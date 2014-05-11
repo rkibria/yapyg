@@ -68,9 +68,12 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
         }
 
     for sprite_name, sprite_def in sprite_defs.iteritems():
+        speed = 0
+        if sprite_def.has_key("speed"):
+            speed = sprite_def["speed"]
         sprites.insert(state, _get_full_sprite_name(entity_name, sprite_name),
             sprite_def["textures"],
-            speed=sprite_def["speed"],
+            speed=speed,
             pos=state["entities"][entity_name]["pos"],
             rot_list=state["entities"][entity_name]["rot"],
             pos_offset=state["entities"][entity_name]["pos_offset"],

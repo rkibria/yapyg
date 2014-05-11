@@ -37,7 +37,7 @@ def initialize(state):
     state["sprites"]["rectangles_rotates_dict"] = {}
     state["sprites"]["sprite_sizes_dict"] = {}
 
-def insert(state, sprite_name, textures, speed=999999, pos_offset=(0, 0),
+def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
         scale=[1.0, 1.0], enable=True, pos=[0,0], rot_list=[0]):
     """
     TODO
@@ -47,14 +47,16 @@ def insert(state, sprite_name, textures, speed=999999, pos_offset=(0, 0),
         "pos" : pos,
         "rot": rot_list,
         "textures" : textures,
-        "type" : "linear",
         "speed": speed,
         "scale": scale,
         "pos_offset": pos_offset,
     }
     state["sprites"]["sprites"][sprite_name] = sprite
-    for texture_filename in textures:
-        texture_db.load(state, texture_filename, texture_filename)
+    for texture_part in textures:
+        if type(texture_part) == tuple:
+            texture_db.insert_color_rect(state, texture_part[1], texture_part[2], texture_part, texture_part[3], texture_part[4], texture_part[5])
+        elif type(texture_part) == str:
+            texture_db.load(state, texture_part, texture_part)
 
 def get(state, sprite_name):
     """
@@ -101,21 +103,20 @@ def draw(state, canvas, frame_time_delta, view_scale):
     for sprite_name, sprite in state["sprites"]["sprites"].iteritems():
         if not sprite["enable"]:
             continue
-        sprite_type = sprite["type"]
-        if sprite_type == "linear":
-            textures = sprite["textures"]
+        textures = sprite["textures"]
+        pos = [sprite["pos"][0], sprite["pos"][1]]
+        scale = sprite["scale"]
+        rotate = sprite["rot"][0]
+        phase = None
+
+        if sprite.has_key("pos_offset"):
+            pos[0] += sprite["pos_offset"][0]
+            pos[1] += sprite["pos_offset"][1]
+
+        if sprite.has_key("phase"):
+            phase = sprite["phase"]
             speed = sprite["speed"]
-            pos = [sprite["pos"][0], sprite["pos"][1]]
-            scale = sprite["scale"]
-            rotate = sprite["rot"][0]
-            phase = None
-
-            if sprite.has_key("pos_offset"):
-                pos[0] += sprite["pos_offset"][0]
-                pos[1] += sprite["pos_offset"][1]
-
-            if sprite.has_key("phase"):
-                phase = sprite["phase"]
+            if speed > 0:
                 time_sum = sprite["time_sum"]
                 time_sum += int(frame_time_delta)
                 phase_increment = int(time_sum / speed)
@@ -128,12 +129,12 @@ def draw(state, canvas, frame_time_delta, view_scale):
                     time_sum = time_sum % speed
                     sprite["time_sum"] = time_sum
                     sprite["phase"] = phase
-            else:
-                sprite["time_sum"] = 0
-                sprite["phase"] = 0
-                phase = 0
-            _draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
-                texture_db.get(state, sprite["textures"][phase]), pos, scale, rotate)
+        else:
+            sprite["time_sum"] = 0
+            sprite["phase"] = 0
+            phase = 0
+        _draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
+            texture_db.get(state, sprite["textures"][phase]), pos, scale, rotate)
 
 def _draw_sprite(state, canvas, view_pos, view_scale, sprite_name, texture, pos, scale, rotate):
     """

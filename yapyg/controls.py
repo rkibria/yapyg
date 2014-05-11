@@ -19,31 +19,39 @@
 # THE SOFTWARE.
 
 """
-Generate new game states
+Controls
 """
 
-import screen
-import tiles
-import texture_db
-import sprites
-import movers
-import entities
-import view
-import controls
-
-def create(screen_width, screen_height, tile_size):
+def initialize(state):
     """
     TODO
     """
-    state = {}
+    state["controls"] = {
+        "joystick": False,
+        "joystick_direction": [0, 0],
+    }
 
-    screen.initialize(state, screen_width, screen_height, tile_size)
-    texture_db.initialize(state)
-    tiles.initialize(state, tile_size)
-    sprites.initialize(state)
-    movers.initialize(state)
-    entities.initialize(state)
-    view.initialize(state)
-    controls.initialize(state)
+def add_joystick(state):
+    """
+    TODO
+    """
+    state["controls"]["joystick"] = True
 
-    return state
+def need_joystick(state):
+    """
+    TODO
+    """
+    return state["controls"]["joystick"]
+
+def set_joystick(state, directions):
+    """
+    TODO
+    """
+    state["controls"]["joystick_direction"][0] = directions[0]
+    state["controls"]["joystick_direction"][1] = directions[1]
+
+def get_joystick(state):
+    """
+    TODO
+    """
+    return state["controls"]["joystick_direction"]

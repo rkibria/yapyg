@@ -37,20 +37,25 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.spinner import Spinner
 from kivy.uix.image import Image
+from kivy.clock import Clock
 
 from yapyg.widget import YapygWidget
+from yapyg.joystick_widget import JoystickWidget
+import yapyg.controls
 
 import demo_starship
 import demo_tiles
+import demo_pong
 
 class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_tiles"
+        default_choice = "demo_pong"
         self.choices = {
             "demo_starship": "'Endless' scrolling background and entity animation",
             "demo_tiles": "Tile map scrolling",
+            "demo_pong": "The classic Pong game",
             }
 
         layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
@@ -81,10 +86,8 @@ class MenuWidget(FloatLayout):
             parent = self.parent
             parent.remove_widget(self)
 
-            if self.spinner.text == "demo_starship":
-                state = demo_starship.create(Window.width, Window.height, tile_size)
-            if self.spinner.text == "demo_tiles":
-                state = demo_tiles.create(Window.width, Window.height, tile_size)
+            state = None
+            exec("state = %s.create(Window.width, Window.height, tile_size)" % self.spinner.text)
 
             parent.add_widget(ScreenWidget(state))
 
@@ -92,11 +95,27 @@ class ScreenWidget(FloatLayout):
     def __init__(self, state, **kwargs):
         super(ScreenWidget, self).__init__(**kwargs)
 
+        self.state = state
+
         self.add_widget(YapygWidget(state, [Window.width, Window.height], Window.width / screen_width))
 
-        exit_button = Button(text="Exit", size_hint=(0.2, 0.05))
+        self.joystick = None
+        if yapyg.controls.need_joystick(state):
+            joystick_height = 0.2
+            joystick_width = (joystick_height * Window.height) / Window.width
+            self.joystick = JoystickWidget(
+                size_hint=(joystick_width, joystick_height),
+                pos_hint = {"x" : 0.0, "y" : 0.0},
+                )
+            self.add_widget(self.joystick)
+            Clock.schedule_interval(self.on_timer, 0.1)
+
+        exit_button = Button(text="Exit", pos_hint={"x":0.8, "y":0.95}, size_hint=(0.2, 0.05))
         exit_button.bind(state=self.on_exit)
         self.add_widget(exit_button)
+
+    def on_timer(self, dt):
+        yapyg.controls.set_joystick(self.state, self.joystick.get_direction())
 
     def on_exit(self, instance, value):
         if self.parent:

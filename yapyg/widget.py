@@ -20,6 +20,7 @@
 
 from kivy.clock import Clock
 from kivy.uix.widget import Widget
+from kivy.core.window import Window
 
 import movers
 import tiles
@@ -38,9 +39,7 @@ class YapygWidget(Widget):
 
         self.view_size = view_size
         self.scale = scale
-
         self.state = state
-
         self.redraw_tiles = True
 
         self.min_frame_time_delta = 0

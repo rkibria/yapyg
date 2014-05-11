@@ -18,32 +18,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-"""
-Generate new game states
-"""
-
-import screen
-import tiles
-import texture_db
-import sprites
-import movers
-import entities
-import view
-import controls
+import yapyg.factory
+import yapyg.entities
+import yapyg.movers.controlled
+import yapyg.controls
 
 def create(screen_width, screen_height, tile_size):
-    """
-    TODO
-    """
-    state = {}
+    state = yapyg.factory.create(screen_width, screen_height, tile_size)
 
-    screen.initialize(state, screen_width, screen_height, tile_size)
-    texture_db.initialize(state)
-    tiles.initialize(state, tile_size)
-    sprites.initialize(state)
-    movers.initialize(state)
-    entities.initialize(state)
-    view.initialize(state)
-    controls.initialize(state)
+    paddle_width = 0.5
+    yapyg.entities.insert(state, "paddle1",
+        {
+            "std": {
+                "textures": [("rectangle", paddle_width * tile_size, 16, 1, 1, 1)],
+            },
+        }, [1, 1.5], 0)
+    yapyg.entities.set_sprite(state, "paddle1", "std")
+
+    yapyg.entities.insert(state, "paddle2",
+        {
+            "std": {
+                "textures": [("rectangle", paddle_width * tile_size, 16, 1, 1, 1)],
+            },
+        }, [1, 6], 0)
+    yapyg.entities.set_sprite(state, "paddle2", "std")
+
+    yapyg.controls.add_joystick(state)
+
+    yapyg.movers.controlled.add(state, "paddle1_mover",
+        yapyg.entities.get_pos(state, "paddle1"),
+        "joystick", 0.1, [0, 1.5, float(screen_width) / tile_size - paddle_width, 1.5])
 
     return state
