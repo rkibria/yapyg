@@ -35,18 +35,31 @@ def create(screen_width, screen_height, tile_size):
         }, [1, 1.5], 0)
     yapyg.entities.set_sprite(state, "paddle1", "std")
 
-    yapyg.entities.insert(state, "paddle2",
+    yapyg.entities.insert(state, "top_wall",
         {
             "std": {
-                "textures": [("rectangle", paddle_width * tile_size, 16, 1, 1, 1)],
+                "textures": [("rectangle", screen_width, 16, 1, 1, 1)],
             },
-        }, [1, 6], 0)
-    yapyg.entities.set_sprite(state, "paddle2", "std")
+        }, [0, screen_height / float(tile_size)], 0)
+    yapyg.entities.set_sprite(state, "top_wall", "std")
+
+    yapyg.entities.insert(state, "ball",
+        {
+            "std": {
+                "textures": [("ellipse", 16, 16, 1, 1, 1)],
+            },
+        }, [1, 3], 0)
+    yapyg.entities.set_sprite(state, "ball", "std")
 
     yapyg.controls.add_joystick(state)
 
     yapyg.movers.controlled.add(state, "paddle1_mover",
         yapyg.entities.get_pos(state, "paddle1"),
         "joystick", 0.1, [0, 1.5, float(screen_width) / tile_size - paddle_width, 1.5])
+
+    yapyg.movers.linear.add(state, "ball_mover",
+        yapyg.entities.get_pos(state, "ball"),
+        yapyg.entities.get_rot(state, "ball"),
+        [100, 100], 2.0 / 1000000)
 
     return state

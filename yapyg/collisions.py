@@ -19,33 +19,14 @@
 # THE SOFTWARE.
 
 """
-Generate new game states
+Collisions
 """
 
-import screen
-import tiles
-import texture_db
-import sprites
-import movers
-import entities
-import view
-import controls
-import collisions
+import geometry
 
-def create(screen_width, screen_height, tile_size):
+def initialize(state):
     """
     TODO
     """
-    state = {}
-
-    screen.initialize(state, screen_width, screen_height, tile_size)
-    texture_db.initialize(state)
-    tiles.initialize(state, tile_size)
-    sprites.initialize(state)
-    movers.initialize(state)
-    entities.initialize(state)
-    view.initialize(state)
-    controls.initialize(state)
-    collisions.initialize(state)
-
-    return state
+    state["collisions"] = {
+    }

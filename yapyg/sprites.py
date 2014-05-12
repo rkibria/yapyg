@@ -54,7 +54,10 @@ def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
     state["sprites"]["sprites"][sprite_name] = sprite
     for texture_part in textures:
         if type(texture_part) == tuple:
-            texture_db.insert_color_rect(state, texture_part[1], texture_part[2], texture_part, texture_part[3], texture_part[4], texture_part[5])
+            if texture_part[0] == "rectangle":
+                texture_db.insert_color_rect(state, texture_part[1], texture_part[2], texture_part, texture_part[3], texture_part[4], texture_part[5])
+            elif texture_part[0] == "ellipse":
+                texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2], texture_part, texture_part[3], texture_part[4], texture_part[5])
         elif type(texture_part) == str:
             texture_db.load(state, texture_part, texture_part)
 

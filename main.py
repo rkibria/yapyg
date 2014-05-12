@@ -55,7 +55,7 @@ class MenuWidget(FloatLayout):
         self.choices = {
             "demo_starship": "'Endless' scrolling background and entity animation",
             "demo_tiles": "Tile map scrolling",
-            "demo_pong": "The classic Pong game",
+            "demo_pong": "A single player version of the classic Pong game",
             }
 
         layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])

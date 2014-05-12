@@ -26,7 +26,7 @@ from kivy.logger import Logger
 
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
-from kivy.graphics import Color, Rectangle, Fbo
+from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
 def initialize(state):
     """
@@ -89,5 +89,17 @@ def insert_color_rect(state, texture_w, texture_h, texture_name, c_r, c_g, c_b):
     with fbo:
         Color(c_r, c_g, c_b)
         Rectangle(pos=(0, 0), size=(texture_w, texture_h))
+    fbo.draw()
+    insert(state, texture_name, texture)
+
+def insert_color_ellipse(state, texture_w, texture_h, texture_name, c_r, c_g, c_b):
+    """
+    TODO
+    """
+    texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
+    fbo = Fbo(size=(texture_w, texture_h), texture=texture)
+    with fbo:
+        Color(c_r, c_g, c_b)
+        Ellipse(pos=(0, 0), size=(texture_w, texture_h))
     fbo.draw()
     insert(state, texture_name, texture)
