@@ -26,14 +26,15 @@ from kivy.logger import Logger
 
 from .. import geometry
 from .. import movers
+from .. import entities
 
-def add(state, mover_name, pos_var, rot_var, new_pos, speed, do_rotate = False, on_end_function=None, do_replace=False):
+def add(state, entity_name, rel_vector, speed, do_rotate=False, on_end_function=None, do_replace=False):
     """
     TODO
     """
-    movers.add(state, mover_name, create(pos_var, rot_var, new_pos, speed, do_rotate, on_end_function), do_replace)
+    movers.add(state, entity_name, create(entity_name, rel_vector, speed, do_rotate, on_end_function), do_replace)
 
-def create(pos_var, rot_var, rel_vector, speed, do_rotate, on_end_function):
+def create(entity_name, rel_vector, speed, do_rotate, on_end_function):
     """
     TODO
     """
@@ -41,18 +42,20 @@ def create(pos_var, rot_var, rel_vector, speed, do_rotate, on_end_function):
     travel_time = distance / speed
     travel_vector = [rel_vector[0] / travel_time, rel_vector[1] / travel_time]
     return {
-            "passed_time": 0,
-            "pos_var": pos_var,
-            "rot_var": rot_var,
+            "entity_name": entity_name,
+            "rel_vector": rel_vector,
             "speed": speed,
+            "do_rotate": do_rotate,
+
             "travel_vector": travel_vector,
             "travel_time": travel_time,
+            "passed_time": 0,
+
             "run": run,
-            "do_rotate": do_rotate,
             "on_end_function": on_end_function,
         }
 
-def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
+def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     """
     TODO
     """
@@ -61,15 +64,16 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
     passed_time = mover["passed_time"]
 
     if passed_time == 0 and mover["do_rotate"]:
-        mover["rot_var"][0] = (int(geometry.get_rotation([0, 0], travel_vector)) - 90) % 360
+        entities.get_rot(state, entity_name)[0] = (int(geometry.get_rotation([0, 0], travel_vector)) - 90) % 360
 
     passed_time += frame_time_delta
     if passed_time > travel_time:
         passed_time = travel_time
     mover["passed_time"] = passed_time
 
-    mover["pos_var"][0] += frame_time_delta * travel_vector[0]
-    mover["pos_var"][1] += frame_time_delta * travel_vector[1]
+    pos = entities.get_pos(state, entity_name)
+    pos[0] += frame_time_delta * travel_vector[0]
+    pos[1] += frame_time_delta * travel_vector[1]
 
     if passed_time == travel_time:
-        movers_to_delete.append((mover_name, mover["on_end_function"]))
+        movers_to_delete.append((entity_name, mover["on_end_function"]))

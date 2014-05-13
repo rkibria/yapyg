@@ -22,7 +22,7 @@ import yapyg.factory
 import yapyg.screen
 import yapyg.movers.linear
 import yapyg.movers.jump
-import yapyg.movers.entitycmd
+import yapyg.movers.set_property
 import yapyg.movers.wait
 import yapyg.view
 import yapyg.viewers.relative
@@ -102,11 +102,8 @@ def create(screen_width, screen_height, tile_size):
 def start_movement(state, mover_name):
     path = [[6, 0], [0, 5], [-6, 0], [0, -5]]
     for index in xrange(len(path)):
-        yapyg.movers.entitycmd.add(state, "man_mover", "man", "set_sprite", "idle")
-        yapyg.movers.wait.add(state, "man_mover", 500000)
-        yapyg.movers.entitycmd.add(state, "man_mover", "man", "set_sprite", "walk")
-        yapyg.movers.linear.add(state, "man_mover",
-            yapyg.entities.get_pos(state, "man"),
-            yapyg.entities.get_rot(state, "man"),
-            path[index], 1.0 / 1000000,
+        yapyg.movers.set_property.add(state, "man", "set_sprite", "idle")
+        yapyg.movers.wait.add(state, "man", 500000)
+        yapyg.movers.set_property.add(state, "man", "set_sprite", "walk")
+        yapyg.movers.linear.add(state, "man", path[index], 1.0 / 1000000,
             True, None if index != len(path) - 1 else start_movement)

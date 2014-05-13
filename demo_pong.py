@@ -57,9 +57,6 @@ def create(screen_width, screen_height, tile_size):
         yapyg.entities.get_pos(state, "paddle1"),
         "joystick", 0.1, [0, 1.5, float(screen_width) / tile_size - paddle_width, 1.5])
 
-    yapyg.movers.linear.add(state, "ball_mover",
-        yapyg.entities.get_pos(state, "ball"),
-        yapyg.entities.get_rot(state, "ball"),
-        [100, 100], 2.0 / 1000000)
+    yapyg.movers.linear.add(state, "ball", [100, 100], 2.0 / 1000000)
 
     return state

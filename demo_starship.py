@@ -20,9 +20,10 @@
 
 import yapyg.factory
 import yapyg.screen
+import yapyg.entities
 import yapyg.movers.linear
 import yapyg.movers.jump
-import yapyg.movers.entitycmd
+import yapyg.movers.set_property
 import yapyg.movers.wait
 
 def create(screen_width, screen_height, tile_size):
@@ -30,7 +31,14 @@ def create(screen_width, screen_height, tile_size):
 
     for x in xrange(int(screen_width / 256) + 1):
         for y in xrange(int(screen_height / 256) + 2):
-            yapyg.sprites.insert(state, "000_stars_%d_%d" % (x, y), ["assets/img/sprites/stars.png"], pos=[x * 2, y * 2])
+            entity_name = "000_stars_%d_%d" % (x, y)
+            yapyg.entities.insert(state, entity_name, {
+                    "std": {
+                        "textures": ["assets/img/sprites/stars.png"],
+                        "speed": 100000,
+                    },
+                }, [x * 2, y * 2], 0)
+            yapyg.movers.set_property.add(state, entity_name, "set_sprite", "std")
 
     yapyg.entities.insert(state, "500_ship",
         {
@@ -52,25 +60,17 @@ def create(screen_width, screen_height, tile_size):
 def start_stars_movement(state, mover_name):
     for x in xrange(int(yapyg.screen.get_width(state) / 256) + 1):
         for y in xrange(int(yapyg.screen.get_height(state) / 256) + 2):
-            sprite_name = "000_stars_%d_%d" % (x, y)
-            yapyg.movers.jump.add(state, sprite_name + "_mover", yapyg.sprites.get_pos(state, sprite_name), [x * 2, y * 2])
-            yapyg.movers.linear.add(state, sprite_name + "_mover",
-                yapyg.sprites.get_pos(state, sprite_name),
-                yapyg.sprites.get_rot(state, sprite_name),
-                [0, -2], 0.25 / 1000000)
-    yapyg.movers.wait.add(state, sprite_name + "_mover", 0, start_stars_movement)
+            entity_name = "000_stars_%d_%d" % (x, y)
+            yapyg.movers.jump.add(state, entity_name, [x * 2, y * 2])
+            yapyg.movers.linear.add(state, entity_name, [0, -2], 0.25 / 1000000)
+    yapyg.movers.wait.add(state, entity_name, 0, start_stars_movement)
 
 def start_ship_movement(state, mover_name):
-    small_step = 0.33
-    big_step = 2 * small_step
-    path = [[0, big_step], [small_step, small_step], [big_step, 0], [small_step, -small_step],
-        [0, -big_step], [-small_step, -small_step], [-big_step, 0], [-small_step, small_step]]
+    path = [[0, 0.66], [0.33, 0.33], [0.66, 0], [0.33, -0.33],
+        [0, -0.66], [-0.33, -0.33], [-0.66, 0], [-0.33, 0.33]]
     for index in xrange(len(path)):
-        yapyg.movers.entitycmd.add(state, "ship_mover", "500_ship", "set_sprite", "idle")
-        yapyg.movers.wait.add(state, "ship_mover", 500000)
-        yapyg.movers.entitycmd.add(state, "ship_mover", "500_ship", "set_sprite", "thrust")
-        yapyg.movers.linear.add(state, "ship_mover",
-            yapyg.entities.get_pos(state, "500_ship"),
-            yapyg.entities.get_rot(state, "500_ship"),
-            path[index], 1.0 / 1000000,
+        yapyg.movers.set_property.add(state, "500_ship", "set_sprite", "idle")
+        yapyg.movers.wait.add(state, "500_ship", 500000)
+        yapyg.movers.set_property.add(state, "500_ship", "set_sprite", "thrust")
+        yapyg.movers.linear.add(state, "500_ship", path[index], 1.0 / 1000000,
             True, None if index != len(path) - 1 else start_ship_movement)

@@ -51,9 +51,9 @@ class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_pong"
+        default_choice = "demo_starship"
         self.choices = {
-            "demo_starship": "'Endless' scrolling background and entity animation",
+            "demo_starship": "'Endless' scrolling background and animation",
             "demo_tiles": "Tile map scrolling",
             "demo_pong": "A single player version of the classic Pong game",
             }
