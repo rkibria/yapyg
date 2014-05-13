@@ -26,6 +26,7 @@ import movers
 import tiles
 import sprites
 import view
+import collisions
 
 class YapygWidget(Widget):
     def __init__(self,
@@ -61,6 +62,8 @@ class YapygWidget(Widget):
 
     def redraw(self, frame_time_delta):
         movers.run(self.state, frame_time_delta)
+
+        collisions.run(self.state)
 
         if view.run(self.state):
             self.redraw_tiles = True

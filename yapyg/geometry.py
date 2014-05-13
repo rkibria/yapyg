@@ -34,65 +34,60 @@ def is_point_in_circle(point, circ):
     c_r = circ[2]
     p_x = point[0]
     p_y = point[1]
-    #
+
     y_d = p_y - c_y
     y_d *= y_d
     x_d = p_x - c_x
     x_d *= x_d
     dist = y_d + x_d
-    #
+
     return dist <= (c_r * c_r)
 
-def point_in_rect(pos, rect):
+def is_point_in_rect(pos, rect):
     """
     rect = (row, col, w, h)
     """
     pos_x = pos[0]
     pos_y = pos[1]
-    #
+
     rect_x1 = rect[0]
     rect_y1 = rect[1]
     rect_x2 = rect_x1 + rect[2]
     rect_y2 = rect_y1 + rect[3]
-    #
+
     return ((pos_y >= rect_y1 and pos_y <= rect_y2)
         and (pos_x >= rect_x1 and pos_x <= rect_x2))
 
-def is_rect_circle_collision(circ, rect, exact_check=False):
+def is_rect_circle_collision(circ, rect, exact_check = False):
     """
-    circ = (x, y, r)
-    rect = (x, y, w, h)
+    circ = (y, x, r)
+    rect = (y, x, h, w)
     """
-    c_x = circ[0]
-    c_y = circ[1]
+    c_y = circ[0]
+    c_x = circ[1]
     c_r = circ[2]
-    #
-    r_x1 = rect[0]
-    r_y1 = rect[1]
-    r_w = rect[2]
-    r_h = rect[3]
-    #
+    r_y1 = rect[0]
+    r_x1 = rect[1]
+    r_h = rect[2]
+    r_w = rect[3]
     r_x2 = r_x1 + r_w
     r_y3 = r_y1 + r_h
-    #
+
+    circle_outside = True
+
     if not exact_check:
-        return not (
-            (c_x < r_x1 - c_r)
-            or (c_x > r_x2 + c_r)
-            or (c_y < r_y1 - c_r)
-            or (c_y > r_y3 + c_r)
-            )
+        circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
+            or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
     else:
-        circle_outside = True
-        #
         corner_circles = (
-            (r_x1, r_y1, c_r),
-            (r_x1, r_y2, c_r),
-            (r_x3, r_y1, c_r),
-            (r_x3, r_y2, c_r),
+            (r_y1, r_x1, c_r),
+            (r_y1, r_x2, c_r),
+            (r_y3, r_x1, c_r),
+            (r_y3, r_x2, c_r),
         )
+        circle_point = (c_y, c_x)
         for corner_circle in corner_circles:
-            circle_outside = not is_point_in_circle((c_x, c_y), corner_circle)
+            circle_outside = not is_point_in_circle(circle_point, corner_circle)
             if not circle_outside:
                 break
         if circle_outside:
@@ -102,11 +97,13 @@ def is_rect_circle_collision(circ, rect, exact_check=False):
                 ):
                 circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
                     or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
-        return not circle_outside
+
+    is_collision = not circle_outside
+    return is_collision
 
 def is_circle_circle_collision(c_1, c_2):
     """
-    circ = (x, y, r)
+    circ = (x, y, r): x/y = center, r = radius
 
     Test if distance between circle centers is smaller
     than the sum of circle radii.

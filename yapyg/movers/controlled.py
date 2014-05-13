@@ -26,32 +26,34 @@ from kivy.logger import Logger
 
 from .. import movers
 from .. import controls
+from .. import entities
 
-def add(state, mover_name, pos_var, controller, factor, limits, on_end_function=None, do_replace=False):
+def add(state, entity_name, controller, factor, limits, on_end_function=None, do_replace=False):
     """
     TODO
     """
-    movers.add(state, mover_name, create(pos_var, controller, factor, limits, on_end_function), do_replace)
+    movers.add(state, entity_name, create(entity_name, controller, factor, limits, on_end_function), do_replace)
 
-def create(pos_var, controller, factor, limits, on_end_function=None):
+def create(entity_name, controller, factor, limits, on_end_function=None):
     """
     TODO
     """
     return {
-            "pos_var": pos_var,
+            "entity_name": entity_name,
             "controller": controller,
             "factor": factor,
             "limits": limits,
+
             "run": run,
             "on_end_function": on_end_function,
         }
 
-def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
+def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     """
     TODO
     """
     direction = controls.get_joystick(state)
-    pos = mover["pos_var"]
+    pos = entities.get_pos(state, entity_name)
     factor = mover["factor"]
     limits = mover["limits"]
 
@@ -67,5 +69,5 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
     elif new_y > limits[3]:
         new_y = limits[3]
 
-    mover["pos_var"][0] = new_x
-    mover["pos_var"][1] = new_y
+    pos[0] = new_x
+    pos[1] = new_y

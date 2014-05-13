@@ -50,6 +50,12 @@ def get_pos(state, entity_name):
     """
     return state["entities"][entity_name]["pos"]
 
+def get_pos_offset(state, entity_name):
+    """
+    TODO
+    """
+    return state["entities"][entity_name]["pos_offset"]
+
 def get_rot(state, entity_name):
     """
     TODO

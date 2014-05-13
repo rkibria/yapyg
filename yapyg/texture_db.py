@@ -22,11 +22,16 @@
 Texture storage and operations
 """
 
-from kivy.logger import Logger
-
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
+
+class YapygTextureDbException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
 
 def initialize(state):
     """
@@ -53,17 +58,14 @@ def get(state, texture_name):
     if state["textures"].has_key(texture_name):
         return state["textures"][texture_name]
     else:
-        Logger.debug(str(state["textures"]))
-        Logger.debug("ERROR: Texture '" + texture_name + "' not present")
-        zzz()
+        raise YapygTextureDbException("Texture '" + texture_name + "' not present")
 
 def insert_combined(state, texture_size, texture_name, texture_list):
     """
     TODO
     """
     if len(texture_list) == 0:
-        Logger.debug("ERROR: insert_combined called with empty list")
-        zzz()
+        raise YapygTextureDbException("insert_combined() called with empty list")
     elif len(texture_list) == 1:
         # Single texture, just load it and enter it with the
         # tile name as key to texture dict

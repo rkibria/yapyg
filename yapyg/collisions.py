@@ -23,10 +23,104 @@ Collisions
 """
 
 import geometry
+import entities
+
+class YapygCollisionException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
 
 def initialize(state):
     """
     TODO
     """
     state["collisions"] = {
+        "handler_function": None,
+        "entities": {},
     }
+
+def set_handler(state, handler_function):
+    """
+    TODO
+    """
+    state["collisions"]["handler_function"] = handler_function
+
+def add(state, entity_name, collision_shape, active_check=True):
+    """
+    TODO
+    """
+    state["collisions"]["entities"][entity_name] = {
+        "collision_shape": collision_shape,
+        "active_check": active_check,
+        }
+
+def _get_collision_shape(state, entity_name, collision_def):
+    """
+    collision_shape:
+        ["rectangle", width, height]
+        ["circle", diameter]
+    =>
+        circle: (center_x, center_y, radius)
+        rectangle: (x, y, w, h)
+    """
+    pos = entities.get_pos(state, entity_name)
+    pos_offset = entities.get_pos_offset(state, entity_name)
+    collision_shape = collision_def["collision_shape"]
+
+    if collision_shape[0] == "circle":
+        radius = collision_shape[1] / 2.0
+        return (pos[0] + pos_offset[0] + radius, pos[1] + pos_offset[1] + radius, radius)
+    elif collision_shape[0] == "rectangle":
+        return (pos[0] + pos_offset[0], pos[1] + pos_offset[1], collision_shape[1], collision_shape[2])
+    else:
+        raise YapygCollisionException("Unknown shape %s" % collision_shape[0])
+
+def _is_collision(state, shape_type_1, shape_type_2, absolute_shape_1, absolute_shape_2):
+    if shape_type_1 == "circle":
+        if shape_type_2 == "circle":
+            return geometry.is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
+        elif shape_type_2 == "rectangle":
+            return geometry.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, exact_check=True)
+        else:
+            raise YapygCollisionException("Unknown shape %s" % shape_type_2)
+    elif shape_type_1 == "rectangle":
+        if shape_type_2 == "circle":
+            return geometry.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, exact_check=True)
+        elif shape_type_2 == "rectangle":
+            raise YapygCollisionException("TODO")
+        else:
+            raise YapygCollisionException("Unknown shape %s" % shape_type_2)
+    else:
+        raise YapygCollisionException("Unknown shape %s" % shape_type_1)
+
+def run(state):
+    """
+    TODO
+    """
+    if not state["collisions"]["handler_function"]:
+        return
+
+    collision_list = []
+    for entity_name_1, collision_def_1 in state["collisions"]["entities"].iteritems():
+        if not collision_def_1["active_check"]:
+            continue
+
+        absolute_shape_1 = _get_collision_shape(state, entity_name_1, collision_def_1)
+
+        for entity_name_2, collision_def_2 in state["collisions"]["entities"].iteritems():
+            if entity_name_2 == entity_name_1:
+                continue
+
+            absolute_shape_2 = _get_collision_shape(state, entity_name_2, collision_def_2)
+
+            if _is_collision(state,
+                    collision_def_1["collision_shape"][0],
+                    collision_def_2["collision_shape"][0],
+                    absolute_shape_1,
+                    absolute_shape_2):
+                collision_list.append((entity_name_1, entity_name_2))
+
+    if collision_list:
+        (state["collisions"]["handler_function"])(state, collision_list)

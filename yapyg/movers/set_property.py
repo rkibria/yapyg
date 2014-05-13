@@ -22,10 +22,15 @@
 Entity state setting mover
 """
 
-from kivy.logger import Logger
-
 from .. import movers
 from .. import entities
+
+class YapygMoverSetPropertyException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
 
 def add(state, entity_name, property, new_value, on_end_function=None, do_replace=False):
     """
@@ -56,7 +61,6 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     if property == "set_sprite":
         entities.set_sprite(state, entity_name, new_value)
     else:
-        Logger.debug("ERROR: unknown property %s" % property)
-        zzz()
+        raise YapygMoverSetPropertyException("Unknown property %s" % property)
 
     movers_to_delete.append((entity_name, mover["on_end_function"]))
