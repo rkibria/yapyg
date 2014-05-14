@@ -26,10 +26,19 @@ from .. import movers
 from .. import entities
 
 class YapygMoverSetPropertyException(Exception):
+    """
+    TODO
+    """
     def __init__(self, value):
+        """
+        TODO
+        """
         self.value = value
 
     def __str__(self):
+        """
+        TODO
+        """
         return repr(self.value)
 
 def add(state, entity_name, property, new_value, on_end_function=None, do_replace=False):
@@ -43,6 +52,7 @@ def create(entity_name, property, new_value, on_end_function=None):
     TODO
     """
     return {
+            "type": "set_property",
             "entity_name": entity_name,
             "property": property,
             "new_value": new_value,

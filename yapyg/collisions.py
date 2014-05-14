@@ -26,10 +26,19 @@ import geometry
 import entities
 
 class YapygCollisionException(Exception):
+    """
+    TODO
+    """
     def __init__(self, value):
+        """
+        TODO
+        """
         self.value = value
 
     def __str__(self):
+        """
+        TODO
+        """
         return repr(self.value)
 
 def initialize(state):
@@ -78,6 +87,9 @@ def _get_collision_shape(state, entity_name, collision_def):
         raise YapygCollisionException("Unknown shape %s" % collision_shape[0])
 
 def _is_collision(state, shape_type_1, shape_type_2, absolute_shape_1, absolute_shape_2):
+    """
+    TODO
+    """
     if shape_type_1 == "circle":
         if shape_type_2 == "circle":
             return geometry.is_circle_circle_collision(absolute_shape_1, absolute_shape_2)

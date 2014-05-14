@@ -37,6 +37,7 @@ def create(on_end_function=None):
     TODO
     """
     return {
+            "type": "repeat",
             "run": run,
             "on_end_function": on_end_function,
         }

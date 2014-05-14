@@ -28,6 +28,22 @@ from .. import geometry
 from .. import movers
 from .. import entities
 
+class YapygMoverLinearException(Exception):
+    """
+    TODO
+    """
+    def __init__(self, value):
+        """
+        TODO
+        """
+        self.value = value
+
+    def __str__(self):
+        """
+        TODO
+        """
+        return repr(self.value)
+
 def add(state, entity_name, rel_vector, speed, do_rotate=False, on_end_function=None, do_replace=False):
     """
     TODO
@@ -39,9 +55,13 @@ def create(entity_name, rel_vector, speed, do_rotate, on_end_function):
     TODO
     """
     distance = geometry.get_vector_size(rel_vector)
+    if distance == 0 or speed == 0:
+        raise YapygMoverLinearException("Distance and speed must be >0")
+
     travel_time = distance / speed
     travel_vector = [rel_vector[0] / travel_time, rel_vector[1] / travel_time]
     return {
+            "type": "linear",
             "entity_name": entity_name,
             "rel_vector": rel_vector,
             "speed": speed,
@@ -71,9 +91,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         passed_time = travel_time
     mover["passed_time"] = passed_time
 
-    pos = entities.get_pos(state, entity_name)
-    pos[0] += frame_time_delta * travel_vector[0]
-    pos[1] += frame_time_delta * travel_vector[1]
+    entities.add_pos(state, entity_name, frame_time_delta * travel_vector[0], frame_time_delta * travel_vector[1])
 
     if passed_time == travel_time:
         movers_to_delete.append((entity_name, mover["on_end_function"]))

@@ -27,10 +27,19 @@ from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
 class YapygTextureDbException(Exception):
+    """
+    TODO
+    """
     def __init__(self, value):
+        """
+        TODO
+        """
         self.value = value
 
     def __str__(self):
+        """
+        TODO
+        """
         return repr(self.value)
 
 def initialize(state):

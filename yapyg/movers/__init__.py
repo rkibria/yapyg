@@ -26,22 +26,34 @@ from collections import deque
 
 from kivy.logger import Logger
 
+class YapygMoverException(Exception):
+    """
+    TODO
+    """
+    def __init__(self, value):
+        """
+        TODO
+        """
+        self.value = value
+
+    def __str__(self):
+        """
+        TODO
+        """
+        return repr(self.value)
+
 def initialize(state):
     """
     TODO
     """
     state["movers"] = {}
 
-def get(state, mover_name):
-    """
-    TODO
-    """
-    return state["movers"][mover_name][0]
-
 def add(state, mover_name, mover, do_replace=False):
     """
     TODO
     """
+    if not mover:
+        raise YapygMoverException("%s was assigned null element" % mover_name)
     if do_replace:
         state["movers"][mover_name] = deque()
         state["movers"][mover_name].append(mover)
@@ -49,6 +61,21 @@ def add(state, mover_name, mover, do_replace=False):
         if not state["movers"].has_key(mover_name):
             state["movers"][mover_name] = deque()
         state["movers"][mover_name].append(mover)
+
+def get_active(state, mover_name):
+    """
+    TODO
+    """
+    if state["movers"].has_key(mover_name):
+        return state["movers"][mover_name][0]
+    else:
+        return None
+
+def get_type(state, mover):
+    """
+    TODO
+    """
+    return mover["type"]
 
 def remove(state, mover_name):
     """

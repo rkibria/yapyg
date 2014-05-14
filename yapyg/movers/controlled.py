@@ -39,6 +39,7 @@ def create(entity_name, controller, factor, limits, on_end_function=None):
     TODO
     """
     return {
+            "type": "controlled",
             "entity_name": entity_name,
             "controller": controller,
             "factor": factor,
@@ -69,5 +70,4 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     elif new_y > limits[3]:
         new_y = limits[3]
 
-    pos[0] = new_x
-    pos[1] = new_y
+    entities.set_pos(state, entity_name, new_x, new_y)

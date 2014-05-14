@@ -110,7 +110,7 @@ class ScreenWidget(FloatLayout):
             self.add_widget(self.joystick)
             Clock.schedule_interval(self.on_timer, 0.1)
 
-        exit_button = Button(text="Exit", pos_hint={"x":0.8, "y":0.95}, size_hint=(0.2, 0.05))
+        exit_button = Button(text="Exit", pos_hint={"x":0.8, "y":0.0}, size_hint=(0.2, 0.05))
         exit_button.bind(state=self.on_exit)
         self.add_widget(exit_button)
 

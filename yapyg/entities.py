@@ -50,6 +50,20 @@ def get_pos(state, entity_name):
     """
     return state["entities"][entity_name]["pos"]
 
+def set_pos(state, entity_name, x_pos, y_pos):
+    """
+    TODO
+    """
+    state["entities"][entity_name]["pos"][0] = x_pos
+    state["entities"][entity_name]["pos"][1] = y_pos
+
+def add_pos(state, entity_name, x_pos, y_pos):
+    """
+    TODO
+    """
+    state["entities"][entity_name]["pos"][0] += x_pos
+    state["entities"][entity_name]["pos"][1] += y_pos
+
 def get_pos_offset(state, entity_name):
     """
     TODO

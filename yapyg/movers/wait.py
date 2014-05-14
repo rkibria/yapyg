@@ -37,6 +37,7 @@ def create(wait_time, on_end_function=None):
     TODO
     """
     return {
+            "type": "wait",
             "passed_time": 0,
             "wait_time": wait_time,
             "run": run,

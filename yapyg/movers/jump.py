@@ -38,6 +38,7 @@ def create(entity_name, new_pos, new_rot=None, on_end_function=None):
     TODO
     """
     return {
+            "type": "jump",
             "entity_name": entity_name,
             "new_pos": new_pos,
             "new_rot": new_rot,
@@ -51,9 +52,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     TODO
     """
     if mover["new_pos"]:
-        pos = entities.get_pos(state, entity_name)
-        pos[0] = mover["new_pos"][0]
-        pos[1] = mover["new_pos"][1]
+        entities.set_pos(state, entity_name, mover["new_pos"][0], mover["new_pos"][1])
 
     if mover["new_rot"]:
         entities.get_rot(state, entity_name)[0] = mover["new_rot"]
