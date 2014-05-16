@@ -33,12 +33,11 @@ def create(screen_width, screen_height, tile_size):
         for y in xrange(int(screen_height / 256) + 2):
             entity_name = "000_stars_%d_%d" % (x, y)
             yapyg.entities.insert(state, entity_name, {
-                    "std": {
+                    "*": {
                         "textures": ["assets/img/sprites/stars.png"],
                         "speed": 100000,
                     },
                 }, [x * 2, y * 2], 0)
-            yapyg.movers.set_property.add(state, entity_name, "set_sprite", "std")
 
     yapyg.entities.insert(state, "500_ship",
         {

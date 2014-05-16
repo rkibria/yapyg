@@ -48,12 +48,15 @@ def get_pos(state, entity_name):
     """
     TODO
     """
-    return state["entities"][entity_name]["pos"]
+    return (state["entities"][entity_name]["pos"][0], state["entities"][entity_name]["pos"][1])
 
 def set_pos(state, entity_name, x_pos, y_pos):
     """
     TODO
     """
+    state["entities"][entity_name]["last_pos"][0] = state["entities"][entity_name]["pos"][0]
+    state["entities"][entity_name]["last_pos"][1] = state["entities"][entity_name]["pos"][1]
+
     state["entities"][entity_name]["pos"][0] = x_pos
     state["entities"][entity_name]["pos"][1] = y_pos
 
@@ -61,6 +64,9 @@ def add_pos(state, entity_name, x_pos, y_pos):
     """
     TODO
     """
+    state["entities"][entity_name]["last_pos"][0] = state["entities"][entity_name]["pos"][0]
+    state["entities"][entity_name]["last_pos"][1] = state["entities"][entity_name]["pos"][1]
+
     state["entities"][entity_name]["pos"][0] += x_pos
     state["entities"][entity_name]["pos"][1] += y_pos
 
@@ -68,13 +74,28 @@ def get_pos_offset(state, entity_name):
     """
     TODO
     """
-    return state["entities"][entity_name]["pos_offset"]
+    return (state["entities"][entity_name]["pos_offset"][0], state["entities"][entity_name]["pos_offset"][1])
 
 def get_rot(state, entity_name):
     """
     TODO
     """
-    return state["entities"][entity_name]["rot"]
+    return state["entities"][entity_name]["rot"][0]
+
+def set_rot(state, entity_name, rot):
+    """
+    TODO
+    """
+    state["entities"][entity_name]["last_pos"][2] = state["entities"][entity_name]["rot"][0]
+    state["entities"][entity_name]["rot"][0] = rot
+
+def undo_last_move(state, entity_name):
+    """
+    TODO
+    """
+    state["entities"][entity_name]["pos"][0] = state["entities"][entity_name]["last_pos"][0]
+    state["entities"][entity_name]["pos"][1] = state["entities"][entity_name]["last_pos"][1]
+    state["entities"][entity_name]["rot"][0] = state["entities"][entity_name]["last_pos"][2]
 
 def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
     """
@@ -85,9 +106,13 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
         "rot": [rot],
         "pos_offset": pos_offset,
         "enabled_sprite": None,
+        "last_pos": [pos[0], pos[1], rot],
         }
 
+    default_sprite = None
     for sprite_name, sprite_def in sprite_defs.iteritems():
+        if sprite_name[0] == "*":
+            default_sprite = sprite_name
         speed = 0
         if sprite_def.has_key("speed"):
             speed = sprite_def["speed"]
@@ -99,6 +124,8 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
             pos_offset=state["entities"][entity_name]["pos_offset"],
             enable=False,
             )
+    if default_sprite:
+        set_sprite(state, entity_name, default_sprite)
 
 def set_sprite(state, entity_name, sprite_name):
     """

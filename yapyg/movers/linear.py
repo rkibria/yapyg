@@ -84,7 +84,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     passed_time = mover["passed_time"]
 
     if passed_time == 0 and mover["do_rotate"]:
-        entities.get_rot(state, entity_name)[0] = (int(geometry.get_rotation([0, 0], travel_vector)) - 90) % 360
+        entities.set_rot(state, entity_name, (int(geometry.get_rotation([0, 0], travel_vector)) - 90) % 360)
 
     passed_time += frame_time_delta
     if passed_time > travel_time:

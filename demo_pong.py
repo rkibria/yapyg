@@ -54,73 +54,67 @@ def create(screen_width, screen_height, tile_size):
     yapyg.entities.insert(state,
         ENT_PONG_PADDLE,
         {
-            "std": {
+            "*": {
                 "textures": [("rectangle", PADDLE_WIDTH * tile_size, PADDLE_HEIGHT * tile_size, 1, 1, 1)],
             },
         },
         [1, PADDLE_Y],
         0)
-    yapyg.entities.set_sprite(state, ENT_PONG_PADDLE, "std")
     yapyg.collisions.add(state, ENT_PONG_PADDLE, ["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_BOTTOMWALL,
         {
-            "std": {
+            "*": {
                 "textures": [("rectangle", screen_width, tile_size, 0, 0, 0)],
             },
         },
         [0, PADDLE_Y - 1 - 2 * PADDLE_HEIGHT],
         0)
-    yapyg.entities.set_sprite(state, ENT_PONG_BOTTOMWALL, "std")
     yapyg.collisions.add(state, ENT_PONG_BOTTOMWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_TOPWALL,
         {
-            "std": {
+            "*": {
                 "textures": [("rectangle", screen_width, tile_size, 0, 0, 0)],
             },
         },
         [0, screen_height / float(tile_size)],
         0)
-    yapyg.entities.set_sprite(state, ENT_PONG_TOPWALL, "std")
     yapyg.collisions.add(state, ENT_PONG_TOPWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_LEFTWALL,
         {
-            "std": {
+            "*": {
                 "textures": [("rectangle", tile_size, screen_height, 0, 0, 0)],
             }
         },
         [-1, 0],
         0)
-    yapyg.entities.set_sprite(state, ENT_PONG_LEFTWALL, "std")
     yapyg.collisions.add(state, ENT_PONG_LEFTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_RIGHTWALL,
         {
-            "std": {
+            "*": {
                 "textures": [("rectangle", tile_size, screen_height, 0, 0, 0)],
             }
         },
         [float(screen_width) / tile_size, 0],
         0)
-    yapyg.entities.set_sprite(state, ENT_PONG_RIGHTWALL, "std")
     yapyg.collisions.add(state, ENT_PONG_RIGHTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_BALL,
         {
-            "std": {
+            "*": {
                 "textures": [("ellipse", PADDLE_HEIGHT * tile_size, PADDLE_HEIGHT * tile_size, 1, 1, 1)],
             },
         },
         PONG_BALL_START_POS,
         0)
-    yapyg.entities.set_sprite(state, ENT_PONG_BALL, "std")
     yapyg.collisions.add(state, ENT_PONG_BALL, ["circle", PADDLE_HEIGHT])
 
     yapyg.collisions.set_handler(state, collision_handler)
@@ -137,6 +131,7 @@ def create(screen_width, screen_height, tile_size):
     return state
 
 def collision_handler(state, collision_list):
+    yapyg.entities.undo_last_move(state, ENT_PONG_BALL)
     collision_entity = collision_list[0][0] if collision_list[0][0] != ENT_PONG_BALL else collision_list[0][1]
     ball_mover = yapyg.movers.get_active(state, ENT_PONG_BALL)
     if yapyg.movers.get_type(state, ball_mover) == "linear":

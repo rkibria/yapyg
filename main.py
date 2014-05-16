@@ -46,16 +46,18 @@ import yapyg.controls
 import demo_starship
 import demo_tiles
 import demo_pong
+import demo_bounce
 
 class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_pong"
+        default_choice = "demo_bounce"
         self.choices = {
+            "demo_bounce": "Basic physics simulation",
             "demo_starship": "'Endless' scrolling background and animation",
             "demo_tiles": "Tile map scrolling",
-            "demo_pong": "A single player version of the classic Pong game",
+            "demo_pong": "Simple Pong game",
             }
 
         layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
