@@ -40,15 +40,15 @@ def reflect_speeds(normal_vector, v1_vector, v2_vector, m_1, m_2):
     v1_eff = geometry.dot_product(normal_vector, v1_vector)
     v2_eff = geometry.dot_product(normal_vector, v2_vector)
     new_v1_eff, new_v2_eff = elastic_collision(v1_eff, -v2_eff, m_1, m_2)
-    #
+
     new_v1_eff = geometry.vector_prod(normal_vector, new_v1_eff)
     new_v2_eff = geometry.vector_prod(normal_vector, new_v2_eff)
-    #
+
     v1_perpendicular = geometry.components(normal_vector, v1_vector)[1]
     v2_perpendicular = geometry.components(normal_vector, v2_vector)[1]
-    #
+
     new_v1_vector = geometry.vector_diff(v1_perpendicular, new_v1_eff)
     new_v2_vector = geometry.vector_sum(v2_perpendicular, new_v2_eff)
-    #
+
     return (new_v1_vector[0], new_v1_vector[1],
         new_v2_vector[0], new_v2_vector[1])

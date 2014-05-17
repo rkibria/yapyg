@@ -54,6 +54,11 @@ def set_pos(state, entity_name, x_pos, y_pos):
     """
     TODO
     """
+    if not state["entities"][entity_name]["last_pos"]:
+        state["entities"][entity_name]["last_pos"] = [
+            0,
+            0,
+            state["entities"][entity_name]["rot"][0]]
     state["entities"][entity_name]["last_pos"][0] = state["entities"][entity_name]["pos"][0]
     state["entities"][entity_name]["last_pos"][1] = state["entities"][entity_name]["pos"][1]
 
@@ -64,6 +69,11 @@ def add_pos(state, entity_name, x_pos, y_pos):
     """
     TODO
     """
+    if not state["entities"][entity_name]["last_pos"]:
+        state["entities"][entity_name]["last_pos"] = [
+            0,
+            0,
+            state["entities"][entity_name]["rot"][0]]
     state["entities"][entity_name]["last_pos"][0] = state["entities"][entity_name]["pos"][0]
     state["entities"][entity_name]["last_pos"][1] = state["entities"][entity_name]["pos"][1]
 
@@ -86,16 +96,24 @@ def set_rot(state, entity_name, rot):
     """
     TODO
     """
+    if not state["entities"][entity_name]["last_pos"]:
+        state["entities"][entity_name]["last_pos"] = [
+            state["entities"][entity_name]["pos"][0],
+            state["entities"][entity_name]["pos"][1],
+            0]
     state["entities"][entity_name]["last_pos"][2] = state["entities"][entity_name]["rot"][0]
+
     state["entities"][entity_name]["rot"][0] = rot
 
 def undo_last_move(state, entity_name):
     """
     TODO
     """
-    state["entities"][entity_name]["pos"][0] = state["entities"][entity_name]["last_pos"][0]
-    state["entities"][entity_name]["pos"][1] = state["entities"][entity_name]["last_pos"][1]
-    state["entities"][entity_name]["rot"][0] = state["entities"][entity_name]["last_pos"][2]
+    if state["entities"][entity_name]["last_pos"]:
+        state["entities"][entity_name]["pos"][0] = state["entities"][entity_name]["last_pos"][0]
+        state["entities"][entity_name]["pos"][1] = state["entities"][entity_name]["last_pos"][1]
+        state["entities"][entity_name]["rot"][0] = state["entities"][entity_name]["last_pos"][2]
+        state["entities"][entity_name]["last_pos"] = None
 
 def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
     """
@@ -106,7 +124,7 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
         "rot": [rot],
         "pos_offset": pos_offset,
         "enabled_sprite": None,
-        "last_pos": [pos[0], pos[1], rot],
+        "last_pos": None,
         }
 
     default_sprite = None

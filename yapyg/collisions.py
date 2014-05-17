@@ -56,6 +56,15 @@ def set_handler(state, handler_function):
     """
     state["collisions"]["handler_function"] = handler_function
 
+def get_shape(state, entity_name):
+    """
+    TODO
+    """
+    if state["collisions"]["entities"].has_key(entity_name):
+        return state["collisions"]["entities"][entity_name]["collision_shape"]
+    else:
+        return None
+
 def add(state, entity_name, collision_shape, active_check=True):
     """
     TODO
@@ -115,14 +124,20 @@ def run(state):
         return
 
     collision_list = []
-    for entity_name_1, collision_def_1 in state["collisions"]["entities"].iteritems():
-        if not collision_def_1["active_check"]:
-            continue
+    entity_list = state["collisions"]["entities"].keys()
 
+    for index_1 in xrange(len(entity_list)):
+        entity_name_1 = entity_list[index_1]
+        collision_def_1 = state["collisions"]["entities"][entity_name_1]
         absolute_shape_1 = _get_collision_shape(state, entity_name_1, collision_def_1)
 
-        for entity_name_2, collision_def_2 in state["collisions"]["entities"].iteritems():
+        for index_2 in xrange(index_1 + 1, len(entity_list)):
+            entity_name_2 = entity_list[index_2]
             if entity_name_2 == entity_name_1:
+                continue
+
+            collision_def_2 = state["collisions"]["entities"][entity_name_2]
+            if not collision_def_1["active_check"] and not collision_def_2["active_check"]:
                 continue
 
             absolute_shape_2 = _get_collision_shape(state, entity_name_2, collision_def_2)
@@ -132,7 +147,8 @@ def run(state):
                     collision_def_2["collision_shape"][0],
                     absolute_shape_1,
                     absolute_shape_2):
-                collision_list.append((entity_name_1, entity_name_2))
+                collision_list.append((entity_name_1, entity_name_2,
+                    absolute_shape_1, absolute_shape_2))
 
     if collision_list:
         (state["collisions"]["handler_function"])(state, collision_list)

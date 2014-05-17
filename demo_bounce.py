@@ -20,27 +20,17 @@
 
 import yapyg.factory
 import yapyg.screen
-import yapyg.movers.linear
-import yapyg.movers.jump
-import yapyg.movers.set_property
-import yapyg.movers.wait
-import yapyg.view
-import yapyg.viewers.relative
+import yapyg.movers.physical
 
 def create(screen_width, screen_height, tile_size):
-    global ENT_BOUNCE_TOPWALL
     ENT_BOUNCE_TOPWALL = "top_wall"
-    global ENT_BOUNCE_LEFTWALL
     ENT_BOUNCE_LEFTWALL = "left_wall"
-    global ENT_BOUNCE_RIGHTWALL
     ENT_BOUNCE_RIGHTWALL = "right_wall"
-    global ENT_BOUNCE_BOTTOMWALL
     ENT_BOUNCE_BOTTOMWALL = "bottom_wall"
-    global ENT_BOUNCE_BALL
-    ENT_BOUNCE_BALL = "ball"
-    global BOUNCE_BALL_ANIM_SPEED
-    BOUNCE_BALL_ANIM_SPEED = 3.0 / 1000000
+    BOUNCE_BALL_SPEED = 3.0 / 1000000
     BALL_SIZE = 1.0 / 8
+    BOUNCE_GRAVITY = -0.05 / 1000000
+    BOUNCE_VX = 0.5 / 1000000
 
     state = yapyg.factory.create(screen_width, screen_height, tile_size)
 
@@ -91,20 +81,26 @@ def create(screen_width, screen_height, tile_size):
         0)
     yapyg.collisions.add(state, ENT_BOUNCE_RIGHTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
 
-    yapyg.entities.insert(state,
-        ENT_BOUNCE_BALL,
-        {
-            "*": {
-                "textures": [("ellipse", BALL_SIZE * tile_size, BALL_SIZE * tile_size, 1, 1, 1)],
-            },
-        },
-        [1.5, 3],
-        0)
-    yapyg.collisions.add(state, ENT_BOUNCE_BALL, ["circle", BALL_SIZE])
+    index = 0
+    for column in xrange(2):
+        for row in xrange(10):
+            ball_entity_name = "ball_%d" % index
+            yapyg.entities.insert(state,
+                ball_entity_name,
+                {
+                    "*": {
+                        "textures": [("ellipse", BALL_SIZE * tile_size, BALL_SIZE * tile_size, 1, 1, 1)],
+                    },
+                },
+                [1 + row * 1.25 * BALL_SIZE + column * 0.1, 2 + column * 1.25 * BALL_SIZE],
+                0)
+            yapyg.collisions.add(state, ball_entity_name, ["circle", BALL_SIZE])
+            yapyg.movers.physical.add(state, ball_entity_name, ay=BOUNCE_GRAVITY, vx=BOUNCE_VX)
+            index += 1
 
     yapyg.collisions.set_handler(state, collision_handler)
 
     return state
 
 def collision_handler(state, collision_list):
-    pass
+    yapyg.movers.physical.collision_handler(state, collision_list)
