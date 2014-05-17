@@ -74,7 +74,7 @@ def add(state, entity_name, collision_shape, active_check=True):
         "active_check": active_check,
         }
 
-def _get_collision_shape(state, entity_name, collision_def):
+def get_collision_shape(state, entity_name, collision_def):
     """
     collision_shape:
         ["rectangle", width, height]
@@ -129,7 +129,7 @@ def run(state):
     for index_1 in xrange(len(entity_list)):
         entity_name_1 = entity_list[index_1]
         collision_def_1 = state["collisions"]["entities"][entity_name_1]
-        absolute_shape_1 = _get_collision_shape(state, entity_name_1, collision_def_1)
+        absolute_shape_1 = get_collision_shape(state, entity_name_1, collision_def_1)
 
         for index_2 in xrange(index_1 + 1, len(entity_list)):
             entity_name_2 = entity_list[index_2]
@@ -140,7 +140,7 @@ def run(state):
             if not collision_def_1["active_check"] and not collision_def_2["active_check"]:
                 continue
 
-            absolute_shape_2 = _get_collision_shape(state, entity_name_2, collision_def_2)
+            absolute_shape_2 = get_collision_shape(state, entity_name_2, collision_def_2)
 
             if _is_collision(state,
                     collision_def_1["collision_shape"][0],
@@ -148,7 +148,7 @@ def run(state):
                     absolute_shape_1,
                     absolute_shape_2):
                 collision_list.append((entity_name_1, entity_name_2,
-                    absolute_shape_1, absolute_shape_2))
+                    collision_def_1, collision_def_2))
 
     if collision_list:
         (state["collisions"]["handler_function"])(state, collision_list)

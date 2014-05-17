@@ -23,6 +23,7 @@ Simulate physical movement
 """
 
 import math
+import random
 
 from .. import movers
 from .. import entities
@@ -103,7 +104,7 @@ def _rectangle_circle_collision(rectangle_entity_name, circle_entity_name,
                 circle_physical_mover["vy"] = -circle_physical_mover["vy"] * circle_physical_mover["inelasticity"]
         else:
             # lower/upper left/right quadrant
-            v_total = math.sqrt(circle_physical_mover["vx"] * circle_physical_mover["vx"] 
+            v_total = math.sqrt(circle_physical_mover["vx"] * circle_physical_mover["vx"]
                 + circle_physical_mover["vy"] * circle_physical_mover["vy"])
             corner_y = None
             corner_x = None
@@ -157,7 +158,7 @@ def collision_handler(state, collision_list):
     """
     TODO
     """
-    for entity_name_1, entity_name_2, absolute_shape_1, absolute_shape_2 in collision_list:
+    for entity_name_1, entity_name_2, collision_def_1, collision_def_2 in collision_list:
         entity_mover_1 = movers.get_active(state, entity_name_1)
         entity_mover_2 = movers.get_active(state, entity_name_2)
 
@@ -172,20 +173,36 @@ def collision_handler(state, collision_list):
             entity_shape_1 = collisions.get_shape(state, entity_name_1)
             entity_shape_2 = collisions.get_shape(state, entity_name_2)
 
+            absolute_shape_1 = collisions.get_collision_shape(state, entity_name_1, collision_def_1)
+            absolute_shape_2 = collisions.get_collision_shape(state, entity_name_2, collision_def_2)
+
             if entity_shape_1[0] == "rectangle":
                 if entity_shape_2[0] == "rectangle":
                     print "TODO r-r"
                     exit()
                 elif entity_shape_2[0] == "circle":
+                    entities.undo_last_move(state, entity_name_2)
+                    absolute_shape_2 = collisions.get_collision_shape(state, entity_name_2, collision_def_2)
                     _rectangle_circle_collision(entity_name_1, entity_name_2,
                         absolute_shape_1, absolute_shape_2,
                         physics_mover_1, physics_mover_2)
             elif entity_shape_1[0] == "circle":
                 if entity_shape_2[0] == "rectangle":
+                    entities.undo_last_move(state, entity_name_1)
+                    absolute_shape_1 = collisions.get_collision_shape(state, entity_name_1, collision_def_1)
                     _rectangle_circle_collision(entity_name_2, entity_name_1,
                         absolute_shape_2, absolute_shape_1,
                         physics_mover_2, physics_mover_1)
                 elif entity_shape_2[0] == "circle":
+                    last_pos_1 = entities.get_last_pos(state, entity_name_1)
+                    last_pos_2 = entities.get_last_pos(state, entity_name_2)
+                    if last_pos_1 and last_pos_2:
+                        if random.randint(0, 1) == 0:
+                            entities.undo_last_move(state, entity_name_1)
+                            absolute_shape_1 = collisions.get_collision_shape(state, entity_name_1, collision_def_1)
+                        else:
+                            entities.undo_last_move(state, entity_name_2)
+                            absolute_shape_2 = collisions.get_collision_shape(state, entity_name_2, collision_def_2)
                     _circle_circle_collision(entity_name_1, entity_name_2,
                         absolute_shape_1, absolute_shape_2,
                         physics_mover_1, physics_mover_2)

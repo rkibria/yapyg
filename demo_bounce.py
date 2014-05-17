@@ -23,10 +23,10 @@ import yapyg.screen
 import yapyg.movers.physical
 
 def create(screen_width, screen_height, tile_size):
-    ENT_BOUNCE_TOPWALL = "top_wall"
-    ENT_BOUNCE_LEFTWALL = "left_wall"
-    ENT_BOUNCE_RIGHTWALL = "right_wall"
-    ENT_BOUNCE_BOTTOMWALL = "bottom_wall"
+    ENT_BOUNCE_TOPWALL = "000_top_wall"
+    ENT_BOUNCE_LEFTWALL = "000_left_wall"
+    ENT_BOUNCE_RIGHTWALL = "000_right_wall"
+    ENT_BOUNCE_BOTTOMWALL = "000_bottom_wall"
     BOUNCE_BALL_SPEED = 3.0 / 1000000
     BALL_SIZE = 1.0 / 8
     BOUNCE_GRAVITY = -0.05 / 1000000
@@ -41,10 +41,10 @@ def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_BOTTOMWALL,
         {
             "*": {
-                "textures": [("rectangle", screen_width, tile_size, 0, 0, 0)],
+                "textures": [("rectangle", screen_width, tile_size, 0, 0, 1)],
             },
         },
-        [0, -1],
+        [0, 0],
         0)
     yapyg.collisions.add(state, ENT_BOUNCE_BOTTOMWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
 
@@ -52,10 +52,10 @@ def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_TOPWALL,
         {
             "*": {
-                "textures": [("rectangle", screen_width, tile_size, 0, 0, 0)],
+                "textures": [("rectangle", screen_width, tile_size, 0, 0, 1)],
             },
         },
-        [0, screen_height / float(tile_size)],
+        [0, -1.0 + screen_height / float(tile_size)],
         0)
     yapyg.collisions.add(state, ENT_BOUNCE_TOPWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
 
@@ -63,10 +63,10 @@ def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_LEFTWALL,
         {
             "*": {
-                "textures": [("rectangle", tile_size, screen_height, 0, 0, 0)],
+                "textures": [("rectangle", tile_size, screen_height, 0, 0, 1)],
             }
         },
-        [-1, 0],
+        [-0.75, 0],
         0)
     yapyg.collisions.add(state, ENT_BOUNCE_LEFTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
 
@@ -74,17 +74,17 @@ def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_RIGHTWALL,
         {
             "*": {
-                "textures": [("rectangle", tile_size, screen_height, 0, 0, 0)],
+                "textures": [("rectangle", tile_size, screen_height, 0, 0, 1)],
             }
         },
-        [float(screen_width) / tile_size, 0],
+        [-0.25 + float(screen_width) / tile_size, 0],
         0)
     yapyg.collisions.add(state, ENT_BOUNCE_RIGHTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
 
     index = 0
     for column in xrange(2):
         for row in xrange(10):
-            ball_entity_name = "ball_%d" % index
+            ball_entity_name = "900_ball_%d" % index
             yapyg.entities.insert(state,
                 ball_entity_name,
                 {
@@ -92,7 +92,7 @@ def create(screen_width, screen_height, tile_size):
                         "textures": [("ellipse", BALL_SIZE * tile_size, BALL_SIZE * tile_size, 1, 1, 1)],
                     },
                 },
-                [1 + row * 1.25 * BALL_SIZE + column * 0.1, 2 + column * 1.25 * BALL_SIZE],
+                [1 + row * 1.25 * BALL_SIZE + column * 0.1, 3 + column * 1.25 * BALL_SIZE],
                 0)
             yapyg.collisions.add(state, ball_entity_name, ["circle", BALL_SIZE])
             yapyg.movers.physical.add(state, ball_entity_name, ay=BOUNCE_GRAVITY, vx=BOUNCE_VX)

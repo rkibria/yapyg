@@ -80,6 +80,12 @@ def add_pos(state, entity_name, x_pos, y_pos):
     state["entities"][entity_name]["pos"][0] += x_pos
     state["entities"][entity_name]["pos"][1] += y_pos
 
+def get_last_pos(state, entity_name):
+    """
+    TODO
+    """
+    return state["entities"][entity_name]["last_pos"]
+
 def get_pos_offset(state, entity_name):
     """
     TODO
