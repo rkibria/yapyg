@@ -95,17 +95,26 @@ def _rectangle_circle_collision(rectangle_entity_name, circle_entity_name,
     rect_y = abs_rectangle_shape[1]
     rect_w = abs_rectangle_shape[2]
     rect_h = abs_rectangle_shape[3]
+    rect_r = abs_rectangle_shape[4]
+
+    circle_move_vector = [circle_physical_mover["vx"], circle_physical_mover["vy"]]
+
+    if rect_r != 0:
+        rotated_circle = geometry.get_rotated_point((rect_x + rect_w / 2.0, rect_y + rect_h / 2.0), (circle_x, circle_y), -rect_r)
+        circle_x = rotated_circle[0]
+        circle_y = rotated_circle[1]
+
+        circle_move_vector = geometry.get_rotated_point((0, 0), circle_move_vector, -rect_r)
 
     if circle_y <= rect_y or circle_y >= rect_y + rect_h:
         # circle centre below or above rectangle
         if circle_x > rect_x and circle_x < rect_x + rect_w:
             # lower/upper quadrant
             if circle_physical_mover:
-                circle_physical_mover["vy"] = -circle_physical_mover["vy"] * circle_physical_mover["inelasticity"]
+                circle_move_vector[1] = -circle_move_vector[1] * circle_physical_mover["inelasticity"]
         else:
             # lower/upper left/right quadrant
-            v_total = math.sqrt(circle_physical_mover["vx"] * circle_physical_mover["vx"]
-                + circle_physical_mover["vy"] * circle_physical_mover["vy"])
+            v_total = math.hypot(circle_move_vector[0], circle_move_vector[1])
             corner_y = None
             corner_x = None
             if circle_y <= rect_y:
@@ -122,17 +131,22 @@ def _rectangle_circle_collision(rectangle_entity_name, circle_entity_name,
             new_vy = math.sin(angle) * v_total
             new_vx = math.cos(angle) * v_total
             if circle_physical_mover:
-                circle_physical_mover["vx"] = new_vx * circle_physical_mover["inelasticity"]
-                circle_physical_mover["vy"] = new_vy * circle_physical_mover["inelasticity"]
+                circle_move_vector[0] = new_vx * circle_physical_mover["inelasticity"]
+                circle_move_vector[1] = new_vy * circle_physical_mover["inelasticity"]
     else:
         # circle same height as rectangle
         if circle_x < rect_x or circle_x > rect_x + rect_w:
             # left or right quadrant
             if circle_physical_mover:
-                circle_physical_mover["vx"] = -circle_physical_mover["vx"] * circle_physical_mover["inelasticity"]
+                circle_move_vector[0] = -circle_move_vector[0] * circle_physical_mover["inelasticity"]
         else:
             # inside rectangle
             pass
+
+    if circle_physical_mover:
+        circle_move_vector = geometry.get_rotated_point((0, 0), circle_move_vector, rect_r)
+        circle_physical_mover["vx"] = circle_move_vector[0]
+        circle_physical_mover["vy"] = circle_move_vector[1]
 
 def _circle_circle_collision(circle_entity_name_1, circle_entity_name_2,
         abs_circle_shape_1, abs_circle_shape_2,

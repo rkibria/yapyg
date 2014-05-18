@@ -81,7 +81,7 @@ def get_collision_shape(state, entity_name, collision_def):
         ["circle", diameter]
     =>
         circle: (center_x, center_y, radius)
-        rectangle: (x, y, w, h)
+        rectangle: (x, y, w, h, rotation)
     """
     pos = entities.get_pos(state, entity_name)
     pos_offset = entities.get_pos_offset(state, entity_name)
@@ -91,7 +91,8 @@ def get_collision_shape(state, entity_name, collision_def):
         radius = collision_shape[1] / 2.0
         return (pos[0] + pos_offset[0] + radius, pos[1] + pos_offset[1] + radius, radius)
     elif collision_shape[0] == "rectangle":
-        return (pos[0] + pos_offset[0], pos[1] + pos_offset[1], collision_shape[1], collision_shape[2])
+        return (pos[0] + pos_offset[0], pos[1] + pos_offset[1],
+            collision_shape[1], collision_shape[2], entities.get_rot(state, entity_name))
     else:
         raise YapygCollisionException("Unknown shape %s" % collision_shape[0])
 

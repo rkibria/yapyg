@@ -103,7 +103,7 @@ def draw(state, canvas, frame_time_delta, view_scale):
     TODO
     """
     view_pos = view.get_view_pos(state)
-    for sprite_name, sprite in state["sprites"]["sprites"].iteritems():
+    for sprite_name, sprite in sorted(state["sprites"]["sprites"].iteritems()):
         if not sprite["enable"]:
             continue
         textures = sprite["textures"]

@@ -94,7 +94,7 @@ def create(screen_width, screen_height, tile_size):
 
     start_movement(state, None)
 
-    yapyg.view.set_viewer(state, yapyg.viewers.relative.create(state, "man", [-1, -1]))
+    yapyg.view.set_viewer(state, yapyg.viewers.relative.create(state, "man", [-1.5, -1.5]))
 
     return state
 

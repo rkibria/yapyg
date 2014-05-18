@@ -60,18 +60,26 @@ def is_point_in_rect(pos, rect):
 
 def is_rect_circle_collision(circ, rect, exact_check = False):
     """
-    circ = (y, x, r)
-    rect = (y, x, h, w)
+    circ = (x, y, r)
+    rect = (x, y, w, h, rot)
     """
-    c_y = circ[0]
-    c_x = circ[1]
+    c_x = circ[0]
+    c_y = circ[1]
     c_r = circ[2]
-    r_y1 = rect[0]
-    r_x1 = rect[1]
-    r_h = rect[2]
-    r_w = rect[3]
+
+    r_x1 = rect[0]
+    r_y1 = rect[1]
+    r_w = rect[2]
+    r_h = rect[3]
+    r_rot = rect[4]
+
     r_x2 = r_x1 + r_w
     r_y3 = r_y1 + r_h
+
+    if r_rot != 0:
+        rotated_circle = get_rotated_point((r_x1 + r_w / 2.0, r_y1 + r_h / 2.0), (c_x, c_y), -r_rot)
+        c_x = rotated_circle[0]
+        c_y = rotated_circle[1]
 
     circle_outside = True
 
@@ -176,3 +184,19 @@ def get_vector_size(vec):
     TODO
     """
     return math.hypot(vec[0], vec[1])
+
+def complex_multiply(complex_1, complex_2):
+    """
+    TODO
+    """
+    return [complex_1[0] * complex_2[0] - complex_1[1] * complex_2[1],
+        complex_1[0] * complex_2[1] + complex_1[1] * complex_2[0]]
+
+def get_rotated_point(origin_point, point, rot):
+    """
+    TODO
+    """
+    rot_rad = math.radians(rot)
+    rot_relative_point = complex_multiply((point[0] - origin_point[0],
+        point[1] - origin_point[1]), (math.cos(rot_rad), math.sin(rot_rad)))
+    return [origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1]]
