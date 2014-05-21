@@ -47,17 +47,19 @@ import demo_starship
 import demo_tiles
 import demo_pong
 import demo_bounce
+import demo_breakout
 
 class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_bounce"
+        default_choice = "demo_breakout"
         self.choices = {
             "demo_bounce": "Basic physics simulation",
             "demo_starship": "'Endless' scrolling background and animation",
             "demo_tiles": "Tile map scrolling",
             "demo_pong": "Simple Pong game",
+            "demo_breakout": "Breakout implemented with physical mover",
             }
 
         layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
@@ -89,7 +91,7 @@ class MenuWidget(FloatLayout):
             parent.remove_widget(self)
 
             state = None
-            exec("state = %s.create(Window.width, Window.height, tile_size)" % self.spinner.text)
+            exec("state = %s.create(float(Window.width), float(Window.height), float(tile_size))" % self.spinner.text)
 
             parent.add_widget(ScreenWidget(state))
 
