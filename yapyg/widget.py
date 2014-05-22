@@ -27,6 +27,7 @@ import tiles
 import sprites
 import view
 import collisions
+import factory
 
 class YapygWidget(Widget):
     def __init__(self,
@@ -47,18 +48,25 @@ class YapygWidget(Widget):
         self.on_timer_callback = on_timer_callback
         Clock.schedule_once(self.on_timer, timeout=0)
 
+    def destroy(self):
+        state = self.state
+        self.state = None
+        factory.destroy(state)
+
     def on_timer(self, dt):
-        cur_fps = Clock.get_fps()
-        if cur_fps > 0:
-            last_frame_delta = 1000000.0 / cur_fps
-            if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
-                self.min_frame_time_delta = last_frame_delta
-            else:
-                last_frame_delta = self.min_frame_time_delta
-            if self.on_timer_callback:
-                (self.on_timer_callback)(self.state, last_frame_delta)
-            self.redraw(last_frame_delta)
-        Clock.schedule_once(self.on_timer, timeout=0)
+        if self.state:
+            cur_fps = Clock.get_fps()
+            if cur_fps > 0:
+                last_frame_delta = 1000000.0 / cur_fps
+                if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
+                    self.min_frame_time_delta = last_frame_delta
+                else:
+                    last_frame_delta = self.min_frame_time_delta
+                if self.on_timer_callback:
+                    (self.on_timer_callback)(self.state, last_frame_delta)
+                self.redraw(last_frame_delta)
+        if self.state:
+            Clock.schedule_once(self.on_timer, timeout=0)
 
     def redraw(self, frame_time_delta):
         movers.run(self.state, frame_time_delta)

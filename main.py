@@ -100,8 +100,9 @@ class ScreenWidget(FloatLayout):
         super(ScreenWidget, self).__init__(**kwargs)
 
         self.state = state
+        self.yapyg_widget = YapygWidget(state, [Window.width, Window.height], Window.width / screen_width)
 
-        self.add_widget(YapygWidget(state, [Window.width, Window.height], Window.width / screen_width))
+        self.add_widget(self.yapyg_widget)
 
         self.joystick = None
         if yapyg.controls.need_joystick(state):
@@ -119,10 +120,12 @@ class ScreenWidget(FloatLayout):
         self.add_widget(exit_button)
 
     def on_timer(self, dt):
-        yapyg.controls.set_joystick(self.state, self.joystick.get_direction())
+        if self.state:
+            yapyg.controls.set_joystick(self.state, self.joystick.get_direction())
 
     def on_exit(self, instance, value):
         if self.parent:
+            self.yapyg_widget.destroy()
             parent = self.parent
             parent.remove_widget(self)
             parent.add_widget(MenuWidget())

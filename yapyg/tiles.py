@@ -42,6 +42,12 @@ def initialize(state, tile_size):
     }
     add_tile_def(state, "tl_null", ["assets/img/tiles/no_tile.png",])
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["tiles"]
+
 def get_tile_size(state):
     """
     TODO

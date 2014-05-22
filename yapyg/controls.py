@@ -31,6 +31,12 @@ def initialize(state):
         "joystick_direction": [0, 0],
     }
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["controls"]
+
 def add_joystick(state):
     """
     TODO

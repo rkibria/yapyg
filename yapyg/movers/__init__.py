@@ -48,6 +48,12 @@ def initialize(state):
     """
     state["movers"] = {}
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["movers"]
+
 def add(state, mover_name, mover, do_replace=False):
     """
     TODO

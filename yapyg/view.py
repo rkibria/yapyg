@@ -31,6 +31,12 @@ def initialize(state):
         "view_setter": None,
     }
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["view"]
+
 def get_view_pos(state):
     """
     TODO

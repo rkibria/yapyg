@@ -50,6 +50,12 @@ def initialize(state):
         "entities": {},
     }
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["collisions"]
+
 def set_handler(state, handler_function):
     """
     TODO
@@ -73,6 +79,12 @@ def add(state, entity_name, collision_shape, active_check=True):
         "collision_shape": collision_shape,
         "active_check": active_check,
         }
+
+def delete(state, entity_name):
+    """
+    TODO
+    """
+    del state["collisions"]["entities"][entity_name]
 
 def get_collision_shape(state, entity_name, collision_def):
     """

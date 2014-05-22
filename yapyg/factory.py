@@ -49,3 +49,14 @@ def create(screen_width, screen_height, tile_size):
     collisions.initialize(state)
 
     return state
+
+def destroy(state):
+    screen.destroy(state)
+    texture_db.destroy(state)
+    tiles.destroy(state)
+    sprites.destroy(state)
+    movers.destroy(state)
+    entities.destroy(state)
+    view.destroy(state)
+    controls.destroy(state)
+    collisions.destroy(state)

@@ -31,6 +31,12 @@ def initialize(state, screen_width, screen_height, tile_size):
     state["screen"]["height"] = screen_height
     state["screen"]["tile_size"] = tile_size
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["screen"]
+
 def get_width(state):
     """
     TODO

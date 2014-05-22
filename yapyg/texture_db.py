@@ -48,6 +48,12 @@ def initialize(state):
     """
     state["textures"] = {}
 
+def destroy(state):
+    """
+    TODO
+    """
+    del state["textures"]
+
 def insert(state, texture_name, texture):
     """
     TODO
