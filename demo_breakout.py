@@ -32,7 +32,8 @@ def create(screen_width, screen_height, tile_size):
     PADDLE_HEIGHT = 1.0 / 8
     PADDLE_Y = 2.0
     BOTTOM_Y = 1.5
-    BORDER_THICKNESS = 0.1
+    BORDER_THICKNESS = 2.0
+    BORDER_OFFSET = 0.1
 
     global ENT_PADDLE
     ENT_PADDLE = "500_paddle"
@@ -45,9 +46,9 @@ def create(screen_width, screen_height, tile_size):
     global BALL_START_POS
     BALL_START_POS = [1, PADDLE_Y + 0.5]
     BALL_VXY = 2.0 / 1000000
-    BLOCK_WIDTH = 1.77 / 3.5
+    BLOCK_WIDTH = 1.78 / 3.5
     BLOCK_HEIGHT = 1.0 / 3.5
-    BLOCK_X = BORDER_THICKNESS
+    BLOCK_X = 0.1
     BLOCK_Y = 4.5
     global ENT_BLOCK_BASE
     ENT_BLOCK_BASE = "400_block"
@@ -58,9 +59,10 @@ def create(screen_width, screen_height, tile_size):
     yapyg.tiles.set_area(state, [["." for x in xrange(10)] for x in xrange(10)])
 
     yapyg.helpers.create_collision_box(state, "000_screenbox",
-        (0, BOTTOM_Y),
-        ((screen_width / tile_size), (screen_height / tile_size) - BOTTOM_Y),
-        thickness=BORDER_THICKNESS)
+        (-BORDER_THICKNESS + BORDER_OFFSET, -BORDER_THICKNESS + BOTTOM_Y + BORDER_OFFSET),
+        ((screen_width / tile_size) + 2 * BORDER_THICKNESS - 2 * BORDER_OFFSET,
+        (screen_height / tile_size) - BOTTOM_Y + 2 * BORDER_THICKNESS - 2 * BORDER_OFFSET),
+        thickness=BORDER_THICKNESS, color=(0.2, 0, 0))
 
     for row in xrange(5):
         for col in xrange(7):
@@ -104,7 +106,8 @@ def create(screen_width, screen_height, tile_size):
         ENT_PADDLE,
         "joystick",
         0.1,
-        [BORDER_THICKNESS, PADDLE_Y, float(screen_width) / tile_size - PADDLE_WIDTH - BORDER_THICKNESS, PADDLE_Y])
+        [BORDER_OFFSET, PADDLE_Y,
+        float(screen_width) / tile_size - PADDLE_WIDTH - BORDER_OFFSET, PADDLE_Y])
 
     return state
 
