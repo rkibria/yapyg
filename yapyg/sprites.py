@@ -27,6 +27,7 @@ from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 import texture_db
 import tiles
 import view
+import text
 
 def initialize(state):
     """
@@ -64,6 +65,8 @@ def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
                 texture_db.insert_color_rect(state, texture_part[1], texture_part[2], texture_part, texture_part[3], texture_part[4], texture_part[5])
             elif texture_part[0] == "ellipse":
                 texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2], texture_part, texture_part[3], texture_part[4], texture_part[5])
+            elif texture_part[0] == "text":
+                texture_db.insert(state, texture_part, text.create_texture(state, texture_part[1], texture_part[2]))
         elif type(texture_part) == str:
             texture_db.load(state, texture_part, texture_part)
 

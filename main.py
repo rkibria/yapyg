@@ -48,13 +48,15 @@ import demo_tiles
 import demo_pong
 import demo_bounce
 import demo_breakout
+import demo_text
 
 class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_breakout"
+        default_choice = "demo_text"
         self.choices = {
+            "demo_text": "Text drawing",
             "demo_bounce": "Basic physics simulation",
             "demo_starship": "'Endless' scrolling background and animation",
             "demo_tiles": "Tile map scrolling",

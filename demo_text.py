@@ -18,48 +18,42 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-"""
-Generate new game states
-"""
+import math
 
-import screen
-import tiles
-import texture_db
-import sprites
-import movers
-import entities
-import view
-import controls
-import collisions
-import text
+import yapyg.factory
+import yapyg.entities
+import yapyg.movers
+import yapyg.movers.controlled
+import yapyg.controls
+import yapyg.collisions
+import yapyg.text
 
 def create(screen_width, screen_height, tile_size):
-    """
-    TODO
-    """
-    state = {}
+    state = yapyg.factory.create(screen_width, screen_height, tile_size)
 
-    screen.initialize(state, screen_width, screen_height, tile_size)
-    texture_db.initialize(state)
-    tiles.initialize(state, tile_size)
-    sprites.initialize(state)
-    movers.initialize(state)
-    entities.initialize(state)
-    view.initialize(state)
-    controls.initialize(state)
-    collisions.initialize(state)
-    text.initialize(state)
-    
+    yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/gray_square.png",])
+    yapyg.tiles.set_area(state, [["." for x in xrange(10)] for x in xrange(10)])
+
+    yapyg.text.load_font(state, "DroidSans", "assets/img/fonts/DroidSansMonoDotted32x64", 32, 64)
+
+    yapyg.entities.insert(state,
+        "500_text_1",
+        {
+            "*": {
+                "textures": [("text", "This is text\nSecond line", "DroidSans")],
+            },
+        },
+        [0.3, 0.5])
+
+    start_movement(state, None)
+
     return state
 
-def destroy(state):
-    screen.destroy(state)
-    texture_db.destroy(state)
-    tiles.destroy(state)
-    sprites.destroy(state)
-    movers.destroy(state)
-    entities.destroy(state)
-    view.destroy(state)
-    controls.destroy(state)
-    collisions.destroy(state)
-    text.destroy(state)
+def start_movement(state, mover_name):
+    n_steps = 1000
+    for index in xrange(n_steps):
+        degrees = float(index) / n_steps * 360.0
+        yapyg.movers.linear.add(state, "500_text_1",
+            (math.cos(math.radians(degrees)) / 100.0, math.sin(math.radians(degrees)) / 100.0),
+            0.5 / 1000000,
+            True, None if index != n_steps - 1 else start_movement)
