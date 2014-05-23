@@ -26,6 +26,8 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
+import screen
+
 class YapygTextureDbException(Exception):
     """
     TODO
@@ -79,6 +81,9 @@ def insert_combined(state, texture_size, texture_name, texture_list):
     """
     TODO
     """
+    tile_size = screen.get_tile_size(state)
+    texture_size *= tile_size
+
     if len(texture_list) == 0:
         raise YapygTextureDbException("insert_combined() called with empty list")
     elif len(texture_list) == 1:
@@ -101,6 +106,10 @@ def insert_color_rect(state, texture_w, texture_h, texture_name, c_r, c_g, c_b):
     """
     TODO
     """
+    tile_size = screen.get_tile_size(state)
+    texture_w *= tile_size
+    texture_h *= tile_size
+
     texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
     fbo = Fbo(size=(texture_w, texture_h), texture=texture)
     with fbo:
@@ -113,6 +122,10 @@ def insert_color_ellipse(state, texture_w, texture_h, texture_name, c_r, c_g, c_
     """
     TODO
     """
+    tile_size = screen.get_tile_size(state)
+    texture_w *= tile_size
+    texture_h *= tile_size
+
     texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
     fbo = Fbo(size=(texture_w, texture_h), texture=texture)
     with fbo:

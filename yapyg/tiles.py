@@ -69,7 +69,7 @@ def get_area(state):
 def add_tile_def(state, tile_name, texture_list):
     state["tiles"]["defs"][tile_name] = {}
     state["tiles"]["defs"][tile_name]["textures"] = texture_list
-    texture_db.insert_combined(state, get_tile_size(state), tile_name, texture_list)
+    texture_db.insert_combined(state, 1, tile_name, texture_list)
 
 def get_tile(state, row, col):
     """

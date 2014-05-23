@@ -70,7 +70,7 @@ def create(screen_width, screen_height, tile_size):
                 block_entity_name,
                 {
                     "*": {
-                        "textures": [("rectangle", BLOCK_WIDTH * tile_size, BLOCK_HEIGHT * tile_size, color[0], color[1], color[2])],
+                        "textures": [("rectangle", BLOCK_WIDTH, BLOCK_HEIGHT, color[0], color[1], color[2])],
                     },
                 },
                 [BLOCK_X + col * BLOCK_WIDTH, BLOCK_Y + row * BLOCK_HEIGHT],
@@ -81,7 +81,7 @@ def create(screen_width, screen_height, tile_size):
         ENT_PADDLE,
         {
             "*": {
-                "textures": [("rectangle", PADDLE_WIDTH * tile_size, PADDLE_HEIGHT * tile_size, 1, 1, 1)],
+                "textures": [("rectangle", PADDLE_WIDTH, PADDLE_HEIGHT, 1, 1, 1)],
             },
         },
         [1, PADDLE_Y],
@@ -92,7 +92,7 @@ def create(screen_width, screen_height, tile_size):
         ENT_BALL,
         {
             "*": {
-                "textures": [("ellipse", PADDLE_HEIGHT * tile_size, PADDLE_HEIGHT * tile_size, 1, 1, 1)],
+                "textures": [("ellipse", PADDLE_HEIGHT, PADDLE_HEIGHT, 1, 1, 1)],
             },
         },
         BALL_START_POS,

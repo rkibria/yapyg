@@ -43,51 +43,51 @@ def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_BOTTOMWALL,
         {
             "*": {
-                "textures": [("rectangle", screen_width, tile_size, 0, 0, 1)],
+                "textures": [("rectangle", screen_width / tile_size, tile_size / tile_size, 0, 0, 1)],
             },
         },
         [0, -0.5],
         0)
-    yapyg.collisions.add(state, ENT_BOUNCE_BOTTOMWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
+    yapyg.collisions.add(state, ENT_BOUNCE_BOTTOMWALL, ["rectangle", screen_width / tile_size, 1], False)
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_TOPWALL,
         {
             "*": {
-                "textures": [("rectangle", screen_width, tile_size, 0, 0, 1)],
+                "textures": [("rectangle", screen_width / tile_size, 1, 0, 0, 1)],
             },
         },
         [0, -0.5 + screen_height / float(tile_size)],
         0)
-    yapyg.collisions.add(state, ENT_BOUNCE_TOPWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
+    yapyg.collisions.add(state, ENT_BOUNCE_TOPWALL, ["rectangle", screen_width / tile_size, 1], False)
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_LEFTWALL,
         {
             "*": {
-                "textures": [("rectangle", tile_size, screen_height, 0, 0, 1)],
+                "textures": [("rectangle", 1, screen_height / tile_size, 0, 0, 1)],
             }
         },
         [-0.75, 0],
         0)
-    yapyg.collisions.add(state, ENT_BOUNCE_LEFTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
+    yapyg.collisions.add(state, ENT_BOUNCE_LEFTWALL, ["rectangle", 1, screen_height / tile_size], False)
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_RIGHTWALL,
         {
             "*": {
-                "textures": [("rectangle", tile_size, screen_height, 0, 0, 1)],
+                "textures": [("rectangle", 1, screen_height / tile_size, 0, 0, 1)],
             }
         },
-        [-0.25 + float(screen_width) / tile_size, 0],
+        [-0.25 + screen_width / tile_size, 0],
         0)
-    yapyg.collisions.add(state, ENT_BOUNCE_RIGHTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
+    yapyg.collisions.add(state, ENT_BOUNCE_RIGHTWALL, ["rectangle", 1, screen_height / tile_size], False)
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_BLOCK_1,
         {
             "*": {
-                "textures": [("rectangle", tile_size * 1, tile_size * 1, 0, 0, 1)],
+                "textures": [("rectangle", 1, 1, 0, 0, 1)],
             }
         },
         [1.5, 0],
@@ -98,7 +98,7 @@ def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_BLOCK_2,
         {
             "*": {
-                "textures": [("rectangle", tile_size * 1, tile_size * 1, 0, 0, 1)],
+                "textures": [("rectangle", 1, 1, 0, 0, 1)],
             }
         },
         [2 - 0.5, 2.5 - 0.5],
@@ -113,7 +113,7 @@ def create(screen_width, screen_height, tile_size):
                 ball_entity_name,
                 {
                     "*": {
-                        "textures": [("ellipse", BALL_SIZE * tile_size, BALL_SIZE * tile_size, 1, 1, 1)],
+                        "textures": [("ellipse", BALL_SIZE, BALL_SIZE, 1, 1, 1)],
                     },
                 },
                 [1 + row * 1.25 * BALL_SIZE + column * 0.1, 4.5 + column * 1.25 * BALL_SIZE],

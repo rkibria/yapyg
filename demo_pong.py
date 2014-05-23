@@ -55,7 +55,7 @@ def create(screen_width, screen_height, tile_size):
         ENT_PONG_PADDLE,
         {
             "*": {
-                "textures": [("rectangle", PADDLE_WIDTH * tile_size, PADDLE_HEIGHT * tile_size, 1, 1, 1)],
+                "textures": [("rectangle", PADDLE_WIDTH, PADDLE_HEIGHT, 1, 1, 1)],
             },
         },
         [1, PADDLE_Y],
@@ -66,51 +66,51 @@ def create(screen_width, screen_height, tile_size):
         ENT_PONG_BOTTOMWALL,
         {
             "*": {
-                "textures": [("rectangle", screen_width, tile_size, 0, 0, 0)],
+                "textures": [("rectangle", screen_width / tile_size, 1, 0, 0, 0)],
             },
         },
         [0, PADDLE_Y - 1 - 2 * PADDLE_HEIGHT],
         0)
-    yapyg.collisions.add(state, ENT_PONG_BOTTOMWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
+    yapyg.collisions.add(state, ENT_PONG_BOTTOMWALL, ["rectangle", screen_width / tile_size, 1], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_TOPWALL,
         {
             "*": {
-                "textures": [("rectangle", screen_width, tile_size, 0, 0, 0)],
+                "textures": [("rectangle", screen_width / tile_size, 1, 0, 0, 0)],
             },
         },
-        [0, screen_height / float(tile_size)],
+        [0, screen_height / tile_size],
         0)
-    yapyg.collisions.add(state, ENT_PONG_TOPWALL, ["rectangle", float(screen_width) / tile_size, 1], False)
+    yapyg.collisions.add(state, ENT_PONG_TOPWALL, ["rectangle", screen_width / tile_size, 1], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_LEFTWALL,
         {
             "*": {
-                "textures": [("rectangle", tile_size, screen_height, 0, 0, 0)],
+                "textures": [("rectangle", 1, screen_height / tile_size, 0, 0, 0)],
             }
         },
         [-1, 0],
         0)
-    yapyg.collisions.add(state, ENT_PONG_LEFTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
+    yapyg.collisions.add(state, ENT_PONG_LEFTWALL, ["rectangle", 1, screen_height / tile_size], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_RIGHTWALL,
         {
             "*": {
-                "textures": [("rectangle", tile_size, screen_height, 0, 0, 0)],
+                "textures": [("rectangle", 1, screen_height / tile_size, 0, 0, 0)],
             }
         },
-        [float(screen_width) / tile_size, 0],
+        [screen_width / tile_size, 0],
         0)
-    yapyg.collisions.add(state, ENT_PONG_RIGHTWALL, ["rectangle", 1, float(screen_height) / tile_size], False)
+    yapyg.collisions.add(state, ENT_PONG_RIGHTWALL, ["rectangle", 1, screen_height / tile_size], False)
 
     yapyg.entities.insert(state,
         ENT_PONG_BALL,
         {
             "*": {
-                "textures": [("ellipse", PADDLE_HEIGHT * tile_size, PADDLE_HEIGHT * tile_size, 1, 1, 1)],
+                "textures": [("ellipse", PADDLE_HEIGHT, PADDLE_HEIGHT, 1, 1, 1)],
             },
         },
         PONG_BALL_START_POS,
@@ -124,7 +124,7 @@ def create(screen_width, screen_height, tile_size):
         ENT_PONG_PADDLE,
         "joystick",
         0.1,
-        [0, PADDLE_Y, float(screen_width) / tile_size - PADDLE_WIDTH, PADDLE_Y])
+        [0, PADDLE_Y, screen_width / tile_size - PADDLE_WIDTH, PADDLE_Y])
 
     yapyg.movers.linear.add(state, ENT_PONG_BALL, [PONG_BALL_MOVE_SPEED, PONG_BALL_MOVE_SPEED], PONG_BALL_ANIM_SPEED)
 

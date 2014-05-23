@@ -23,7 +23,6 @@ Helpers for recurring tasks
 """
 
 import entities
-import screen
 import collisions
 
 def create_screen_wall(state, base_name, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,0,0)):
@@ -41,12 +40,8 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
     ENT_RIGHTWALL = base_name + "_right"
     ENT_BOTTOMWALL = base_name + "_bottom"
 
-    # scr_width = screen.get_width(state)
-    # scr_height = screen.get_height(state)
-    tile_size = screen.get_tile_size(state)
-
-    horizontal_wall_width_px = size[0] * tile_size
-    vertical_wall_height_px = size[1] * tile_size
+    horizontal_wall_width = size[0]
+    vertical_wall_height = size[1]
 
     if top:
         entities.insert(state,
@@ -54,14 +49,14 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
             {
                 "*": {
                     "textures": [("rectangle",
-                        horizontal_wall_width_px,
-                        thickness * tile_size,
+                        horizontal_wall_width,
+                        thickness,
                         color[0], color[1], color[2],)],
                 },
             },
-            [pos[0], pos[1] + size[1] - thickness],
+            [pos[0], pos[1] + vertical_wall_height - thickness],
             0)
-        collisions.add(state, ENT_TOPWALL, ["rectangle", horizontal_wall_width_px / tile_size, thickness], False)
+        collisions.add(state, ENT_TOPWALL, ["rectangle", horizontal_wall_width, thickness], False)
 
     if bottom:
         entities.insert(state,
@@ -69,14 +64,14 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
             {
                 "*": {
                     "textures": [("rectangle",
-                        horizontal_wall_width_px,
-                        thickness * tile_size,
+                        horizontal_wall_width,
+                        thickness,
                         color[0], color[1], color[2],)],
                 },
             },
             [pos[0], pos[1]],
             0)
-        collisions.add(state, ENT_BOTTOMWALL, ["rectangle", horizontal_wall_width_px / tile_size, thickness], False)
+        collisions.add(state, ENT_BOTTOMWALL, ["rectangle", horizontal_wall_width, thickness], False)
 
     if left:
         entities.insert(state,
@@ -84,14 +79,14 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
             {
                 "*": {
                     "textures": [("rectangle",
-                        thickness * tile_size,
-                        vertical_wall_height_px,
+                        thickness,
+                        vertical_wall_height,
                         color[0], color[1], color[2],)],
                 },
             },
             [pos[0], pos[1]],
             0)
-        collisions.add(state, ENT_LEFTWALL, ["rectangle", thickness, vertical_wall_height_px / tile_size], False)
+        collisions.add(state, ENT_LEFTWALL, ["rectangle", thickness, vertical_wall_height], False)
 
     if right:
         entities.insert(state,
@@ -99,11 +94,11 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
             {
                 "*": {
                     "textures": [("rectangle",
-                        thickness * tile_size,
-                        vertical_wall_height_px,
+                        thickness,
+                        vertical_wall_height,
                         color[0], color[1], color[2],)],
                 },
             },
-            [pos[0] + size[0] - thickness, pos[1]],
+            [pos[0] + horizontal_wall_width - thickness, pos[1]],
             0)
-        collisions.add(state, ENT_RIGHTWALL, ["rectangle", thickness, vertical_wall_height_px / tile_size], False)
+        collisions.add(state, ENT_RIGHTWALL, ["rectangle", thickness, vertical_wall_height], False)
