@@ -25,6 +25,7 @@ Entities
 import copy
 
 import sprites
+import collisions
 
 def initialize(state):
     """
@@ -127,7 +128,7 @@ def undo_last_move(state, entity_name):
         state["entities"][entity_name]["rot"][0] = state["entities"][entity_name]["last_pos"][2]
         state["entities"][entity_name]["last_pos"] = None
 
-def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
+def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0], collision=None):
     """
     TODO
     """
@@ -139,6 +140,9 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0]):
         "last_pos": None,
         "sprites": [],
         }
+
+    if collision:
+        collisions.add(state, entity_name, collision[0], collision[1])
 
     default_sprite = None
     for sprite_name, sprite_def in sprite_defs.iteritems():

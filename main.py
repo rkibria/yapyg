@@ -53,7 +53,7 @@ class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_breakout"
+        default_choice = "demo_pong"
         self.choices = {
             "demo_bounce": "Basic physics simulation",
             "demo_starship": "'Endless' scrolling background and animation",

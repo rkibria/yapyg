@@ -47,8 +47,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         [0, -0.5],
-        0)
-    yapyg.collisions.add(state, ENT_BOUNCE_BOTTOMWALL, ["rectangle", screen_width / tile_size, 1], False)
+        collision=(["rectangle", screen_width / tile_size, 1], False))
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_TOPWALL,
@@ -58,8 +57,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         [0, -0.5 + screen_height / float(tile_size)],
-        0)
-    yapyg.collisions.add(state, ENT_BOUNCE_TOPWALL, ["rectangle", screen_width / tile_size, 1], False)
+        collision=(["rectangle", screen_width / tile_size, 1], False))
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_LEFTWALL,
@@ -69,8 +67,7 @@ def create(screen_width, screen_height, tile_size):
             }
         },
         [-0.75, 0],
-        0)
-    yapyg.collisions.add(state, ENT_BOUNCE_LEFTWALL, ["rectangle", 1, screen_height / tile_size], False)
+        collision=(["rectangle", 1, screen_height / tile_size], False))
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_RIGHTWALL,
@@ -80,8 +77,7 @@ def create(screen_width, screen_height, tile_size):
             }
         },
         [-0.25 + screen_width / tile_size, 0],
-        0)
-    yapyg.collisions.add(state, ENT_BOUNCE_RIGHTWALL, ["rectangle", 1, screen_height / tile_size], False)
+        collision=(["rectangle", 1, screen_height / tile_size], False))
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_BLOCK_1,
@@ -91,8 +87,8 @@ def create(screen_width, screen_height, tile_size):
             }
         },
         [1.5, 0],
-        45)
-    yapyg.collisions.add(state, ENT_BOUNCE_BLOCK_1, ["rectangle", 1, 1], False)
+        45,
+        collision=(["rectangle", 1, 1], False))
 
     yapyg.entities.insert(state,
         ENT_BOUNCE_BLOCK_2,
@@ -102,8 +98,8 @@ def create(screen_width, screen_height, tile_size):
             }
         },
         [2 - 0.5, 2.5 - 0.5],
-        45)
-    yapyg.collisions.add(state, ENT_BOUNCE_BLOCK_2, ["rectangle", 1, 1], False)
+        45,
+        collision=(["rectangle", 1, 1], False))
 
     index = 0
     for column in xrange(5):
@@ -117,8 +113,7 @@ def create(screen_width, screen_height, tile_size):
                     },
                 },
                 [1 + row * 1.25 * BALL_SIZE + column * 0.1, 4.5 + column * 1.25 * BALL_SIZE],
-                0)
-            yapyg.collisions.add(state, ball_entity_name, ["circle", BALL_SIZE])
+                collision=(["circle", BALL_SIZE], True))
             yapyg.movers.physical.add(state, ball_entity_name, ay=BOUNCE_GRAVITY, vx=BOUNCE_VX)
             index += 1
 

@@ -74,8 +74,7 @@ def create(screen_width, screen_height, tile_size):
                     },
                 },
                 [BLOCK_X + col * BLOCK_WIDTH, BLOCK_Y + row * BLOCK_HEIGHT],
-                0)
-            yapyg.collisions.add(state, block_entity_name, ["rectangle", BLOCK_WIDTH, BLOCK_HEIGHT], False)
+                collision=(["rectangle", BLOCK_WIDTH, BLOCK_HEIGHT], False))
 
     yapyg.entities.insert(state,
         ENT_PADDLE,
@@ -85,8 +84,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         [1, PADDLE_Y],
-        0)
-    yapyg.collisions.add(state, ENT_PADDLE, ["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False)
+        collision=(["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False))
 
     yapyg.entities.insert(state,
         ENT_BALL,
@@ -96,8 +94,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         BALL_START_POS,
-        0)
-    yapyg.collisions.add(state, ENT_BALL, ["circle", PADDLE_HEIGHT])
+        collision=(["circle", PADDLE_HEIGHT], True))
     yapyg.movers.physical.add(state, ENT_BALL, vx=BALL_VXY, vy=BALL_VXY, friction=1)
 
     yapyg.collisions.set_handler(state, collision_handler)

@@ -49,8 +49,8 @@ def create(screen_width, screen_height, tile_size):
 
     PADDLE_WIDTH = 1.0 / 2
     PADDLE_HEIGHT = 1.0 / 8
-
     PADDLE_Y = 1.5
+
     yapyg.entities.insert(state,
         ENT_PONG_PADDLE,
         {
@@ -59,8 +59,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         [1, PADDLE_Y],
-        0)
-    yapyg.collisions.add(state, ENT_PONG_PADDLE, ["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False)
+        collision=(["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False))
 
     yapyg.entities.insert(state,
         ENT_PONG_BOTTOMWALL,
@@ -70,8 +69,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         [0, PADDLE_Y - 1 - 2 * PADDLE_HEIGHT],
-        0)
-    yapyg.collisions.add(state, ENT_PONG_BOTTOMWALL, ["rectangle", screen_width / tile_size, 1], False)
+        collision=(["rectangle", screen_width / tile_size, 1], False))
 
     yapyg.entities.insert(state,
         ENT_PONG_TOPWALL,
@@ -81,8 +79,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         [0, screen_height / tile_size],
-        0)
-    yapyg.collisions.add(state, ENT_PONG_TOPWALL, ["rectangle", screen_width / tile_size, 1], False)
+        collision=(["rectangle", screen_width / tile_size, 1], False))
 
     yapyg.entities.insert(state,
         ENT_PONG_LEFTWALL,
@@ -92,8 +89,7 @@ def create(screen_width, screen_height, tile_size):
             }
         },
         [-1, 0],
-        0)
-    yapyg.collisions.add(state, ENT_PONG_LEFTWALL, ["rectangle", 1, screen_height / tile_size], False)
+        collision=(["rectangle", 1, screen_height / tile_size], False))
 
     yapyg.entities.insert(state,
         ENT_PONG_RIGHTWALL,
@@ -103,8 +99,7 @@ def create(screen_width, screen_height, tile_size):
             }
         },
         [screen_width / tile_size, 0],
-        0)
-    yapyg.collisions.add(state, ENT_PONG_RIGHTWALL, ["rectangle", 1, screen_height / tile_size], False)
+        collision=(["rectangle", 1, screen_height / tile_size], False))
 
     yapyg.entities.insert(state,
         ENT_PONG_BALL,
@@ -114,8 +109,7 @@ def create(screen_width, screen_height, tile_size):
             },
         },
         PONG_BALL_START_POS,
-        0)
-    yapyg.collisions.add(state, ENT_PONG_BALL, ["circle", PADDLE_HEIGHT])
+        collision=(["circle", PADDLE_HEIGHT], True))
 
     yapyg.collisions.set_handler(state, collision_handler)
 
