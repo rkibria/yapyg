@@ -54,7 +54,7 @@ class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_text"
+        default_choice = "demo_breakout"
         self.choices = {
             "demo_text": "Text drawing",
             "demo_bounce": "Basic physics simulation",
@@ -108,16 +108,54 @@ class ScreenWidget(FloatLayout):
 
         self.joystick = None
         if yapyg.controls.need_joystick(state):
-            joystick_height = 0.2
+            joystick_height = 0.18
             joystick_width = (joystick_height * Window.height) / Window.width
             self.joystick = JoystickWidget(
                 size_hint=(joystick_width, joystick_height),
-                pos_hint = {"x" : 0.0, "y" : 0.0},
-                )
+                pos_hint = {"x" : 0.0, "y" : 0.0},)
             self.add_widget(self.joystick)
             Clock.schedule_interval(self.on_timer, 0.1)
 
-        exit_button = Button(text="Exit", pos_hint={"x":0.8, "y":0.0}, size_hint=(0.2, 0.05))
+            button_width = joystick_width / 2.0
+            button_height = joystick_height / 2.0
+            
+            self.add_widget(Button(text='[color=000000][b]B[/b][/color]',
+                font_size=26,
+                markup=True,
+                background_normal="assets/img/ui/joy_button.png",
+                background_down="assets/img/ui/joy_button_down.png",
+                size_hint=(button_width, button_height),
+                pos_hint = {"x" : 1.0 - joystick_width, "y" : 0.0},
+                ))
+
+            self.add_widget(Button(text='[color=000000][b]A[/b][/color]',
+                font_size=26,
+                markup=True,
+                background_normal="assets/img/ui/joy_button.png",
+                background_down="assets/img/ui/joy_button_down.png",
+                size_hint=(button_width, button_height),
+                pos_hint = {"x" : 1.0 - button_width, "y" : 0.0},
+                ))
+
+            self.add_widget(Button(text='[color=000000][b]D[/b][/color]',
+                font_size=26,
+                markup=True,
+                background_normal="assets/img/ui/joy_button.png",
+                background_down="assets/img/ui/joy_button_down.png",
+                size_hint=(button_width, button_height),
+                pos_hint = {"x" : 1.0 - joystick_width, "y" : button_height},
+                ))
+
+            self.add_widget(Button(text='[color=000000][b]C[/b][/color]',
+                font_size=26,
+                markup=True,
+                background_normal="assets/img/ui/joy_button.png",
+                background_down="assets/img/ui/joy_button_down.png",
+                size_hint=(button_width, button_height),
+                pos_hint = {"x" : 1.0 - button_width, "y" : button_height},
+                ))
+
+        exit_button = Button(text="Exit", pos_hint={"x":0.4, "y":0.0}, size_hint=(0.2, 0.05))
         exit_button.bind(state=self.on_exit)
         self.add_widget(exit_button)
 
