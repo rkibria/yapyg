@@ -22,8 +22,6 @@
 Simple linear mover
 """
 
-from kivy.logger import Logger
-
 from .. import geometry
 from .. import movers
 from .. import entities

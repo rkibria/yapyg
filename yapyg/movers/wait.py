@@ -22,8 +22,6 @@
 Waitstate mover
 """
 
-from kivy.logger import Logger
-
 from .. import movers
 
 def add(state, mover_name, wait_time, on_end_function=None, do_replace=False):

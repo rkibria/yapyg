@@ -22,8 +22,6 @@
 Mover sequence repeater
 """
 
-from kivy.logger import Logger
-
 from .. import movers
 
 def add(state, mover_name, on_end_function=None, do_replace=False):

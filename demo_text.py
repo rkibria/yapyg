@@ -19,14 +19,11 @@
 # THE SOFTWARE.
 
 import math
+import time
+import yapyg
 
-import yapyg.factory
-import yapyg.entities
-import yapyg.movers
-import yapyg.movers.controlled
-import yapyg.controls
-import yapyg.collisions
-import yapyg.text
+def get_time_string():
+    return time.strftime("%H:%M:%S", time.localtime())
 
 def create(screen_width, screen_height, tile_size):
     state = yapyg.factory.create(screen_width, screen_height, tile_size)
@@ -47,7 +44,21 @@ def create(screen_width, screen_height, tile_size):
 
     start_movement(state, None)
 
+    yapyg.entities.insert(state,
+        "500_text_time",
+        {
+            "*": {
+                "textures": [("text", get_time_string(), "DroidSans")],
+            },
+        },
+        [0.0, 0.0])
+
+    yapyg.timer.create(state, on_timer, 1000000)
+
     return state
+
+def on_timer(state, last_frame_delta):
+    yapyg.entities.set_sprite(state, "500_text_time", "*", {"textures": [("text", get_time_string(), "DroidSans")],})
 
 def start_movement(state, mover_name):
     n_steps = 1000

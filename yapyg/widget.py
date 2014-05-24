@@ -28,13 +28,13 @@ import sprites
 import view
 import collisions
 import factory
+import timer
 
 class YapygWidget(Widget):
     def __init__(self,
             state,
             view_size,
             scale,
-            on_timer_callback=None,
             **kwargs
         ):
         super(YapygWidget, self).__init__(**kwargs)
@@ -45,7 +45,6 @@ class YapygWidget(Widget):
         self.redraw_tiles = True
 
         self.min_frame_time_delta = 0
-        self.on_timer_callback = on_timer_callback
         Clock.schedule_once(self.on_timer, timeout=0)
 
     def destroy(self):
@@ -62,8 +61,9 @@ class YapygWidget(Widget):
                     self.min_frame_time_delta = last_frame_delta
                 else:
                     last_frame_delta = self.min_frame_time_delta
-                if self.on_timer_callback:
-                    (self.on_timer_callback)(self.state, last_frame_delta)
+
+                timer.run(self.state, last_frame_delta)
+
                 self.redraw(last_frame_delta)
         if self.state:
             Clock.schedule_once(self.on_timer, timeout=0)

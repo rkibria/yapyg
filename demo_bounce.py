@@ -18,8 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import yapyg.factory
-import yapyg.screen
+import yapyg
 import yapyg.movers.physical
 
 def create(screen_width, screen_height, tile_size):

@@ -151,20 +151,33 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0], colli
         if sprite_name[0] == "*":
             default_sprite = sprite_name
 
-        speed = 0
-        if sprite_def.has_key("speed"):
-            speed = sprite_def["speed"]
-
-        sprites.insert(state, _get_full_sprite_name(entity_name, sprite_name),
-            sprite_def["textures"],
-            speed=speed,
-            pos=state["entities"][entity_name]["pos"],
-            rot_list=state["entities"][entity_name]["rot"],
-            pos_offset=state["entities"][entity_name]["pos_offset"],
-            enable=False,)
+        set_sprite(state, entity_name, sprite_name, sprite_def)
 
     if default_sprite:
-        set_sprite(state, entity_name, default_sprite)
+        set_active_sprite(state, entity_name, default_sprite)
+
+def set_sprite(state, entity_name, sprite_name, sprite_def, enable=False):
+    if not sprite_def.has_key("speed"):
+        sprite_def["speed"] = 0
+
+    full_sprite_name = _get_full_sprite_name(entity_name, sprite_name)
+    enabled_sprite_name = state["entities"][entity_name]["enabled_sprite"]
+
+    if enabled_sprite_name == sprite_name:
+        sprites.set_enable(state, full_sprite_name, False)
+
+    sprites.delete(state, full_sprite_name)
+
+    sprites.insert(state, full_sprite_name,
+        sprite_def["textures"],
+        speed=sprite_def["speed"],
+        pos=state["entities"][entity_name]["pos"],
+        rot_list=state["entities"][entity_name]["rot"],
+        pos_offset=state["entities"][entity_name]["pos_offset"],
+        enable=enable,)
+
+    if enabled_sprite_name == sprite_name:
+        sprites.set_enable(state, full_sprite_name, True)
 
 def delete(state, entity_name):
     """
@@ -175,7 +188,7 @@ def delete(state, entity_name):
         sprites.delete(state, _get_full_sprite_name(entity_name, sprite_name))
     del state["entities"][entity_name]
 
-def set_sprite(state, entity_name, sprite_name):
+def set_active_sprite(state, entity_name, sprite_name):
     """
     TODO
     """

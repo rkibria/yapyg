@@ -74,13 +74,17 @@ def delete(state, sprite_name):
     """
     TODO
     """
-    del state["sprites"]["sprites"][sprite_name]
+    if state["sprites"]["sprites"].has_key(sprite_name):
+        del state["sprites"]["sprites"][sprite_name]
 
 def get(state, sprite_name):
     """
     TODO
     """
-    return state["sprites"]["sprites"][sprite_name]
+    if state["sprites"]["sprites"].has_key(sprite_name):
+        return state["sprites"]["sprites"][sprite_name]
+    else:
+        return None
 
 def get_pos(state, sprite_name):
     """

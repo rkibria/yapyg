@@ -18,14 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import yapyg.factory
-import yapyg.entities
-import yapyg.movers
-import yapyg.movers.controlled
-import yapyg.controls
-import yapyg.collisions
-import yapyg.helpers
-import yapyg.movers.physical
+import yapyg
 
 def create(screen_width, screen_height, tile_size):
     PADDLE_WIDTH = 1.0 / 2

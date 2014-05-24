@@ -18,13 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import yapyg.factory
-import yapyg.screen
-import yapyg.entities
-import yapyg.movers.linear
+import yapyg
 import yapyg.movers.jump
-import yapyg.movers.set_property
+import yapyg.movers.linear
 import yapyg.movers.wait
+import yapyg.movers.set_property
 
 def create(screen_width, screen_height, tile_size):
     state = yapyg.factory.create(screen_width, screen_height, tile_size)
@@ -68,8 +66,8 @@ def start_ship_movement(state, mover_name):
     path = [[0, 0.66], [0.33, 0.33], [0.66, 0], [0.33, -0.33],
         [0, -0.66], [-0.33, -0.33], [-0.66, 0], [-0.33, 0.33]]
     for index in xrange(len(path)):
-        yapyg.movers.set_property.add(state, "500_ship", "set_sprite", "idle")
+        yapyg.movers.set_property.add(state, "500_ship", "set_active_sprite", "idle")
         yapyg.movers.wait.add(state, "500_ship", 500000)
-        yapyg.movers.set_property.add(state, "500_ship", "set_sprite", "thrust")
+        yapyg.movers.set_property.add(state, "500_ship", "set_active_sprite", "thrust")
         yapyg.movers.linear.add(state, "500_ship", path[index], 1.0 / 1000000,
             True, None if index != len(path) - 1 else start_ship_movement)

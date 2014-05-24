@@ -68,8 +68,8 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
     property = mover["property"]
     new_value = mover["new_value"]
 
-    if property == "set_sprite":
-        entities.set_sprite(state, entity_name, new_value)
+    if property == "set_active_sprite":
+        entities.set_active_sprite(state, entity_name, new_value)
     else:
         raise YapygMoverSetPropertyException("Unknown property %s" % property)
 

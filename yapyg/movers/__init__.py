@@ -24,8 +24,6 @@ General movements
 
 from collections import deque
 
-from kivy.logger import Logger
-
 class YapygMoverException(Exception):
     """
     TODO

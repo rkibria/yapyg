@@ -32,6 +32,7 @@ import view
 import controls
 import collisions
 import text
+import timer
 
 def create(screen_width, screen_height, tile_size):
     """
@@ -49,6 +50,7 @@ def create(screen_width, screen_height, tile_size):
     controls.initialize(state)
     collisions.initialize(state)
     text.initialize(state)
+    timer.initialize(state)
     
     return state
 
@@ -63,3 +65,4 @@ def destroy(state):
     controls.destroy(state)
     collisions.destroy(state)
     text.destroy(state)
+    timer.destroy(state)

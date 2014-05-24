@@ -22,8 +22,6 @@
 Controller-influenced mover
 """
 
-from kivy.logger import Logger
-
 from .. import movers
 from .. import controls
 from .. import entities

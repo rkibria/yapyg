@@ -19,40 +19,38 @@
 # THE SOFTWARE.
 
 """
-Immediate position change mover
+Timer
 """
 
-from .. import movers
-from .. import entities
-
-def add(state, entity_name, new_pos=None, new_rot=None, on_end_function=None, do_replace=False):
+def initialize(state):
     """
     TODO
     """
-    movers.add(state, entity_name, create(entity_name, new_pos, new_rot, on_end_function), do_replace)
+    state["timer"] = {
+        "timers": [],
+    }
 
-def create(entity_name, new_pos, new_rot=None, on_end_function=None):
+def destroy(state):
     """
     TODO
     """
-    return {
-            "type": "jump",
-            "entity_name": entity_name,
-            "new_pos": new_pos,
-            "new_rot": new_rot,
+    del state["timer"]
 
-            "run": run,
-            "on_end_function": on_end_function,
-        }
-
-def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
+def create(state, handler, timeout_us=0):
     """
     TODO
     """
-    if mover["new_pos"]:
-        entities.set_pos(state, entity_name, mover["new_pos"][0], mover["new_pos"][1])
+    state["timer"]["timers"].append([handler, timeout_us, 0])
 
-    if mover["new_rot"]:
-        entities.get_rot(state, entity_name)[0] = mover["new_rot"]
-
-    movers_to_delete.append((entity_name, mover["on_end_function"]))
+def run(state, last_frame_delta):
+    """
+    TODO
+    """
+    for entry in state["timer"]["timers"]:
+        handler, timeout_us, sum_time = entry
+        sum_time += last_frame_delta
+        if sum_time >= timeout_us:
+            entry[2] = sum_time - timeout_us
+            (handler)(state, last_frame_delta)
+        else:
+            entry[2] = sum_time
