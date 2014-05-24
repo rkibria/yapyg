@@ -110,9 +110,14 @@ class ScreenWidget(FloatLayout):
         if yapyg.controls.need_joystick(state):
             joystick_height = 0.18
             joystick_width = (joystick_height * Window.height) / Window.width
+            
+            self.add_widget(Image(source="assets/img/ui/joy_panel.png",
+                size_hint=(1, 0.2),
+                pos_hint = {"x" : 0.0, "y" : 0.0}))
+
             self.joystick = JoystickWidget(
                 size_hint=(joystick_width, joystick_height),
-                pos_hint = {"x" : 0.0, "y" : 0.0},)
+                pos_hint = {"x" : 0.01, "y" : 0.01},)
             self.add_widget(self.joystick)
             Clock.schedule_interval(self.on_timer, 0.1)
 
@@ -125,7 +130,7 @@ class ScreenWidget(FloatLayout):
                 background_normal="assets/img/ui/joy_button.png",
                 background_down="assets/img/ui/joy_button_down.png",
                 size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - joystick_width, "y" : 0.0},
+                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
                 ))
 
             self.add_widget(Button(text='[color=000000][b]A[/b][/color]',
@@ -134,7 +139,7 @@ class ScreenWidget(FloatLayout):
                 background_normal="assets/img/ui/joy_button.png",
                 background_down="assets/img/ui/joy_button_down.png",
                 size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - button_width, "y" : 0.0},
+                pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
                 ))
 
             self.add_widget(Button(text='[color=000000][b]D[/b][/color]',
@@ -143,7 +148,7 @@ class ScreenWidget(FloatLayout):
                 background_normal="assets/img/ui/joy_button.png",
                 background_down="assets/img/ui/joy_button_down.png",
                 size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - joystick_width, "y" : button_height},
+                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : button_height + 0.01},
                 ))
 
             self.add_widget(Button(text='[color=000000][b]C[/b][/color]',
@@ -152,10 +157,17 @@ class ScreenWidget(FloatLayout):
                 background_normal="assets/img/ui/joy_button.png",
                 background_down="assets/img/ui/joy_button_down.png",
                 size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - button_width, "y" : button_height},
+                pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : button_height + 0.01},
                 ))
 
-        exit_button = Button(text="Exit", pos_hint={"x":0.4, "y":0.0}, size_hint=(0.2, 0.05))
+        exit_button = Button(text='[color=000000]Menu[/color]',
+                font_size=26,
+                markup=True,
+                background_normal="assets/img/ui/joy_option_button.png",
+                background_down="assets/img/ui/joy_option_button_down.png",
+                size_hint=(0.2, 0.05),
+                pos_hint = {"x":0.4, "y":0.01},
+                )
         exit_button.bind(state=self.on_exit)
         self.add_widget(exit_button)
 
