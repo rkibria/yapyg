@@ -34,13 +34,13 @@ import collisions
 import text
 import timer
 
-def create(screen_width, screen_height, tile_size):
+def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
     """
     TODO
     """
     state = {}
 
-    screen.initialize(state, screen_width, screen_height, tile_size)
+    screen.initialize(state, screen_width, screen_height, tile_size, origin_xy)
     texture_db.initialize(state)
     tiles.initialize(state, tile_size)
     sprites.initialize(state)
@@ -51,7 +51,7 @@ def create(screen_width, screen_height, tile_size):
     collisions.initialize(state)
     text.initialize(state)
     timer.initialize(state)
-    
+
     return state
 
 def destroy(state):

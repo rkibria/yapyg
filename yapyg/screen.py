@@ -22,14 +22,16 @@
 2D Sprites
 """
 
-def initialize(state, screen_width, screen_height, tile_size):
+def initialize(state, screen_width, screen_height, tile_size, origin_xy=(0, 0)):
     """
     TODO
     """
-    state["screen"] = {}
-    state["screen"]["width"] = screen_width
-    state["screen"]["height"] = screen_height
-    state["screen"]["tile_size"] = tile_size
+    state["screen"] = {
+        "width": screen_width,
+        "height": screen_height,
+        "tile_size": tile_size,
+        "origin_xy": [origin_xy[0], origin_xy[1]],
+    }
 
 def destroy(state):
     """
@@ -54,3 +56,17 @@ def get_tile_size(state):
     TODO
     """
     return state["screen"]["tile_size"]
+
+def set_origin(state, origin_xy):
+    """
+    TODO
+    """
+    state["screen"]["origin_xy"][0] = origin_xy[0]
+    state["screen"]["origin_xy"][1] = origin_xy[1]
+
+def get_origin(state):
+    """
+    TODO
+    """
+    origin_xy = state["screen"]["origin_xy"]
+    return (origin_xy[0], origin_xy[1])

@@ -108,11 +108,12 @@ class ScreenWidget(FloatLayout):
 
         self.joystick = None
         if yapyg.controls.need_joystick(state):
+            joystick_panel_height = 0.2
             joystick_height = 0.18
             joystick_width = (joystick_height * Window.height) / Window.width
-            
+
             self.add_widget(Image(source="assets/img/ui/joy_panel.png",
-                size_hint=(1, 0.2),
+                size_hint=(1, joystick_panel_height),
                 pos_hint = {"x" : 0.0, "y" : 0.0}))
 
             self.joystick = JoystickWidget(
@@ -123,7 +124,7 @@ class ScreenWidget(FloatLayout):
 
             button_width = joystick_width / 2.0
             button_height = joystick_height / 2.0
-            
+
             self.add_widget(Button(text='[color=000000][b]B[/b][/color]',
                 font_size=26,
                 markup=True,

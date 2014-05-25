@@ -29,6 +29,7 @@ from kivy.uix.image import Image
 
 import texture_db
 import view
+import screen
 
 def initialize(state, tile_size):
     """
@@ -92,6 +93,8 @@ def draw(state, scale, canvas, view_size):
     """
     TODO
     """
+    origin_xy = screen.get_origin(state)
+
     target_w = view_size[0]
     target_h = view_size[1]
 
@@ -114,8 +117,8 @@ def draw(state, scale, canvas, view_size):
             for col in xrange(first_col, first_col + total_cols + 2):
                 tile_x = col * scaled_tile_size
                 tile_y = row * scaled_tile_size
-                draw_x = (tile_x - map_x)
-                draw_y = (tile_y - map_y)
+                draw_x = (tile_x - map_x) + origin_xy[0]
+                draw_y = (tile_y - map_y) + origin_xy[1]
                 draw_pos = (draw_x, draw_y)
                 texture = texture_db.get(state, "tl_null")
                 tile = get_tile(state, row, col)

@@ -28,6 +28,7 @@ import texture_db
 import tiles
 import view
 import text
+import screen
 
 def initialize(state):
     """
@@ -121,6 +122,7 @@ def draw(state, canvas, frame_time_delta, view_scale):
     """
     TODO
     """
+    origin_xy = screen.get_origin(state)
     view_pos = view.get_view_pos(state)
     for sprite_name, sprite in sorted(state["sprites"]["sprites"].iteritems()):
         if not sprite["enable"]:
@@ -156,9 +158,9 @@ def draw(state, canvas, frame_time_delta, view_scale):
             sprite["phase"] = 0
             phase = 0
         _draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
-            texture_db.get(state, sprite["textures"][phase]), pos, scale, rotate)
+            texture_db.get(state, sprite["textures"][phase]), pos, scale, rotate, origin_xy)
 
-def _draw_sprite(state, canvas, view_pos, view_scale, sprite_name, texture, pos, scale, rotate):
+def _draw_sprite(state, canvas, view_pos, view_scale, sprite_name, texture, pos, scale, rotate, origin_xy):
     """
     TODO
     """
@@ -175,8 +177,8 @@ def _draw_sprite(state, canvas, view_pos, view_scale, sprite_name, texture, pos,
 
     draw_pos = (draw_x, draw_y)
     offset = (pos[0] - col, pos[1] - row,)
-    offset_pos = (int(draw_pos[0] + scaled_tile_size * offset[0]),
-                 int(draw_pos[1] + scaled_tile_size * offset[1]))
+    offset_pos = (int(draw_pos[0] + scaled_tile_size * offset[0] + origin_xy[0]),
+                 int(draw_pos[1] + scaled_tile_size * offset[1] + origin_xy[1]))
 
     if rectangles_rotates_dict.has_key(sprite_name):
         rect, rot = rectangles_rotates_dict[sprite_name]
