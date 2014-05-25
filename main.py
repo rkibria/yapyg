@@ -49,12 +49,13 @@ import demo_pong
 import demo_bounce
 import demo_breakout
 import demo_text
+import demo_collision
 
 class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
         super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_breakout"
+        default_choice = "demo_collision"
         self.choices = {
             "demo_text": "Text drawing",
             "demo_bounce": "Basic physics simulation",
@@ -62,6 +63,7 @@ class MenuWidget(FloatLayout):
             "demo_tiles": "Tile map scrolling",
             "demo_pong": "Simple Pong game",
             "demo_breakout": "Breakout implemented with physical mover",
+            "demo_collision": "Optimized collision checking demo/test",
             }
 
         layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
