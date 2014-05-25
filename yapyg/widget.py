@@ -62,9 +62,10 @@ class YapygWidget(Widget):
                 else:
                     last_frame_delta = self.min_frame_time_delta
 
-                timer.run(self.state, last_frame_delta)
+                if last_frame_delta < 33333:
+                    timer.run(self.state, last_frame_delta)
+                    self.redraw(last_frame_delta)
 
-                self.redraw(last_frame_delta)
         if self.state:
             Clock.schedule_once(self.on_timer, timeout=0)
 

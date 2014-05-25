@@ -31,7 +31,23 @@ def initialize(state):
     """
     TODO
     """
-    state["entities"] = {}
+    state["entities"] = {
+        "entities": {},
+        "pos_listeners": [],
+    }
+
+def add_pos_listener(state, callback):
+    """
+    TODO
+    """
+    state["entities"]["pos_listeners"].append(callback)
+
+def _call_pos_listeners(state, entity_name, pos):
+    """
+    TODO
+    """
+    for callback in state["entities"]["pos_listeners"]:
+        (callback)(state, entity_name, pos)
 
 def destroy(state):
     """
@@ -49,104 +65,120 @@ def get(state, entity_name):
     """
     TODO
     """
-    return state["entities"][entity_name]
+    if state["entities"]["entities"].has_key(entity_name):
+        return state["entities"]["entities"][entity_name]
+    else:
+        return None
 
 def get_pos(state, entity_name):
     """
     TODO
     """
-    return (state["entities"][entity_name]["pos"][0], state["entities"][entity_name]["pos"][1])
+    entity = get(state, entity_name)
+    return (entity["pos"][0], entity["pos"][1])
 
 def set_pos(state, entity_name, x_pos, y_pos):
     """
     TODO
     """
-    if not state["entities"][entity_name]["last_pos"]:
-        state["entities"][entity_name]["last_pos"] = [
+    entity = get(state, entity_name)
+    if not entity["last_pos"]:
+        entity["last_pos"] = [
             0,
             0,
-            state["entities"][entity_name]["rot"][0]]
-    state["entities"][entity_name]["last_pos"][0] = state["entities"][entity_name]["pos"][0]
-    state["entities"][entity_name]["last_pos"][1] = state["entities"][entity_name]["pos"][1]
+            entity["rot"][0]]
+    entity["last_pos"][0] = entity["pos"][0]
+    entity["last_pos"][1] = entity["pos"][1]
 
-    state["entities"][entity_name]["pos"][0] = x_pos
-    state["entities"][entity_name]["pos"][1] = y_pos
+    entity["pos"][0] = x_pos
+    entity["pos"][1] = y_pos
+
+    _call_pos_listeners(state, entity_name, get_pos(state, entity_name))
 
 def add_pos(state, entity_name, x_pos, y_pos):
     """
     TODO
     """
-    if not state["entities"][entity_name]["last_pos"]:
-        state["entities"][entity_name]["last_pos"] = [
+    entity = get(state, entity_name)
+    if not entity["last_pos"]:
+        entity["last_pos"] = [
             0,
             0,
-            state["entities"][entity_name]["rot"][0]]
-    state["entities"][entity_name]["last_pos"][0] = state["entities"][entity_name]["pos"][0]
-    state["entities"][entity_name]["last_pos"][1] = state["entities"][entity_name]["pos"][1]
+            entity["rot"][0]]
+    entity["last_pos"][0] = entity["pos"][0]
+    entity["last_pos"][1] = entity["pos"][1]
 
-    state["entities"][entity_name]["pos"][0] += x_pos
-    state["entities"][entity_name]["pos"][1] += y_pos
+    entity["pos"][0] += x_pos
+    entity["pos"][1] += y_pos
+
+    _call_pos_listeners(state, entity_name, get_pos(state, entity_name))
 
 def get_last_pos(state, entity_name):
     """
     TODO
     """
-    return state["entities"][entity_name]["last_pos"]
+    return get(state, entity_name)["last_pos"]
 
 def get_pos_offset(state, entity_name):
     """
     TODO
     """
-    return (state["entities"][entity_name]["pos_offset"][0], state["entities"][entity_name]["pos_offset"][1])
+    entity = get(state, entity_name)
+    return (entity["pos_offset"][0], entity["pos_offset"][1])
 
 def get_rot(state, entity_name):
     """
     TODO
     """
-    return state["entities"][entity_name]["rot"][0]
+    return get(state, entity_name)["rot"][0]
 
 def set_rot(state, entity_name, rot):
     """
     TODO
     """
-    if not state["entities"][entity_name]["last_pos"]:
-        state["entities"][entity_name]["last_pos"] = [
-            state["entities"][entity_name]["pos"][0],
-            state["entities"][entity_name]["pos"][1],
+    entity = get(state, entity_name)
+    if not entity["last_pos"]:
+        entity["last_pos"] = [
+            entity["pos"][0],
+            entity["pos"][1],
             0]
-    state["entities"][entity_name]["last_pos"][2] = state["entities"][entity_name]["rot"][0]
+    entity["last_pos"][2] = entity["rot"][0]
 
-    state["entities"][entity_name]["rot"][0] = rot
+    entity["rot"][0] = rot
 
 def undo_last_move(state, entity_name):
     """
     TODO
     """
-    if state["entities"][entity_name]["last_pos"]:
-        state["entities"][entity_name]["pos"][0] = state["entities"][entity_name]["last_pos"][0]
-        state["entities"][entity_name]["pos"][1] = state["entities"][entity_name]["last_pos"][1]
-        state["entities"][entity_name]["rot"][0] = state["entities"][entity_name]["last_pos"][2]
-        state["entities"][entity_name]["last_pos"] = None
+    entity = get(state, entity_name)
+    if entity["last_pos"]:
+        entity["pos"][0] = entity["last_pos"][0]
+        entity["pos"][1] = entity["last_pos"][1]
+        entity["rot"][0] = entity["last_pos"][2]
+        entity["last_pos"] = None
+        _call_pos_listeners(state, entity_name, get_pos(state, entity_name))
 
 def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0], collision=None):
     """
     TODO
     """
-    state["entities"][entity_name] = {
+    state["entities"]["entities"][entity_name] = {
         "pos": [pos[0], pos[1]],
         "rot": [rot],
         "pos_offset": pos_offset,
         "enabled_sprite": None,
         "last_pos": None,
         "sprites": [],
+        "collision": True if collision else None,
         }
 
     if collision:
         collisions.add(state, entity_name, collision[0], collision[1])
 
+    entity = get(state, entity_name)
     default_sprite = None
     for sprite_name, sprite_def in sprite_defs.iteritems():
-        state["entities"][entity_name]["sprites"].append(sprite_name)
+        entity["sprites"].append(sprite_name)
 
         if sprite_name[0] == "*":
             default_sprite = sprite_name
@@ -160,8 +192,9 @@ def set_sprite(state, entity_name, sprite_name, sprite_def, enable=False):
     if not sprite_def.has_key("speed"):
         sprite_def["speed"] = 0
 
+    entity = get(state, entity_name)
     full_sprite_name = _get_full_sprite_name(entity_name, sprite_name)
-    enabled_sprite_name = state["entities"][entity_name]["enabled_sprite"]
+    enabled_sprite_name = entity["enabled_sprite"]
 
     if enabled_sprite_name == sprite_name:
         sprites.set_enable(state, full_sprite_name, False)
@@ -171,9 +204,9 @@ def set_sprite(state, entity_name, sprite_name, sprite_def, enable=False):
     sprites.insert(state, full_sprite_name,
         sprite_def["textures"],
         speed=sprite_def["speed"],
-        pos=state["entities"][entity_name]["pos"],
-        rot_list=state["entities"][entity_name]["rot"],
-        pos_offset=state["entities"][entity_name]["pos_offset"],
+        pos=entity["pos"],
+        rot_list=entity["rot"],
+        pos_offset=entity["pos_offset"],
         enable=enable,)
 
     if enabled_sprite_name == sprite_name:
@@ -183,16 +216,23 @@ def delete(state, entity_name):
     """
     TODO
     """
-    sprites.set_enable(state, _get_full_sprite_name(entity_name, state["entities"][entity_name]["enabled_sprite"]), False)
-    for sprite_name in state["entities"][entity_name]["sprites"]:
-        sprites.delete(state, _get_full_sprite_name(entity_name, sprite_name))
-    del state["entities"][entity_name]
+    entity = get(state, entity_name)
+    if entity:
+        sprites.set_enable(state, _get_full_sprite_name(entity_name, entity["enabled_sprite"]), False)
+        for sprite_name in entity["sprites"]:
+            sprites.delete(state, _get_full_sprite_name(entity_name, sprite_name))
+
+        if entity["collision"]:
+            collisions.delete(state, entity_name)
+
+        del state["entities"]["entities"][entity_name]
 
 def set_active_sprite(state, entity_name, sprite_name):
     """
     TODO
     """
-    if state["entities"][entity_name]["enabled_sprite"]:
-        sprites.set_enable(state, _get_full_sprite_name(entity_name, state["entities"][entity_name]["enabled_sprite"]), False)
+    entity = get(state, entity_name)
+    if entity["enabled_sprite"]:
+        sprites.set_enable(state, _get_full_sprite_name(entity_name, entity["enabled_sprite"]), False)
     sprites.set_enable(state, _get_full_sprite_name(entity_name, sprite_name), True)
-    state["entities"][entity_name]["enabled_sprite"] = sprite_name
+    entity["enabled_sprite"] = sprite_name

@@ -116,4 +116,3 @@ def collision_handler(state, collision_list):
 
         if block_entity_name:
             yapyg.entities.delete(state, block_entity_name)
-            yapyg.collisions.delete(state, block_entity_name)

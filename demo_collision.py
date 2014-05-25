@@ -23,7 +23,7 @@ import yapyg
 def create(screen_width, screen_height, tile_size):
     BOTTOM_Y = 0
     BORDER_THICKNESS = 2.0
-    BORDER_OFFSET = 0.05
+    BORDER_OFFSET = 0
 
     global ENT_BALL
     ENT_BALL = "500_ball"
@@ -32,13 +32,13 @@ def create(screen_width, screen_height, tile_size):
     global BALL_ANIM_SPEED
     BALL_ANIM_SPEED = 3.0 / 1000000
     global BALL_START_POS
-    BALL_SIZE = 1.0 / 16.0
+    BALL_SIZE = 1.0 / 32.0
     BALL_START_POS = [2 * BORDER_OFFSET, 2 * BORDER_OFFSET]
     BALL_VXY = 2.0 / 1000000
     BLOCK_WIDTH = 0.1
     BLOCK_HEIGHT = 0.1
-    BLOCK_X = BORDER_OFFSET
-    BLOCK_Y = 1.0
+    BLOCK_X = 1.0
+    BLOCK_Y = 0.0
     global ENT_BLOCK_BASE
     ENT_BLOCK_BASE = "400_block"
 
@@ -54,7 +54,7 @@ def create(screen_width, screen_height, tile_size):
         thickness=BORDER_THICKNESS, color=(0.1, 0.1, 0.1))
 
     for row in xrange(52):
-        for col in xrange(40):
+        for col in xrange(30):
             block_entity_name = ENT_BLOCK_BASE + "_%d_%d" % (col, row)
             color = (0.5, 0.2, 1) if ((row + col) % 2 == 0) else (0, 1, 0)
             yapyg.entities.insert(state,
