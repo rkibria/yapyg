@@ -51,6 +51,7 @@ import demo_breakout
 import demo_text
 import demo_collision
 import demo_collision_1
+import demo_control_1
 
 class MenuWidget(FloatLayout):
     def __init__(self, **kwargs):
@@ -66,6 +67,7 @@ class MenuWidget(FloatLayout):
             "demo_breakout": "Breakout implemented with physical mover",
             "demo_collision": "Optimized collision checking demo/test",
             "demo_collision_1": "Simple collision test case",
+            "demo_control_1": "Demonstrates a more complex control scheme",
             }
 
         layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])

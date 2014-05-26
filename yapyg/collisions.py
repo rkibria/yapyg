@@ -246,9 +246,6 @@ def run(state):
                 if not hash_map.has_key(hash):
                     continue
 
-                if entity_name_1 in active_checks_done:
-                    continue
-
                 collision_candidates = hash_map[hash]
 
                 for entity_name_2 in collision_candidates:

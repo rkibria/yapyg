@@ -61,3 +61,14 @@ def get_joystick(state):
     TODO
     """
     return state["controls"]["joystick_direction"]
+
+def get_joystick_properties():
+    """
+    TODO
+    """
+    return {
+        "x" : 0.0,
+        "y" : 0.0,
+        "w" : 1.0,
+        "h" : 0.2,
+        }
