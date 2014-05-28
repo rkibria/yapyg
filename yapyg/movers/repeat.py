@@ -25,25 +25,25 @@ Mover sequence repeater
 from .. import movers
 
 def add(state, mover_name, on_end_function=None, do_replace=False):
-    """
-    TODO
-    """
-    movers.add(state, mover_name, create(on_end_function), do_replace)
+        """
+        TODO
+        """
+        movers.add(state, mover_name, create(on_end_function), do_replace)
 
 def create(on_end_function=None):
-    """
-    TODO
-    """
-    return {
-            "type": "repeat",
-            "run": run,
-            "on_end_function": on_end_function,
-        }
+        """
+        TODO
+        """
+        return {
+                        "type": "repeat",
+                        "run": run,
+                        "on_end_function": on_end_function,
+                }
 
 def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
-    """
-    TODO
-    """
+        """
+        TODO
+        """
 
-    if True:
-        movers_to_delete.append((mover_name, mover["on_end_function"]))
+        if True:
+                movers_to_delete.append((mover_name, mover["on_end_function"]))

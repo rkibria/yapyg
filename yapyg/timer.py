@@ -23,34 +23,34 @@ Timer
 """
 
 def initialize(state):
-    """
-    TODO
-    """
-    state["timer"] = {
-        "timers": [],
-    }
+        """
+        TODO
+        """
+        state["timer"] = {
+                "timers": [],
+        }
 
 def destroy(state):
-    """
-    TODO
-    """
-    del state["timer"]
+        """
+        TODO
+        """
+        del state["timer"]
 
 def create(state, handler, timeout_us=0):
-    """
-    TODO
-    """
-    state["timer"]["timers"].append([handler, timeout_us, 0])
+        """
+        TODO
+        """
+        state["timer"]["timers"].append([handler, timeout_us, 0])
 
 def run(state, last_frame_delta):
-    """
-    TODO
-    """
-    for entry in state["timer"]["timers"]:
-        handler, timeout_us, sum_time = entry
-        sum_time += last_frame_delta
-        if sum_time >= timeout_us:
-            entry[2] = sum_time - timeout_us
-            (handler)(state, last_frame_delta)
-        else:
-            entry[2] = sum_time
+        """
+        TODO
+        """
+        for entry in state["timer"]["timers"]:
+                handler, timeout_us, sum_time = entry
+                sum_time += last_frame_delta
+                if sum_time >= timeout_us:
+                        entry[2] = sum_time - timeout_us
+                        (handler)(state, last_frame_delta)
+                else:
+                        entry[2] = sum_time

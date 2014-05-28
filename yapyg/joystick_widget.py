@@ -23,83 +23,83 @@ from kivy.uix.widget import Widget
 from kivy.graphics import *
 
 class JoystickWidget(Widget):
-    def __init__(self, deadzone=0,
-            joystickbkg_file="assets/img/ui/joy_bkg.png",
-            joystick_file="assets/img/ui/joy_stick.png",
-            **kwargs):
-        super(JoystickWidget, self).__init__(**kwargs)
-        self.joystickbkg_file = joystickbkg_file
-        self.joystick_file = joystick_file
-        self.bind(pos=self.redraw, size=self.redraw)
-        self.direction = [0, 0,]
-        self.deadzone = deadzone
-        self.redraw(None, None)
+        def __init__(self, deadzone=0,
+                        joystickbkg_file="assets/img/ui/joy_bkg.png",
+                        joystick_file="assets/img/ui/joy_stick.png",
+                        **kwargs):
+                super(JoystickWidget, self).__init__(**kwargs)
+                self.joystickbkg_file = joystickbkg_file
+                self.joystick_file = joystick_file
+                self.bind(pos=self.redraw, size=self.redraw)
+                self.direction = [0, 0,]
+                self.deadzone = deadzone
+                self.redraw(None, None)
 
-    def get_direction(self):
-        return self.direction
+        def get_direction(self):
+                return self.direction
 
-    def redraw(self, instance, value):
-        self.canvas.clear()
-        with self.canvas:
-            PushMatrix()
-            Rectangle(source=self.joystickbkg_file, pos=self.pos, size=self.size)
-            sticksize = (self.size[0] / 4, self.size[1] / 4, )
-            self.joystick = Rectangle(source=self.joystick_file, pos=(0,0), size=sticksize)
-            PopMatrix()
-            self.do_center()
+        def redraw(self, instance, value):
+                self.canvas.clear()
+                with self.canvas:
+                        PushMatrix()
+                        Rectangle(source=self.joystickbkg_file, pos=self.pos, size=self.size)
+                        sticksize = (self.size[0] / 4, self.size[1] / 4, )
+                        self.joystick = Rectangle(source=self.joystick_file, pos=(0,0), size=sticksize)
+                        PopMatrix()
+                        self.do_center()
 
-    def get_centerpos(self):
-        return (self.pos[0] + self.size[0] / 2, self.pos[1] + self.size[1] / 2,)
+        def get_centerpos(self):
+                return (self.pos[0] + self.size[0] / 2, self.pos[1] + self.size[1] / 2,)
 
-    def do_center(self):
-        self.do_draw(self.get_centerpos())
+        def do_center(self):
+                self.do_draw(self.get_centerpos())
 
-    def do_draw(self, touchpos):
-        if touchpos[0] > self.size[0] or touchpos[1] > self.size[1]:
-            self.do_draw(self.get_centerpos())
-            return
+        def do_draw(self, touchpos):
+                if touchpos[0] > self.size[0] or touchpos[1] > self.size[1]:
+                        self.do_draw(self.get_centerpos())
+                        return
 
-        min_x = self.pos[0] + self.size[0] / 8.0
-        min_y = self.pos[1] + self.size[1] / 8.0
+                min_x = self.pos[0] + self.size[0] / 8.0
+                min_y = self.pos[1] + self.size[1] / 8.0
 
-        max_x = self.pos[0] + self.size[0] - self.size[0] / 8.0
-        max_y = self.pos[1] + self.size[1] - self.size[1] / 8.0
+                max_x = self.pos[0] + self.size[0] - self.size[0] / 8.0
+                max_y = self.pos[1] + self.size[1] - self.size[1] / 8.0
 
-        stickpos_x = max(min_x, touchpos[0], )
-        stickpos_y = max(min_y, touchpos[1], )
+                stickpos_x = max(min_x, touchpos[0], )
+                stickpos_y = max(min_y, touchpos[1], )
 
-        stickpos_x = min(max_x, stickpos_x, )
-        stickpos_y = min(max_y, stickpos_y, )
+                stickpos_x = min(max_x, stickpos_x, )
+                stickpos_y = min(max_y, stickpos_y, )
 
-        centerpos = self.get_centerpos()
-        delta_x = stickpos_x - centerpos[0]
-        delta_y = stickpos_y - centerpos[1]
+                centerpos = self.get_centerpos()
+                delta_x = stickpos_x - centerpos[0]
+                delta_y = stickpos_y - centerpos[1]
 
-        max_delta_x = 3.0 / 4.0 * self.size[0]
-        max_delta_y = 3.0 / 4.0 * self.size[1]
+                max_delta_x = 3.0 / 4.0 * self.size[0]
+                max_delta_y = 3.0 / 4.0 * self.size[1]
 
-        direction_x = delta_x / max_delta_x * 2.0
-        direction_y = delta_y / max_delta_y * 2.0
+                direction_x = delta_x / max_delta_x * 2.0
+                direction_y = delta_y / max_delta_y * 2.0
 
-        if abs(direction_x) >= self.deadzone or abs(direction_y) >= self.deadzone:
-            self.direction[0] = direction_x
-            self.direction[1] = direction_y
-        else:
-            self.direction[0] = 0
-            self.direction[1] = 0
+                if abs(direction_x) >= self.deadzone or abs(direction_y) >= self.deadzone:
+                        self.direction[0] = direction_x
+                        self.direction[1] = direction_y
+                else:
+                        self.direction[0] = 0
+                        self.direction[1] = 0
 
-        drawpos_x = stickpos_x - self.size[0] / 8
-        drawpos_y = stickpos_y - self.size[1] / 8
+                drawpos_x = stickpos_x - self.size[0] / 8
+                drawpos_y = stickpos_y - self.size[1] / 8
 
-        if self.joystick:
-            self.joystick.pos = (drawpos_x, drawpos_y,)
+                if self.joystick:
+                        self.joystick.pos = (drawpos_x, drawpos_y,)
 
-    def on_touch_down(self, touch):
-        if self.collide_point(touch.x, touch.y):
-            self.do_draw((touch.x, touch.y))
+        def on_touch_down(self, touch):
+                if self.collide_point(touch.x, touch.y):
+                        self.do_draw((touch.x, touch.y))
 
-    def on_touch_up(self, touch):
-        self.do_center()
+        def on_touch_up(self, touch):
+                self.do_center()
 
-    def on_touch_move(self, touch):
-        self.do_draw((touch.x, touch.y))
+        def on_touch_move(self, touch):
+                self.do_draw((touch.x, touch.y))

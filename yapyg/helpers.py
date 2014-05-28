@@ -26,79 +26,79 @@ import entities
 import collisions
 
 def create_screen_wall(state, base_name, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
-    """
-    TODO
-    """
-    pass
+        """
+        TODO
+        """
+        pass
 
 def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
-    """
-    TODO
-    """
-    ENT_TOPWALL = base_name + "_top"
-    ENT_LEFTWALL = base_name + "_left"
-    ENT_RIGHTWALL = base_name + "_right"
-    ENT_BOTTOMWALL = base_name + "_bottom"
+        """
+        TODO
+        """
+        ENT_TOPWALL = base_name + "_top"
+        ENT_LEFTWALL = base_name + "_left"
+        ENT_RIGHTWALL = base_name + "_right"
+        ENT_BOTTOMWALL = base_name + "_bottom"
 
-    horizontal_wall_width = size[0]
-    vertical_wall_height = size[1]
+        horizontal_wall_width = size[0]
+        vertical_wall_height = size[1]
 
-    if bottom:
-        entities.insert(state,
-            ENT_BOTTOMWALL,
-            {
-                "*": {
-                    "textures": [("rectangle",
-                        horizontal_wall_width,
-                        thickness,
-                        color[0], color[1], color[2],)],
-                },
-            },
-            [pos[0], pos[1]],
-            0)
-        collisions.add(state, ENT_BOTTOMWALL, ["rectangle", horizontal_wall_width, thickness], False)
+        if bottom:
+                entities.insert(state,
+                        ENT_BOTTOMWALL,
+                        {
+                                "*": {
+                                        "textures": [("rectangle",
+                                                horizontal_wall_width,
+                                                thickness,
+                                                color[0], color[1], color[2],)],
+                                },
+                        },
+                        [pos[0], pos[1]],
+                        0)
+                collisions.add(state, ENT_BOTTOMWALL, ["rectangle", horizontal_wall_width, thickness], False)
 
-    if left:
-        entities.insert(state,
-            ENT_LEFTWALL,
-            {
-                "*": {
-                    "textures": [("rectangle",
-                        thickness,
-                        vertical_wall_height,
-                        color[0], color[1], color[2],)],
-                },
-            },
-            [pos[0], pos[1]],
-            0)
-        collisions.add(state, ENT_LEFTWALL, ["rectangle", thickness, vertical_wall_height], False)
+        if left:
+                entities.insert(state,
+                        ENT_LEFTWALL,
+                        {
+                                "*": {
+                                        "textures": [("rectangle",
+                                                thickness,
+                                                vertical_wall_height,
+                                                color[0], color[1], color[2],)],
+                                },
+                        },
+                        [pos[0], pos[1]],
+                        0)
+                collisions.add(state, ENT_LEFTWALL, ["rectangle", thickness, vertical_wall_height], False)
 
-    if top:
-        entities.insert(state,
-            ENT_TOPWALL,
-            {
-                "*": {
-                    "textures": [("rectangle",
-                        horizontal_wall_width,
-                        thickness,
-                        color[0], color[1], color[2],)],
-                },
-            },
-            [pos[0], pos[1] + vertical_wall_height - thickness],
-            0)
-        collisions.add(state, ENT_TOPWALL, ["rectangle", horizontal_wall_width, thickness], False)
+        if top:
+                entities.insert(state,
+                        ENT_TOPWALL,
+                        {
+                                "*": {
+                                        "textures": [("rectangle",
+                                                horizontal_wall_width,
+                                                thickness,
+                                                color[0], color[1], color[2],)],
+                                },
+                        },
+                        [pos[0], pos[1] + vertical_wall_height - thickness],
+                        0)
+                collisions.add(state, ENT_TOPWALL, ["rectangle", horizontal_wall_width, thickness], False)
 
-    if right:
-        entities.insert(state,
-            ENT_RIGHTWALL,
-            {
-                "*": {
-                    "textures": [("rectangle",
-                        thickness,
-                        vertical_wall_height,
-                        color[0], color[1], color[2],)],
-                },
-            },
-            [pos[0] + horizontal_wall_width - thickness, pos[1]],
-            0)
-        collisions.add(state, ENT_RIGHTWALL, ["rectangle", thickness, vertical_wall_height], False)
+        if right:
+                entities.insert(state,
+                        ENT_RIGHTWALL,
+                        {
+                                "*": {
+                                        "textures": [("rectangle",
+                                                thickness,
+                                                vertical_wall_height,
+                                                color[0], color[1], color[2],)],
+                                },
+                        },
+                        [pos[0] + horizontal_wall_width - thickness, pos[1]],
+                        0)
+                collisions.add(state, ENT_RIGHTWALL, ["rectangle", thickness, vertical_wall_height], False)

@@ -54,144 +54,144 @@ import demo_collision_1
 import demo_control_1
 
 class MenuWidget(FloatLayout):
-    def __init__(self, **kwargs):
-        super(MenuWidget, self).__init__(**kwargs)
+        def __init__(self, **kwargs):
+                super(MenuWidget, self).__init__(**kwargs)
 
-        default_choice = "demo_bounce"
-        self.choices = {
-            "demo_text": "Text drawing",
-            "demo_bounce": "Basic physics simulation",
-            "demo_starship": "'Endless' scrolling background and animation",
-            "demo_tiles": "Tile map scrolling",
-            "demo_pong": "Simple Pong game",
-            "demo_breakout": "Breakout implemented with physical mover",
-            "demo_collision": "Optimized collision checking demo/test",
-            "demo_collision_1": "Simple collision test case",
-            "demo_control_1": "Demonstrates a more complex control scheme",
-            }
+                default_choice = "demo_bounce"
+                self.choices = {
+                        "demo_text": "Text drawing",
+                        "demo_bounce": "Basic physics simulation",
+                        "demo_starship": "'Endless' scrolling background and animation",
+                        "demo_tiles": "Tile map scrolling",
+                        "demo_pong": "Simple Pong game",
+                        "demo_breakout": "Breakout implemented with physical mover",
+                        "demo_collision": "Optimized collision checking demo/test",
+                        "demo_collision_1": "Simple collision test case",
+                        "demo_control_1": "Demonstrates a more complex control scheme",
+                        }
 
-        layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
+                layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
 
-        layout.add_widget(Image(source="assets/img/ui/logo.png", size_hint=(1, 0.4)))
+                layout.add_widget(Image(source="assets/img/ui/logo.png", size_hint=(1, 0.4)))
 
-        layout.add_widget(Label(text="Choose demo:", size_hint=(1, 0.1)))
+                layout.add_widget(Label(text="Choose demo:", size_hint=(1, 0.1)))
 
-        self.spinner = Spinner(text=default_choice, values=[x for x in self.choices.iterkeys()], size_hint=(1, 0.1))
-        layout.add_widget(self.spinner)
-        self.spinner.bind(text=self.show_selected_value)
+                self.spinner = Spinner(text=default_choice, values=[x for x in self.choices.iterkeys()], size_hint=(1, 0.1))
+                layout.add_widget(self.spinner)
+                self.spinner.bind(text=self.show_selected_value)
 
-        self.description_label = Label(text=self.choices[default_choice], valign="middle", halign="center", size_hint=(1, 0.3))
-        self.description_label.bind(size=self.description_label.setter("text_size"))
-        layout.add_widget(self.description_label)
+                self.description_label = Label(text=self.choices[default_choice], valign="middle", halign="center", size_hint=(1, 0.3))
+                self.description_label.bind(size=self.description_label.setter("text_size"))
+                layout.add_widget(self.description_label)
 
-        run_button = Button(text="Run", size_hint=(1, 0.1))
-        run_button.bind(state=self.on_run)
-        layout.add_widget(run_button)
+                run_button = Button(text="Run", size_hint=(1, 0.1))
+                run_button.bind(state=self.on_run)
+                layout.add_widget(run_button)
 
-        self.add_widget(layout)
+                self.add_widget(layout)
 
-    def show_selected_value(self, spinner, value):
-        self.description_label.text = self.choices[value]
+        def show_selected_value(self, spinner, value):
+                self.description_label.text = self.choices[value]
 
-    def on_run(self, instance, value):
-        if self.parent:
-            parent = self.parent
-            parent.remove_widget(self)
+        def on_run(self, instance, value):
+                if self.parent:
+                        parent = self.parent
+                        parent.remove_widget(self)
 
-            state = None
-            exec("state = %s.create(float(Window.width), float(Window.height), float(tile_size))" % self.spinner.text)
+                        state = None
+                        exec("state = %s.create(float(Window.width), float(Window.height), float(tile_size))" % self.spinner.text)
 
-            parent.add_widget(ScreenWidget(state))
+                        parent.add_widget(ScreenWidget(state))
 
 class ScreenWidget(FloatLayout):
-    def __init__(self, state, **kwargs):
-        super(ScreenWidget, self).__init__(**kwargs)
+        def __init__(self, state, **kwargs):
+                super(ScreenWidget, self).__init__(**kwargs)
 
-        self.state = state
-        self.yapyg_widget = YapygWidget(state, [Window.width, Window.height], Window.width / screen_width)
+                self.state = state
+                self.yapyg_widget = YapygWidget(state, [Window.width, Window.height], Window.width / screen_width)
 
-        self.add_widget(self.yapyg_widget)
+                self.add_widget(self.yapyg_widget)
 
-        self.joystick = None
-        if yapyg.controls.need_joystick(state):
-            joystick_panel_height = 0.2
-            joystick_height = 0.18
-            joystick_width = (joystick_height * Window.height) / Window.width
+                self.joystick = None
+                if yapyg.controls.need_joystick(state):
+                        joystick_panel_height = 0.2
+                        joystick_height = 0.18
+                        joystick_width = (joystick_height * Window.height) / Window.width
 
-            self.add_widget(Image(source="assets/img/ui/joy_panel.png",
-                size_hint=(1, joystick_panel_height),
-                pos_hint = {"x" : 0.0, "y" : 0.0}))
+                        self.add_widget(Image(source="assets/img/ui/joy_panel.png",
+                                size_hint=(1, joystick_panel_height),
+                                pos_hint = {"x" : 0.0, "y" : 0.0}))
 
-            self.joystick = JoystickWidget(
-                size_hint=(joystick_width, joystick_height),
-                pos_hint = {"x" : 0.01, "y" : 0.01},)
-            self.add_widget(self.joystick)
-            Clock.schedule_interval(self.on_timer, 0.1)
+                        self.joystick = JoystickWidget(
+                                size_hint=(joystick_width, joystick_height),
+                                pos_hint = {"x" : 0.01, "y" : 0.01},)
+                        self.add_widget(self.joystick)
+                        Clock.schedule_interval(self.on_timer, 0.1)
 
-            button_width = joystick_width / 2.0
-            button_height = joystick_height / 2.0
+                        button_width = joystick_width / 2.0
+                        button_height = joystick_height / 2.0
 
-            self.add_widget(Button(text='[color=000000][b]B[/b][/color]',
-                font_size=26,
-                markup=True,
-                background_normal="assets/img/ui/joy_button.png",
-                background_down="assets/img/ui/joy_button_down.png",
-                size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
-                ))
+                        self.add_widget(Button(text='[color=000000][b]B[/b][/color]',
+                                font_size=26,
+                                markup=True,
+                                background_normal="assets/img/ui/joy_button.png",
+                                background_down="assets/img/ui/joy_button_down.png",
+                                size_hint=(button_width, button_height),
+                                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
+                                ))
 
-            self.add_widget(Button(text='[color=000000][b]A[/b][/color]',
-                font_size=26,
-                markup=True,
-                background_normal="assets/img/ui/joy_button.png",
-                background_down="assets/img/ui/joy_button_down.png",
-                size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
-                ))
+                        self.add_widget(Button(text='[color=000000][b]A[/b][/color]',
+                                font_size=26,
+                                markup=True,
+                                background_normal="assets/img/ui/joy_button.png",
+                                background_down="assets/img/ui/joy_button_down.png",
+                                size_hint=(button_width, button_height),
+                                pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
+                                ))
 
-            self.add_widget(Button(text='[color=000000][b]D[/b][/color]',
-                font_size=26,
-                markup=True,
-                background_normal="assets/img/ui/joy_button.png",
-                background_down="assets/img/ui/joy_button_down.png",
-                size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : button_height + 0.01},
-                ))
+                        self.add_widget(Button(text='[color=000000][b]D[/b][/color]',
+                                font_size=26,
+                                markup=True,
+                                background_normal="assets/img/ui/joy_button.png",
+                                background_down="assets/img/ui/joy_button_down.png",
+                                size_hint=(button_width, button_height),
+                                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : button_height + 0.01},
+                                ))
 
-            self.add_widget(Button(text='[color=000000][b]C[/b][/color]',
-                font_size=26,
-                markup=True,
-                background_normal="assets/img/ui/joy_button.png",
-                background_down="assets/img/ui/joy_button_down.png",
-                size_hint=(button_width, button_height),
-                pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : button_height + 0.01},
-                ))
+                        self.add_widget(Button(text='[color=000000][b]C[/b][/color]',
+                                font_size=26,
+                                markup=True,
+                                background_normal="assets/img/ui/joy_button.png",
+                                background_down="assets/img/ui/joy_button_down.png",
+                                size_hint=(button_width, button_height),
+                                pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : button_height + 0.01},
+                                ))
 
-        exit_button = Button(text='[color=000000]Menu[/color]',
-                font_size=26,
-                markup=True,
-                background_normal="assets/img/ui/joy_option_button.png",
-                background_down="assets/img/ui/joy_option_button_down.png",
-                size_hint=(0.2, 0.05),
-                pos_hint = {"x":0.4, "y":0.01},
-                )
-        exit_button.bind(state=self.on_exit)
-        self.add_widget(exit_button)
+                exit_button = Button(text='[color=000000]Menu[/color]',
+                                font_size=26,
+                                markup=True,
+                                background_normal="assets/img/ui/joy_option_button.png",
+                                background_down="assets/img/ui/joy_option_button_down.png",
+                                size_hint=(0.2, 0.05),
+                                pos_hint = {"x":0.4, "y":0.01},
+                                )
+                exit_button.bind(state=self.on_exit)
+                self.add_widget(exit_button)
 
-    def on_timer(self, dt):
-        if self.state:
-            yapyg.controls.set_joystick(self.state, self.joystick.get_direction())
+        def on_timer(self, dt):
+                if self.state:
+                        yapyg.controls.set_joystick(self.state, self.joystick.get_direction())
 
-    def on_exit(self, instance, value):
-        if self.parent:
-            self.yapyg_widget.destroy()
-            parent = self.parent
-            parent.remove_widget(self)
-            parent.add_widget(MenuWidget())
+        def on_exit(self, instance, value):
+                if self.parent:
+                        self.yapyg_widget.destroy()
+                        parent = self.parent
+                        parent.remove_widget(self)
+                        parent.add_widget(MenuWidget())
 
 class YapygDemoApp(App):
-    def build(self):
-        return MenuWidget()
+        def build(self):
+                return MenuWidget()
 
 if __name__ == "__main__":
-    YapygDemoApp().run()
+        YapygDemoApp().run()

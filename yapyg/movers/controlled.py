@@ -27,45 +27,45 @@ from .. import controls
 from .. import entities
 
 def add(state, entity_name, controller, factor, limits, on_end_function=None, do_replace=False):
-    """
-    TODO
-    """
-    movers.add(state, entity_name, create(entity_name, controller, factor, limits, on_end_function), do_replace)
+        """
+        TODO
+        """
+        movers.add(state, entity_name, create(entity_name, controller, factor, limits, on_end_function), do_replace)
 
 def create(entity_name, controller, factor, limits, on_end_function=None):
-    """
-    TODO
-    """
-    return {
-            "type": "controlled",
-            "entity_name": entity_name,
-            "controller": controller,
-            "factor": factor,
-            "limits": limits,
+        """
+        TODO
+        """
+        return {
+                        "type": "controlled",
+                        "entity_name": entity_name,
+                        "controller": controller,
+                        "factor": factor,
+                        "limits": limits,
 
-            "run": run,
-            "on_end_function": on_end_function,
-        }
+                        "run": run,
+                        "on_end_function": on_end_function,
+                }
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
-    """
-    TODO
-    """
-    direction = controls.get_joystick(state)
-    pos = entities.get_pos(state, entity_name)
-    factor = mover["factor"]
-    limits = mover["limits"]
+        """
+        TODO
+        """
+        direction = controls.get_joystick(state)
+        pos = entities.get_pos(state, entity_name)
+        factor = mover["factor"]
+        limits = mover["limits"]
 
-    new_x = pos[0] + factor * direction[0]
-    if new_x < limits[0]:
-        new_x = limits[0]
-    elif new_x > limits[2]:
-        new_x = limits[2]
+        new_x = pos[0] + factor * direction[0]
+        if new_x < limits[0]:
+                new_x = limits[0]
+        elif new_x > limits[2]:
+                new_x = limits[2]
 
-    new_y = pos[1] + factor * direction[1]
-    if new_y < limits[1]:
-        new_y = limits[1]
-    elif new_y > limits[3]:
-        new_y = limits[3]
+        new_y = pos[1] + factor * direction[1]
+        if new_y < limits[1]:
+                new_y = limits[1]
+        elif new_y > limits[3]:
+                new_y = limits[3]
 
-    entities.set_pos(state, entity_name, new_x, new_y)
+        entities.set_pos(state, entity_name, new_x, new_y)

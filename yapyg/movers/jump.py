@@ -26,33 +26,33 @@ from .. import movers
 from .. import entities
 
 def add(state, entity_name, new_pos=None, new_rot=None, on_end_function=None, do_replace=False):
-    """
-    TODO
-    """
-    movers.add(state, entity_name, create(entity_name, new_pos, new_rot, on_end_function), do_replace)
+        """
+        TODO
+        """
+        movers.add(state, entity_name, create(entity_name, new_pos, new_rot, on_end_function), do_replace)
 
 def create(entity_name, new_pos, new_rot=None, on_end_function=None):
-    """
-    TODO
-    """
-    return {
-            "type": "jump",
-            "entity_name": entity_name,
-            "new_pos": new_pos,
-            "new_rot": new_rot,
+        """
+        TODO
+        """
+        return {
+                        "type": "jump",
+                        "entity_name": entity_name,
+                        "new_pos": new_pos,
+                        "new_rot": new_rot,
 
-            "run": run,
-            "on_end_function": on_end_function,
-        }
+                        "run": run,
+                        "on_end_function": on_end_function,
+                }
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
-    """
-    TODO
-    """
-    if mover["new_pos"]:
-        entities.set_pos(state, entity_name, mover["new_pos"][0], mover["new_pos"][1])
+        """
+        TODO
+        """
+        if mover["new_pos"]:
+                entities.set_pos(state, entity_name, mover["new_pos"][0], mover["new_pos"][1])
 
-    if mover["new_rot"]:
-        entities.get_rot(state, entity_name)[0] = mover["new_rot"]
+        if mover["new_rot"]:
+                entities.get_rot(state, entity_name)[0] = mover["new_rot"]
 
-    movers_to_delete.append((entity_name, mover["on_end_function"]))
+        movers_to_delete.append((entity_name, mover["on_end_function"]))

@@ -23,45 +23,45 @@ View setter
 """
 
 def initialize(state):
-    """
-    TODO
-    """
-    state["view"] = {
-        "view_pos": [0, 0],
-        "view_setter": None,
-    }
+        """
+        TODO
+        """
+        state["view"] = {
+                "view_pos": [0, 0],
+                "view_setter": None,
+        }
 
 def destroy(state):
-    """
-    TODO
-    """
-    del state["view"]
+        """
+        TODO
+        """
+        del state["view"]
 
 def get_view_pos(state):
-    """
-    TODO
-    """
-    return state["view"]["view_pos"]
+        """
+        TODO
+        """
+        return state["view"]["view_pos"]
 
 def set_view_pos(state, view_pos):
-    """
-    TODO
-    """
-    state["view"]["view_pos"][0] = view_pos[0]
-    state["view"]["view_pos"][1] = view_pos[1]
+        """
+        TODO
+        """
+        state["view"]["view_pos"][0] = view_pos[0]
+        state["view"]["view_pos"][1] = view_pos[1]
 
 def set_viewer(state, viewer):
-    """
-    TODO
-    """
-    state["view"]["view_setter"] = viewer
+        """
+        TODO
+        """
+        state["view"]["view_setter"] = viewer
 
 def run(state):
-    """
-    TODO
-    """
-    setter = state["view"]["view_setter"]
-    if setter:
-        return (setter["run"])(state, setter)
-    else:
-        return False
+        """
+        TODO
+        """
+        setter = state["view"]["view_setter"]
+        if setter:
+                return (setter["run"])(state, setter)
+        else:
+                return False

@@ -27,25 +27,25 @@ from .. import view
 from .. import entities
 
 def create(state, entity_name, offset):
-    """
-    TODO
-    """
-    return {
-        "run": run,
-        "entity_name": entity_name,
-        "offset": offset,
-    }
+        """
+        TODO
+        """
+        return {
+                "run": run,
+                "entity_name": entity_name,
+                "offset": offset,
+        }
 
 def run(state, viewer):
-    """
-    TODO
-    """
-    old_view_pos = view.get_view_pos(state)
-    entity_pos = entities.get_pos(state, viewer["entity_name"])
-    new_view_pos = [entity_pos[0] + viewer["offset"][0],
-        entity_pos[1] + viewer["offset"][1]]
-    if old_view_pos != new_view_pos:
-        view.set_view_pos(state, new_view_pos)
-        return True
-    else:
-        return False
+        """
+        TODO
+        """
+        old_view_pos = view.get_view_pos(state)
+        entity_pos = entities.get_pos(state, viewer["entity_name"])
+        new_view_pos = [entity_pos[0] + viewer["offset"][0],
+                entity_pos[1] + viewer["offset"][1]]
+        if old_view_pos != new_view_pos:
+                view.set_view_pos(state, new_view_pos)
+                return True
+        else:
+                return False

@@ -22,56 +22,56 @@ import yapyg
 import yapyg.viewers.relative
 
 def create(screen_width, screen_height, tile_size):
-    joystick_props = yapyg.controls.get_joystick_properties()
-    origin_xy = (0, joystick_props["h"] * screen_height)
-    state = yapyg.factory.create(screen_width, screen_height, tile_size, origin_xy)
+        joystick_props = yapyg.controls.get_joystick_properties()
+        origin_xy = (0, joystick_props["h"] * screen_height)
+        state = yapyg.factory.create(screen_width, screen_height, tile_size, origin_xy)
 
-    yapyg.controls.add_joystick(state)
+        yapyg.controls.add_joystick(state)
 
-    yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/grass.png",])
+        yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/grass.png",])
 
-    yapyg.tiles.add_tile_def(state, "1", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/sw_x.png"])
-    yapyg.tiles.add_tile_def(state, "2", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/s_x.png"])
-    yapyg.tiles.add_tile_def(state, "3", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/se_x.png"])
-    yapyg.tiles.add_tile_def(state, "4", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/e_x.png"])
-    yapyg.tiles.add_tile_def(state, "5", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/ne_x.png"])
-    yapyg.tiles.add_tile_def(state, "6", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/n_x.png"])
-    yapyg.tiles.add_tile_def(state, "7", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/nw_x.png"])
-    yapyg.tiles.add_tile_def(state, "8", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/w_x.png"])
+        yapyg.tiles.add_tile_def(state, "1", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/sw_x.png"])
+        yapyg.tiles.add_tile_def(state, "2", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/s_x.png"])
+        yapyg.tiles.add_tile_def(state, "3", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/se_x.png"])
+        yapyg.tiles.add_tile_def(state, "4", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/e_x.png"])
+        yapyg.tiles.add_tile_def(state, "5", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/ne_x.png"])
+        yapyg.tiles.add_tile_def(state, "6", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/n_x.png"])
+        yapyg.tiles.add_tile_def(state, "7", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/nw_x.png"])
+        yapyg.tiles.add_tile_def(state, "8", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/w_x.png"])
 
-    area_strings = [
-        "765",
-        "8.4",
-        "8.4",
-        "8.4",
-        "123",
-        ]
+        area_strings = [
+                "765",
+                "8.4",
+                "8.4",
+                "8.4",
+                "123",
+                ]
 
-    area = []
-    for area_string_row in area_strings:
-        new_row = []
-        area.append(new_row)
-        for tile in area_string_row:
-            new_row.append(tile)
+        area = []
+        for area_string_row in area_strings:
+                new_row = []
+                area.append(new_row)
+                for tile in area_string_row:
+                        new_row.append(tile)
 
-    yapyg.tiles.set_area(state, area)
+        yapyg.tiles.set_area(state, area)
 
-    yapyg.entities.insert(state, "man",
-        {
-            "*idle": {
-                "textures": [("assets/img/sprites/man_idle/%d.png" % i) for i in [0,1,2,3,1,0,3,2]],
-                "speed": 200000,
-            },
-            "walk": {
-                "textures": [("assets/img/sprites/man_walk/%d.png" % i) for i in [1,2,3]],
-                "speed" : 100000,
-            },
-        }, [1, 1], 0, [0.25, 0.25])
+        yapyg.entities.insert(state, "man",
+                {
+                        "*idle": {
+                                "textures": [("assets/img/sprites/man_idle/%d.png" % i) for i in [0,1,2,3,1,0,3,2]],
+                                "speed": 200000,
+                        },
+                        "walk": {
+                                "textures": [("assets/img/sprites/man_walk/%d.png" % i) for i in [1,2,3]],
+                                "speed" : 100000,
+                        },
+                }, [1, 1], 0, [0.25, 0.25])
 
-    yapyg.movers.controlled.add(state,
-        "man",
-        "joystick",
-        0.1,
-        [0, 0, 2, 4])
+        yapyg.movers.controlled.add(state,
+                "man",
+                "joystick",
+                0.1,
+                [0, 0, 2, 4])
 
-    return state
+        return state

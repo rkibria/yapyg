@@ -35,34 +35,34 @@ import text
 import timer
 
 def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
-    """
-    TODO
-    """
-    state = {}
+        """
+        TODO
+        """
+        state = {}
 
-    screen.initialize(state, screen_width, screen_height, tile_size, origin_xy)
-    texture_db.initialize(state)
-    tiles.initialize(state, tile_size)
-    sprites.initialize(state)
-    movers.initialize(state)
-    entities.initialize(state)
-    view.initialize(state)
-    controls.initialize(state)
-    collisions.initialize(state)
-    text.initialize(state)
-    timer.initialize(state)
+        screen.initialize(state, screen_width, screen_height, tile_size, origin_xy)
+        texture_db.initialize(state)
+        tiles.initialize(state, tile_size)
+        sprites.initialize(state)
+        movers.initialize(state)
+        entities.initialize(state)
+        view.initialize(state)
+        controls.initialize(state)
+        collisions.initialize(state)
+        text.initialize(state)
+        timer.initialize(state)
 
-    return state
+        return state
 
 def destroy(state):
-    screen.destroy(state)
-    texture_db.destroy(state)
-    tiles.destroy(state)
-    sprites.destroy(state)
-    movers.destroy(state)
-    entities.destroy(state)
-    view.destroy(state)
-    controls.destroy(state)
-    collisions.destroy(state)
-    text.destroy(state)
-    timer.destroy(state)
+        screen.destroy(state)
+        texture_db.destroy(state)
+        tiles.destroy(state)
+        sprites.destroy(state)
+        movers.destroy(state)
+        entities.destroy(state)
+        view.destroy(state)
+        controls.destroy(state)
+        collisions.destroy(state)
+        text.destroy(state)
+        timer.destroy(state)

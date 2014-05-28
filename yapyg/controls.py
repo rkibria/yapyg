@@ -23,52 +23,52 @@ Controls
 """
 
 def initialize(state):
-    """
-    TODO
-    """
-    state["controls"] = {
-        "joystick": False,
-        "joystick_direction": [0, 0],
-    }
+        """
+        TODO
+        """
+        state["controls"] = {
+                "joystick": False,
+                "joystick_direction": [0, 0],
+        }
 
 def destroy(state):
-    """
-    TODO
-    """
-    del state["controls"]
+        """
+        TODO
+        """
+        del state["controls"]
 
 def add_joystick(state):
-    """
-    TODO
-    """
-    state["controls"]["joystick"] = True
+        """
+        TODO
+        """
+        state["controls"]["joystick"] = True
 
 def need_joystick(state):
-    """
-    TODO
-    """
-    return state["controls"]["joystick"]
+        """
+        TODO
+        """
+        return state["controls"]["joystick"]
 
 def set_joystick(state, directions):
-    """
-    TODO
-    """
-    state["controls"]["joystick_direction"][0] = directions[0]
-    state["controls"]["joystick_direction"][1] = directions[1]
+        """
+        TODO
+        """
+        state["controls"]["joystick_direction"][0] = directions[0]
+        state["controls"]["joystick_direction"][1] = directions[1]
 
 def get_joystick(state):
-    """
-    TODO
-    """
-    return state["controls"]["joystick_direction"]
+        """
+        TODO
+        """
+        return state["controls"]["joystick_direction"]
 
 def get_joystick_properties():
-    """
-    TODO
-    """
-    return {
-        "x" : 0.0,
-        "y" : 0.0,
-        "w" : 1.0,
-        "h" : 0.2,
-        }
+        """
+        TODO
+        """
+        return {
+                "x" : 0.0,
+                "y" : 0.0,
+                "w" : 1.0,
+                "h" : 0.2,
+                }

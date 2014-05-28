@@ -26,51 +26,51 @@ from .. import movers
 from .. import entities
 
 class YapygMoverSetPropertyException(Exception):
-    """
-    TODO
-    """
-    def __init__(self, value):
         """
         TODO
         """
-        self.value = value
+        def __init__(self, value):
+                """
+                TODO
+                """
+                self.value = value
 
-    def __str__(self):
-        """
-        TODO
-        """
-        return repr(self.value)
+        def __str__(self):
+                """
+                TODO
+                """
+                return repr(self.value)
 
 def add(state, entity_name, property, new_value, on_end_function=None, do_replace=False):
-    """
-    TODO
-    """
-    movers.add(state, entity_name, create(entity_name, property, new_value, on_end_function), do_replace)
+        """
+        TODO
+        """
+        movers.add(state, entity_name, create(entity_name, property, new_value, on_end_function), do_replace)
 
 def create(entity_name, property, new_value, on_end_function=None):
-    """
-    TODO
-    """
-    return {
-            "type": "set_property",
-            "entity_name": entity_name,
-            "property": property,
-            "new_value": new_value,
+        """
+        TODO
+        """
+        return {
+                        "type": "set_property",
+                        "entity_name": entity_name,
+                        "property": property,
+                        "new_value": new_value,
 
-            "run": run,
-            "on_end_function": on_end_function,
-        }
+                        "run": run,
+                        "on_end_function": on_end_function,
+                }
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
-    """
-    TODO
-    """
-    property = mover["property"]
-    new_value = mover["new_value"]
+        """
+        TODO
+        """
+        property = mover["property"]
+        new_value = mover["new_value"]
 
-    if property == "set_active_sprite":
-        entities.set_active_sprite(state, entity_name, new_value)
-    else:
-        raise YapygMoverSetPropertyException("Unknown property %s" % property)
+        if property == "set_active_sprite":
+                entities.set_active_sprite(state, entity_name, new_value)
+        else:
+                raise YapygMoverSetPropertyException("Unknown property %s" % property)
 
-    movers_to_delete.append((entity_name, mover["on_end_function"]))
+        movers_to_delete.append((entity_name, mover["on_end_function"]))
