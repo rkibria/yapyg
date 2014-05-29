@@ -56,8 +56,7 @@ def create(screen_width, screen_height, tile_size):
 
         yapyg.tiles.set_area(state, area)
 
-        yapyg.entities.insert(state, "man",
-                {
+        yapyg.entities.insert(state, "man", {
                         "*idle": {
                                 "textures": [("assets/img/sprites/man_idle/%d.png" % i) for i in [0,1,2,3,1,0,3,2]],
                                 "speed": 200000,
@@ -71,7 +70,9 @@ def create(screen_width, screen_height, tile_size):
         yapyg.movers.controlled.add(state,
                 "man",
                 "joystick",
-                0.1,
-                [0, 0, 2, 4])
+                0.03,
+                [0, 0, 2, 4],
+                ["*idle", "walk"],
+                True)
 
         return state
