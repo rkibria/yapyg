@@ -19,43 +19,55 @@
 # THE SOFTWARE.
 
 import yapyg
-import yapyg.viewers.relative
 
-def create(screen_width, screen_height, tile_size):
+# Called from the menu widget, this function creates and
+# sets up the game state object. Parameters are the usable
+# screen size and tile size in pixels.
+def create(screen_width_px, screen_height_px, tile_size_px):
+        # If there is an on-screen joystick
+        # (there may not be one needed for non-mobile or other platforms)
+        # set the drawing origin to above it (WORK IN PROGRESS, this needs a
+        # cleaner solution).
         joystick_props = yapyg.controls.get_joystick_properties()
-        origin_xy = (0, joystick_props["h"] * screen_height)
-        state = yapyg.factory.create(screen_width, screen_height, tile_size, origin_xy)
+        origin_xy = (0, joystick_props["h"] * screen_height_px)
 
+        # Create the actual game state object that stores all information that yapyg needs.
+        state = yapyg.factory.create(screen_width_px, screen_height_px, tile_size_px, origin_xy)
+        
+        # Enable the joystick.
         yapyg.controls.add_joystick(state)
 
-        yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/grass.png",])
+        # Create some tiles to use for our game area. Individual tiles are referred to by strings.
+        # Each tile can be composed by layering several images over each other, here for example
+        # wall pieces (with transparency) are drawn on top of the ground image.
+        yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/gray_ground.png",])
+        yapyg.tiles.add_tile_def(state, "1", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/sw_x.png"])
+        yapyg.tiles.add_tile_def(state, "2", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/s_x.png"])
+        yapyg.tiles.add_tile_def(state, "3", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/se_x.png"])
+        yapyg.tiles.add_tile_def(state, "4", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/e_x.png"])
+        yapyg.tiles.add_tile_def(state, "5", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/ne_x.png"])
+        yapyg.tiles.add_tile_def(state, "6", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/n_x.png"])
+        yapyg.tiles.add_tile_def(state, "7", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/nw_x.png"])
+        yapyg.tiles.add_tile_def(state, "8", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/w_x.png"])
 
-        yapyg.tiles.add_tile_def(state, "1", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/sw_x.png"])
-        yapyg.tiles.add_tile_def(state, "2", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/s_x.png"])
-        yapyg.tiles.add_tile_def(state, "3", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/se_x.png"])
-        yapyg.tiles.add_tile_def(state, "4", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/e_x.png"])
-        yapyg.tiles.add_tile_def(state, "5", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/ne_x.png"])
-        yapyg.tiles.add_tile_def(state, "6", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/n_x.png"])
-        yapyg.tiles.add_tile_def(state, "7", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/nw_x.png"])
-        yapyg.tiles.add_tile_def(state, "8", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/w_x.png"])
+        # The tile map is made as a list of lists. The arrangement is drawn as seen here,
+        # i.e. the '1' tile is in the lower left corner of the screen.
+        yapyg.tiles.set_area(state,
+                [
+                ['7', '6', '5'],
+                ['8', '.', '4'],
+                ['8', '.', '4'],
+                ['8', '.', '4'],
+                ['1', '2', '3'],
+                ])
 
-        area_strings = [
-                "765",
-                "8.4",
-                "8.4",
-                "8.4",
-                "123",
-                ]
-
-        area = []
-        for area_string_row in area_strings:
-                new_row = []
-                area.append(new_row)
-                for tile in area_string_row:
-                        new_row.append(tile)
-
-        yapyg.tiles.set_area(state, area)
-
+        # We create the "man" entity which has 2 different sprite representations: standing and walking.
+        # The idle sprite is the default sprite, since it starts with an asterisk (*). The animation of
+        # the sprites is defined by a list of images that will be played in order, then repeated, where
+        # the playback speed is defined individually for the sprite as well. We also define the starting
+        # coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
+        # the rotation amount of the entity (0 here) and an offset for drawing the sprite to the actual position,
+        # here [0.25, 0.25].
         yapyg.entities.insert(state, "man", {
                         "*idle": {
                                 "textures": [("assets/img/sprites/man_idle/%d.png" % i) for i in [0,1,2,3,1,0,3,2]],
@@ -67,6 +79,10 @@ def create(screen_width, screen_height, tile_size):
                         },
                 }, [1, 1], 0, [0.25, 0.25])
 
+        # We add a mover that will translate joystick movement to moving the man around the area.
+        # This particular mover needs the source of control, a factor for the strength of the movement,
+        # the allowed range for the movement, what sprites to use for idle and moving state and if to
+        # rotate the entity to the movement direction.
         yapyg.movers.controlled.add(state,
                 "man",
                 "joystick",
@@ -75,4 +91,5 @@ def create(screen_width, screen_height, tile_size):
                 ["*idle", "walk"],
                 True)
 
+        # The state object is finished.
         return state
