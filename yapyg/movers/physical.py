@@ -31,6 +31,16 @@ from .. import geometry
 from .. import physics
 from .. import collisions
 
+IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
+IDX_MOVERS_PHYSICAL_MASS = 3
+IDX_MOVERS_PHYSICAL_VX = 4
+IDX_MOVERS_PHYSICAL_VY = 5
+IDX_MOVERS_PHYSICAL_AX = 6
+IDX_MOVERS_PHYSICAL_AY = 7
+IDX_MOVERS_PHYSICAL_FRICTION = 8
+IDX_MOVERS_PHYSICAL_INELASTICITY = 9
+IDX_MOVERS_PHYSICAL_ON_END_FUNCTION = 10
+
 def add(state, entity_name,
                 mass=1,
                 vx=0, vy=0,
@@ -56,31 +66,27 @@ def create(entity_name,
         """
         TODO
         """
-        return {
-                        "type": "physics",
-                        "entity_name": entity_name,
-
-                        "mass": mass,
-                        "vx": vx,
-                        "vy": vy,
-                        "ax": ax,
-                        "ay": ay,
-                        "friction": friction,
-                        "inelasticity": inelasticity,
-
-                        "run": run,
-                        "on_end_function": on_end_function,
-                }
+        return ["physics",
+                run,
+                entity_name,
+                mass,
+                vx,
+                vy,
+                ax,
+                ay,
+                friction,
+                inelasticity,
+                on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        entities.add_pos(state, entity_name, mover["vx"] * frame_time_delta, mover["vy"] * frame_time_delta)
-        mover["vx"] += mover["ax"]
-        mover["vy"] += mover["ay"]
-        mover["vx"] *= mover["friction"]
-        mover["vy"] *= mover["friction"]
+        entities.add_pos(state, entity_name, mover[IDX_MOVERS_PHYSICAL_VX] * frame_time_delta, mover[IDX_MOVERS_PHYSICAL_VY] * frame_time_delta)
+        mover[IDX_MOVERS_PHYSICAL_VX] += mover[IDX_MOVERS_PHYSICAL_AX]
+        mover[IDX_MOVERS_PHYSICAL_VY] += mover[IDX_MOVERS_PHYSICAL_AY]
+        mover[IDX_MOVERS_PHYSICAL_VX] *= mover[IDX_MOVERS_PHYSICAL_FRICTION]
+        mover[IDX_MOVERS_PHYSICAL_VY] *= mover[IDX_MOVERS_PHYSICAL_FRICTION]
 
 def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name,
                 rectangle_collision_def, circle_collision_def,
@@ -103,7 +109,7 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
         rect_h = abs_rectangle_shape[3]
         rect_r = abs_rectangle_shape[4]
 
-        circle_move_vector = [circle_physical_mover["vx"], circle_physical_mover["vy"]]
+        circle_move_vector = [circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY]]
 
         if rect_r != 0:
                 rotated_circle = geometry.get_rotated_point((rect_x + rect_w / 2.0, rect_y + rect_h / 2.0), (circle_x, circle_y), -rect_r)
@@ -120,14 +126,14 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                                 # lower quadrant
                                 # print "lower quadrant"
                                 if circle_physical_mover:
-                                        circle_move_vector[1] = -abs(circle_move_vector[1]) * circle_physical_mover["inelasticity"]
+                                        circle_move_vector[1] = -abs(circle_move_vector[1]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
                                         # TODO
                                         entities.add_pos(state, circle_entity_name, 0, -((circle_y + circle_r) - rect_y))
                         else:
                                 # upper quadrant
                                 # print "upper quadrant"
                                 if circle_physical_mover:
-                                        circle_move_vector[1] = abs(circle_move_vector[1]) * circle_physical_mover["inelasticity"]
+                                        circle_move_vector[1] = abs(circle_move_vector[1]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
                                         # TODO
                                         entities.add_pos(state, circle_entity_name, 0, (rect_y + rect_h) - (circle_y - circle_r))
                 else:
@@ -150,22 +156,22 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                         new_vy = math.sin(angle) * v_total
                         new_vx = math.cos(angle) * v_total
                         if circle_physical_mover:
-                                circle_move_vector[0] = new_vx * circle_physical_mover["inelasticity"]
-                                circle_move_vector[1] = new_vy * circle_physical_mover["inelasticity"]
+                                circle_move_vector[0] = new_vx * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                                circle_move_vector[1] = new_vy * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
         else:
                 # circle same height as rectangle
                 if circle_x < rect_x:
                         # left quadrant
                         # print "left quadrant"
                         if circle_physical_mover:
-                                circle_move_vector[0] = -abs(circle_move_vector[0]) * circle_physical_mover["inelasticity"]
+                                circle_move_vector[0] = -abs(circle_move_vector[0]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
                                 # TODO
                                 entities.add_pos(state, circle_entity_name, -((circle_x + circle_r) - rect_x), 0)
                 elif circle_x > rect_x + rect_w:
                         # right quadrant
                         # print "right quadrant"
                         if circle_physical_mover:
-                                circle_move_vector[0] = abs(circle_move_vector[0]) * circle_physical_mover["inelasticity"]
+                                circle_move_vector[0] = abs(circle_move_vector[0]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
                                 # TODO
                                 entities.add_pos(state, circle_entity_name, (rect_x + rect_w) - (circle_x - circle_r), 0)
                 else:
@@ -188,8 +194,8 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
 
         if circle_physical_mover:
                 circle_move_vector = geometry.get_rotated_point((0, 0), circle_move_vector, rect_r)
-                circle_physical_mover["vx"] = circle_move_vector[0]
-                circle_physical_mover["vy"] = circle_move_vector[1]
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
 
 def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
                 collision_def_1, collision_def_2,
@@ -213,14 +219,14 @@ def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
                         (abs_circle_shape_2[0], abs_circle_shape_2[1], ),
                         (abs_circle_shape_1[0], abs_circle_shape_1[1], )
                         ),
-                (circle_physical_mover_1["vx"], circle_physical_mover_1["vy"],),
-                (circle_physical_mover_2["vx"], circle_physical_mover_2["vy"]),
-                circle_physical_mover_1["mass"],
-                circle_physical_mover_2["mass"])
-        circle_physical_mover_1["vx"] = new_vx1 * circle_physical_mover_1["inelasticity"]
-        circle_physical_mover_1["vy"] = new_vy1 * circle_physical_mover_1["inelasticity"]
-        circle_physical_mover_2["vx"] = new_vx2 * circle_physical_mover_2["inelasticity"]
-        circle_physical_mover_2["vy"] = new_vy2 * circle_physical_mover_2["inelasticity"]
+                (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY],),
+                (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY]),
+                circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS],
+                circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS])
+        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_vx1 * circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
+        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_vy1 * circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
+        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_vx2 * circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]
+        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_vy2 * circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]
 
 def _coin_toss(state):
         return (random.randint(0, 1) == 1)
@@ -235,9 +241,9 @@ def collision_handler(state, collision_list):
 
                 physics_mover_1 = None
                 physics_mover_2 = None
-                if (entity_mover_1 and entity_mover_1["type"] == "physics"):
+                if (entity_mover_1 and entity_mover_1[0] == "physics"):
                         physics_mover_1 = entity_mover_1
-                if (entity_mover_2 and entity_mover_2["type"] == "physics"):
+                if (entity_mover_2 and entity_mover_2[0] == "physics"):
                         physics_mover_2 = entity_mover_2
 
                 if (physics_mover_1 or physics_mover_2):

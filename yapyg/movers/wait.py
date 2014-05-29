@@ -24,6 +24,10 @@ Waitstate mover
 
 from .. import movers
 
+IDX_WAIT_MOVER_PASSED_TIME = 2
+IDX_WAIT_MOVER_WAIT_TIME = 3
+IDX_WAIT_MOVER_ON_END_FUNCTION = 4
+
 def add(state, mover_name, wait_time, on_end_function=None, do_replace=False):
         """
         TODO
@@ -34,25 +38,23 @@ def create(wait_time, on_end_function=None):
         """
         TODO
         """
-        return {
-                        "type": "wait",
-                        "passed_time": 0,
-                        "wait_time": wait_time,
-                        "run": run,
-                        "on_end_function": on_end_function,
-                }
+        return ["wait",
+                run,
+                0,
+                wait_time,
+                on_end_function,]
 
 def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        passed_time = mover["passed_time"]
-        wait_time = mover["wait_time"]
+        passed_time = mover[IDX_WAIT_MOVER_PASSED_TIME]
+        wait_time = mover[IDX_WAIT_MOVER_WAIT_TIME]
 
         passed_time += frame_time_delta
         if passed_time > wait_time:
                 passed_time = wait_time
-        mover["passed_time"] = passed_time
+        mover[IDX_WAIT_MOVER_PASSED_TIME] = passed_time
 
         if passed_time == wait_time:
-                movers_to_delete.append((mover_name, mover["on_end_function"]))
+                movers_to_delete.append((mover_name, mover[IDX_WAIT_MOVER_ON_END_FUNCTION]))

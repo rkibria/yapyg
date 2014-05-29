@@ -26,6 +26,15 @@ from .. import geometry
 from .. import movers
 from .. import entities
 
+IDX_LINEAR_MOVER_ENTITY_NAME = 2
+IDX_LINEAR_MOVER_REL_VECTOR = 3
+IDX_LINEAR_MOVER_SPEED = 4
+IDX_LINEAR_MOVER_DO_ROTATE = 5
+IDX_LINEAR_MOVER_TRAVEL_VECTOR = 6
+IDX_LINEAR_MOVER_TRAVEL_TIME = 7
+IDX_LINEAR_MOVER_PASSED_TIME = 8
+IDX_LINEAR_MOVER_ON_END_FUNCTION = 9
+
 class YapygMoverLinearException(Exception):
         """
         TODO
@@ -58,38 +67,34 @@ def create(entity_name, rel_vector, speed, do_rotate, on_end_function):
 
         travel_time = distance / speed
         travel_vector = [rel_vector[0] / travel_time, rel_vector[1] / travel_time]
-        return {
-                        "type": "linear",
-                        "entity_name": entity_name,
-                        "rel_vector": rel_vector,
-                        "speed": speed,
-                        "do_rotate": do_rotate,
-
-                        "travel_vector": travel_vector,
-                        "travel_time": travel_time,
-                        "passed_time": 0,
-
-                        "run": run,
-                        "on_end_function": on_end_function,
-                }
+        return ["linear",
+                run,
+                entity_name,
+                rel_vector,
+                speed,
+                do_rotate,
+                travel_vector,
+                travel_time,
+                0,
+                on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        travel_time = mover["travel_time"]
-        travel_vector = mover["travel_vector"]
-        passed_time = mover["passed_time"]
+        travel_time = mover[IDX_LINEAR_MOVER_TRAVEL_TIME]
+        travel_vector = mover[IDX_LINEAR_MOVER_TRAVEL_VECTOR]
+        passed_time = mover[IDX_LINEAR_MOVER_PASSED_TIME]
 
-        if passed_time == 0 and mover["do_rotate"]:
+        if passed_time == 0 and mover[IDX_LINEAR_MOVER_DO_ROTATE]:
                 entities.set_rot(state, entity_name, (int(geometry.get_rotation([0, 0], travel_vector)) - 90) % 360)
 
         passed_time += frame_time_delta
         if passed_time > travel_time:
                 passed_time = travel_time
-        mover["passed_time"] = passed_time
+        mover[IDX_LINEAR_MOVER_PASSED_TIME] = passed_time
 
         entities.add_pos(state, entity_name, frame_time_delta * travel_vector[0], frame_time_delta * travel_vector[1])
 
         if passed_time == travel_time:
-                movers_to_delete.append((entity_name, mover["on_end_function"]))
+                movers_to_delete.append((entity_name, mover[IDX_LINEAR_MOVER_ON_END_FUNCTION]))

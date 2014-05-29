@@ -25,6 +25,11 @@ Immediate position change mover
 from .. import movers
 from .. import entities
 
+IDX_JUMP_MOVER_ENTITY_NAME = 2
+IDX_JUMP_MOVER_NEW_POS = 3
+IDX_JUMP_MOVER_NEW_ROT = 4
+IDX_JUMP_MOVER_ON_END_FUNCTION = 5
+
 def add(state, entity_name, new_pos=None, new_rot=None, on_end_function=None, do_replace=False):
         """
         TODO
@@ -35,24 +40,21 @@ def create(entity_name, new_pos, new_rot=None, on_end_function=None):
         """
         TODO
         """
-        return {
-                        "type": "jump",
-                        "entity_name": entity_name,
-                        "new_pos": new_pos,
-                        "new_rot": new_rot,
-
-                        "run": run,
-                        "on_end_function": on_end_function,
-                }
+        return ["jump",
+                run,
+                entity_name,
+                new_pos,
+                new_rot,
+                on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        if mover["new_pos"]:
-                entities.set_pos(state, entity_name, mover["new_pos"][0], mover["new_pos"][1])
+        if mover[IDX_JUMP_MOVER_NEW_POS]:
+                entities.set_pos(state, entity_name, mover[IDX_JUMP_MOVER_NEW_POS][0], mover[IDX_JUMP_MOVER_NEW_POS][1])
 
-        if mover["new_rot"]:
-                entities.get_rot(state, entity_name)[0] = mover["new_rot"]
+        if mover[IDX_JUMP_MOVER_NEW_ROT]:
+                entities.get_rot(state, entity_name)[0] = mover[IDX_JUMP_MOVER_NEW_ROT]
 
-        movers_to_delete.append((entity_name, mover["on_end_function"]))
+        movers_to_delete.append((entity_name, mover[IDX_JUMP_MOVER_ON_END_FUNCTION]))

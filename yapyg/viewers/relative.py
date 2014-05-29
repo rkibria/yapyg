@@ -26,24 +26,25 @@ from kivy.logger import Logger
 from .. import view
 from .. import entities
 
+IDX_RELATIVE_VIEW_ENTITY = 1
+IDX_RELATIVE_VIEW_OFFSET = 2
+
 def create(state, entity_name, offset):
         """
         TODO
         """
-        return {
-                "run": run,
-                "entity_name": entity_name,
-                "offset": offset,
-        }
+        return [run,
+                entity_name,
+                offset,]
 
 def run(state, viewer):
         """
         TODO
         """
         old_view_pos = view.get_view_pos(state)
-        entity_pos = entities.get_pos(state, viewer["entity_name"])
-        new_view_pos = [entity_pos[0] + viewer["offset"][0],
-                entity_pos[1] + viewer["offset"][1]]
+        entity_pos = entities.get_pos(state, viewer[IDX_RELATIVE_VIEW_ENTITY])
+        new_view_pos = [entity_pos[0] + viewer[IDX_RELATIVE_VIEW_OFFSET][0],
+                entity_pos[1] + viewer[IDX_RELATIVE_VIEW_OFFSET][1]]
         if old_view_pos != new_view_pos:
                 view.set_view_pos(state, new_view_pos)
                 return True

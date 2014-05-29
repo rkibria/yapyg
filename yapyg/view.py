@@ -66,6 +66,6 @@ def run(state):
         """
         setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
         if setter:
-                return (setter["run"])(state, setter)
+                return (setter[0])(state, setter)
         else:
                 return False

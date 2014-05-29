@@ -20,6 +20,8 @@
 
 """
 General movements
+
+- movers are lists with 0=type, 1=run-function
 """
 
 from collections import deque
@@ -81,7 +83,7 @@ def get_type(state, mover):
         """
         TODO
         """
-        return mover["type"]
+        return mover[0]
 
 def remove(state, mover_name):
         """
@@ -98,7 +100,7 @@ def run(state, frame_time_delta):
         movers_to_delete = []
         for mover_name, mover_deque in state[globals.IDX_STATE_MOVERS].iteritems():
                 mover = mover_deque[0]
-                (mover["run"])(state, mover_name, mover, frame_time_delta, movers_to_delete)
+                (mover[1])(state, mover_name, mover, frame_time_delta, movers_to_delete)
 
         movers_to_insert = []
         for mover_name, on_end_function in movers_to_delete:

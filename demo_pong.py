@@ -125,7 +125,7 @@ def collision_handler(state, collision_list):
         collision_entity = collision_list[0][0] if collision_list[0][0] != ENT_PONG_BALL else collision_list[0][1]
         ball_mover = yapyg.movers.get_active(state, ENT_PONG_BALL)
         if yapyg.movers.get_type(state, ball_mover) == "linear":
-                rel_vector = ball_mover["rel_vector"]
+                rel_vector = ball_mover[yapyg.movers.linear.IDX_LINEAR_MOVER_REL_VECTOR]
                 if collision_entity == ENT_PONG_LEFTWALL or collision_entity == ENT_PONG_RIGHTWALL:
                         yapyg.movers.linear.add(state, ENT_PONG_BALL, [-rel_vector[0], rel_vector[1]], PONG_BALL_ANIM_SPEED, do_replace=True)
                 elif collision_entity == ENT_PONG_TOPWALL:

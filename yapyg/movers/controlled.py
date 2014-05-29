@@ -26,26 +26,27 @@ from .. import movers
 from .. import controls
 from .. import entities
 
+IDX_CONTROLLED_MOVER_ENTITY_NAME = 2
+IDX_CONTROLLED_MOVER_CONTROLLER = 3
+IDX_CONTROLLED_MOVER_FACTOR = 4
+IDX_CONTROLLED_MOVER_LIMITS = 5
+
 def add(state, entity_name, controller, factor, limits, on_end_function=None, do_replace=False):
         """
         TODO
         """
-        movers.add(state, entity_name, create(entity_name, controller, factor, limits, on_end_function), do_replace)
+        movers.add(state, entity_name, create(entity_name, controller, factor, limits), do_replace)
 
-def create(entity_name, controller, factor, limits, on_end_function=None):
+def create(entity_name, controller, factor, limits):
         """
         TODO
         """
-        return {
-                        "type": "controlled",
-                        "entity_name": entity_name,
-                        "controller": controller,
-                        "factor": factor,
-                        "limits": limits,
-
-                        "run": run,
-                        "on_end_function": on_end_function,
-                }
+        return ["controlled",
+                run,
+                entity_name,
+                controller,
+                factor,
+                limits]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
@@ -53,8 +54,8 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         direction = controls.get_joystick(state)
         pos = entities.get_pos(state, entity_name)
-        factor = mover["factor"]
-        limits = mover["limits"]
+        factor = mover[IDX_CONTROLLED_MOVER_FACTOR]
+        limits = mover[IDX_CONTROLLED_MOVER_LIMITS]
 
         new_x = pos[0] + factor * direction[0]
         if new_x < limits[0]:

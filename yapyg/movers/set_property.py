@@ -25,6 +25,11 @@ Entity state setting mover
 from .. import movers
 from .. import entities
 
+IDX_MOVER_SET_PROPERTY_ENTITY_NAME = 2
+IDX_MOVER_SET_PROPERTY_PROPERTY = 3
+IDX_MOVER_SET_PROPERTY_NEW_VALUE = 4
+IDX_MOVER_SET_PROPERTY_ON_END_FUNCTION = 5
+
 class YapygMoverSetPropertyException(Exception):
         """
         TODO
@@ -51,26 +56,23 @@ def create(entity_name, property, new_value, on_end_function=None):
         """
         TODO
         """
-        return {
-                        "type": "set_property",
-                        "entity_name": entity_name,
-                        "property": property,
-                        "new_value": new_value,
-
-                        "run": run,
-                        "on_end_function": on_end_function,
-                }
+        return ["set_property",
+                run,
+                entity_name,
+                property,
+                new_value,
+                on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        property = mover["property"]
-        new_value = mover["new_value"]
+        property = mover[IDX_MOVER_SET_PROPERTY_PROPERTY]
+        new_value = mover[IDX_MOVER_SET_PROPERTY_NEW_VALUE]
 
         if property == "set_active_sprite":
                 entities.set_active_sprite(state, entity_name, new_value)
         else:
                 raise YapygMoverSetPropertyException("Unknown property %s" % property)
 
-        movers_to_delete.append((entity_name, mover["on_end_function"]))
+        movers_to_delete.append((entity_name, mover[IDX_MOVER_SET_PROPERTY_ON_END_FUNCTION]))
