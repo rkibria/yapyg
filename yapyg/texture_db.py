@@ -134,10 +134,3 @@ def insert_color_ellipse(state, texture_w, texture_h, texture_name, c_r, c_g, c_
                 Ellipse(pos=(0, 0), size=(texture_w, texture_h))
         fbo.draw()
         insert(state, texture_name, texture)
-
-def insert_text(state, texture_name, text, font_name, font_w, font_h):
-        """
-        TODO
-        """
-        font_path = "assets/img/fonts/" + texture_name + str(font_w) + "x" + str(font_h)
-

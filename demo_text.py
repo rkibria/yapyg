@@ -31,16 +31,17 @@ def create(screen_width, screen_height, tile_size):
         yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/gray_square.png",])
         yapyg.tiles.set_area(state, [["." for x in xrange(10)] for x in xrange(10)])
 
-        yapyg.text.load_font(state, "DroidSans", "assets/img/fonts/DroidSansMonoDotted32x64", 32, 64)
+        yapyg.text.load_font(state, "DroidSansMonoDotted32x64", "assets/img/fonts/DroidSansMonoDotted32x64.png", 32, 64)
+        yapyg.text.load_font(state, "DroidSansMonoDotted16x32", "assets/img/fonts/DroidSansMonoDotted16x32.png", 16, 32)
 
         yapyg.entities.insert(state,
                 "500_text_1",
                 {
                         "*": {
-                                "textures": [("text", "This is text\nSecond line", "DroidSans")],
+                                "textures": [("text", "This is text\nSecond line", "DroidSansMonoDotted16x32")],
                         },
                 },
-                [0.3, 0.5])
+                [1, 2])
 
         start_movement(state, None)
 
@@ -48,23 +49,23 @@ def create(screen_width, screen_height, tile_size):
                 "500_text_time",
                 {
                         "*": {
-                                "textures": [("text", get_time_string(), "DroidSans")],
+                                "textures": [("text", get_time_string(), "DroidSansMonoDotted32x64")],
                         },
                 },
-                [0.0, 0.0])
+                [0.0, 0.5])
 
         yapyg.timer.create(state, on_timer, 1000000)
 
         return state
 
 def on_timer(state, last_frame_delta):
-        yapyg.entities.set_sprite(state, "500_text_time", "*", {"textures": [("text", get_time_string(), "DroidSans")],})
+        yapyg.entities.set_sprite(state, "500_text_time", "*", {"textures": [("text", get_time_string(), "DroidSansMonoDotted32x64")],})
 
 def start_movement(state, mover_name):
         n_steps = 1000
         for index in xrange(n_steps):
                 degrees = float(index) / n_steps * 360.0
                 yapyg.movers.linear.add(state, "500_text_1",
-                        (math.cos(math.radians(degrees)) / 100.0, math.sin(math.radians(degrees)) / 100.0),
+                        (math.cos(math.radians(degrees)) / 1000.0, math.sin(math.radians(degrees)) / 1000.0),
                         0.5 / 1000000,
                         True, None if index != n_steps - 1 else start_movement)
