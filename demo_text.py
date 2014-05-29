@@ -33,6 +33,7 @@ def create(screen_width, screen_height, tile_size):
 
         yapyg.text.load_font(state, "DroidSansMonoDotted32x64", "assets/img/fonts/DroidSansMonoDotted32x64.png", 32, 64)
         yapyg.text.load_font(state, "DroidSansMonoDotted16x32", "assets/img/fonts/DroidSansMonoDotted16x32.png", 16, 32)
+        yapyg.text.load_font(state, "DroidSansMonoDotted12x24", "assets/img/fonts/DroidSansMonoDotted12x24.png", 12, 24)
 
         yapyg.entities.insert(state,
                 "500_text_1",
@@ -44,6 +45,24 @@ def create(screen_width, screen_height, tile_size):
                 [1, 2])
 
         start_movement(state, None)
+
+        yapyg.entities.insert(state,
+                "500_text_2",
+                {
+                        "*": {
+                                "textures": [("text", 
+                                                "Lorem ipsum dolor sit amet, consectetur adipisici elit,\n"
+                                                "sed eiusmod tempor incidunt ut labore et dolore magna aliqua.\n"
+                                                "Ut enim ad minim veniam, quis nostrud exercitation ullamco\n"
+                                                "laboris nisi ut aliquid ex ea commodi consequat. Quis aute\n"
+                                                "iure reprehenderit in voluptate velit esse cillum dolore eu\n"
+                                                "fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non\n"
+                                                "proident, sunt in culpa qui officia deserunt mollit anim id\n"
+                                                "est laborum.",
+                                        "DroidSansMonoDotted12x24")],
+                        },
+                },
+                [0, 4])
 
         yapyg.entities.insert(state,
                 "500_text_time",
