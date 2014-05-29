@@ -52,7 +52,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_TILES]
+        state[globals.IDX_STATE_TILES] = None
 
 def get_tile_size(state):
         """

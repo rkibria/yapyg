@@ -64,7 +64,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_ENTITIES]
+        state[globals.IDX_STATE_ENTITIES] = None
 
 def _get_full_sprite_name(entity_name, sprite_name):
         """

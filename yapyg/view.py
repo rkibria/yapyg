@@ -39,7 +39,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_VIEW]
+        state[globals.IDX_STATE_VIEW] = None
 
 def get_view_pos(state):
         """

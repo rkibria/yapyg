@@ -39,7 +39,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_CONTROLS]
+        state[globals.IDX_STATE_CONTROLS] = None
 
 def add_joystick(state):
         """

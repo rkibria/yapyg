@@ -36,7 +36,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_TIMER]
+        state[globals.IDX_STATE_TIMER] = None
 
 def create(state, handler, timeout_us=0):
         """

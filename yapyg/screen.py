@@ -43,7 +43,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_SCREEN]
+        state[globals.IDX_STATE_SCREEN] = None
 
 def get_width(state):
         """

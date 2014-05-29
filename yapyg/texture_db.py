@@ -55,7 +55,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_TEXTURE_DB]
+        state[globals.IDX_STATE_TEXTURE_DB] = None
 
 def insert(state, texture_name, texture):
         """

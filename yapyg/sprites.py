@@ -58,7 +58,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_SPRITES]
+        state[globals.IDX_STATE_SPRITES] = None
 
 def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
                 scale=[1.0, 1.0], enable=True, pos=[0,0], rot_list=[0]):

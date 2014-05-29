@@ -52,7 +52,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_MOVERS]
+        state[globals.IDX_STATE_MOVERS] = None
 
 def add(state, mover_name, mover, do_replace=False):
         """

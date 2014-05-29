@@ -39,7 +39,7 @@ def destroy(state):
         """
         TODO
         """
-        del state[globals.IDX_STATE_TEXT]
+        state[globals.IDX_STATE_TEXT] = None
 
 def load_font(state, font_name, font_path, font_w, font_h, min_code=32, max_code=127):
         """
