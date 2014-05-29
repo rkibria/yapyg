@@ -57,8 +57,9 @@ def set_joystick(state, directions):
         """
         TODO
         """
-        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = directions[0]
-        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = directions[1]
+        if state[globals.IDX_STATE_CONTROLS]:
+                state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = directions[0]
+                state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = directions[1]
 
 def get_joystick(state):
         """
