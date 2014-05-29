@@ -22,6 +22,7 @@
 Generate new game states
 """
 
+import globals
 import screen
 import tiles
 import texture_db
@@ -38,7 +39,7 @@ def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         """
         TODO
         """
-        state = {}
+        state = [None for x in xrange(globals.IDX_STATE_LAST)]
 
         screen.initialize(state, screen_width, screen_height, tile_size, origin_xy)
         texture_db.initialize(state)

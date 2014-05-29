@@ -26,25 +26,26 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
+import globals
 import texture_db
 
 def initialize(state):
         """
         TODO
         """
-        state["text"] = {}
+        state[globals.IDX_STATE_TEXT] = {}
 
 def destroy(state):
         """
         TODO
         """
-        del state["text"]
+        del state[globals.IDX_STATE_TEXT]
 
 def load_font(state, font_name, font_path, font_w, font_h, min_code=32, max_code=127):
         """
         TODO
         """
-        state["text"][font_name] = {
+        state[globals.IDX_STATE_TEXT][font_name] = {
                 "width": font_w,
                 "height": font_h,
                 "min_code": min_code,
@@ -67,7 +68,7 @@ def create_texture(state, text, font_name):
         """
         TODO
         """
-        font_def = state["text"][font_name]
+        font_def = state[globals.IDX_STATE_TEXT][font_name]
         text_lines = text.split("\n")
         n_lines = len(text_lines)
         max_line_length = len(max(text_lines, key=len))

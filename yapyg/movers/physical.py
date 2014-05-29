@@ -23,6 +23,7 @@ Simulate physical movement
 """
 
 import math
+import random
 
 from .. import movers
 from .. import entities
@@ -222,12 +223,7 @@ def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
         circle_physical_mover_2["vy"] = new_vy2 * circle_physical_mover_2["inelasticity"]
 
 def _coin_toss(state):
-        if not state.has_key("mover.physical.cointoss"):
-                state["mover.physical.cointoss"] = False
-        last_toss = state["mover.physical.cointoss"]
-        last_toss = not last_toss
-        state["mover.physical.cointoss"] = last_toss
-        return last_toss
+        return (random.randint(0, 1) == 1)
 
 def collision_handler(state, collision_list):
         """

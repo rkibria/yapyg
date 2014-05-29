@@ -19,40 +19,18 @@
 # THE SOFTWARE.
 
 """
-Timer
+Globals
 """
 
-import globals
-
-IDX_TIMERS_TABLE = 0
-
-def initialize(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_TIMER] = [[],]
-
-def destroy(state):
-        """
-        TODO
-        """
-        del state[globals.IDX_STATE_TIMER]
-
-def create(state, handler, timeout_us=0):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_TIMER][IDX_TIMERS_TABLE].append([handler, timeout_us, 0])
-
-def run(state, last_frame_delta):
-        """
-        TODO
-        """
-        for entry in state[globals.IDX_STATE_TIMER][IDX_TIMERS_TABLE]:
-                handler, timeout_us, sum_time = entry
-                sum_time += last_frame_delta
-                if sum_time >= timeout_us:
-                        entry[2] = sum_time - timeout_us
-                        (handler)(state, last_frame_delta)
-                else:
-                        entry[2] = sum_time
+IDX_STATE_SCREEN = 0
+IDX_STATE_TILES = 1
+IDX_STATE_TEXTURE_DB = 2
+IDX_STATE_SPRITES = 3
+IDX_STATE_MOVERS = 4
+IDX_STATE_ENTITIES = 5
+IDX_STATE_VIEW = 6
+IDX_STATE_CONTROLS = 7
+IDX_STATE_COLLISIONS = 8
+IDX_STATE_TEXT = 9
+IDX_STATE_TIMER = 10
+IDX_STATE_LAST = 11

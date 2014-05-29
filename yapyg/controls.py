@@ -22,45 +22,49 @@
 Controls
 """
 
+import globals
+
+IDX_CONTROLS_JOYSTICK = 0
+IDX_CONTROLS_JOYSTICK_DIRECTION = 1
+
 def initialize(state):
         """
         TODO
         """
-        state["controls"] = {
-                "joystick": False,
-                "joystick_direction": [0, 0],
-        }
+        state[globals.IDX_STATE_CONTROLS] = [
+                False,
+                [0, 0],]
 
 def destroy(state):
         """
         TODO
         """
-        del state["controls"]
+        del state[globals.IDX_STATE_CONTROLS]
 
 def add_joystick(state):
         """
         TODO
         """
-        state["controls"]["joystick"] = True
+        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK] = True
 
 def need_joystick(state):
         """
         TODO
         """
-        return state["controls"]["joystick"]
+        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]
 
 def set_joystick(state, directions):
         """
         TODO
         """
-        state["controls"]["joystick_direction"][0] = directions[0]
-        state["controls"]["joystick_direction"][1] = directions[1]
+        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = directions[0]
+        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = directions[1]
 
 def get_joystick(state):
         """
         TODO
         """
-        return state["controls"]["joystick_direction"]
+        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION]
 
 def get_joystick_properties():
         """

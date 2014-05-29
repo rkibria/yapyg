@@ -22,51 +22,57 @@
 2D Sprites
 """
 
+import globals
+
+IDX_SCREEN_WIDTH = 0
+IDX_SCREEN_HEIGHT = 1
+IDX_SCREEN_TILE_SIZE = 2
+IDX_SCREEN_ORIGIN_XY = 3
+
 def initialize(state, screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         """
         TODO
         """
-        state["screen"] = {
-                "width": screen_width,
-                "height": screen_height,
-                "tile_size": tile_size,
-                "origin_xy": [origin_xy[0], origin_xy[1]],
-        }
+        state[globals.IDX_STATE_SCREEN] = [
+                screen_width,
+                screen_height,
+                tile_size,
+                [origin_xy[0], origin_xy[1]],]
 
 def destroy(state):
         """
         TODO
         """
-        del state["screen"]
+        del state[globals.IDX_STATE_SCREEN]
 
 def get_width(state):
         """
         TODO
         """
-        return state["screen"]["width"]
+        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_WIDTH]
 
 def get_height(state):
         """
         TODO
         """
-        return state["screen"]["height"]
+        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_HEIGHT]
 
 def get_tile_size(state):
         """
         TODO
         """
-        return state["screen"]["tile_size"]
+        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
 
 def set_origin(state, origin_xy):
         """
         TODO
         """
-        state["screen"]["origin_xy"][0] = origin_xy[0]
-        state["screen"]["origin_xy"][1] = origin_xy[1]
+        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][0] = origin_xy[0]
+        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][1] = origin_xy[1]
 
 def get_origin(state):
         """
         TODO
         """
-        origin_xy = state["screen"]["origin_xy"]
+        origin_xy = state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
         return (origin_xy[0], origin_xy[1])

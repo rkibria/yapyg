@@ -24,11 +24,16 @@
 
 from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 
+import globals
 import texture_db
 import tiles
 import view
 import text
 import screen
+
+IDX_SPRITES_TABLE = 0
+IDX_SPRITES_RECTS_ROTS = 1
+IDX_SPRITES_SIZES = 2
 
 IDX_SPRITE_ENABLE = 0
 IDX_SPRITE_POS = 1
@@ -44,17 +49,16 @@ def initialize(state):
         """
         TODO
         """
-        state["sprites"] = {
-                "sprites": {},
-                "rectangles_rotates_dict": {},
-                "sprite_sizes_dict": {},
-        }
+        state[globals.IDX_STATE_SPRITES] = [
+                {},
+                {},
+                {},]
 
 def destroy(state):
         """
         TODO
         """
-        del state["sprites"]
+        del state[globals.IDX_STATE_SPRITES]
 
 def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
                 scale=[1.0, 1.0], enable=True, pos=[0,0], rot_list=[0]):
@@ -71,7 +75,7 @@ def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
                 pos_offset,
                 0,
                 0,]
-        state["sprites"]["sprites"][sprite_name] = sprite
+        state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name] = sprite
         for texture_part in textures:
                 if type(texture_part) == tuple:
                         if texture_part[0] == "rectangle":
@@ -87,15 +91,15 @@ def delete(state, sprite_name):
         """
         TODO
         """
-        if state["sprites"]["sprites"].has_key(sprite_name):
-                del state["sprites"]["sprites"][sprite_name]
+        if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
+                del state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
 
 def get(state, sprite_name):
         """
         TODO
         """
-        if state["sprites"]["sprites"].has_key(sprite_name):
-                return state["sprites"]["sprites"][sprite_name]
+        if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
+                return state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
         else:
                 return None
 
@@ -116,19 +120,19 @@ def set_enable(state, sprite_name, enable):
         TODO
         """
         if enable == False:
-                if state["sprites"]["sprites"].has_key(sprite_name) and state["sprites"]["sprites"][sprite_name][IDX_SPRITE_ENABLE] == True:
-                        state["sprites"]["sprites"][sprite_name][IDX_SPRITE_ENABLE] = False
-                        if state["sprites"]["rectangles_rotates_dict"].has_key(sprite_name):
-                                rect, rot = state["sprites"]["rectangles_rotates_dict"][sprite_name]
-                                state["sprites"]["sprite_sizes_dict"][sprite_name] = rect.size
+                if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name) and state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name][IDX_SPRITE_ENABLE] == True:
+                        state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name][IDX_SPRITE_ENABLE] = False
+                        if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_RECTS_ROTS].has_key(sprite_name):
+                                rect, rot = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_RECTS_ROTS][sprite_name]
+                                state[globals.IDX_STATE_SPRITES][IDX_SPRITES_SIZES][sprite_name] = rect.size
                                 rect.size = (0, 0)
         else:
-                if state["sprites"]["sprites"].has_key(sprite_name) and state["sprites"]["sprites"][sprite_name][IDX_SPRITE_ENABLE] == False:
-                        state["sprites"]["sprites"][sprite_name][IDX_SPRITE_ENABLE] = True
-                        if state["sprites"]["rectangles_rotates_dict"].has_key(sprite_name):
-                                rect, rot = state["sprites"]["rectangles_rotates_dict"][sprite_name]
-                                if state["sprites"]["sprite_sizes_dict"].has_key(sprite_name):
-                                        rect.size = state["sprites"]["sprite_sizes_dict"][sprite_name]
+                if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name) and state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name][IDX_SPRITE_ENABLE] == False:
+                        state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name][IDX_SPRITE_ENABLE] = True
+                        if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_RECTS_ROTS].has_key(sprite_name):
+                                rect, rot = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_RECTS_ROTS][sprite_name]
+                                if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_SIZES].has_key(sprite_name):
+                                        rect.size = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_SIZES][sprite_name]
 
 def draw(state, canvas, frame_time_delta, view_scale):
         """
@@ -136,7 +140,7 @@ def draw(state, canvas, frame_time_delta, view_scale):
         """
         origin_xy = screen.get_origin(state)
         view_pos = view.get_view_pos(state)
-        for sprite_name, sprite in sorted(state["sprites"]["sprites"].iteritems()):
+        for sprite_name, sprite in sorted(state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].iteritems()):
                 if not sprite[IDX_SPRITE_ENABLE]:
                         continue
                 textures = sprite[IDX_SPRITE_TEXTURES]
@@ -170,7 +174,7 @@ def _draw_sprite(state, canvas, view_pos, view_scale, sprite_name, texture, pos,
         """
         TODO
         """
-        rectangles_rotates_dict = state["sprites"]["rectangles_rotates_dict"]
+        rectangles_rotates_dict = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_RECTS_ROTS]
         col = int(pos[0])
         row = int(pos[1])
         scaled_tile_size = tiles.get_tile_size(state) * view_scale

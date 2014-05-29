@@ -22,45 +22,49 @@
 View setter
 """
 
+import globals
+
+IDX_VIEW_POS = 0
+IDX_VIEW_SETTER = 1
+
 def initialize(state):
         """
         TODO
         """
-        state["view"] = {
-                "view_pos": [0, 0],
-                "view_setter": None,
-        }
+        state[globals.IDX_STATE_VIEW] = [
+                [0, 0],
+                None,]
 
 def destroy(state):
         """
         TODO
         """
-        del state["view"]
+        del state[globals.IDX_STATE_VIEW]
 
 def get_view_pos(state):
         """
         TODO
         """
-        return state["view"]["view_pos"]
+        return state[globals.IDX_STATE_VIEW][IDX_VIEW_POS]
 
 def set_view_pos(state, view_pos):
         """
         TODO
         """
-        state["view"]["view_pos"][0] = view_pos[0]
-        state["view"]["view_pos"][1] = view_pos[1]
+        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][0] = view_pos[0]
+        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][1] = view_pos[1]
 
 def set_viewer(state, viewer):
         """
         TODO
         """
-        state["view"]["view_setter"] = viewer
+        state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
 
 def run(state):
         """
         TODO
         """
-        setter = state["view"]["view_setter"]
+        setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
         if setter:
                 return (setter["run"])(state, setter)
         else:

@@ -24,6 +24,8 @@ General movements
 
 from collections import deque
 
+from .. import globals
+
 class YapygMoverException(Exception):
         """
         TODO
@@ -44,13 +46,13 @@ def initialize(state):
         """
         TODO
         """
-        state["movers"] = {}
+        state[globals.IDX_STATE_MOVERS] = {}
 
 def destroy(state):
         """
         TODO
         """
-        del state["movers"]
+        del state[globals.IDX_STATE_MOVERS]
 
 def add(state, mover_name, mover, do_replace=False):
         """
@@ -59,19 +61,19 @@ def add(state, mover_name, mover, do_replace=False):
         if not mover:
                 raise YapygMoverException("%s was assigned null element" % mover_name)
         if do_replace:
-                state["movers"][mover_name] = deque()
-                state["movers"][mover_name].append(mover)
+                state[globals.IDX_STATE_MOVERS][mover_name] = deque()
+                state[globals.IDX_STATE_MOVERS][mover_name].append(mover)
         else:
-                if not state["movers"].has_key(mover_name):
-                        state["movers"][mover_name] = deque()
-                state["movers"][mover_name].append(mover)
+                if not state[globals.IDX_STATE_MOVERS].has_key(mover_name):
+                        state[globals.IDX_STATE_MOVERS][mover_name] = deque()
+                state[globals.IDX_STATE_MOVERS][mover_name].append(mover)
 
 def get_active(state, mover_name):
         """
         TODO
         """
-        if state["movers"].has_key(mover_name):
-                return state["movers"][mover_name][0]
+        if state[globals.IDX_STATE_MOVERS].has_key(mover_name):
+                return state[globals.IDX_STATE_MOVERS][mover_name][0]
         else:
                 return None
 
@@ -85,16 +87,16 @@ def remove(state, mover_name):
         """
         TODO
         """
-        state["movers"][mover_name].popleft()
-        if len(state["movers"][mover_name]) == 0:
-                del state["movers"][mover_name]
+        state[globals.IDX_STATE_MOVERS][mover_name].popleft()
+        if len(state[globals.IDX_STATE_MOVERS][mover_name]) == 0:
+                del state[globals.IDX_STATE_MOVERS][mover_name]
 
 def run(state, frame_time_delta):
         """
         TODO
         """
         movers_to_delete = []
-        for mover_name, mover_deque in state["movers"].iteritems():
+        for mover_name, mover_deque in state[globals.IDX_STATE_MOVERS].iteritems():
                 mover = mover_deque[0]
                 (mover["run"])(state, mover_name, mover, frame_time_delta, movers_to_delete)
 

@@ -24,6 +24,7 @@ Collisions
 
 import math
 
+import globals
 import geometry
 import entities
 
@@ -56,7 +57,7 @@ def initialize(state):
         """
         TODO
         """
-        state["collisions"] = [
+        state[globals.IDX_STATE_COLLISIONS] = [
                 {},
                 {},
                 [],
@@ -67,27 +68,27 @@ def entity_pos_listener(state, entity_name, pos):
         """
         TODO
         """
-        if state["collisions"][IDX_COLLISIONDB_ENTITIES].has_key(entity_name):
+        if state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES].has_key(entity_name):
                 _update_hash(state, entity_name)
 
 def destroy(state):
         """
         TODO
         """
-        del state["collisions"]
+        del state[globals.IDX_STATE_COLLISIONS]
 
 def set_handler(state, handler_function):
         """
         TODO
         """
-        state["collisions"][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
+        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
 
 def get_shape(state, entity_name):
         """
         TODO
         """
-        if state["collisions"][IDX_COLLISIONDB_ENTITIES].has_key(entity_name):
-                return state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPE]
+        if state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES].has_key(entity_name):
+                return state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPE]
         else:
                 return None
 
@@ -95,13 +96,13 @@ def add(state, entity_name, collision_shape, active_check=True):
         """
         TODO
         """
-        state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name] = [
+        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name] = [
                 collision_shape,
                 active_check,
                 None,]
 
         if active_check:
-                state["collisions"][IDX_COLLISIONDB_ACTIVE_CHECKS].append(entity_name)
+                state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ACTIVE_CHECKS].append(entity_name)
 
         _update_hash(state, entity_name)
 
@@ -114,7 +115,7 @@ def _get_hash_area(state, entity_name, entity_lower_left):
         upper_right_x_offset = 0
         upper_right_y_offset = 0
 
-        collision_shape = state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPE]
+        collision_shape = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPE]
         if collision_shape[0] == "circle":
                 upper_right_x_offset = collision_shape[1]
                 upper_right_y_offset = collision_shape[1]
@@ -143,11 +144,11 @@ def _update_hash(state, entity_name):
         """
         TODO
         """
-        last_pos = state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_LAST_POS]
+        last_pos = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_LAST_POS]
         if last_pos:
                 _remove_hash_entries(state, entity_name, last_pos)
 
-        state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_LAST_POS] = entities.get_pos(state, entity_name)
+        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_LAST_POS] = entities.get_pos(state, entity_name)
 
         _insert_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
 
@@ -155,7 +156,7 @@ def _insert_hash_entries(state, entity_name, entity_lower_left):
         """
         TODO
         """
-        hash_map = state["collisions"][IDX_COLLISIONDB_HASH_MAP]
+        hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
         entity_lower_left, entity_upper_right = _get_hash_area(state, entity_name, entity_lower_left)
 
         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
@@ -169,7 +170,7 @@ def _remove_hash_entries(state, entity_name, entity_lower_left):
         """
         TODO
         """
-        hash_map = state["collisions"][IDX_COLLISIONDB_HASH_MAP]
+        hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
         entity_lower_left, entity_upper_right = _get_hash_area(state, entity_name, entity_lower_left)
 
         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
@@ -181,7 +182,7 @@ def delete(state, entity_name):
         TODO
         """
         _remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
-        del state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name]
+        del state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name]
 
 def get_collision_shape(state, entity_name, collision_def):
         """
@@ -232,16 +233,16 @@ def run(state):
         """
         TODO
         """
-        if not state["collisions"][IDX_COLLISIONDB_HANDLER_FUNCTION]:
+        if not state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]:
                 return
 
-        hash_map = state["collisions"][IDX_COLLISIONDB_HASH_MAP]
+        hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
         collision_list = []
         active_checks_done = set()
 
-        for entity_name_1 in state["collisions"][IDX_COLLISIONDB_ACTIVE_CHECKS]:
+        for entity_name_1 in state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ACTIVE_CHECKS]:
 
-                collision_def_1 = state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name_1]
+                collision_def_1 = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name_1]
                 absolute_shape_1 = get_collision_shape(state, entity_name_1, collision_def_1)
 
                 entity_1_lower_left = entities.get_pos(state, entity_name_1)
@@ -259,7 +260,7 @@ def run(state):
                                         if entity_name_1 == entity_name_2:
                                                 continue
 
-                                        collision_def_2 = state["collisions"][IDX_COLLISIONDB_ENTITIES][entity_name_2]
+                                        collision_def_2 = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name_2]
                                         if collision_def_2[IDX_COLLISION_ACTIVE_CHECK]:
                                                 if entity_name_2 in active_checks_done:
                                                         continue
@@ -279,4 +280,4 @@ def run(state):
                                                         active_checks_done.add(entity_name_2)
 
         if collision_list:
-                (state["collisions"][IDX_COLLISIONDB_HANDLER_FUNCTION])(state, collision_list)
+                (state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION])(state, collision_list)

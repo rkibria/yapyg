@@ -27,49 +27,54 @@ from kivy.logger import Logger
 from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
 from kivy.uix.image import Image
 
+import globals
 import texture_db
 import view
 import screen
+
+IDX_TILES_SIZE = 0
+IDX_TILES_DEFS = 1
+IDX_TILES_AREA = 2
+IDX_TILES_RECTS = 3
 
 def initialize(state, tile_size):
         """
         TODO
         """
-        state["tiles"] = {
-                "size": tile_size,
-                "defs": {},
-                "area": [],
-                "tile_rects": [],
-        }
+        state[globals.IDX_STATE_TILES] = [
+                tile_size,
+                {},
+                [],
+                [],]
         add_tile_def(state, "tl_null", ["assets/img/tiles/no_tile.png",])
 
 def destroy(state):
         """
         TODO
         """
-        del state["tiles"]
+        del state[globals.IDX_STATE_TILES]
 
 def get_tile_size(state):
         """
         TODO
         """
-        return state["tiles"]["size"]
+        return state[globals.IDX_STATE_TILES][IDX_TILES_SIZE]
 
 def set_area(state, area):
         """
         TODO
         """
-        state["tiles"]["area"] = area
+        state[globals.IDX_STATE_TILES][IDX_TILES_AREA] = area
 
 def get_area(state):
         """
         TODO
         """
-        return state["tiles"]["area"]
+        return state[globals.IDX_STATE_TILES][IDX_TILES_AREA]
 
 def add_tile_def(state, tile_name, texture_list):
-        state["tiles"]["defs"][tile_name] = {}
-        state["tiles"]["defs"][tile_name]["textures"] = texture_list
+        state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name] = {}
+        state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name]["textures"] = texture_list
         texture_db.insert_combined(state, 1, tile_name, texture_list)
 
 def get_tile(state, row, col):
@@ -109,7 +114,7 @@ def draw(state, scale, canvas, view_size):
         first_col = int(map_x / scaled_tile_size)
         total_cols = int(target_w / scaled_tile_size)
 
-        tile_rects = state["tiles"]["tile_rects"]
+        tile_rects = state[globals.IDX_STATE_TILES][IDX_TILES_RECTS]
 
         tile_index = 0
         with canvas:

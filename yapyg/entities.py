@@ -24,6 +24,7 @@ Entities
 
 import copy
 
+import globals
 import sprites
 import collisions
 
@@ -42,29 +43,28 @@ def initialize(state):
         """
         TODO
         """
-        state["entities"] = [
+        state[globals.IDX_STATE_ENTITIES] = [
                 {},
-                [],
-        ]
+                [],]
 
 def add_pos_listener(state, callback):
         """
         TODO
         """
-        state["entities"][IDX_ENTITIES_POS_LISTENERS].append(callback)
+        state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_POS_LISTENERS].append(callback)
 
 def _call_pos_listeners(state, entity_name, pos):
         """
         TODO
         """
-        for callback in state["entities"][IDX_ENTITIES_POS_LISTENERS]:
+        for callback in state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_POS_LISTENERS]:
                 (callback)(state, entity_name, pos)
 
 def destroy(state):
         """
         TODO
         """
-        del state["entities"]
+        del state[globals.IDX_STATE_ENTITIES]
 
 def _get_full_sprite_name(entity_name, sprite_name):
         """
@@ -76,8 +76,8 @@ def get(state, entity_name):
         """
         TODO
         """
-        if state["entities"][IDX_ENTITIES_TABLE].has_key(entity_name):
-                return state["entities"][IDX_ENTITIES_TABLE][entity_name]
+        if state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE].has_key(entity_name):
+                return state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
         else:
                 return None
 
@@ -173,7 +173,7 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0], colli
         """
         TODO
         """
-        state["entities"][IDX_ENTITIES_TABLE][entity_name] = [
+        state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name] = [
                 [pos[0], pos[1]],
                 [rot],
                 pos_offset,
@@ -235,7 +235,7 @@ def delete(state, entity_name):
                 if entity[IDX_ENTITY_COLLISION]:
                         collisions.delete(state, entity_name)
 
-                del state["entities"][IDX_ENTITIES_TABLE][entity_name]
+                del state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
 
 def set_active_sprite(state, entity_name, sprite_name):
         """

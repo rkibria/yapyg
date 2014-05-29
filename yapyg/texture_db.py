@@ -26,6 +26,7 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
+import globals
 import screen
 
 class YapygTextureDbException(Exception):
@@ -48,32 +49,32 @@ def initialize(state):
         """
         TODO
         """
-        state["textures"] = {}
+        state[globals.IDX_STATE_TEXTURE_DB] = {}
 
 def destroy(state):
         """
         TODO
         """
-        del state["textures"]
+        del state[globals.IDX_STATE_TEXTURE_DB]
 
 def insert(state, texture_name, texture):
         """
         TODO
         """
-        state["textures"][texture_name] = texture
+        state[globals.IDX_STATE_TEXTURE_DB][texture_name] = texture
 
 def load(state, texture_name, texture_filename):
         """
         TODO
         """
-        state["textures"][texture_name] = Image(source=texture_filename).texture
+        state[globals.IDX_STATE_TEXTURE_DB][texture_name] = Image(source=texture_filename).texture
 
 def get(state, texture_name):
         """
         TODO
         """
-        if state["textures"].has_key(texture_name):
-                return state["textures"][texture_name]
+        if state[globals.IDX_STATE_TEXTURE_DB].has_key(texture_name):
+                return state[globals.IDX_STATE_TEXTURE_DB][texture_name]
         else:
                 raise YapygTextureDbException("Texture '" + texture_name + "' not present")
 
