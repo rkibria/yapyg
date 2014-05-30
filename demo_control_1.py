@@ -45,7 +45,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         yapyg.tiles.load_walls(state, "", "assets/img/tiles/checkerboard.png", "assets/img/tiles/bricks_walls.png")
 
         # The tile map is made as a list of lists. The arrangement is drawn as seen here,
-        # i.e. the '1' tile is in the lower left corner of the screen.
+        # i.e. the '5' tile is in the lower left corner of the screen.
         yapyg.tiles.set_area(state,
                 [
                 ['6', 'a', 'a', '7'],
