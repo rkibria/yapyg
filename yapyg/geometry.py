@@ -144,7 +144,7 @@ def normal_vector(pos_1, pos_2):
         TODO
         """
         distance = get_distance(pos_1, pos_2)
-        return [((pos_2[x] - pos_1[x]) / distance) for x in xrange(0, len(pos_1))]
+        return ((pos_2[0] - pos_1[0]) / distance, (pos_2[1] - pos_1[1]) / distance)
 
 def dot_product(v_1, v_2):
         """
@@ -152,29 +152,29 @@ def dot_product(v_1, v_2):
         """
         return v_1[0] * v_2[0] + v_1[1] * v_2[1]
 
-def vector_prod(vec, factor):
+def vector_product(vec, factor):
         """
         TODO
         """
-        return [(vec[x] * factor) for x in xrange(0, len(vec))]
+        return (vec[0] * factor, vec[1] * factor)
 
 def vector_diff(v_1, v_2):
         """
         TODO
         """
-        return [(v_1[x] - v_2[x]) for x in xrange(0, len(v_1))]
+        return (v_1[0] - v_2[0], v_1[1] - v_2[1])
 
 def vector_sum(v_1, v_2):
         """
         TODO
         """
-        return [(v_1[x] + v_2[x]) for x in xrange(0, len(v_1))]
+        return (v_1[0] + v_2[0], v_1[1] + v_2[1])
 
 def components(normal_vector, v_vector):
         """
         TODO
         """
-        parallel_vector = vector_prod(normal_vector,
+        parallel_vector = vector_product(normal_vector,
                 dot_product(normal_vector, v_vector))
         perpendicular_vector = vector_diff(v_vector, parallel_vector)
         return (parallel_vector, perpendicular_vector)
@@ -189,8 +189,8 @@ def complex_multiply(complex_1, complex_2):
         """
         TODO
         """
-        return [complex_1[0] * complex_2[0] - complex_1[1] * complex_2[1],
-                complex_1[0] * complex_2[1] + complex_1[1] * complex_2[0]]
+        return (complex_1[0] * complex_2[0] - complex_1[1] * complex_2[1],
+                complex_1[0] * complex_2[1] + complex_1[1] * complex_2[0])
 
 def get_rotated_point(origin_point, point, rot):
         """
@@ -199,4 +199,4 @@ def get_rotated_point(origin_point, point, rot):
         rot_rad = math.radians(rot)
         rot_relative_point = complex_multiply((point[0] - origin_point[0],
                 point[1] - origin_point[1]), (math.cos(rot_rad), math.sin(rot_rad)))
-        return [origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1]]
+        return (origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1])

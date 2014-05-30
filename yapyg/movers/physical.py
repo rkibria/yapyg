@@ -109,7 +109,7 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
         rect_h = abs_rectangle_shape[3]
         rect_r = abs_rectangle_shape[4]
 
-        circle_move_vector = [circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY]]
+        circle_move_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
 
         if rect_r != 0:
                 rotated_circle = geometry.get_rotated_point((rect_x + rect_w / 2.0, rect_y + rect_h / 2.0), (circle_x, circle_y), -rect_r)
@@ -126,14 +126,16 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                                 # lower quadrant
                                 # print "lower quadrant"
                                 if circle_physical_mover:
-                                        circle_move_vector[1] = -abs(circle_move_vector[1]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                                        circle_move_vector = (circle_move_vector[0],
+                                                -abs(circle_move_vector[1]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY])
                                         # TODO
                                         entities.add_pos(state, circle_entity_name, 0, -((circle_y + circle_r) - rect_y))
                         else:
                                 # upper quadrant
                                 # print "upper quadrant"
                                 if circle_physical_mover:
-                                        circle_move_vector[1] = abs(circle_move_vector[1]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                                        circle_move_vector = (circle_move_vector[0],
+                                                abs(circle_move_vector[1]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY])
                                         # TODO
                                         entities.add_pos(state, circle_entity_name, 0, (rect_y + rect_h) - (circle_y - circle_r))
                 else:
@@ -156,22 +158,24 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                         new_vy = math.sin(angle) * v_total
                         new_vx = math.cos(angle) * v_total
                         if circle_physical_mover:
-                                circle_move_vector[0] = new_vx * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
-                                circle_move_vector[1] = new_vy * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                                circle_move_vector = (new_vx * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY],
+                                        new_vy * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY])
         else:
                 # circle same height as rectangle
                 if circle_x < rect_x:
                         # left quadrant
                         # print "left quadrant"
                         if circle_physical_mover:
-                                circle_move_vector[0] = -abs(circle_move_vector[0]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                                circle_move_vector = (-abs(circle_move_vector[0]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY],
+                                        circle_move_vector[1])
                                 # TODO
                                 entities.add_pos(state, circle_entity_name, -((circle_x + circle_r) - rect_x), 0)
                 elif circle_x > rect_x + rect_w:
                         # right quadrant
                         # print "right quadrant"
                         if circle_physical_mover:
-                                circle_move_vector[0] = abs(circle_move_vector[0]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                                circle_move_vector = (abs(circle_move_vector[0]) * circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY],
+                                        circle_move_vector[1])
                                 # TODO
                                 entities.add_pos(state, circle_entity_name, (rect_x + rect_w) - (circle_x - circle_r), 0)
                 else:
