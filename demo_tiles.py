@@ -25,25 +25,12 @@ def create(screen_width, screen_height, tile_size):
         state = yapyg.factory.create(screen_width, screen_height, tile_size)
 
         yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/grass.png",])
-
-        yapyg.tiles.add_tile_def(state, "1", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/sw_x.png"])
-        yapyg.tiles.add_tile_def(state, "2", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/s_x.png"])
-        yapyg.tiles.add_tile_def(state, "3", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/se_x.png"])
-        yapyg.tiles.add_tile_def(state, "4", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/e_x.png"])
-        yapyg.tiles.add_tile_def(state, "5", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/ne_x.png"])
-        yapyg.tiles.add_tile_def(state, "6", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/n_x.png"])
-        yapyg.tiles.add_tile_def(state, "7", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/nw_x.png"])
-        yapyg.tiles.add_tile_def(state, "8", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/w_x.png"])
-        yapyg.tiles.add_tile_def(state, "9", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/x_1.png"])
-        yapyg.tiles.add_tile_def(state, "0", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/x_2.png"])
-        yapyg.tiles.add_tile_def(state, "!", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/x_4.png"])
-        yapyg.tiles.add_tile_def(state, "$", ["assets/img/tiles/grass.png", "assets/img/tiles/brick/x_3.png"])
-
-        yapyg.tiles.add_tile_def(state, "+", ["assets/img/tiles/grass.png", "assets/img/tiles/road/I.png"])
-
+        yapyg.tiles.add_tile_def(state, "+", ["assets/img/tiles/grass.png", "assets/img/tiles/brown_ground.png"])
         yapyg.tiles.add_tile_def(state, "t", ["assets/img/tiles/grass.png", "assets/img/tiles/tree.png"])
 
-        area_strings = [
+        yapyg.tiles.load_walls(state, "", "assets/img/tiles/grass.png", "assets/img/tiles/bricks_walls.png")
+
+        area_strings = (
                 "......+...........",
                 "......+...........",
                 "......+...........",
@@ -52,18 +39,18 @@ def create(screen_width, screen_height, tile_size):
                 "......+...........",
                 "......+...........",
                 "......+...........",
-                "......+!2222$.....",
-                "......+476658.....",
-                "......+48tt48.....",
-                "......+48tt48.....",
-                "......+412238.....",
-                "......+966660.....",
+                "......+...........",
+                "......+.6aa7.3....",
+                "......+.9tt9.9....",
+                "......+.9tt9.9....",
+                "......+.5aa8.1....",
+                "......+...........",
+                "......+.2aa4......",
                 "......+...........",
                 "......+...........",
                 "......+...........",
                 "......+...........",
-                "......+...........",
-                ]
+                )
 
         area = []
         for area_string_row in area_strings:

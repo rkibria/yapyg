@@ -18,6 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+# import cProfile
+
 screen_width = 480
 screen_height = 800
 tile_size = 128
@@ -57,7 +59,7 @@ class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
                 super(MenuWidget, self).__init__(**kwargs)
 
-                default_choice = "demo_text"
+                default_choice = "demo_control_1"
                 self.choices = {
                         "demo_text": "Text drawing",
                         "demo_bounce": "Basic physics simulation",
@@ -194,4 +196,5 @@ class YapygDemoApp(App):
                 return MenuWidget()
 
 if __name__ == "__main__":
+        # cProfile.run("YapygDemoApp().run()")
         YapygDemoApp().run()

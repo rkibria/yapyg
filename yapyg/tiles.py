@@ -26,6 +26,7 @@ from kivy.logger import Logger
 
 from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
 from kivy.uix.image import Image
+from kivy.graphics.texture import Texture
 
 import globals
 import texture_db
@@ -73,9 +74,54 @@ def get_area(state):
         return state[globals.IDX_STATE_TILES][IDX_TILES_AREA]
 
 def add_tile_def(state, tile_name, texture_list):
+        """
+        TODO
+        """
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name] = {}
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name]["textures"] = texture_list
         texture_db.insert_combined(state, 1, tile_name, texture_list)
+
+tiles_origin_table = (
+        ('0', (0,0)),
+        ('1', (1,0)),
+        ('2', (2,0)),
+        ('3', (3,0)),
+
+        ('4', (0,1)),
+        ('5', (1,1)),
+        ('6', (2,1)),
+        ('7', (3,1)),
+
+        ('8', (0,2)),
+        ('9', (1,2)),
+        ('a', (2,2)),
+        ('b', (3,2)),
+
+        ('c', (0,3)),
+        ('d', (1,3)),
+        ('e', (2,3)),
+        ('f', (3,3)),
+        )
+
+def load_walls(state, base_name, background_file, tile_file):
+        """
+        TODO
+        """
+        tile_size = screen.get_tile_size(state)
+        background_texture = Image(source=background_file).texture
+        walls_texture = Image(source=tile_file).texture
+        for tile_name, origin_xy in tiles_origin_table:
+                full_tile_name = base_name + tile_name
+                wall_texture = walls_texture.get_region(origin_xy[0] * tile_size, origin_xy[1] * tile_size, tile_size, tile_size)
+
+                tile_texture = Texture.create(size=(tile_size, tile_size), colorfmt='rgba')
+                fbo = Fbo(size=(tile_size, tile_size), texture=tile_texture)
+                with fbo:
+                        Color(1, 1, 1)
+                        Rectangle(pos=(0, 0), size=tile_texture.size, texture=background_texture)
+                        Rectangle(pos=(0, 0), size=tile_texture.size, texture=wall_texture)
+                fbo.draw()
+                texture_db.insert(state, full_tile_name, tile_texture)
 
 def get_tile(state, row, col):
         """

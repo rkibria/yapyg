@@ -38,27 +38,21 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         yapyg.controls.add_joystick(state)
 
         # Create some tiles to use for our game area. Individual tiles are referred to by strings.
-        # Each tile can be composed by layering several images over each other, here for example
-        # wall pieces (with transparency) are drawn on top of the ground image.
+        # Each tile can be composed by layering several images over each other
         yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/gray_ground.png",])
-        yapyg.tiles.add_tile_def(state, "1", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/sw_x.png"])
-        yapyg.tiles.add_tile_def(state, "2", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/s_x.png"])
-        yapyg.tiles.add_tile_def(state, "3", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/se_x.png"])
-        yapyg.tiles.add_tile_def(state, "4", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/e_x.png"])
-        yapyg.tiles.add_tile_def(state, "5", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/ne_x.png"])
-        yapyg.tiles.add_tile_def(state, "6", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/n_x.png"])
-        yapyg.tiles.add_tile_def(state, "7", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/nw_x.png"])
-        yapyg.tiles.add_tile_def(state, "8", ["assets/img/tiles/gray_ground.png", "assets/img/tiles/brick/w_x.png"])
+
+        # Special wall tile import helper.
+        yapyg.tiles.load_walls(state, "", "assets/img/tiles/gray_ground.png", "assets/img/tiles/bricks_walls.png")
 
         # The tile map is made as a list of lists. The arrangement is drawn as seen here,
         # i.e. the '1' tile is in the lower left corner of the screen.
         yapyg.tiles.set_area(state,
                 [
-                ['7', '6', '5'],
-                ['8', '.', '4'],
-                ['8', '.', '4'],
-                ['8', '.', '4'],
-                ['1', '2', '3'],
+                ['6', 'a', 'a', '7'],
+                ['9', '.', '.', '9'],
+                ['9', '.', '.', '9'],
+                ['9', '.', '.', '9'],
+                ['5', 'a', 'a', '8'],
                 ])
 
         # We create the "man" entity which has 2 different sprite representations: standing and walking.
@@ -87,7 +81,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                 "man",
                 "joystick",
                 0.03,
-                [0, 0, 2, 4],
+                [0, 0, 3, 4],
                 ["*idle", "walk"],
                 True)
 
