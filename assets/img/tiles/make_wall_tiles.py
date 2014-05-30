@@ -72,9 +72,7 @@ full_image_name = "bricks"
 def smooth_edges(tile_image, x1, y1, x2, y2):
     box = (x1, y1, x2, y2)
     ic = tile_image.crop(box)
-    # ic = ic.filter(ImageFilter.BLUR)
     ic = ic.filter(ImageFilter.SMOOTH)
-    # ic = ic.filter(ImageFilter.SMOOTH_MORE)
     tile_image.paste(ic, box)
 
 offset = 4
@@ -113,6 +111,9 @@ for remove_list in wall_remove_table:
     for part in remove_list:
         remove_part(draw, part)
 
+    cut_image = Image.new("RGBA", (tile_size * 3, tile_size * 3), (0,0,0,0))
+    cut_image.paste(tile_image, (tile_size, tile_size))
+    
     if index == 0:
         smooth_left(tile_image)
         smooth_right(tile_image)
@@ -177,13 +178,20 @@ for remove_list in wall_remove_table:
         smooth_bottomright(tile_image)
         smooth_topleft(tile_image)
         smooth_bottomleft(tile_image)
-
     del draw
 
+    for i in xrange(10):
+        cut_image = cut_image.filter(ImageFilter.BLUR)
+        cut_image = cut_image.filter(ImageFilter.SMOOTH)
+        cut_image = cut_image.filter(ImageFilter.SMOOTH_MORE)
+    cut_image = cut_image.crop((tile_size, tile_size, 2 * tile_size, 2 * tile_size))
+    cut_image.paste(tile_image, (0, 0), tile_image)
+    
     x = output_positions[index][0] * tile_size
     y = output_positions[index][1] * tile_size
-    output_image.paste(tile_image, (x,y))
+    output_image.paste(cut_image, (x, y))
 
     index += 1
 
 output_image.save(full_image_name + "_walls.png")
+print "done"
