@@ -180,11 +180,9 @@ for remove_list in wall_remove_table:
         smooth_bottomleft(tile_image)
     del draw
 
+    cut_image = cut_image.convert('LA')
     cut_image = cut_image.filter(ImageFilter.GaussianBlur(25))
-##    for i in xrange(10):
-##        cut_image = cut_image.filter(ImageFilter.BLUR)
-##        cut_image = cut_image.filter(ImageFilter.SMOOTH)
-##        cut_image = cut_image.filter(ImageFilter.SMOOTH_MORE)
+    cut_image = cut_image.convert('RGBA')
     cut_image = cut_image.crop((tile_size, tile_size, 2 * tile_size, 2 * tile_size))
     cut_image.paste(tile_image, (0, 0), tile_image)
     
