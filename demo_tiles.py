@@ -71,16 +71,16 @@ def create(screen_width, screen_height, tile_size):
                                 "textures": [("assets/img/sprites/man_walk/%d.png" % i) for i in [1,2,3]],
                                 "speed" : 100000,
                         },
-                }, [6, 5], 0, [0.25, 0.25])
+                }, [7, 5], 0, [0.25, 0.25])
 
         start_movement(state, None)
 
-        yapyg.view.set_viewer(state, yapyg.viewers.relative.create(state, "man", [-1.5, -1.5]))
+        yapyg.view.set_viewer(state, yapyg.viewers.relative.create(state, "man", [-1.5, -2.5]))
 
         return state
 
 def start_movement(state, mover_name):
-        path = [[6, 0], [0, 5], [-6, 0], [0, -5]]
+        path = [[5, 0], [0, 5], [-5, 0], [0, -5]]
         for index in xrange(len(path)):
                 yapyg.movers.set_property.add(state, "man", "set_active_sprite", "idle")
                 yapyg.movers.wait.add(state, "man", 500000)

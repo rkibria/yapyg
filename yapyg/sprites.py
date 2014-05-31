@@ -34,6 +34,7 @@ import screen
 IDX_SPRITES_TABLE = 0
 IDX_SPRITES_RECTS_ROTS = 1
 IDX_SPRITES_SIZES = 2
+IDX_SPRITES_DRAW_ORDER = 3
 
 IDX_SPRITE_ENABLE = 0
 IDX_SPRITE_POS = 1
@@ -52,7 +53,8 @@ def initialize(state):
         state[globals.IDX_STATE_SPRITES] = [
                 {},
                 {},
-                {},]
+                {},
+                []]
 
 def destroy(state):
         """
@@ -86,6 +88,8 @@ def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
                                 texture_db.insert(state, texture_part, text.create_texture(state, texture_part[1], texture_part[2]))
                 elif type(texture_part) == str:
                         texture_db.load(state, texture_part, texture_part)
+        state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER].append(sprite_name)
+        state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER].sort()
 
 def delete(state, sprite_name):
         """
@@ -93,6 +97,7 @@ def delete(state, sprite_name):
         """
         if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
                 del state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
+                state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER].remove(sprite_name)
 
 def get(state, sprite_name):
         """
@@ -140,7 +145,9 @@ def draw(state, canvas, frame_time_delta, view_scale):
         """
         origin_xy = screen.get_origin(state)
         view_pos = view.get_view_pos(state)
-        for sprite_name, sprite in sorted(state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].iteritems()):
+        for sprite_name in state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER]:
+                sprite = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
+
                 if not sprite[IDX_SPRITE_ENABLE]:
                         continue
                 textures = sprite[IDX_SPRITE_TEXTURES]

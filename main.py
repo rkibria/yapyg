@@ -59,7 +59,7 @@ class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
                 super(MenuWidget, self).__init__(**kwargs)
 
-                default_choice = "demo_text"
+                default_choice = "demo_tiles"
                 self.choices = {
                         "demo_text": "Text drawing",
                         "demo_bounce": "Basic physics simulation",
