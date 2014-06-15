@@ -65,11 +65,11 @@ def create(screen_width, screen_height, tile_size):
                 {
                         "idle": {
                                 "textures": [("assets/img/sprites/man_idle/%d.png" % i) for i in [0,1,2,3,1,0,3,2]],
-                                "speed": 200000,
+                                "speed": 333,
                         },
                         "walk": {
                                 "textures": [("assets/img/sprites/man_walk/%d.png" % i) for i in [1,2,3]],
-                                "speed" : 100000,
+                                "speed" : 150,
                         },
                 }, [7, 5], 0, [0.25, 0.25])
 
@@ -83,7 +83,7 @@ def start_movement(state, mover_name):
         path = [[5, 0], [0, 5], [-5, 0], [0, -5]]
         for index in xrange(len(path)):
                 yapyg.movers.set_property.add(state, "man", "set_active_sprite", "idle")
-                yapyg.movers.wait.add(state, "man", 500000)
+                yapyg.movers.wait.add(state, "man", 2.0)
                 yapyg.movers.set_property.add(state, "man", "set_active_sprite", "walk")
-                yapyg.movers.linear.add(state, "man", path[index], 1.0 / 1000000,
+                yapyg.movers.linear.add(state, "man", path[index], 1.0,
                         True, None if index != len(path) - 1 else start_movement)

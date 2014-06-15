@@ -27,6 +27,12 @@ General movements
 from collections import deque
 
 from .. import globals
+from .. import collisions
+from .. import fixpoint
+
+IDX_MOVER_TYPE = 0
+IDX_MOVER_RUN_FUNCTION = 1
+IDX_MOVER_ENTITY_NAME = 2
 
 class YapygMoverException(Exception):
         """
@@ -83,7 +89,7 @@ def get_type(state, mover):
         """
         TODO
         """
-        return mover[0]
+        return mover[IDX_MOVER_TYPE]
 
 def remove(state, mover_name):
         """
@@ -99,8 +105,10 @@ def run(state, frame_time_delta):
         """
         movers_to_delete = []
         for mover_name, mover_deque in state[globals.IDX_STATE_MOVERS].iteritems():
+                # print "run", mover_name, "frame_time_delta", fixpoint.fix2float(frame_time_delta)
                 mover = mover_deque[0]
-                (mover[1])(state, mover_name, mover, frame_time_delta, movers_to_delete)
+                (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
+                collisions.run(state, mover[IDX_MOVER_ENTITY_NAME])
 
         movers_to_insert = []
         for mover_name, on_end_function in movers_to_delete:

@@ -22,8 +22,6 @@
 Tiles
 """
 
-from kivy.logger import Logger
-
 from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
@@ -32,6 +30,7 @@ import globals
 import texture_db
 import view
 import screen
+import fixpoint
 
 IDX_TILES_SIZE = 0
 IDX_TILES_DEFS = 1
@@ -43,7 +42,7 @@ def initialize(state, tile_size):
         TODO
         """
         state[globals.IDX_STATE_TILES] = [
-                tile_size,
+                fixpoint.float2fix(float(tile_size)),
                 {},
                 [],
                 [],]
@@ -79,7 +78,7 @@ def add_tile_def(state, tile_name, texture_list):
         """
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name] = {}
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name]["textures"] = texture_list
-        texture_db.insert_combined(state, 1, tile_name, texture_list)
+        texture_db.insert_combined(state, fixpoint.FIXP_1, tile_name, texture_list)
 
 tiles_origin_table = (
         ('0', (0,0)),
@@ -108,14 +107,19 @@ def load_walls(state, base_name, background_file, tile_file):
         TODO
         """
         tile_size = screen.get_tile_size(state)
+        int_tile_size = fixpoint.fix2int(tile_size)
         background_texture = Image(source=background_file).texture
         walls_texture = Image(source=tile_file).texture
         for tile_name, origin_xy in tiles_origin_table:
                 full_tile_name = base_name + tile_name
-                wall_texture = walls_texture.get_region(origin_xy[0] * tile_size, origin_xy[1] * tile_size, tile_size, tile_size)
+                wall_texture = walls_texture.get_region(
+                        origin_xy[0] * int_tile_size,
+                        origin_xy[1] * int_tile_size,
+                        int_tile_size,
+                        int_tile_size)
 
-                tile_texture = Texture.create(size=(tile_size, tile_size), colorfmt='rgba')
-                fbo = Fbo(size=(tile_size, tile_size), texture=tile_texture)
+                tile_texture = Texture.create(size=(int_tile_size, int_tile_size), colorfmt='rgba')
+                fbo = Fbo(size=(int_tile_size, int_tile_size), texture=tile_texture)
                 with fbo:
                         Color(1, 1, 1)
                         Rectangle(pos=(0, 0), size=tile_texture.size, texture=background_texture)
@@ -149,16 +153,16 @@ def draw(state, scale, canvas, view_size):
         target_w = view_size[0]
         target_h = view_size[1]
 
-        scaled_tile_size = get_tile_size(state) * scale
+        scaled_tile_size = fixpoint.mul(get_tile_size(state), scale)
         view_pos = view.get_view_pos(state)
-        map_x = view_pos[0] * scaled_tile_size
-        map_y = view_pos[1] * scaled_tile_size
+        map_x = fixpoint.mul(view_pos[0], scaled_tile_size)
+        map_y = fixpoint.mul(view_pos[1], scaled_tile_size)
 
-        first_row = int(map_y / scaled_tile_size)
-        total_rows = int(target_h / scaled_tile_size)
+        first_row = fixpoint.fix2int(fixpoint.div(map_y, scaled_tile_size))
+        total_rows = fixpoint.fix2int(fixpoint.div(target_h, scaled_tile_size))
 
-        first_col = int(map_x / scaled_tile_size)
-        total_cols = int(target_w / scaled_tile_size)
+        first_col = fixpoint.fix2int(fixpoint.div(map_x, scaled_tile_size))
+        total_cols = fixpoint.fix2int(fixpoint.div(target_w, scaled_tile_size))
 
         tile_rects = state[globals.IDX_STATE_TILES][IDX_TILES_RECTS]
 
@@ -166,17 +170,22 @@ def draw(state, scale, canvas, view_size):
         with canvas:
                 for row in xrange(first_row, first_row + total_rows + 2):
                         for col in xrange(first_col, first_col + total_cols + 2):
-                                tile_x = col * scaled_tile_size
-                                tile_y = row * scaled_tile_size
-                                draw_x = (tile_x - map_x) + origin_xy[0]
-                                draw_y = (tile_y - map_y) + origin_xy[1]
-                                draw_pos = (draw_x, draw_y)
+
+                                tile_x = fixpoint.mul(fixpoint.int2fix(col), scaled_tile_size)
+                                tile_y = fixpoint.mul(fixpoint.int2fix(row), scaled_tile_size)
+
+                                draw_pos = (
+                                        fixpoint.fix2int((tile_x - map_x) + origin_xy[0]),
+                                        fixpoint.fix2int((tile_y - map_y) + origin_xy[1]))
+
                                 texture = texture_db.get(state, "tl_null")
                                 tile = get_tile(state, row, col)
-
                                 if tile:
                                         texture = texture_db.get(state, tile)
-                                draw_size = (texture.width * scale, texture.height * scale,)
+
+                                draw_size = (
+                                        fixpoint.fix2int(fixpoint.mul(fixpoint.int2fix(texture.width), scale)),
+                                        fixpoint.fix2int(fixpoint.mul(fixpoint.int2fix(texture.height), scale)),)
 
                                 if tile_index >= len(tile_rects):
                                         PushMatrix()

@@ -23,6 +23,7 @@ Waitstate mover
 """
 
 from .. import movers
+from .. import fixpoint
 
 IDX_WAIT_MOVER_PASSED_TIME = 2
 IDX_WAIT_MOVER_WAIT_TIME = 3
@@ -41,7 +42,7 @@ def create(wait_time, on_end_function=None):
         return ["wait",
                 run,
                 0,
-                wait_time,
+                fixpoint.float2fix(float(wait_time)),
                 on_end_function,]
 
 def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
@@ -51,7 +52,7 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
         passed_time = mover[IDX_WAIT_MOVER_PASSED_TIME]
         wait_time = mover[IDX_WAIT_MOVER_WAIT_TIME]
 
-        passed_time += frame_time_delta
+        passed_time += fixpoint.div(frame_time_delta, fixpoint.FIXP_1000)
         if passed_time > wait_time:
                 passed_time = wait_time
         mover[IDX_WAIT_MOVER_PASSED_TIME] = passed_time

@@ -25,6 +25,7 @@ from kivy.logger import Logger
 
 from .. import view
 from .. import entities
+from .. import fixpoint
 
 IDX_RELATIVE_VIEW_ENTITY = 1
 IDX_RELATIVE_VIEW_OFFSET = 2
@@ -35,7 +36,8 @@ def create(state, entity_name, offset):
         """
         return [run,
                 entity_name,
-                offset,]
+                (fixpoint.float2fix(float(offset[0])), fixpoint.float2fix(float(offset[1]))),
+                ]
 
 def run(state, viewer):
         """

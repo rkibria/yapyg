@@ -35,10 +35,10 @@ def create(screen_width, screen_height, tile_size):
         global BALL_MOVE_SPEED
         BALL_MOVE_SPEED = 100
         global BALL_ANIM_SPEED
-        BALL_ANIM_SPEED = 3.0 / 1000000
+        BALL_ANIM_SPEED = 3.0
         global BALL_START_POS
         BALL_START_POS = [1, PADDLE_Y + 0.5]
-        BALL_VXY = 2.0 / 1000000
+        BALL_VXY = 2.0
         BLOCK_WIDTH = 1.78 / 3.5
         BLOCK_HEIGHT = 1.0 / 3.5
         BLOCK_X = 0.1
@@ -69,7 +69,7 @@ def create(screen_width, screen_height, tile_size):
                                         },
                                 },
                                 [BLOCK_X + col * BLOCK_WIDTH, BLOCK_Y + row * BLOCK_HEIGHT],
-                                collision=(["rectangle", BLOCK_WIDTH, BLOCK_HEIGHT], False))
+                                collision=((("rectangle", 0, 0, BLOCK_WIDTH, BLOCK_HEIGHT),)))
 
         yapyg.entities.insert(state,
                 ENT_PADDLE,
@@ -79,7 +79,7 @@ def create(screen_width, screen_height, tile_size):
                         },
                 },
                 [1, PADDLE_Y],
-                collision=(["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False))
+                collision=((("rectangle", 0, 0, PADDLE_WIDTH, PADDLE_HEIGHT),)))
 
         yapyg.entities.insert(state,
                 ENT_BALL,
@@ -89,7 +89,7 @@ def create(screen_width, screen_height, tile_size):
                         },
                 },
                 BALL_START_POS,
-                collision=(["circle", PADDLE_HEIGHT], True))
+                collision=((("circle", PADDLE_HEIGHT / 2, PADDLE_HEIGHT / 2, PADDLE_HEIGHT / 2),)))
         yapyg.movers.physical.add(state, ENT_BALL, vx=BALL_VXY, vy=BALL_VXY, friction=1)
 
         yapyg.collisions.set_handler(state, collision_handler)
@@ -107,7 +107,7 @@ def create(screen_width, screen_height, tile_size):
 def collision_handler(state, collision_list):
         yapyg.movers.physical.collision_handler(state, collision_list)
 
-        for entity_name_1, entity_name_2, collision_def_1, collision_def_2 in collision_list:
+        for entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2 in collision_list:
                 block_entity_name = None
                 if ENT_BLOCK_BASE in entity_name_1:
                         block_entity_name = entity_name_1

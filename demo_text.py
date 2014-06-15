@@ -93,7 +93,7 @@ def create(screen_width, screen_height, tile_size):
                 },
                 [0.0, 0.5])
 
-        yapyg.timer.create(state, on_timer, 1000000)
+        yapyg.timer.create(state, on_timer, 1000)
 
         return state
 
@@ -101,10 +101,10 @@ def on_timer(state, last_frame_delta):
         yapyg.entities.set_sprite(state, "500_text_time", "*", {"textures": [("text", get_time_string(), "DroidSansMonoDotted32x64")],})
 
 def start_movement(state, mover_name):
-        n_steps = 1000
+        n_steps = 20
         for index in xrange(n_steps):
                 degrees = float(index) / n_steps * 360.0
                 yapyg.movers.linear.add(state, "500_text_1",
-                        (math.cos(math.radians(degrees)) / 1000.0, math.sin(math.radians(degrees)) / 1000.0),
-                        0.5 / 1000000,
+                        (math.cos(math.radians(degrees)) / n_steps, math.sin(math.radians(degrees)) / n_steps),
+                        0.5,
                         True, None if index != n_steps - 1 else start_movement)

@@ -25,7 +25,7 @@ Controller-influenced mover
 from .. import movers
 from .. import controls
 from .. import entities
-from .. import geometry
+from .. import fixpoint
 
 IDX_CONTROLLED_MOVER_ENTITY_NAME = 2
 IDX_CONTROLLED_MOVER_CONTROLLER = 3
@@ -43,14 +43,15 @@ def add(state, entity_name, controller, factor, limits, sprites=None, rotate=Fal
 
 def create(entity_name, controller, factor, limits, sprites=None, rotate=False):
         """
-        TODO
+        limits = (x1, y1, x2, y2)
         """
         return ["controlled",
                 run,
                 entity_name,
                 controller,
-                factor,
-                limits,
+                fixpoint.float2fix(float(factor)),
+                (fixpoint.float2fix(float(limits[0])), fixpoint.float2fix(float(limits[1])),
+                        fixpoint.float2fix(float(limits[2])), fixpoint.float2fix(float(limits[3]))),
                 sprites,
                 rotate,
                 None]
@@ -71,13 +72,13 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 pos = entities.get_pos(state, entity_name)
                 factor = mover[IDX_CONTROLLED_MOVER_FACTOR]
                 limits = mover[IDX_CONTROLLED_MOVER_LIMITS]
-                new_x = pos[0] + factor * direction[0]
+                new_x = pos[0] + fixpoint.mul(factor, direction[0])
                 if new_x < limits[0]:
                         new_x = limits[0]
                 elif new_x > limits[2]:
                         new_x = limits[2]
 
-                new_y = pos[1] + factor * direction[1]
+                new_y = pos[1] + fixpoint.mul(factor, direction[1])
                 if new_y < limits[1]:
                         new_y = limits[1]
                 elif new_y > limits[3]:
@@ -86,7 +87,10 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 entities.set_pos(state, entity_name, new_x, new_y)
 
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
-                        entities.set_rot(state, entity_name, (int(geometry.get_rotation([0, 0], direction)) - 90) % 360)
+                        heading = fixpoint.heading_from_to((0, 0), direction)
+                        heading_int = (fixpoint.fix2int(heading) - 90) % 360
+                        heading = fixpoint.int2fix(heading_int)
+                        entities.set_rot(state, entity_name, heading)
         else:
                 if sprites and (not last_sprite or last_sprite == sprites[1]):
                         mover[IDX_CONTROLLED_MOVER_LAST_SPRITE] = sprites[0]

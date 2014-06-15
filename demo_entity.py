@@ -18,55 +18,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-"""
-View setter
-"""
+import yapyg
 
-import globals
-import fixpoint
+def create(screen_width, screen_height, tile_size):
+        state = yapyg.factory.create(screen_width, screen_height, tile_size)
 
-IDX_VIEW_POS = 0
-IDX_VIEW_SETTER = 1
+        yapyg.entities.insert(state,
+                "ball",
+                {
+                        "*": {
+                                "textures": [("ellipse", 1.0 / 8, 1.0 / 8, 1, 1, 1)],
+                        },
+                },
+                (1, 1),)
 
-def initialize(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW] = [
-                [0, 0],
-                None,]
-
-def destroy(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW] = None
-
-def get_view_pos(state):
-        """
-        TODO
-        """
-        return state[globals.IDX_STATE_VIEW][IDX_VIEW_POS]
-
-def set_view_pos(state, view_pos):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][0] = view_pos[0]
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][1] = view_pos[1]
-
-def set_viewer(state, viewer):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
-
-def run(state):
-        """
-        TODO
-        """
-        setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
-        if setter:
-                return (setter[0])(state, setter)
-        else:
-                return False
+        return state

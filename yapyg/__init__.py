@@ -26,10 +26,8 @@ import collisions
 import controls
 import entities
 import factory
-import geometry
 import helpers
 import joystick_widget
-import physics
 import screen
 import sprites
 import text
@@ -40,3 +38,4 @@ import widget
 import movers
 import viewers
 import timer
+import fixpoint

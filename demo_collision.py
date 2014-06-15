@@ -29,12 +29,10 @@ def create(screen_width, screen_height, tile_size):
         ENT_BALL = "500_ball"
         global BALL_MOVE_SPEED
         BALL_MOVE_SPEED = 100
-        global BALL_ANIM_SPEED
-        BALL_ANIM_SPEED = 3.0 / 1000000
         global BALL_START_POS
         BALL_SIZE = 1.0 / 32.0
-        BALL_START_POS = [2 * BORDER_OFFSET, 2 * BORDER_OFFSET]
-        BALL_VXY = 2.0 / 1000000
+        BALL_START_POS = [2 * BORDER_OFFSET, 2 * BORDER_OFFSET + 0.1]
+        BALL_VXY = 2.0
         BLOCK_WIDTH = 0.1
         BLOCK_HEIGHT = 0.1
         BLOCK_X = 1.0
@@ -65,19 +63,19 @@ def create(screen_width, screen_height, tile_size):
                                         },
                                 },
                                 [BLOCK_X + col * BLOCK_WIDTH, BLOCK_Y + row * BLOCK_HEIGHT],
-                                collision=(["rectangle", BLOCK_WIDTH, BLOCK_HEIGHT], False))
+                                collision=((("rectangle", 0, 0, BLOCK_WIDTH, BLOCK_HEIGHT),)))
 
         yapyg.entities.insert(state,
                 ENT_BALL,
                 {
                         "*": {
-                                "textures": [("ellipse", BALL_SIZE, BALL_SIZE, 1, 1, 1)],
+                                "textures": [("ellipse", BALL_SIZE, BALL_SIZE, 0, 1, 0)],
                         },
                 },
                 BALL_START_POS,
-                collision=(["circle", BALL_SIZE], True))
-        yapyg.movers.physical.add(state, ENT_BALL, vx=BALL_VXY, vy=BALL_VXY, friction=1)
-
+                collision=((("circle", BALL_SIZE / 2.0, BALL_SIZE / 2.0, BALL_SIZE / 2.0),)))
+        yapyg.movers.physical.add(state, ENT_BALL, vx=BALL_VXY, vy=BALL_VXY)
+        
         yapyg.collisions.set_handler(state, collision_handler)
 
         return state

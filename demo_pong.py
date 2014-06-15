@@ -37,7 +37,7 @@ def create(screen_width, screen_height, tile_size):
         global PONG_BALL_MOVE_SPEED
         PONG_BALL_MOVE_SPEED = 100
         global PONG_BALL_ANIM_SPEED
-        PONG_BALL_ANIM_SPEED = 3.0 / 1000000
+        PONG_BALL_ANIM_SPEED = 3.0
         global PONG_BALL_START_POS
         PONG_BALL_START_POS = [1, 3]
 
@@ -55,7 +55,7 @@ def create(screen_width, screen_height, tile_size):
                         },
                 },
                 [1, PADDLE_Y],
-                collision=(["rectangle", PADDLE_WIDTH, PADDLE_HEIGHT], False))
+                collision=((("rectangle", 0, 0, PADDLE_WIDTH, PADDLE_HEIGHT),)))
 
         yapyg.entities.insert(state,
                 ENT_PONG_BOTTOMWALL,
@@ -65,7 +65,7 @@ def create(screen_width, screen_height, tile_size):
                         },
                 },
                 [0, PADDLE_Y - 1 - 2 * PADDLE_HEIGHT],
-                collision=(["rectangle", screen_width / tile_size, 1], False))
+                collision=((("rectangle", 0, 0, screen_width / tile_size, 1),)))
 
         yapyg.entities.insert(state,
                 ENT_PONG_TOPWALL,
@@ -75,7 +75,7 @@ def create(screen_width, screen_height, tile_size):
                         },
                 },
                 [0, screen_height / tile_size],
-                collision=(["rectangle", screen_width / tile_size, 1], False))
+                collision=((("rectangle", 0, 0, screen_width / tile_size, 1),)))
 
         yapyg.entities.insert(state,
                 ENT_PONG_LEFTWALL,
@@ -85,7 +85,7 @@ def create(screen_width, screen_height, tile_size):
                         }
                 },
                 [-1, 0],
-                collision=(["rectangle", 1, screen_height / tile_size], False))
+                collision=((("rectangle", 0, 0, 1, screen_height / tile_size),)))
 
         yapyg.entities.insert(state,
                 ENT_PONG_RIGHTWALL,
@@ -95,7 +95,7 @@ def create(screen_width, screen_height, tile_size):
                         }
                 },
                 [screen_width / tile_size, 0],
-                collision=(["rectangle", 1, screen_height / tile_size], False))
+                collision=((("rectangle", 0, 0, 1, screen_height / tile_size),)))
 
         yapyg.entities.insert(state,
                 ENT_PONG_BALL,
@@ -105,7 +105,7 @@ def create(screen_width, screen_height, tile_size):
                         },
                 },
                 PONG_BALL_START_POS,
-                collision=(["circle", PADDLE_HEIGHT], True))
+                collision=((("circle", PADDLE_HEIGHT / 2, PADDLE_HEIGHT / 2, PADDLE_HEIGHT / 2),)))
 
         yapyg.collisions.set_handler(state, collision_handler)
 
@@ -126,12 +126,14 @@ def collision_handler(state, collision_list):
         ball_mover = yapyg.movers.get_active(state, ENT_PONG_BALL)
         if yapyg.movers.get_type(state, ball_mover) == "linear":
                 rel_vector = ball_mover[yapyg.movers.linear.IDX_LINEAR_MOVER_REL_VECTOR]
+                rel_vector = (yapyg.fixpoint.fix2float(rel_vector[0]), yapyg.fixpoint.fix2float(rel_vector[1]))
+
                 if collision_entity == ENT_PONG_LEFTWALL or collision_entity == ENT_PONG_RIGHTWALL:
                         yapyg.movers.linear.add(state, ENT_PONG_BALL, [-rel_vector[0], rel_vector[1]], PONG_BALL_ANIM_SPEED, do_replace=True)
                 elif collision_entity == ENT_PONG_TOPWALL:
                         yapyg.movers.linear.add(state, ENT_PONG_BALL, [rel_vector[0], -PONG_BALL_MOVE_SPEED], PONG_BALL_ANIM_SPEED, do_replace=True)
                 elif collision_entity == ENT_PONG_BOTTOMWALL:
-                        yapyg.movers.wait.add(state, ENT_PONG_BALL, 1000000, do_replace=True)
+                        yapyg.movers.wait.add(state, ENT_PONG_BALL, 1, do_replace=True)
                         yapyg.movers.jump.add(state, ENT_PONG_BALL, PONG_BALL_START_POS)
                         yapyg.movers.linear.add(state, ENT_PONG_BALL, [PONG_BALL_MOVE_SPEED, PONG_BALL_MOVE_SPEED], PONG_BALL_ANIM_SPEED)
                 elif collision_entity == ENT_PONG_PADDLE:

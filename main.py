@@ -54,22 +54,28 @@ import demo_text
 import demo_collision
 import demo_collision_1
 import demo_control_1
+import demo_empty
+import demo_entity
+import demo_sprite
 
 class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
                 super(MenuWidget, self).__init__(**kwargs)
 
-                default_choice = "demo_tiles"
+                default_choice = "demo_breakout"
                 self.choices = {
+                        # "demo_sprite": "A single static sprite",
+                        # "demo_entity": "A single static entity",
+                        # "demo_pong": "Empty program",
                         "demo_text": "Text drawing",
                         "demo_bounce": "Basic physics simulation",
                         "demo_starship": "'Endless' scrolling background and animation",
                         "demo_tiles": "Tile map scrolling",
-                        "demo_pong": "Simple Pong game",
+                        # "demo_pong": "Simple Pong game",
                         "demo_breakout": "Breakout implemented with physical mover",
                         "demo_collision": "Optimized collision checking demo/test",
-                        "demo_collision_1": "Simple collision test case",
-                        "demo_control_1": "Demonstrates a more complex control scheme",
+                        # "demo_collision_1": "Simple collision test case",
+                        # "demo_control_1": "Demonstrates a more complex control scheme",
                         }
 
                 layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])

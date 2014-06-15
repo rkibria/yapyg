@@ -39,10 +39,10 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         # Create some tiles to use for our game area. Individual tiles are referred to by strings.
         # Each tile can be composed by layering several images over each other
-        yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/checkerboard.png",])
+        yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/dirtysquares.png",])
 
         # Special wall tile import helper.
-        yapyg.tiles.load_walls(state, "", "assets/img/tiles/checkerboard.png", "assets/img/tiles/bricks_walls.png")
+        yapyg.tiles.load_walls(state, "", "assets/img/tiles/dirtysquares.png", "assets/img/tiles/bricks_walls.png")
 
         # The tile map is made as a list of lists. The arrangement is drawn as seen here,
         # i.e. the '5' tile is in the lower left corner of the screen.

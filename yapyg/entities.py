@@ -27,6 +27,7 @@ import copy
 import globals
 import sprites
 import collisions
+import fixpoint
 
 IDX_ENTITY_POS = 0
 IDX_ENTITY_ROT = 1
@@ -38,6 +39,22 @@ IDX_ENTITY_COLLISION = 6
 
 IDX_ENTITIES_TABLE = 0
 IDX_ENTITIES_POS_LISTENERS = 1
+
+class YapygEntityException(Exception):
+        """
+        TODO
+        """
+        def __init__(self, value):
+                """
+                TODO
+                """
+                self.value = value
+
+        def __str__(self):
+                """
+                TODO
+                """
+                return repr(self.value)
 
 def initialize(state):
         """
@@ -92,6 +109,9 @@ def set_pos(state, entity_name, x_pos, y_pos):
         """
         TODO
         """
+        if not isinstance(x_pos, int) or not isinstance(y_pos, int):
+                raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
+
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
                 entity[IDX_ENTITY_LAST_POS] = [
@@ -110,6 +130,9 @@ def add_pos(state, entity_name, x_pos, y_pos):
         """
         TODO
         """
+        if not isinstance(x_pos, int) or not isinstance(y_pos, int):
+                raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
+
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
                 entity[IDX_ENTITY_LAST_POS] = [
@@ -147,6 +170,9 @@ def set_rot(state, entity_name, rot):
         """
         TODO
         """
+        if not isinstance(rot, int):
+                raise YapygEntityException("Rotation must be fixed point number, was %s" % str(rot))
+
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
                 entity[IDX_ENTITY_LAST_POS] = [
@@ -169,21 +195,21 @@ def undo_last_move(state, entity_name):
                 entity[IDX_ENTITY_LAST_POS] = None
                 _call_pos_listeners(state, entity_name, get_pos(state, entity_name))
 
-def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0], collision=None):
+def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=(0, 0), collision=None):
         """
         TODO
         """
         state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name] = [
-                [pos[0], pos[1]],
-                [rot],
-                pos_offset,
+                [fixpoint.float2fix(float(pos[0])), fixpoint.float2fix(float(pos[1]))],
+                [fixpoint.float2fix(float(rot))],
+                [fixpoint.float2fix(float(pos_offset[0])), fixpoint.float2fix(float(pos_offset[1]))],
                 None,
                 None,
                 [],
                 True if collision else None,]
 
         if collision:
-                collisions.add(state, entity_name, collision[0], collision[1])
+                collisions.add(state, entity_name, collision)
 
         entity = get(state, entity_name)
         default_sprite = None
@@ -201,6 +227,8 @@ def insert(state, entity_name, sprite_defs, pos, rot=0, pos_offset=[0, 0], colli
 def set_sprite(state, entity_name, sprite_name, sprite_def, enable=False):
         if not sprite_def.has_key("speed"):
                 sprite_def["speed"] = 0
+        else:
+                sprite_def["speed"] = fixpoint.float2fix(float(sprite_def["speed"]))
 
         entity = get(state, entity_name)
         full_sprite_name = _get_full_sprite_name(entity_name, sprite_name)

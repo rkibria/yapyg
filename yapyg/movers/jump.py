@@ -24,6 +24,7 @@ Immediate position change mover
 
 from .. import movers
 from .. import entities
+from .. import fixpoint
 
 IDX_JUMP_MOVER_ENTITY_NAME = 2
 IDX_JUMP_MOVER_NEW_POS = 3
@@ -43,8 +44,8 @@ def create(entity_name, new_pos, new_rot=None, on_end_function=None):
         return ["jump",
                 run,
                 entity_name,
-                new_pos,
-                new_rot,
+                (fixpoint.float2fix(float(new_pos[0])), fixpoint.float2fix(float(new_pos[1]))),
+                fixpoint.float2fix(float(new_rot)) if new_rot else None,
                 on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):

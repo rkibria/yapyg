@@ -28,6 +28,7 @@ from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
 import globals
 import screen
+import fixpoint
 
 class YapygTextureDbException(Exception):
         """
@@ -83,7 +84,8 @@ def insert_combined(state, texture_size, texture_name, texture_list):
         TODO
         """
         tile_size = screen.get_tile_size(state)
-        texture_size *= tile_size
+        texture_size = fixpoint.mul(tile_size, texture_size)
+        int_texture_size = fixpoint.fix2int(texture_size)
 
         if len(texture_list) == 0:
                 raise YapygTextureDbException("insert_combined() called with empty list")
@@ -93,10 +95,10 @@ def insert_combined(state, texture_size, texture_name, texture_list):
                 load(state, texture_name, texture_list[0])
         else:
                 # Combine several textures into one
-                texture = Texture.create(size=(texture_size, texture_size), colorfmt='rgba')
+                texture = Texture.create(size=(int_texture_size, int_texture_size), colorfmt='rgba')
                 for texture_filename in texture_list:
                         other_texture = Image(source=texture_filename).texture
-                        fbo = Fbo(size=(texture_size, texture_size), texture=texture)
+                        fbo = Fbo(size=(int_texture_size, int_texture_size), texture=texture)
                         with fbo:
                                 Color(1, 1, 1)
                                 Rectangle(pos=(0, 0), size=other_texture.size, texture=other_texture)
@@ -108,8 +110,12 @@ def insert_color_rect(state, texture_w, texture_h, texture_name, c_r, c_g, c_b):
         TODO
         """
         tile_size = screen.get_tile_size(state)
-        texture_w *= tile_size
-        texture_h *= tile_size
+
+        texture_w = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_w)))
+        texture_h = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_h)))
+
+        texture_w = fixpoint.fix2int(texture_w)
+        texture_h = fixpoint.fix2int(texture_h)
 
         texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
         fbo = Fbo(size=(texture_w, texture_h), texture=texture)
@@ -124,8 +130,12 @@ def insert_color_ellipse(state, texture_w, texture_h, texture_name, c_r, c_g, c_
         TODO
         """
         tile_size = screen.get_tile_size(state)
-        texture_w *= tile_size
-        texture_h *= tile_size
+
+        texture_w = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_w)))
+        texture_h = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_h)))
+
+        texture_w = fixpoint.fix2int(texture_w)
+        texture_h = fixpoint.fix2int(texture_h)
 
         texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
         fbo = Fbo(size=(texture_w, texture_h), texture=texture)

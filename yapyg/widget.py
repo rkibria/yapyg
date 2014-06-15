@@ -26,9 +26,11 @@ import movers
 import tiles
 import sprites
 import view
-import collisions
 import factory
 import timer
+import fixpoint
+
+MIN_FRAME_DELTA = fixpoint.int2fix(35)
 
 class YapygWidget(Widget):
         def __init__(self,
@@ -39,8 +41,8 @@ class YapygWidget(Widget):
                 ):
                 super(YapygWidget, self).__init__(**kwargs)
 
-                self.view_size = view_size
-                self.scale = scale
+                self.view_size = [fixpoint.float2fix(float(view_size[0])), fixpoint.float2fix(float(view_size[1]))]
+                self.scale = fixpoint.float2fix(float(scale))
                 self.state = state
                 self.redraw_tiles = True
 
@@ -54,15 +56,15 @@ class YapygWidget(Widget):
 
         def on_timer(self, dt):
                 if self.state:
-                        cur_fps = Clock.get_fps()
+                        cur_fps = fixpoint.float2fix(float(Clock.get_fps())) # fixpoint
                         if cur_fps > 0:
-                                last_frame_delta = 1000000.0 / cur_fps
+                                last_frame_delta = fixpoint.div(fixpoint.FIXP_1000, cur_fps) # fixpoint, milliseconds
                                 if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
                                         self.min_frame_time_delta = last_frame_delta
                                 else:
                                         last_frame_delta = self.min_frame_time_delta
 
-                                if last_frame_delta < 33333:
+                                if last_frame_delta < MIN_FRAME_DELTA:
                                         timer.run(self.state, last_frame_delta)
                                         self.redraw(last_frame_delta)
 
@@ -71,8 +73,6 @@ class YapygWidget(Widget):
 
         def redraw(self, frame_time_delta):
                 movers.run(self.state, frame_time_delta)
-
-                collisions.run(self.state)
 
                 if view.run(self.state):
                         self.redraw_tiles = True
