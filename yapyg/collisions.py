@@ -65,6 +65,7 @@ def entity_pos_listener(state, entity_name, pos):
         TODO
         """
         if state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES].has_key(entity_name):
+                state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE] = None
                 _update_hash(state, entity_name)
 
 def destroy(state):
@@ -264,8 +265,7 @@ def get_collision_shapes(state, entity_name, collision_def):
                 else:
                         raise YapygCollisionException("Unknown shape %s" % collision_shape[0])
 
-        # if not state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ACTIVE_CHECK]:
-                # state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE] = absolute_shapes
+        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE] = absolute_shapes
 
         return absolute_shapes
 
