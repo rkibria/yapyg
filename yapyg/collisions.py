@@ -119,7 +119,7 @@ def _get_hash_area(state, entity_name, entity_lower_left):
         lower_left_y_offset = 0
         upper_right_x_offset = 0
         upper_right_y_offset = 0
-        
+
         for collision_shape in state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPES]:
                 if collision_shape[0] == "circle":
                         c_x = collision_shape[1]
@@ -302,7 +302,6 @@ def run(state, entity_name_1):
                 return
 
         hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
-        confirmed_collisions_dict = {}
 
         collision_def_1 = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name_1]
         absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)
@@ -322,24 +321,15 @@ def run(state, entity_name_1):
                                 if entity_name_1 == entity_name_2:
                                         continue
 
-                                if confirmed_collisions_dict.has_key((entity_name_1, entity_name_2)) or confirmed_collisions_dict.has_key((entity_name_2, entity_name_1)):
-                                        continue
-
                                 collision_def_2 = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name_2]
-
                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
 
-                                is_done = False
                                 for absolute_shape_1 in absolute_shapes_1:
                                         for absolute_shape_2 in absolute_shapes_2:
                                                 if _is_collision(state, absolute_shape_1, absolute_shape_2):
-                                                        confirmed_collisions_dict[(entity_name_1, entity_name_2)] = (collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2)
-
-                                                        is_done = True
-                                                        break
-                                        if is_done:
-                                                break
-        if confirmed_collisions_dict:
-                collision_list = [(k[0], k[1], v[0], v[1], v[2], v[3]) for k, v in confirmed_collisions_dict.iteritems()]
-
-                (state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION])(state, collision_list)
+                                                        (state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION])(
+                                                                state,
+                                                                entity_name_1, entity_name_2,
+                                                                collision_def_1, collision_def_2,
+                                                                absolute_shape_1, absolute_shape_2)
+                                                        return

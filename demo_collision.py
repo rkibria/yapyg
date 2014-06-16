@@ -80,5 +80,5 @@ def create(screen_width, screen_height, tile_size):
 
         return state
 
-def collision_handler(state, collision_list):
-        yapyg.movers.physical.collision_handler(state, collision_list)
+def collision_handler(state, entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2):
+        yapyg.movers.physical.collision_handler(state, entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2)

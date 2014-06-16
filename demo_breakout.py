@@ -19,6 +19,8 @@
 # THE SOFTWARE.
 
 import yapyg
+import yapyg.movers.controlled
+import yapyg.movers.physical
 
 def create(screen_width, screen_height, tile_size):
         PADDLE_WIDTH = 1.0 / 2
@@ -104,15 +106,14 @@ def create(screen_width, screen_height, tile_size):
 
         return state
 
-def collision_handler(state, collision_list):
-        yapyg.movers.physical.collision_handler(state, collision_list)
+def collision_handler(state, entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2):
+        yapyg.movers.physical.collision_handler(state, entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2)
 
-        for entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2 in collision_list:
-                block_entity_name = None
-                if ENT_BLOCK_BASE in entity_name_1:
-                        block_entity_name = entity_name_1
-                elif ENT_BLOCK_BASE in entity_name_2:
-                        block_entity_name = entity_name_2
+        block_entity_name = None
+        if ENT_BLOCK_BASE in entity_name_1:
+                block_entity_name = entity_name_1
+        elif ENT_BLOCK_BASE in entity_name_2:
+                block_entity_name = entity_name_2
 
-                if block_entity_name:
-                        yapyg.entities.delete(state, block_entity_name)
+        if block_entity_name:
+                yapyg.entities.delete(state, block_entity_name)

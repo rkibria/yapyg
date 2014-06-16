@@ -65,11 +65,11 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         yapyg.entities.insert(state, "man", {
                         "*idle": {
                                 "textures": [("assets/img/sprites/man_idle/%d.png" % i) for i in [0,1,2,3,1,0,3,2]],
-                                "speed": 200000,
+                                "speed": 333,
                         },
                         "walk": {
                                 "textures": [("assets/img/sprites/man_walk/%d.png" % i) for i in [1,2,3]],
-                                "speed" : 100000,
+                                "speed" : 150,
                         },
                 }, [1, 1], 0, [0.25, 0.25])
 

@@ -18,7 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# import cProfile
+import profile
+import pstats
 
 screen_width = 480
 screen_height = 800
@@ -47,35 +48,29 @@ import yapyg.controls
 
 import demo_starship
 import demo_tiles
-import demo_pong
 import demo_bounce
 import demo_breakout
 import demo_text
 import demo_collision
-import demo_collision_1
-import demo_control_1
-import demo_empty
-import demo_entity
-import demo_sprite
+import demo_gauntlet
+# import demo_entity
+# import demo_sprite
 
 class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
                 super(MenuWidget, self).__init__(**kwargs)
 
-                default_choice = "demo_breakout"
+                default_choice = "demo_collision"
                 self.choices = {
-                        # "demo_sprite": "A single static sprite",
-                        # "demo_entity": "A single static entity",
-                        # "demo_pong": "Empty program",
                         "demo_text": "Text drawing",
                         "demo_bounce": "Basic physics simulation",
                         "demo_starship": "'Endless' scrolling background and animation",
                         "demo_tiles": "Tile map scrolling",
-                        # "demo_pong": "Simple Pong game",
                         "demo_breakout": "Breakout implemented with physical mover",
                         "demo_collision": "Optimized collision checking demo/test",
-                        # "demo_collision_1": "Simple collision test case",
-                        # "demo_control_1": "Demonstrates a more complex control scheme",
+                        "demo_gauntlet": "Demonstrates a more complex control scheme",
+                        # "demo_sprite": "A single static sprite",
+                        # "demo_entity": "A single static entity",
                         }
 
                 layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
@@ -202,5 +197,6 @@ class YapygDemoApp(App):
                 return MenuWidget()
 
 if __name__ == "__main__":
-        # cProfile.run("YapygDemoApp().run()")
+        # stats_file = "yapyg.stats"
+        # profile.run("YapygDemoApp().run()", stats_file)
         YapygDemoApp().run()

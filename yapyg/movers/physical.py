@@ -248,39 +248,38 @@ def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = fixpoint.mul(new_vx2, circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY])
         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = fixpoint.mul(new_vy2, circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY])
 
-def collision_handler(state, collision_list):
+def collision_handler(state, entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2):
         """
         TODO
         """
-        for entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2 in collision_list:
-                entity_mover_1 = movers.get_active(state, entity_name_1)
-                entity_mover_2 = movers.get_active(state, entity_name_2)
+        entity_mover_1 = movers.get_active(state, entity_name_1)
+        entity_mover_2 = movers.get_active(state, entity_name_2)
 
-                physics_mover_1 = None
-                physics_mover_2 = None
-                if (entity_mover_1 and entity_mover_1[0] == "physics"):
-                        physics_mover_1 = entity_mover_1
-                if (entity_mover_2 and entity_mover_2[0] == "physics"):
-                        physics_mover_2 = entity_mover_2
+        physics_mover_1 = None
+        physics_mover_2 = None
+        if (entity_mover_1 and entity_mover_1[0] == "physics"):
+                physics_mover_1 = entity_mover_1
+        if (entity_mover_2 and entity_mover_2[0] == "physics"):
+                physics_mover_2 = entity_mover_2
 
-                if (physics_mover_1 or physics_mover_2):
-                        if absolute_shape_1[0] == "rectangle":
-                                if absolute_shape_2[0] == "rectangle":
-                                        print "TODO r-r"
-                                        exit()
-                                elif absolute_shape_2[0] == "circle":
-                                        _rectangle_circle_collision(state, entity_name_1, entity_name_2,
-                                                absolute_shape_1, absolute_shape_2,
-                                                physics_mover_1, physics_mover_2)
-                        elif absolute_shape_1[0] == "circle":
-                                if absolute_shape_2[0] == "rectangle":
-                                        _rectangle_circle_collision(state, entity_name_2, entity_name_1,
-                                                absolute_shape_2, absolute_shape_1,
-                                                physics_mover_2, physics_mover_1)
-                                elif absolute_shape_2[0] == "circle":
-                                        _circle_circle_collision(state, entity_name_1, entity_name_2,
-                                                absolute_shape_1, absolute_shape_2,
-                                                physics_mover_1, physics_mover_2)
+        if (physics_mover_1 or physics_mover_2):
+                if absolute_shape_1[0] == "rectangle":
+                        if absolute_shape_2[0] == "rectangle":
+                                print "TODO r-r"
+                                exit()
+                        elif absolute_shape_2[0] == "circle":
+                                _rectangle_circle_collision(state, entity_name_1, entity_name_2,
+                                        absolute_shape_1, absolute_shape_2,
+                                        physics_mover_1, physics_mover_2)
+                elif absolute_shape_1[0] == "circle":
+                        if absolute_shape_2[0] == "rectangle":
+                                _rectangle_circle_collision(state, entity_name_2, entity_name_1,
+                                        absolute_shape_2, absolute_shape_1,
+                                        physics_mover_2, physics_mover_1)
+                        elif absolute_shape_2[0] == "circle":
+                                _circle_circle_collision(state, entity_name_1, entity_name_2,
+                                        absolute_shape_1, absolute_shape_2,
+                                        physics_mover_1, physics_mover_2)
 
 def elastic_collision(v_1, v_2, m_1, m_2):
         """
