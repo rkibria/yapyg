@@ -224,8 +224,8 @@ def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
         """
         entities.undo_last_move(state, circle_entity_name_1)
 
-        abs_pos_1 = (fixpoint.float2fix(abs_circle_shape_1[1]), fixpoint.float2fix(abs_circle_shape_1[2]),)
-        abs_pos_2 = (fixpoint.float2fix(abs_circle_shape_2[1]), fixpoint.float2fix(abs_circle_shape_2[2]),)
+        abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
+        abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
 
         unit_vector_1_to_2 = fixpoint.unit_vector(abs_pos_1, abs_pos_2)
 
