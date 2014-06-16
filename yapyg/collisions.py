@@ -269,37 +269,12 @@ def get_collision_shapes(state, entity_name, collision_def):
 
         return absolute_shapes
 
-def _is_collision(state, absolute_shape_1, absolute_shape_2):
-        """
-        TODO
-        """
-        absolute_shape_1_type = absolute_shape_1[0]
-        absolute_shape_2_type = absolute_shape_2[0]
-
-        if absolute_shape_1_type == "circle":
-                if absolute_shape_2_type == "circle":
-                        return fixpoint.is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
-                elif absolute_shape_2_type == "rectangle":
-                        return fixpoint.is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
-                else:
-                        raise YapygCollisionException("Unknown shape %s" % str(shape_type_2))
-        elif absolute_shape_1_type == "rectangle":
-                if absolute_shape_2_type == "circle":
-                        return fixpoint.is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
-                elif absolute_shape_2_type == "rectangle":
-                        # TODO
-                        return False
-                else:
-                        raise YapygCollisionException("Unknown shape %s" % str(shape_type_2))
-        else:
-                raise YapygCollisionException("Unknown shape %s" % str(absolute_shape_1))
-
 def run(state, entity_name_1):
         """
         TODO
         """
         state_collisions = state[globals.IDX_STATE_COLLISIONS]
-        
+
         collision_handler = state_collisions[IDX_COLLISIONDB_HANDLER_FUNCTION]
         if not collision_handler:
                 return
@@ -315,6 +290,9 @@ def run(state, entity_name_1):
 
         entity_1_lower_left, entity_1_upper_right = _get_hash_area(state,
                 entity_name_1, entities.get_pos(state, entity_name_1))
+
+        is_circle_circle_collision = fixpoint.is_circle_circle_collision
+        is_rect_circle_collision = fixpoint.is_rect_circle_collision
 
         for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
                 for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
@@ -333,7 +311,24 @@ def run(state, entity_name_1):
 
                                 for absolute_shape_1 in absolute_shapes_1:
                                         for absolute_shape_2 in absolute_shapes_2:
-                                                if _is_collision(state, absolute_shape_1, absolute_shape_2):
+
+                                                is_collision = False
+                                                absolute_shape_1_type = absolute_shape_1[0]
+                                                absolute_shape_2_type = absolute_shape_2[0]
+
+                                                if absolute_shape_1_type == "circle":
+                                                        if absolute_shape_2_type == "circle":
+                                                                is_collision = is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                        elif absolute_shape_2_type == "rectangle":
+                                                                is_collision = is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                elif absolute_shape_1_type == "rectangle":
+                                                        if absolute_shape_2_type == "circle":
+                                                                is_collision = is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
+                                                        elif absolute_shape_2_type == "rectangle":
+                                                                # TODO
+                                                                is_collision = False
+
+                                                if is_collision:
                                                         (collision_handler)(
                                                                 state,
                                                                 entity_name_1, entity_name_2,
