@@ -805,7 +805,7 @@ def is_circle_circle_collision(c_1, c_2):
 
         return sq_3 >= (sq_1 + sq_2)
 
-def is_rect_circle_collision(circ, rect, exact_check = False):
+def is_rect_circle_collision(circ, rect):
         """
         circ = ("circle", x, y, r)
         rect = ("rectangle", x, y, w, h, rot)
@@ -830,31 +830,27 @@ def is_rect_circle_collision(circ, rect, exact_check = False):
 
         circle_outside = True
 
-        if not exact_check:
-                circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
-                        or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
-        else:
-                corner_circles = (
-                        (r_y1, r_x1, c_r),
-                        (r_y1, r_x2, c_r),
-                        (r_y3, r_x1, c_r),
-                        (r_y3, r_x2, c_r),
-                )
-                circle_point = (c_y, c_x)
-                for corner_circle in corner_circles:
-                        circle_outside = not is_point_in_circle(circle_point, corner_circle)
-                        if not circle_outside:
-                                break
-                if circle_outside:
-                        if ((c_x >= r_x1 and c_x <= r_x2)
-                                or
-                                (c_y >= r_y1 and c_y <= r_y3)
-                                ):
-                                circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
-                                        or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
+        corner_circles = (
+                (r_y1, r_x1, c_r),
+                (r_y1, r_x2, c_r),
+                (r_y3, r_x1, c_r),
+                (r_y3, r_x2, c_r),
+        )
+        circle_point = (c_y, c_x)
+        for corner_circle in corner_circles:
+                circle_outside = not is_point_in_circle(circle_point, corner_circle)
+                if not circle_outside:
+                        break
 
-        is_collision = not circle_outside
-        return is_collision
+        if circle_outside:
+                if ((c_x >= r_x1 and c_x <= r_x2)
+                        or
+                        (c_y >= r_y1 and c_y <= r_y3)
+                        ):
+                        circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
+                                or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
+
+        return not circle_outside
 
 def is_point_in_circle(point, circ):
         """

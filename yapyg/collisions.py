@@ -273,17 +273,20 @@ def _is_collision(state, absolute_shape_1, absolute_shape_2):
         """
         TODO
         """
-        if absolute_shape_1[0] == "circle":
-                if absolute_shape_2[0] == "circle":
+        absolute_shape_1_type = absolute_shape_1[0]
+        absolute_shape_2_type = absolute_shape_2[0]
+
+        if absolute_shape_1_type == "circle":
+                if absolute_shape_2_type == "circle":
                         return fixpoint.is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
-                elif absolute_shape_2[0] == "rectangle":
-                        return fixpoint.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, exact_check=True)
+                elif absolute_shape_2_type == "rectangle":
+                        return fixpoint.is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
                 else:
                         raise YapygCollisionException("Unknown shape %s" % str(shape_type_2))
-        elif absolute_shape_1[0] == "rectangle":
-                if absolute_shape_2[0] == "circle":
-                        return fixpoint.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, exact_check=True)
-                elif absolute_shape_2[0] == "rectangle":
+        elif absolute_shape_1_type == "rectangle":
+                if absolute_shape_2_type == "circle":
+                        return fixpoint.is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
+                elif absolute_shape_2_type == "rectangle":
                         # TODO
                         return False
                 else:
@@ -295,15 +298,19 @@ def run(state, entity_name_1):
         """
         TODO
         """
-        if not state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]:
+        state_collisions = state[globals.IDX_STATE_COLLISIONS]
+        
+        collision_handler = state_collisions[IDX_COLLISIONDB_HANDLER_FUNCTION]
+        if not collision_handler:
                 return
 
-        if not state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES].has_key(entity_name_1):
+        state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
+        if not state_collisions_entities.has_key(entity_name_1):
                 return
 
-        hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
+        hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]
 
-        collision_def_1 = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name_1]
+        collision_def_1 = state_collisions_entities[entity_name_1]
         absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)
 
         entity_1_lower_left, entity_1_upper_right = _get_hash_area(state,
@@ -321,13 +328,13 @@ def run(state, entity_name_1):
                                 if entity_name_1 == entity_name_2:
                                         continue
 
-                                collision_def_2 = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name_2]
+                                collision_def_2 = state_collisions_entities[entity_name_2]
                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
 
                                 for absolute_shape_1 in absolute_shapes_1:
                                         for absolute_shape_2 in absolute_shapes_2:
                                                 if _is_collision(state, absolute_shape_1, absolute_shape_2):
-                                                        (state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION])(
+                                                        (collision_handler)(
                                                                 state,
                                                                 entity_name_1, entity_name_2,
                                                                 collision_def_1, collision_def_2,

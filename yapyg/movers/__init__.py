@@ -104,18 +104,14 @@ def run(state, frame_time_delta):
         TODO
         """
         movers_to_delete = []
+        collisions_run_func = collisions.run
         for mover_name, mover_deque in state[globals.IDX_STATE_MOVERS].iteritems():
-                # print "run", mover_name, "frame_time_delta", fixpoint.fix2float(frame_time_delta)
                 mover = mover_deque[0]
                 (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
-                collisions.run(state, mover[IDX_MOVER_ENTITY_NAME])
+                collisions_run_func(state, mover[IDX_MOVER_ENTITY_NAME])
 
-        movers_to_insert = []
         for mover_name, on_end_function in movers_to_delete:
                 remove(state, mover_name)
-
-        for mover_name, mover in movers_to_insert:
-                insert(state, mover_name, mover)
 
         for mover_name, on_end_function in movers_to_delete:
                 if on_end_function:

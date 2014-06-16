@@ -93,27 +93,23 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        if not isinstance(frame_time_delta, int):
-                raise YapygPhysicalMoverException("Frame time must be fixed point number, was %s" % str(frame_time_delta))
+        mul = fixpoint.mul
+        div = fixpoint.div
 
         v_x = mover[IDX_MOVERS_PHYSICAL_VX]
         v_y = mover[IDX_MOVERS_PHYSICAL_VY]
 
-        if not isinstance(v_x, int) or not isinstance(v_y, int):
-                raise YapygPhysicalMoverException("Velocity must be fixed point numbers, was %s" % str((vx, vy)))
-
-        delta_x = fixpoint.mul(v_x, frame_time_delta)
-        delta_y = fixpoint.mul(v_y, frame_time_delta)
-
-        delta_x = fixpoint.div(delta_x, fixpoint.FIXP_1000)
-        delta_y = fixpoint.div(delta_y, fixpoint.FIXP_1000)
+        delta_x = div(mul(v_x, frame_time_delta), fixpoint.FIXP_1000)
+        delta_y = div(mul(v_y, frame_time_delta), fixpoint.FIXP_1000)
 
         entities.add_pos(state, entity_name, delta_x, delta_y)
 
-        mover[IDX_MOVERS_PHYSICAL_VX] += mover[IDX_MOVERS_PHYSICAL_AX]
-        mover[IDX_MOVERS_PHYSICAL_VY] += mover[IDX_MOVERS_PHYSICAL_AY]
-        mover[IDX_MOVERS_PHYSICAL_VX] = fixpoint.mul(mover[IDX_MOVERS_PHYSICAL_VX], mover[IDX_MOVERS_PHYSICAL_FRICTION])
-        mover[IDX_MOVERS_PHYSICAL_VY] = fixpoint.mul(mover[IDX_MOVERS_PHYSICAL_VY], mover[IDX_MOVERS_PHYSICAL_FRICTION])
+        v_x += mover[IDX_MOVERS_PHYSICAL_AX]
+        v_y += mover[IDX_MOVERS_PHYSICAL_AY]
+
+        friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]
+        mover[IDX_MOVERS_PHYSICAL_VX] = mul(v_x, friction)
+        mover[IDX_MOVERS_PHYSICAL_VY] = mul(v_y, friction)
 
 def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name,
                 abs_rectangle_shape, abs_circle_shape,

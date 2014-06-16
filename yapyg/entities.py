@@ -109,8 +109,8 @@ def set_pos(state, entity_name, x_pos, y_pos):
         """
         TODO
         """
-        if not isinstance(x_pos, int) or not isinstance(y_pos, int):
-                raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
+        # if not isinstance(x_pos, int) or not isinstance(y_pos, int):
+                # raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
 
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
@@ -130,8 +130,8 @@ def add_pos(state, entity_name, x_pos, y_pos):
         """
         TODO
         """
-        if not isinstance(x_pos, int) or not isinstance(y_pos, int):
-                raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
+        # if not isinstance(x_pos, int) or not isinstance(y_pos, int):
+                # raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
 
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
