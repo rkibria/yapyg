@@ -57,9 +57,6 @@ def create(screen_width, screen_height, tile_size):
 
         return state
 
-def callback(state, mover_name):
-        print "END"
-
 def start_stars_movement(state, mover_name):
         int_screen_width = yapyg.fixpoint.fix2int(yapyg.screen.get_width(state))
         int_screen_height = yapyg.fixpoint.fix2int(yapyg.screen.get_height(state))

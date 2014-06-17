@@ -108,6 +108,7 @@ def run(state, frame_time_delta):
         for mover_name, mover_deque in state[globals.IDX_STATE_MOVERS].iteritems():
                 mover = mover_deque[0]
                 (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
+                
                 collisions_run_func(state, mover[IDX_MOVER_ENTITY_NAME])
 
         for mover_name, on_end_function in movers_to_delete:

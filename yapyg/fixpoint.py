@@ -883,10 +883,4 @@ def floor(x):
         """
         TODO
         """
-        if x < 0:
-                if x & 0xffff > 0:
-                        return int2fix(fix2int(x - FIXP_1))
-                else:
-                        return int2fix(fix2int(x))
-        else:
-                return int2fix(fix2int(x))
+        return int2fix(fix2int(x))

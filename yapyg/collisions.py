@@ -26,6 +26,8 @@ import globals
 import fixpoint
 import entities
 
+HASH_SCALE_FACTOR = fixpoint.int2fix(4)
+
 class YapygCollisionException(Exception):
         """
         TODO
@@ -66,7 +68,7 @@ def entity_pos_listener(state, entity_name, pos):
         """
         if state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES].has_key(entity_name):
                 state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE] = None
-                _update_hash(state, entity_name)
+                _update_hash(state, entity_name, pos)
 
 def destroy(state):
         """
@@ -107,7 +109,7 @@ def add(state, entity_name, shapes_list):
                 None, # IDX_COLLISION_ABSOLUTE_SHAPE
                 ]
 
-        _update_hash(state, entity_name)
+        _update_hash(state, entity_name, entities.get_pos(state, entity_name))
 
 def _get_hash_area(state, entity_name, entity_lower_left):
         """
@@ -120,11 +122,17 @@ def _get_hash_area(state, entity_name, entity_lower_left):
         upper_right_x_offset = 0
         upper_right_y_offset = 0
 
-        for collision_shape in state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPES]:
+        FIXP_1_5 = fixpoint.FIXP_1_5
+        div = fixpoint.div
+        negate = fixpoint.negate
+        mul = fixpoint.mul
+
+        entity_shapes = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_SHAPES]
+        for collision_shape in entity_shapes:
                 if collision_shape[0] == "circle":
-                        c_x = collision_shape[1]
-                        c_y = collision_shape[2]
-                        c_r = collision_shape[3]
+                        c_x = mul(collision_shape[1], HASH_SCALE_FACTOR)
+                        c_y = mul(collision_shape[2], HASH_SCALE_FACTOR)
+                        c_r = mul(collision_shape[3], HASH_SCALE_FACTOR)
 
                         c_ll_x = c_x - c_r
                         c_ll_y = c_y - c_r
@@ -144,11 +152,12 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                 upper_right_y_offset = c_ur_y
 
                 elif collision_shape[0] == "rectangle":
-                        r_x = collision_shape[1]
-                        r_y = collision_shape[2]
-                        r_w = collision_shape[3]
-                        r_h = collision_shape[4]
+                        r_x = mul(collision_shape[1], HASH_SCALE_FACTOR)
+                        r_y = mul(collision_shape[2], HASH_SCALE_FACTOR)
+                        r_w = mul(collision_shape[3], HASH_SCALE_FACTOR)
+                        r_h = mul(collision_shape[4], HASH_SCALE_FACTOR)
                         rot = entities.get_rot(state, entity_name)
+
                         if rot == 0:
                                 if r_x < lower_left_x_offset:
                                         lower_left_x_offset = r_x
@@ -167,7 +176,7 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                 if r_x != 0 or r_y != 0:
                                         raise YapygCollisionException("TODO")
 
-                                max_extent = fixpoint.div(fixpoint.negate(max(r_w, r_h)), fixpoint.FIXP_2)
+                                max_extent = div(negate(max(r_w, r_h)), fixpoint.FIXP_2)
 
                                 if max_extent < lower_left_x_offset:
                                         lower_left_x_offset = max_extent
@@ -175,12 +184,14 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                 if max_extent < lower_left_y_offset:
                                         lower_left_y_offset = max_extent
 
-                                max_extent = fixpoint.mul(fixpoint.FIXP_1_5, max(r_w, r_h))
+                                max_extent = mul(FIXP_1_5, max(r_w, r_h))
 
                                 if max_extent > upper_right_x_offset:
                                         upper_right_x_offset = max_extent
                                 if max_extent > upper_right_y_offset:
                                         upper_right_y_offset = max_extent
+
+        entity_lower_left = (mul(entity_lower_left[0], HASH_SCALE_FACTOR), mul(entity_lower_left[1], HASH_SCALE_FACTOR))
 
         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,
                 entity_lower_left[1] + lower_left_y_offset)
@@ -188,11 +199,13 @@ def _get_hash_area(state, entity_name, entity_lower_left):
         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,
                 entity_lower_left[1] + upper_right_y_offset)
 
-        area_lower_left = (fixpoint.fix2int(fixpoint.floor(area_lower_left[0])), fixpoint.fix2int(fixpoint.floor(area_lower_left[1])))
-        area_upper_right = (fixpoint.fix2int(fixpoint.floor(area_upper_right[0])), fixpoint.fix2int(fixpoint.floor(area_upper_right[1])))
+        fix2int = fixpoint.fix2int
+        floor = fixpoint.floor
+        area_lower_left = (fix2int(floor(area_lower_left[0])), fix2int(floor(area_lower_left[1])))
+        area_upper_right = (fix2int(floor(area_upper_right[0])), fix2int(floor(area_upper_right[1])))
         return (area_lower_left, area_upper_right)
 
-def _update_hash(state, entity_name):
+def _update_hash(state, entity_name, new_pos):
         """
         TODO
         """
@@ -200,9 +213,9 @@ def _update_hash(state, entity_name):
         if last_pos:
                 _remove_hash_entries(state, entity_name, last_pos)
 
-        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_LAST_POS] = entities.get_pos(state, entity_name)
+        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_LAST_POS] = new_pos
 
-        entity_lower_left, entity_upper_right = _get_hash_area(state, entity_name, entities.get_pos(state, entity_name))
+        entity_lower_left, entity_upper_right = _get_hash_area(state, entity_name, new_pos)
 
         hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
@@ -241,8 +254,9 @@ def get_collision_shapes(state, entity_name, collision_def):
                 circle: ("circle", center_x, center_y, radius)
                 rectangle: ("rectangle", x, y, w, h, rotation)
         """
-        if state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE]:
-                return state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE]
+        cached_absolute_shapes = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_ABSOLUTE_SHAPE]
+        if cached_absolute_shapes:
+                return cached_absolute_shapes
 
         pos = entities.get_pos(state, entity_name)
         pos_offset = entities.get_pos_offset(state, entity_name)
@@ -294,6 +308,7 @@ def run(state, entity_name_1):
         is_circle_circle_collision = fixpoint.is_circle_circle_collision
         is_rect_circle_collision = fixpoint.is_rect_circle_collision
 
+        already_checked_set = set()
         for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
                 for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
                         hash = (x, y)
@@ -305,6 +320,11 @@ def run(state, entity_name_1):
                         for entity_name_2 in collision_candidates:
                                 if entity_name_1 == entity_name_2:
                                         continue
+                                        
+                                if entity_name_2 in already_checked_set:
+                                        continue
+                                
+                                already_checked_set.add(entity_name_2)
 
                                 collision_def_2 = state_collisions_entities[entity_name_2]
                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
