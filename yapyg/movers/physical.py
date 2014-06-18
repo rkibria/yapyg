@@ -151,17 +151,11 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                                 if circle_physical_mover:
                                         circle_move_vector = (circle_move_vector[0],
                                                 fixpoint.mul(-abs(circle_move_vector[1]), inelasticity))
-                                        # TODO
-                                        entities.add_pos(state, circle_entity_name,
-                                                0, (-((circle_y + circle_r) - rect_y)))
                         else:
                                 # upper quadrant
                                 if circle_physical_mover:
                                         circle_move_vector = (circle_move_vector[0],
                                                 fixpoint.mul(abs(circle_move_vector[1]), inelasticity))
-                                        # TODO
-                                        entities.add_pos(state, circle_entity_name,
-                                                0, ((rect_y + rect_h) - (circle_y - circle_r)))
                 else:
                         # lower/upper left/right quadrant
                         v_total = fixpoint.length(circle_move_vector)
@@ -193,18 +187,12 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                                 circle_move_vector = (
                                         fixpoint.mul(-abs(circle_move_vector[0]), inelasticity),
                                         circle_move_vector[1])
-                                # TODO
-                                entities.add_pos(state, circle_entity_name,
-                                        ((-((circle_x + circle_r) - rect_x))), 0)
                 elif circle_x > rect_x + rect_w:
                         # right quadrant
                         if circle_physical_mover:
                                 circle_move_vector = (
                                         fixpoint.mul(abs(circle_move_vector[0]), inelasticity),
                                         circle_move_vector[1])
-                                # TODO
-                                entities.add_pos(state, circle_entity_name,
-                                        ((rect_x + rect_w) - (circle_x - circle_r)), 0)
                 else:
                         # inside rectangle
                         circle_move_vector = (

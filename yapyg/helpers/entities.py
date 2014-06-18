@@ -22,8 +22,8 @@
 Helpers for recurring tasks
 """
 
-import entities
-import collisions
+from .. import entities
+from .. import collisions
 
 def create_screen_wall(state, base_name, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
         """

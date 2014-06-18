@@ -20,6 +20,7 @@
 
 import yapyg
 import yapyg.viewers.relative
+import yapyg.helpers.tiles
 
 def create(screen_width, screen_height, tile_size):
         state = yapyg.factory.create(screen_width, screen_height, tile_size)
@@ -28,7 +29,7 @@ def create(screen_width, screen_height, tile_size):
         yapyg.tiles.add_tile_def(state, "+", ["assets/img/tiles/grass.png", "assets/img/tiles/brown_ground.png"])
         yapyg.tiles.add_tile_def(state, "t", ["assets/img/tiles/grass.png", "assets/img/tiles/tree.png"])
 
-        yapyg.tiles.load_walls(state, "", "assets/img/tiles/grass.png", "assets/img/tiles/bricks_walls.png")
+        yapyg.helpers.tiles.load_walls(state, "", "assets/img/tiles/grass.png", "assets/img/tiles/bricks_walls.png")
 
         area_strings = (
                 "......+...........",

@@ -61,6 +61,7 @@ def div(op1, op2):
         r = long(o1 / long(op2))
         return int(r)
 
+FIXP_minus1 = int2fix(-1)
 FIXP_0 = int2fix(0)
 FIXP_1 = int2fix(1)
 FIXP_2 = int2fix(2)
@@ -770,8 +771,6 @@ def atan2(y, x):
         else:
                 result = base - lookup
         return result
-
-FIXP_minus1 = int2fix(-1)
 
 def negate(x):
         """

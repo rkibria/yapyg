@@ -19,6 +19,7 @@
 # THE SOFTWARE.
 
 import yapyg
+import yapyg.helpers.entities
 
 def create(screen_width, screen_height, tile_size):
         BOTTOM_Y = 0
@@ -45,7 +46,7 @@ def create(screen_width, screen_height, tile_size):
         yapyg.tiles.add_tile_def(state, ".", ["assets/img/tiles/gray_square.png",])
         yapyg.tiles.set_area(state, [["." for x in xrange(10)] for x in xrange(10)])
 
-        yapyg.helpers.create_collision_box(state, "000_screenbox",
+        yapyg.helpers.entities.create_collision_box(state, "000_screenbox",
                 (-BORDER_THICKNESS + BORDER_OFFSET, -BORDER_THICKNESS + BOTTOM_Y + BORDER_OFFSET),
                 ((screen_width / tile_size) + 2 * BORDER_THICKNESS - 2 * BORDER_OFFSET,
                 (screen_height / tile_size) - BOTTOM_Y + 2 * BORDER_THICKNESS - 2 * BORDER_OFFSET),
