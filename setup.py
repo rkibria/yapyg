@@ -12,8 +12,7 @@ if have_cython:
         ext = cythonize('yapyg/fixpoint.pyx')
 else:
         ext = [
-                Extension('fixpoint', ['yapyg/fixpoint.c'],
-                        extra_compile_args=['-std=c99', '-ffast-math', '-fPIC']),
+                Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
                 ]
 
 setup(
