@@ -9,25 +9,18 @@ except ImportError:
     have_cython = False
 
 if have_cython:
-    yapyg_files = [
-        'fixpoint.pxi',
-        ]
-    cmdclass = {'build_ext': build_ext}
+    ext = Extension('fixpoint', ['yapyg/fixpoint.pyx'],
+        extra_compile_args=['-std=c99', '-ffast-math', '-fPIC'])
 else:
-    yapyg_files = ['fixpoint.c']
-    cmdclass = {}
-
-ext = Extension('yapyg',
-    yapyg_files,
-    extra_compile_args=['-std=c99', '-ffast-math', '-fPIC'])
- 
-if environ.get('READTHEDOCS', None) == 'True':
-    ext.pyrex_directives = {'embedsignature': True}
+    ext = ""
 
 setup(
     name='yapyg',
-    description='Cython bindings for yapyg',
+    version='0.1.0',
+    description='Yet Another Python Game Engine',
     author='Raihan Kibria',
     author_email='raihan@kibria.de',
-    cmdclass=cmdclass,
-    ext_modules=[ext])
+    url='https://github.com/rkibria/yapyg',
+    packages=['yapyg'],
+    ext_modules=[ext]
+    )
