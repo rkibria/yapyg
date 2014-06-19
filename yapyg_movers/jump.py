@@ -19,43 +19,43 @@
 # THE SOFTWARE.
 
 """
-Waitstate mover
+Immediate position change mover
 """
 
-from .. import movers
-from .. import fixpoint
+import yapyg.movers
+import yapyg.entities
+import yapyg.fixpoint
 
-IDX_WAIT_MOVER_PASSED_TIME = 2
-IDX_WAIT_MOVER_WAIT_TIME = 3
-IDX_WAIT_MOVER_ON_END_FUNCTION = 4
+IDX_JUMP_MOVER_ENTITY_NAME = 2
+IDX_JUMP_MOVER_NEW_POS = 3
+IDX_JUMP_MOVER_NEW_ROT = 4
+IDX_JUMP_MOVER_ON_END_FUNCTION = 5
 
-def add(state, mover_name, wait_time, on_end_function=None, do_replace=False):
+def add(state, entity_name, new_pos=None, new_rot=None, on_end_function=None, do_replace=False):
         """
         TODO
         """
-        movers.add(state, mover_name, create(wait_time, on_end_function), do_replace)
+        yapyg.movers.add(state, entity_name, create(entity_name, new_pos, new_rot, on_end_function), do_replace)
 
-def create(wait_time, on_end_function=None):
+def create(entity_name, new_pos, new_rot=None, on_end_function=None):
         """
         TODO
         """
-        return ["wait",
+        return ["jump",
                 run,
-                0,
-                fixpoint.float2fix(float(wait_time)),
+                entity_name,
+                (yapyg.fixpoint.float2fix(float(new_pos[0])), yapyg.fixpoint.float2fix(float(new_pos[1]))),
+                yapyg.fixpoint.float2fix(float(new_rot)) if new_rot else None,
                 on_end_function,]
 
-def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
+def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        passed_time = mover[IDX_WAIT_MOVER_PASSED_TIME]
-        wait_time = mover[IDX_WAIT_MOVER_WAIT_TIME]
+        if mover[IDX_JUMP_MOVER_NEW_POS]:
+                yapyg.entities.set_pos(state, entity_name, mover[IDX_JUMP_MOVER_NEW_POS][0], mover[IDX_JUMP_MOVER_NEW_POS][1])
 
-        passed_time += fixpoint.div(frame_time_delta, fixpoint.FIXP_1000)
-        if passed_time > wait_time:
-                passed_time = wait_time
-        mover[IDX_WAIT_MOVER_PASSED_TIME] = passed_time
+        if mover[IDX_JUMP_MOVER_NEW_ROT]:
+                yapyg.entities.get_rot(state, entity_name)[0] = mover[IDX_JUMP_MOVER_NEW_ROT]
 
-        if passed_time == wait_time:
-                movers_to_delete.append((mover_name, mover[IDX_WAIT_MOVER_ON_END_FUNCTION]))
+        movers_to_delete.append((entity_name, mover[IDX_JUMP_MOVER_ON_END_FUNCTION]))

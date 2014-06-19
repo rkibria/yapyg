@@ -22,8 +22,7 @@
 Helpers for recurring tasks
 """
 
-from .. import entities
-from .. import collisions
+import yapyg.entities
 
 def create_screen_wall(state, base_name, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
         """
@@ -44,7 +43,7 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
         vertical_wall_height = size[1]
 
         if bottom:
-                entities.insert(state,
+                yapyg.entities.insert(state,
                         ENT_BOTTOMWALL,
                         {
                                 "*": {
@@ -59,7 +58,7 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
         if left:
-                entities.insert(state,
+                yapyg.entities.insert(state,
                         ENT_LEFTWALL,
                         {
                                 "*": {
@@ -74,7 +73,7 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         collision=((("rectangle", 0, 0, thickness, vertical_wall_height),)))
 
         if top:
-                entities.insert(state,
+                yapyg.entities.insert(state,
                         ENT_TOPWALL,
                         {
                                 "*": {
@@ -89,7 +88,7 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
         if right:
-                entities.insert(state,
+                yapyg.entities.insert(state,
                         ENT_RIGHTWALL,
                         {
                                 "*": {

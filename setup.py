@@ -23,6 +23,6 @@ setup(
         author='Raihan Kibria',
         author_email='raihan@kibria.de',
         url='https://github.com/rkibria/yapyg',
-        packages=['yapyg', 'yapyg.helpers', 'yapyg.movers', 'yapyg.viewers'],
+        packages=['yapyg', 'yapyg_helpers', 'yapyg_movers', 'yapyg_viewers'],
         ext_modules=ext
         )

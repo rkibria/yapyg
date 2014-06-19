@@ -22,9 +22,9 @@
 Simple linear mover
 """
 
-from .. import fixpoint
-from .. import movers
-from .. import entities
+import yapyg.fixpoint
+import yapyg.movers
+import yapyg.entities
 
 IDX_LINEAR_MOVER_REL_VECTOR = 3
 IDX_LINEAR_MOVER_SPEED = 4
@@ -54,23 +54,23 @@ def add(state, entity_name, rel_vector, speed, do_rotate=False, on_end_function=
         """
         TODO
         """
-        movers.add(state, entity_name, create(entity_name, rel_vector, speed, do_rotate, on_end_function), do_replace)
+        yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, do_rotate, on_end_function), do_replace)
 
 def create(entity_name, rel_vector, speed, do_rotate, on_end_function):
         """
         TODO
         """
-        speed = fixpoint.float2fix(float(speed))
-        rel_vector = (fixpoint.float2fix(float(rel_vector[0])), fixpoint.float2fix(float(rel_vector[1])))
+        speed = yapyg.fixpoint.float2fix(float(speed))
+        rel_vector = (yapyg.fixpoint.float2fix(float(rel_vector[0])), yapyg.fixpoint.float2fix(float(rel_vector[1])))
 
-        distance = fixpoint.length(rel_vector)
+        distance = yapyg.fixpoint.length(rel_vector)
         if distance == 0 or speed == 0:
                 raise YapygMoverLinearException("Distance and speed must be >0")
 
-        travel_time = fixpoint.div(distance, speed)
+        travel_time = yapyg.fixpoint.div(distance, speed)
         travel_vector = (
-                fixpoint.div(rel_vector[0], travel_time),
-                fixpoint.div(rel_vector[1], travel_time))
+                yapyg.fixpoint.div(rel_vector[0], travel_time),
+                yapyg.fixpoint.div(rel_vector[1], travel_time))
 
         return ["linear",
                 run,
@@ -92,23 +92,23 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         passed_time = mover[IDX_LINEAR_MOVER_PASSED_TIME]
 
         if passed_time == 0 and mover[IDX_LINEAR_MOVER_DO_ROTATE]:
-                heading = fixpoint.heading_from_to((0, 0), travel_vector)
-                heading_int = (fixpoint.fix2int(heading) - 90) % 360
-                heading = fixpoint.int2fix(heading_int)
-                entities.set_rot(state, entity_name, heading)
+                heading = yapyg.fixpoint.heading_from_to((0, 0), travel_vector)
+                heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
+                heading = yapyg.fixpoint.int2fix(heading_int)
+                yapyg.entities.set_rot(state, entity_name, heading)
 
-        passed_time += fixpoint.div(frame_time_delta, fixpoint.FIXP_1000)
+        passed_time += yapyg.fixpoint.div(frame_time_delta, yapyg.fixpoint.FIXP_1000)
         if passed_time > travel_time:
                 passed_time = travel_time
         mover[IDX_LINEAR_MOVER_PASSED_TIME] = passed_time
 
-        d_x = fixpoint.mul(frame_time_delta, travel_vector[0])
-        d_y = fixpoint.mul(frame_time_delta, travel_vector[1])
+        d_x = yapyg.fixpoint.mul(frame_time_delta, travel_vector[0])
+        d_y = yapyg.fixpoint.mul(frame_time_delta, travel_vector[1])
 
-        d_x = fixpoint.div(d_x, fixpoint.FIXP_1000)
-        d_y = fixpoint.div(d_y, fixpoint.FIXP_1000)
+        d_x = yapyg.fixpoint.div(d_x, yapyg.fixpoint.FIXP_1000)
+        d_y = yapyg.fixpoint.div(d_y, yapyg.fixpoint.FIXP_1000)
 
-        entities.add_pos(state, entity_name, d_x, d_y)
+        yapyg.entities.add_pos(state, entity_name, d_x, d_y)
 
         if passed_time == travel_time:
                 movers_to_delete.append((entity_name, mover[IDX_LINEAR_MOVER_ON_END_FUNCTION]))

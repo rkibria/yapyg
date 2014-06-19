@@ -26,9 +26,9 @@ from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 
-from .. import screen
-from .. import fixpoint
-from .. import texture_db
+import yapyg.screen
+import yapyg.fixpoint
+import yapyg.texture_db
 
 tiles_origin_table = (
         ('0', (0,0)),
@@ -56,8 +56,8 @@ def load_walls(state, base_name, background_file, tile_file):
         """
         TODO
         """
-        tile_size = screen.get_tile_size(state)
-        int_tile_size = fixpoint.fix2int(tile_size)
+        tile_size = yapyg.screen.get_tile_size(state)
+        int_tile_size = yapyg.fixpoint.fix2int(tile_size)
         background_texture = Image(source=background_file).texture
         walls_texture = Image(source=tile_file).texture
         for tile_name, origin_xy in tiles_origin_table:
@@ -75,4 +75,4 @@ def load_walls(state, base_name, background_file, tile_file):
                         Rectangle(pos=(0, 0), size=tile_texture.size, texture=background_texture)
                         Rectangle(pos=(0, 0), size=tile_texture.size, texture=wall_texture)
                 fbo.draw()
-                texture_db.insert(state, full_tile_name, tile_texture)
+                yapyg.texture_db.insert(state, full_tile_name, tile_texture)

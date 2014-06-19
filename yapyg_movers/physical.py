@@ -22,9 +22,9 @@
 Simulate physical movement
 """
 
-from .. import movers
-from .. import entities
-from .. import fixpoint
+import yapyg.movers
+import yapyg.entities
+import yapyg.fixpoint
 
 IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
 IDX_MOVERS_PHYSICAL_MASS = 3
@@ -61,7 +61,7 @@ def add(state, entity_name,
         """
         TODO
         """
-        movers.add(state, entity_name, create(entity_name,
+        yapyg.movers.add(state, entity_name, create(entity_name,
                 mass,
                 vx, vy,
                 ax, ay,
@@ -80,29 +80,29 @@ def create(entity_name,
         return ["physics",
                 run,
                 entity_name,
-                fixpoint.float2fix(mass),
-                fixpoint.float2fix(vx),
-                fixpoint.float2fix(vy),
-                fixpoint.float2fix(ax),
-                fixpoint.float2fix(ay),
-                fixpoint.float2fix(friction),
-                fixpoint.float2fix(inelasticity),
+                yapyg.fixpoint.float2fix(mass),
+                yapyg.fixpoint.float2fix(vx),
+                yapyg.fixpoint.float2fix(vy),
+                yapyg.fixpoint.float2fix(ax),
+                yapyg.fixpoint.float2fix(ay),
+                yapyg.fixpoint.float2fix(friction),
+                yapyg.fixpoint.float2fix(inelasticity),
                 on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        mul = fixpoint.mul
-        div = fixpoint.div
+        mul = yapyg.fixpoint.mul
+        div = yapyg.fixpoint.div
 
         v_x = mover[IDX_MOVERS_PHYSICAL_VX]
         v_y = mover[IDX_MOVERS_PHYSICAL_VY]
 
-        delta_x = div(mul(v_x, frame_time_delta), fixpoint.FIXP_1000)
-        delta_y = div(mul(v_y, frame_time_delta), fixpoint.FIXP_1000)
+        delta_x = div(mul(v_x, frame_time_delta), yapyg.fixpoint.FIXP_1000)
+        delta_y = div(mul(v_y, frame_time_delta), yapyg.fixpoint.FIXP_1000)
 
-        entities.add_pos(state, entity_name, delta_x, delta_y)
+        yapyg.entities.add_pos(state, entity_name, delta_x, delta_y)
 
         v_x += mover[IDX_MOVERS_PHYSICAL_AX]
         v_y += mover[IDX_MOVERS_PHYSICAL_AY]
@@ -117,7 +117,7 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
         """
         TODO
         """
-        entities.undo_last_move(state, circle_entity_name)
+        yapyg.entities.undo_last_move(state, circle_entity_name)
 
         circle_x = (abs_circle_shape[1])
         circle_y = (abs_circle_shape[2])
@@ -133,14 +133,14 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
         inelasticity = circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
 
         if rect_r != 0:
-                rotated_circle = fixpoint.rotated_point(
-                        (rect_x + fixpoint.div(rect_w, fixpoint.FIXP_2), rect_y + fixpoint.div(rect_h, fixpoint.FIXP_2)),
+                rotated_circle = yapyg.fixpoint.rotated_point(
+                        (rect_x + yapyg.fixpoint.div(rect_w, yapyg.fixpoint.FIXP_2), rect_y + yapyg.fixpoint.div(rect_h, yapyg.fixpoint.FIXP_2)),
                         (circle_x, circle_y),
                         -rect_r)
                 circle_x = rotated_circle[0]
                 circle_y = rotated_circle[1]
 
-                circle_move_vector = fixpoint.rotated_point((0, 0), circle_move_vector, -rect_r)
+                circle_move_vector = yapyg.fixpoint.rotated_point((0, 0), circle_move_vector, -rect_r)
 
         if circle_y <= rect_y or circle_y >= rect_y + rect_h:
                 # circle centre below or above rectangle
@@ -150,15 +150,15 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                                 # lower quadrant
                                 if circle_physical_mover:
                                         circle_move_vector = (circle_move_vector[0],
-                                                fixpoint.mul(-abs(circle_move_vector[1]), inelasticity))
+                                                yapyg.fixpoint.mul(-abs(circle_move_vector[1]), inelasticity))
                         else:
                                 # upper quadrant
                                 if circle_physical_mover:
                                         circle_move_vector = (circle_move_vector[0],
-                                                fixpoint.mul(abs(circle_move_vector[1]), inelasticity))
+                                                yapyg.fixpoint.mul(abs(circle_move_vector[1]), inelasticity))
                 else:
                         # lower/upper left/right quadrant
-                        v_total = fixpoint.length(circle_move_vector)
+                        v_total = yapyg.fixpoint.length(circle_move_vector)
                         corner_y = None
                         corner_x = None
                         if circle_y <= rect_y:
@@ -171,36 +171,36 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
                                 corner_x = rect_x + rect_w
                         angle_dx = circle_x - corner_x
                         angle_dy = circle_y - corner_y
-                        angle = fixpoint.atan2(angle_dy, angle_dx)
+                        angle = yapyg.fixpoint.atan2(angle_dy, angle_dx)
 
-                        new_vy = fixpoint.mul(fixpoint.sin(angle), v_total)
-                        new_vx = fixpoint.mul(fixpoint.cos(angle), v_total)
+                        new_vy = yapyg.fixpoint.mul(yapyg.fixpoint.sin(angle), v_total)
+                        new_vx = yapyg.fixpoint.mul(yapyg.fixpoint.cos(angle), v_total)
                         if circle_physical_mover:
                                 circle_move_vector = (
-                                        fixpoint.mul(new_vx, inelasticity),
-                                        fixpoint.mul(new_vy, inelasticity))
+                                        yapyg.fixpoint.mul(new_vx, inelasticity),
+                                        yapyg.fixpoint.mul(new_vy, inelasticity))
         else:
                 # circle same height as rectangle
                 if circle_x < rect_x:
                         # left quadrant
                         if circle_physical_mover:
                                 circle_move_vector = (
-                                        fixpoint.mul(-abs(circle_move_vector[0]), inelasticity),
+                                        yapyg.fixpoint.mul(-abs(circle_move_vector[0]), inelasticity),
                                         circle_move_vector[1])
                 elif circle_x > rect_x + rect_w:
                         # right quadrant
                         if circle_physical_mover:
                                 circle_move_vector = (
-                                        fixpoint.mul(abs(circle_move_vector[0]), inelasticity),
+                                        yapyg.fixpoint.mul(abs(circle_move_vector[0]), inelasticity),
                                         circle_move_vector[1])
                 else:
                         # inside rectangle
                         circle_move_vector = (
-                                fixpoint.mul(-circle_move_vector[0], inelasticity),
-                                fixpoint.mul(-circle_move_vector[1], inelasticity))
+                                yapyg.fixpoint.mul(-circle_move_vector[0], inelasticity),
+                                yapyg.fixpoint.mul(-circle_move_vector[1], inelasticity))
 
         if circle_physical_mover:
-                circle_move_vector = fixpoint.rotated_point((0, 0), circle_move_vector, rect_r)
+                circle_move_vector = yapyg.fixpoint.rotated_point((0, 0), circle_move_vector, rect_r)
                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]
                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
 
@@ -210,12 +210,12 @@ def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
         """
         TODO
         """
-        entities.undo_last_move(state, circle_entity_name_1)
+        yapyg.entities.undo_last_move(state, circle_entity_name_1)
 
         abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
         abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
 
-        unit_vector_1_to_2 = fixpoint.unit_vector(abs_pos_1, abs_pos_2)
+        unit_vector_1_to_2 = yapyg.fixpoint.unit_vector(abs_pos_1, abs_pos_2)
 
         speed_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
         speed_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
@@ -226,18 +226,18 @@ def _circle_circle_collision(state, circle_entity_name_1, circle_entity_name_2,
                 circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS],
                 circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS])
 
-        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = fixpoint.mul(new_vx1, circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY])
-        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = fixpoint.mul(new_vy1, circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY])
+        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = yapyg.fixpoint.mul(new_vx1, circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY])
+        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = yapyg.fixpoint.mul(new_vy1, circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY])
 
-        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = fixpoint.mul(new_vx2, circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY])
-        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = fixpoint.mul(new_vy2, circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY])
+        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = yapyg.fixpoint.mul(new_vx2, circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY])
+        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = yapyg.fixpoint.mul(new_vy2, circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY])
 
 def collision_handler(state, entity_name_1, entity_name_2, collision_def_1, collision_def_2, absolute_shape_1, absolute_shape_2):
         """
         TODO
         """
-        entity_mover_1 = movers.get_active(state, entity_name_1)
-        entity_mover_2 = movers.get_active(state, entity_name_2)
+        entity_mover_1 = yapyg.movers.get_active(state, entity_name_1)
+        entity_mover_2 = yapyg.movers.get_active(state, entity_name_2)
 
         physics_mover_1 = None
         physics_mover_2 = None
@@ -271,26 +271,26 @@ def elastic_collision(v_1, v_2, m_1, m_2):
         """
         mass_sum = m_1 + m_2
         return (
-                fixpoint.div(fixpoint.mul(v_1, m_1 - m_2) + fixpoint.mul(fixpoint.FIXP_2, fixpoint.mul(m_2, v_2)), mass_sum),
-                fixpoint.div(fixpoint.mul(v_2, m_2 - m_1) + fixpoint.mul(fixpoint.FIXP_2, fixpoint.mul(m_1, v_1)), mass_sum),
+                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_1, m_1 - m_2) + yapyg.fixpoint.mul(yapyg.fixpoint.FIXP_2, yapyg.fixpoint.mul(m_2, v_2)), mass_sum),
+                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_2, m_2 - m_1) + yapyg.fixpoint.mul(yapyg.fixpoint.FIXP_2, yapyg.fixpoint.mul(m_1, v_1)), mass_sum),
                 )
 
 def reflect_speeds(unit_vector, v1_vector, v2_vector, m_1, m_2):
         """
         TODO
         """
-        v1_eff = fixpoint.dot_product(unit_vector, v1_vector)
-        v2_eff = fixpoint.dot_product(unit_vector, v2_vector)
-        new_v1_eff, new_v2_eff = elastic_collision(v1_eff, fixpoint.negate(v2_eff), m_1, m_2)
+        v1_eff = yapyg.fixpoint.dot_product(unit_vector, v1_vector)
+        v2_eff = yapyg.fixpoint.dot_product(unit_vector, v2_vector)
+        new_v1_eff, new_v2_eff = elastic_collision(v1_eff, yapyg.fixpoint.negate(v2_eff), m_1, m_2)
 
-        new_v1_eff = fixpoint.vector_product(unit_vector, new_v1_eff)
-        new_v2_eff = fixpoint.vector_product(unit_vector, new_v2_eff)
+        new_v1_eff = yapyg.fixpoint.vector_product(unit_vector, new_v1_eff)
+        new_v2_eff = yapyg.fixpoint.vector_product(unit_vector, new_v2_eff)
 
-        v1_perpendicular = fixpoint.components(unit_vector, v1_vector)[1]
-        v2_perpendicular = fixpoint.components(unit_vector, v2_vector)[1]
+        v1_perpendicular = yapyg.fixpoint.components(unit_vector, v1_vector)[1]
+        v2_perpendicular = yapyg.fixpoint.components(unit_vector, v2_vector)[1]
 
-        new_v1_vector = fixpoint.vector_diff(v1_perpendicular, new_v1_eff)
-        new_v2_vector = fixpoint.vector_sum(v2_perpendicular, new_v2_eff)
+        new_v1_vector = yapyg.fixpoint.vector_diff(v1_perpendicular, new_v1_eff)
+        new_v2_vector = yapyg.fixpoint.vector_sum(v2_perpendicular, new_v2_eff)
 
         return (new_v1_vector[0], new_v1_vector[1],
                 new_v2_vector[0], new_v2_vector[1])

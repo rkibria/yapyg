@@ -26,9 +26,9 @@ General movements
 
 from collections import deque
 
-from .. import globals
-from .. import collisions
-from .. import fixpoint
+import globals
+import collisions
+import fixpoint
 
 IDX_MOVER_TYPE = 0
 IDX_MOVER_RUN_FUNCTION = 1

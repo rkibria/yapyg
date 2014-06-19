@@ -19,43 +19,60 @@
 # THE SOFTWARE.
 
 """
-Immediate position change mover
+Entity state setting mover
 """
 
-from .. import movers
-from .. import entities
-from .. import fixpoint
+import yapyg.movers
+import yapyg.entities
 
-IDX_JUMP_MOVER_ENTITY_NAME = 2
-IDX_JUMP_MOVER_NEW_POS = 3
-IDX_JUMP_MOVER_NEW_ROT = 4
-IDX_JUMP_MOVER_ON_END_FUNCTION = 5
+IDX_MOVER_SET_PROPERTY_ENTITY_NAME = 2
+IDX_MOVER_SET_PROPERTY_PROPERTY = 3
+IDX_MOVER_SET_PROPERTY_NEW_VALUE = 4
+IDX_MOVER_SET_PROPERTY_ON_END_FUNCTION = 5
 
-def add(state, entity_name, new_pos=None, new_rot=None, on_end_function=None, do_replace=False):
+class YapygMoverSetPropertyException(Exception):
         """
         TODO
         """
-        movers.add(state, entity_name, create(entity_name, new_pos, new_rot, on_end_function), do_replace)
+        def __init__(self, value):
+                """
+                TODO
+                """
+                self.value = value
 
-def create(entity_name, new_pos, new_rot=None, on_end_function=None):
+        def __str__(self):
+                """
+                TODO
+                """
+                return repr(self.value)
+
+def add(state, entity_name, property, new_value, on_end_function=None, do_replace=False):
         """
         TODO
         """
-        return ["jump",
+        yapyg.movers.add(state, entity_name, create(entity_name, property, new_value, on_end_function), do_replace)
+
+def create(entity_name, property, new_value, on_end_function=None):
+        """
+        TODO
+        """
+        return ["set_property",
                 run,
                 entity_name,
-                (fixpoint.float2fix(float(new_pos[0])), fixpoint.float2fix(float(new_pos[1]))),
-                fixpoint.float2fix(float(new_rot)) if new_rot else None,
+                property,
+                new_value,
                 on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        if mover[IDX_JUMP_MOVER_NEW_POS]:
-                entities.set_pos(state, entity_name, mover[IDX_JUMP_MOVER_NEW_POS][0], mover[IDX_JUMP_MOVER_NEW_POS][1])
+        property = mover[IDX_MOVER_SET_PROPERTY_PROPERTY]
+        new_value = mover[IDX_MOVER_SET_PROPERTY_NEW_VALUE]
 
-        if mover[IDX_JUMP_MOVER_NEW_ROT]:
-                entities.get_rot(state, entity_name)[0] = mover[IDX_JUMP_MOVER_NEW_ROT]
+        if property == "set_active_sprite":
+                yapyg.entities.set_active_sprite(state, entity_name, new_value)
+        else:
+                raise YapygMoverSetPropertyException("Unknown property %s" % property)
 
-        movers_to_delete.append((entity_name, mover[IDX_JUMP_MOVER_ON_END_FUNCTION]))
+        movers_to_delete.append((entity_name, mover[IDX_MOVER_SET_PROPERTY_ON_END_FUNCTION]))

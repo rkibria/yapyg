@@ -22,10 +22,10 @@
 Controller-influenced mover
 """
 
-from .. import movers
-from .. import controls
-from .. import entities
-from .. import fixpoint
+import yapyg.movers
+import yapyg.controls
+import yapyg.entities
+import yapyg.fixpoint
 
 IDX_CONTROLLED_MOVER_ENTITY_NAME = 2
 IDX_CONTROLLED_MOVER_CONTROLLER = 3
@@ -39,7 +39,7 @@ def add(state, entity_name, controller, factor, limits, sprites=None, rotate=Fal
         """
         sprites = [idle sprite, moving sprite]
         """
-        movers.add(state, entity_name, create(entity_name, controller, factor, limits, sprites, rotate), do_replace)
+        yapyg.movers.add(state, entity_name, create(entity_name, controller, factor, limits, sprites, rotate), do_replace)
 
 def create(entity_name, controller, factor, limits, sprites=None, rotate=False):
         """
@@ -49,9 +49,9 @@ def create(entity_name, controller, factor, limits, sprites=None, rotate=False):
                 run,
                 entity_name,
                 controller,
-                fixpoint.float2fix(float(factor)),
-                (fixpoint.float2fix(float(limits[0])), fixpoint.float2fix(float(limits[1])),
-                        fixpoint.float2fix(float(limits[2])), fixpoint.float2fix(float(limits[3]))),
+                yapyg.fixpoint.float2fix(float(factor)),
+                (yapyg.fixpoint.float2fix(float(limits[0])), yapyg.fixpoint.float2fix(float(limits[1])),
+                        yapyg.fixpoint.float2fix(float(limits[2])), yapyg.fixpoint.float2fix(float(limits[3]))),
                 sprites,
                 rotate,
                 None]
@@ -60,38 +60,38 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         """
         TODO
         """
-        direction = controls.get_joystick(state)
+        direction = yapyg.controls.get_joystick(state)
         sprites = mover[IDX_CONTROLLED_MOVER_SPRITES]
         last_sprite = mover[IDX_CONTROLLED_MOVER_LAST_SPRITE]
 
         if direction[0] != 0 or direction[1] != 0:
                 if sprites and (not last_sprite or last_sprite == sprites[0]):
                         mover[IDX_CONTROLLED_MOVER_LAST_SPRITE] = sprites[1]
-                        entities.set_active_sprite(state, entity_name, sprites[1])
+                        yapyg.entities.set_active_sprite(state, entity_name, sprites[1])
 
-                pos = entities.get_pos(state, entity_name)
+                pos = yapyg.entities.get_pos(state, entity_name)
                 factor = mover[IDX_CONTROLLED_MOVER_FACTOR]
                 limits = mover[IDX_CONTROLLED_MOVER_LIMITS]
-                new_x = pos[0] + fixpoint.mul(factor, direction[0])
+                new_x = pos[0] + yapyg.fixpoint.mul(factor, direction[0])
                 if new_x < limits[0]:
                         new_x = limits[0]
                 elif new_x > limits[2]:
                         new_x = limits[2]
 
-                new_y = pos[1] + fixpoint.mul(factor, direction[1])
+                new_y = pos[1] + yapyg.fixpoint.mul(factor, direction[1])
                 if new_y < limits[1]:
                         new_y = limits[1]
                 elif new_y > limits[3]:
                         new_y = limits[3]
 
-                entities.set_pos(state, entity_name, new_x, new_y)
+                yapyg.entities.set_pos(state, entity_name, new_x, new_y)
 
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
-                        heading = fixpoint.heading_from_to((0, 0), direction)
-                        heading_int = (fixpoint.fix2int(heading) - 90) % 360
-                        heading = fixpoint.int2fix(heading_int)
-                        entities.set_rot(state, entity_name, heading)
+                        heading = yapyg.fixpoint.heading_from_to((0, 0), direction)
+                        heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
+                        heading = yapyg.fixpoint.int2fix(heading_int)
+                        yapyg.entities.set_rot(state, entity_name, heading)
         else:
                 if sprites and (not last_sprite or last_sprite == sprites[1]):
                         mover[IDX_CONTROLLED_MOVER_LAST_SPRITE] = sprites[0]
-                        entities.set_active_sprite(state, entity_name, sprites[0])
+                        yapyg.entities.set_active_sprite(state, entity_name, sprites[0])
