@@ -1,3 +1,0 @@
-title=Yapyg Engine Demo
-author=Raihan Kibria
-orientation=portrait
