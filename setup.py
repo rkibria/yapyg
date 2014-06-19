@@ -8,13 +8,6 @@ try:
 except ImportError:
     have_cython = False
 
-c_yapyg_root = join(dirname(__file__), '')
-c_yapyg_src = join(c_yapyg_root, '')
-# c_yapyg_incs = [join(c_yapyg_root, 'include'), join(c_yapyg_root, 'include', 'yapyg')]
-c_yapyg_files = [join(c_yapyg_src, x) for x in (
-    'fixpoint.c', 
-    )]
-
 if have_cython:
     yapyg_files = [
         'fixpoint.pxi',
@@ -25,8 +18,7 @@ else:
     cmdclass = {}
 
 ext = Extension('yapyg',
-    yapyg_files + c_yapyg_files,
-    # include_dirs=c_yapyg_incs,
+    yapyg_files,
     extra_compile_args=['-std=c99', '-ffast-math', '-fPIC'])
  
 if environ.get('READTHEDOCS', None) == 'True':
