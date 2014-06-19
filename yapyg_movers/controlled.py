@@ -87,7 +87,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 yapyg.entities.set_pos(state, entity_name, new_x, new_y)
 
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
-                        heading = yapyg.fixpoint.heading_from_to((0, 0), direction)
+                        heading = yapyg.fixpoint.heading_from_to((0, 0), tuple(direction))
                         heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
                         heading = yapyg.fixpoint.int2fix(heading_int)
                         yapyg.entities.set_rot(state, entity_name, heading)
