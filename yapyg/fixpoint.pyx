@@ -22,44 +22,65 @@
 Fixed point math
 """
 
-def int2fix(value):
-        """
-        TODO
-        """
+cdef int _int2fix(int value):
         return value << 16
 
-def float2fix(value):
+def int2fix(int value):
         """
         TODO
         """
+        return _int2fix(value)
+
+cdef int _float2fix(float value):
         return int(value * 65536.0)
 
-def fix2int(value):
+def float2fix(float value):
         """
         TODO
         """
+        return _float2fix(value)
+
+cdef int _fix2int(int value):
         return value >> 16
 
-def fix2float(value):
+def fix2int(int value):
         """
         TODO
         """
+        return _fix2int(value)
+
+cdef float _fix2float(int value):
         return value * 0.0000152587890625  # (1/65536.0)
 
-def mul(op1, op2):
+def fix2float(int value):
         """
         TODO
         """
+        return _fix2float(value)
+
+cdef int _mul(int op1, int op2):
+        """
+        TODO
+        """
+        cdef long long r
         r = long(op1) * long(op2)
         return int(r >> 16)
 
-def div(op1, op2):
+def mul(int op1, int op2):
+        return _mul(op1, op2)
+
+cdef int _div(int op1, int op2):
+        cdef long long o1
+        o1 = long(op1) << 16
+        cdef long long r
+        r = o1 / long(op2)
+        return int(r)
+
+def div(int op1, int op2):
         """
         TODO
         """
-        o1 = long(op1) << 16
-        r = long(o1 / long(op2))
-        return int(r)
+        return _div(op1, op2)
 
 FIXP_minus1 = int2fix(-1)
 FIXP_0 = int2fix(0)
@@ -76,31 +97,31 @@ FIXP_1_5 = float2fix(1.5)
 
 FIXP_PI = float2fix(3.14159265359)
 
-def dot_product(v_1, v_2):
+def dot_product(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return mul(v_1[0], v_2[0]) + mul(v_1[1], v_2[1])
+        return _mul(v_1[0], v_2[0]) + _mul(v_1[1], v_2[1])
 
-def vector_product(vec, factor):
+def vector_product(tuple vec, int factor):
         """
         TODO
         """
-        return (mul(vec[0], factor), mul(vec[1], factor))
+        return (_mul(vec[0], factor), _mul(vec[1], factor))
 
-def vector_diff(v_1, v_2):
+def vector_diff(tuple v_1, tuple v_2):
         """
         TODO
         """
         return (v_1[0] - v_2[0], v_1[1] - v_2[1])
 
-def vector_sum(v_1, v_2):
+def vector_sum(tuple v_1, tuple v_2):
         """
         TODO
         """
         return (v_1[0] + v_2[0], v_1[1] + v_2[1])
 
-def components(normal_vector, v_vector):
+def components(tuple normal_vector, tuple v_vector):
         """
         TODO
         """
@@ -109,12 +130,12 @@ def components(normal_vector, v_vector):
         perpendicular_vector = vector_diff(v_vector, parallel_vector)
         return (parallel_vector, perpendicular_vector)
 
-def complex_multiply(complex_1, complex_2):
+def complex_multiply(tuple complex_1, tuple complex_2):
         """
         TODO
         """
-        return (mul(complex_1[0], complex_2[0]) - mul(complex_1[1], complex_2[1]),
-                mul(complex_1[0], complex_2[1]) + mul(complex_1[1], complex_2[0]))
+        return (_mul(complex_1[0], complex_2[0]) - _mul(complex_1[1], complex_2[1]),
+                _mul(complex_1[0], complex_2[1]) + _mul(complex_1[1], complex_2[0]))
 
 # sin/cos
 trigonometry_table = (
@@ -481,35 +502,43 @@ trigonometry_table = (
         (0, 65536), # 360
         )
 
-def sin(degrees):
+cdef int _trig_linear_interpolation(int degrees, int index):
+        cdef int int_degrees
+        int_degrees = _fix2int(degrees)
+
+        cdef int fix_whole_degrees
+        fix_whole_degrees = _int2fix(int_degrees)
+
+        cdef int fix_remainder_degrees
+        fix_remainder_degrees = degrees - fix_whole_degrees
+
+        cdef int int_degrees_capped
+        int_degrees_capped = int_degrees % 360
+
+        global trigonometry_table
+        cdef int lower_val
+        lower_val = trigonometry_table[int_degrees_capped][index]
+
+        cdef int higher_val
+        higher_val = trigonometry_table[int_degrees_capped + 1][index]
+
+        cdef int delta
+        delta = higher_val - lower_val
+        return lower_val + _mul(delta, fix_remainder_degrees)
+
+def sin(int degrees):
         """
         TODO
         """
-        int_degrees = fix2int(degrees)
-        fix_whole_degrees = int2fix(int_degrees)
-        fix_remainder_degrees = degrees - fix_whole_degrees
+        return _trig_linear_interpolation(degrees, 0)
 
-        int_degrees_capped = int_degrees % 360
-        lower_sin = trigonometry_table[int_degrees_capped][0]
-        higher_sin = trigonometry_table[int_degrees_capped + 1][0]
-        delta_sin = higher_sin - lower_sin
-        return lower_sin + mul(delta_sin, fix_remainder_degrees)
-
-def cos(degrees):
+def cos(int degrees):
         """
         TODO
         """
-        int_degrees = fix2int(degrees)
-        fix_whole_degrees = int2fix(int_degrees)
-        fix_remainder_degrees = degrees - fix_whole_degrees
+        return _trig_linear_interpolation(degrees, 1)
 
-        int_degrees_capped = int_degrees % 360
-        lower_cos = trigonometry_table[int_degrees_capped][1]
-        higher_cos = trigonometry_table[int_degrees_capped + 1][1]
-        delta_cos = higher_cos - lower_cos
-        return lower_cos + mul(delta_cos, fix_remainder_degrees)
-
-def rotated_point(origin_point, point, rot):
+def rotated_point(tuple origin_point, tuple point, int rot):
         """
         TODO
         """
@@ -517,57 +546,64 @@ def rotated_point(origin_point, point, rot):
                 point[1] - origin_point[1]), (cos(rot), sin(rot)))
         return (origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1])
 
-def _bit_len(int_type):
+cdef int _bit_len(int int_type):
+        cdef int length
         length = 0
         while (int_type):
                 int_type >>= 1
                 length += 1
         return length
 
-def sqrt(x):
+def sqrt(int x):
         """
         Babylonian method
         """
         if x == FIXP_0:
                 return FIXP_0
+        cdef int significant_bits
         significant_bits = _bit_len(x >> 16)
+
+        cdef int x_n
         x_n = int2fix(1 << (significant_bits / 2))
 
+        cdef int x_n_plus_1
         for i in xrange(10):
                 if x_n == 0:
                         return x_n
-                x_n_plus_1 = div((x_n + div(x, x_n)), FIXP_2)
+                x_n_plus_1 = _div((x_n + _div(x, x_n)), FIXP_2)
                 if x_n_plus_1 == x_n:
                         return x_n
                 else:
                         x_n = x_n_plus_1
         return x_n
 
-def length(vector):
+def length(tuple vector):
         """
         TODO
         """
+        cdef int x_dist
         x_dist = vector[0]
-        x_dist = mul(x_dist, x_dist)
+        x_dist = _mul(x_dist, x_dist)
 
+        cdef int y_dist
         y_dist = vector[1]
-        y_dist = mul(y_dist, y_dist)
+        y_dist = _mul(y_dist, y_dist)
 
         return sqrt(x_dist + y_dist)
 
-def distance(pos_1, pos_2):
+def distance(tuple pos_1, tuple pos_2):
         """
         Euclidian distance between pos_1 and pos_2
         """
         return length((pos_2[0] - pos_1[0], pos_2[1] - pos_1[1],))
 
-def unit_vector(pos_1, pos_2):
+def unit_vector(tuple pos_1, tuple pos_2):
         """
         Returns a unit vector pointing from pos_1 to pos_2
         """
         vector_distance = distance(pos_1, pos_2)
-        return (div(pos_2[0] - pos_1[0], vector_distance),
-                div(pos_2[1] - pos_1[1], vector_distance),)
+        return (_div(pos_2[0] - pos_1[0], vector_distance),
+                _div(pos_2[1] - pos_1[1], vector_distance),)
 
 # t[i] = arctan_degrees(1.0 / 128 * i)
 arctan_table = (
@@ -704,14 +740,19 @@ arctan_table = (
 
 ARCTAN_STEP_SIZE = div(FIXP_1, FIXP_128)
 
-def atan2(y, x):
+def atan2(int y, int x):
         """
         TODO
         """
+        cdef int y_abs
+        cdef int x_abs
         y_abs = abs(y)
         x_abs = abs(x)
 
         # Octants start in upper right quadrant and go counter-clockwise
+        cdef int quot
+        cdef int base
+        cdef int add_to_base
         if y >= 0:
                 if x >= 0:
                         # upper right quadrant
@@ -763,61 +804,90 @@ def atan2(y, x):
                                 base = FIXP_360
                                 add_to_base = False
 
+        cdef int index
         index = fix2int(div(quot, ARCTAN_STEP_SIZE))
+
+        cdef int lookup
         lookup = arctan_table[index]
 
+        cdef int result
         if add_to_base:
                 result = base + lookup
         else:
                 result = base - lookup
         return result
 
-def negate(x):
+def negate(int x):
         """
         TODO
         """
-        return mul(FIXP_minus1, x)
+        return _mul(FIXP_minus1, x)
 
-def is_circle_circle_collision(c_1, c_2):
+def is_circle_circle_collision(tuple c_1, tuple c_2):
         """
         circ = ("circle", x, y, r): x/y = center, r = radius
 
         Test if distance between circle centers is smaller
         than the sum of circle radii.
         """
+        cdef int c1_x
+        cdef int c1_y
+        cdef int c1_r
+
         c1_x = c_1[1]
         c1_y = c_1[2]
         c1_r = c_1[3]
+
+        cdef int c2_x
+        cdef int c2_y
+        cdef int c2_r
 
         c2_x = c_2[1]
         c2_y = c_2[2]
         c2_r = c_2[3]
 
+        cdef int sq_1
+        cdef int sq_2
+        cdef int sq_3
+
         sq_1 = c2_x - c1_x
-        sq_1 = mul(sq_1, sq_1)
+        sq_1 = _mul(sq_1, sq_1)
 
         sq_2 = c2_y - c1_y
-        sq_2 = mul(sq_2, sq_2)
+        sq_2 = _mul(sq_2, sq_2)
 
         sq_3 = c1_r + c2_r
-        sq_3 = mul(sq_3, sq_3)
+        sq_3 = _mul(sq_3, sq_3)
 
         return sq_3 >= (sq_1 + sq_2)
 
-def is_rect_circle_collision(circ, rect):
+def is_rect_circle_collision(tuple circ, tuple rect):
         """
         circ = ("circle", x, y, r)
         rect = ("rectangle", x, y, w, h, rot)
         """
+        cdef int c1_x
+        cdef int c1_y
+        cdef int c1_r
+
         c_x = circ[1]
         c_y = circ[2]
         c_r = circ[3]
+
+        cdef int r_x1
+        cdef int r_y1
+        cdef int r_w
+        cdef int r_h
+        cdef int r_rot
 
         r_x1 = rect[1]
         r_y1 = rect[2]
         r_w = rect[3]
         r_h = rect[4]
         r_rot = rect[5]
+
+        cdef int r_x2
+        cdef int r_y3
 
         r_x2 = r_x1 + r_w
         r_y3 = r_y1 + r_h
@@ -851,34 +921,43 @@ def is_rect_circle_collision(circ, rect):
 
         return not circle_outside
 
-def is_point_in_circle(point, circ):
+def is_point_in_circle(tuple point, tuple circ):
         """
         point = (x, y)
         circ = (x, y, r)
         """
+        cdef int c_x
+        cdef int c_y
+        cdef int c_r
+        cdef int p_x
+        cdef int p_y
+        
         c_x = circ[0]
         c_y = circ[1]
         c_r = circ[2]
         p_x = point[0]
         p_y = point[1]
 
+        cdef int y_d
         y_d = p_y - c_y
-        y_d = mul(y_d, y_d)
+        y_d = _mul(y_d, y_d)
 
+        cdef int x_d
         x_d = p_x - c_x
-        x_d = mul(x_d, x_d)
+        x_d = _mul(x_d, x_d)
 
+        cdef int dist
         dist = y_d + x_d
 
-        return dist <= mul(c_r, c_r)
+        return dist <= _mul(c_r, c_r)
 
-def heading_from_to(pos1, pos2):
+def heading_from_to(tuple pos1, tuple pos2):
         """
         TODO
         """
         return atan2(pos2[1] - pos1[1], pos2[0] - pos1[0])
 
-def floor(x):
+def floor(int x):
         """
         TODO
         """

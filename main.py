@@ -197,6 +197,6 @@ class YapygDemoApp(App):
                 return MenuWidget()
 
 if __name__ == "__main__":
-        stats_file = "yapyg.stats"
-        profile.run("YapygDemoApp().run()", stats_file)
-        # YapygDemoApp().run()
+        # stats_file = "yapyg.stats"
+        # profile.run("YapygDemoApp().run()", stats_file)
+        YapygDemoApp().run()
