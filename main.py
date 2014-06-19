@@ -18,8 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import profile
-import pstats
+# import profile
+# import pstats
 
 screen_width = 480
 screen_height = 800
