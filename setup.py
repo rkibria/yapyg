@@ -9,10 +9,10 @@ except ImportError:
     have_cython = False
 
 if have_cython:
-    ext = Extension('fixpoint', ['yapyg/fixpoint.pyx'],
-        extra_compile_args=['-std=c99', '-ffast-math', '-fPIC'])
+    ext = Extension('fixpoint', ['yapyg/fixpoint.pyx'])
 else:
-    ext = ""
+    ext = Extension('fixpoint', ['yapyg/fixpoint.c'],
+        extra_compile_args=['-std=c99', '-ffast-math', '-fPIC'])
 
 setup(
     name='yapyg',
