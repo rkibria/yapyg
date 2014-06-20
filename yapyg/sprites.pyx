@@ -24,13 +24,14 @@
 
 from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 
+cimport fixpoint
+
 import globals
 import texture_db
 import tiles
 import view
 import text
 import screen
-import fixpoint
 
 IDX_SPRITES_TABLE = 0
 IDX_SPRITES_RECTS_ROTS = 1
@@ -47,7 +48,7 @@ IDX_SPRITE_POS_OFFSET = 6
 IDX_SPRITE_TIME_SUM = 7
 IDX_SPRITE_PHASE = 8
 
-def initialize(state):
+def initialize(list state):
         """
         TODO
         """
@@ -69,7 +70,7 @@ def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
         TODO
         """
         if not scale:
-                scale = (fixpoint.int2fix(1), fixpoint.int2fix(1))
+                scale = (fixpoint.c_int2fix(1), fixpoint.c_int2fix(1))
 
         sprite = [
                 enable,
@@ -143,13 +144,29 @@ def set_enable(state, sprite_name, enable):
                                 if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_SIZES].has_key(sprite_name):
                                         rect.size = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_SIZES][sprite_name]
 
-def draw(state, canvas, frame_time_delta, view_scale):
+cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
         """
         TODO
         """
+        cdef tuple origin_xy
         origin_xy = screen.get_origin(state)
+
+        cdef tuple view_pos
         view_pos = view.get_view_pos(state)
-        for sprite_name in state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER]:
+
+        cdef str sprite_name
+        cdef list draw_order
+        draw_order = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER]
+        cdef list sprite
+        cdef list pos
+        cdef list scale
+        cdef int rotate
+        cdef int phase
+        cdef int speed
+        cdef int time_sum
+        cdef int phase_increment
+
+        for sprite_name in draw_order:
                 sprite = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
 
                 if not sprite[IDX_SPRITE_ENABLE]:
@@ -159,17 +176,17 @@ def draw(state, canvas, frame_time_delta, view_scale):
                 pos = [sprite[IDX_SPRITE_POS][0], sprite[IDX_SPRITE_POS][1]]
                 scale = sprite[IDX_SPRITE_SCALE]
                 rotate = sprite[IDX_SPRITE_ROT][0]
-                phase = None
+                phase = 0
 
                 pos[0] += sprite[IDX_SPRITE_POS_OFFSET][0]
                 pos[1] += sprite[IDX_SPRITE_POS_OFFSET][1]
 
-                phase = sprite[IDX_SPRITE_PHASE] # int
+                phase = sprite[IDX_SPRITE_PHASE]
                 speed = sprite[IDX_SPRITE_SPEED]
                 if speed > 0:
                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
                         time_sum += frame_time_delta
-                        phase_increment = fixpoint.fix2int(fixpoint.div(time_sum, speed)) # int
+                        phase_increment = fixpoint.c_fix2int(fixpoint.c_div(time_sum, speed)) # int
                         if phase_increment < 1:
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 phase = sprite[IDX_SPRITE_PHASE]
@@ -180,68 +197,92 @@ def draw(state, canvas, frame_time_delta, view_scale):
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 sprite[IDX_SPRITE_PHASE] = phase
 
-                _draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
+                c_draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
                         texture_db.get(state, sprite[IDX_SPRITE_TEXTURES][phase]), pos, scale, rotate, origin_xy)
 
-def _draw_sprite(state, canvas, view_pos, view_scale, sprite_name, texture, pos, scale, rotate, origin_xy):
+cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sprite_name,
+                texture, list pos, list scale, int rotate, tuple origin_xy):
         """
         TODO
         """
+        cdef dict rectangles_rotates_dict
         rectangles_rotates_dict = state[globals.IDX_STATE_SPRITES][IDX_SPRITES_RECTS_ROTS]
-        col = fixpoint.floor(pos[0])
-        row = fixpoint.floor(pos[1])
-        scaled_tile_size = fixpoint.mul(tiles.get_tile_size(state), view_scale)
 
-        tile_x = fixpoint.mul(col, scaled_tile_size)
-        tile_y = fixpoint.mul(row, scaled_tile_size)
+        cdef int col
+        cdef int row
+        cdef int scaled_tile_size
+        col = fixpoint.c_floor(pos[0])
+        row = fixpoint.c_floor(pos[1])
+        scaled_tile_size = fixpoint.c_mul(tiles.get_tile_size(state), view_scale)
 
-        draw_x = tile_x - fixpoint.mul(view_pos[0], scaled_tile_size)
-        draw_y = tile_y - fixpoint.mul(view_pos[1], scaled_tile_size)
+        cdef int tile_x
+        cdef int tile_y
+        tile_x = fixpoint.c_mul(col, scaled_tile_size)
+        tile_y = fixpoint.c_mul(row, scaled_tile_size)
 
+        cdef int draw_x
+        cdef int draw_y
+        draw_x = tile_x - fixpoint.c_mul(view_pos[0], scaled_tile_size)
+        draw_y = tile_y - fixpoint.c_mul(view_pos[1], scaled_tile_size)
+
+        cdef tuple draw_pos
         draw_pos = (draw_x, draw_y)
+
+        cdef tuple offset
         offset = (pos[0] - col, pos[1] - row,)
-        offset_pos = (draw_pos[0] + fixpoint.mul(scaled_tile_size, offset[0]) + origin_xy[0],
-                        draw_pos[1] + fixpoint.mul(scaled_tile_size, offset[1]) + origin_xy[1])
+
+        cdef tuple offset_pos
+        offset_pos = (draw_pos[0] + fixpoint.c_mul(scaled_tile_size, offset[0]) + origin_xy[0],
+                        draw_pos[1] + fixpoint.c_mul(scaled_tile_size, offset[1]) + origin_xy[1])
+
+        cdef int int_d_x
+        cdef int int_d_y
+        cdef int pos_changed
+        cdef int rot_changed
+        cdef int x
+        cdef int y
+        cdef int w
+        cdef int h
 
         if rectangles_rotates_dict.has_key(sprite_name):
                 rect, rot = rectangles_rotates_dict[sprite_name]
                 if not rect.texture is texture:
                         rect.texture = texture
 
-                int_d_x = abs(int(rect.pos[0]) - fixpoint.fix2int(offset_pos[0]))
-                int_d_y = abs(int(rect.pos[1]) - fixpoint.fix2int(offset_pos[1]))
+                int_d_x = abs(int(rect.pos[0]) - fixpoint.c_fix2int(offset_pos[0]))
+                int_d_y = abs(int(rect.pos[1]) - fixpoint.c_fix2int(offset_pos[1]))
                 pos_changed = (int_d_x > 0 or int_d_y > 0)
 
-                rot_changed = (abs(rot.angle - fixpoint.fix2int(rotate)) > 0)
+                rot_changed = (abs(rot.angle - fixpoint.c_fix2int(rotate)) > 0)
 
                 if pos_changed or rot_changed:
-                        x = fixpoint.fix2int(offset_pos[0])
-                        y = fixpoint.fix2int(offset_pos[1])
+                        x = fixpoint.c_fix2int(offset_pos[0])
+                        y = fixpoint.c_fix2int(offset_pos[1])
 
                         rect.pos = (x, y)
 
-                        rot.angle = fixpoint.fix2int(rotate)
+                        rot.angle = fixpoint.c_fix2int(rotate)
 
-                        w = fixpoint.mul(fixpoint.int2fix(texture.size[0]), fixpoint.mul(view_scale, scale[0]))
-                        h = fixpoint.mul(fixpoint.int2fix(texture.size[1]), fixpoint.mul(view_scale, scale[1]))
-                        w = fixpoint.fix2int(w)
-                        h = fixpoint.fix2int(h)
+                        w = fixpoint.c_mul(fixpoint.c_int2fix(texture.size[0]), fixpoint.c_mul(view_scale, scale[0]))
+                        h = fixpoint.c_mul(fixpoint.c_int2fix(texture.size[1]), fixpoint.c_mul(view_scale, scale[1]))
+                        w = fixpoint.c_fix2int(w)
+                        h = fixpoint.c_fix2int(h)
 
                         rot.origin = (x + w / 2, y + h / 2)
         else:
                 with canvas:
                         PushMatrix()
 
-                        w = fixpoint.mul(fixpoint.float2fix(float(texture.size[0])), fixpoint.mul(view_scale, scale[0]))
-                        h = fixpoint.mul(fixpoint.float2fix(float(texture.size[1])), fixpoint.mul(view_scale, scale[1]))
-                        w = fixpoint.fix2int(w)
-                        h = fixpoint.fix2int(h)
+                        w = fixpoint.c_mul(fixpoint.c_float2fix(float(texture.size[0])), fixpoint.c_mul(view_scale, scale[0]))
+                        h = fixpoint.c_mul(fixpoint.c_float2fix(float(texture.size[1])), fixpoint.c_mul(view_scale, scale[1]))
+                        w = fixpoint.c_fix2int(w)
+                        h = fixpoint.c_fix2int(h)
 
-                        x = fixpoint.fix2int(offset_pos[0])
-                        y = fixpoint.fix2int(offset_pos[1])
+                        x = fixpoint.c_fix2int(offset_pos[0])
+                        y = fixpoint.c_fix2int(offset_pos[1])
 
                         rot = Rotate()
-                        rot.angle = fixpoint.fix2int(rotate)
+                        rot.angle = fixpoint.c_fix2int(rotate)
                         rot.axis = (0, 0, 1)
                         rot.origin = (x + w / 2, y + h / 2)
 

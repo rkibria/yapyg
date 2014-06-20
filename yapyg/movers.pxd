@@ -19,54 +19,7 @@
 # THE SOFTWARE.
 
 """
-View setter
+General movements
 """
 
-import globals
-import fixpoint
-
-IDX_VIEW_POS = 0
-IDX_VIEW_SETTER = 1
-
-def initialize(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW] = [
-                [0, 0],
-                None,]
-
-def destroy(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW] = None
-
-def get_view_pos(state):
-        """
-        TODO
-        """
-        return tuple(state[globals.IDX_STATE_VIEW][IDX_VIEW_POS])
-
-def set_view_pos(state, view_pos):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][0] = view_pos[0]
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][1] = view_pos[1]
-
-def set_viewer(state, viewer):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
-
-def run(state):
-        """
-        TODO
-        """
-        setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
-        if setter:
-                return (setter[0])(state, setter)
-        else:
-                return False
+cdef void c_run(list state, int frame_time_delta)

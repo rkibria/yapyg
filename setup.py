@@ -15,6 +15,8 @@ else:
                 Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
                 Extension('yapyg/collisions', ['yapyg/collisions.c']),
                 Extension('yapyg/movers', ['yapyg/movers.c']),
+                Extension('yapyg/sprites', ['yapyg/sprites.c']),
+                Extension('yapyg/widget', ['yapyg/widget.c']),
                 ]
 
 setup(

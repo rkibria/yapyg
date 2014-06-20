@@ -81,7 +81,7 @@ def remove(list state, str mover_name):
         if len(state[globals.IDX_STATE_MOVERS][mover_name]) == 0:
                 del state[globals.IDX_STATE_MOVERS][mover_name]
 
-def run(list state, int frame_time_delta):
+cdef void c_run(list state, int frame_time_delta):
         """
         TODO
         """
