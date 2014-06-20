@@ -40,22 +40,6 @@ IDX_ENTITY_COLLISION = 6
 IDX_ENTITIES_TABLE = 0
 IDX_ENTITIES_POS_LISTENERS = 1
 
-class YapygEntityException(Exception):
-        """
-        TODO
-        """
-        def __init__(self, value):
-                """
-                TODO
-                """
-                self.value = value
-
-        def __str__(self):
-                """
-                TODO
-                """
-                return repr(self.value)
-
 def initialize(state):
         """
         TODO
@@ -109,8 +93,7 @@ def set_pos(state, entity_name, x_pos, y_pos):
         """
         TODO
         """
-        # if not isinstance(x_pos, int) or not isinstance(y_pos, int):
-                # raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
+        old_pos = tuple([IDX_ENTITY_POS])
 
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
@@ -120,6 +103,9 @@ def set_pos(state, entity_name, x_pos, y_pos):
                         entity[IDX_ENTITY_ROT][0]]
         entity[IDX_ENTITY_LAST_POS][0] = entity[IDX_ENTITY_POS][0]
         entity[IDX_ENTITY_LAST_POS][1] = entity[IDX_ENTITY_POS][1]
+
+        if (x_pos, y_pos) == old_pos:
+                return
 
         entity[IDX_ENTITY_POS][0] = x_pos
         entity[IDX_ENTITY_POS][1] = y_pos
@@ -130,9 +116,6 @@ def add_pos(state, entity_name, x_pos, y_pos):
         """
         TODO
         """
-        # if not isinstance(x_pos, int) or not isinstance(y_pos, int):
-                # raise YapygEntityException("Position must be fixed point number, was %s" % str((x_pos, y_pos,)))
-
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
                 entity[IDX_ENTITY_LAST_POS] = [
@@ -141,6 +124,9 @@ def add_pos(state, entity_name, x_pos, y_pos):
                         entity[IDX_ENTITY_ROT][0]]
         entity[IDX_ENTITY_LAST_POS][0] = entity[IDX_ENTITY_POS][0]
         entity[IDX_ENTITY_LAST_POS][1] = entity[IDX_ENTITY_POS][1]
+
+        if (x_pos, y_pos) == (0, 0):
+                return
 
         entity[IDX_ENTITY_POS][0] += x_pos
         entity[IDX_ENTITY_POS][1] += y_pos
@@ -170,9 +156,6 @@ def set_rot(state, entity_name, rot):
         """
         TODO
         """
-        if not isinstance(rot, int):
-                raise YapygEntityException("Rotation must be fixed point number, was %s" % str(rot))
-
         entity = get(state, entity_name)
         if not entity[IDX_ENTITY_LAST_POS]:
                 entity[IDX_ENTITY_LAST_POS] = [

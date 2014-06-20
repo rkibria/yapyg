@@ -26,48 +26,30 @@ General movements
 
 from collections import deque
 
+cimport collisions
+
 import globals
-import collisions
-import fixpoint
 
 IDX_MOVER_TYPE = 0
 IDX_MOVER_RUN_FUNCTION = 1
 IDX_MOVER_ENTITY_NAME = 2
 
-class YapygMoverException(Exception):
-        """
-        TODO
-        """
-        def __init__(self, value):
-                """
-                TODO
-                """
-                self.value = value
-
-        def __str__(self):
-                """
-                TODO
-                """
-                return repr(self.value)
-
-def initialize(state):
+def initialize(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_MOVERS] = {}
 
-def destroy(state):
+def destroy(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_MOVERS] = None
 
-def add(state, mover_name, mover, do_replace=False):
+def add(list state, str mover_name, list mover, int do_replace=False):
         """
         TODO
         """
-        if not mover:
-                raise YapygMoverException("%s was assigned null element" % mover_name)
         if do_replace:
                 state[globals.IDX_STATE_MOVERS][mover_name] = deque()
                 state[globals.IDX_STATE_MOVERS][mover_name].append(mover)
@@ -76,7 +58,7 @@ def add(state, mover_name, mover, do_replace=False):
                         state[globals.IDX_STATE_MOVERS][mover_name] = deque()
                 state[globals.IDX_STATE_MOVERS][mover_name].append(mover)
 
-def get_active(state, mover_name):
+def get_active(list state, str mover_name):
         """
         TODO
         """
@@ -85,13 +67,13 @@ def get_active(state, mover_name):
         else:
                 return None
 
-def get_type(state, mover):
+def get_type(list state, list mover):
         """
         TODO
         """
         return mover[IDX_MOVER_TYPE]
 
-def remove(state, mover_name):
+def remove(list state, str mover_name):
         """
         TODO
         """
@@ -99,17 +81,20 @@ def remove(state, mover_name):
         if len(state[globals.IDX_STATE_MOVERS][mover_name]) == 0:
                 del state[globals.IDX_STATE_MOVERS][mover_name]
 
-def run(state, frame_time_delta):
+def run(list state, int frame_time_delta):
         """
         TODO
         """
+        cdef list movers_to_delete
         movers_to_delete = []
-        collisions_run_func = collisions.run
+
+        cdef str mover_name
+        cdef list mover
         for mover_name, mover_deque in state[globals.IDX_STATE_MOVERS].iteritems():
                 mover = mover_deque[0]
                 (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
-                
-                collisions_run_func(state, mover[IDX_MOVER_ENTITY_NAME])
+
+                collisions.c_run(state, mover[IDX_MOVER_ENTITY_NAME])
 
         for mover_name, on_end_function in movers_to_delete:
                 remove(state, mover_name)

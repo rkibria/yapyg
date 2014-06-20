@@ -9,10 +9,12 @@ except ImportError:
         have_cython = False
 
 if have_cython:
-        ext = cythonize('yapyg/fixpoint.pyx')
+        ext = cythonize("yapyg/*.pyx")
 else:
         ext = [
                 Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
+                Extension('yapyg/collisions', ['yapyg/collisions.c']),
+                Extension('yapyg/movers', ['yapyg/movers.c']),
                 ]
 
 setup(

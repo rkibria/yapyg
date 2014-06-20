@@ -22,27 +22,12 @@
 Collisions
 """
 
+cimport fixpoint
+
 import globals
-import fixpoint
 import entities
 
-HASH_SCALE_FACTOR = fixpoint.int2fix(4)
-
-class YapygCollisionException(Exception):
-        """
-        TODO
-        """
-        def __init__(self, value):
-                """
-                TODO
-                """
-                self.value = value
-
-        def __str__(self):
-                """
-                TODO
-                """
-                return repr(self.value)
+HASH_SCALE_FACTOR = fixpoint.c_int2fix(4)
 
 IDX_COLLISIONDB_ENTITIES = 0
 IDX_COLLISIONDB_HASH_MAP = 1
@@ -52,7 +37,11 @@ IDX_COLLISION_SHAPES = 0
 IDX_COLLISION_LAST_POS = 1
 IDX_COLLISION_CACHE = 2
 
-def initialize(state):
+IDX_COLLISION_CACHE_ABS_SHAPE = 0
+IDX_COLLISION_CACHE_HASH_EXTENT = 1
+IDX_COLLISION_CACHE_LAST_HASH_POS = 2
+
+def initialize(list state):
         """
         TODO
         """
@@ -62,85 +51,163 @@ def initialize(state):
                 None,]
         entities.add_pos_listener(state, entity_pos_listener)
 
-def entity_pos_listener(state, entity_name, pos):
-        """
-        TODO
-        """
-        entities_db = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
-        if entities_db.has_key(entity_name):
-                entities_db[entity_name][IDX_COLLISION_CACHE][0] = None
-                _update_hash(state, entity_name, pos)
-
-def destroy(state):
+def destroy(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_COLLISIONS] = None
 
-def set_handler(state, handler_function):
+def entity_pos_listener(list state, str entity_name, tuple pos):
+        """
+        TODO
+        """
+        cdef dict collision_db
+        collision_db = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
+        if collision_db.has_key(entity_name):
+                collision_db[entity_name][IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_ABS_SHAPE] = None
+                c_update_hash(state, entity_name, pos)
+
+def set_handler(list state, handler_function):
         """
         TODO
         """
         state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
 
-def add(state, entity_name, shapes_list):
+def add(list state, str entity_name, tuple shapes_list):
         """
         TODO
         """
+        cdef list trans_shapes_list
         trans_shapes_list = []
+        cdef tuple trans_shape
         for shape in shapes_list:
+                trans_shape = ("UNKNOWN",)
                 if shape[0] == "rectangle":
                         trans_shape = ("rectangle",
-                                fixpoint.float2fix(float(shape[1])),
-                                fixpoint.float2fix(float(shape[2])),
-                                fixpoint.float2fix(float(shape[3])),
-                                fixpoint.float2fix(float(shape[4])),)
+                                fixpoint.c_float2fix(float(shape[1])),
+                                fixpoint.c_float2fix(float(shape[2])),
+                                fixpoint.c_float2fix(float(shape[3])),
+                                fixpoint.c_float2fix(float(shape[4])),)
                 elif shape[0] == "circle":
                         trans_shape = ("circle",
-                                fixpoint.float2fix(float(shape[1])),
-                                fixpoint.float2fix(float(shape[2])),
-                                fixpoint.float2fix(float(shape[3])),)
-                else:
-                        raise YapygCollisionException("Unknown shape %s" % shape[0])
+                                fixpoint.c_float2fix(float(shape[1])),
+                                fixpoint.c_float2fix(float(shape[2])),
+                                fixpoint.c_float2fix(float(shape[3])),)
                 trans_shapes_list.append(trans_shape)
 
-        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name] = [
-                trans_shapes_list, # IDX_COLLISION_SHAPES
-                None, # IDX_COLLISION_LAST_POS
-                [None, None, None], # IDX_COLLISION_CACHE: absolute shape, hash map extent, last added hash lower_left + upper_right
+        cdef dict collision_db
+        collision_db = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
+        collision_db[entity_name] = [
+                trans_shapes_list,
+                None,
+                [None, None, None],
                 ]
 
-        _update_hash(state, entity_name, entities.get_pos(state, entity_name))
+        c_update_hash(state, entity_name, entities.get_pos(state, entity_name))
 
-def _get_hash_area(state, entity_name, entity_lower_left):
+def delete(list state, str entity_name):
+        """
+        TODO
+        """
+        c_remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
+        cdef dict collision_db
+        collision_db = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
+        del collision_db[entity_name]
+
+cdef void c_update_hash(list state, str entity_name, tuple new_pos):
+        """
+        TODO
+        """
+        cdef dict collision_db
+        collision_db = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
+
+        cdef list entity_collision_data
+        entity_collision_data = collision_db[entity_name]
+
+        cdef tuple last_pos
+        last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]
+        if last_pos:
+                c_remove_hash_entries(state, entity_name, last_pos)
+
+        entity_collision_data[IDX_COLLISION_LAST_POS] = new_pos
+
+        cdef tuple entity_lower_left
+        cdef tuple entity_upper_right
+        entity_lower_left, entity_upper_right = c_get_hash_area(state, entity_name, new_pos)
+
+        entity_collision_data[IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_LAST_HASH_POS] = (entity_lower_left, entity_upper_right)
+
+        cdef dict hash_map
+        hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
+
+        cdef int x
+        cdef int y
+        cdef tuple hash
+        for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
+                for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
+                        hash = (x, y)
+                        if not hash_map.has_key(hash):
+                                hash_map[hash] = set()
+                        hash_map[hash].add(entity_name)
+
+cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left):
         """
         Returns absolute tile positions of lower left and upper right of area to check
                 ["rectangle", x, y, width, height]
                 ["circle", x, y, radius]
         """
-        FIXP_2 = fixpoint.int2fix(2)
-        FIXP_1_5 = fixpoint.float2fix(1.5)
-        div = fixpoint.div
-        negate = fixpoint.negate
-        mul = fixpoint.mul
+        cdef int FIXP_1_5
+        FIXP_1_5 = fixpoint.FIXP_1_5
+        cdef int FIXP_2
+        FIXP_2 = fixpoint.FIXP_2
+
+        cdef int lower_left_x_offset
+        cdef int lower_left_y_offset
+        cdef int upper_right_x_offset
+        cdef int upper_right_y_offset
 
         lower_left_x_offset = 0
         lower_left_y_offset = 0
         upper_right_x_offset = 0
         upper_right_y_offset = 0
 
-        entity_entry = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name]
+        cdef dict collision_db
+        collision_db = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
 
-        cached_hash_extents = entity_entry[IDX_COLLISION_CACHE][1]
+        cdef list entity_collision_data
+        entity_collision_data = collision_db[entity_name]
+
+        cdef list entity_collision_cache
+        entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
+
+        cdef tuple cached_hash_extents
+        cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]
+
+        cdef list entity_shapes
+        cdef tuple collision_shape
+        cdef int c_x
+        cdef int c_y
+        cdef int c_r
+        cdef int c_ll_x
+        cdef int c_ll_y
+        cdef int c_ur_x
+        cdef int c_ur_y
+        cdef int r_x
+        cdef int r_y
+        cdef int r_w
+        cdef int r_h
+        cdef int rot
+        cdef int max_extent
         if cached_hash_extents:
                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
         else:
-                entity_shapes = entity_entry[IDX_COLLISION_SHAPES]
+                entity_shapes = entity_collision_data[IDX_COLLISION_SHAPES]
+
                 for collision_shape in entity_shapes:
                         if collision_shape[0] == "circle":
-                                c_x = mul(collision_shape[1], HASH_SCALE_FACTOR)
-                                c_y = mul(collision_shape[2], HASH_SCALE_FACTOR)
-                                c_r = mul(collision_shape[3], HASH_SCALE_FACTOR)
+                                c_x = fixpoint.c_mul(collision_shape[1], HASH_SCALE_FACTOR)
+                                c_y = fixpoint.c_mul(collision_shape[2], HASH_SCALE_FACTOR)
+                                c_r = fixpoint.c_mul(collision_shape[3], HASH_SCALE_FACTOR)
 
                                 c_ll_x = c_x - c_r
                                 c_ll_y = c_y - c_r
@@ -160,10 +227,10 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                         upper_right_y_offset = c_ur_y
 
                         elif collision_shape[0] == "rectangle":
-                                r_x = mul(collision_shape[1], HASH_SCALE_FACTOR)
-                                r_y = mul(collision_shape[2], HASH_SCALE_FACTOR)
-                                r_w = mul(collision_shape[3], HASH_SCALE_FACTOR)
-                                r_h = mul(collision_shape[4], HASH_SCALE_FACTOR)
+                                r_x = fixpoint.c_mul(collision_shape[1], HASH_SCALE_FACTOR)
+                                r_y = fixpoint.c_mul(collision_shape[2], HASH_SCALE_FACTOR)
+                                r_w = fixpoint.c_mul(collision_shape[3], HASH_SCALE_FACTOR)
+                                r_h = fixpoint.c_mul(collision_shape[4], HASH_SCALE_FACTOR)
                                 rot = entities.get_rot(state, entity_name)
 
                                 if rot == 0:
@@ -181,10 +248,10 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                         if r_y2 > upper_right_y_offset:
                                                 upper_right_y_offset = r_y2
                                 else:
-                                        if r_x != 0 or r_y != 0:
-                                                raise YapygCollisionException("TODO")
+                                        if r_x != 0 or r_y != 0: # TODO
+                                                pass
 
-                                        max_extent = div(negate(max(r_w, r_h)), FIXP_2)
+                                        max_extent = fixpoint.c_div(fixpoint.c_negate(max(r_w, r_h)), FIXP_2)
 
                                         if max_extent < lower_left_x_offset:
                                                 lower_left_x_offset = max_extent
@@ -192,75 +259,56 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                         if max_extent < lower_left_y_offset:
                                                 lower_left_y_offset = max_extent
 
-                                        max_extent = mul(FIXP_1_5, max(r_w, r_h))
+                                        max_extent = fixpoint.c_mul(FIXP_1_5, max(r_w, r_h))
 
                                         if max_extent > upper_right_x_offset:
                                                 upper_right_x_offset = max_extent
                                         if max_extent > upper_right_y_offset:
                                                 upper_right_y_offset = max_extent
-                entity_entry[IDX_COLLISION_CACHE][1] = (lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset)
+                entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
+                        upper_right_x_offset, upper_right_y_offset)
 
-        entity_lower_left = (mul(entity_lower_left[0], HASH_SCALE_FACTOR), mul(entity_lower_left[1], HASH_SCALE_FACTOR))
+        entity_lower_left = (fixpoint.c_mul(entity_lower_left[0], HASH_SCALE_FACTOR), fixpoint.c_mul(entity_lower_left[1], HASH_SCALE_FACTOR))
 
+        cdef tuple area_lower_left
         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,
                 entity_lower_left[1] + lower_left_y_offset)
 
+        cdef tuple area_upper_right
         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,
                 entity_lower_left[1] + upper_right_y_offset)
 
-        fix2int = fixpoint.fix2int
-        floor = fixpoint.floor
-        area_lower_left = (fix2int(floor(area_lower_left[0])), fix2int(floor(area_lower_left[1])))
-        area_upper_right = (fix2int(floor(area_upper_right[0])), fix2int(floor(area_upper_right[1])))
+        area_lower_left = (fixpoint.c_fix2int(fixpoint.c_floor(area_lower_left[0])), fixpoint.c_fix2int(fixpoint.c_floor(area_lower_left[1])))
+        area_upper_right = (fixpoint.c_fix2int(fixpoint.c_floor(area_upper_right[0])), fixpoint.c_fix2int(fixpoint.c_floor(area_upper_right[1])))
         return (area_lower_left, area_upper_right)
 
-def _update_hash(state, entity_name, new_pos):
+cdef void c_remove_hash_entries(list state, str entity_name, tuple entity_lower_left):
         """
         TODO
         """
-        entity_entry = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name]
-        last_pos = entity_entry[IDX_COLLISION_LAST_POS]
-        if last_pos:
-                _remove_hash_entries(state, entity_name, last_pos)
-
-        entity_entry[IDX_COLLISION_LAST_POS] = new_pos
-
-        entity_lower_left, entity_upper_right = _get_hash_area(state, entity_name, new_pos)
-        entity_entry[IDX_COLLISION_CACHE][2] = (entity_lower_left, entity_upper_right)
-
-        hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
-        for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
-                for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
-                        hash = (x, y)
-                        if not hash_map.has_key(hash):
-                                hash_map[hash] = set()
-                        hash_map[hash].add(entity_name)
-
-def _remove_hash_entries(state, entity_name, entity_lower_left):
-        """
-        TODO
-        """
+        cdef list collision_cache
         collision_cache = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_CACHE]
-        last_added_range = collision_cache[2]
+
+        cdef tuple last_added_range
+        last_added_range = collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS]
+
+        cdef tuple entity_upper_right
         if last_added_range:
                 entity_lower_left, entity_upper_right = last_added_range
         else:
-                entity_lower_left, entity_upper_right = _get_hash_area(state, entity_name, entity_lower_left)
+                entity_lower_left, entity_upper_right = c_get_hash_area(state, entity_name, entity_lower_left)
 
+        cdef dict hash_map
         hash_map = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
+
+        cdef int x
+        cdef int y
         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
                         hash_map[(x, y)].remove(entity_name)
-        collision_cache[2] = None
+        collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None
 
-def delete(state, entity_name):
-        """
-        TODO
-        """
-        _remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
-        del state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name]
-
-def get_collision_shapes(state, entity_name, collision_def):
+cdef list c_get_collision_shapes(list state, str entity_name, list collision_def):
         """
         Get the absolute shapes taking into account position and rotation
 
@@ -271,14 +319,24 @@ def get_collision_shapes(state, entity_name, collision_def):
                 circle: ("circle", center_x, center_y, radius)
                 rectangle: ("rectangle", x, y, w, h, rotation)
         """
-        cached_absolute_shapes = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_CACHE][0]
+        cdef list entity_collision_cache
+        entity_collision_cache = collision_def[IDX_COLLISION_CACHE]
+
+        cdef list cached_absolute_shapes
+        cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]
         if cached_absolute_shapes:
                 return cached_absolute_shapes
 
+        cdef tuple pos
         pos = entities.get_pos(state, entity_name)
+
+        cdef tuple pos_offset
         pos_offset = entities.get_pos_offset(state, entity_name)
+
+        cdef list absolute_shapes
         absolute_shapes = []
 
+        cdef tuple collision_shape
         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:
                 if collision_shape[0] == "circle":
                         c_x = collision_shape[1]
@@ -293,39 +351,50 @@ def get_collision_shapes(state, entity_name, collision_def):
                         r_h = collision_shape[4]
                         absolute_shapes.append(("rectangle", pos[0] + pos_offset[0] + r_x, pos[1] + pos_offset[1] + r_y,
                                 r_w, r_h, entities.get_rot(state, entity_name)))
-                else:
-                        raise YapygCollisionException("Unknown shape %s" % collision_shape[0])
 
-        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES][entity_name][IDX_COLLISION_CACHE][0] = absolute_shapes
+        entity_collision_cache[0] = absolute_shapes
 
         return absolute_shapes
 
-def run(state, entity_name_1):
+cdef void c_run(list state, str entity_name_1):
         """
         TODO
         """
+        cdef list state_collisions
         state_collisions = state[globals.IDX_STATE_COLLISIONS]
 
         collision_handler = state_collisions[IDX_COLLISIONDB_HANDLER_FUNCTION]
         if not collision_handler:
                 return
 
+        cdef dict state_collisions_entities
         state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
         if not state_collisions_entities.has_key(entity_name_1):
                 return
 
+        cdef dict hash_map
         hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]
 
+        cdef list collision_def_1
         collision_def_1 = state_collisions_entities[entity_name_1]
-        absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)
+        cdef list absolute_shapes_1
+        absolute_shapes_1 = c_get_collision_shapes(state, entity_name_1, collision_def_1)
 
-        entity_1_lower_left, entity_1_upper_right = _get_hash_area(state,
+        cdef tuple entity_1_lower_left
+        cdef tuple entity_1_upper_right
+        entity_1_lower_left, entity_1_upper_right = c_get_hash_area(state,
                 entity_name_1, entities.get_pos(state, entity_name_1))
 
-        is_circle_circle_collision = fixpoint.is_circle_circle_collision
-        is_rect_circle_collision = fixpoint.is_rect_circle_collision
-
+        cdef set already_checked_set
         already_checked_set = set()
+
+        cdef int is_collision
+        cdef tuple hash
+        cdef set collision_candidates
+        cdef str entity_name_2
+        cdef list collision_def_2
+        cdef list absolute_shapes_2
+
         for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
                 for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
                         hash = (x, y)
@@ -344,7 +413,7 @@ def run(state, entity_name_1):
                                 already_checked_set.add(entity_name_2)
 
                                 collision_def_2 = state_collisions_entities[entity_name_2]
-                                absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
+                                absolute_shapes_2 = c_get_collision_shapes(state, entity_name_2, collision_def_2)
 
                                 for absolute_shape_1 in absolute_shapes_1:
                                         for absolute_shape_2 in absolute_shapes_2:
@@ -355,14 +424,13 @@ def run(state, entity_name_1):
 
                                                 if absolute_shape_1_type == "circle":
                                                         if absolute_shape_2_type == "circle":
-                                                                is_collision = is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                                is_collision = fixpoint.c_is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
                                                         elif absolute_shape_2_type == "rectangle":
-                                                                is_collision = is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                                is_collision = fixpoint.c_is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
                                                 elif absolute_shape_1_type == "rectangle":
                                                         if absolute_shape_2_type == "circle":
-                                                                is_collision = is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
-                                                        elif absolute_shape_2_type == "rectangle":
-                                                                # TODO
+                                                                is_collision = fixpoint.c_is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
+                                                        elif absolute_shape_2_type == "rectangle": # TODO
                                                                 is_collision = False
 
                                                 if is_collision:

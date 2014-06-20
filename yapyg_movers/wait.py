@@ -25,22 +25,23 @@ Waitstate mover
 import yapyg.movers
 import yapyg.fixpoint
 
-IDX_WAIT_MOVER_PASSED_TIME = 2
-IDX_WAIT_MOVER_WAIT_TIME = 3
-IDX_WAIT_MOVER_ON_END_FUNCTION = 4
+IDX_WAIT_MOVER_PASSED_TIME = 3
+IDX_WAIT_MOVER_WAIT_TIME = 4
+IDX_WAIT_MOVER_ON_END_FUNCTION = 5
 
 def add(state, mover_name, wait_time, on_end_function=None, do_replace=False):
         """
         TODO
         """
-        yapyg.movers.add(state, mover_name, create(wait_time, on_end_function), do_replace)
+        yapyg.movers.add(state, mover_name, create(mover_name, wait_time, on_end_function), do_replace)
 
-def create(wait_time, on_end_function=None):
+def create(mover_name, wait_time, on_end_function=None):
         """
         TODO
         """
         return ["wait",
                 run,
+                mover_name,
                 0,
                 yapyg.fixpoint.float2fix(float(wait_time)),
                 on_end_function,]
