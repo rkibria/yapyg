@@ -36,22 +36,6 @@ IDX_MOVERS_PHYSICAL_FRICTION = 8
 IDX_MOVERS_PHYSICAL_INELASTICITY = 9
 IDX_MOVERS_PHYSICAL_ON_END_FUNCTION = 10
 
-class YapygPhysicalMoverException(Exception):
-        """
-        TODO
-        """
-        def __init__(self, value):
-                """
-                TODO
-                """
-                self.value = value
-
-        def __str__(self):
-                """
-                TODO
-                """
-                return repr(self.value)
-
 def add(state, entity_name,
                 mass=1.0,
                 vx=0, vy=0,
@@ -99,8 +83,9 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         v_x = mover[IDX_MOVERS_PHYSICAL_VX]
         v_y = mover[IDX_MOVERS_PHYSICAL_VY]
 
-        delta_x = div(mul(v_x, frame_time_delta), yapyg.fixpoint.FIXP_1000)
-        delta_y = div(mul(v_y, frame_time_delta), yapyg.fixpoint.FIXP_1000)
+        FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+        delta_x = div(mul(v_x, frame_time_delta), FIXP_1000)
+        delta_y = div(mul(v_y, frame_time_delta), FIXP_1000)
 
         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y)
 
@@ -132,9 +117,11 @@ def _rectangle_circle_collision(state, rectangle_entity_name, circle_entity_name
         circle_move_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
         inelasticity = circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
 
+        FIXP_2 = yapyg.fixpoint.int2fix(2)
+        
         if rect_r != 0:
                 rotated_circle = yapyg.fixpoint.rotated_point(
-                        (rect_x + yapyg.fixpoint.div(rect_w, yapyg.fixpoint.FIXP_2), rect_y + yapyg.fixpoint.div(rect_h, yapyg.fixpoint.FIXP_2)),
+                        (rect_x + yapyg.fixpoint.div(rect_w, FIXP_2), rect_y + yapyg.fixpoint.div(rect_h, FIXP_2)),
                         (circle_x, circle_y),
                         -rect_r)
                 circle_x = rotated_circle[0]
@@ -269,10 +256,11 @@ def elastic_collision(v_1, v_2, m_1, m_2):
         """
         TODO
         """
+        FIXP_2 = yapyg.fixpoint.int2fix(2)
         mass_sum = m_1 + m_2
         return (
-                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_1, m_1 - m_2) + yapyg.fixpoint.mul(yapyg.fixpoint.FIXP_2, yapyg.fixpoint.mul(m_2, v_2)), mass_sum),
-                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_2, m_2 - m_1) + yapyg.fixpoint.mul(yapyg.fixpoint.FIXP_2, yapyg.fixpoint.mul(m_1, v_1)), mass_sum),
+                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_1, m_1 - m_2) + yapyg.fixpoint.mul(FIXP_2, yapyg.fixpoint.mul(m_2, v_2)), mass_sum),
+                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_2, m_2 - m_1) + yapyg.fixpoint.mul(FIXP_2, yapyg.fixpoint.mul(m_1, v_1)), mass_sum),
                 )
 
 def reflect_speeds(unit_vector, v1_vector, v2_vector, m_1, m_2):

@@ -64,10 +64,13 @@ def destroy(state):
         state[globals.IDX_STATE_SPRITES] = None
 
 def insert(state, sprite_name, textures, speed=0, pos_offset=(0, 0),
-                scale=(fixpoint.FIXP_1, fixpoint.FIXP_1), enable=True, pos=(0, 0), rot_list=(0,)):
+                scale=None, enable=True, pos=(0, 0), rot_list=(0,)):
         """
         TODO
         """
+        if not scale:
+                scale = (fixpoint.int2fix(1), fixpoint.int2fix(1))
+
         sprite = [
                 enable,
                 pos,

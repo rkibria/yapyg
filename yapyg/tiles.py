@@ -78,7 +78,7 @@ def add_tile_def(state, tile_name, texture_list):
         """
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name] = {}
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name]["textures"] = texture_list
-        texture_db.insert_combined(state, fixpoint.FIXP_1, tile_name, texture_list)
+        texture_db.insert_combined(state, fixpoint.int2fix(1), tile_name, texture_list)
 
 def get_tile(state, row, col):
         """

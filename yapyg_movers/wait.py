@@ -52,7 +52,8 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
         passed_time = mover[IDX_WAIT_MOVER_PASSED_TIME]
         wait_time = mover[IDX_WAIT_MOVER_WAIT_TIME]
 
-        passed_time += yapyg.fixpoint.div(frame_time_delta, yapyg.fixpoint.FIXP_1000)
+        FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+        passed_time += yapyg.fixpoint.div(frame_time_delta, FIXP_1000)
         if passed_time > wait_time:
                 passed_time = wait_time
         mover[IDX_WAIT_MOVER_PASSED_TIME] = passed_time

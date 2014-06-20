@@ -58,7 +58,7 @@ class YapygWidget(Widget):
                 if self.state:
                         cur_fps = fixpoint.float2fix(float(Clock.get_fps())) # fixpoint
                         if cur_fps > 0:
-                                last_frame_delta = fixpoint.div(fixpoint.FIXP_1000, cur_fps) # fixpoint, milliseconds
+                                last_frame_delta = fixpoint.div(fixpoint.int2fix(1000), cur_fps) # fixpoint, milliseconds
                                 if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
                                         self.min_frame_time_delta = last_frame_delta
                                 else:

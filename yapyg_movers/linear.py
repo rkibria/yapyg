@@ -97,7 +97,8 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 heading = yapyg.fixpoint.int2fix(heading_int)
                 yapyg.entities.set_rot(state, entity_name, heading)
 
-        passed_time += yapyg.fixpoint.div(frame_time_delta, yapyg.fixpoint.FIXP_1000)
+        FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+        passed_time += yapyg.fixpoint.div(frame_time_delta, FIXP_1000)
         if passed_time > travel_time:
                 passed_time = travel_time
         mover[IDX_LINEAR_MOVER_PASSED_TIME] = passed_time
@@ -105,8 +106,8 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         d_x = yapyg.fixpoint.mul(frame_time_delta, travel_vector[0])
         d_y = yapyg.fixpoint.mul(frame_time_delta, travel_vector[1])
 
-        d_x = yapyg.fixpoint.div(d_x, yapyg.fixpoint.FIXP_1000)
-        d_y = yapyg.fixpoint.div(d_y, yapyg.fixpoint.FIXP_1000)
+        d_x = yapyg.fixpoint.div(d_x, FIXP_1000)
+        d_y = yapyg.fixpoint.div(d_y, FIXP_1000)
 
         yapyg.entities.add_pos(state, entity_name, d_x, d_y)
 

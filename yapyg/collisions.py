@@ -118,7 +118,8 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                 ["rectangle", x, y, width, height]
                 ["circle", x, y, radius]
         """
-        FIXP_1_5 = fixpoint.FIXP_1_5
+        FIXP_2 = fixpoint.int2fix(2)
+        FIXP_1_5 = fixpoint.float2fix(1.5)
         div = fixpoint.div
         negate = fixpoint.negate
         mul = fixpoint.mul
@@ -183,7 +184,7 @@ def _get_hash_area(state, entity_name, entity_lower_left):
                                         if r_x != 0 or r_y != 0:
                                                 raise YapygCollisionException("TODO")
 
-                                        max_extent = div(negate(max(r_w, r_h)), fixpoint.FIXP_2)
+                                        max_extent = div(negate(max(r_w, r_h)), FIXP_2)
 
                                         if max_extent < lower_left_x_offset:
                                                 lower_left_x_offset = max_extent
