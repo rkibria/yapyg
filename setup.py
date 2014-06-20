@@ -9,18 +9,17 @@ except ImportError:
         have_cython = False
 
 if have_cython:
-        ext = cythonize("yapyg/*.pyx")
+        ext = cythonize("yapyg/*.pyx") + cythonize("yapyg_movers/*.pyx")
 else:
-        ext = [
-                Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
+        ext = [ Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
                 Extension('yapyg/collisions', ['yapyg/collisions.c']),
                 Extension('yapyg/movers', ['yapyg/movers.c']),
                 Extension('yapyg/sprites', ['yapyg/sprites.c']),
                 Extension('yapyg/widget', ['yapyg/widget.c']),
+                Extension('yapyg_movers/physical', ['yapyg_movers/physical.c']),
                 ]
 
-setup(
-        name='yapyg',
+setup(  name='yapyg',
         version='0.1.0',
         description='Yet Another Python Game Engine',
         author='Raihan Kibria',
