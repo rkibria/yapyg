@@ -22,69 +22,57 @@
 Fixed point math
 """
 
-cdef int c_int2fix(int value):
+cpdef int int2fix(int value):
+        """
+        TODO
+        """
         return value << 16
 
-def int2fix(int value):
+cpdef int float2fix(float value):
         """
         TODO
         """
-        return c_int2fix(value)
-
-cdef int c_float2fix(float value):
         return int(value * 65536.0)
 
-def float2fix(float value):
+cpdef int fix2int(int value):
         """
         TODO
         """
-        return c_float2fix(value)
-
-cdef int c_fix2int(int value):
         return value >> 16
 
-cdef int FIXP_minus1
-cdef int FIXP_0
-cdef int FIXP_1
-cdef int FIXP_2
-cdef int FIXP_90
-cdef int FIXP_128
-cdef int FIXP_180
-cdef int FIXP_270
-cdef int FIXP_360
-cdef int FIXP_1000
-cdef int FIXP_1_5
-cdef int FIXP_PI
+cpdef int FIXP_minus1
+cpdef int FIXP_0
+cpdef int FIXP_1
+cpdef int FIXP_2
+cpdef int FIXP_90
+cpdef int FIXP_128
+cpdef int FIXP_180
+cpdef int FIXP_270
+cpdef int FIXP_360
+cpdef int FIXP_1000
+cpdef int FIXP_1_5
+cpdef int FIXP_PI
 
-FIXP_minus1 = c_int2fix(-1)
-FIXP_0 = c_int2fix(0)
-FIXP_1 = c_int2fix(1)
-FIXP_2 = c_int2fix(2)
-FIXP_90 = c_int2fix(90)
-FIXP_128 = c_int2fix(128)
-FIXP_180 = c_int2fix(180)
-FIXP_270 = c_int2fix(270)
-FIXP_360 = c_int2fix(360)
-FIXP_1000 = c_int2fix(1000)
-FIXP_1_5 = c_float2fix(1.5)
-FIXP_PI = c_float2fix(3.14159265359)
+FIXP_minus1 = int2fix(-1)
+FIXP_0 = int2fix(0)
+FIXP_1 = int2fix(1)
+FIXP_2 = int2fix(2)
+FIXP_90 = int2fix(90)
+FIXP_128 = int2fix(128)
+FIXP_180 = int2fix(180)
+FIXP_270 = int2fix(270)
+FIXP_360 = int2fix(360)
+FIXP_1000 = int2fix(1000)
+FIXP_1_5 = float2fix(1.5)
+FIXP_PI = float2fix(3.14159265359)
 
-def fix2int(int value):
+cpdef float fix2float(int value):
         """
         TODO
         """
-        return c_fix2int(value)
-
-cdef float c_fix2float(int value):
         return value * 0.0000152587890625  # (1/65536.0)
 
-def fix2float(int value):
-        """
-        TODO
-        """
-        return c_fix2float(value)
-
-cdef int c_mul(int op1, int op2):
+cpdef int mul(int op1, int op2):
         """
         TODO
         """
@@ -92,83 +80,59 @@ cdef int c_mul(int op1, int op2):
         r = long(op1) * long(op2)
         return int(r >> 16)
 
-def mul(int op1, int op2):
-        return c_mul(op1, op2)
-
-cdef int c_div(int op1, int op2):
+cpdef int div(int op1, int op2):
+        """
+        TODO
+        """
         cdef long long o1
         o1 = long(op1) << 16
         cdef long long r
         r = o1 / long(op2)
         return int(r)
 
-def div(int op1, int op2):
+cpdef int dot_product(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return c_div(op1, op2)
+        return mul(v_1[0], v_2[0]) + mul(v_1[1], v_2[1])
 
-cdef int c_dot_product(tuple v_1, tuple v_2):
-        return c_mul(v_1[0], v_2[0]) + c_mul(v_1[1], v_2[1])
-
-def dot_product(tuple v_1, tuple v_2):
+cpdef tuple vector_product(tuple vec, int factor):
         """
         TODO
         """
-        return c_dot_product(v_1, v_2)
+        return (mul(vec[0], factor), mul(vec[1], factor))
 
-cdef tuple c_vector_product(tuple vec, int factor):
-        return (c_mul(vec[0], factor), c_mul(vec[1], factor))
-
-def vector_product(tuple vec, int factor):
+cpdef tuple vector_diff(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return c_vector_product(vec, factor)
-
-cdef tuple c_vector_diff(tuple v_1, tuple v_2):
         return (v_1[0] - v_2[0], v_1[1] - v_2[1])
 
-def vector_diff(tuple v_1, tuple v_2):
+cpdef tuple vector_sum(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return c_vector_diff(v_1, v_2)
-
-cdef tuple c_vector_sum(tuple v_1, tuple v_2):
         return (v_1[0] + v_2[0], v_1[1] + v_2[1])
 
-def vector_sum(tuple v_1, tuple v_2):
+cpdef tuple components(tuple normal_vector, tuple v_vector):
         """
         TODO
         """
-        return c_vector_sum(v_1, v_2)
-
-cdef tuple c_components(tuple normal_vector, tuple v_vector):
         cdef tuple parallel_vector
-        parallel_vector = c_vector_product(normal_vector,
-                c_dot_product(normal_vector, v_vector))
+        parallel_vector = vector_product(normal_vector,
+                dot_product(normal_vector, v_vector))
 
         cdef tuple perpendicular_vector
-        perpendicular_vector = c_vector_diff(v_vector, parallel_vector)
+        perpendicular_vector = vector_diff(v_vector, parallel_vector)
 
         return (parallel_vector, perpendicular_vector)
 
-def components(tuple normal_vector, tuple v_vector):
+cpdef tuple complex_multiply(tuple complex_1, tuple complex_2):
         """
         TODO
         """
-        return c_components(normal_vector, v_vector)
-
-cdef tuple c_complex_multiply(tuple complex_1, tuple complex_2):
-        return (c_mul(complex_1[0], complex_2[0]) - c_mul(complex_1[1], complex_2[1]),
-                c_mul(complex_1[0], complex_2[1]) + c_mul(complex_1[1], complex_2[0]))
-
-def complex_multiply(tuple complex_1, tuple complex_2):
-        """
-        TODO
-        """
-        return c_complex_multiply(complex_1, complex_2)
+        return (mul(complex_1[0], complex_2[0]) - mul(complex_1[1], complex_2[1]),
+                mul(complex_1[0], complex_2[1]) + mul(complex_1[1], complex_2[0]))
 
 # sin/cos
 trigonometry_table = (
@@ -535,12 +499,15 @@ trigonometry_table = (
         (0, 65536), # 360
         )
 
-cdef int c_trig_linear_interpolation(int degrees, int index):
+cdef int trig_linear_interpolation(int degrees, int index):
+        """
+        TODO
+        """
         cdef int int_degrees
-        int_degrees = c_fix2int(degrees)
+        int_degrees = fix2int(degrees)
 
         cdef int fix_whole_degrees
-        fix_whole_degrees = c_int2fix(int_degrees)
+        fix_whole_degrees = int2fix(int_degrees)
 
         cdef int fix_remainder_degrees
         fix_remainder_degrees = degrees - fix_whole_degrees
@@ -557,39 +524,30 @@ cdef int c_trig_linear_interpolation(int degrees, int index):
 
         cdef int delta
         delta = higher_val - lower_val
-        return lower_val + c_mul(delta, fix_remainder_degrees)
+        return lower_val + mul(delta, fix_remainder_degrees)
 
-cdef int c_sin(int degrees):
-        return c_trig_linear_interpolation(degrees, 0)
-
-def sin(int degrees):
+cpdef int sin(int degrees):
         """
         TODO
         """
-        return c_sin(degrees)
+        return trig_linear_interpolation(degrees, 0)
 
-cdef int c_cos(int degrees):
-        return c_trig_linear_interpolation(degrees, 1)
-
-def cos(int degrees):
+cpdef int cos(int degrees):
         """
         TODO
         """
-        return c_cos(degrees)
+        return trig_linear_interpolation(degrees, 1)
 
-cdef tuple c_rotated_point(tuple origin_point, tuple point, int rot):
+cpdef tuple rotated_point(tuple origin_point, tuple point, int rot):
+        """
+        TODO
+        """
         cdef tuple rot_relative_point
-        rot_relative_point = c_complex_multiply((point[0] - origin_point[0],
+        rot_relative_point = complex_multiply((point[0] - origin_point[0],
                 point[1] - origin_point[1]), (cos(rot), sin(rot)))
         return (origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1])
 
-def rotated_point(tuple origin_point, tuple point, int rot):
-        """
-        TODO
-        """
-        return c_rotated_point(origin_point, point, rot)
-
-cdef int c_bit_len(int int_type):
+cdef int bit_len(int int_type):
         """
         TODO
         """
@@ -600,72 +558,57 @@ cdef int c_bit_len(int int_type):
                 length += 1
         return length
 
-cdef int c_sqrt(int x):
+cpdef int sqrt(int x):
         """
         Babylonian method
         """
         if x == FIXP_0:
                 return FIXP_0
         cdef int significant_bits
-        significant_bits = c_bit_len(x >> 16)
+        significant_bits = bit_len(x >> 16)
 
         cdef int x_n
-        x_n = c_int2fix(1 << (significant_bits / 2))
+        x_n = int2fix(1 << (significant_bits / 2))
 
         cdef int x_n_plus_1
         for i in xrange(10):
                 if x_n == 0:
                         return x_n
-                x_n_plus_1 = c_div((x_n + c_div(x, x_n)), FIXP_2)
+                x_n_plus_1 = div((x_n + div(x, x_n)), FIXP_2)
                 if x_n_plus_1 == x_n:
                         return x_n
                 else:
                         x_n = x_n_plus_1
         return x_n
 
-def sqrt(int x):
-        """
-        Babylonian method
-        """
-        return c_sqrt(x)
-
-cdef int c_length(tuple vector):
-        cdef int x_dist
-        x_dist = vector[0]
-        x_dist = c_mul(x_dist, x_dist)
-
-        cdef int y_dist
-        y_dist = vector[1]
-        y_dist = c_mul(y_dist, y_dist)
-
-        return c_sqrt(x_dist + y_dist)
-
-def length(tuple vector):
+cpdef int length(tuple vector):
         """
         TODO
         """
-        return c_length(vector)
+        cdef int x_dist
+        x_dist = vector[0]
+        x_dist = mul(x_dist, x_dist)
 
-cdef int c_distance(tuple pos_1, tuple pos_2):
-        return c_length((pos_2[0] - pos_1[0], pos_2[1] - pos_1[1],))
+        cdef int y_dist
+        y_dist = vector[1]
+        y_dist = mul(y_dist, y_dist)
 
-def distance(tuple pos_1, tuple pos_2):
+        return sqrt(x_dist + y_dist)
+
+cpdef int distance(tuple pos_1, tuple pos_2):
         """
-        Euclidian distance between pos_1 and pos_2
+        TODO
         """
-        return c_distance(pos_1, pos_2)
+        return length((pos_2[0] - pos_1[0], pos_2[1] - pos_1[1],))
 
-cdef tuple c_unit_vector(tuple pos_1, tuple pos_2):
+cpdef tuple unit_vector(tuple pos_1, tuple pos_2):
+        """
+        TODO
+        """
         cdef int vector_distance
-        vector_distance = c_distance(pos_1, pos_2)
-        return (c_div(pos_2[0] - pos_1[0], vector_distance),
-                c_div(pos_2[1] - pos_1[1], vector_distance),)
-
-def unit_vector(tuple pos_1, tuple pos_2):
-        """
-        Returns a unit vector pointing from pos_1 to pos_2
-        """
-        return c_unit_vector(pos_1, pos_2)
+        vector_distance = distance(pos_1, pos_2)
+        return (div(pos_2[0] - pos_1[0], vector_distance),
+                div(pos_2[1] - pos_1[1], vector_distance),)
 
 # t[i] = arctan_degrees(1.0 / 128 * i)
 arctan_table = (
@@ -802,7 +745,7 @@ arctan_table = (
 
 ARCTAN_STEP_SIZE = div(FIXP_1, FIXP_128)
 
-cdef int c_atan2(int y, int x):
+cpdef int atan2(int y, int x):
         """
         TODO
         """
@@ -820,24 +763,24 @@ cdef int c_atan2(int y, int x):
                         # upper right quadrant
                         if y_abs < x_abs:
                                 # octant 1
-                                quot = c_div(y_abs, x_abs)
+                                quot = div(y_abs, x_abs)
                                 base = FIXP_0
                                 add_to_base = True
                         else:
                                 # octant 2
-                                quot = c_div(x_abs, y_abs)
+                                quot = div(x_abs, y_abs)
                                 base = FIXP_90
                                 add_to_base = False
                 else:
                         # upper left quadrant
                         if y_abs >= x_abs:
                                 # octant 3
-                                quot = c_div(x_abs, y_abs)
+                                quot = div(x_abs, y_abs)
                                 base = FIXP_90
                                 add_to_base = True
                         else:
                                 # octant 4
-                                quot = c_div(y_abs, x_abs)
+                                quot = div(y_abs, x_abs)
                                 base = FIXP_180
                                 add_to_base = False
         else:
@@ -845,29 +788,29 @@ cdef int c_atan2(int y, int x):
                         # lower left quadrant
                         if y_abs < x_abs:
                                 # octant 5
-                                quot = c_div(y_abs, x_abs)
+                                quot = div(y_abs, x_abs)
                                 base = FIXP_180
                                 add_to_base = True
                         else:
                                 # octant 6
-                                quot = c_div(x_abs, y_abs)
+                                quot = div(x_abs, y_abs)
                                 base = FIXP_270
                                 add_to_base = False
                 else:
                         # lower right quadrant
                         if y_abs >= x_abs:
                                 # octant 7
-                                quot = c_div(x_abs, y_abs)
+                                quot = div(x_abs, y_abs)
                                 base = FIXP_270
                                 add_to_base = True
                         else:
                                 # octant 8
-                                quot = c_div(y_abs, x_abs)
+                                quot = div(y_abs, x_abs)
                                 base = FIXP_360
                                 add_to_base = False
 
         cdef int index
-        index = c_fix2int(c_div(quot, ARCTAN_STEP_SIZE))
+        index = fix2int(div(quot, ARCTAN_STEP_SIZE))
 
         cdef int lookup
         lookup = arctan_table[index]
@@ -879,22 +822,16 @@ cdef int c_atan2(int y, int x):
                 result = base - lookup
         return result
 
-def atan2(int y, int x):
+cpdef int negate(int x):
         """
         TODO
         """
-        return c_atan2(y, x)
+        return mul(FIXP_minus1, x)
 
-cdef int c_negate(int x):
-        return c_mul(FIXP_minus1, x)
-
-def negate(int x):
+cpdef int is_circle_circle_collision(tuple c_1, tuple c_2):
         """
         TODO
         """
-        return c_negate(x)
-
-cdef int c_is_circle_circle_collision(tuple c_1, tuple c_2):
         cdef int c1_x
         cdef int c1_y
         cdef int c1_r
@@ -916,26 +853,17 @@ cdef int c_is_circle_circle_collision(tuple c_1, tuple c_2):
         cdef int sq_3
 
         sq_1 = c2_x - c1_x
-        sq_1 = c_mul(sq_1, sq_1)
+        sq_1 = mul(sq_1, sq_1)
 
         sq_2 = c2_y - c1_y
-        sq_2 = c_mul(sq_2, sq_2)
+        sq_2 = mul(sq_2, sq_2)
 
         sq_3 = c1_r + c2_r
-        sq_3 = c_mul(sq_3, sq_3)
+        sq_3 = mul(sq_3, sq_3)
 
         return sq_3 >= (sq_1 + sq_2)
 
-def is_circle_circle_collision(tuple c_1, tuple c_2):
-        """
-        circ = ("circle", x, y, r): x/y = center, r = radius
-
-        Test if distance between circle centers is smaller
-        than the sum of circle radii.
-        """
-        return c_is_circle_circle_collision(c_1, c_2)
-
-cdef int c_is_rect_circle_collision(tuple circ, tuple rect):
+cpdef int is_rect_circle_collision(tuple circ, tuple rect):
         """
         circ = ("circle", x, y, r)
         rect = ("rectangle", x, y, w, h, rot)
@@ -968,7 +896,7 @@ cdef int c_is_rect_circle_collision(tuple circ, tuple rect):
 
         cdef tuple rotated_circle
         if r_rot != 0:
-                rotated_circle = c_rotated_point((r_x1 + c_div(r_w, FIXP_2), r_y1 + c_div(r_h, FIXP_2)), (c_x, c_y), -r_rot)
+                rotated_circle = rotated_point((r_x1 + div(r_w, FIXP_2), r_y1 + div(r_h, FIXP_2)), (c_x, c_y), -r_rot)
                 c_x = rotated_circle[0]
                 c_y = rotated_circle[1]
 
@@ -987,7 +915,7 @@ cdef int c_is_rect_circle_collision(tuple circ, tuple rect):
         circle_point = (c_y, c_x)
 
         for corner_circle in corner_circles:
-                circle_outside = not c_is_point_in_circle(circle_point, corner_circle)
+                circle_outside = not is_point_in_circle(circle_point, corner_circle)
                 if not circle_outside:
                         break
 
@@ -1001,17 +929,13 @@ cdef int c_is_rect_circle_collision(tuple circ, tuple rect):
 
         return not circle_outside
 
-def is_rect_circle_collision(tuple circ, tuple rect):
+cpdef int is_point_in_circle(tuple point, tuple circ):
         """
-        circ = ("circle", x, y, r)
-        rect = ("rectangle", x, y, w, h, rot)
+        TODO
         """
-        return c_is_rect_circle_collision(circ, rect)
-
-cdef int c_is_point_in_circle(tuple point, tuple circ):
-        cdef int c_x
-        cdef int c_y
-        cdef int c_r
+        cpdef int x
+        cpdef int y
+        cpdef int r
         cdef int p_x
         cdef int p_y
 
@@ -1023,38 +947,25 @@ cdef int c_is_point_in_circle(tuple point, tuple circ):
 
         cdef int y_d
         y_d = p_y - c_y
-        y_d = c_mul(y_d, y_d)
+        y_d = mul(y_d, y_d)
 
         cdef int x_d
         x_d = p_x - c_x
-        x_d = c_mul(x_d, x_d)
+        x_d = mul(x_d, x_d)
 
         cdef int dist
         dist = y_d + x_d
 
-        return dist <= c_mul(c_r, c_r)
+        return dist <= mul(c_r, c_r)
 
-def is_point_in_circle(tuple point, tuple circ):
-        """
-        point = (x, y)
-        circ = (x, y, r)
-        """
-        return c_is_point_in_circle(point, circ)
-
-cdef int c_heading_from_to(tuple pos1, tuple pos2):
-        return c_atan2(pos2[1] - pos1[1], pos2[0] - pos1[0])
-
-def heading_from_to(tuple pos1, tuple pos2):
+cpdef int heading_from_to(tuple pos1, tuple pos2):
         """
         TODO
         """
-        return c_heading_from_to(pos1, pos2)
+        return atan2(pos2[1] - pos1[1], pos2[0] - pos1[0])
 
-cdef int c_floor(int x):
-        return c_int2fix(c_fix2int(x))
-
-def floor(int x):
+cpdef int floor(int x):
         """
         TODO
         """
-        return c_floor(x)
+        return int2fix(fix2int(x))

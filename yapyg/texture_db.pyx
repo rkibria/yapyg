@@ -26,69 +26,65 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
+cimport fixpoint
+
 import globals
 import screen
-import fixpoint
 
-class YapygTextureDbException(Exception):
-        """
-        TODO
-        """
-        def __init__(self, value):
-                """
-                TODO
-                """
-                self.value = value
-
-        def __str__(self):
-                """
-                TODO
-                """
-                return repr(self.value)
-
-def initialize(state):
+cpdef initialize(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_TEXTURE_DB] = {}
 
-def destroy(state):
+cpdef destroy(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_TEXTURE_DB] = None
 
-def insert(state, texture_name, texture):
+cpdef insert(list state, str texture_name, texture):
         """
         TODO
         """
-        state[globals.IDX_STATE_TEXTURE_DB][texture_name] = texture
+        cdef dict texturedb
+        texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        texturedb[texture_name] = texture
 
-def load(state, texture_name, texture_filename):
+cpdef load(list state, str texture_name, str texture_filename):
         """
         TODO
         """
-        state[globals.IDX_STATE_TEXTURE_DB][texture_name] = Image(source=texture_filename).texture
+        cdef dict texturedb
+        texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        texturedb[texture_name] = Image(source=texture_filename).texture
 
-def get(state, texture_name):
+cpdef get(list state, str texture_name):
         """
         TODO
         """
-        if state[globals.IDX_STATE_TEXTURE_DB].has_key(texture_name):
-                return state[globals.IDX_STATE_TEXTURE_DB][texture_name]
+        cdef dict texturedb
+        texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        if texturedb.has_key(texture_name):
+                return texturedb[texture_name]
         else:
-                raise YapygTextureDbException("Texture '" + texture_name + "' not present")
+                return None
 
-def insert_combined(state, texture_size, texture_name, texture_list):
+cpdef insert_combined(list state, int texture_size, str texture_name, tuple texture_list):
         """
         TODO
         """
+        cdef int tile_size
         tile_size = screen.get_tile_size(state)
+        
         texture_size = fixpoint.mul(tile_size, texture_size)
+        
+        cdef int int_texture_size
         int_texture_size = fixpoint.fix2int(texture_size)
 
+        cdef str texture_filename
         if len(texture_list) == 0:
-                raise YapygTextureDbException("insert_combined() called with empty list")
+                return
         elif len(texture_list) == 1:
                 # Single texture, just load it and enter it with the
                 # tile name as key to texture dict
@@ -105,42 +101,42 @@ def insert_combined(state, texture_size, texture_name, texture_list):
                         fbo.draw()
                 insert(state, texture_name, texture)
 
-def insert_color_rect(state, texture_w, texture_h, texture_name, c_r, c_g, c_b):
+cpdef insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
         TODO
         """
-        tile_size = screen.get_tile_size(state)
+        cdef float float_tile_size
+        float_tile_size = fixpoint.fix2float(screen.get_tile_size(state))
 
-        texture_w = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_w)))
-        texture_h = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_h)))
-
-        texture_w = fixpoint.fix2int(texture_w)
-        texture_h = fixpoint.fix2int(texture_h)
-
-        texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
-        fbo = Fbo(size=(texture_w, texture_h), texture=texture)
+        cdef int int_texture_w
+        cdef int int_texture_h
+        int_texture_w = int(texture_w * float_tile_size)
+        int_texture_h = int(texture_h * float_tile_size)
+        
+        texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
+        fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)
         with fbo:
                 Color(c_r, c_g, c_b)
-                Rectangle(pos=(0, 0), size=(texture_w, texture_h))
+                Rectangle(pos=(0, 0), size=(int_texture_w, int_texture_h))
         fbo.draw()
         insert(state, texture_name, texture)
 
-def insert_color_ellipse(state, texture_w, texture_h, texture_name, c_r, c_g, c_b):
+cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
         TODO
         """
-        tile_size = screen.get_tile_size(state)
+        cdef float float_tile_size
+        float_tile_size = fixpoint.fix2float(screen.get_tile_size(state))
 
-        texture_w = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_w)))
-        texture_h = fixpoint.mul(tile_size, fixpoint.float2fix(float(texture_h)))
-
-        texture_w = fixpoint.fix2int(texture_w)
-        texture_h = fixpoint.fix2int(texture_h)
-
-        texture = Texture.create(size=(texture_w, texture_h), colorfmt='rgba')
-        fbo = Fbo(size=(texture_w, texture_h), texture=texture)
+        cdef int int_texture_w
+        cdef int int_texture_h
+        int_texture_w = int(texture_w * float_tile_size)
+        int_texture_h = int(texture_h * float_tile_size)
+        
+        texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
+        fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)
         with fbo:
                 Color(c_r, c_g, c_b)
-                Ellipse(pos=(0, 0), size=(texture_w, texture_h))
+                Ellipse(pos=(0, 0), size=(int_texture_w, int_texture_h))
         fbo.draw()
         insert(state, texture_name, texture)

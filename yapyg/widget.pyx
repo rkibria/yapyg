@@ -25,13 +25,13 @@ from kivy.core.window import Window
 cimport fixpoint
 cimport movers
 cimport sprites
+cimport tiles
 
-import tiles
 import view
 import factory
 import timer
 
-MIN_FRAME_DELTA = fixpoint.c_int2fix(35)
+MIN_FRAME_DELTA = fixpoint.int2fix(35)
 
 class YapygWidget(Widget):
         def __init__(self,
@@ -42,8 +42,8 @@ class YapygWidget(Widget):
                 ):
                 super(YapygWidget, self).__init__(**kwargs)
 
-                self.view_size = (fixpoint.c_float2fix(float(view_size[0])), fixpoint.c_float2fix(float(view_size[1])))
-                self.scale = fixpoint.c_float2fix(float(scale))
+                self.view_size = (fixpoint.float2fix(float(view_size[0])), fixpoint.float2fix(float(view_size[1])))
+                self.scale = fixpoint.float2fix(float(scale))
                 self.state = state
                 self.redraw_tiles = [True]
 
@@ -57,9 +57,9 @@ class YapygWidget(Widget):
 
         def on_timer(self, dt):
                 if self.state:
-                        cur_fps = fixpoint.c_float2fix(float(Clock.get_fps())) # fixpoint
+                        cur_fps = fixpoint.float2fix(float(Clock.get_fps())) # fixpoint
                         if cur_fps > 0:
-                                last_frame_delta = fixpoint.c_div(fixpoint.c_int2fix(1000), cur_fps) # fixpoint, milliseconds
+                                last_frame_delta = fixpoint.div(fixpoint.int2fix(1000), cur_fps) # fixpoint, milliseconds
                                 if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
                                         self.min_frame_time_delta = last_frame_delta
                                 else:
@@ -75,7 +75,7 @@ class YapygWidget(Widget):
         def enable_redraw_tiles(self, value):
                 self.redraw_tiles = value
                 if value:
-                        c_redraw(self.state, fixpoint.c_float2fix(0.01), self.redraw_tiles, self.scale, self.canvas, self.view_size)
+                        c_redraw(self.state, fixpoint.float2fix(0.01), self.redraw_tiles, self.scale, self.canvas, self.view_size)
 
 cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scale, canvas, tuple view_size):
         movers.c_run(state, frame_time_delta)
@@ -84,7 +84,7 @@ cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scal
                 redraw_tiles[0] = True
 
         if redraw_tiles[0]:
-                tiles.draw(state, scale, canvas, view_size)
+                tiles.c_draw(state, scale, canvas, view_size)
                 redraw_tiles[0] = False
 
         sprites.c_draw(state, canvas, frame_time_delta, scale)

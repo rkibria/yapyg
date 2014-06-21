@@ -27,7 +27,7 @@ cimport fixpoint
 import globals
 import entities
 
-HASH_SCALE_FACTOR = fixpoint.c_int2fix(4)
+HASH_SCALE_FACTOR = fixpoint.int2fix(4)
 
 IDX_COLLISIONDB_ENTITIES = 0
 IDX_COLLISIONDB_HASH_MAP = 1
@@ -41,7 +41,7 @@ IDX_COLLISION_CACHE_ABS_SHAPE = 0
 IDX_COLLISION_CACHE_HASH_EXTENT = 1
 IDX_COLLISION_CACHE_LAST_HASH_POS = 2
 
-def initialize(list state):
+cpdef initialize(list state):
         """
         TODO
         """
@@ -49,15 +49,14 @@ def initialize(list state):
                 {},
                 {},
                 None,]
-        entities.add_pos_listener(state, entity_pos_listener)
 
-def destroy(list state):
+cpdef destroy(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_COLLISIONS] = None
 
-def entity_pos_listener(list state, str entity_name, tuple pos):
+cpdef entity_pos_listener(list state, str entity_name, tuple pos):
         """
         TODO
         """
@@ -67,13 +66,13 @@ def entity_pos_listener(list state, str entity_name, tuple pos):
                 collision_db[entity_name][IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_ABS_SHAPE] = None
                 c_update_hash(state, entity_name, pos)
 
-def set_handler(list state, handler_function):
+cpdef set_handler(list state, handler_function):
         """
         TODO
         """
         state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
 
-def add(list state, str entity_name, tuple shapes_list):
+cpdef add(list state, str entity_name, tuple shapes_list):
         """
         TODO
         """
@@ -84,15 +83,15 @@ def add(list state, str entity_name, tuple shapes_list):
                 trans_shape = ("UNKNOWN",)
                 if shape[0] == "rectangle":
                         trans_shape = ("rectangle",
-                                fixpoint.c_float2fix(float(shape[1])),
-                                fixpoint.c_float2fix(float(shape[2])),
-                                fixpoint.c_float2fix(float(shape[3])),
-                                fixpoint.c_float2fix(float(shape[4])),)
+                                fixpoint.float2fix(float(shape[1])),
+                                fixpoint.float2fix(float(shape[2])),
+                                fixpoint.float2fix(float(shape[3])),
+                                fixpoint.float2fix(float(shape[4])),)
                 elif shape[0] == "circle":
                         trans_shape = ("circle",
-                                fixpoint.c_float2fix(float(shape[1])),
-                                fixpoint.c_float2fix(float(shape[2])),
-                                fixpoint.c_float2fix(float(shape[3])),)
+                                fixpoint.float2fix(float(shape[1])),
+                                fixpoint.float2fix(float(shape[2])),
+                                fixpoint.float2fix(float(shape[3])),)
                 trans_shapes_list.append(trans_shape)
 
         cdef dict collision_db
@@ -105,7 +104,7 @@ def add(list state, str entity_name, tuple shapes_list):
 
         c_update_hash(state, entity_name, entities.get_pos(state, entity_name))
 
-def delete(list state, str entity_name):
+cpdef delete(list state, str entity_name):
         """
         TODO
         """
@@ -205,9 +204,9 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
 
                 for collision_shape in entity_shapes:
                         if collision_shape[0] == "circle":
-                                c_x = fixpoint.c_mul(collision_shape[1], HASH_SCALE_FACTOR)
-                                c_y = fixpoint.c_mul(collision_shape[2], HASH_SCALE_FACTOR)
-                                c_r = fixpoint.c_mul(collision_shape[3], HASH_SCALE_FACTOR)
+                                c_x = fixpoint.mul(collision_shape[1], HASH_SCALE_FACTOR)
+                                c_y = fixpoint.mul(collision_shape[2], HASH_SCALE_FACTOR)
+                                c_r = fixpoint.mul(collision_shape[3], HASH_SCALE_FACTOR)
 
                                 c_ll_x = c_x - c_r
                                 c_ll_y = c_y - c_r
@@ -227,10 +226,10 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
                                         upper_right_y_offset = c_ur_y
 
                         elif collision_shape[0] == "rectangle":
-                                r_x = fixpoint.c_mul(collision_shape[1], HASH_SCALE_FACTOR)
-                                r_y = fixpoint.c_mul(collision_shape[2], HASH_SCALE_FACTOR)
-                                r_w = fixpoint.c_mul(collision_shape[3], HASH_SCALE_FACTOR)
-                                r_h = fixpoint.c_mul(collision_shape[4], HASH_SCALE_FACTOR)
+                                r_x = fixpoint.mul(collision_shape[1], HASH_SCALE_FACTOR)
+                                r_y = fixpoint.mul(collision_shape[2], HASH_SCALE_FACTOR)
+                                r_w = fixpoint.mul(collision_shape[3], HASH_SCALE_FACTOR)
+                                r_h = fixpoint.mul(collision_shape[4], HASH_SCALE_FACTOR)
                                 rot = entities.get_rot(state, entity_name)
 
                                 if rot == 0:
@@ -251,7 +250,7 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
                                         if r_x != 0 or r_y != 0: # TODO
                                                 pass
 
-                                        max_extent = fixpoint.c_div(fixpoint.c_negate(max(r_w, r_h)), FIXP_2)
+                                        max_extent = fixpoint.div(fixpoint.negate(max(r_w, r_h)), FIXP_2)
 
                                         if max_extent < lower_left_x_offset:
                                                 lower_left_x_offset = max_extent
@@ -259,7 +258,7 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
                                         if max_extent < lower_left_y_offset:
                                                 lower_left_y_offset = max_extent
 
-                                        max_extent = fixpoint.c_mul(FIXP_1_5, max(r_w, r_h))
+                                        max_extent = fixpoint.mul(FIXP_1_5, max(r_w, r_h))
 
                                         if max_extent > upper_right_x_offset:
                                                 upper_right_x_offset = max_extent
@@ -268,7 +267,7 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
                         upper_right_x_offset, upper_right_y_offset)
 
-        entity_lower_left = (fixpoint.c_mul(entity_lower_left[0], HASH_SCALE_FACTOR), fixpoint.c_mul(entity_lower_left[1], HASH_SCALE_FACTOR))
+        entity_lower_left = (fixpoint.mul(entity_lower_left[0], HASH_SCALE_FACTOR), fixpoint.mul(entity_lower_left[1], HASH_SCALE_FACTOR))
 
         cdef tuple area_lower_left
         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,
@@ -278,8 +277,8 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,
                 entity_lower_left[1] + upper_right_y_offset)
 
-        area_lower_left = (fixpoint.c_fix2int(fixpoint.c_floor(area_lower_left[0])), fixpoint.c_fix2int(fixpoint.c_floor(area_lower_left[1])))
-        area_upper_right = (fixpoint.c_fix2int(fixpoint.c_floor(area_upper_right[0])), fixpoint.c_fix2int(fixpoint.c_floor(area_upper_right[1])))
+        area_lower_left = (fixpoint.fix2int(fixpoint.floor(area_lower_left[0])), fixpoint.fix2int(fixpoint.floor(area_lower_left[1])))
+        area_upper_right = (fixpoint.fix2int(fixpoint.floor(area_upper_right[0])), fixpoint.fix2int(fixpoint.floor(area_upper_right[1])))
         return (area_lower_left, area_upper_right)
 
 cdef void c_remove_hash_entries(list state, str entity_name, tuple entity_lower_left):
@@ -424,12 +423,12 @@ cdef void c_run(list state, str entity_name_1):
 
                                                 if absolute_shape_1_type == "circle":
                                                         if absolute_shape_2_type == "circle":
-                                                                is_collision = fixpoint.c_is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                                is_collision = fixpoint.is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
                                                         elif absolute_shape_2_type == "rectangle":
-                                                                is_collision = fixpoint.c_is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                                is_collision = fixpoint.is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
                                                 elif absolute_shape_1_type == "rectangle":
                                                         if absolute_shape_2_type == "circle":
-                                                                is_collision = fixpoint.c_is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
+                                                                is_collision = fixpoint.is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
                                                         elif absolute_shape_2_type == "rectangle": # TODO
                                                                 is_collision = False
 

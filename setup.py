@@ -11,10 +11,13 @@ except ImportError:
 if have_cython:
         ext = cythonize("yapyg/*.pyx") + cythonize("yapyg_movers/*.pyx")
 else:
-        ext = [ Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
-                Extension('yapyg/collisions', ['yapyg/collisions.c']),
+        ext = [ Extension('yapyg/collisions', ['yapyg/collisions.c']),
+                Extension('yapyg/entities', ['yapyg/entities.c']),
+                Extension('yapyg/fixpoint', ['yapyg/fixpoint.c']),
                 Extension('yapyg/movers', ['yapyg/movers.c']),
                 Extension('yapyg/sprites', ['yapyg/sprites.c']),
+                Extension('yapyg/texture_db', ['yapyg/texture_db.c']),
+                Extension('yapyg/tiles', ['yapyg/tiles.c']),
                 Extension('yapyg/widget', ['yapyg/widget.c']),
                 Extension('yapyg_movers/physical', ['yapyg_movers/physical.c']),
                 ]

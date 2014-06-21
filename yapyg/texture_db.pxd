@@ -19,14 +19,14 @@
 # THE SOFTWARE.
 
 """
-General movements
+Texture storage and operations
 """
 
 cpdef initialize(list state)
 cpdef destroy(list state)
-cpdef add(list state, str mover_name, list mover, int do_replace=*)
-cpdef get_active(list state, str mover_name)
-cpdef get_type(list state, list mover)
-cpdef remove(list state, str mover_name)
-
-cdef void c_run(list state, int frame_time_delta)
+cpdef insert(list state, str texture_name, texture)
+cpdef load(list state, str texture_name, str texture_filename)
+cpdef get(list state, str texture_name)
+cpdef insert_combined(list state, int texture_size, str texture_name, tuple texture_list)
+cpdef insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b)
+cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b)

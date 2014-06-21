@@ -19,14 +19,15 @@
 # THE SOFTWARE.
 
 """
-General movements
+Tiles
 """
 
-cpdef initialize(list state)
+cpdef initialize(list state, int tile_size)
 cpdef destroy(list state)
-cpdef add(list state, str mover_name, list mover, int do_replace=*)
-cpdef get_active(list state, str mover_name)
-cpdef get_type(list state, list mover)
-cpdef remove(list state, str mover_name)
+cpdef int get_tile_size(state)
+cpdef set_area(list state, list area)
+cpdef get_area(list state)
+cpdef add_tile_def(list state, str tile_name, tuple texture_list)
+cpdef str get_tile(list state, int row, int col)
 
-cdef void c_run(list state, int frame_time_delta)
+cdef c_draw(list state, int scale, canvas, tuple view_size)

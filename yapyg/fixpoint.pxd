@@ -22,44 +22,44 @@
 Fixed point math
 """
 
-cdef int c_int2fix(int value)
-cdef int c_float2fix(float value)
-cdef int c_fix2int(int value)
-cdef float c_fix2float(int value)
-cdef int c_mul(int op1, int op2)
-cdef int c_div(int op1, int op2)
-cdef int c_dot_product(tuple v_1, tuple v_2)
-cdef tuple c_vector_product(tuple vec, int factor)
-cdef tuple c_vector_diff(tuple v_1, tuple v_2)
-cdef tuple c_vector_sum(tuple v_1, tuple v_2)
-cdef tuple c_components(tuple normal_vector, tuple v_vector)
-cdef tuple c_complex_multiply(tuple complex_1, tuple complex_2)
-cdef int c_trig_linear_interpolation(int degrees, int index)
-cdef int c_sin(int degrees)
-cdef int c_cos(int degrees)
-cdef tuple c_rotated_point(tuple origin_point, tuple point, int rot)
-cdef int c_bit_len(int int_type)
-cdef int c_sqrt(int x)
-cdef int c_length(tuple vector)
-cdef int c_distance(tuple pos_1, tuple pos_2)
-cdef tuple c_unit_vector(tuple pos_1, tuple pos_2)
-cdef int c_atan2(int y, int x)
-cdef int c_negate(int x)
-cdef int c_is_circle_circle_collision(tuple c_1, tuple c_2)
-cdef int c_is_rect_circle_collision(tuple circ, tuple rect)
-cdef int c_is_point_in_circle(tuple point, tuple circ)
-cdef int c_heading_from_to(tuple pos1, tuple pos2)
-cdef int c_floor(int x)
+cpdef int int2fix(int value)
+cpdef int float2fix(float value)
+cpdef int fix2int(int value)
+cpdef float fix2float(int value)
+cpdef int mul(int op1, int op2)
+cpdef int div(int op1, int op2)
+cpdef int dot_product(tuple v_1, tuple v_2)
+cpdef tuple vector_product(tuple vec, int factor)
+cpdef tuple vector_diff(tuple v_1, tuple v_2)
+cpdef tuple vector_sum(tuple v_1, tuple v_2)
+cpdef tuple components(tuple normal_vector, tuple v_vector)
+cpdef tuple complex_multiply(tuple complex_1, tuple complex_2)
+cdef int trig_linear_interpolation(int degrees, int index)
+cpdef int sin(int degrees)
+cpdef int cos(int degrees)
+cpdef tuple rotated_point(tuple origin_point, tuple point, int rot)
+cdef int bit_len(int int_type)
+cpdef int sqrt(int x)
+cpdef int length(tuple vector)
+cpdef int distance(tuple pos_1, tuple pos_2)
+cpdef tuple unit_vector(tuple pos_1, tuple pos_2)
+cpdef int atan2(int y, int x)
+cpdef int negate(int x)
+cpdef int is_circle_circle_collision(tuple c_1, tuple c_2)
+cpdef int is_rect_circle_collision(tuple circ, tuple rect)
+cpdef int is_point_in_circle(tuple point, tuple circ)
+cpdef int heading_from_to(tuple pos1, tuple pos2)
+cpdef int floor(int x)
 
-cdef int FIXP_minus1
-cdef int FIXP_0
-cdef int FIXP_1
-cdef int FIXP_2
-cdef int FIXP_90
-cdef int FIXP_128
-cdef int FIXP_180
-cdef int FIXP_270
-cdef int FIXP_360
-cdef int FIXP_1000
-cdef int FIXP_1_5
-cdef int FIXP_PI
+cpdef int FIXP_minus1
+cpdef int FIXP_0
+cpdef int FIXP_1
+cpdef int FIXP_2
+cpdef int FIXP_90
+cpdef int FIXP_128
+cpdef int FIXP_180
+cpdef int FIXP_270
+cpdef int FIXP_360
+cpdef int FIXP_1000
+cpdef int FIXP_1_5
+cpdef int FIXP_PI

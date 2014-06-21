@@ -22,6 +22,13 @@
 Collisions
 """
 
+cpdef initialize(list state)
+cpdef destroy(list state)
+cpdef entity_pos_listener(list state, str entity_name, tuple pos)
+cpdef set_handler(list state, handler_function)
+cpdef add(list state, str entity_name, tuple shapes_list)
+cpdef delete(list state, str entity_name)
+
 cdef void c_update_hash(list state, str entity_name, tuple new_pos)
 cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
 cdef void c_remove_hash_entries(list state, str entity_name, tuple entity_lower_left)

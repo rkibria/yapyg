@@ -47,13 +47,13 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         ENT_BOTTOMWALL,
                         {
                                 "*": {
-                                        "textures": [("rectangle",
+                                        "textures": (("rectangle",
                                                 horizontal_wall_width,
                                                 thickness,
-                                                color[0], color[1], color[2],)],
+                                                color[0], color[1], color[2],),),
                                 },
                         },
-                        [pos[0], pos[1]],
+                        (pos[0], pos[1]),
                         0,
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
@@ -62,13 +62,13 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         ENT_LEFTWALL,
                         {
                                 "*": {
-                                        "textures": [("rectangle",
+                                        "textures": (("rectangle",
                                                 thickness,
                                                 vertical_wall_height,
-                                                color[0], color[1], color[2],)],
+                                                color[0], color[1], color[2],),),
                                 },
                         },
-                        [pos[0], pos[1]],
+                        (pos[0], pos[1]),
                         0,
                         collision=((("rectangle", 0, 0, thickness, vertical_wall_height),)))
 
@@ -77,13 +77,13 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         ENT_TOPWALL,
                         {
                                 "*": {
-                                        "textures": [("rectangle",
+                                        "textures": (("rectangle",
                                                 horizontal_wall_width,
                                                 thickness,
-                                                color[0], color[1], color[2],)],
+                                                color[0], color[1], color[2],),),
                                 },
                         },
-                        [pos[0], pos[1] + vertical_wall_height - thickness],
+                        (pos[0], pos[1] + vertical_wall_height - thickness),
                         0,
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
@@ -92,12 +92,12 @@ def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bot
                         ENT_RIGHTWALL,
                         {
                                 "*": {
-                                        "textures": [("rectangle",
+                                        "textures": (("rectangle",
                                                 thickness,
                                                 vertical_wall_height,
-                                                color[0], color[1], color[2],)],
+                                                color[0], color[1], color[2],),),
                                 },
                         },
-                        [pos[0] + horizontal_wall_width - thickness, pos[1]],
+                        (pos[0] + horizontal_wall_width - thickness, pos[1]),
                         0,
                         collision=((("rectangle", 0, 0, thickness, vertical_wall_height),)))

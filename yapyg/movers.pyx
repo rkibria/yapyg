@@ -34,19 +34,19 @@ IDX_MOVER_TYPE = 0
 IDX_MOVER_RUN_FUNCTION = 1
 IDX_MOVER_ENTITY_NAME = 2
 
-def initialize(list state):
+cpdef initialize(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_MOVERS] = {}
 
-def destroy(list state):
+cpdef destroy(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_MOVERS] = None
 
-def add(list state, str mover_name, list mover, int do_replace=False):
+cpdef add(list state, str mover_name, list mover, int do_replace=False):
         """
         TODO
         """
@@ -58,7 +58,7 @@ def add(list state, str mover_name, list mover, int do_replace=False):
                         state[globals.IDX_STATE_MOVERS][mover_name] = deque()
                 state[globals.IDX_STATE_MOVERS][mover_name].append(mover)
 
-def get_active(list state, str mover_name):
+cpdef get_active(list state, str mover_name):
         """
         TODO
         """
@@ -67,13 +67,13 @@ def get_active(list state, str mover_name):
         else:
                 return None
 
-def get_type(list state, list mover):
+cpdef get_type(list state, list mover):
         """
         TODO
         """
         return mover[IDX_MOVER_TYPE]
 
-def remove(list state, str mover_name):
+cpdef remove(list state, str mover_name):
         """
         TODO
         """

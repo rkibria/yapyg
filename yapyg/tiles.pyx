@@ -26,18 +26,19 @@ from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 
+cimport fixpoint
+cimport texture_db
+
 import globals
-import texture_db
 import view
 import screen
-import fixpoint
 
 IDX_TILES_SIZE = 0
 IDX_TILES_DEFS = 1
 IDX_TILES_AREA = 2
 IDX_TILES_RECTS = 3
 
-def initialize(state, tile_size):
+cpdef initialize(list state, int tile_size):
         """
         TODO
         """
@@ -46,33 +47,33 @@ def initialize(state, tile_size):
                 {},
                 [],
                 [],]
-        add_tile_def(state, "tl_null", ["assets/img/tiles/no_tile.png",])
+        add_tile_def(state, "tl_null", ("assets/img/tiles/no_tile.png",))
 
-def destroy(state):
+cpdef destroy(list state):
         """
         TODO
         """
         state[globals.IDX_STATE_TILES] = None
 
-def get_tile_size(state):
+cpdef int get_tile_size(state):
         """
         TODO
         """
         return state[globals.IDX_STATE_TILES][IDX_TILES_SIZE]
 
-def set_area(state, area):
+cpdef set_area(list state, list area):
         """
         TODO
         """
         state[globals.IDX_STATE_TILES][IDX_TILES_AREA] = area
 
-def get_area(state):
+cpdef get_area(list state):
         """
         TODO
         """
         return state[globals.IDX_STATE_TILES][IDX_TILES_AREA]
 
-def add_tile_def(state, tile_name, texture_list):
+cpdef add_tile_def(list state, str tile_name, tuple texture_list):
         """
         TODO
         """
@@ -80,7 +81,7 @@ def add_tile_def(state, tile_name, texture_list):
         state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name]["textures"] = texture_list
         texture_db.insert_combined(state, fixpoint.int2fix(1), tile_name, texture_list)
 
-def get_tile(state, row, col):
+cpdef str get_tile(list state, int row, int col):
         """
         row = 0 is the most southern part of the map
         col = 0 is the most western part of the map
@@ -97,7 +98,7 @@ def get_tile(state, row, col):
                 return None
         return rowdata[col]
 
-def draw(state, scale, canvas, view_size):
+cdef c_draw(list state, int scale, canvas, tuple view_size):
         """
         TODO
         """
