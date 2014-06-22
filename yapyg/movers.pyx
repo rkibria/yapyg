@@ -22,6 +22,12 @@
 General movements
 
 - movers are lists with 0=type, 1=run-function
+
+mover_db = dict[entity_name] : deque(movers)
+
+e.g. MOVE(+x,+y), WAIT(x sec), SET_PROPERTY(".."), ...
+
+
 """
 
 from collections import deque
