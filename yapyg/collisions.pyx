@@ -29,14 +29,25 @@ import entities
 
 HASH_SCALE_FACTOR = fixpoint.int2fix(4)
 
+cdef int IDX_COLLISIONDB_ENTITIES
+cdef int IDX_COLLISIONDB_HASH_MAP
+cdef int IDX_COLLISIONDB_HANDLER_FUNCTION
+cdef int IDX_COLLISIONDB_COLLISIONS_LIST
 IDX_COLLISIONDB_ENTITIES = 0
 IDX_COLLISIONDB_HASH_MAP = 1
 IDX_COLLISIONDB_HANDLER_FUNCTION = 2
+IDX_COLLISIONDB_COLLISIONS_LIST = 3
 
+cdef int IDX_COLLISION_SHAPES
+cdef int IDX_COLLISION_LAST_POS
+cdef int IDX_COLLISION_CACHE
 IDX_COLLISION_SHAPES = 0
 IDX_COLLISION_LAST_POS = 1
 IDX_COLLISION_CACHE = 2
 
+cdef int IDX_COLLISION_CACHE_ABS_SHAPE
+cdef int IDX_COLLISION_CACHE_HASH_EXTENT
+cdef int IDX_COLLISION_CACHE_LAST_HASH_POS
 IDX_COLLISION_CACHE_ABS_SHAPE = 0
 IDX_COLLISION_CACHE_HASH_EXTENT = 1
 IDX_COLLISION_CACHE_LAST_HASH_POS = 2
@@ -48,7 +59,9 @@ cpdef initialize(list state):
         state[globals.IDX_STATE_COLLISIONS] = [
                 {},
                 {},
-                None,]
+                None,
+                []
+                ]
 
 cpdef destroy(list state):
         """
@@ -355,16 +368,12 @@ cdef list c_get_collision_shapes(list state, str entity_name, list collision_def
 
         return absolute_shapes
 
-cdef void c_run(list state, str entity_name_1):
+cdef tuple c_run(list state, str entity_name_1):
         """
         TODO
         """
         cdef list state_collisions
         state_collisions = state[globals.IDX_STATE_COLLISIONS]
-
-        collision_handler = state_collisions[IDX_COLLISIONDB_HANDLER_FUNCTION]
-        if not collision_handler:
-                return
 
         cdef dict state_collisions_entities
         state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
@@ -386,6 +395,9 @@ cdef void c_run(list state, str entity_name_1):
 
         cdef set already_checked_set
         already_checked_set = set()
+
+        cdef list collisions_list
+        collisions_list = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
 
         cdef int is_collision
         cdef tuple hash
@@ -433,9 +445,24 @@ cdef void c_run(list state, str entity_name_1):
                                                                 is_collision = False
 
                                                 if is_collision:
-                                                        (collision_handler)(
-                                                                state,
+                                                        collisions_list.append((entity_name_1, entity_name_2,))
+                                                        return (state,
                                                                 entity_name_1, entity_name_2,
                                                                 collision_def_1, collision_def_2,
-                                                                absolute_shape_1, absolute_shape_2)
-                                                        return
+                                                                absolute_shape_1, absolute_shape_2
+                                                                )
+        return None
+
+cdef void c_clear_collisions_list(list state):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
+
+cdef void c_notify_collision_handler(list state):
+        cdef list collisions_list
+        collisions_list = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
+
+        handler_function = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]
+        if collisions_list and handler_function:
+                (handler_function)(state, collisions_list)

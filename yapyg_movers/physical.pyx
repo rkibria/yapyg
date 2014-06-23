@@ -25,6 +25,7 @@ Simulate physical movement
 cimport yapyg.fixpoint
 cimport yapyg.movers
 cimport yapyg.entities
+cimport yapyg.collisions
 
 cdef int IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
 cdef int IDX_MOVERS_PHYSICAL_MASS = 3
@@ -116,6 +117,11 @@ cpdef run(list state, str entity_name, list mover, int frame_time_delta, list mo
 
         mover[IDX_MOVERS_PHYSICAL_VX] = yapyg.fixpoint.mul(v_x, friction)
         mover[IDX_MOVERS_PHYSICAL_VY] = yapyg.fixpoint.mul(v_y, friction)
+
+        cdef tuple collision_result
+        collision_result = yapyg.collisions.c_run(state, entity_name)
+        if collision_result:
+                collision_handler(*collision_result)
 
 FIXP_2 = yapyg.fixpoint.int2fix(2)
 

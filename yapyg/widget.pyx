@@ -40,6 +40,9 @@ class YapygWidget(Widget):
                         scale,
                         **kwargs
                 ):
+                """
+                TODO
+                """
                 super(YapygWidget, self).__init__(**kwargs)
 
                 self.view_size = (fixpoint.float2fix(float(view_size[0])), fixpoint.float2fix(float(view_size[1])))
@@ -51,11 +54,17 @@ class YapygWidget(Widget):
                 Clock.schedule_once(self.on_timer, timeout=0)
 
         def destroy(self):
+                """
+                TODO
+                """
                 state = self.state
                 self.state = None
                 factory.destroy(state)
 
         def on_timer(self, dt):
+                """
+                TODO
+                """
                 if self.state:
                         cur_fps = fixpoint.float2fix(float(Clock.get_fps()))
                         if cur_fps > 0:
@@ -73,11 +82,17 @@ class YapygWidget(Widget):
                         Clock.schedule_once(self.on_timer, timeout=0)
 
         def enable_redraw_tiles(self, value):
+                """
+                TODO
+                """
                 self.redraw_tiles = value
                 if value:
                         c_redraw(self.state, fixpoint.float2fix(0.01), self.redraw_tiles, self.scale, self.canvas, self.view_size)
 
 cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scale, canvas, tuple view_size):
+        """
+        TODO
+        """
         movers.c_run(state, frame_time_delta)
 
         if view.run(state):

@@ -22,6 +22,19 @@
 Collisions
 """
 
+cdef int IDX_COLLISIONDB_ENTITIES
+cdef int IDX_COLLISIONDB_HASH_MAP
+cdef int IDX_COLLISIONDB_HANDLER_FUNCTION
+cdef int IDX_COLLISIONDB_COLLISIONS_LIST
+
+cdef int IDX_COLLISION_SHAPES
+cdef int IDX_COLLISION_LAST_POS
+cdef int IDX_COLLISION_CACHE
+
+cdef int IDX_COLLISION_CACHE_ABS_SHAPE
+cdef int IDX_COLLISION_CACHE_HASH_EXTENT
+cdef int IDX_COLLISION_CACHE_LAST_HASH_POS
+
 cpdef initialize(list state)
 cpdef destroy(list state)
 cpdef entity_pos_listener(list state, str entity_name, tuple pos)
@@ -33,4 +46,6 @@ cdef void c_update_hash(list state, str entity_name, tuple new_pos)
 cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
 cdef void c_remove_hash_entries(list state, str entity_name, tuple entity_lower_left)
 cdef list c_get_collision_shapes(list state, str entity_name, list collision_def)
-cdef void c_run(list state, str entity_name_1)
+cdef tuple c_run(list state, str entity_name_1)
+cdef void c_clear_collisions_list(list state)
+cdef void c_notify_collision_handler(list state)
