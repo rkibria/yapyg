@@ -22,9 +22,17 @@
 Simple linear mover
 """
 
-import yapyg.fixpoint
-import yapyg.movers
-import yapyg.entities
+cimport yapyg.fixpoint
+cimport yapyg.movers
+cimport yapyg.entities
+
+cdef int IDX_LINEAR_MOVER_REL_VECTOR
+cdef int IDX_LINEAR_MOVER_SPEED
+cdef int IDX_LINEAR_MOVER_DO_ROTATE
+cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR
+cdef int IDX_LINEAR_MOVER_TRAVEL_TIME
+cdef int IDX_LINEAR_MOVER_PASSED_TIME
+cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION
 
 IDX_LINEAR_MOVER_REL_VECTOR = 3
 IDX_LINEAR_MOVER_SPEED = 4
@@ -34,40 +42,32 @@ IDX_LINEAR_MOVER_TRAVEL_TIME = 7
 IDX_LINEAR_MOVER_PASSED_TIME = 8
 IDX_LINEAR_MOVER_ON_END_FUNCTION = 9
 
-class YapygMoverLinearException(Exception):
-        """
-        TODO
-        """
-        def __init__(self, value):
-                """
-                TODO
-                """
-                self.value = value
-
-        def __str__(self):
-                """
-                TODO
-                """
-                return repr(self.value)
-
-def add(state, entity_name, rel_vector, speed, do_rotate=False, on_end_function=None, do_replace=False):
+cpdef add(list state, str entity_name, tuple rel_vector, float speed, int do_rotate=False, on_end_function=None, int do_replace=False):
         """
         TODO
         """
         yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, do_rotate, on_end_function), do_replace)
 
-def create(entity_name, rel_vector, speed, do_rotate, on_end_function):
+cpdef list create(str entity_name, tuple f_rel_vector, float f_speed, int do_rotate, on_end_function):
         """
         TODO
         """
-        speed = yapyg.fixpoint.float2fix(float(speed))
-        rel_vector = (yapyg.fixpoint.float2fix(float(rel_vector[0])), yapyg.fixpoint.float2fix(float(rel_vector[1])))
+        cdef int speed
+        speed = yapyg.fixpoint.float2fix(f_speed)
 
+        cdef tuple rel_vector
+        rel_vector = (yapyg.fixpoint.float2fix(f_rel_vector[0]), yapyg.fixpoint.float2fix(f_rel_vector[1]))
+
+        cdef int distance
         distance = yapyg.fixpoint.length(rel_vector)
         if distance == 0 or speed == 0:
-                raise YapygMoverLinearException("Distance and speed must be >0")
+                print "yapyg_movers\linear.pyx: Distance and speed must be >0"
+                return None
 
+        cdef int travel_time
         travel_time = yapyg.fixpoint.div(distance, speed)
+
+        cdef tuple travel_vector
         travel_vector = (
                 yapyg.fixpoint.div(rel_vector[0], travel_time),
                 yapyg.fixpoint.div(rel_vector[1], travel_time))
@@ -83,26 +83,36 @@ def create(entity_name, rel_vector, speed, do_rotate, on_end_function):
                 0,
                 on_end_function,]
 
-def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
+cdef int FIXP_1000
+FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+
+cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
         """
         TODO
         """
+        cdef int travel_time
+        cdef tuple travel_vector
+        cdef int passed_time
+
         travel_time = mover[IDX_LINEAR_MOVER_TRAVEL_TIME]
         travel_vector = mover[IDX_LINEAR_MOVER_TRAVEL_VECTOR]
         passed_time = mover[IDX_LINEAR_MOVER_PASSED_TIME]
 
+        cdef int heading
+        cdef int heading_int
         if passed_time == 0 and mover[IDX_LINEAR_MOVER_DO_ROTATE]:
                 heading = yapyg.fixpoint.heading_from_to((0, 0), travel_vector)
                 heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
                 heading = yapyg.fixpoint.int2fix(heading_int)
                 yapyg.entities.set_rot(state, entity_name, heading)
 
-        FIXP_1000 = yapyg.fixpoint.int2fix(1000)
         passed_time += yapyg.fixpoint.div(frame_time_delta, FIXP_1000)
         if passed_time > travel_time:
                 passed_time = travel_time
         mover[IDX_LINEAR_MOVER_PASSED_TIME] = passed_time
 
+        cdef int d_x
+        cdef int d_y
         d_x = yapyg.fixpoint.mul(frame_time_delta, travel_vector[0])
         d_y = yapyg.fixpoint.mul(frame_time_delta, travel_vector[1])
 

@@ -57,7 +57,7 @@ cpdef destroy(list state):
         """
         state[globals.IDX_STATE_ENTITIES] = None
 
-cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot=0, tuple pos_offset=(0, 0), tuple collision=None):
+cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot=0, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
         """
         TODO
         """
@@ -94,12 +94,12 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot
                 if sprite_name[0] == "*":
                         default_sprite = sprite_name
 
-                set_sprite(state, entity_name, sprite_name, sprite_def)
+                set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative)
 
         if default_sprite:
                 set_active_sprite(state, entity_name, default_sprite)
 
-cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=False):
+cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=False, int screen_relative=False):
         """
         TODO
         """
@@ -151,6 +151,7 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
                         sprite_enable,
                         sprite_pos,
                         sprite_rot_list,
+                        screen_relative,
                         )
 
                 if enabled_sprite_name == sprite_name:

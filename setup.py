@@ -20,6 +20,7 @@ else:
                 Extension('yapyg/tiles', ['yapyg/tiles.c']),
                 Extension('yapyg/widget', ['yapyg/widget.c']),
                 Extension('yapyg_movers/physical', ['yapyg_movers/physical.c']),
+                Extension('yapyg_movers/linear', ['yapyg_movers/linear.c']),
                 ]
 
 setup(  name='yapyg',

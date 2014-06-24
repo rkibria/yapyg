@@ -37,8 +37,8 @@ cdef int IDX_LAST_POS_ROTATION
 
 cpdef initialize(list state)
 cpdef destroy(list state)
-cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot=*, tuple pos_offset=*, tuple collision=*)
-cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=*)
+cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot=*, tuple pos_offset=*, tuple collision=*, int screen_relative=*)
+cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=*, int screen_relative=*)
 cpdef set_active_sprite(list state, str entity_name, str sprite_name)
 cpdef delete(list state, str entity_name)
 cpdef list get(list state, str entity_name)
