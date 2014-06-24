@@ -27,6 +27,7 @@ import fixpoint
 
 IDX_CONTROLS_JOYSTICK = 0
 IDX_CONTROLS_JOYSTICK_DIRECTION = 1
+IDX_CONTROLS_BUTTONS = 2
 
 def initialize(state):
         """
@@ -34,13 +35,45 @@ def initialize(state):
         """
         state[globals.IDX_STATE_CONTROLS] = [
                 False,
-                [0, 0],]
+                [0, 0],
+                None
+                ]
 
 def destroy(state):
         """
         TODO
         """
         state[globals.IDX_STATE_CONTROLS] = None
+
+def add_buttons(state, button_defs):
+        """
+        button definition = button label
+        """
+        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS] = []
+        state_bdefs = state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+        for b_def in button_defs:
+                state_bdefs.append([
+                        b_def,
+                        False, # press state
+                        ])
+
+def get_buttons(state):
+        """
+        TODO
+        """
+        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+
+def set_button_state(state, button_index, button_pressed):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][1] = button_pressed
+
+def get_button_is_down(state, button_index):
+        """
+        TODO
+        """
+        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][1]
 
 def add_joystick(state):
         """
