@@ -64,7 +64,7 @@ class ScreenWidget(FloatLayout):
                         button_defs = yapyg.controls.get_buttons(state)
 
                         if button_defs:
-                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][0],
+                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
                                         font_size=16,
                                         markup=True,
                                         background_normal="assets/img/ui/joy_button.png",
@@ -76,7 +76,7 @@ class ScreenWidget(FloatLayout):
                                 button_0.bind(state=self.on_button_0)
 
                                 if len(button_defs) > 1:
-                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][0],
+                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
                                                 font_size=16,
                                                 markup=True,
                                                 background_normal="assets/img/ui/joy_button.png",
@@ -88,7 +88,7 @@ class ScreenWidget(FloatLayout):
                                         button_1.bind(state=self.on_button_1)
 
                                 if len(button_defs) > 2:
-                                        button_2 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[2][0],
+                                        button_2 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[2][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
                                                 font_size=16,
                                                 markup=True,
                                                 background_normal="assets/img/ui/joy_button.png",
@@ -100,7 +100,7 @@ class ScreenWidget(FloatLayout):
                                         button_2.bind(state=self.on_button_2)
 
                                 if len(button_defs) > 3:
-                                        button_3 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[3][0],
+                                        button_3 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[3][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
                                                 font_size=16,
                                                 markup=True,
                                                 background_normal="assets/img/ui/joy_button.png",
@@ -139,10 +139,13 @@ class ScreenWidget(FloatLayout):
                         yapyg.controls.set_button_state(self.state, 0, True if value == "down" else False)
 
         def on_button_1(self, instance, value):
-                pass
+                if self.state:
+                        yapyg.controls.set_button_state(self.state, 1, True if value == "down" else False)
 
         def on_button_2(self, instance, value):
-                pass
+                if self.state:
+                        yapyg.controls.set_button_state(self.state, 2, True if value == "down" else False)
 
         def on_button_3(self, instance, value):
-                pass
+                if self.state:
+                        yapyg.controls.set_button_state(self.state, 3, True if value == "down" else False)

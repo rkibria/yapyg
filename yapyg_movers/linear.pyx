@@ -56,7 +56,7 @@ cpdef list create(str entity_name, tuple f_rel_vector, float f_speed, int do_rot
         speed = yapyg.fixpoint.float2fix(f_speed)
 
         cdef tuple rel_vector
-        rel_vector = (yapyg.fixpoint.float2fix(f_rel_vector[0]), yapyg.fixpoint.float2fix(f_rel_vector[1]))
+        rel_vector = (yapyg.fixpoint.float2fix(float(f_rel_vector[0])), yapyg.fixpoint.float2fix(float(f_rel_vector[1])))
 
         cdef int distance
         distance = yapyg.fixpoint.length(rel_vector)
