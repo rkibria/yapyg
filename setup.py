@@ -9,7 +9,7 @@ except ImportError:
         have_cython = False
 
 if have_cython:
-        ext = cythonize("yapyg/*.pyx") + cythonize("yapyg_movers/*.pyx")
+        ext = cythonize("yapyg/*.pyx") + cythonize("yapyg_movers/*.pyx") + cythonize("yapyg_widgets/*.pyx")
 else:
         ext = [ Extension('yapyg/collisions', ['yapyg/collisions.c']),
                 Extension('yapyg/entities', ['yapyg/entities.c']),
@@ -18,9 +18,9 @@ else:
                 Extension('yapyg/sprites', ['yapyg/sprites.c']),
                 Extension('yapyg/texture_db', ['yapyg/texture_db.c']),
                 Extension('yapyg/tiles', ['yapyg/tiles.c']),
-                Extension('yapyg/widget', ['yapyg/widget.c']),
                 Extension('yapyg_movers/physical', ['yapyg_movers/physical.c']),
                 Extension('yapyg_movers/linear', ['yapyg_movers/linear.c']),
+                Extension('yapyg_widgets/display_widget', ['yapyg_widgets/display_widget.c']),
                 ]
 
 setup(  name='yapyg',
@@ -29,6 +29,6 @@ setup(  name='yapyg',
         author='Raihan Kibria',
         author_email='raihan@kibria.de',
         url='https://github.com/rkibria/yapyg',
-        packages=['yapyg', 'yapyg_helpers', 'yapyg_movers', 'yapyg_viewers'],
+        packages=['yapyg', 'yapyg_helpers', 'yapyg_movers', 'yapyg_viewers', 'yapyg_widgets'],
         ext_modules=ext
         )
