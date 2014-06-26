@@ -36,7 +36,7 @@ def create(state, entity_name, offset):
         """
         return [run,
                 entity_name,
-                (yapyg.fixpoint.float2fix(float(offset[0])), yapyg.fixpoint.float2fix(float(offset[1]))),
+                (offset[0], offset[1]),
                 ]
 
 def run(state, viewer):

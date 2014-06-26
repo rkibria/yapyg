@@ -96,15 +96,15 @@ cpdef add(list state, str entity_name, tuple shapes_list):
                 trans_shape = ("UNKNOWN",)
                 if shape[0] == "rectangle":
                         trans_shape = ("rectangle",
-                                fixpoint.float2fix(float(shape[1])),
-                                fixpoint.float2fix(float(shape[2])),
-                                fixpoint.float2fix(float(shape[3])),
-                                fixpoint.float2fix(float(shape[4])),)
+                                shape[1],
+                                shape[2],
+                                shape[3],
+                                shape[4],)
                 elif shape[0] == "circle":
                         trans_shape = ("circle",
-                                fixpoint.float2fix(float(shape[1])),
-                                fixpoint.float2fix(float(shape[2])),
-                                fixpoint.float2fix(float(shape[3])),)
+                                shape[1],
+                                shape[2],
+                                shape[3],)
                 trans_shapes_list.append(trans_shape)
 
         cdef dict collision_db

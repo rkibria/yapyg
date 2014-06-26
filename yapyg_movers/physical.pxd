@@ -34,23 +34,23 @@ cdef int IDX_MOVERS_PHYSICAL_ON_END_FUNCTION = 10
 
 cpdef add(list state,
                 str entity_name,
-                float mass=*,
-                float vx=*,
-                float vy=*,
-                float ax=*,
-                float ay=*,
-                float friction=*,
-                float inelasticity=*,
+                int mass,
+                int vx,
+                int vy,
+                int ax,
+                int ay,
+                int friction,
+                int inelasticity,
                 int do_replace=*)
 
 cdef list c_create(str entity_name,
-                float mass,
-                float vx,
-                float vy,
-                float ax,
-                float ay,
-                float friction,
-                float inelasticity,
+                int mass,
+                int vx,
+                int vy,
+                int ax,
+                int ay,
+                int friction,
+                int inelasticity,
                 )
 
 cdef int FIXP_1000

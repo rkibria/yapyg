@@ -49,9 +49,8 @@ def create(entity_name, controller, factor, limits, sprites=None, rotate=False):
                 run,
                 entity_name,
                 controller,
-                yapyg.fixpoint.float2fix(float(factor)),
-                (yapyg.fixpoint.float2fix(float(limits[0])), yapyg.fixpoint.float2fix(float(limits[1])),
-                        yapyg.fixpoint.float2fix(float(limits[2])), yapyg.fixpoint.float2fix(float(limits[3]))),
+                factor,
+                (limits[0], limits[1], limits[2], limits[3]),
                 sprites,
                 rotate,
                 None]

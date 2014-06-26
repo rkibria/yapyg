@@ -57,7 +57,7 @@ cpdef destroy(list state):
         """
         state[globals.IDX_STATE_ENTITIES] = None
 
-cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot=0, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
+cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, int rot=0, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
         """
         TODO
         """
@@ -69,9 +69,9 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, float rot
 
         cdef list entity
         entity = [
-                [fixpoint.float2fix(float(pos[0])), fixpoint.float2fix(float(pos[1]))],
-                [fixpoint.float2fix(rot)],
-                [fixpoint.float2fix(float(pos_offset[0])), fixpoint.float2fix(float(pos_offset[1]))],
+                [pos[0], pos[1]],
+                [rot],
+                [pos_offset[0], pos_offset[1]],
                 None,
                 None,
                 [],
@@ -124,7 +124,7 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
 
                 sprite_speed = 0
                 if sprite_def.has_key("speed"):
-                        sprite_speed = fixpoint.float2fix(float(sprite_def["speed"]))
+                        sprite_speed = sprite_def["speed"]
 
                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
 

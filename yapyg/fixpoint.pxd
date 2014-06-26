@@ -50,6 +50,7 @@ cpdef int is_rect_circle_collision(tuple circ, tuple rect)
 cpdef int is_point_in_circle(tuple point, tuple circ)
 cpdef int heading_from_to(tuple pos1, tuple pos2)
 cpdef int floor(int x)
+cpdef int modulo(int x, int d)
 
 cpdef int FIXP_minus1
 cpdef int FIXP_0

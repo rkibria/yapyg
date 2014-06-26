@@ -43,7 +43,7 @@ cpdef initialize(list state, int tile_size):
         TODO
         """
         state[globals.IDX_STATE_TILES] = [
-                fixpoint.float2fix(float(tile_size)),
+                tile_size,
                 {},
                 [],
                 [],]

@@ -43,7 +43,7 @@ def create(state, handler, timeout_ms=0):
         """
         TODO
         """
-        state[globals.IDX_STATE_TIMER][IDX_TIMERS_TABLE].append([handler, fixpoint.int2fix(timeout_ms), 0])
+        state[globals.IDX_STATE_TIMER][IDX_TIMERS_TABLE].append([handler, timeout_ms, 0])
 
 def run(state, last_frame_delta):
         """

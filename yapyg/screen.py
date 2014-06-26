@@ -35,10 +35,10 @@ def initialize(state, screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         TODO
         """
         state[globals.IDX_STATE_SCREEN] = [
-                fixpoint.float2fix(float(screen_width)),
-                fixpoint.float2fix(float(screen_height)),
-                fixpoint.float2fix(float(tile_size)),
-                [fixpoint.float2fix(float(origin_xy[0])), fixpoint.float2fix(float(origin_xy[1]))],]
+                screen_width,
+                screen_height,
+                tile_size,
+                [origin_xy[0], origin_xy[1]],]
 
 def destroy(state):
         """
@@ -68,8 +68,8 @@ def set_origin(state, origin_xy):
         """
         TODO
         """
-        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][0] = fixpoint.float2fix(float(origin_xy[0]))
-        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][1] = fixpoint.float2fix(float(origin_xy[1]))
+        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][0] = origin_xy[0]
+        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][1] = origin_xy[1]
 
 def get_origin(state):
         """

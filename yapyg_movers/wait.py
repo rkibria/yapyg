@@ -43,7 +43,7 @@ def create(mover_name, wait_time, on_end_function=None):
                 run,
                 mover_name,
                 0,
-                yapyg.fixpoint.float2fix(float(wait_time)),
+                wait_time,
                 on_end_function,]
 
 FIXP_1000 = yapyg.fixpoint.int2fix(1000)

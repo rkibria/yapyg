@@ -44,8 +44,8 @@ def create(entity_name, new_pos, new_rot=None, on_end_function=None):
         return ["jump",
                 run,
                 entity_name,
-                (yapyg.fixpoint.float2fix(float(new_pos[0])), yapyg.fixpoint.float2fix(float(new_pos[1]))),
-                yapyg.fixpoint.float2fix(float(new_rot)) if new_rot else None,
+                (new_pos[0], new_pos[1]),
+                new_rot if new_rot else None,
                 on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):

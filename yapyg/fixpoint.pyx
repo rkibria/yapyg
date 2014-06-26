@@ -969,3 +969,18 @@ cpdef int floor(int x):
         TODO
         """
         return int2fix(fix2int(x))
+
+cpdef int modulo(int x, int d):
+        """
+        TODO
+        """
+        cdef int int_x
+        int_x = fix2int(x)
+
+        cdef int int_d
+        int_d = fix2int(d)
+
+        cdef int int_res
+        int_res = int_x % int_d
+
+        return int2fix(int_res)

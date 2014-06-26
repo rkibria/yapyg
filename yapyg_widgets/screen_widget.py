@@ -31,13 +31,14 @@ import yapyg_viewers
 
 from display_widget import DisplayWidget
 from joystick_widget import JoystickWidget
+from yapyg.fixpoint import float2fix
 
 class ScreenWidget(FloatLayout):
         def __init__(self, state, on_exit_function, scale, **kwargs):
                 super(ScreenWidget, self).__init__(**kwargs)
 
                 self.state = state
-                self.display_widget = DisplayWidget(state, [Window.width, Window.height], scale)
+                self.display_widget = DisplayWidget(state, [float2fix(float(Window.width)), float2fix(float(Window.height))], scale)
                 self.on_exit_function = on_exit_function
 
                 self.add_widget(self.display_widget)

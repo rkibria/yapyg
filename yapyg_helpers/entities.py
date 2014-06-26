@@ -23,14 +23,42 @@ Helpers for recurring tasks
 """
 
 import yapyg.entities
+import yapyg.screen
+import yapyg.fixpoint
 
-def create_screen_wall(state, base_name, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
+def create_screen_wall(state, base_name, border_thickness, border_offset, bottom_y, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
         """
         TODO
         """
-        pass
+        screen_width = yapyg.screen.get_width(state)
+        screen_height = yapyg.screen.get_height(state)
+        tile_size = yapyg.screen.get_tile_size(state)
 
-def create_collision_box(state, base_name, pos, size, thickness=1, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
+        FIXP_2 = yapyg.fixpoint.int2fix(2)
+        pos = (-border_thickness + border_offset, -border_thickness + bottom_y + border_offset)
+        size_w = (
+                yapyg.fixpoint.div(screen_width, tile_size)
+                + yapyg.fixpoint.mul(FIXP_2, border_thickness)
+                - yapyg.fixpoint.mul(FIXP_2, border_offset)
+                )
+        size_h = (
+                yapyg.fixpoint.div(screen_height, tile_size)
+                - bottom_y + yapyg.fixpoint.mul(FIXP_2, border_thickness)
+                - yapyg.fixpoint.mul(FIXP_2,  border_offset)
+                )
+
+        create_collision_box(state, base_name,
+                pos,
+                (size_w, size_h),
+                border_thickness,
+                top,
+                bottom,
+                left,
+                right,
+                color,
+                )
+
+def create_collision_box(state, base_name, pos, size, thickness, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
         """
         TODO
         """

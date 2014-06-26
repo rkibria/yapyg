@@ -28,7 +28,7 @@ cimport yapyg.entities
 
 cdef int IDX_LINEAR_MOVER_REL_VECTOR
 cdef int IDX_LINEAR_MOVER_SPEED
-cdef int IDX_LINEAR_MOVER_DO_ROTATE
+cdef int IDX_LINEAR_MOVER_ROTATE_MODE
 cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR
 cdef int IDX_LINEAR_MOVER_TRAVEL_TIME
 cdef int IDX_LINEAR_MOVER_PASSED_TIME
@@ -36,28 +36,36 @@ cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION
 
 IDX_LINEAR_MOVER_REL_VECTOR = 3
 IDX_LINEAR_MOVER_SPEED = 4
-IDX_LINEAR_MOVER_DO_ROTATE = 5
+IDX_LINEAR_MOVER_ROTATE_MODE = 5
 IDX_LINEAR_MOVER_TRAVEL_VECTOR = 6
 IDX_LINEAR_MOVER_TRAVEL_TIME = 7
 IDX_LINEAR_MOVER_PASSED_TIME = 8
 IDX_LINEAR_MOVER_ON_END_FUNCTION = 9
 
-cpdef add(list state, str entity_name, tuple rel_vector, float speed, int do_rotate=False, on_end_function=None, int do_replace=False):
+cdef int N_ROTATE_MODE_NONE
+cdef int N_ROTATE_MODE_AUTO
+cdef int N_ROTATE_MODE_CONST
+
+N_ROTATE_MODE_NONE = 0
+N_ROTATE_MODE_AUTO = 1
+N_ROTATE_MODE_CONST = 2
+
+rotate_mode_trans = {
+        "none": N_ROTATE_MODE_NONE,
+        "auto": N_ROTATE_MODE_AUTO,
+        "const": N_ROTATE_MODE_CONST,
+}
+
+cpdef add(list state, str entity_name, tuple rel_vector, int speed, tuple rotate_mode=("none", 0), on_end_function=None, int do_replace=False):
         """
         TODO
         """
-        yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, do_rotate, on_end_function), do_replace)
+        yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, rotate_mode, on_end_function), do_replace)
 
-cpdef list create(str entity_name, tuple f_rel_vector, float f_speed, int do_rotate, on_end_function):
+cpdef list create(str entity_name, tuple rel_vector, int speed, tuple rotate_mode, on_end_function):
         """
         TODO
         """
-        cdef int speed
-        speed = yapyg.fixpoint.float2fix(f_speed)
-
-        cdef tuple rel_vector
-        rel_vector = (yapyg.fixpoint.float2fix(float(f_rel_vector[0])), yapyg.fixpoint.float2fix(float(f_rel_vector[1])))
-
         cdef int distance
         distance = yapyg.fixpoint.length(rel_vector)
         if distance == 0 or speed == 0:
@@ -77,7 +85,7 @@ cpdef list create(str entity_name, tuple f_rel_vector, float f_speed, int do_rot
                 entity_name,
                 rel_vector, # IDX_LINEAR_MOVER_REL_VECTOR
                 speed, # IDX_LINEAR_MOVER_SPEED
-                do_rotate,
+                (rotate_mode_trans[rotate_mode[0]], rotate_mode[1]),
                 travel_vector,
                 travel_time,
                 0,
@@ -85,6 +93,9 @@ cpdef list create(str entity_name, tuple f_rel_vector, float f_speed, int do_rot
 
 cdef int FIXP_1000
 FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+
+cdef int FIXP_360
+FIXP_360 = yapyg.fixpoint.int2fix(360)
 
 cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
         """
@@ -100,11 +111,26 @@ cpdef run(list state, str entity_name, list mover, int frame_time_delta, list mo
 
         cdef int heading
         cdef int heading_int
-        if passed_time == 0 and mover[IDX_LINEAR_MOVER_DO_ROTATE]:
-                heading = yapyg.fixpoint.heading_from_to((0, 0), travel_vector)
-                heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
-                heading = yapyg.fixpoint.int2fix(heading_int)
-                yapyg.entities.set_rot(state, entity_name, heading)
+        cdef tuple rotate_mode
+        rotate_mode = mover[IDX_LINEAR_MOVER_ROTATE_MODE]
+        cdef int rot_type
+        rot_type = rotate_mode[0]
+        cdef int rot_speed
+        rot_speed = rotate_mode[1]
+        cdef int old_rot
+        old_rot = yapyg.entities.get_rot(state, entity_name)
+        cdef int delta_rot
+        if rot_type == N_ROTATE_MODE_AUTO:
+                if passed_time == 0:
+                        heading = yapyg.fixpoint.heading_from_to((0, 0), travel_vector)
+                        heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
+                        heading = yapyg.fixpoint.int2fix(heading_int)
+                        yapyg.entities.set_rot(state, entity_name, heading)
+        elif rot_type == N_ROTATE_MODE_CONST:
+                delta_rot = yapyg.fixpoint.mul(rot_speed, frame_time_delta)
+                old_rot += delta_rot
+                old_rot = yapyg.fixpoint.modulo(old_rot, FIXP_360)
+                yapyg.entities.set_rot(state, entity_name, old_rot)
 
         passed_time += yapyg.fixpoint.div(frame_time_delta, FIXP_1000)
         if passed_time > travel_time:

@@ -39,13 +39,13 @@ cdef int IDX_MOVERS_PHYSICAL_ON_END_FUNCTION = 10
 
 cpdef add(list state,
                 str entity_name,
-                float mass=1.0,
-                float vx=0,
-                float vy=0,
-                float ax=0,
-                float ay=0,
-                float friction=1.0,
-                float inelasticity=1.0,
+                int mass,
+                int vx,
+                int vy,
+                int ax,
+                int ay,
+                int friction,
+                int inelasticity,
                 int do_replace=False):
         """
         TODO
@@ -63,13 +63,13 @@ cpdef add(list state,
                 )
 
 cdef list c_create(str entity_name,
-                float mass,
-                float vx,
-                float vy,
-                float ax,
-                float ay,
-                float friction,
-                float inelasticity,
+                int mass,
+                int vx,
+                int vy,
+                int ax,
+                int ay,
+                int friction,
+                int inelasticity,
                 ):
         """
         TODO
@@ -77,13 +77,13 @@ cdef list c_create(str entity_name,
         return ["physics",
                 run,
                 entity_name,
-                yapyg.fixpoint.float2fix(mass),
-                yapyg.fixpoint.float2fix(vx),
-                yapyg.fixpoint.float2fix(vy),
-                yapyg.fixpoint.float2fix(ax),
-                yapyg.fixpoint.float2fix(ay),
-                yapyg.fixpoint.float2fix(friction),
-                yapyg.fixpoint.float2fix(inelasticity),
+                mass,
+                vx,
+                vy,
+                ax,
+                ay,
+                friction,
+                inelasticity,
                 ]
 
 FIXP_1000 = yapyg.fixpoint.int2fix(1000)

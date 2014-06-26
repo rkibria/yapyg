@@ -76,9 +76,9 @@ cpdef insert_combined(list state, int texture_size, str texture_name, tuple text
         """
         cdef int tile_size
         tile_size = screen.get_tile_size(state)
-        
+
         texture_size = fixpoint.mul(tile_size, texture_size)
-        
+
         cdef int int_texture_size
         int_texture_size = fixpoint.fix2int(texture_size)
 
@@ -101,18 +101,21 @@ cpdef insert_combined(list state, int texture_size, str texture_name, tuple text
                         fbo.draw()
                 insert(state, texture_name, texture)
 
-cpdef insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
+cpdef insert_color_rect(list state, int texture_w, int texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
         TODO
         """
-        cdef float float_tile_size
-        float_tile_size = fixpoint.fix2float(screen.get_tile_size(state))
+        cdef int tile_size
+        tile_size = screen.get_tile_size(state)
+
+        texture_w = fixpoint.mul(texture_w, tile_size)
+        texture_h = fixpoint.mul(texture_h, tile_size)
 
         cdef int int_texture_w
         cdef int int_texture_h
-        int_texture_w = int(texture_w * float_tile_size)
-        int_texture_h = int(texture_h * float_tile_size)
-        
+        int_texture_w = fixpoint.fix2int(texture_w)
+        int_texture_h = fixpoint.fix2int(texture_h)
+
         texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
         fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)
         with fbo:
@@ -121,18 +124,21 @@ cpdef insert_color_rect(list state, float texture_w, float texture_h, str textur
         fbo.draw()
         insert(state, texture_name, texture)
 
-cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
+cpdef insert_color_ellipse(list state, int texture_w, int texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
         TODO
         """
-        cdef float float_tile_size
-        float_tile_size = fixpoint.fix2float(screen.get_tile_size(state))
+        cdef int tile_size
+        tile_size = screen.get_tile_size(state)
+
+        texture_w = fixpoint.mul(texture_w, tile_size)
+        texture_h = fixpoint.mul(texture_h, tile_size)
 
         cdef int int_texture_w
         cdef int int_texture_h
-        int_texture_w = int(texture_w * float_tile_size)
-        int_texture_h = int(texture_h * float_tile_size)
-        
+        int_texture_w = fixpoint.fix2int(texture_w)
+        int_texture_h = fixpoint.fix2int(texture_h)
+
         texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
         fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)
         with fbo:

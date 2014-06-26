@@ -31,6 +31,8 @@ import yapyg.view
 import yapyg.factory
 import yapyg.timer
 
+from yapyg.fixpoint import float2fix
+
 MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(35)
 
 class DisplayWidget(Widget):
@@ -45,8 +47,8 @@ class DisplayWidget(Widget):
                 """
                 super(DisplayWidget, self).__init__(**kwargs)
 
-                self.view_size = (yapyg.fixpoint.float2fix(float(view_size[0])), yapyg.fixpoint.float2fix(float(view_size[1])))
-                self.scale = yapyg.fixpoint.float2fix(float(scale))
+                self.view_size = (view_size[0], view_size[1])
+                self.scale = scale
                 self.state = state
                 self.redraw_tiles = [True]
 
@@ -65,8 +67,9 @@ class DisplayWidget(Widget):
                 """
                 TODO
                 """
+                cdef int cur_fps
                 if self.state:
-                        cur_fps = yapyg.fixpoint.float2fix(float(Clock.get_fps()))
+                        cur_fps = float2fix(float(Clock.get_fps()))
                         if cur_fps > 0:
                                 last_frame_delta = yapyg.fixpoint.div(yapyg.fixpoint.FIXP_1000, cur_fps) # milliseconds
                                 if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
@@ -87,7 +90,7 @@ class DisplayWidget(Widget):
                 """
                 self.redraw_tiles = value
                 if value:
-                        c_redraw(self.state, yapyg.fixpoint.float2fix(0.01), self.redraw_tiles, self.scale, self.canvas, self.view_size)
+                        c_redraw(self.state, float2fix(0.01), self.redraw_tiles, self.scale, self.canvas, self.view_size)
 
 cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scale, canvas, tuple view_size):
         """
