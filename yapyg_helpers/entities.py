@@ -81,8 +81,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                                                 color[0], color[1], color[2],),),
                                 },
                         },
-                        (pos[0], pos[1]),
-                        0,
+                        (pos[0], pos[1], 0),
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
         if left:
@@ -96,8 +95,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                                                 color[0], color[1], color[2],),),
                                 },
                         },
-                        (pos[0], pos[1]),
-                        0,
+                        (pos[0], pos[1], 0),
                         collision=((("rectangle", 0, 0, thickness, vertical_wall_height),)))
 
         if top:
@@ -111,8 +109,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                                                 color[0], color[1], color[2],),),
                                 },
                         },
-                        (pos[0], pos[1] + vertical_wall_height - thickness),
-                        0,
+                        (pos[0], pos[1] + vertical_wall_height - thickness, 0),
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
         if right:
@@ -126,6 +123,5 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                                                 color[0], color[1], color[2],),),
                                 },
                         },
-                        (pos[0] + horizontal_wall_width - thickness, pos[1]),
-                        0,
+                        (pos[0] + horizontal_wall_width - thickness, pos[1], 0),
                         collision=((("rectangle", 0, 0, thickness, vertical_wall_height),)))

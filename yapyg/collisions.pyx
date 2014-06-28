@@ -208,6 +208,7 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
         cdef int r_y
         cdef int r_w
         cdef int r_h
+        cdef tuple pos
         cdef int rot
         cdef int max_extent
         if cached_hash_extents:
@@ -243,7 +244,8 @@ cdef tuple c_get_hash_area(list state, str entity_name, tuple entity_lower_left)
                                 r_y = fixpoint.mul(collision_shape[2], HASH_SCALE_FACTOR)
                                 r_w = fixpoint.mul(collision_shape[3], HASH_SCALE_FACTOR)
                                 r_h = fixpoint.mul(collision_shape[4], HASH_SCALE_FACTOR)
-                                rot = entities.get_rot(state, entity_name)
+                                pos = entities.get_pos(state, entity_name)
+                                rot = pos[2]
 
                                 if rot == 0:
                                         if r_x < lower_left_x_offset:
@@ -341,6 +343,9 @@ cdef list c_get_collision_shapes(list state, str entity_name, list collision_def
 
         cdef tuple pos
         pos = entities.get_pos(state, entity_name)
+        
+        cdef int rot
+        rot = pos[2]
 
         cdef tuple pos_offset
         pos_offset = entities.get_pos_offset(state, entity_name)
@@ -362,7 +367,7 @@ cdef list c_get_collision_shapes(list state, str entity_name, list collision_def
                         r_w = collision_shape[3]
                         r_h = collision_shape[4]
                         absolute_shapes.append(("rectangle", pos[0] + pos_offset[0] + r_x, pos[1] + pos_offset[1] + r_y,
-                                r_w, r_h, entities.get_rot(state, entity_name)))
+                                r_w, r_h, rot))
 
         entity_collision_cache[0] = absolute_shapes
 

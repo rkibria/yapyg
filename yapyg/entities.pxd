@@ -25,19 +25,15 @@ Entities
 cdef int IDX_ENTITIES_TABLE
 
 cdef int IDX_ENTITY_POS
-cdef int IDX_ENTITY_ROT
 cdef int IDX_ENTITY_POS_OFFSET
 cdef int IDX_ENTITY_ENABLED_SPRITE
 cdef int IDX_ENTITY_LAST_POS
 cdef int IDX_ENTITY_SPRITES
 cdef int IDX_ENTITY_COLLISION
 
-cdef int IDX_LAST_POS_POSITION
-cdef int IDX_LAST_POS_ROTATION
-
 cpdef initialize(list state)
 cpdef destroy(list state)
-cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, int rot=*, tuple pos_offset=*, tuple collision=*, int screen_relative=*)
+cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=*, tuple collision=*, int screen_relative=*)
 cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=*, int screen_relative=*)
 cpdef set_active_sprite(list state, str entity_name, str sprite_name)
 cpdef delete(list state, str entity_name)
@@ -45,10 +41,8 @@ cpdef list get(list state, str entity_name)
 cpdef tuple get_pos(list state, str entity_name)
 cpdef tuple get_last_pos(list state, str entity_name)
 cpdef tuple get_pos_offset(list state, str entity_name)
-cpdef int get_rot(list state, str entity_name)
-cpdef set_rot(list state, str entity_name, int rot)
-cpdef set_pos(list state, str entity_name, int x_pos, int y_pos)
-cpdef add_pos(list state, str entity_name, int x_pos, int y_pos)
+cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot)
+cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot)
 cpdef undo_last_move(list state, str entity_name)
 
 cdef c_call_pos_listeners(list state, str entity_name, tuple pos)

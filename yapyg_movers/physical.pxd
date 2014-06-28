@@ -22,15 +22,16 @@
 Simulate physical movement
 """
 
-cdef int IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
-cdef int IDX_MOVERS_PHYSICAL_MASS = 3
-cdef int IDX_MOVERS_PHYSICAL_VX = 4
-cdef int IDX_MOVERS_PHYSICAL_VY = 5
-cdef int IDX_MOVERS_PHYSICAL_AX = 6
-cdef int IDX_MOVERS_PHYSICAL_AY = 7
-cdef int IDX_MOVERS_PHYSICAL_FRICTION = 8
-cdef int IDX_MOVERS_PHYSICAL_INELASTICITY = 9
-cdef int IDX_MOVERS_PHYSICAL_ON_END_FUNCTION = 10
+cdef int IDX_MOVERS_PHYSICAL_ENTITY_NAME
+cdef int IDX_MOVERS_PHYSICAL_MASS
+cdef int IDX_MOVERS_PHYSICAL_VX
+cdef int IDX_MOVERS_PHYSICAL_VY
+cdef int IDX_MOVERS_PHYSICAL_AX
+cdef int IDX_MOVERS_PHYSICAL_AY
+cdef int IDX_MOVERS_PHYSICAL_FRICTION
+cdef int IDX_MOVERS_PHYSICAL_INELASTICITY
+cdef int IDX_MOVERS_PHYSICAL_VR
+cdef int IDX_MOVERS_PHYSICAL_ROT_FRICTION
 
 cpdef add(list state,
                 str entity_name,
@@ -41,6 +42,8 @@ cpdef add(list state,
                 int ay,
                 int friction,
                 int inelasticity,
+                int vr,
+                int rot_friction,
                 int do_replace=*)
 
 cdef list c_create(str entity_name,
@@ -51,6 +54,8 @@ cdef list c_create(str entity_name,
                 int ay,
                 int friction,
                 int inelasticity,
+                int vr,
+                int rot_friction,
                 )
 
 cdef int FIXP_1000

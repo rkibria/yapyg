@@ -33,15 +33,11 @@ import globals
 IDX_ENTITIES_TABLE = 0
 
 IDX_ENTITY_POS = 0
-IDX_ENTITY_ROT = 1
-IDX_ENTITY_POS_OFFSET = 2
-IDX_ENTITY_ENABLED_SPRITE = 3
-IDX_ENTITY_LAST_POS = 4 # tuple (pos_tuple, rot_int)
-IDX_ENTITY_SPRITES = 5
-IDX_ENTITY_COLLISION = 6
-
-IDX_LAST_POS_POSITION = 0
-IDX_LAST_POS_ROTATION = 1
+IDX_ENTITY_POS_OFFSET = 1
+IDX_ENTITY_ENABLED_SPRITE = 2
+IDX_ENTITY_LAST_POS = 3 # tuple (pos_tuple, rot_int)
+IDX_ENTITY_SPRITES = 4
+IDX_ENTITY_COLLISION = 5
 
 cpdef initialize(list state):
         """
@@ -57,7 +53,7 @@ cpdef destroy(list state):
         """
         state[globals.IDX_STATE_ENTITIES] = None
 
-cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, int rot=0, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
+cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
         """
         TODO
         """
@@ -69,8 +65,7 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, int rot=0
 
         cdef list entity
         entity = [
-                [pos[0], pos[1]],
-                [rot],
+                [pos[0], pos[1], pos[2]],
                 [pos_offset[0], pos_offset[1]],
                 None,
                 None,
@@ -134,8 +129,6 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
 
                 sprite_pos = entity[IDX_ENTITY_POS]
 
-                sprite_rot_list = entity[IDX_ENTITY_ROT]
-
                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]
                 if enabled_sprite_name == sprite_name:
                         sprites.set_enable(state, full_sprite_name, False)
@@ -150,7 +143,6 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
                         sprite_scale,
                         sprite_enable,
                         sprite_pos,
-                        sprite_rot_list,
                         screen_relative,
                         )
 
@@ -254,36 +246,7 @@ cpdef tuple get_pos_offset(list state, str entity_name):
         else:
                 return None
 
-cpdef int get_rot(list state, str entity_name):
-        """
-        TODO
-        """
-        cdef list entity
-        entity = get(state, entity_name)
-
-        cdef list rot
-        if entity:
-                rot = entity[IDX_ENTITY_ROT]
-                return rot[0]
-        else:
-                return None
-
-cpdef set_rot(list state, str entity_name, int rot):
-        """
-        TODO
-        """
-        cdef list entity
-        entity = get(state, entity_name)
-
-        if entity:
-                entity[IDX_ENTITY_LAST_POS] = (
-                        tuple(entity[IDX_ENTITY_POS]),
-                        entity[IDX_ENTITY_ROT][0],
-                        )
-
-                entity[IDX_ENTITY_ROT][0] = rot
-
-cpdef set_pos(list state, str entity_name, int x_pos, int y_pos):
+cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
         """
         TODO
         """
@@ -294,20 +257,18 @@ cpdef set_pos(list state, str entity_name, int x_pos, int y_pos):
         if entity:
                 old_pos = tuple(entity[IDX_ENTITY_POS])
 
-                entity[IDX_ENTITY_LAST_POS] = (
-                        tuple(entity[IDX_ENTITY_POS]),
-                        entity[IDX_ENTITY_ROT][0],
-                        )
+                entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
 
-                if (x_pos, y_pos) == old_pos:
+                if (x_pos, y_pos, rot) == old_pos:
                         return
 
                 entity[IDX_ENTITY_POS][0] = x_pos
                 entity[IDX_ENTITY_POS][1] = y_pos
+                entity[IDX_ENTITY_POS][2] = rot
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 
-cpdef add_pos(list state, str entity_name, int x_pos, int y_pos):
+cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
         """
         TODO
         """
@@ -315,16 +276,14 @@ cpdef add_pos(list state, str entity_name, int x_pos, int y_pos):
         entity = get(state, entity_name)
 
         if entity:
-                entity[IDX_ENTITY_LAST_POS] = (
-                        tuple(entity[IDX_ENTITY_POS]),
-                        entity[IDX_ENTITY_ROT][0],
-                        )
+                entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
 
-                if (x_pos, y_pos) == (0, 0):
+                if (x_pos, y_pos, rot) == (0, 0, 0):
                         return
 
                 entity[IDX_ENTITY_POS][0] += x_pos
                 entity[IDX_ENTITY_POS][1] += y_pos
+                entity[IDX_ENTITY_POS][2] += rot
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 
@@ -336,19 +295,14 @@ cpdef undo_last_move(list state, str entity_name):
         entity = get(state, entity_name)
 
         cdef tuple last_pos
-        cdef tuple last_position
-        cdef int last_rot
         if entity:
                 if entity[IDX_ENTITY_LAST_POS]:
                         last_pos = entity[IDX_ENTITY_LAST_POS]
-                        last_position = last_pos[IDX_LAST_POS_POSITION]
-                        last_rotation = last_pos[IDX_LAST_POS_ROTATION]
 
-                        entity[IDX_ENTITY_POS][0] = last_position[0]
-                        entity[IDX_ENTITY_POS][1] = last_position[1]
-
-                        entity[IDX_ENTITY_ROT][0] = last_rotation
+                        entity[IDX_ENTITY_POS][0] = last_pos[0]
+                        entity[IDX_ENTITY_POS][1] = last_pos[1]
+                        entity[IDX_ENTITY_POS][2] = last_pos[2]
 
                         entity[IDX_ENTITY_LAST_POS] = None
 
-                        c_call_pos_listeners(state, entity_name, last_position)
+                        c_call_pos_listeners(state, entity_name, last_pos)

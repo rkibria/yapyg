@@ -28,24 +28,22 @@ import yapyg.fixpoint
 
 IDX_JUMP_MOVER_ENTITY_NAME = 2
 IDX_JUMP_MOVER_NEW_POS = 3
-IDX_JUMP_MOVER_NEW_ROT = 4
-IDX_JUMP_MOVER_ON_END_FUNCTION = 5
+IDX_JUMP_MOVER_ON_END_FUNCTION = 4
 
-def add(state, entity_name, new_pos=None, new_rot=None, on_end_function=None, do_replace=False):
+def add(state, entity_name, new_pos=None, on_end_function=None, do_replace=False):
         """
         TODO
         """
-        yapyg.movers.add(state, entity_name, create(entity_name, new_pos, new_rot, on_end_function), do_replace)
+        yapyg.movers.add(state, entity_name, create(entity_name, new_pos, on_end_function), do_replace)
 
-def create(entity_name, new_pos, new_rot=None, on_end_function=None):
+def create(entity_name, new_pos, on_end_function=None):
         """
         TODO
         """
         return ["jump",
                 run,
                 entity_name,
-                (new_pos[0], new_pos[1]),
-                new_rot if new_rot else None,
+                new_pos,
                 on_end_function,]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
@@ -53,9 +51,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         TODO
         """
         if mover[IDX_JUMP_MOVER_NEW_POS]:
-                yapyg.entities.set_pos(state, entity_name, mover[IDX_JUMP_MOVER_NEW_POS][0], mover[IDX_JUMP_MOVER_NEW_POS][1])
-
-        if mover[IDX_JUMP_MOVER_NEW_ROT]:
-                yapyg.entities.get_rot(state, entity_name)[0] = mover[IDX_JUMP_MOVER_NEW_ROT]
+                new_pos = mover[IDX_JUMP_MOVER_NEW_POS]
+                yapyg.entities.set_pos(state, entity_name, new_pos[0], new_pos[1], new_pos[2])
 
         movers_to_delete.append((entity_name, mover[IDX_JUMP_MOVER_ON_END_FUNCTION]))

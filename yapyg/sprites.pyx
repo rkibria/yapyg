@@ -45,7 +45,6 @@ IDX_SPRITES_DRAW_ORDER = 3
 
 cdef int IDX_SPRITE_ENABLE
 cdef int IDX_SPRITE_POS
-cdef int IDX_SPRITE_ROT
 cdef int IDX_SPRITE_TEXTURES
 cdef int IDX_SPRITE_SPEED
 cdef int IDX_SPRITE_SCALE
@@ -56,14 +55,13 @@ cdef int IDX_SPRITE_SCREEN_RELATIVE
 
 IDX_SPRITE_ENABLE = 0
 IDX_SPRITE_POS = 1
-IDX_SPRITE_ROT = 2
-IDX_SPRITE_TEXTURES = 3
-IDX_SPRITE_SPEED = 4
-IDX_SPRITE_SCALE = 5
-IDX_SPRITE_POS_OFFSET = 6
-IDX_SPRITE_TIME_SUM = 7
-IDX_SPRITE_PHASE = 8
-IDX_SPRITE_SCREEN_RELATIVE = 9
+IDX_SPRITE_TEXTURES = 2
+IDX_SPRITE_SPEED = 3
+IDX_SPRITE_SCALE = 4
+IDX_SPRITE_POS_OFFSET = 5
+IDX_SPRITE_TIME_SUM = 6
+IDX_SPRITE_PHASE = 7
+IDX_SPRITE_SCREEN_RELATIVE = 8
 
 cpdef initialize(list state):
         """
@@ -81,7 +79,7 @@ cpdef destroy(list state):
         """
         state[globals.IDX_STATE_SPRITES] = None
 
-cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_offset, tuple scale, int enable, list pos, list rot_list, int screen_relative=False):
+cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_offset, tuple scale, int enable, list pos, int screen_relative=False):
         """
         TODO
         """
@@ -116,7 +114,6 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
         sprite = [
                 enable,
                 pos,
-                rot_list,
                 tuple(text_textures),
                 speed,
                 [scale[0], scale[1]],
@@ -156,12 +153,6 @@ cpdef tuple get_pos(list state, str sprite_name):
         TODO
         """
         return get(state, sprite_name)[IDX_SPRITE_POS]
-
-cpdef int get_rot(list state, str sprite_name):
-        """
-        TODO
-        """
-        return get(state, sprite_name)[IDX_SPRITE_ROT]
 
 cpdef set_enable(list state, str sprite_name, int enable):
         """
@@ -237,9 +228,8 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
                         continue
 
                 textures = sprite[IDX_SPRITE_TEXTURES]
-                pos = [sprite[IDX_SPRITE_POS][0], sprite[IDX_SPRITE_POS][1]]
+                pos = [sprite[IDX_SPRITE_POS][0], sprite[IDX_SPRITE_POS][1], sprite[IDX_SPRITE_POS][2]]
                 scale = sprite[IDX_SPRITE_SCALE]
-                rotate = sprite[IDX_SPRITE_ROT][0]
                 phase = 0
 
                 pos[0] += sprite[IDX_SPRITE_POS_OFFSET][0]
@@ -265,10 +255,10 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
 
                 texture_name = textures[phase]
                 c_draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
-                        texture_db.get(state, texture_name), pos, scale, rotate, origin_xy, screen_relative)
+                        texture_db.get(state, texture_name), pos, scale, origin_xy, screen_relative)
 
 cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sprite_name,
-                texture, list pos, list scale, int rotate, tuple origin_xy, int screen_relative):
+                texture, list pos, list scale, tuple origin_xy, int screen_relative):
         """
         TODO
         """
@@ -304,6 +294,9 @@ cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str 
 
         cdef tuple offset
         offset = (pos[0] - col, pos[1] - row,)
+        
+        cdef int rotate
+        rotate = pos[2]
 
         cdef tuple offset_pos
         offset_pos = (draw_pos[0] + fixpoint.mul(scaled_tile_size, offset[0]) + origin_xy[0],

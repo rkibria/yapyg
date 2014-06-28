@@ -83,13 +83,13 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 elif new_y > limits[3]:
                         new_y = limits[3]
 
-                yapyg.entities.set_pos(state, entity_name, new_x, new_y)
-
+                heading = pos[2]
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
                         heading = yapyg.fixpoint.heading_from_to((0, 0), tuple(direction))
                         heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
                         heading = yapyg.fixpoint.int2fix(heading_int)
-                        yapyg.entities.set_rot(state, entity_name, heading)
+
+                yapyg.entities.set_pos(state, entity_name, new_x, new_y, heading)
         else:
                 if sprites and (not last_sprite or last_sprite == sprites[1]):
                         mover[IDX_CONTROLLED_MOVER_LAST_SPRITE] = sprites[0]
