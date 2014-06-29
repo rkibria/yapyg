@@ -37,6 +37,7 @@ cdef int IDX_MOVERS_PHYSICAL_FRICTION = 8
 cdef int IDX_MOVERS_PHYSICAL_INELASTICITY = 9
 cdef int IDX_MOVERS_PHYSICAL_VR = 10
 cdef int IDX_MOVERS_PHYSICAL_ROT_FRICTION = 11
+cdef int IDX_MOVERS_PHYSICAL_ROT_DECAY = 12
 
 cpdef add(list state,
                 str entity_name,
@@ -49,6 +50,7 @@ cpdef add(list state,
                 int inelasticity,
                 int vr,
                 int rot_friction,
+                int rot_decay,
                 int do_replace=False):
         """
         TODO
@@ -63,6 +65,7 @@ cpdef add(list state,
                         inelasticity,
                         vr,
                         rot_friction,
+                        rot_decay,
                         ),
                         do_replace
                 )
@@ -77,6 +80,7 @@ cdef list c_create(str entity_name,
                 int inelasticity,
                 int vr,
                 int rot_friction,
+                int rot_decay,
                 ):
         """
         TODO
@@ -93,6 +97,7 @@ cdef list c_create(str entity_name,
                 inelasticity,
                 vr,
                 rot_friction,
+                rot_decay,
                 ]
 
 cdef int FIXP_1000 = yapyg.fixpoint.int2fix(1000)
@@ -131,6 +136,10 @@ cpdef run(list state, str entity_name, list mover, int frame_time_delta, list mo
 
         cdef int delta_rot = 0
         delta_rot = yapyg.fixpoint.mul(v_r, frame_time_delta)
+
+        rot_decay = mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
+        v_r = yapyg.fixpoint.mul(v_r, rot_decay)
+        mover[IDX_MOVERS_PHYSICAL_VR] = v_r
 
         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y, delta_rot)
 
@@ -314,19 +323,49 @@ cdef void c_circle_circle_collision(list state,
         """
         yapyg.entities.undo_last_move(state, circle_entity_name_1)
 
-        cdef tuple abs_pos_1
-        cdef tuple abs_pos_2
-        abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
-        abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
+        cdef tuple abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
+        cdef tuple abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
 
-        cdef tuple unit_vector_1_to_2
-        unit_vector_1_to_2 = yapyg.fixpoint.unit_vector(abs_pos_1, abs_pos_2)
+        cdef tuple speed_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
+        cdef tuple speed_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
 
-        cdef tuple speed_vector_1
-        cdef tuple speed_vector_2
-        speed_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
-        speed_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
+        # torque creation
+        cdef tuple centre_to_centre_vector = yapyg.fixpoint.vector_diff(abs_pos_2, abs_pos_1)
 
+        cdef int centre_to_centre_vector_angle = yapyg.fixpoint.atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])
+        cdef int speed_vector_angle = yapyg.fixpoint.atan2(speed_vector_1[1], speed_vector_1[0])
+
+        cdef int angle_delta = centre_to_centre_vector_angle - speed_vector_angle
+
+        cdef int torque_creation_factor = yapyg.fixpoint.sin(angle_delta)
+
+        cdef int circle_r_1 = abs_circle_shape_1[3]
+        cdef int circle_r_2 = abs_circle_shape_2[3]
+
+        cdef int v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
+        cdef int rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
+        cdef int m_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
+
+        cdef int v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
+        cdef int rot_friction_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
+        cdef int m_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]
+
+        cdef int created_v_p = yapyg.fixpoint.mul(torque_creation_factor, yapyg.fixpoint.length(speed_vector_1))
+
+        cdef int torque_transfer_factor = yapyg.fixpoint.div(rot_friction_1 + rot_friction_2, FIXP_2)
+
+        cdef int created_v_r_1 = yapyg.fixpoint.div(created_v_p, circle_r_1)
+        created_v_r_1 = yapyg.fixpoint.div(created_v_r_1, FIXP_2PI)
+        created_v_r_1 = yapyg.fixpoint.mul(created_v_r_1, torque_transfer_factor)
+        circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1
+
+        cdef int created_v_r_2 = yapyg.fixpoint.div(-created_v_p, circle_r_2)
+        created_v_r_2 = yapyg.fixpoint.div(created_v_r_2, FIXP_2PI)
+        created_v_r_2 = yapyg.fixpoint.mul(created_v_r_2, torque_transfer_factor)
+        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2
+
+        # ellastic collision
+        cdef tuple unit_vector_1_to_2 = yapyg.fixpoint.unit_vector(abs_pos_1, abs_pos_2)
         cdef int new_vx1
         cdef int new_vx2
         cdef int new_vy1
@@ -348,17 +387,9 @@ cdef void c_circle_circle_collision(list state,
         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = yapyg.fixpoint.mul(new_vx2, inelasticity_2)
         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = yapyg.fixpoint.mul(new_vy2, inelasticity_2)
 
-        # torque
-        circle_r_1 = abs_circle_shape_1[3]
-        circle_r_2 = abs_circle_shape_2[3]
-
-        cdef int v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
-        cdef int rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
-        cdef int m_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
-
-        cdef int v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
-        cdef int rot_friction_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
-        cdef int m_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]
+        # torque tranmission
+        v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
+        v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
 
         cdef int v_p_1 = yapyg.fixpoint.mul(v_r_1, circle_r_1)
         v_p_1 = yapyg.fixpoint.mul(v_p_1, FIXP_2PI)
@@ -367,10 +398,15 @@ cdef void c_circle_circle_collision(list state,
         v_p_2 = yapyg.fixpoint.mul(v_p_2, FIXP_2PI)
 
         cdef int delta_v = v_p_1 + v_p_2
-        cdef int factor = yapyg.fixpoint.float2fix(0.2)
 
-        v_p_1 = v_p_1 - yapyg.fixpoint.mul(factor, delta_v)
-        v_p_2 = v_p_2 - yapyg.fixpoint.mul(factor, delta_v)
+        cdef int mass_factor_1 = yapyg.fixpoint.div(m_2, m_1 + m_2)
+        cdef int mass_factor_2 = yapyg.fixpoint.div(m_1, m_1 + m_2)
+
+        cdef int torque_transfer_factor_1 = yapyg.fixpoint.mul(torque_transfer_factor, mass_factor_1)
+        cdef int torque_transfer_factor_2 = yapyg.fixpoint.mul(torque_transfer_factor, mass_factor_2)
+
+        v_p_1 = v_p_1 - yapyg.fixpoint.mul(torque_transfer_factor, delta_v)
+        v_p_2 = v_p_2 - yapyg.fixpoint.mul(torque_transfer_factor, delta_v)
 
         v_r_1 = yapyg.fixpoint.div(v_p_1, circle_r_1)
         v_r_1 = yapyg.fixpoint.div(v_r_1, FIXP_2PI)

@@ -44,6 +44,7 @@ cpdef add(list state,
                 int inelasticity,
                 int vr,
                 int rot_friction,
+                int rot_decay,
                 int do_replace=*)
 
 cdef list c_create(str entity_name,
@@ -56,6 +57,7 @@ cdef list c_create(str entity_name,
                 int inelasticity,
                 int vr,
                 int rot_friction,
+                int rot_decay,
                 )
 
 cdef int FIXP_1000
