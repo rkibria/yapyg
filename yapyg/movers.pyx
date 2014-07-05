@@ -36,9 +36,9 @@ cimport collisions
 
 import globals
 
-IDX_MOVER_TYPE = 0
-IDX_MOVER_RUN_FUNCTION = 1
-IDX_MOVER_ENTITY_NAME = 2
+cdef int IDX_MOVER_TYPE = 0
+cdef int IDX_MOVER_RUN_FUNCTION = 1
+cdef int IDX_MOVER_ENTITY_NAME = 2
 
 cpdef initialize(list state):
         """

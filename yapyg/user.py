@@ -19,20 +19,32 @@
 # THE SOFTWARE.
 
 """
-Globals
+User data
 """
 
-IDX_STATE_SCREEN = 0
-IDX_STATE_TILES = 1
-IDX_STATE_TEXTURE_DB = 2
-IDX_STATE_SPRITES = 3
-IDX_STATE_MOVERS = 4
-IDX_STATE_ENTITIES = 5
-IDX_STATE_VIEW = 6
-IDX_STATE_CONTROLS = 7
-IDX_STATE_COLLISIONS = 8
-IDX_STATE_TEXT = 9
-IDX_STATE_TIMER = 10
-IDX_STATE_DEBUG = 11
-IDX_STATE_USER = 12
-IDX_STATE_LAST = 13
+import globals
+import fixpoint
+
+def initialize(state):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_USER] = None
+
+def destroy(state):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_USER] = None
+
+def get_data(state):
+        """
+        TODO
+        """
+        return state[globals.IDX_STATE_USER]
+
+def set_data(state, data):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_USER] = data

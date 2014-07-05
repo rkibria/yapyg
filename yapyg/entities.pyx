@@ -35,7 +35,7 @@ IDX_ENTITIES_TABLE = 0
 IDX_ENTITY_POS = 0
 IDX_ENTITY_POS_OFFSET = 1
 IDX_ENTITY_ENABLED_SPRITE = 2
-IDX_ENTITY_LAST_POS = 3 # tuple (pos_tuple, rot_int)
+IDX_ENTITY_LAST_POS = 3
 IDX_ENTITY_SPRITES = 4
 IDX_ENTITY_COLLISION = 5
 
@@ -246,6 +246,13 @@ cpdef tuple get_pos_offset(list state, str entity_name):
         else:
                 return None
 
+cdef int FIXP_360 = fixpoint.int2fix(360)
+
+cdef void normalize_rotation(entity):
+        cdef int old_rot = entity[IDX_ENTITY_POS][2]
+        cdef int modulo_rot = fixpoint.modulo(old_rot, FIXP_360)
+        entity[IDX_ENTITY_POS][2] = modulo_rot
+
 cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
         """
         TODO
@@ -265,6 +272,8 @@ cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
                 entity[IDX_ENTITY_POS][0] = x_pos
                 entity[IDX_ENTITY_POS][1] = y_pos
                 entity[IDX_ENTITY_POS][2] = rot
+                
+                normalize_rotation(entity)
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 
@@ -284,6 +293,8 @@ cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
                 entity[IDX_ENTITY_POS][0] += x_pos
                 entity[IDX_ENTITY_POS][1] += y_pos
                 entity[IDX_ENTITY_POS][2] += rot
+                
+                normalize_rotation(entity)
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 

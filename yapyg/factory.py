@@ -34,6 +34,8 @@ import controls
 import collisions
 import text
 import timer
+import debug
+import user
 
 def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         """
@@ -52,6 +54,8 @@ def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         collisions.initialize(state)
         text.initialize(state)
         timer.initialize(state)
+        debug.initialize(state)
+        user.initialize(state)
 
         return state
 
@@ -67,3 +71,5 @@ def destroy(state):
         collisions.destroy(state)
         text.destroy(state)
         timer.destroy(state)
+        debug.destroy(state)
+        user.destroy(state)

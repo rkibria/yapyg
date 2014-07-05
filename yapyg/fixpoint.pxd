@@ -51,6 +51,8 @@ cpdef int is_point_in_circle(tuple point, tuple circ)
 cpdef int heading_from_to(tuple pos1, tuple pos2)
 cpdef int floor(int x)
 cpdef int modulo(int x, int d)
+cpdef list fixtuple2floatlist(fix_tuple)
+cpdef str fixtuple2str(tuple fix_tuple, int precision=*)
 
 cpdef int FIXP_minus1
 cpdef int FIXP_0

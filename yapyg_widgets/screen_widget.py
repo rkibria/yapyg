@@ -23,18 +23,20 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.uix.image import Image
+from kivy.uix.label import Label
 
 import yapyg
 import yapyg_helpers
 import yapyg_movers
 import yapyg_viewers
+import yapyg.debug
 
 from display_widget import DisplayWidget
 from joystick_widget import JoystickWidget
-from yapyg.fixpoint import float2fix
+from yapyg.fixpoint import float2fix, fix2float
 
 class ScreenWidget(FloatLayout):
-        def __init__(self, state, on_exit_function, scale, **kwargs):
+        def __init__(self, state, on_exit_function, scale, debugging=False, **kwargs):
                 super(ScreenWidget, self).__init__(**kwargs)
 
                 self.state = state
@@ -123,12 +125,43 @@ class ScreenWidget(FloatLayout):
                 exit_button.bind(state=self.on_exit)
                 self.add_widget(exit_button)
 
+                if debugging:
+                        NUM_DEBUG_LINES = yapyg.debug.NUM_DEBUG_LINES + 1
+                        DEBUG_LINE_SIZE = 0.025
+                        self.debug_label_array = []
+                        for i in xrange(NUM_DEBUG_LINES):
+                                self.debug_label_array.append(Label(
+                                        color=(0, 1, 0, 1),
+                                        size_hint=(1.0, DEBUG_LINE_SIZE),
+                                        pos_hint = {"x": 0, "y": 1.0 - DEBUG_LINE_SIZE - DEBUG_LINE_SIZE * i},
+                                        markup=True,
+                                        text_size=(Window.width, Window.height / NUM_DEBUG_LINES),
+                                        ))
+                                self.debug_label_array[i].bind(texture_size=self.setter('size'))
+                                self.add_widget(self.debug_label_array[i])
+                        Clock.schedule_interval(self.on_debug_timer, 0.5)
+
+        def set_debug_text(self, line_no, txt):
+                self.debug_label_array[line_no].text = txt
+
+        def on_debug_timer(self, dt):
+                frame_time = self.display_widget.get_frame_time()
+                status_output = "fps:%.1f frame_time:%.1fms" % (float(Clock.get_fps()), fix2float(frame_time))
+                self.set_debug_text(0, status_output)
+
+                NUM_DEBUG_LINES = yapyg.debug.NUM_DEBUG_LINES
+                for i in xrange(NUM_DEBUG_LINES):
+                        debug_line = yapyg.debug.get_line(self.state, i)
+                        self.set_debug_text(1 + i, debug_line)
+
         def on_timer(self, dt):
                 if self.state:
                         yapyg.controls.set_joystick(self.state, self.joystick.get_direction())
 
         def on_exit(self, instance, value):
                 if self.parent:
+                        Clock.unschedule(self.on_debug_timer)
+                        Clock.unschedule(self.on_timer)
                         self.display_widget.destroy()
                         parent = self.parent
                         parent.remove_widget(self)

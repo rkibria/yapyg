@@ -19,20 +19,38 @@
 # THE SOFTWARE.
 
 """
-Globals
+Debugging
 """
 
-IDX_STATE_SCREEN = 0
-IDX_STATE_TILES = 1
-IDX_STATE_TEXTURE_DB = 2
-IDX_STATE_SPRITES = 3
-IDX_STATE_MOVERS = 4
-IDX_STATE_ENTITIES = 5
-IDX_STATE_VIEW = 6
-IDX_STATE_CONTROLS = 7
-IDX_STATE_COLLISIONS = 8
-IDX_STATE_TEXT = 9
-IDX_STATE_TIMER = 10
-IDX_STATE_DEBUG = 11
-IDX_STATE_USER = 12
-IDX_STATE_LAST = 13
+import globals
+import fixpoint
+
+IDX_DEBUG_TEXTLINES = 0
+
+NUM_DEBUG_LINES = 39
+
+def initialize(state):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_DEBUG] = [
+                [("") for x in xrange(NUM_DEBUG_LINES)],
+                ]
+
+def destroy(state):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_DEBUG] = None
+
+def set_line(state, line_no, txt):
+        """
+        TODO
+        """
+        state[globals.IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no] = txt
+
+def get_line(state, line_no):
+        """
+        TODO
+        """
+        return state[globals.IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no]

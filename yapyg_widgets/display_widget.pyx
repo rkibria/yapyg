@@ -33,7 +33,7 @@ import yapyg.timer
 
 from yapyg.fixpoint import float2fix
 
-MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(35)
+MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(1000)
 
 class DisplayWidget(Widget):
         def __init__(self,
@@ -52,7 +52,7 @@ class DisplayWidget(Widget):
                 self.state = state
                 self.redraw_tiles = [True]
 
-                self.min_frame_time_delta = 0
+                self.frame_time = 0
                 Clock.schedule_once(self.on_timer, timeout=0)
 
         def destroy(self):
@@ -72,17 +72,20 @@ class DisplayWidget(Widget):
                         cur_fps = float2fix(float(Clock.get_fps()))
                         if cur_fps > 0:
                                 last_frame_delta = yapyg.fixpoint.div(yapyg.fixpoint.FIXP_1000, cur_fps) # milliseconds
-                                if self.min_frame_time_delta == 0 or last_frame_delta < self.min_frame_time_delta:
-                                        self.min_frame_time_delta = last_frame_delta
-                                else:
-                                        last_frame_delta = self.min_frame_time_delta
 
                                 if last_frame_delta < MIN_FRAME_DELTA:
-                                        yapyg.timer.run(self.state, last_frame_delta)
-                                        c_redraw(self.state, last_frame_delta, self.redraw_tiles, self.scale, self.canvas, self.view_size)
+                                        self.frame_time = last_frame_delta
+                                else:
+                                        self.frame_time = MIN_FRAME_DELTA
+
+                                yapyg.timer.run(self.state, self.frame_time)
+                                c_redraw(self.state, self.frame_time, self.redraw_tiles, self.scale, self.canvas, self.view_size)
 
                 if self.state:
                         Clock.schedule_once(self.on_timer, timeout=0)
+
+        def get_frame_time(self):
+                return self.frame_time
 
         def enable_redraw_tiles(self, value):
                 """

@@ -974,13 +974,35 @@ cpdef int modulo(int x, int d):
         """
         TODO
         """
-        cdef int int_x
-        int_x = fix2int(x)
+        cdef int int_x = fix2int(x)
+        cdef int int_d = fix2int(d)
 
-        cdef int int_d
-        int_d = fix2int(d)
+        cdef int int_res = int_x % int_d
 
-        cdef int int_res
-        int_res = int_x % int_d
+        cdef int x_fraction = x - int2fix(int_x)
+        cdef fix_res = int2fix(int_res)
+        fix_res += x_fraction
 
-        return int2fix(int_res)
+        return fix_res
+
+cpdef list fixtuple2floatlist(fix_tuple):
+        cdef list out_list = []
+        cdef int fix_value
+        for fix_value in fix_tuple:
+                out_list.append(fix2float(fix_value))
+        return out_list
+
+cpdef str fixtuple2str(tuple fix_tuple, int precision=3):
+        cdef list float_list = fixtuple2floatlist(fix_tuple)
+        cdef str out_string = "("
+        cdef int i
+        cdef float float_value
+        cdef str format_string
+        for i in xrange(len(float_list)):
+                float_value = float_list[i]
+                format_string = "%%.%df" % precision
+                out_string += (format_string % float_value)
+                if i != len(float_list) - 1:
+                        out_string += ", "
+        out_string += ")"
+        return out_string
