@@ -27,7 +27,7 @@ import fixpoint
 
 IDX_DEBUG_TEXTLINES = 0
 
-NUM_DEBUG_LINES = 39
+NUM_DEBUG_LINES = 19
 
 def initialize(state):
         """

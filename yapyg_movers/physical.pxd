@@ -22,17 +22,6 @@
 Simulate physical movement
 """
 
-cdef int IDX_MOVERS_PHYSICAL_ENTITY_NAME
-cdef int IDX_MOVERS_PHYSICAL_MASS
-cdef int IDX_MOVERS_PHYSICAL_VX
-cdef int IDX_MOVERS_PHYSICAL_VY
-cdef int IDX_MOVERS_PHYSICAL_AX
-cdef int IDX_MOVERS_PHYSICAL_AY
-cdef int IDX_MOVERS_PHYSICAL_FRICTION
-cdef int IDX_MOVERS_PHYSICAL_INELASTICITY
-cdef int IDX_MOVERS_PHYSICAL_VR
-cdef int IDX_MOVERS_PHYSICAL_ROT_FRICTION
-
 cpdef add(list state,
                 str entity_name,
                 int mass,
@@ -45,6 +34,7 @@ cpdef add(list state,
                 int vr,
                 int rot_friction,
                 int rot_decay,
+                int stickyness,
                 int do_replace=*)
 
 cdef list c_create(str entity_name,
@@ -58,6 +48,7 @@ cdef list c_create(str entity_name,
                 int vr,
                 int rot_friction,
                 int rot_decay,
+                int stickyness
                 )
 
 cdef int FIXP_1000

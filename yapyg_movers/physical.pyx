@@ -27,17 +27,18 @@ cimport yapyg.movers
 cimport yapyg.entities
 cimport yapyg.collisions
 
-cdef int IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
-cdef int IDX_MOVERS_PHYSICAL_MASS = 3
-cdef int IDX_MOVERS_PHYSICAL_VX = 4
-cdef int IDX_MOVERS_PHYSICAL_VY = 5
-cdef int IDX_MOVERS_PHYSICAL_AX = 6
-cdef int IDX_MOVERS_PHYSICAL_AY = 7
-cdef int IDX_MOVERS_PHYSICAL_FRICTION = 8
-cdef int IDX_MOVERS_PHYSICAL_INELASTICITY = 9
-cdef int IDX_MOVERS_PHYSICAL_VR = 10
-cdef int IDX_MOVERS_PHYSICAL_ROT_FRICTION = 11
-cdef int IDX_MOVERS_PHYSICAL_ROT_DECAY = 12
+IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
+IDX_MOVERS_PHYSICAL_MASS = 3
+IDX_MOVERS_PHYSICAL_VX = 4
+IDX_MOVERS_PHYSICAL_VY = 5
+IDX_MOVERS_PHYSICAL_AX = 6
+IDX_MOVERS_PHYSICAL_AY = 7
+IDX_MOVERS_PHYSICAL_FRICTION = 8
+IDX_MOVERS_PHYSICAL_INELASTICITY = 9
+IDX_MOVERS_PHYSICAL_VR = 10
+IDX_MOVERS_PHYSICAL_ROT_FRICTION = 11
+IDX_MOVERS_PHYSICAL_ROT_DECAY = 12
+IDX_MOVERS_PHYSICAL_STICKYNESS = 13
 
 cpdef add(list state,
                 str entity_name,
@@ -51,6 +52,7 @@ cpdef add(list state,
                 int vr,
                 int rot_friction,
                 int rot_decay,
+                int stickyness,
                 int do_replace=False):
         """
         TODO
@@ -66,6 +68,7 @@ cpdef add(list state,
                         vr,
                         rot_friction,
                         rot_decay,
+                        stickyness
                         ),
                         do_replace
                 )
@@ -81,6 +84,7 @@ cdef list c_create(str entity_name,
                 int vr,
                 int rot_friction,
                 int rot_decay,
+                int stickyness
                 ):
         """
         TODO
@@ -98,62 +102,64 @@ cdef list c_create(str entity_name,
                 vr,
                 rot_friction,
                 rot_decay,
+                stickyness,
                 ]
 
 cdef int FIXP_1000 = yapyg.fixpoint.int2fix(1000)
-cdef int FIXP_360 = yapyg.fixpoint.int2fix(360)
 
 cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
         """
         TODO
         """
-        cdef int v_x
-        cdef int v_y
-        v_x = mover[IDX_MOVERS_PHYSICAL_VX]
-        v_y = mover[IDX_MOVERS_PHYSICAL_VY]
+        cdef int v_x = mover[IDX_MOVERS_PHYSICAL_VX]
+        cdef int v_y = mover[IDX_MOVERS_PHYSICAL_VY]
 
-        cdef int delta_x
-        cdef int delta_y
-        delta_x = yapyg.fixpoint.div(yapyg.fixpoint.mul(v_x, frame_time_delta), FIXP_1000)
-        delta_y = yapyg.fixpoint.div(yapyg.fixpoint.mul(v_y, frame_time_delta), FIXP_1000)
+        cdef int a_x = mover[IDX_MOVERS_PHYSICAL_AX]
+        cdef int a_y = mover[IDX_MOVERS_PHYSICAL_AY]
 
-        cdef int a_x
-        cdef int a_y
-        a_x = mover[IDX_MOVERS_PHYSICAL_AX]
-        a_y = mover[IDX_MOVERS_PHYSICAL_AY]
+        cdef int delta_vx = yapyg.fixpoint.div(yapyg.fixpoint.mul(a_x, frame_time_delta), FIXP_1000)
+        cdef int delta_vy = yapyg.fixpoint.div(yapyg.fixpoint.mul(a_y, frame_time_delta), FIXP_1000)
 
-        v_x += a_x
-        v_y += a_y
+        v_x += delta_vx
+        v_y += delta_vy
 
-        cdef int friction
-        friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]
+        cdef int delta_x = yapyg.fixpoint.div(yapyg.fixpoint.mul(v_x, frame_time_delta), FIXP_1000)
+        cdef int delta_y = yapyg.fixpoint.div(yapyg.fixpoint.mul(v_y, frame_time_delta), FIXP_1000)
 
-        mover[IDX_MOVERS_PHYSICAL_VX] = yapyg.fixpoint.mul(v_x, friction)
-        mover[IDX_MOVERS_PHYSICAL_VY] = yapyg.fixpoint.mul(v_y, friction)
+        cdef int v_r = mover[IDX_MOVERS_PHYSICAL_VR]
+        cdef int delta_rot = yapyg.fixpoint.mul(v_r, frame_time_delta)
 
-        cdef int v_r
-        v_r = mover[IDX_MOVERS_PHYSICAL_VR]
-
-        cdef int delta_rot = 0
-        delta_rot = yapyg.fixpoint.mul(v_r, frame_time_delta)
-
-        rot_decay = mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
-        v_r = yapyg.fixpoint.mul(v_r, rot_decay)
-        mover[IDX_MOVERS_PHYSICAL_VR] = v_r
+        cdef int stickyness = mover[IDX_MOVERS_PHYSICAL_STICKYNESS]
+        if yapyg.fixpoint.length((v_x, v_y,)) < stickyness:
+                delta_x = 0
+                delta_y = 0
+                delta_rot = 0
 
         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y, delta_rot)
 
-        cdef tuple collision_result
-        collision_result = yapyg.collisions.c_run(state, entity_name)
+        cdef int friction
+        cdef int rot_decay
+        cdef tuple collision_result = yapyg.collisions.c_run(state, entity_name)
         if collision_result:
                 collision_handler(*collision_result)
+        else:
+                friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]
+                mover[IDX_MOVERS_PHYSICAL_VX] = yapyg.fixpoint.mul(v_x, friction)
+                mover[IDX_MOVERS_PHYSICAL_VY] = yapyg.fixpoint.mul(v_y, friction)
+
+                rot_decay = mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
+                mover[IDX_MOVERS_PHYSICAL_VR] = yapyg.fixpoint.mul(v_r, rot_decay)
 
 FIXP_2 = yapyg.fixpoint.int2fix(2)
 FIXP_2PI = yapyg.fixpoint.float2fix(2 * 3.14159265359)
 
 cdef c_compute_circle_torque(list state, int v_r, int v_x, int rot_friction, int circle_r, int clockw_right):
-        cdef int v_p = yapyg.fixpoint.mul(v_r, circle_r)
-        v_p = yapyg.fixpoint.mul(v_p, FIXP_2PI)
+        """
+        TODO
+        """
+        cdef int circle_circumference = yapyg.fixpoint.mul(FIXP_2PI, circle_r)
+
+        cdef int v_p = yapyg.fixpoint.mul(v_r, circle_circumference)
 
         if not clockw_right:
                 v_p = -v_p
@@ -167,8 +173,7 @@ cdef c_compute_circle_torque(list state, int v_r, int v_x, int rot_friction, int
         if not clockw_right:
                 v_p = -v_p
 
-        v_r = yapyg.fixpoint.div(v_p, circle_r)
-        v_r = yapyg.fixpoint.div(v_p, FIXP_2PI)
+        v_r = yapyg.fixpoint.div(v_p, circle_circumference)
 
         return (v_r, v_x)
 
@@ -359,7 +364,7 @@ cdef void c_circle_circle_collision(list state,
         created_v_r_1 = yapyg.fixpoint.mul(created_v_r_1, torque_transfer_factor)
         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1
 
-        cdef int created_v_r_2 = yapyg.fixpoint.div(-created_v_p, circle_r_2)
+        cdef int created_v_r_2 = yapyg.fixpoint.div(created_v_p, circle_r_2)
         created_v_r_2 = yapyg.fixpoint.div(created_v_r_2, FIXP_2PI)
         created_v_r_2 = yapyg.fixpoint.mul(created_v_r_2, torque_transfer_factor)
         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2
@@ -405,8 +410,8 @@ cdef void c_circle_circle_collision(list state,
         cdef int torque_transfer_factor_1 = yapyg.fixpoint.mul(torque_transfer_factor, mass_factor_1)
         cdef int torque_transfer_factor_2 = yapyg.fixpoint.mul(torque_transfer_factor, mass_factor_2)
 
-        v_p_1 = v_p_1 - yapyg.fixpoint.mul(torque_transfer_factor, delta_v)
-        v_p_2 = v_p_2 - yapyg.fixpoint.mul(torque_transfer_factor, delta_v)
+        v_p_1 = v_p_1 - yapyg.fixpoint.mul(torque_transfer_factor_1, delta_v)
+        v_p_2 = v_p_2 - yapyg.fixpoint.mul(torque_transfer_factor_2, delta_v)
 
         v_r_1 = yapyg.fixpoint.div(v_p_1, circle_r_1)
         v_r_1 = yapyg.fixpoint.div(v_r_1, FIXP_2PI)
@@ -468,14 +473,21 @@ cdef tuple c_elastic_collision(int v_1, int v_2, int m_1, int m_2):
 
         cdef int diff_1
         diff_1 = m_1 - m_2
-        return (yapyg.fixpoint.div(yapyg.fixpoint.mul(v_1, diff_1) + yapyg.fixpoint.mul(FIXP_2, yapyg.fixpoint.mul(m_2, v_2)), mass_sum),
-                yapyg.fixpoint.div(yapyg.fixpoint.mul(v_2, -diff_1) + yapyg.fixpoint.mul(FIXP_2, yapyg.fixpoint.mul(m_1, v_1)), mass_sum),
-                )
+
+        cdef int new_v_1 = yapyg.fixpoint.div(yapyg.fixpoint.mul(v_1, diff_1) + yapyg.fixpoint.mul(FIXP_2, yapyg.fixpoint.mul(m_2, v_2)),
+                mass_sum)
+
+        cdef int new_v_2 = yapyg.fixpoint.div(yapyg.fixpoint.mul(v_2, -diff_1) + yapyg.fixpoint.mul(FIXP_2, yapyg.fixpoint.mul(m_1, v_1)),
+                mass_sum)
+
+        return (new_v_1, new_v_2,)
 
 cdef tuple c_reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, int m_1, int m_2):
         """
         TODO
         """
+        print "before", yapyg.fixpoint.fixtuple2str(v1_vector), yapyg.fixpoint.fixtuple2str(v2_vector)
+        
         cdef int v1_eff
         cdef int v2_eff
         v1_eff = yapyg.fixpoint.dot_product(unit_vector, v1_vector)
@@ -499,6 +511,9 @@ cdef tuple c_reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector,
         cdef tuple new_v2_vector
         new_v1_vector = yapyg.fixpoint.vector_diff(v1_perpendicular, new_v1_eff_vector)
         new_v2_vector = yapyg.fixpoint.vector_sum(v2_perpendicular, new_v2_eff_vector)
+
+        print "after", yapyg.fixpoint.fixtuple2str(new_v1_vector), yapyg.fixpoint.fixtuple2str(new_v2_vector)
+        print ""
 
         return (new_v1_vector[0], new_v1_vector[1],
                 new_v2_vector[0], new_v2_vector[1])

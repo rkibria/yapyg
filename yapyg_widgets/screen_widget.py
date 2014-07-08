@@ -127,7 +127,7 @@ class ScreenWidget(FloatLayout):
 
                 if debugging:
                         NUM_DEBUG_LINES = yapyg.debug.NUM_DEBUG_LINES + 1
-                        DEBUG_LINE_SIZE = 0.025
+                        DEBUG_LINE_SIZE = 0.05
                         self.debug_label_array = []
                         for i in xrange(NUM_DEBUG_LINES):
                                 self.debug_label_array.append(Label(
