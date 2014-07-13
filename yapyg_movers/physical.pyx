@@ -365,7 +365,7 @@ cdef void c_circle_circle_collision(list state,
 
         cdef int created_v_p = yapyg.fixpoint.mul(torque_creation_factor, yapyg.fixpoint.length(speed_vector_1))
 
-        cdef int torque_transfer_factor = yapyg.fixpoint.div(rot_friction_1 + rot_friction_2, FIXP_2)
+        cdef int torque_transfer_factor = yapyg.fixpoint.div(min(rot_friction_1, rot_friction_2), FIXP_2)
 
         cdef int created_v_r_1 = yapyg.fixpoint.div(created_v_p, circle_r_1)
         created_v_r_1 = yapyg.fixpoint.div(created_v_r_1, FIXP_2PI)
