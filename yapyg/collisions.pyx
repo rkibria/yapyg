@@ -377,32 +377,25 @@ cdef tuple c_run(list state, str entity_name_1):
         """
         TODO
         """
-        cdef list state_collisions
-        state_collisions = state[globals.IDX_STATE_COLLISIONS]
+        cdef list state_collisions = state[globals.IDX_STATE_COLLISIONS]
 
-        cdef dict state_collisions_entities
-        state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
+        cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
         if not state_collisions_entities.has_key(entity_name_1):
                 return
 
-        cdef dict hash_map
-        hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]
+        cdef dict hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]
 
-        cdef list collision_def_1
-        collision_def_1 = state_collisions_entities[entity_name_1]
-        cdef list absolute_shapes_1
-        absolute_shapes_1 = c_get_collision_shapes(state, entity_name_1, collision_def_1)
+        cdef list collision_def_1 = state_collisions_entities[entity_name_1]
+        cdef list absolute_shapes_1 = c_get_collision_shapes(state, entity_name_1, collision_def_1)
 
         cdef tuple entity_1_lower_left
         cdef tuple entity_1_upper_right
         entity_1_lower_left, entity_1_upper_right = c_get_hash_area(state,
                 entity_name_1, entities.get_pos(state, entity_name_1))
 
-        cdef set already_checked_set
-        already_checked_set = set()
+        cdef set already_checked_set = set()
 
-        cdef list collisions_list
-        collisions_list = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
+        cdef list collisions_list = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
 
         cdef int is_collision
         cdef tuple hash
@@ -410,6 +403,7 @@ cdef tuple c_run(list state, str entity_name_1):
         cdef str entity_name_2
         cdef list collision_def_2
         cdef list absolute_shapes_2
+        cdef list contact_points = []
 
         for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
                 for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
@@ -438,23 +432,25 @@ cdef tuple c_run(list state, str entity_name_1):
                                                 absolute_shape_1_type = absolute_shape_1[0]
                                                 absolute_shape_2_type = absolute_shape_2[0]
 
+                                                del contact_points[:]
                                                 if absolute_shape_1_type == "circle":
                                                         if absolute_shape_2_type == "circle":
-                                                                is_collision = fixpoint.is_circle_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                                is_collision = fixpoint.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
                                                         elif absolute_shape_2_type == "rectangle":
-                                                                is_collision = fixpoint.is_rect_circle_collision(absolute_shape_1, absolute_shape_2)
+                                                                is_collision = fixpoint.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
                                                 elif absolute_shape_1_type == "rectangle":
                                                         if absolute_shape_2_type == "circle":
-                                                                is_collision = fixpoint.is_rect_circle_collision(absolute_shape_2, absolute_shape_1)
-                                                        elif absolute_shape_2_type == "rectangle": # TODO
-                                                                is_collision = False
+                                                                is_collision = fixpoint.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
+                                                        elif absolute_shape_2_type == "rectangle":
+                                                                is_collision = fixpoint.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
 
                                                 if is_collision:
                                                         collisions_list.append((entity_name_1, entity_name_2,))
                                                         return (state,
                                                                 entity_name_1, entity_name_2,
                                                                 collision_def_1, collision_def_2,
-                                                                absolute_shape_1, absolute_shape_2
+                                                                absolute_shape_1, absolute_shape_2,
+                                                                contact_points
                                                                 )
         return None
 
@@ -465,8 +461,7 @@ cdef void c_clear_collisions_list(list state):
         state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
 
 cdef void c_notify_collision_handler(list state):
-        cdef list collisions_list
-        collisions_list = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
+        cdef list collisions_list = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
 
         handler_function = state[globals.IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]
         if collisions_list and handler_function:

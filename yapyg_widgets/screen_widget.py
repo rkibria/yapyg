@@ -133,7 +133,7 @@ class ScreenWidget(FloatLayout):
                                 self.debug_label_array.append(Label(
                                         color=(0, 1, 0, 1),
                                         size_hint=(1.0, DEBUG_LINE_SIZE),
-                                        pos_hint = {"x": 0, "y": 1.0 - DEBUG_LINE_SIZE - DEBUG_LINE_SIZE * i},
+                                        pos_hint = {"x": 0.05, "y": 1.0 - DEBUG_LINE_SIZE - DEBUG_LINE_SIZE * i},
                                         markup=True,
                                         text_size=(Window.width, Window.height / NUM_DEBUG_LINES),
                                         ))

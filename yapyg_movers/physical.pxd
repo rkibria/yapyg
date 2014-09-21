@@ -51,11 +51,7 @@ cdef list c_create(str entity_name,
                 int stickyness
                 )
 
-cdef int FIXP_1000
-
 cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete)
-
-cdef int FIXP_2
 
 cdef c_rectangle_circle_collision(list state,
                 str rectangle_entity_name,
@@ -79,8 +75,8 @@ cpdef collision_handler(list state,
                 list collision_def_1,
                 list collision_def_2,
                 tuple absolute_shape_1,
-                tuple absolute_shape_2)
+                tuple absolute_shape_2,
+                list contact_points)
 
-cdef tuple c_elastic_collision(int v_1, int v_2, int m_1, int m_2)
-
-cdef tuple c_reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, int m_1, int m_2)
+cpdef tuple elastic_collision(int v_1, int v_2, int m_1, int m_2)
+cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, int m_1, int m_2)
