@@ -464,9 +464,9 @@ cdef c_rectangle_rectangle_collision(list state,
                 abs_rectangle_shape_2[2] + yapyg.fixpoint.div(abs_rectangle_shape_2[4], FIXP_2))
 
         cdef tuple contact_point
-        cdef tuple contact_sum_vector = (0, 0)
+        cdef tuple contact_sum_vector
 
-        cdef tuple rotated_contact_point
+        cdef tuple rotated_point
         cdef int contact_x
         cdef int contact_y
         cdef tuple rect_move_vector
@@ -492,6 +492,7 @@ cdef c_rectangle_rectangle_collision(list state,
                 print "TODO: 2 physics rectangles collision"
         else:
                 # print "physics rectangle (1) with static rectangle collision (2)"
+                contact_sum_vector = (0, 0)
                 for contact_point in contact_points:
                         contact_sum_vector = yapyg.fixpoint.vector_sum(contact_sum_vector,
                                 yapyg.fixpoint.vector_diff(contact_point, rectangle_center_1))
@@ -500,12 +501,11 @@ cdef c_rectangle_rectangle_collision(list state,
                         # resulting_torque = yapyg.fixpoint.dot_product(rotated_vector, speed_vector_1)
                         # resulting_torque = yapyg.fixpoint.mul(resulting_torque, rot_friction_1)
                         # rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += yapyg.fixpoint.mul(resulting_torque, torque_factor)
+                contact_sum_vector = (contact_sum_vector[0] + rectangle_center_1[0], contact_sum_vector[1] + rectangle_center_1[1])
+                contact_x,contact_y = contact_sum_vector
 
                 # rotate coordinate system so that static rectangle (2) is not rotated
                 rect_move_vector = speed_vector_1
-
-                contact_x = contact_sum_vector[0] + rectangle_center_1[0]
-                contact_y = contact_sum_vector[1] + rectangle_center_1[1]
 
                 rect_x_1 = rectangle_center_1[0]
                 rect_y_1 = rectangle_center_1[1]
@@ -521,13 +521,13 @@ cdef c_rectangle_rectangle_collision(list state,
                 rect_bottom_2 = rect_y_2 - rect_h_2
 
                 if rect_rot_2 != 0:
-                        rotated_contact_point = yapyg.fixpoint.rotated_point(
-                                rectangle_center_2,
-                                contact_sum_vector,
-                                -rect_rot_2)
-                        contact_x = rotated_contact_point[0]
-                        contact_y = rotated_contact_point[1]
+                        rotated_point = yapyg.fixpoint.rotated_point(rectangle_center_2, contact_sum_vector, -rect_rot_2)
+                        contact_x,contact_y = rotated_point
+
                         rect_move_vector = yapyg.fixpoint.rotated_point((0, 0), rect_move_vector, -rect_rot_2)
+
+                        rotated_point = yapyg.fixpoint.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)
+                        rect_x_1,rect_y_1 = rotated_point
 
                 if contact_x < rect_x_2:
                         if contact_y < rect_y_2:
