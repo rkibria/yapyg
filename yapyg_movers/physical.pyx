@@ -481,26 +481,33 @@ cdef c_rectangle_rectangle_collision(list state,
         cdef int rect_top_2
         cdef int rect_bottom_2
 
-        # cdef tuple rotation_vector = (0, yapyg.fixpoint.int2fix(-1))
-        # cdef tuple vector_center_to_contact
+        cdef tuple rotation_vector = (0, yapyg.fixpoint.int2fix(-1))
+        cdef tuple vector_center_to_contact
         # cdef tuple max_positive_torque_vector
         # cdef tuple rotated_vector
-        # cdef int resulting_torque
-        # cdef int torque_factor = yapyg.fixpoint.float2fix(0.1)
+        cdef int resulting_torque
+        cdef int torque_factor = yapyg.fixpoint.float2fix(0.25)
 
         if rectangle_physical_mover_2:
                 print "TODO: 2 physics rectangles collision"
         else:
                 # print "physics rectangle (1) with static rectangle collision (2)"
                 contact_sum_vector = (0, 0)
+                resulting_torque = 0
                 for contact_point in contact_points:
                         contact_sum_vector = yapyg.fixpoint.vector_sum(contact_sum_vector,
                                 yapyg.fixpoint.vector_diff(contact_point, rectangle_center_1))
-                        # vector_center_to_contact = yapyg.fixpoint.vector_diff(contact_point, rectangle_center_1)
-                        # rotated_vector = yapyg.fixpoint.complex_multiply(rotation_vector, vector_center_to_contact)
-                        # resulting_torque = yapyg.fixpoint.dot_product(rotated_vector, speed_vector_1)
-                        # resulting_torque = yapyg.fixpoint.mul(resulting_torque, rot_friction_1)
-                        # rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += yapyg.fixpoint.mul(resulting_torque, torque_factor)
+                        vector_center_to_contact = yapyg.fixpoint.vector_diff(contact_point, rectangle_center_1)
+                        rotated_vector = yapyg.fixpoint.complex_multiply(rotation_vector, vector_center_to_contact)
+                        resulting_torque += yapyg.fixpoint.dot_product(rotated_vector, speed_vector_1)
+
+                resulting_torque = yapyg.fixpoint.mul(resulting_torque, torque_factor)
+                # Seems to fix rectangles getting stuck sometimes
+                if resulting_torque != rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]:
+                        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque
+                else:
+                        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = 0
+
                 contact_sum_vector = (contact_sum_vector[0] + rectangle_center_1[0], contact_sum_vector[1] + rectangle_center_1[1])
                 contact_x,contact_y = contact_sum_vector
 
