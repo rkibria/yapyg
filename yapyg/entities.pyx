@@ -272,7 +272,7 @@ cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
                 entity[IDX_ENTITY_POS][0] = x_pos
                 entity[IDX_ENTITY_POS][1] = y_pos
                 entity[IDX_ENTITY_POS][2] = rot
-                
+
                 normalize_rotation(entity)
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
@@ -293,7 +293,7 @@ cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
                 entity[IDX_ENTITY_POS][0] += x_pos
                 entity[IDX_ENTITY_POS][1] += y_pos
                 entity[IDX_ENTITY_POS][2] += rot
-                
+
                 normalize_rotation(entity)
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))

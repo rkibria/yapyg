@@ -17,6 +17,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+from yapyg_widgets.display_widget import yapyg
 
 """
 Simulate physical movement
@@ -41,6 +42,8 @@ IDX_MOVERS_PHYSICAL_VR = 10
 IDX_MOVERS_PHYSICAL_ROT_FRICTION = 11
 IDX_MOVERS_PHYSICAL_ROT_DECAY = 12
 IDX_MOVERS_PHYSICAL_STICKYNESS = 13
+
+cdef str PHYSICS_MOVER_NAME = "physics"
 
 cpdef add(list state,
                 str entity_name,
@@ -91,7 +94,7 @@ cdef list c_create(str entity_name,
         """
         TODO
         """
-        return ["physics",
+        return [PHYSICS_MOVER_NAME,
                 run,
                 entity_name,
                 mass,
@@ -156,7 +159,7 @@ cpdef run(list state, str entity_name, list mover, int frame_time_delta, list mo
 
         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y, delta_rot)
 
-        cdef tuple collision_result = yapyg.collisions.c_run(state, entity_name)
+        cdef tuple collision_result = yapyg.collisions.run(state, entity_name)
         if collision_result:
                 collision_handler(*collision_result)
 
@@ -311,7 +314,8 @@ cdef c_rectangle_circle_collision(list state,
                                         circle_move_vector[1])
                         else:
                                 # inside rectangle
-                                pass
+                                # print "WARNING: physical mover circle inside a rectangle"
+                                circle_move_vector = (-circle_move_vector[0], -circle_move_vector[1])
 
                 # rotate back to original coordinate system
                 circle_move_vector = yapyg.fixpoint.rotated_point((0, 0), circle_move_vector, rect_r)
@@ -589,9 +593,9 @@ cpdef collision_handler(list state,
         cdef list physics_mover_2
         physics_mover_1 = None
         physics_mover_2 = None
-        if (entity_mover_1 and entity_mover_1[0] == "physics"):
+        if (entity_mover_1 and entity_mover_1[0] == PHYSICS_MOVER_NAME):
                 physics_mover_1 = entity_mover_1
-        if (entity_mover_2 and entity_mover_2[0] == "physics"):
+        if (entity_mover_2 and entity_mover_2[0] == PHYSICS_MOVER_NAME):
                 physics_mover_2 = entity_mover_2
 
         if (physics_mover_1 or physics_mover_2):

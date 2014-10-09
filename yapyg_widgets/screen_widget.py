@@ -46,47 +46,119 @@ class ScreenWidget(FloatLayout):
                 self.add_widget(self.display_widget)
 
                 self.joystick = None
-                if yapyg.controls.need_joystick(state):
-                        joystick_panel_height = 0.2
+
+                joystick_panel_height = 0.2
+                joystick_x = 0.01
+                joystick_y = 0.01
+
+                if yapyg.controls.need_joystick(state) or yapyg.controls.need_buttons(state):
                         joystick_height = 0.18
                         joystick_width = (joystick_height * Window.height) / Window.width
-
                         self.add_widget(Image(source="assets/img/ui/joy_panel.png",
                                 size_hint=(1, joystick_panel_height),
                                 pos_hint = {"x" : 0.0, "y" : 0.0}))
 
+                if yapyg.controls.need_joystick(state):
                         self.joystick = JoystickWidget(
                                 size_hint=(joystick_width, joystick_height),
-                                pos_hint = {"x" : 0.01, "y" : 0.01},)
+                                pos_hint = {"x" : joystick_x, "y" : joystick_y},)
                         self.add_widget(self.joystick)
                         Clock.schedule_interval(self.on_timer, 0.1)
 
+                if yapyg.controls.need_buttons(state):
                         button_width = joystick_width / 2.0
                         button_height = joystick_height / 2.0
+                        button_width_big = 2 * button_width
+                        button_height_big = 2 * button_height
+
+                        background_file = "assets/img/ui/joy_button.png"
+                        background_down_file = "assets/img/ui/joy_button_down.png"
+                        background_file_big = "assets/img/ui/joy_button_big.png"
+                        background_down_file_big = "assets/img/ui/joy_button_down_big.png"
 
                         button_defs = yapyg.controls.get_buttons(state)
 
                         if button_defs:
-                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
-                                        font_size=16,
-                                        markup=True,
-                                        background_normal="assets/img/ui/joy_button.png",
-                                        background_down="assets/img/ui/joy_button_down.png",
-                                        size_hint=(button_width, button_height),
-                                        pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
-                                        )
+                                if button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_POS] == "right":
+                                        if button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_SIZE] == "small":
+                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                        font_size=16,
+                                                        markup=True,
+                                                        background_normal=background_file,
+                                                        background_down=background_down_file,
+                                                        size_hint=(button_width, button_height),
+                                                        pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
+                                                        )
+                                        else:
+                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                        font_size=16,
+                                                        markup=True,
+                                                        background_normal=background_file_big,
+                                                        background_down=background_down_file_big,
+                                                        size_hint=(button_width_big, button_height_big),
+                                                        pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
+                                                        )
+                                elif button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_POS] == "left":
+                                        if button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_SIZE] == "small":
+                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                        font_size=16,
+                                                        markup=True,
+                                                        background_normal=background_file,
+                                                        background_down=background_down_file,
+                                                        size_hint=(button_width, button_height),
+                                                        pos_hint = {"x" : joystick_x, "y" : joystick_y},
+                                                        )
+                                        else:
+                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                        font_size=16,
+                                                        markup=True,
+                                                        background_normal=background_file_big,
+                                                        background_down=background_down_file_big,
+                                                        size_hint=(button_width_big, button_height_big),
+                                                        pos_hint = {"x" : joystick_x, "y" : joystick_y},
+                                                        )
                                 self.add_widget(button_0)
                                 button_0.bind(state=self.on_button_0)
 
                                 if len(button_defs) > 1:
-                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
-                                                font_size=16,
-                                                markup=True,
-                                                background_normal="assets/img/ui/joy_button.png",
-                                                background_down="assets/img/ui/joy_button_down.png",
-                                                size_hint=(button_width, button_height),
-                                                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
-                                                )
+                                        if button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_POS] == "right":
+                                                if button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_SIZE] == "small":
+                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                                font_size=16,
+                                                                markup=True,
+                                                                background_normal=background_file,
+                                                                background_down=background_down_file,
+                                                                size_hint=(button_width, button_height),
+                                                                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
+                                                                )
+                                                else:
+                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                                font_size=16,
+                                                                markup=True,
+                                                                background_normal=background_file_big,
+                                                                background_down=background_down_file_big,
+                                                                size_hint=(button_width_big, button_height_big),
+                                                                pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
+                                                                )
+                                        elif button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_POS] == "left":
+                                                if button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_SIZE] == "small":
+                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                                font_size=16,
+                                                                markup=True,
+                                                                background_normal=background_file,
+                                                                background_down=background_down_file,
+                                                                size_hint=(button_width, button_height),
+                                                                pos_hint = {"x" : joystick_x, "y" : joystick_y},
+                                                                )
+                                                else:
+                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
+                                                                font_size=16,
+                                                                markup=True,
+                                                                background_normal=background_file_big,
+                                                                background_down=background_down_file_big,
+                                                                size_hint=(button_width_big, button_height_big),
+                                                                pos_hint = {"x" : joystick_x, "y" : joystick_y},
+                                                                )
                                         self.add_widget(button_1)
                                         button_1.bind(state=self.on_button_1)
 
@@ -94,8 +166,8 @@ class ScreenWidget(FloatLayout):
                                         button_2 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[2][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
                                                 font_size=16,
                                                 markup=True,
-                                                background_normal="assets/img/ui/joy_button.png",
-                                                background_down="assets/img/ui/joy_button_down.png",
+                                                background_normal=background_file,
+                                                background_down=background_down_file,
                                                 size_hint=(button_width, button_height),
                                                 pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : button_height + 0.01},
                                                 )
@@ -106,8 +178,8 @@ class ScreenWidget(FloatLayout):
                                         button_3 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[3][yapyg.controls.IDX_CONTROL_BUTTON_LABEL],
                                                 font_size=16,
                                                 markup=True,
-                                                background_normal="assets/img/ui/joy_button.png",
-                                                background_down="assets/img/ui/joy_button_down.png",
+                                                background_normal=background_file,
+                                                background_down=background_down_file,
                                                 size_hint=(button_width, button_height),
                                                 pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : button_height + 0.01},
                                                 )

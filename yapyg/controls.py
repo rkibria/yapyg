@@ -32,6 +32,8 @@ IDX_CONTROLS_BUTTONS = 2
 IDX_CONTROL_BUTTON_LABEL = 0
 IDX_CONTROL_BUTTON_CALLBACK = 1
 IDX_CONTROL_BUTTON_STATE = 2
+IDX_CONTROL_BUTTON_POS = 3
+IDX_CONTROL_BUTTON_SIZE = 4
 
 def initialize(state):
         """
@@ -51,7 +53,9 @@ def destroy(state):
 
 def add_buttons(state, button_defs):
         """
-        button definition = (button label, callback)
+        button definition = (button label, callback, position, size)
+        position can be "left", "center", "right"
+        size can be "small", "big"
         """
         state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS] = []
         state_button_defs = state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
@@ -60,6 +64,8 @@ def add_buttons(state, button_defs):
                         button_def[0],
                         button_def[1],
                         False,
+                        button_def[2],
+                        button_def[3],
                         ])
 
 def get_buttons(state):
@@ -93,6 +99,12 @@ def need_joystick(state):
         TODO
         """
         return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]
+
+def need_buttons(state):
+        """
+        TODO
+        """
+        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
 
 def set_joystick(state, directions):
         """

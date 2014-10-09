@@ -91,7 +91,7 @@ cdef void c_run(list state, int frame_time_delta):
         """
         TODO
         """
-        collisions.c_clear_collisions_list(state)
+        collisions.clear_collisions_list(state)
 
         cdef list movers_to_delete
         movers_to_delete = []
@@ -109,4 +109,4 @@ cdef void c_run(list state, int frame_time_delta):
                 if on_end_function:
                         (on_end_function)(state, mover_name)
 
-        collisions.c_notify_collision_handler(state)
+        collisions.notify_collision_handler(state)
