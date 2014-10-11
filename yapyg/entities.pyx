@@ -27,8 +27,7 @@ import copy
 cimport sprites
 cimport collisions
 cimport fixpoint
-
-import globals
+cimport globals
 
 IDX_ENTITIES_TABLE = 0
 
@@ -94,6 +93,8 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
         if default_sprite:
                 set_active_sprite(state, entity_name, default_sprite)
 
+cdef int FIXP_1 = fixpoint.int2fix(1)
+
 cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=False, int screen_relative=False):
         """
         TODO
@@ -123,7 +124,7 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
 
                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
 
-                sprite_scale = (fixpoint.int2fix(1), fixpoint.int2fix(1))
+                sprite_scale = (FIXP_1, FIXP_1)
 
                 sprite_enable = enable
 

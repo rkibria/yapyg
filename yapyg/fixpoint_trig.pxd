@@ -19,19 +19,10 @@
 # THE SOFTWARE.
 
 """
-Fixed point math
+Fixed point math - trigonometry
 """
 
-cpdef int int2fix(int value)
-cpdef int float2fix(float value)
-cpdef int fix2int(int value)
-cpdef float fix2float(int value)
-cpdef int mul(int op1, int op2)
-cpdef int div(int op1, int op2)
-cdef int _bit_len(int int_type)
-cpdef int sqrt(int x)
-cpdef int floor(int x)
-cpdef int modulo(int x, int d)
-cpdef int negate(int x)
-cpdef list fixtuple2floatlist(fix_tuple)
-cpdef str fixtuple2str(tuple fix_tuple, int precision=*)
+cdef int trig_linear_interpolation(int degrees, int index)
+cpdef int sin(int degrees)
+cpdef int cos(int degrees)
+cpdef int atan2(int y, int x)

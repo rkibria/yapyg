@@ -33,8 +33,7 @@ e.g. MOVE(+x,+y), WAIT(x sec), SET_PROPERTY(".."), ...
 from collections import deque
 
 cimport collisions
-
-import globals
+cimport globals
 
 cdef int IDX_MOVER_TYPE = 0
 cdef int IDX_MOVER_RUN_FUNCTION = 1

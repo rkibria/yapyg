@@ -25,26 +25,28 @@ User data
 import globals
 import fixpoint
 
+IDX_STATE_USER = globals.get_module_index("IDX_STATE_USER")
+
 def initialize(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_USER] = None
+        state[IDX_STATE_USER] = None
 
 def destroy(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_USER] = None
+        state[IDX_STATE_USER] = None
 
 def get_data(state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_USER]
+        return state[IDX_STATE_USER]
 
 def set_data(state, data):
         """
         TODO
         """
-        state[globals.IDX_STATE_USER] = data
+        state[IDX_STATE_USER] = data

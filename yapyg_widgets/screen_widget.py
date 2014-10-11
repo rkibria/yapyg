@@ -40,6 +40,10 @@ class ScreenWidget(FloatLayout):
                 super(ScreenWidget, self).__init__(**kwargs)
 
                 self.state = state
+
+                FIXP_1 = yapyg.fixpoint.int2fix(1)
+                yapyg.texture_db.insert_color_rect(state, FIXP_1, FIXP_1, "tl_null", 0.0, 0.0, 0.0)
+
                 self.display_widget = DisplayWidget(state, [float2fix(float(Window.width)), float2fix(float(Window.height))], scale)
                 self.on_exit_function = on_exit_function
 
@@ -96,7 +100,7 @@ class ScreenWidget(FloatLayout):
                                                         background_normal=background_file_big,
                                                         background_down=background_down_file_big,
                                                         size_hint=(button_width_big, button_height_big),
-                                                        pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
+                                                        pos_hint = {"x" : 1.0 - button_width_big - 0.01, "y" : 0.0 + 0.01},
                                                         )
                                 elif button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_POS] == "left":
                                         if button_defs[0][yapyg.controls.IDX_CONTROL_BUTTON_SIZE] == "small":

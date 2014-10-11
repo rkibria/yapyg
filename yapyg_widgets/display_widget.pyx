@@ -26,14 +26,15 @@ cimport yapyg.fixpoint
 cimport yapyg.movers
 cimport yapyg.sprites
 cimport yapyg.tiles
+cimport yapyg.view
 
-import yapyg.view
 import yapyg.factory
 import yapyg.timer
 
 from yapyg.fixpoint import float2fix
 
-MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(1000)
+cdef int FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+cdef int MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(1000)
 
 class DisplayWidget(Widget):
         def __init__(self,
@@ -71,7 +72,7 @@ class DisplayWidget(Widget):
                 if self.state:
                         cur_fps = float2fix(float(Clock.get_fps()))
                         if cur_fps > 0:
-                                last_frame_delta = yapyg.fixpoint.div(yapyg.fixpoint.FIXP_1000, cur_fps) # milliseconds
+                                last_frame_delta = yapyg.fixpoint.div(FIXP_1000, cur_fps) # milliseconds
 
                                 if last_frame_delta < MIN_FRAME_DELTA:
                                         self.frame_time = last_frame_delta
@@ -105,7 +106,7 @@ cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scal
                 redraw_tiles[0] = True
 
         if redraw_tiles[0]:
-                yapyg.tiles.c_draw(state, scale, canvas, view_size)
+                yapyg.tiles.draw(state, scale, canvas, view_size)
                 redraw_tiles[0] = False
 
         yapyg.sprites.c_draw(state, canvas, frame_time_delta, scale)

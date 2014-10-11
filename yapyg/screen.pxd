@@ -19,20 +19,13 @@
 # THE SOFTWARE.
 
 """
-Globals
+Main screen/window
 """
 
-IDX_STATE_SCREEN = 0
-IDX_STATE_TILES = 1
-IDX_STATE_TEXTURE_DB = 2
-IDX_STATE_SPRITES = 3
-IDX_STATE_MOVERS = 4
-IDX_STATE_ENTITIES = 5
-IDX_STATE_VIEW = 6
-IDX_STATE_CONTROLS = 7
-IDX_STATE_COLLISIONS = 8
-IDX_STATE_TEXT = 9
-IDX_STATE_TIMER = 10
-IDX_STATE_DEBUG = 11
-IDX_STATE_USER = 12
-IDX_STATE_LAST = 13
+cpdef initialize(list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=?)
+cpdef destroy(list state)
+cpdef int get_width(list state)
+cpdef int get_height(list state)
+cpdef int get_tile_size(list state)
+cpdef set_origin(list state, tuple origin_xy)
+cpdef tuple get_origin(list state)

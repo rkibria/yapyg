@@ -27,41 +27,26 @@ from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 cimport fixpoint
 cimport tiles
 cimport texture_db
+cimport globals
+cimport view
+cimport screen
 
-import globals
-import view
 import text
-import screen
 
-cdef int IDX_SPRITES_TABLE
-cdef int IDX_SPRITES_RECTS_ROT
-cdef int IDX_SPRITES_SIZES
-cdef int IDX_SPRITES_DRAW_ORDER
+cdef int IDX_SPRITES_TABLE = 0
+cdef int IDX_SPRITES_RECTS_ROTS = 1
+cdef int IDX_SPRITES_SIZES = 2
+cdef int IDX_SPRITES_DRAW_ORDER = 3
 
-IDX_SPRITES_TABLE = 0
-IDX_SPRITES_RECTS_ROTS = 1
-IDX_SPRITES_SIZES = 2
-IDX_SPRITES_DRAW_ORDER = 3
-
-cdef int IDX_SPRITE_ENABLE
-cdef int IDX_SPRITE_POS
-cdef int IDX_SPRITE_TEXTURES
-cdef int IDX_SPRITE_SPEED
-cdef int IDX_SPRITE_SCALE
-cdef int IDX_SPRITE_POS_OFFSET
-cdef int IDX_SPRITE_TIME_SUM
-cdef int IDX_SPRITE_PHASE
-cdef int IDX_SPRITE_SCREEN_RELATIVE
-
-IDX_SPRITE_ENABLE = 0
-IDX_SPRITE_POS = 1
-IDX_SPRITE_TEXTURES = 2
-IDX_SPRITE_SPEED = 3
-IDX_SPRITE_SCALE = 4
-IDX_SPRITE_POS_OFFSET = 5
-IDX_SPRITE_TIME_SUM = 6
-IDX_SPRITE_PHASE = 7
-IDX_SPRITE_SCREEN_RELATIVE = 8
+cdef int IDX_SPRITE_ENABLE = 0
+cdef int IDX_SPRITE_POS = 1
+cdef int IDX_SPRITE_TEXTURES = 2
+cdef int IDX_SPRITE_SPEED = 3
+cdef int IDX_SPRITE_SCALE = 4
+cdef int IDX_SPRITE_POS_OFFSET = 5
+cdef int IDX_SPRITE_TIME_SUM = 6
+cdef int IDX_SPRITE_PHASE = 7
+cdef int IDX_SPRITE_SCREEN_RELATIVE = 8
 
 cpdef initialize(list state):
         """
@@ -83,17 +68,13 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
         """
         TODO
         """
-        cdef list sprite_db
-        sprite_db = state[globals.IDX_STATE_SPRITES]
-
-        cdef dict sprites_table
-        sprites_table = sprite_db[IDX_SPRITES_TABLE]
+        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
 
         if not scale:
                 scale = (fixpoint.int2fix(1), fixpoint.int2fix(1))
 
-        cdef list text_textures
-        text_textures = []
+        cdef list text_textures = []
         for texture_part in textures:
                 texture_name = str(texture_part)
                 text_textures.append(texture_name)
@@ -110,8 +91,7 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
                 elif type(texture_part) == str:
                         texture_db.load(state, texture_part, texture_part)
 
-        cdef list sprite
-        sprite = [
+        cdef list sprite = [
                 enable,
                 pos,
                 tuple(text_textures),
@@ -124,9 +104,7 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
                 ]
 
         sprites_table[sprite_name] = sprite
-
-        cdef list sprite_draw_order
-        sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
+        cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
 
         sprite_draw_order.append(sprite_name)
         sprite_draw_order.sort()
@@ -158,17 +136,10 @@ cpdef set_enable(list state, str sprite_name, int enable):
         """
         TODO
         """
-        cdef list sprite_db
-        sprite_db = state[globals.IDX_STATE_SPRITES]
-
-        cdef dict sprites_table
-        sprites_table = sprite_db[IDX_SPRITES_TABLE]
-
-        cdef dict sprites_rects_rots
-        sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
-
-        cdef dict sprite_sizes
-        sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
+        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
+        cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
+        cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
 
         cdef list sprite
         if sprites_table.has_key(sprite_name):
@@ -193,20 +164,11 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
         """
         TODO
         """
-        cdef tuple origin_xy
-        origin_xy = screen.get_origin(state)
-
-        cdef tuple view_pos
-        view_pos = view.get_view_pos(state)
-
-        cdef list sprite_db
-        sprite_db = state[globals.IDX_STATE_SPRITES]
-
-        cdef dict sprites_table
-        sprites_table = sprite_db[IDX_SPRITES_TABLE]
-
-        cdef list draw_order
-        draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
+        cdef tuple origin_xy = screen.get_origin(state)
+        cdef tuple view_pos = view.get_view_pos(state)
+        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
+        cdef list draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
 
         cdef str sprite_name
         cdef list sprite
@@ -262,23 +224,15 @@ cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str 
         """
         TODO
         """
-        cdef list sprite_db
-        sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef dict rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]
 
-        cdef dict rectangles_rotates_dict
-        rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]
+        cdef int col = fixpoint.floor(pos[0])
+        cdef int row = fixpoint.floor(pos[1])
+        cdef int scaled_tile_size = fixpoint.mul(tiles.get_tile_size(state), view_scale)
 
-        cdef int col
-        cdef int row
-        cdef int scaled_tile_size
-        col = fixpoint.floor(pos[0])
-        row = fixpoint.floor(pos[1])
-        scaled_tile_size = fixpoint.mul(tiles.get_tile_size(state), view_scale)
-
-        cdef int tile_x
-        cdef int tile_y
-        tile_x = fixpoint.mul(col, scaled_tile_size)
-        tile_y = fixpoint.mul(row, scaled_tile_size)
+        cdef int tile_x = fixpoint.mul(col, scaled_tile_size)
+        cdef int tile_y = fixpoint.mul(row, scaled_tile_size)
 
         cdef int draw_x
         cdef int draw_y
@@ -289,17 +243,10 @@ cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str 
                 draw_x = tile_x
                 draw_y = tile_y
 
-        cdef tuple draw_pos
-        draw_pos = (draw_x, draw_y)
-
-        cdef tuple offset
-        offset = (pos[0] - col, pos[1] - row,)
-        
-        cdef int rotate
-        rotate = pos[2]
-
-        cdef tuple offset_pos
-        offset_pos = (draw_pos[0] + fixpoint.mul(scaled_tile_size, offset[0]) + origin_xy[0],
+        cdef tuple draw_pos = (draw_x, draw_y)
+        cdef tuple offset = (pos[0] - col, pos[1] - row,)
+        cdef int rotate = pos[2]
+        cdef tuple offset_pos = (draw_pos[0] + fixpoint.mul(scaled_tile_size, offset[0]) + origin_xy[0],
                         draw_pos[1] + fixpoint.mul(scaled_tile_size, offset[1]) + origin_xy[1])
 
         cdef int int_d_x

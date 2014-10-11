@@ -25,31 +25,33 @@ Timer
 import globals
 import fixpoint
 
+IDX_STATE_TIMER = globals.get_module_index("IDX_STATE_TIMER")
+
 IDX_TIMERS_TABLE = 0
 
 def initialize(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_TIMER] = [[],]
+        state[IDX_STATE_TIMER] = [[],]
 
 def destroy(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_TIMER] = None
+        state[IDX_STATE_TIMER] = None
 
 def create(state, handler, timeout_ms=0):
         """
         TODO
         """
-        state[globals.IDX_STATE_TIMER][IDX_TIMERS_TABLE].append([handler, timeout_ms, 0])
+        state[IDX_STATE_TIMER][IDX_TIMERS_TABLE].append([handler, timeout_ms, 0])
 
 def run(state, last_frame_delta):
         """
         TODO
         """
-        for entry in state[globals.IDX_STATE_TIMER][IDX_TIMERS_TABLE]:
+        for entry in state[IDX_STATE_TIMER][IDX_TIMERS_TABLE]:
                 handler, timeout_ms, sum_time = entry
                 sum_time += last_frame_delta
                 if sum_time >= timeout_ms:

@@ -26,6 +26,7 @@ import yapyg.movers
 import yapyg.controls
 import yapyg.entities
 import yapyg.fixpoint
+import yapyg.fixpoint_2d
 
 IDX_CONTROLLED_MOVER_ENTITY_NAME = 2
 IDX_CONTROLLED_MOVER_CONTROLLER = 3
@@ -85,7 +86,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
 
                 heading = pos[2]
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
-                        heading = yapyg.fixpoint.heading_from_to((0, 0), tuple(direction))
+                        heading = yapyg.fixpoint_2d.heading_from_to((0, 0), tuple(direction))
                         heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
                         heading = yapyg.fixpoint.int2fix(heading_int)
 

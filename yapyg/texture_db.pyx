@@ -27,8 +27,8 @@ from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
 cimport fixpoint
+cimport globals
 
-import globals
 import screen
 
 cpdef initialize(list state):
@@ -47,24 +47,21 @@ cpdef insert(list state, str texture_name, texture):
         """
         TODO
         """
-        cdef dict texturedb
-        texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        cdef dict texturedb = state[globals.IDX_STATE_TEXTURE_DB]
         texturedb[texture_name] = texture
 
 cpdef load(list state, str texture_name, str texture_filename):
         """
         TODO
         """
-        cdef dict texturedb
-        texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        cdef dict texturedb = state[globals.IDX_STATE_TEXTURE_DB]
         texturedb[texture_name] = Image(source=texture_filename).texture
 
 cpdef get(list state, str texture_name):
         """
         TODO
         """
-        cdef dict texturedb
-        texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        cdef dict texturedb = state[globals.IDX_STATE_TEXTURE_DB]
         if texturedb.has_key(texture_name):
                 return texturedb[texture_name]
         else:
@@ -74,13 +71,9 @@ cpdef insert_combined(list state, int texture_size, str texture_name, tuple text
         """
         TODO
         """
-        cdef int tile_size
-        tile_size = screen.get_tile_size(state)
-
+        cdef int tile_size = screen.get_tile_size(state)
         texture_size = fixpoint.mul(tile_size, texture_size)
-
-        cdef int int_texture_size
-        int_texture_size = fixpoint.fix2int(texture_size)
+        cdef int int_texture_size = fixpoint.fix2int(texture_size)
 
         cdef str texture_filename
         if len(texture_list) == 0:
@@ -105,16 +98,13 @@ cpdef insert_color_rect(list state, int texture_w, int texture_h, str texture_na
         """
         TODO
         """
-        cdef int tile_size
-        tile_size = screen.get_tile_size(state)
+        cdef int tile_size = screen.get_tile_size(state)
 
         texture_w = fixpoint.mul(texture_w, tile_size)
         texture_h = fixpoint.mul(texture_h, tile_size)
 
-        cdef int int_texture_w
-        cdef int int_texture_h
-        int_texture_w = fixpoint.fix2int(texture_w)
-        int_texture_h = fixpoint.fix2int(texture_h)
+        cdef int int_texture_w = fixpoint.fix2int(texture_w)
+        cdef int int_texture_h = fixpoint.fix2int(texture_h)
 
         texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
         fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)
@@ -128,16 +118,13 @@ cpdef insert_color_ellipse(list state, int texture_w, int texture_h, str texture
         """
         TODO
         """
-        cdef int tile_size
-        tile_size = screen.get_tile_size(state)
+        cdef int tile_size = screen.get_tile_size(state)
 
         texture_w = fixpoint.mul(texture_w, tile_size)
         texture_h = fixpoint.mul(texture_h, tile_size)
 
-        cdef int int_texture_w
-        cdef int int_texture_h
-        int_texture_w = fixpoint.fix2int(texture_w)
-        int_texture_h = fixpoint.fix2int(texture_h)
+        cdef int int_texture_w = fixpoint.fix2int(texture_w)
+        cdef int int_texture_h = fixpoint.fix2int(texture_h)
 
         texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
         fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)

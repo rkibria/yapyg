@@ -19,19 +19,13 @@
 # THE SOFTWARE.
 
 """
-Fixed point math
+Fixed point math - collision algorithms
 """
 
-cpdef int int2fix(int value)
-cpdef int float2fix(float value)
-cpdef int fix2int(int value)
-cpdef float fix2float(int value)
-cpdef int mul(int op1, int op2)
-cpdef int div(int op1, int op2)
-cdef int _bit_len(int int_type)
-cpdef int sqrt(int x)
-cpdef int floor(int x)
-cpdef int modulo(int x, int d)
-cpdef int negate(int x)
-cpdef list fixtuple2floatlist(fix_tuple)
-cpdef str fixtuple2str(tuple fix_tuple, int precision=*)
+cpdef int is_rect_rect_collision(tuple rect_1, tuple rect_2, list contact_points)
+cpdef int is_circle_circle_collision(tuple c_1, tuple c_2, list contact_points)
+cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points)
+cpdef int is_point_in_circle(tuple point, tuple circ)
+cpdef int is_point_in_rect(tuple point, tuple rectangle)
+cpdef tuple get_rect_points(tuple rect)
+cpdef int value_in_range(int value, int min_limit, int max_limit)

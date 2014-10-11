@@ -25,6 +25,8 @@ Debugging
 import globals
 import fixpoint
 
+IDX_STATE_DEBUG = globals.get_module_index("IDX_STATE_DEBUG")
+
 IDX_DEBUG_TEXTLINES = 0
 
 NUM_DEBUG_LINES = 19
@@ -33,7 +35,7 @@ def initialize(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_DEBUG] = [
+        state[IDX_STATE_DEBUG] = [
                 [("") for x in xrange(NUM_DEBUG_LINES)],
                 ]
 
@@ -41,16 +43,16 @@ def destroy(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_DEBUG] = None
+        state[IDX_STATE_DEBUG] = None
 
 def set_line(state, line_no, txt):
         """
         TODO
         """
-        state[globals.IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no] = txt
+        state[IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no] = txt
 
 def get_line(state, line_no):
         """
         TODO
         """
-        return state[globals.IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no]
+        return state[IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no]

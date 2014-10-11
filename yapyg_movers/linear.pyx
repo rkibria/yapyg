@@ -23,6 +23,7 @@ Simple linear mover
 """
 
 cimport yapyg.fixpoint
+cimport yapyg.fixpoint_2d
 cimport yapyg.movers
 cimport yapyg.entities
 
@@ -67,7 +68,7 @@ cpdef list create(str entity_name, tuple rel_vector, int speed, tuple rotate_mod
         TODO
         """
         cdef int distance
-        distance = yapyg.fixpoint.length(rel_vector)
+        distance = yapyg.fixpoint_2d.length(rel_vector)
         if distance == 0 or speed == 0:
                 print "yapyg_movers\linear.pyx: Distance and speed must be >0"
                 return None
@@ -91,11 +92,8 @@ cpdef list create(str entity_name, tuple rel_vector, int speed, tuple rotate_mod
                 0,
                 on_end_function,]
 
-cdef int FIXP_1000
-FIXP_1000 = yapyg.fixpoint.int2fix(1000)
-
-cdef int FIXP_360
-FIXP_360 = yapyg.fixpoint.int2fix(360)
+cdef int FIXP_1000 = yapyg.fixpoint.int2fix(1000)
+cdef int FIXP_360 = yapyg.fixpoint.int2fix(360)
 
 cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
         """
@@ -127,7 +125,7 @@ cpdef run(list state, str entity_name, list mover, int frame_time_delta, list mo
 
         if rot_type == N_ROTATE_MODE_AUTO:
                 if passed_time == 0:
-                        heading = yapyg.fixpoint.heading_from_to((0, 0), travel_vector)
+                        heading = yapyg.fixpoint_2d.heading_from_to((0, 0), travel_vector)
                         heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
                         heading = yapyg.fixpoint.int2fix(heading_int)
                         delta_rot = -old_rot + heading

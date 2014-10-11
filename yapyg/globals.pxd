@@ -19,54 +19,21 @@
 # THE SOFTWARE.
 
 """
-View setter
+Globals
 """
 
-import globals
-import fixpoint
+cpdef int IDX_STATE_SCREEN
+cpdef int IDX_STATE_TILES
+cpdef int IDX_STATE_TEXTURE_DB
+cpdef int IDX_STATE_SPRITES
+cpdef int IDX_STATE_MOVERS
+cpdef int IDX_STATE_ENTITIES
+cpdef int IDX_STATE_VIEW
+cpdef int IDX_STATE_CONTROLS
+cpdef int IDX_STATE_COLLISIONS
+cpdef int IDX_STATE_TEXT
+cpdef int IDX_STATE_TIMER
+cpdef int IDX_STATE_DEBUG
+cpdef int IDX_STATE_USER
 
-IDX_VIEW_POS = 0
-IDX_VIEW_SETTER = 1
-
-def initialize(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW] = [
-                [0, 0],
-                None,]
-
-def destroy(state):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW] = None
-
-def get_view_pos(state):
-        """
-        TODO
-        """
-        return tuple(state[globals.IDX_STATE_VIEW][IDX_VIEW_POS])
-
-def set_view_pos(state, view_pos):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][0] = view_pos[0]
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_POS][1] = view_pos[1]
-
-def set_viewer(state, viewer):
-        """
-        TODO
-        """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
-
-def run(state):
-        """
-        TODO
-        """
-        setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
-        if setter:
-                return (setter[0])(state, setter)
-        else:
-                return False
+cpdef int get_module_index(str name)

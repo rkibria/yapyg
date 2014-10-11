@@ -28,15 +28,16 @@ from kivy.graphics.texture import Texture
 
 cimport fixpoint
 cimport texture_db
+cimport globals
+cimport view
+cimport screen
 
-import globals
-import view
-import screen
+cdef int IDX_TILES_SIZE = 0
+cdef int IDX_TILES_DEFS = 1
+cdef int IDX_TILES_AREA = 2
+cdef int IDX_TILES_RECTS = 3
 
-IDX_TILES_SIZE = 0
-IDX_TILES_DEFS = 1
-IDX_TILES_AREA = 2
-IDX_TILES_RECTS = 3
+cdef int FIXP_1 = fixpoint.int2fix(1)
 
 cpdef initialize(list state, int tile_size):
         """
@@ -47,7 +48,6 @@ cpdef initialize(list state, int tile_size):
                 {},
                 [],
                 [],]
-        add_tile_def(state, "tl_null", ("assets/img/tiles/no_tile.png",))
 
 cpdef destroy(list state):
         """
@@ -67,7 +67,7 @@ cpdef set_area(list state, list area):
         """
         state[globals.IDX_STATE_TILES][IDX_TILES_AREA] = area
 
-cpdef get_area(list state):
+cpdef list get_area(list state):
         """
         TODO
         """
@@ -77,9 +77,10 @@ cpdef add_tile_def(list state, str tile_name, tuple texture_list):
         """
         TODO
         """
-        state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name] = {}
-        state[globals.IDX_STATE_TILES][IDX_TILES_DEFS][tile_name]["textures"] = texture_list
-        texture_db.insert_combined(state, fixpoint.int2fix(1), tile_name, texture_list)
+        cdef dict tile_defs = state[globals.IDX_STATE_TILES][IDX_TILES_DEFS]
+        tile_defs[tile_name] = {}
+        tile_defs[tile_name]["textures"] = texture_list
+        texture_db.insert_combined(state, FIXP_1, tile_name, texture_list)
 
 cpdef str get_tile(list state, int row, int col):
         """
@@ -87,18 +88,16 @@ cpdef str get_tile(list state, int row, int col):
         col = 0 is the most western part of the map
         -> 0/0 is the lower left corner
         """
-        area = get_area(state)
-        row = int(row)
-        maxrows = len(area)
+        cdef list area = get_area(state)
+        cdef int maxrows = len(area)
         if row < 0 or row >= maxrows:
                 return None
-        col = int(col)
-        rowdata = area[maxrows - row - 1]
+        cdef list rowdata = area[maxrows - row - 1]
         if col < 0 or col >= len(rowdata):
                 return None
         return rowdata[col]
 
-cdef c_draw(list state, int scale, canvas, tuple view_size):
+cpdef draw(list state, int scale, canvas, tuple view_size):
         """
         TODO
         """

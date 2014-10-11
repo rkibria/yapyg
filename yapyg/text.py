@@ -29,6 +29,8 @@ from kivy.graphics import Rectangle, Fbo
 import globals
 import texture_db
 
+IDX_STATE_TEXT = globals.get_module_index("IDX_STATE_TEXT")
+
 IDX_TEXT_WIDTH = 0
 IDX_TEXT_HEIGHT = 1
 
@@ -36,13 +38,13 @@ def initialize(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_TEXT] = {}
+        state[IDX_STATE_TEXT] = {}
 
 def destroy(state):
         """
         TODO
         """
-        state[globals.IDX_STATE_TEXT] = None
+        state[IDX_STATE_TEXT] = None
 
 def load_font(state, font_name, font_path, font_w, font_h):
         """
@@ -55,7 +57,7 @@ def load_font(state, font_name, font_path, font_w, font_h):
                         texture_name = font_name + "-" + str(code)
                         texture_db.insert(state, texture_name, font_texture.get_region(x * font_w, (7 - y) * font_h, font_w, font_h))
                         code += 1
-        state[globals.IDX_STATE_TEXT][font_name] = [font_w, font_h]
+        state[IDX_STATE_TEXT][font_name] = [font_w, font_h]
 
 def get_character_texture(state, font_name, char):
         """
@@ -67,7 +69,7 @@ def create_texture(state, text, font_name):
         """
         TODO
         """
-        font_def = state[globals.IDX_STATE_TEXT][font_name]
+        font_def = state[IDX_STATE_TEXT][font_name]
         text_lines = text.split("\n")
         n_lines = len(text_lines)
         max_line_length = len(max(text_lines, key=len))

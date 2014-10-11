@@ -19,61 +19,54 @@
 # THE SOFTWARE.
 
 """
-2D Sprites
+View setter
 """
 
-import globals
-import fixpoint
+cimport globals
 
-IDX_SCREEN_WIDTH = 0
-IDX_SCREEN_HEIGHT = 1
-IDX_SCREEN_TILE_SIZE = 2
-IDX_SCREEN_ORIGIN_XY = 3
+cdef int IDX_VIEW_POS = 0
+cdef int IDX_VIEW_SETTER = 1
 
-def initialize(state, screen_width, screen_height, tile_size, origin_xy=(0, 0)):
+cpdef initialize(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_SCREEN] = [
-                screen_width,
-                screen_height,
-                tile_size,
-                [origin_xy[0], origin_xy[1]],]
+        state[globals.IDX_STATE_VIEW] = [
+                [0, 0],
+                None,]
 
-def destroy(state):
+cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_SCREEN] = None
+        state[globals.IDX_STATE_VIEW] = None
 
-def get_width(state):
+cpdef tuple get_view_pos(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_WIDTH]
+        return tuple(state[globals.IDX_STATE_VIEW][IDX_VIEW_POS])
 
-def get_height(state):
+cpdef set_view_pos(list state, view_pos):
         """
         TODO
         """
-        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_HEIGHT]
+        cdef list vp = state[globals.IDX_STATE_VIEW][IDX_VIEW_POS]
+        vp[0] = view_pos[0]
+        vp[1] = view_pos[1]
 
-def get_tile_size(state):
+cpdef set_viewer(list state, viewer):
         """
         TODO
         """
-        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
+        state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
 
-def set_origin(state, origin_xy):
+cpdef int run(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][0] = origin_xy[0]
-        state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY][1] = origin_xy[1]
-
-def get_origin(state):
-        """
-        TODO
-        """
-        origin_xy = state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
-        return (origin_xy[0], origin_xy[1])
+        setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
+        if setter:
+                return (setter[0])(state, setter)
+        else:
+                return False
