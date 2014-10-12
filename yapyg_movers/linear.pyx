@@ -24,24 +24,24 @@ Simple linear mover
 
 cimport yapyg.fixpoint
 cimport yapyg.fixpoint_2d
-cimport yapyg.movers
+import yapyg.movers
 cimport yapyg.entities
 
-cdef int IDX_LINEAR_MOVER_REL_VECTOR
-cdef int IDX_LINEAR_MOVER_SPEED
-cdef int IDX_LINEAR_MOVER_ROTATE_MODE
-cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR
-cdef int IDX_LINEAR_MOVER_TRAVEL_TIME
-cdef int IDX_LINEAR_MOVER_PASSED_TIME
-cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION
+# cdef int IDX_LINEAR_MOVER_REL_VECTOR
+# cdef int IDX_LINEAR_MOVER_SPEED
+# cdef int IDX_LINEAR_MOVER_ROTATE_MODE
+# cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR
+# cdef int IDX_LINEAR_MOVER_TRAVEL_TIME
+# cdef int IDX_LINEAR_MOVER_PASSED_TIME
+# cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION
 
-IDX_LINEAR_MOVER_REL_VECTOR = 3
-IDX_LINEAR_MOVER_SPEED = 4
-IDX_LINEAR_MOVER_ROTATE_MODE = 5
-IDX_LINEAR_MOVER_TRAVEL_VECTOR = 6
-IDX_LINEAR_MOVER_TRAVEL_TIME = 7
-IDX_LINEAR_MOVER_PASSED_TIME = 8
-IDX_LINEAR_MOVER_ON_END_FUNCTION = 9
+IDX_LINEAR_MOVER_REL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+IDX_LINEAR_MOVER_SPEED = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
+IDX_LINEAR_MOVER_ROTATE_MODE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
+IDX_LINEAR_MOVER_TRAVEL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
+IDX_LINEAR_MOVER_TRAVEL_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
+IDX_LINEAR_MOVER_PASSED_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
+IDX_LINEAR_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
 
 cdef int N_ROTATE_MODE_NONE
 cdef int N_ROTATE_MODE_AUTO
@@ -84,6 +84,7 @@ cpdef list create(str entity_name, tuple rel_vector, int speed, tuple rotate_mod
         return ["linear",
                 run,
                 entity_name,
+                None,
                 rel_vector, # IDX_LINEAR_MOVER_REL_VECTOR
                 speed, # IDX_LINEAR_MOVER_SPEED
                 (rotate_mode_trans[rotate_mode[0]], rotate_mode[1]),

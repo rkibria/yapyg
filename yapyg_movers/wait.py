@@ -25,9 +25,9 @@ Waitstate mover
 import yapyg.movers
 import yapyg.fixpoint
 
-IDX_WAIT_MOVER_PASSED_TIME = 3
-IDX_WAIT_MOVER_WAIT_TIME = 4
-IDX_WAIT_MOVER_ON_END_FUNCTION = 5
+IDX_WAIT_MOVER_PASSED_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+IDX_WAIT_MOVER_WAIT_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
+IDX_WAIT_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
 
 def add(state, mover_name, wait_time, on_end_function=None, do_replace=False):
         """
@@ -42,6 +42,7 @@ def create(mover_name, wait_time, on_end_function=None):
         return ["wait",
                 run,
                 mover_name,
+                None,
                 0,
                 wait_time,
                 on_end_function,]

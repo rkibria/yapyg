@@ -33,18 +33,17 @@ cimport yapyg.movers
 cimport yapyg.entities
 cimport yapyg.collisions
 
-IDX_MOVERS_PHYSICAL_ENTITY_NAME = 2
-IDX_MOVERS_PHYSICAL_MASS = 3
-IDX_MOVERS_PHYSICAL_VX = 4
-IDX_MOVERS_PHYSICAL_VY = 5
-IDX_MOVERS_PHYSICAL_AX = 6
-IDX_MOVERS_PHYSICAL_AY = 7
-IDX_MOVERS_PHYSICAL_FRICTION = 8
-IDX_MOVERS_PHYSICAL_INELASTICITY = 9
-IDX_MOVERS_PHYSICAL_VR = 10
-IDX_MOVERS_PHYSICAL_ROT_FRICTION = 11
-IDX_MOVERS_PHYSICAL_ROT_DECAY = 12
-IDX_MOVERS_PHYSICAL_STICKYNESS = 13
+IDX_MOVERS_PHYSICAL_MASS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+IDX_MOVERS_PHYSICAL_VX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
+IDX_MOVERS_PHYSICAL_VY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
+IDX_MOVERS_PHYSICAL_AX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
+IDX_MOVERS_PHYSICAL_AY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
+IDX_MOVERS_PHYSICAL_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
+IDX_MOVERS_PHYSICAL_INELASTICITY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
+IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
+IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
+IDX_MOVERS_PHYSICAL_ROT_DECAY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 9
+IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
 
 cdef str PHYSICS_MOVER_NAME = "physics"
 
@@ -100,6 +99,7 @@ cdef list c_create(str entity_name,
         return [PHYSICS_MOVER_NAME,
                 run,
                 entity_name,
+                collision_handler,
                 mass,
                 vx,
                 vy,
@@ -587,6 +587,8 @@ cpdef collision_handler(list state,
         """
         TODO
         """
+        # print "physical collision_handler", entity_name_1, entity_name_2
+
         cdef list entity_mover_1
         cdef list entity_mover_2
         entity_mover_1 = yapyg.movers.get_active(state, entity_name_1)
@@ -621,6 +623,17 @@ cpdef collision_handler(list state,
                                 c_circle_circle_collision(state, entity_name_1, entity_name_2,
                                         absolute_shape_1, absolute_shape_2,
                                         physics_mover_1, physics_mover_2)
+
+        if entity_mover_2 and entity_mover_2[0] != PHYSICS_MOVER_NAME:
+                if (entity_mover_2[yapyg.movers.IDX_MOVER_COLLISION_HANDLER]):
+                        (entity_mover_2[yapyg.movers.IDX_MOVER_COLLISION_HANDLER])(state,
+                        entity_name_1,
+                        entity_name_2,
+                        collision_def_1,
+                        collision_def_2,
+                        absolute_shape_1,
+                        absolute_shape_2,
+                        contact_points)
 
 cpdef tuple elastic_collision(int v_1, int v_2, int m_1, int m_2):
         """

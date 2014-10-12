@@ -28,13 +28,12 @@ import yapyg.entities
 import yapyg.fixpoint
 import yapyg.fixpoint_2d
 
-IDX_CONTROLLED_MOVER_ENTITY_NAME = 2
-IDX_CONTROLLED_MOVER_CONTROLLER = 3
-IDX_CONTROLLED_MOVER_FACTOR = 4
-IDX_CONTROLLED_MOVER_LIMITS = 5
-IDX_CONTROLLED_MOVER_SPRITES = 6
-IDX_CONTROLLED_MOVER_ROTATE = 7
-IDX_CONTROLLED_MOVER_LAST_SPRITE = 8
+IDX_CONTROLLED_MOVER_CONTROLLER = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+IDX_CONTROLLED_MOVER_FACTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
+IDX_CONTROLLED_MOVER_LIMITS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
+IDX_CONTROLLED_MOVER_SPRITES = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
+IDX_CONTROLLED_MOVER_ROTATE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
+IDX_CONTROLLED_MOVER_LAST_SPRITE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
 
 def add(state, entity_name, controller, factor, limits, sprites=None, rotate=False, on_end_function=None, do_replace=False):
         """
@@ -49,6 +48,7 @@ def create(entity_name, controller, factor, limits, sprites=None, rotate=False):
         return ["controlled",
                 run,
                 entity_name,
+                None,
                 controller,
                 factor,
                 (limits[0], limits[1], limits[2], limits[3]),

@@ -25,10 +25,9 @@ Entity state setting mover
 import yapyg.movers
 import yapyg.entities
 
-IDX_MOVER_SET_PROPERTY_ENTITY_NAME = 2
-IDX_MOVER_SET_PROPERTY_PROPERTY = 3
-IDX_MOVER_SET_PROPERTY_NEW_VALUE = 4
-IDX_MOVER_SET_PROPERTY_ON_END_FUNCTION = 5
+IDX_MOVER_SET_PROPERTY_PROPERTY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+IDX_MOVER_SET_PROPERTY_NEW_VALUE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
+IDX_MOVER_SET_PROPERTY_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
 
 class YapygMoverSetPropertyException(Exception):
         """
@@ -59,6 +58,7 @@ def create(entity_name, property, new_value, on_end_function=None):
         return ["set_property",
                 run,
                 entity_name,
+                None,
                 property,
                 new_value,
                 on_end_function,]

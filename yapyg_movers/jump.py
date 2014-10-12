@@ -26,9 +26,8 @@ import yapyg.movers
 import yapyg.entities
 import yapyg.fixpoint
 
-IDX_JUMP_MOVER_ENTITY_NAME = 2
-IDX_JUMP_MOVER_NEW_POS = 3
-IDX_JUMP_MOVER_ON_END_FUNCTION = 4
+IDX_JUMP_MOVER_NEW_POS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+IDX_JUMP_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
 
 def add(state, entity_name, new_pos=None, on_end_function=None, do_replace=False):
         """
@@ -43,6 +42,7 @@ def create(entity_name, new_pos, on_end_function=None):
         return ["jump",
                 run,
                 entity_name,
+                None,
                 new_pos,
                 on_end_function,]
 

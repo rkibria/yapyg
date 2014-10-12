@@ -21,7 +21,7 @@
 """
 General movements
 
-- movers are lists with 0=type, 1=run-function
+- movers are lists with 0=type(str), 1=run-function, 2=entity_name
 
 mover_db = dict[entity_name] : deque(movers)
 
@@ -35,9 +35,12 @@ from collections import deque
 cimport collisions
 cimport globals
 
-cdef int IDX_MOVER_TYPE = 0
-cdef int IDX_MOVER_RUN_FUNCTION = 1
-cdef int IDX_MOVER_ENTITY_NAME = 2
+cpdef int IDX_MOVER_TYPE = 0
+cpdef int IDX_MOVER_RUN_FUNCTION = 1
+cpdef int IDX_MOVER_ENTITY_NAME = 2
+cpdef int IDX_MOVER_COLLISION_HANDLER = 3
+
+IDX_MOVER_FIRST_PARAMETER = IDX_MOVER_COLLISION_HANDLER + 1
 
 cpdef initialize(list state):
         """
