@@ -26,6 +26,8 @@ from yapyg import fixpoint_trig
 from yapyg import controls
 from yapyg import text
 from yapyg import view
+from yapyg import collisions
+from yapyg import debug
 from yapyg_movers import controlled_mover
 from yapyg_movers import linear_mover
 from yapyg_viewers import relative_viewer
@@ -76,6 +78,8 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                   ['[', '_', '_', '_', '_', '_', '_', '_', '_', ']']]
                   )
 
+        collisions.set_handler(state, collision_handler)
+
         text.load_font(state, "DroidSansMonoDotted16x32", "assets/img/fonts/DroidSansMonoDotted16x32.png", 16, 32)
 
         entities.insert(state,
@@ -111,6 +115,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         # coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
         # the rotation amount of the entity (0 here) and an offset for drawing the sprite to the actual position,
         # here [0.25, 0.25].
+        CIRCLE_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 4.0), fixpoint.int2fix(2))
         entities.insert(state, ENT_MAN, {
                         "*idle": {
                                 "textures": (
@@ -134,7 +139,8 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                 "speed" : fixpoint.float2fix(150.0),
                         },
                 }, (fixpoint.float2fix(1.0), fixpoint.float2fix(1.0), 0),
-                (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25))
+                (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)),
+                collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
                 )
 
         # We add a mover that will translate joystick movement to moving the man around the area.
@@ -154,8 +160,22 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         # The state object is finished.
         return state
 
+def collision_handler(state, collisions_list):
+        for entity_name_1, entity_name_2 in collisions_list:
+                print "collision: %s <-> %s" % (entity_name_1, entity_name_2,)
+                if entity_name_1 == ENT_MAN and entity_name_2 != ENT_SHOT:
+                        entities.undo_last_move(state, entity_name_1)
+                elif entity_name_2 == ENT_MAN and entity_name_1 != ENT_SHOT:
+                        entities.undo_last_move(state, entity_name_2)
+
+                if entity_name_1 == ENT_SHOT and entity_name_2 != ENT_MAN:
+                        entities.delete(state, entity_name_1)
+                elif entity_name_2 == ENT_SHOT and entity_name_1 != ENT_MAN:
+                        entities.delete(state, entity_name_2)
+
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
 
+SHOT_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 8.0), fixpoint.int2fix(2))
 def on_fire_button(state, button_pressed):
         if button_pressed:
                 man_pos = entities.get_pos(state, ENT_MAN)
@@ -171,11 +191,17 @@ def on_fire_button(state, button_pressed):
                         fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading[1]))
 
                 entities.insert(state, ENT_SHOT, {
-                                "*": {
-                                        "textures": (
-                                                "assets/img/sprites/throwingstar/0.png",
-                                                ),
-                                        "speed": 0,
-                                },
-                        }, man_pos, (fixpoint.float2fix(-0.125), fixpoint.float2fix(-0.125)))
+                                                  "*": {
+                                                        "textures": (
+                                                                     "assets/img/sprites/throwingstar/0.png",
+                                                                     ),
+                                                        "speed": 0,
+                                                        },
+                                                  },
+                                man_pos,
+                                (fixpoint.float2fix(-0.125),
+                                 fixpoint.float2fix(-0.125)
+                                 ),
+                                collision=(("circle", SHOT_RADIUS, SHOT_RADIUS, SHOT_RADIUS,),),
+                                )
                 linear_mover.add(state, ENT_SHOT, heading, fixpoint.float2fix(4.0), ("const", fixpoint.float2fix(-1.0)), None, True)

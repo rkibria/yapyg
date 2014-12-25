@@ -92,6 +92,12 @@ cpdef remove(list state, str mover_name):
         if len(state[IDX_STATE_MOVERS][mover_name]) == 0:
                 del state[IDX_STATE_MOVERS][mover_name]
 
+cpdef delete(list state, str mover_name):
+        """
+        TODO
+        """
+        del state[IDX_STATE_MOVERS][mover_name]
+
 cdef void c_run(list state, int frame_time_delta):
         """
         TODO

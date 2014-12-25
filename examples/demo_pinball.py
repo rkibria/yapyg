@@ -44,7 +44,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         controls.add_buttons(state, (("LEFT", on_left_button, "left", "big"),
                                      ("RIGHT", on_right_button, "right", "big")))
 
-        tiles.add_tile_def(state, ".", ("assets/img/tiles/gray_square.png",))
+        tiles.add_tile_def(state, ".", ("assets/img/tiles/grid_double.png",))
         tiles.set_area(state, [["."] * 10] * 10)
 
         entities_helpers.create_screen_wall(state, "000_screenbox", BORDER_THICKNESS, BORDER_OFFSET, BOTTOM_Y,

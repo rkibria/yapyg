@@ -42,7 +42,7 @@ def get_time_string():
 def create(screen_width, screen_height, tile_size):
         state = factory.create(screen_width, screen_height, tile_size)
 
-        tiles.add_tile_def(state, ".", ("assets/img/tiles/gray_square.png",))
+        tiles.add_tile_def(state, ".", ("assets/img/tiles/grid_double.png",))
         tiles.set_area(state, [["." for x in xrange(10)] for x in xrange(10)])
 
         text.load_font(state, "DroidSansMonoDotted32x64", "assets/img/fonts/DroidSansMonoDotted32x64.png", 32, 64)

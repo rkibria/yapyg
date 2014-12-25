@@ -91,6 +91,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                         heading = yapyg.fixpoint.int2fix(heading_int)
 
                 yapyg.entities.set_pos(state, entity_name, new_x, new_y, heading)
+                yapyg.collisions.run(state, entity_name)
         else:
                 if sprites and (not last_sprite or last_sprite == sprites[1]):
                         mover[IDX_CONTROLLED_MOVER_LAST_SPRITE] = sprites[0]

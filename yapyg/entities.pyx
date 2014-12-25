@@ -27,6 +27,7 @@ import copy
 cimport sprites
 cimport collisions
 cimport fixpoint
+cimport movers
 
 cdef int IDX_STATE_ENTITIES
 
@@ -180,6 +181,8 @@ cpdef delete(list state, str entity_name):
                         collisions.delete(state, entity_name)
 
                 del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
+
+                movers.delete(state, entity_name)
 
 cdef c_call_pos_listeners(list state, str entity_name, tuple pos):
         """

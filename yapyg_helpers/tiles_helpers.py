@@ -30,24 +30,31 @@ from yapyg import screen
 from yapyg import fixpoint
 from yapyg import tiles
 
+TILE_SIZE = fixpoint.float2fix(1.0)
+WALL_WIDTH = fixpoint.float2fix(1.0 / 4.0)
+OFFSET_WALL = TILE_SIZE - WALL_WIDTH - WALL_WIDTH
+SOUTH_WALL = ("rectangle", 0, 0, TILE_SIZE, WALL_WIDTH)
+WEST_WALL = ("rectangle", 0, 0, WALL_WIDTH, TILE_SIZE)
+NORTH_WALL = ("rectangle", 0, OFFSET_WALL, TILE_SIZE, WALL_WIDTH)
+EAST_WALL = ("rectangle", OFFSET_WALL, 0, WALL_WIDTH, TILE_SIZE)
 tiles_origin_table = (
-        ('_', (0,0)),
-        ('(', (1,0)),
-        ('-', (2,0)),
-        (')', (3,0)),
+        ('_', (0,0), (SOUTH_WALL,)),
+        ('(', (1,0), (WEST_WALL,)),
+        ('-', (2,0), (NORTH_WALL,)),
+        (')', (3,0), (EAST_WALL,)),
 
-        ('[', (0,1)),
-        ('<', (1,1)),
-        ('>', (2,1)),
-        (']', (3,1)),
+        ('[', (0,1), (SOUTH_WALL, WEST_WALL)),
+        ('<', (1,1), (NORTH_WALL, WEST_WALL)),
+        ('>', (2,1), (NORTH_WALL, EAST_WALL)),
+        (']', (3,1), (SOUTH_WALL, EAST_WALL)),
 
-        (',', (0,2)),
-        (';', (1,2)),
-        (':', (2,2)),
-        ('.', (3,2)),
+        (',', (0,2), (("rectangle", 0, 0, WALL_WIDTH, WALL_WIDTH),)),
+        (';', (1,2), (("rectangle", 0, OFFSET_WALL, WALL_WIDTH, WALL_WIDTH),)),
+        (':', (2,2), (("rectangle", OFFSET_WALL, OFFSET_WALL, WALL_WIDTH, WALL_WIDTH),)),
+        ('.', (3,2), (("rectangle", OFFSET_WALL, 0, WALL_WIDTH, WALL_WIDTH),)),
         )
 
-def load_walls(state, base_name, background_file, tile_file):
+def load_walls(state, base_name, background_file, tile_file, with_collisions=True):
         """
         TODO
         """
@@ -55,7 +62,7 @@ def load_walls(state, base_name, background_file, tile_file):
         int_tile_size = fixpoint.fix2int(tile_size)
         background_texture = Image(source=background_file).texture
         walls_texture = Image(source=tile_file).texture
-        for tile_name, origin_xy in tiles_origin_table:
+        for tile_name, origin_xy, collision in tiles_origin_table:
                 full_tile_name = base_name + tile_name
                 wall_texture = walls_texture.get_region(
                         origin_xy[0] * int_tile_size,
@@ -70,7 +77,9 @@ def load_walls(state, base_name, background_file, tile_file):
                         Rectangle(pos=(0, 0), size=tile_texture.size, texture=background_texture)
                         Rectangle(pos=(0, 0), size=tile_texture.size, texture=wall_texture)
                 fbo.draw()
-                tiles.add_tile_def(state, full_tile_name, tile_texture)
+                if not with_collisions:
+                        collision = None
+                tiles.add_tile_def(state, full_tile_name, tile_texture, collision)
 
 def strings_to_chars(area_strings):
         """

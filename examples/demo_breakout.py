@@ -57,7 +57,7 @@ def create(screen_width, screen_height, tile_size):
 
         state = factory.create(screen_width, screen_height, tile_size)
 
-        tiles.add_tile_def(state, ".", ("assets/img/tiles/gray_square.png",))
+        tiles.add_tile_def(state, ".", ("assets/img/tiles/grid_double.png",))
         tiles.set_area(state, [["." for x in xrange(10)] for x in xrange(10)])
 
         entities_helpers.create_screen_wall(state, "000_screenbox", BORDER_THICKNESS, BORDER_OFFSET, BOTTOM_Y, color=(0, 0.15, 1))
