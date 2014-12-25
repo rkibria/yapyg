@@ -22,16 +22,18 @@
 View setter
 """
 
-cimport globals
+cdef int IDX_STATE_VIEW
 
 cdef int IDX_VIEW_POS = 0
 cdef int IDX_VIEW_SETTER = 1
 
-cpdef initialize(list state):
+cpdef initialize(int state_idx, list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_VIEW] = [
+        global IDX_STATE_VIEW
+        IDX_STATE_VIEW = state_idx
+        state[IDX_STATE_VIEW] = [
                 [0, 0],
                 None,]
 
@@ -39,19 +41,19 @@ cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_VIEW] = None
+        state[IDX_STATE_VIEW] = None
 
 cpdef tuple get_view_pos(list state):
         """
         TODO
         """
-        return tuple(state[globals.IDX_STATE_VIEW][IDX_VIEW_POS])
+        return tuple(state[IDX_STATE_VIEW][IDX_VIEW_POS])
 
 cpdef set_view_pos(list state, view_pos):
         """
         TODO
         """
-        cdef list vp = state[globals.IDX_STATE_VIEW][IDX_VIEW_POS]
+        cdef list vp = state[IDX_STATE_VIEW][IDX_VIEW_POS]
         vp[0] = view_pos[0]
         vp[1] = view_pos[1]
 
@@ -59,13 +61,13 @@ cpdef set_viewer(list state, viewer):
         """
         TODO
         """
-        state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
+        state[IDX_STATE_VIEW][IDX_VIEW_SETTER] = viewer
 
 cpdef int run(list state):
         """
         TODO
         """
-        setter = state[globals.IDX_STATE_VIEW][IDX_VIEW_SETTER]
+        setter = state[IDX_STATE_VIEW][IDX_VIEW_SETTER]
         if setter:
                 return (setter[0])(state, setter)
         else:

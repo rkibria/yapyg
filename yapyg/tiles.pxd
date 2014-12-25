@@ -22,11 +22,14 @@
 Tiles
 """
 
-cpdef initialize(list state, int tile_size)
+cdef int IDX_STATE_TILES
+
+cpdef initialize(int state_idx, list state, int tile_size)
 cpdef destroy(list state)
 cpdef int get_tile_size(state)
 cpdef set_area(list state, list area)
 cpdef list get_area(list state)
-cpdef add_tile_def(list state, str tile_name, tuple texture_list)
+cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=?)
 cpdef str get_tile(list state, int row, int col)
 cpdef draw(list state, int scale, canvas, tuple view_size)
+cpdef tuple get_area_size(list state)

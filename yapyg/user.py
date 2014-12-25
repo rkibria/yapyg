@@ -22,15 +22,14 @@
 User data
 """
 
-import globals
-import fixpoint
+IDX_STATE_USER = None
 
-IDX_STATE_USER = globals.get_module_index("IDX_STATE_USER")
-
-def initialize(state):
+def initialize(state_idx, state):
         """
         TODO
         """
+        global IDX_STATE_USER
+        IDX_STATE_USER = state_idx
         state[IDX_STATE_USER] = None
 
 def destroy(state):

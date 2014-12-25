@@ -22,6 +22,8 @@
 Collisions
 """
 
+cdef int IDX_STATE_COLLISIONS
+
 cdef int IDX_COLLISIONDB_ENTITIES
 cdef int IDX_COLLISIONDB_HASH_MAP
 cdef int IDX_COLLISIONDB_HANDLER_FUNCTION
@@ -35,15 +37,16 @@ cdef int IDX_COLLISION_CACHE_ABS_SHAPE
 cdef int IDX_COLLISION_CACHE_HASH_EXTENT
 cdef int IDX_COLLISION_CACHE_LAST_HASH_POS
 
-cpdef initialize(list state)
+cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
 cpdef entity_pos_listener(list state, str entity_name, tuple pos)
 cpdef set_handler(list state, handler_function)
-cpdef add(list state, str entity_name, tuple shapes_list)
+cpdef add_entity(list state, str entity_name, tuple shapes_list)
 cpdef delete(list state, str entity_name)
+cpdef add_tile(list state, str tile_name, int x, int y, tuple shapes_list)
 
-cpdef update_hash(list state, str entity_name, tuple new_pos)
-cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left)
+cpdef update_hash(list state, str entity_name, tuple new_pos, int is_tile)
+cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, int is_tile)
 cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left)
 cpdef list get_collision_shapes(list state, str entity_name, list collision_def)
 cpdef tuple run(list state, str entity_name_1)

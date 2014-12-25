@@ -22,7 +22,9 @@
 Main screen/window
 """
 
-cpdef initialize(list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=?)
+cdef int IDX_STATE_SCREEN = 0
+
+cpdef initialize(int state_idx, list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=?)
 cpdef destroy(list state)
 cpdef int get_width(list state)
 cpdef int get_height(list state)

@@ -22,21 +22,24 @@
 Debugging
 """
 
-import globals
-import fixpoint
+import collections
 
-IDX_STATE_DEBUG = globals.get_module_index("IDX_STATE_DEBUG")
+IDX_STATE_DEBUG = None
 
 IDX_DEBUG_TEXTLINES = 0
-
 NUM_DEBUG_LINES = 19
 
-def initialize(state):
+def initialize(state_idx, state):
         """
         TODO
         """
+        global IDX_STATE_DEBUG
+        IDX_STATE_DEBUG = state_idx
+        debug_lines = collections.deque()
+        for x in xrange(NUM_DEBUG_LINES):
+                debug_lines.append("")
         state[IDX_STATE_DEBUG] = [
-                [("") for x in xrange(NUM_DEBUG_LINES)],
+                debug_lines,
                 ]
 
 def destroy(state):
@@ -56,3 +59,11 @@ def get_line(state, line_no):
         TODO
         """
         return state[IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES][line_no]
+
+def print_line(state, txt):
+        """
+        TODO
+        """
+        debug_lines = state[IDX_STATE_DEBUG][IDX_DEBUG_TEXTLINES]
+        debug_lines.popleft()
+        debug_lines.append(txt)

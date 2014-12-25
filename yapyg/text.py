@@ -26,18 +26,20 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Rectangle, Fbo
 
-import globals
+
 import texture_db
 
-IDX_STATE_TEXT = globals.get_module_index("IDX_STATE_TEXT")
+IDX_STATE_TEXT = None
 
 IDX_TEXT_WIDTH = 0
 IDX_TEXT_HEIGHT = 1
 
-def initialize(state):
+def initialize(state_idx, state):
         """
         TODO
         """
+        global IDX_STATE_TEXT
+        IDX_STATE_TEXT = state_idx
         state[IDX_STATE_TEXT] = {}
 
 def destroy(state):

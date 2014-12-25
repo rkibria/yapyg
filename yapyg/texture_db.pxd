@@ -22,7 +22,9 @@
 Texture storage and operations
 """
 
-cpdef initialize(list state)
+cdef int IDX_STATE_TEXTURE_DB
+
+cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
 cpdef insert(list state, str texture_name, texture)
 cpdef load(list state, str texture_name, str texture_filename)

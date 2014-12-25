@@ -22,7 +22,7 @@
 Generate new game states
 """
 
-import globals
+
 import screen
 import tiles
 import texture_db
@@ -36,30 +36,38 @@ import text
 import timer
 import debug
 import user
+import fixpoint
 
 def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         """
         TODO
         """
-        state = [None for x in xrange(globals.IDX_STATE_LAST)]
+        state = [None for x in xrange(13)]
+        tile_size = fixpoint.int2fix(tile_size)
+        screen_width = fixpoint.int2fix(screen_width)
+        screen_height = fixpoint.int2fix(screen_height)
+        origin_xy = (fixpoint.int2fix(origin_xy[0]), fixpoint.int2fix(origin_xy[1]))
 
-        screen.initialize(state, screen_width, screen_height, tile_size, origin_xy)
-        texture_db.initialize(state)
-        tiles.initialize(state, tile_size)
-        sprites.initialize(state)
-        movers.initialize(state)
-        entities.initialize(state)
-        view.initialize(state)
-        controls.initialize(state)
-        collisions.initialize(state)
-        text.initialize(state)
-        timer.initialize(state)
-        debug.initialize(state)
-        user.initialize(state)
+        screen.initialize(0, state, screen_width, screen_height, tile_size, origin_xy)
+        texture_db.initialize(1, state)
+        tiles.initialize(2, state, tile_size)
+        sprites.initialize(3, state)
+        movers.initialize(4, state)
+        entities.initialize(5, state)
+        view.initialize(6, state)
+        controls.initialize(7, state)
+        collisions.initialize(8, state)
+        text.initialize(9, state)
+        timer.initialize(10, state)
+        debug.initialize(11, state)
+        user.initialize(12, state)
 
         return state
 
 def destroy(state):
+        """
+        TODO
+        """
         screen.destroy(state)
         texture_db.destroy(state)
         tiles.destroy(state)

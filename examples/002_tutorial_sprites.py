@@ -18,22 +18,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-"""
-Globals
-"""
+screen_width = 480
+screen_height = 800
+tile_size = 128
+import yapyg.bootstrap
+yapyg.bootstrap.initialize_screen(screen_width, screen_height)
 
-cpdef int IDX_STATE_SCREEN
-cpdef int IDX_STATE_TILES
-cpdef int IDX_STATE_TEXTURE_DB
-cpdef int IDX_STATE_SPRITES
-cpdef int IDX_STATE_MOVERS
-cpdef int IDX_STATE_ENTITIES
-cpdef int IDX_STATE_VIEW
-cpdef int IDX_STATE_CONTROLS
-cpdef int IDX_STATE_COLLISIONS
-cpdef int IDX_STATE_TEXT
-cpdef int IDX_STATE_TIMER
-cpdef int IDX_STATE_DEBUG
-cpdef int IDX_STATE_USER
+from kivy.app import App
+from yapyg import factory
+from yapyg import tiles
+from yapyg import entities
+from yapyg_widgets.screen_widget import ScreenWidget
 
-cpdef int get_module_index(str name)
+class TutorialApp(App):
+        def build(self):
+                state = factory.create(screen_width, screen_height, tile_size)
+                tiles.add_tile_def(state, '+', ("assets/img/tiles/grid_simple.png",))
+                tiles.set_area(state, [["+"] * 9] * 9)
+                entities.insert(state,
+                                "ball",
+                                {
+                                 "*": {
+                                       "textures": ("assets/img/sprites/quarter_ball.png",),
+                                       },
+                                 },
+                                (0, 0, 0,),
+                                )
+                return ScreenWidget(state, debugging=True)
+
+TutorialApp().run()

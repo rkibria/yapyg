@@ -27,22 +27,25 @@ import copy
 cimport sprites
 cimport collisions
 cimport fixpoint
-cimport globals
 
-IDX_ENTITIES_TABLE = 0
+cdef int IDX_STATE_ENTITIES
 
-IDX_ENTITY_POS = 0
-IDX_ENTITY_POS_OFFSET = 1
-IDX_ENTITY_ENABLED_SPRITE = 2
-IDX_ENTITY_LAST_POS = 3
-IDX_ENTITY_SPRITES = 4
-IDX_ENTITY_COLLISION = 5
+cdef int IDX_ENTITIES_TABLE = 0
 
-cpdef initialize(list state):
+cdef int IDX_ENTITY_POS = 0
+cdef int IDX_ENTITY_POS_OFFSET = 1
+cdef int IDX_ENTITY_ENABLED_SPRITE = 2
+cdef int IDX_ENTITY_LAST_POS = 3
+cdef int IDX_ENTITY_SPRITES = 4
+cdef int IDX_ENTITY_COLLISION = 5
+
+cpdef initialize(int state_idx, list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_ENTITIES] = [
+        global IDX_STATE_ENTITIES
+        IDX_STATE_ENTITIES = state_idx
+        state[IDX_STATE_ENTITIES] = [
                 {},
                 ]
 
@@ -50,14 +53,14 @@ cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_ENTITIES] = None
+        state[IDX_STATE_ENTITIES] = None
 
 cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
         """
         TODO
         """
         cdef list entities_db
-        entities_db = state[globals.IDX_STATE_ENTITIES]
+        entities_db = state[IDX_STATE_ENTITIES]
 
         cdef dict entities_table
         entities_table = entities_db[IDX_ENTITIES_TABLE]
@@ -74,7 +77,7 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
         entities_table[entity_name] = entity
 
         if collision:
-                collisions.add(state, entity_name, collision)
+                collisions.add_entity(state, entity_name, collision)
 
         cdef str default_sprite
         default_sprite = None
@@ -176,7 +179,7 @@ cpdef delete(list state, str entity_name):
                 if entity[IDX_ENTITY_COLLISION]:
                         collisions.delete(state, entity_name)
 
-                del state[globals.IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
+                del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
 
 cdef c_call_pos_listeners(list state, str entity_name, tuple pos):
         """
@@ -195,7 +198,7 @@ cpdef list get(list state, str entity_name):
         TODO
         """
         cdef list entities_db
-        entities_db = state[globals.IDX_STATE_ENTITIES]
+        entities_db = state[IDX_STATE_ENTITIES]
 
         cdef dict entities_table
         entities_table = entities_db[IDX_ENTITIES_TABLE]

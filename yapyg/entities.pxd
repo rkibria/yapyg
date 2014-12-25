@@ -22,6 +22,8 @@
 Entities
 """
 
+cdef int IDX_STATE_ENTITIES
+
 cdef int IDX_ENTITIES_TABLE
 
 cdef int IDX_ENTITY_POS
@@ -31,7 +33,7 @@ cdef int IDX_ENTITY_LAST_POS
 cdef int IDX_ENTITY_SPRITES
 cdef int IDX_ENTITY_COLLISION
 
-cpdef initialize(list state)
+cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
 cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=*, tuple collision=*, int screen_relative=*)
 cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=*, int screen_relative=*)

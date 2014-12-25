@@ -22,17 +22,17 @@
 Timer
 """
 
-import globals
-import fixpoint
 
-IDX_STATE_TIMER = globals.get_module_index("IDX_STATE_TIMER")
+IDX_STATE_TIMER = None
 
 IDX_TIMERS_TABLE = 0
 
-def initialize(state):
+def initialize(state_idx, state):
         """
         TODO
         """
+        global IDX_STATE_TIMER
+        IDX_STATE_TIMER = state_idx
         state[IDX_STATE_TIMER] = [[],]
 
 def destroy(state):

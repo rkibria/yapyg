@@ -27,41 +27,44 @@ from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
 
 cimport fixpoint
-cimport globals
 
 import screen
 
-cpdef initialize(list state):
+cdef int IDX_STATE_TEXTURE_DB
+
+cpdef initialize(int state_idx, list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_TEXTURE_DB] = {}
+        global IDX_STATE_TEXTURE_DB
+        IDX_STATE_TEXTURE_DB = state_idx
+        state[IDX_STATE_TEXTURE_DB] = {}
 
 cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_TEXTURE_DB] = None
+        state[IDX_STATE_TEXTURE_DB] = None
 
 cpdef insert(list state, str texture_name, texture):
         """
         TODO
         """
-        cdef dict texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        cdef dict texturedb = state[IDX_STATE_TEXTURE_DB]
         texturedb[texture_name] = texture
 
 cpdef load(list state, str texture_name, str texture_filename):
         """
         TODO
         """
-        cdef dict texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        cdef dict texturedb = state[IDX_STATE_TEXTURE_DB]
         texturedb[texture_name] = Image(source=texture_filename).texture
 
 cpdef get(list state, str texture_name):
         """
         TODO
         """
-        cdef dict texturedb = state[globals.IDX_STATE_TEXTURE_DB]
+        cdef dict texturedb = state[IDX_STATE_TEXTURE_DB]
         if texturedb.has_key(texture_name):
                 return texturedb[texture_name]
         else:

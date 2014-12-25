@@ -22,7 +22,9 @@
 2D Sprites
 """
 
-cpdef initialize(list state)
+cdef int IDX_STATE_SPRITES
+
+cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
 cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_offset, tuple scale, int enable, list pos, int screen_relative=*)
 cpdef delete(list state, str sprite_name)

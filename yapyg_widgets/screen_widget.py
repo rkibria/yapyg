@@ -36,7 +36,7 @@ from joystick_widget import JoystickWidget
 from yapyg.fixpoint import float2fix, fix2float
 
 class ScreenWidget(FloatLayout):
-        def __init__(self, state, on_exit_function, scale, debugging=False, **kwargs):
+        def __init__(self, state, scale=None, on_exit_function=None, debugging=False, **kwargs):
                 super(ScreenWidget, self).__init__(**kwargs)
 
                 self.state = state
@@ -44,6 +44,8 @@ class ScreenWidget(FloatLayout):
                 FIXP_1 = yapyg.fixpoint.int2fix(1)
                 yapyg.texture_db.insert_color_rect(state, FIXP_1, FIXP_1, "tl_null", 0.0, 0.0, 0.0)
 
+                if not scale:
+                        scale = FIXP_1
                 self.display_widget = DisplayWidget(state, [float2fix(float(Window.width)), float2fix(float(Window.height))], scale)
                 self.on_exit_function = on_exit_function
 
@@ -190,16 +192,17 @@ class ScreenWidget(FloatLayout):
                                         self.add_widget(button_3)
                                         button_3.bind(state=self.on_button_3)
 
-                exit_button = Button(text='[color=000000]Menu[/color]',
-                                font_size=26,
-                                markup=True,
-                                background_normal="assets/img/ui/joy_option_button.png",
-                                background_down="assets/img/ui/joy_option_button_down.png",
-                                size_hint=(0.2, 0.05),
-                                pos_hint = {"x":0.4, "y":0.01},
-                                )
-                exit_button.bind(state=self.on_exit)
-                self.add_widget(exit_button)
+                if self.on_exit_function:
+                        exit_button = Button(text='[color=000000]Menu[/color]',
+                                        font_size=26,
+                                        markup=True,
+                                        background_normal="assets/img/ui/joy_option_button.png",
+                                        background_down="assets/img/ui/joy_option_button_down.png",
+                                        size_hint=(0.2, 0.05),
+                                        pos_hint = {"x":0.4, "y":0.01},
+                                        )
+                        exit_button.bind(state=self.on_exit)
+                        self.add_widget(exit_button)
 
                 if debugging:
                         NUM_DEBUG_LINES = yapyg.debug.NUM_DEBUG_LINES + 1
@@ -225,8 +228,7 @@ class ScreenWidget(FloatLayout):
                 status_output = "fps:%.1f frame_time:%.1fms" % (float(Clock.get_fps()), fix2float(frame_time))
                 self.set_debug_text(0, status_output)
 
-                NUM_DEBUG_LINES = yapyg.debug.NUM_DEBUG_LINES
-                for i in xrange(NUM_DEBUG_LINES):
+                for i in xrange(yapyg.debug.NUM_DEBUG_LINES):
                         debug_line = yapyg.debug.get_line(self.state, i)
                         self.set_debug_text(1 + i, debug_line)
 

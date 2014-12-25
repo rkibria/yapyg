@@ -22,29 +22,29 @@
 Helpers for recurring tasks
 """
 
-import yapyg.entities
-import yapyg.screen
-import yapyg.fixpoint
+from yapyg import entities
+from yapyg import screen
+from yapyg import fixpoint
 
 def create_screen_wall(state, base_name, border_thickness, border_offset, bottom_y, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
         """
         TODO
         """
-        screen_width = yapyg.screen.get_width(state)
-        screen_height = yapyg.screen.get_height(state)
-        tile_size = yapyg.screen.get_tile_size(state)
+        screen_width = screen.get_width(state)
+        screen_height = screen.get_height(state)
+        tile_size = screen.get_tile_size(state)
 
-        FIXP_2 = yapyg.fixpoint.int2fix(2)
+        FIXP_2 = fixpoint.int2fix(2)
         pos = (-border_thickness + border_offset, -border_thickness + bottom_y + border_offset)
         size_w = (
-                yapyg.fixpoint.div(screen_width, tile_size)
-                + yapyg.fixpoint.mul(FIXP_2, border_thickness)
-                - yapyg.fixpoint.mul(FIXP_2, border_offset)
+                fixpoint.div(screen_width, tile_size)
+                + fixpoint.mul(FIXP_2, border_thickness)
+                - fixpoint.mul(FIXP_2, border_offset)
                 )
         size_h = (
-                yapyg.fixpoint.div(screen_height, tile_size)
-                - bottom_y + yapyg.fixpoint.mul(FIXP_2, border_thickness)
-                - yapyg.fixpoint.mul(FIXP_2,  border_offset)
+                fixpoint.div(screen_height, tile_size)
+                - bottom_y + fixpoint.mul(FIXP_2, border_thickness)
+                - fixpoint.mul(FIXP_2,  border_offset)
                 )
 
         create_collision_box(state, base_name,
@@ -71,7 +71,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
         vertical_wall_height = size[1]
 
         if bottom:
-                yapyg.entities.insert(state,
+                entities.insert(state,
                         ENT_BOTTOMWALL,
                         {
                                 "*": {
@@ -85,7 +85,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
         if left:
-                yapyg.entities.insert(state,
+                entities.insert(state,
                         ENT_LEFTWALL,
                         {
                                 "*": {
@@ -99,7 +99,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                         collision=((("rectangle", 0, 0, thickness, vertical_wall_height),)))
 
         if top:
-                yapyg.entities.insert(state,
+                entities.insert(state,
                         ENT_TOPWALL,
                         {
                                 "*": {
@@ -113,7 +113,7 @@ def create_collision_box(state, base_name, pos, size, thickness, top=True, botto
                         collision=((("rectangle", 0, 0, horizontal_wall_width, thickness),)))
 
         if right:
-                yapyg.entities.insert(state,
+                entities.insert(state,
                         ENT_RIGHTWALL,
                         {
                                 "*": {

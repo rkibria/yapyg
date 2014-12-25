@@ -22,8 +22,9 @@
 Controls
 """
 
-cimport globals
 cimport fixpoint
+
+cdef int IDX_STATE_CONTROLS
 
 cdef int IDX_CONTROLS_JOYSTICK = 0
 cdef int IDX_CONTROLS_JOYSTICK_DIRECTION = 1
@@ -35,11 +36,13 @@ IDX_CONTROL_BUTTON_STATE = 2
 IDX_CONTROL_BUTTON_POS = 3
 IDX_CONTROL_BUTTON_SIZE = 4
 
-cpdef initialize(list state):
+cpdef initialize(int state_idx, list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_CONTROLS] = [
+        global IDX_STATE_CONTROLS
+        IDX_STATE_CONTROLS = state_idx
+        state[IDX_STATE_CONTROLS] = [
                 False,
                 [0, 0],
                 []
@@ -49,7 +52,7 @@ cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_CONTROLS] = None
+        state[IDX_STATE_CONTROLS] = None
 
 cpdef add_buttons(list state, tuple button_defs):
         """
@@ -57,7 +60,7 @@ cpdef add_buttons(list state, tuple button_defs):
         position can be "left", "center", "right"
         size can be "small", "big"
         """
-        state_button_defs = state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+        state_button_defs = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
         for button_def in button_defs:
                 state_button_defs.append([
                         button_def[0],
@@ -71,13 +74,13 @@ cpdef list get_buttons(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+        return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
 
 cpdef set_button_state(list state, int button_index, int button_pressed):
         """
         TODO
         """
-        button_state = state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
+        button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
         button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
         (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
 
@@ -85,39 +88,39 @@ cpdef int get_button_is_down(list state, int button_index):
         """
         TODO
         """
-        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][IDX_CONTROL_BUTTON_STATE]
+        return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][IDX_CONTROL_BUTTON_STATE]
 
 cpdef add_joystick(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK] = True
+        state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK] = True
 
 cpdef int need_joystick(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]
+        return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]
 
 cpdef int need_buttons(list state):
         """
         TODO
         """
-        return len(state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]) > 0
+        return len(state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]) > 0
 
 cpdef set_joystick(list state, directions):
         """
         TODO
         """
-        if state[globals.IDX_STATE_CONTROLS]:
-                state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = fixpoint.float2fix(float(directions[0]))
-                state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = fixpoint.float2fix(float(directions[1]))
+        if state[IDX_STATE_CONTROLS]:
+                state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = fixpoint.float2fix(float(directions[0]))
+                state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = fixpoint.float2fix(float(directions[1]))
 
 cpdef get_joystick(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION]
+        return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION]
 
 cpdef dict get_joystick_properties():
         """

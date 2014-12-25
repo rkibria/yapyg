@@ -26,14 +26,7 @@ cimport yapyg.fixpoint
 cimport yapyg.fixpoint_2d
 import yapyg.movers
 cimport yapyg.entities
-
-# cdef int IDX_LINEAR_MOVER_REL_VECTOR
-# cdef int IDX_LINEAR_MOVER_SPEED
-# cdef int IDX_LINEAR_MOVER_ROTATE_MODE
-# cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR
-# cdef int IDX_LINEAR_MOVER_TRAVEL_TIME
-# cdef int IDX_LINEAR_MOVER_PASSED_TIME
-# cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION
+cimport yapyg.collisions
 
 IDX_LINEAR_MOVER_REL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
 IDX_LINEAR_MOVER_SPEED = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
@@ -70,7 +63,7 @@ cpdef list create(str entity_name, tuple rel_vector, int speed, tuple rotate_mod
         cdef int distance
         distance = yapyg.fixpoint_2d.length(rel_vector)
         if distance == 0 or speed == 0:
-                print "yapyg_movers\linear.pyx: Distance and speed must be >0"
+                print "Distance and speed must be >0"
                 return None
 
         cdef int travel_time
@@ -150,3 +143,5 @@ cpdef run(list state, str entity_name, list mover, int frame_time_delta, list mo
 
         if passed_time == travel_time:
                 movers_to_delete.append((entity_name, mover[IDX_LINEAR_MOVER_ON_END_FUNCTION]))
+
+        yapyg.collisions.run(state, entity_name)

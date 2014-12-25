@@ -27,11 +27,12 @@ from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 cimport fixpoint
 cimport tiles
 cimport texture_db
-cimport globals
 cimport view
 cimport screen
 
 import text
+
+cdef int IDX_STATE_SPRITES
 
 cdef int IDX_SPRITES_TABLE = 0
 cdef int IDX_SPRITES_RECTS_ROTS = 1
@@ -48,11 +49,13 @@ cdef int IDX_SPRITE_TIME_SUM = 6
 cdef int IDX_SPRITE_PHASE = 7
 cdef int IDX_SPRITE_SCREEN_RELATIVE = 8
 
-cpdef initialize(list state):
+cpdef initialize(int state_idx, list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_SPRITES] = [
+        global IDX_STATE_SPRITES
+        IDX_STATE_SPRITES = state_idx
+        state[IDX_STATE_SPRITES] = [
                 {},
                 {},
                 {},
@@ -62,13 +65,13 @@ cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_SPRITES] = None
+        state[IDX_STATE_SPRITES] = None
 
 cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_offset, tuple scale, int enable, list pos, int screen_relative=False):
         """
         TODO
         """
-        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
 
         if not scale:
@@ -113,16 +116,16 @@ cpdef delete(list state, str sprite_name):
         """
         TODO
         """
-        if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
-                del state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
-                state[globals.IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER].remove(sprite_name)
+        if state[IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
+                del state[IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
+                state[IDX_STATE_SPRITES][IDX_SPRITES_DRAW_ORDER].remove(sprite_name)
 
 cpdef list get(list state, str sprite_name):
         """
         TODO
         """
-        if state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
-                return state[globals.IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
+        if state[IDX_STATE_SPRITES][IDX_SPRITES_TABLE].has_key(sprite_name):
+                return state[IDX_STATE_SPRITES][IDX_SPRITES_TABLE][sprite_name]
         else:
                 return None
 
@@ -136,7 +139,7 @@ cpdef set_enable(list state, str sprite_name, int enable):
         """
         TODO
         """
-        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
@@ -166,7 +169,7 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
         """
         cdef tuple origin_xy = screen.get_origin(state)
         cdef tuple view_pos = view.get_view_pos(state)
-        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
         cdef list draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
 
@@ -224,7 +227,7 @@ cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str 
         """
         TODO
         """
-        cdef list sprite_db = state[globals.IDX_STATE_SPRITES]
+        cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]
 
         cdef int col = fixpoint.floor(pos[0])

@@ -22,12 +22,14 @@
 General movements
 """
 
+cdef int IDX_STATE_MOVERS
+
 cpdef int IDX_MOVER_TYPE = 0
 cpdef int IDX_MOVER_RUN_FUNCTION = 1
 cpdef int IDX_MOVER_ENTITY_NAME = 2
 cpdef int IDX_MOVER_COLLISION_HANDLER = 3
 
-cpdef initialize(list state)
+cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
 cpdef add(list state, str mover_name, list mover, int do_replace=*)
 cpdef get_active(list state, str mover_name)

@@ -22,18 +22,21 @@
 Main screen/window
 """
 
-cimport globals
+cdef int IDX_STATE_SCREEN = 0
 
 cdef int IDX_SCREEN_WIDTH = 0
 cdef int IDX_SCREEN_HEIGHT = 1
 cdef int IDX_SCREEN_TILE_SIZE = 2
 cdef int IDX_SCREEN_ORIGIN_XY = 3
 
-cpdef initialize(list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=(0, 0)):
+cpdef initialize(int state_idx, list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=(0, 0)):
         """
         TODO
         """
-        state[globals.IDX_STATE_SCREEN] = [
+        global IDX_STATE_SCREEN
+        IDX_STATE_SCREEN = state_idx
+
+        state[IDX_STATE_SCREEN] = [
                 screen_width,
                 screen_height,
                 tile_size,
@@ -43,31 +46,31 @@ cpdef destroy(list state):
         """
         TODO
         """
-        state[globals.IDX_STATE_SCREEN] = None
+        state[IDX_STATE_SCREEN] = None
 
 cpdef int get_width(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_WIDTH]
+        return state[IDX_STATE_SCREEN][IDX_SCREEN_WIDTH]
 
 cpdef int get_height(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_HEIGHT]
+        return state[IDX_STATE_SCREEN][IDX_SCREEN_HEIGHT]
 
 cpdef int get_tile_size(list state):
         """
         TODO
         """
-        return state[globals.IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
+        return state[IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
 
 cpdef set_origin(list state, tuple origin_xy):
         """
         TODO
         """
-        cdef list screen_origin = state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
+        cdef list screen_origin = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
         screen_origin[0] = origin_xy[0]
         screen_origin[1] = origin_xy[1]
 
@@ -75,5 +78,5 @@ cpdef tuple get_origin(list state):
         """
         TODO
         """
-        cdef list origin_xy = state[globals.IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
+        cdef list origin_xy = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
         return (origin_xy[0], origin_xy[1])
