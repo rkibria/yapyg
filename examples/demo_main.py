@@ -39,11 +39,12 @@ from kivy.uix.boxlayout import BoxLayout
 from yapyg_widgets.screen_widget import ScreenWidget
 from yapyg.fixpoint import float2fix
 
+DEFAULT_START_CHOICE = "demo_bounce"
+
 class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
                 super(MenuWidget, self).__init__(**kwargs)
 
-                default_choice = "demo_gauntlet"
                 self.choices = {
                         "demo_bounce": "Basic physics simulation",
                         "demo_breakout": "Breakout demo",
@@ -60,11 +61,11 @@ class MenuWidget(FloatLayout):
 
                 layout.add_widget(Label(text="Choose demo:", size_hint=(1, 0.1)))
 
-                self.spinner = Spinner(text=default_choice, values=[x for x in self.choices.iterkeys()], size_hint=(1, 0.1))
+                self.spinner = Spinner(text=DEFAULT_START_CHOICE, values=[x for x in self.choices.iterkeys()], size_hint=(1, 0.1))
                 layout.add_widget(self.spinner)
                 self.spinner.bind(text=self.show_selected_value)
 
-                self.description_label = Label(text=self.choices[default_choice], valign="middle", halign="center", size_hint=(1, 0.2))
+                self.description_label = Label(text=self.choices[DEFAULT_START_CHOICE], valign="middle", halign="center", size_hint=(1, 0.2))
                 self.description_label.bind(size=self.description_label.setter("text_size"))
                 layout.add_widget(self.description_label)
 
@@ -94,6 +95,9 @@ class MenuWidget(FloatLayout):
 
                         state = None
                         module_name = self.spinner.text
+                        global DEFAULT_START_CHOICE
+                        DEFAULT_START_CHOICE = module_name
+
                         exec("import %s" % module_name)
                         exec("state = %s.create(Window.width, Window.height, tile_size)" % self.spinner.text)
 

@@ -30,6 +30,7 @@ from yapyg import collisions
 from yapyg import debug
 from yapyg_movers import controlled_mover
 from yapyg_movers import linear_mover
+from yapyg_movers import destroy_mover
 from yapyg_viewers import relative_viewer
 from yapyg_helpers import tiles_helpers
 
@@ -161,23 +162,19 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         return state
 
 def collision_handler(state, collisions_list):
+        print str(collisions_list)
         for entity_name_1, entity_name_2 in collisions_list:
-                print "collision: %s <-> %s" % (entity_name_1, entity_name_2,)
                 if entity_name_1 == ENT_MAN and entity_name_2 != ENT_SHOT:
                         entities.undo_last_move(state, entity_name_1)
-                elif entity_name_2 == ENT_MAN and entity_name_1 != ENT_SHOT:
-                        entities.undo_last_move(state, entity_name_2)
 
-                if entity_name_1 == ENT_SHOT and entity_name_2 != ENT_MAN:
-                        entities.delete(state, entity_name_1)
-                elif entity_name_2 == ENT_SHOT and entity_name_1 != ENT_MAN:
-                        entities.delete(state, entity_name_2)
+                if entity_name_1 == ENT_SHOT:
+                        destroy_mover.add(state, ENT_SHOT, do_replace=True)
 
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
 
 SHOT_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 8.0), fixpoint.int2fix(2))
 def on_fire_button(state, button_pressed):
-        if button_pressed:
+        if button_pressed and not entities.get(state, ENT_SHOT):
                 man_pos = entities.get_pos(state, ENT_MAN)
 
                 man_rot = man_pos[2]
@@ -188,7 +185,7 @@ def on_fire_button(state, button_pressed):
 
                 heading = (heading_x, heading_y)
                 heading = (fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading[0]),
-                        fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading[1]))
+                           fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading[1]))
 
                 entities.insert(state, ENT_SHOT, {
                                                   "*": {
@@ -205,3 +202,4 @@ def on_fire_button(state, button_pressed):
                                 collision=(("circle", SHOT_RADIUS, SHOT_RADIUS, SHOT_RADIUS,),),
                                 )
                 linear_mover.add(state, ENT_SHOT, heading, fixpoint.float2fix(4.0), ("const", fixpoint.float2fix(-1.0)), None, True)
+                destroy_mover.add(state, ENT_SHOT)

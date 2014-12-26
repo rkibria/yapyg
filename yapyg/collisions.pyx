@@ -428,7 +428,10 @@ cpdef tuple run(list state, str entity_name_1):
                                                                 is_collision = fixpoint_coll.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
 
                                                 if is_collision:
-                                                        collisions_list.append((entity_name_1, entity_name_2,))
+                                                        if entity_name_1 < entity_name_2:
+                                                                collisions_list.append((entity_name_1, entity_name_2,))
+                                                        else:
+                                                                collisions_list.append((entity_name_2, entity_name_1,))
                                                         return (state,
                                                                 entity_name_1, entity_name_2,
                                                                 collision_def_1, collision_def_2,

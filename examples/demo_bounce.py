@@ -35,7 +35,7 @@ def create(screen_width, screen_height, tile_size):
         BORDER_THICKNESS = fixpoint.float2fix(2.0)
         BORDER_OFFSET = fixpoint.float2fix(0.1)
 
-        WALLS_COLOR = (0, 0.15, 1)
+        WALLS_COLOR = (0.3, 0.45, 1)
 
         state = factory.create(screen_width, screen_height, tile_size)
 

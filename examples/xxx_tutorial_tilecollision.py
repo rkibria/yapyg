@@ -32,7 +32,7 @@ from yapyg import fixpoint
 from yapyg import collisions
 from yapyg import debug
 from yapyg_widgets.screen_widget import ScreenWidget
-from yapyg_helpers import tile_helpers
+from yapyg_helpers import tiles_helpers
 from yapyg_movers import linear_mover
 
 class TutorialApp(App):
@@ -49,7 +49,7 @@ class TutorialApp(App):
                         " +  ",
                         "    ",
                         )
-                tiles.set_area(state, tile_helpers.strings_to_chars(area_strings))
+                tiles.set_area(state, tiles_helpers.strings_to_chars(area_strings))
 
                 collisions.set_handler(state, collision_handler)
 

@@ -29,6 +29,9 @@ cimport collisions
 cimport fixpoint
 cimport movers
 
+cdef int FIXP_1 = fixpoint.int2fix(1)
+cdef int FIXP_360 = fixpoint.int2fix(360)
+
 cdef int IDX_STATE_ENTITIES
 
 cdef int IDX_ENTITIES_TABLE = 0
@@ -60,14 +63,9 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
         """
         TODO
         """
-        cdef list entities_db
-        entities_db = state[IDX_STATE_ENTITIES]
-
-        cdef dict entities_table
-        entities_table = entities_db[IDX_ENTITIES_TABLE]
-
-        cdef list entity
-        entity = [
+        cdef list entities_db = state[IDX_STATE_ENTITIES]
+        cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
+        cdef list entity = [
                 [pos[0], pos[1], pos[2]],
                 [pos_offset[0], pos_offset[1]],
                 None,
@@ -80,8 +78,7 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
         if collision:
                 collisions.add_entity(state, entity_name, collision)
 
-        cdef str default_sprite
-        default_sprite = None
+        cdef str default_sprite = None
 
         cdef str sprite_name
         cdef dict sprite_def
@@ -97,14 +94,11 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
         if default_sprite:
                 set_active_sprite(state, entity_name, default_sprite)
 
-cdef int FIXP_1 = fixpoint.int2fix(1)
-
 cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=False, int screen_relative=False):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
+        cdef list entity = get(state, entity_name)
 
         cdef str full_sprite_name
         cdef tuple sprite_textures
@@ -154,24 +148,22 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
                 if enabled_sprite_name == sprite_name:
                         sprites.set_enable(state, full_sprite_name, True)
 
-cpdef set_active_sprite(list state, str entity_name, str sprite_name):
+cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
+        cdef list entity = get(state, entity_name)
         if entity:
                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
-                sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), True)
+                sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), enable)
                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
 
 cpdef delete(list state, str entity_name):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
+        cdef list entity = get(state, entity_name)
         if entity:
                 sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
                 for sprite_name in entity[IDX_ENTITY_SPRITES]:
@@ -200,12 +192,8 @@ cpdef list get(list state, str entity_name):
         """
         TODO
         """
-        cdef list entities_db
-        entities_db = state[IDX_STATE_ENTITIES]
-
-        cdef dict entities_table
-        entities_table = entities_db[IDX_ENTITIES_TABLE]
-
+        cdef list entities_db = state[IDX_STATE_ENTITIES]
+        cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
         if entities_table.has_key(entity_name):
                 return entities_table[entity_name]
         else:
@@ -215,9 +203,7 @@ cpdef tuple get_pos(list state, str entity_name):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
-
+        cdef list entity = get(state, entity_name)
         cdef list pos
         if entity:
                 pos = entity[IDX_ENTITY_POS]
@@ -229,9 +215,7 @@ cpdef tuple get_last_pos(list state, str entity_name):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
-
+        cdef list entity = get(state, entity_name)
         cdef tuple last_pos
         if entity:
                 last_pos = entity[IDX_ENTITY_LAST_POS]
@@ -243,9 +227,7 @@ cpdef tuple get_pos_offset(list state, str entity_name):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
-
+        cdef list entity = get(state, entity_name)
         cdef list pos_offset
         if entity:
                 pos_offset = entity[IDX_ENTITY_POS_OFFSET]
@@ -253,9 +235,10 @@ cpdef tuple get_pos_offset(list state, str entity_name):
         else:
                 return None
 
-cdef int FIXP_360 = fixpoint.int2fix(360)
-
 cdef void normalize_rotation(entity):
+        """
+        TODO
+        """
         cdef int old_rot = entity[IDX_ENTITY_POS][2]
         cdef int modulo_rot = fixpoint.modulo(old_rot, FIXP_360)
         entity[IDX_ENTITY_POS][2] = modulo_rot
@@ -264,9 +247,7 @@ cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
-
+        cdef list entity = get(state, entity_name)
         cdef tuple old_pos
         if entity:
                 old_pos = tuple(entity[IDX_ENTITY_POS])
@@ -288,9 +269,7 @@ cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
-
+        cdef list entity = get(state, entity_name)
         if entity:
                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
 
@@ -309,9 +288,7 @@ cpdef undo_last_move(list state, str entity_name):
         """
         TODO
         """
-        cdef list entity
-        entity = get(state, entity_name)
-
+        cdef list entity = get(state, entity_name)
         cdef tuple last_pos
         if entity:
                 if entity[IDX_ENTITY_LAST_POS]:

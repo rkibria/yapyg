@@ -33,6 +33,7 @@ e.g. MOVE(+x,+y), WAIT(x sec), SET_PROPERTY(".."), ...
 from collections import deque
 
 cimport collisions
+cimport entities
 
 cdef int IDX_STATE_MOVERS
 
@@ -61,20 +62,22 @@ cpdef add(list state, str mover_name, list mover, int do_replace=False):
         """
         TODO
         """
+        cdef dict movers_dict = state[IDX_STATE_MOVERS]
         if do_replace:
-                state[IDX_STATE_MOVERS][mover_name] = deque()
-                state[IDX_STATE_MOVERS][mover_name].append(mover)
+                movers_dict[mover_name] = deque()
+                movers_dict[mover_name].append(mover)
         else:
-                if not state[IDX_STATE_MOVERS].has_key(mover_name):
-                        state[IDX_STATE_MOVERS][mover_name] = deque()
-                state[IDX_STATE_MOVERS][mover_name].append(mover)
+                if not movers_dict.has_key(mover_name):
+                        movers_dict[mover_name] = deque()
+                movers_dict[mover_name].append(mover)
 
 cpdef get_active(list state, str mover_name):
         """
         TODO
         """
-        if state[IDX_STATE_MOVERS].has_key(mover_name):
-                return state[IDX_STATE_MOVERS][mover_name][0]
+        cdef dict movers_dict = state[IDX_STATE_MOVERS]
+        if movers_dict.has_key(mover_name):
+                return movers_dict[mover_name][0]
         else:
                 return None
 
@@ -88,35 +91,47 @@ cpdef remove(list state, str mover_name):
         """
         TODO
         """
-        state[IDX_STATE_MOVERS][mover_name].popleft()
-        if len(state[IDX_STATE_MOVERS][mover_name]) == 0:
-                del state[IDX_STATE_MOVERS][mover_name]
+        cdef dict movers_dict = state[IDX_STATE_MOVERS]
+        movers_dict[mover_name].popleft()
+        if len(movers_dict[mover_name]) == 0:
+                del movers_dict[mover_name]
 
 cpdef delete(list state, str mover_name):
         """
         TODO
         """
-        del state[IDX_STATE_MOVERS][mover_name]
+        cdef dict movers_dict = state[IDX_STATE_MOVERS]
+        if movers_dict.has_key(mover_name):
+                del movers_dict[mover_name]
 
 cdef void c_run(list state, int frame_time_delta):
         """
         TODO
         """
+        cdef dict movers_dict = state[IDX_STATE_MOVERS]
         collisions.clear_collisions_list(state)
-
-        cdef list movers_to_delete
-        movers_to_delete = []
-
+        cdef list movers_to_delete = []
+        cdef list entities_to_delete = []
         cdef str mover_name
         cdef list mover
-        for mover_name, mover_deque in state[IDX_STATE_MOVERS].iteritems():
+        for mover_name, mover_deque in movers_dict.iteritems():
                 mover = mover_deque[0]
                 (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
 
-        for mover_name, on_end_function in movers_to_delete:
+        for mover_to_delete in movers_to_delete:
+                mover_name = mover_to_delete[0]
                 remove(state, mover_name)
 
-        for mover_name, on_end_function in movers_to_delete:
+        for mover_to_delete in movers_to_delete:
+                if len(mover_to_delete) > 2:
+                        mover_name = mover_to_delete[0]
+                        delete_entity = mover_to_delete[2]
+                        if delete_entity:
+                                entities.delete(state, mover_name)
+
+        for mover_to_delete in movers_to_delete:
+                mover_name = mover_to_delete[0]
+                on_end_function = mover_to_delete[1]
                 if on_end_function:
                         (on_end_function)(state, mover_name)
 
