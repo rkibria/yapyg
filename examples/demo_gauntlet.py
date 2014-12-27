@@ -171,35 +171,46 @@ def collision_handler(state, collisions_list):
                         destroy_mover.add(state, ENT_SHOT, do_replace=True)
 
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
-
+FIXP_90 = fixpoint.int2fix(90)
+START_OFFSET_FACTOR = fixpoint.float2fix(0.25)
 SHOT_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 8.0), fixpoint.int2fix(2))
+SHOT_SPRITE_OFFSET = (fixpoint.float2fix(-0.125), fixpoint.float2fix(-0.125)) 
+SHOT_SPEED = fixpoint.float2fix(4.0)
+SHOT_ROTATE_SPEED = fixpoint.float2fix(-1.0)
+SHOT_ROTATE_DEF = ("const", SHOT_ROTATE_SPEED)
+SHOT_COLLISION_DEF = (("circle", SHOT_RADIUS, SHOT_RADIUS, SHOT_RADIUS,),)
+SHOT_SPRITE_DEF = {
+                   "*": {
+                         "textures": ("assets/img/sprites/throwingstar/0.png",),
+                         "speed": 0,
+                         },
+                   }
+
 def on_fire_button(state, button_pressed):
         if button_pressed and not entities.get(state, ENT_SHOT):
                 man_pos = entities.get_pos(state, ENT_MAN)
 
-                man_rot = man_pos[2]
-                man_rot += fixpoint.int2fix(90)
+                man_rot = man_pos[2] + FIXP_90
 
                 heading_x = fixpoint_trig.cos(man_rot)
                 heading_y = fixpoint_trig.sin(man_rot)
 
-                heading = (heading_x, heading_y)
-                heading = (fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading[0]),
-                           fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading[1]))
+                start_pos = (man_pos[0] + fixpoint.mul(START_OFFSET_FACTOR, heading_x),
+                             man_pos[1] + fixpoint.mul(START_OFFSET_FACTOR, heading_y),
+                             0,
+                             )
 
-                entities.insert(state, ENT_SHOT, {
-                                                  "*": {
-                                                        "textures": (
-                                                                     "assets/img/sprites/throwingstar/0.png",
-                                                                     ),
-                                                        "speed": 0,
-                                                        },
-                                                  },
-                                man_pos,
-                                (fixpoint.float2fix(-0.125),
-                                 fixpoint.float2fix(-0.125)
-                                 ),
-                                collision=(("circle", SHOT_RADIUS, SHOT_RADIUS, SHOT_RADIUS,),),
+                heading = (fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading_x),
+                           fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading_y),
+                           )
+
+                entities.insert(state,
+                                ENT_SHOT,
+                                SHOT_SPRITE_DEF,
+                                start_pos,
+                                SHOT_SPRITE_OFFSET,
+                                collision=SHOT_COLLISION_DEF,
                                 )
-                linear_mover.add(state, ENT_SHOT, heading, fixpoint.float2fix(4.0), ("const", fixpoint.float2fix(-1.0)), None, True)
+
+                linear_mover.add(state, ENT_SHOT, heading, SHOT_SPEED, SHOT_ROTATE_DEF, None, True)
                 destroy_mover.add(state, ENT_SHOT)

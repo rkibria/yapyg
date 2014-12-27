@@ -90,11 +90,16 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
 
                 if type(texture_part) == tuple:
                         if texture_part[0] == "rectangle":
-                                texture_db.insert_color_rect(state, texture_part[1], texture_part[2], texture_name, texture_part[3], texture_part[4], texture_part[5])
+                                texture_db.insert_color_rect(state, texture_part[1], texture_part[2],
+                                                             texture_name, texture_part[3], texture_part[4],
+                                                             texture_part[5])
                         elif texture_part[0] == "ellipse":
-                                texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2], texture_name, texture_part[3], texture_part[4], texture_part[5])
+                                texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],
+                                                                texture_name, texture_part[3], texture_part[4],
+                                                                texture_part[5])
                         elif texture_part[0] == "text":
-                                texture_db.insert(state, texture_name, text.create_texture(state, texture_part[1], texture_part[2]))
+                                texture_db.insert(state, texture_name,
+                                                  text.create_texture(state, texture_part[1], texture_part[2]))
                         else:
                                 print "unknown texture type", texture_part[0]
                 elif type(texture_part) == str:
@@ -106,7 +111,7 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
                 tuple(text_textures),
                 speed,
                 [scale[0], scale[1]],
-                pos_offset,
+                [pos_offset[0], pos_offset[1]],
                 0,
                 0,
                 screen_relative,
@@ -159,6 +164,9 @@ cpdef set_enable(list state, str sprite_name, int enable):
         cdef tuple origin_xy
         cdef tuple view_pos
         cdef tuple sprite_size
+        cdef list sprite_pos
+        cdef list sprite_total_pos
+        cdef list sprite_offset
 
         if sprites_table.has_key(sprite_name):
                 sprite = sprites_table[sprite_name]
@@ -178,10 +186,16 @@ cpdef set_enable(list state, str sprite_name, int enable):
                                         if sprite_sizes.has_key(sprite_name):
                                                 origin_xy = screen.get_origin(state)
                                                 view_pos = view.get_view_pos(state)
+                                                sprite_pos = sprite[IDX_SPRITE_POS]
+                                                sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]
+                                                sprite_total_pos = [sprite_pos[0] + sprite_offset[0],
+                                                                    sprite_pos[1] + sprite_offset[1],
+                                                                    sprite_pos[2]
+                                                                    ]
                                                 offset_pos = _get_screen_coords(state,
                                                                                 view_pos,
                                                                                 sprite_db[IDX_SPRITES_VIEW_SCALE],
-                                                                                sprite[IDX_SPRITE_POS],
+                                                                                sprite_total_pos,
                                                                                 origin_xy,
                                                                                 sprite[IDX_SPRITE_SCREEN_RELATIVE]
                                                                                 )
@@ -191,11 +205,11 @@ cpdef set_enable(list state, str sprite_name, int enable):
                                                                                                sprite_db[IDX_SPRITES_VIEW_SCALE],
                                                                                                sprite[IDX_SPRITE_SCALE],
                                                                                                offset_pos,
-                                                                                               sprite[IDX_SPRITE_POS][2])
+                                                                                               sprite_pos[2])
                                                 rot.origin = rect_rot_attributes[1]
                                                 rot.angle = rect_rot_attributes[2]
                                                 rect.pos = rect_rot_attributes[0]
-                                                rect.size = sprite_sizes[sprite_name]
+                                                rect.size = sprite_size
 
 cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
         """
@@ -258,7 +272,8 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
                 c_draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
                         texture_db.get(state, texture_name), pos, scale, origin_xy, screen_relative)
 
-cdef tuple _get_screen_coords(list state, tuple view_pos, int view_scale, list pos, tuple origin_xy, int screen_relative):
+cdef tuple _get_screen_coords(list state, tuple view_pos, int view_scale, list pos,
+                              tuple origin_xy, int screen_relative):
         """
         TODO
         """
@@ -280,12 +295,12 @@ cdef tuple _get_screen_coords(list state, tuple view_pos, int view_scale, list p
 
         cdef tuple draw_pos = (draw_x, draw_y)
         cdef tuple offset = (pos[0] - col, pos[1] - row,)
-        cdef int rotate = pos[2]
         cdef tuple offset_pos = (draw_pos[0] + fixpoint.mul(scaled_tile_size, offset[0]) + origin_xy[0],
-                        draw_pos[1] + fixpoint.mul(scaled_tile_size, offset[1]) + origin_xy[1])
+                                 draw_pos[1] + fixpoint.mul(scaled_tile_size, offset[1]) + origin_xy[1])
         return offset_pos
 
-cdef tuple _get_rect_rot_attributes(int texture_w, int texture_h, int view_scale, list scale, tuple offset_pos, int rotate):
+cdef tuple _get_rect_rot_attributes(int texture_w, int texture_h, int view_scale, list scale,
+                                    tuple offset_pos, int rotate):
         """
         TODO
         """
@@ -339,7 +354,8 @@ cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str 
                         rot.angle = rect_rot_attributes[2]
         else:
                 with canvas:
-                        rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]), int(texture.size[1]), view_scale, scale, offset_pos, rotate)
+                        rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]), int(texture.size[1]),
+                                                                       view_scale, scale, offset_pos, rotate)
 
                         PushMatrix()
                         rot = Rotate(angle=rect_rot_attributes[2],
