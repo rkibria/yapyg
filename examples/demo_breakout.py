@@ -136,5 +136,5 @@ def create(screen_width, screen_height, tile_size):
 
 def collision_handler(state, collisions_list):
         for entity_name_1, entity_name_2 in collisions_list:
-                if ENT_BLOCK_BASE in entity_name_2:
-                        entities.delete(state, entity_name_2)
+                if ENT_BLOCK_BASE in entity_name_1:
+                        entities.delete(state, entity_name_1)
