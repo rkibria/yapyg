@@ -36,11 +36,10 @@ cdef int FIXP_1 = fixpoint.int2fix(1)
 
 cdef int IDX_STATE_SPRITES
 
-cdef int IDX_SPRITES_TABLE = 0
+cdef int IDX_SPRITES_DICT = 0
 cdef int IDX_SPRITES_RECTS_ROTS = 1
 cdef int IDX_SPRITES_SIZES = 2
-cdef int IDX_SPRITES_DRAW_ORDER = 3
-cdef int IDX_SPRITES_VIEW_SCALE = 4
+cdef int IDX_SPRITES_VIEW_SCALE = 3
 
 cdef int IDX_SPRITE_ENABLE = 0
 cdef int IDX_SPRITE_POS = 1
@@ -62,7 +61,6 @@ cpdef initialize(int state_idx, list state):
                 {},
                 {},
                 {},
-                [],
                 FIXP_1,
                 ]
 
@@ -78,7 +76,7 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
         TODO
         """
         cdef list sprite_db = state[IDX_STATE_SPRITES]
-        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
 
         if not scale:
                 scale = (fixpoint.int2fix(1), fixpoint.int2fix(1))
@@ -117,30 +115,25 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
                 screen_relative,
                 ]
 
-        sprites_table[sprite_name] = sprite
-        cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
-
-        sprite_draw_order.append(sprite_name)
-        sprite_draw_order.sort()
+        sprites_dict[sprite_name] = sprite
 
 cpdef delete(list state, str sprite_name):
         """
         TODO
         """
         cdef list sprite_db = state[IDX_STATE_SPRITES]
-        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
-        if sprites_table.has_key(sprite_name):
-                del sprites_table[sprite_name]
-                sprite_db[IDX_SPRITES_DRAW_ORDER].remove(sprite_name)
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
+        if sprites_dict.has_key(sprite_name):
+                del sprites_dict[sprite_name]
 
 cpdef list get(list state, str sprite_name):
         """
         TODO
         """
         cdef list sprite_db = state[IDX_STATE_SPRITES]
-        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
-        if sprites_table.has_key(sprite_name):
-                return sprites_table[sprite_name]
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
+        if sprites_dict.has_key(sprite_name):
+                return sprites_dict[sprite_name]
         else:
                 return None
 
@@ -155,7 +148,7 @@ cpdef set_enable(list state, str sprite_name, int enable):
         TODO
         """
         cdef list sprite_db = state[IDX_STATE_SPRITES]
-        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
 
@@ -168,8 +161,8 @@ cpdef set_enable(list state, str sprite_name, int enable):
         cdef list sprite_total_pos
         cdef list sprite_offset
 
-        if sprites_table.has_key(sprite_name):
-                sprite = sprites_table[sprite_name]
+        if sprites_dict.has_key(sprite_name):
+                sprite = sprites_dict[sprite_name]
 
                 if enable == False:
                         if sprite[IDX_SPRITE_ENABLE] == True:
@@ -218,8 +211,7 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
         cdef tuple origin_xy = screen.get_origin(state)
         cdef tuple view_pos = view.get_view_pos(state)
         cdef list sprite_db = state[IDX_STATE_SPRITES]
-        cdef dict sprites_table = sprite_db[IDX_SPRITES_TABLE]
-        cdef list draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
 
         sprite_db[IDX_SPRITES_VIEW_SCALE] = view_scale
 
@@ -236,8 +228,7 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
         cdef tuple textures
         cdef int screen_relative
 
-        for sprite_name in draw_order:
-                sprite = sprites_table[sprite_name]
+        for sprite_name, sprite in sprites_dict.iteritems():
 
                 if not sprite[IDX_SPRITE_ENABLE]:
                         continue

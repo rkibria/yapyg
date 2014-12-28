@@ -19,19 +19,13 @@
 # THE SOFTWARE.
 
 from yapyg import factory
-from yapyg import tiles
 from yapyg import entities
 from yapyg import fixpoint
-from yapyg import fixpoint_trig
-from yapyg import controls
-from yapyg import text
 from yapyg import screen
 from yapyg_movers import jump_mover
 from yapyg_movers import linear_mover
 from yapyg_movers import wait_mover
 from yapyg_movers import set_property_mover
-from yapyg_viewers import relative_viewer
-from yapyg_helpers import entities_helpers
 
 def star_name(x, y):
         return "000_stars_%d_%d" % (x, y)

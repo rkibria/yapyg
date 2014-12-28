@@ -22,7 +22,6 @@ from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
 from yapyg import fixpoint
-from yapyg import fixpoint_2d
 from yapyg_helpers import entities_helpers
 from yapyg_movers import physical_mover
 

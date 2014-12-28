@@ -22,12 +22,9 @@ from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
 from yapyg import fixpoint
-from yapyg import fixpoint_trig
 from yapyg import controls
-from yapyg import text
 from yapyg_movers import physical_mover
 from yapyg_movers import flipper_mover
-from yapyg_viewers import relative_viewer
 from yapyg_helpers import entities_helpers
 
 def create(screen_width_px, screen_height_px, tile_size_px):

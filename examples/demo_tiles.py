@@ -22,17 +22,11 @@ from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
 from yapyg import fixpoint
-from yapyg import fixpoint_trig
-from yapyg import controls
-from yapyg import text
-from yapyg import timer
 from yapyg import view
-from yapyg_movers import jump_mover
 from yapyg_movers import linear_mover
 from yapyg_movers import wait_mover
 from yapyg_movers import set_property_mover
 from yapyg_viewers import relative_viewer
-from yapyg_helpers import entities_helpers
 from yapyg_helpers import tiles_helpers
 
 def create(screen_width, screen_height, tile_size):
