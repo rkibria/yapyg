@@ -18,22 +18,49 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from kivy.logger import Logger
 from kivy.uix.widget import Widget
-from kivy.graphics import *
+from kivy.core.window import Window
+from kivy.core.window import Keyboard
+from kivy.graphics import PushMatrix, Rectangle, PopMatrix
 
 class JoystickWidget(Widget):
-        def __init__(self, deadzone=0,
-                        joystickbkg_file="assets/img/ui/joy_bkg.png",
-                        joystick_file="assets/img/ui/joy_stick.png",
-                        **kwargs):
+        KEYCODE_W = Keyboard.keycodes['w']
+        KEYCODE_A = Keyboard.keycodes['a']
+        KEYCODE_S = Keyboard.keycodes['s']
+        KEYCODE_D = Keyboard.keycodes['d']
+
+        def __init__(self,
+                     deadzone=0,
+                     joystickbkg_file="assets/img/ui/joy_bkg.png",
+                     joystick_file="assets/img/ui/joy_stick.png",
+                     **kwargs):
                 super(JoystickWidget, self).__init__(**kwargs)
                 self.joystickbkg_file = joystickbkg_file
                 self.joystick_file = joystick_file
                 self.bind(pos=self.redraw, size=self.redraw)
                 self.direction = [0, 0,]
                 self.deadzone = deadzone
+
+                Window.bind(on_key_down=self._on_keyboard_down)
+                Window.bind(on_key_up=self._on_keyboard_up)
+
                 self.redraw(None, None)
+
+        def _on_keyboard_down(self, window, keycode, scancode, codepoint, modifier):
+                if keycode == self.KEYCODE_W:
+                        self.direction[1] = 1
+                elif keycode == self.KEYCODE_S:
+                        self.direction[1] = -1
+                elif keycode == self.KEYCODE_A:
+                        self.direction[0] = -1
+                elif keycode == self.KEYCODE_D:
+                        self.direction[0] = 1
+
+        def _on_keyboard_up(self, window, keycode, scancode):
+                if keycode == self.KEYCODE_W or keycode == self.KEYCODE_S:
+                        self.direction[1] = 0
+                elif keycode == self.KEYCODE_A or keycode == self.KEYCODE_D:
+                        self.direction[0] = 0
 
         def get_direction(self):
                 return self.direction

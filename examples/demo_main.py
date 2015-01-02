@@ -111,7 +111,14 @@ class MenuWidget(FloatLayout):
 
 class YapygDemoApp(App):
         def build(self):
-                return MenuWidget()
+                if True: # False to load a demo directly without the menu!
+                        return MenuWidget()
+                else:
+                        import demo_gauntlet
+                        state = demo_gauntlet.create(Window.width, Window.height, tile_size)
+                        return ScreenWidget(state,
+                                            float2fix(float(Window.width) / screen_width),
+                                            None, True)
 
 if __name__ == "__main__":
         YapygDemoApp().run()
