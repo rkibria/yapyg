@@ -50,6 +50,7 @@ cdef int IDX_SPRITE_POS_OFFSET = 5
 cdef int IDX_SPRITE_TIME_SUM = 6
 cdef int IDX_SPRITE_PHASE = 7
 cdef int IDX_SPRITE_SCREEN_RELATIVE = 8
+cdef int IDX_SPRITE_PLAYONCE = 9
 
 cpdef initialize(int state_idx, list state):
         """
@@ -71,7 +72,7 @@ cpdef destroy(list state):
         state[IDX_STATE_SPRITES] = None
 
 cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_offset,
-             tuple scale, int enable, list pos, int screen_relative=False):
+             tuple scale, int enable, list pos, int screen_relative=False, int play_once=False):
         """
         TODO
         """
@@ -113,6 +114,7 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
                 0,
                 0,
                 screen_relative,
+                play_once,
                 ]
 
         sprites_dict[sprite_name] = sprite
@@ -227,23 +229,30 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
         cdef str texture_name
         cdef tuple textures
         cdef int screen_relative
+        cdef list sprite_pos
+        cdef list sprite_pos_offset
+        cdef int play_once
 
         for sprite_name, sprite in sprites_dict.iteritems():
 
                 if not sprite[IDX_SPRITE_ENABLE]:
                         continue
 
+                sprite_pos = sprite[IDX_SPRITE_POS]
+
                 textures = sprite[IDX_SPRITE_TEXTURES]
-                pos = [sprite[IDX_SPRITE_POS][0], sprite[IDX_SPRITE_POS][1], sprite[IDX_SPRITE_POS][2]]
+                pos = [sprite_pos[0], sprite_pos[1], sprite_pos[2]]
                 scale = sprite[IDX_SPRITE_SCALE]
                 phase = 0
 
-                pos[0] += sprite[IDX_SPRITE_POS_OFFSET][0]
-                pos[1] += sprite[IDX_SPRITE_POS_OFFSET][1]
+                sprite_pos_offset = sprite[IDX_SPRITE_POS_OFFSET]
+                pos[0] += sprite_pos_offset[0]
+                pos[1] += sprite_pos_offset[1]
 
                 phase = sprite[IDX_SPRITE_PHASE]
                 speed = sprite[IDX_SPRITE_SPEED]
                 screen_relative = sprite[IDX_SPRITE_SCREEN_RELATIVE]
+                play_once = sprite[IDX_SPRITE_PLAYONCE]
 
                 if speed > 0:
                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
@@ -254,6 +263,9 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
                                 phase = sprite[IDX_SPRITE_PHASE]
                         else:
                                 phase = (phase + phase_increment)
+                                if phase >= len(textures) and play_once:
+                                        set_enable(state, sprite_name, False)
+                                        continue
                                 phase = phase % len(textures)
                                 time_sum = time_sum % speed
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
@@ -261,7 +273,8 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
 
                 texture_name = textures[phase]
                 draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
-                        texture_db.get(state, texture_name), pos, scale, origin_xy, screen_relative)
+                            texture_db.get(state, texture_name), pos, scale,
+                            origin_xy, screen_relative)
 
 cdef tuple _get_screen_coords(list state, tuple view_pos, int view_scale, list pos,
                               tuple origin_xy, int screen_relative):

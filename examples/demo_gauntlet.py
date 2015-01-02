@@ -169,6 +169,7 @@ def collision_handler(state, collisions_list):
 
                 if entity_name_1 == ENT_SHOT:
                         destroy_mover.add(state, ENT_SHOT, do_replace=True)
+                        do_boom(state, entities.get_pos(state, ENT_SHOT))
 
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
 FIXP_90 = fixpoint.int2fix(90)
@@ -214,3 +215,26 @@ def on_fire_button(state, button_pressed):
 
                 linear_mover.add(state, ENT_SHOT, heading, SHOT_SPEED, SHOT_ROTATE_DEF, None, True)
                 destroy_mover.add(state, ENT_SHOT)
+
+BOOM_TEXTURES = ("assets/img/sprites/explosion_small/0.png",
+                 "assets/img/sprites/explosion_small/1.png",
+                 "assets/img/sprites/explosion_small/2.png",
+                 "assets/img/sprites/explosion_small/3.png",
+                 "assets/img/sprites/explosion_small/4.png",
+                 )
+BOOM_SPRITEDEF = {
+                  "*": {
+                        "textures": BOOM_TEXTURES,
+                        "speed": fixpoint.float2fix(50.0),
+                        },
+                  }
+BOOM_SPRITEOFFSET = (fixpoint.float2fix(-0.125), fixpoint.float2fix(-0.125))
+
+def do_boom(state, pos):
+        entities.insert(state,
+                        "boom",
+                        BOOM_SPRITEDEF,
+                        pos,
+                        BOOM_SPRITEOFFSET,
+                        play_once=True,
+                        )

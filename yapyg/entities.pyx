@@ -42,6 +42,7 @@ cdef int IDX_ENTITY_ENABLED_SPRITE = 2
 cdef int IDX_ENTITY_LAST_POS = 3
 cdef int IDX_ENTITY_SPRITES = 4
 cdef int IDX_ENTITY_COLLISION = 5
+cdef int IDX_ENTITY_PLAYONCE = 6
 
 cpdef initialize(int state_idx, list state):
         """
@@ -59,7 +60,8 @@ cpdef destroy(list state):
         """
         state[IDX_STATE_ENTITIES] = None
 
-cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0), tuple collision=None, int screen_relative=False):
+cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),
+             tuple collision=None, int screen_relative=False, int play_once=False):
         """
         TODO
         """
@@ -72,6 +74,7 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
                 None,
                 [],
                 True if collision else None,
+                True if play_once else False,
                 ]
         entities_table[entity_name] = entity
 
@@ -89,12 +92,13 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
                 if sprite_name[0] == "*":
                         default_sprite = sprite_name
 
-                set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative)
+                set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative, play_once)
 
         if default_sprite:
                 set_active_sprite(state, entity_name, default_sprite)
 
-cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, int enable=False, int screen_relative=False):
+cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
+                 int enable=False, int screen_relative=False, int play_once=False):
         """
         TODO
         """
@@ -143,6 +147,7 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def, 
                         sprite_enable,
                         sprite_pos,
                         screen_relative,
+                        play_once,
                         )
 
                 if enabled_sprite_name == sprite_name:
