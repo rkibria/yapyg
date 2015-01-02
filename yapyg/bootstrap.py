@@ -18,6 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import os
 from kivy.config import Config
 
 def initialize_screen(screen_width, screen_height):
@@ -28,3 +29,5 @@ def initialize_screen(screen_width, screen_height):
         Config.set('graphics', 'resizable', 0)
         Config.set('graphics', 'width', screen_width)
         Config.set('graphics', 'height', screen_height)
+
+        os.environ['KIVY_AUDIO'] = 'pygame'

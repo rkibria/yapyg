@@ -204,7 +204,7 @@ cpdef set_enable(list state, str sprite_name, int enable):
                                                 rect.pos = rect_rot_attributes[0]
                                                 rect.size = sprite_size
 
-cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
+cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
         """
         TODO
         """
@@ -260,7 +260,7 @@ cdef void c_draw(list state, canvas, int frame_time_delta, int view_scale):
                                 sprite[IDX_SPRITE_PHASE] = phase
 
                 texture_name = textures[phase]
-                c_draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
+                draw_sprite(state, canvas, view_pos, view_scale, sprite_name,
                         texture_db.get(state, texture_name), pos, scale, origin_xy, screen_relative)
 
 cdef tuple _get_screen_coords(list state, tuple view_pos, int view_scale, list pos,
@@ -309,7 +309,7 @@ cdef tuple _get_rect_rot_attributes(int texture_w, int texture_h, int view_scale
                 (w, h),
                 )
 
-cdef void c_draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sprite_name,
+cdef void draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sprite_name,
                 texture, list pos, list scale, tuple origin_xy, int screen_relative):
         """
         TODO

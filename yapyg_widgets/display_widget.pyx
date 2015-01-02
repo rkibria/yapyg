@@ -109,4 +109,4 @@ cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scal
                 yapyg.tiles.draw(state, scale, canvas, view_size)
                 redraw_tiles[0] = False
 
-        yapyg.sprites.c_draw(state, canvas, frame_time_delta, scale)
+        yapyg.sprites.draw(state, canvas, frame_time_delta, scale)
