@@ -210,15 +210,14 @@ def collision_handler(state, collisions_list):
                                                     screen_relative=True,
                                                     )
                                 destroy_mover.add(state, entity_name_2, do_replace=True)
-                                entities.disable(state, entity_name_2)
                         else:
                                 entities.undo_last_move(state, entity_name_1)
                 elif entity_name_1 == ENT_SHOT:
                         if entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
                                 pass
                         else:
-                                destroy_mover.add(state, ENT_SHOT, do_replace=True)
                                 do_boom(state, entities.get_pos(state, ENT_SHOT))
+                                destroy_mover.add(state, ENT_SHOT, do_replace=True)
 
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
 FIXP_90 = fixpoint.int2fix(90)

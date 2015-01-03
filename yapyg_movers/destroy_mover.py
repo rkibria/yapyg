@@ -35,6 +35,8 @@ def add(state, mover_name, wait_time=0, on_end_function=None, do_replace=False):
         TODO
         """
         yapyg.movers.add(state, mover_name, create(mover_name, wait_time, on_end_function), do_replace)
+        if do_replace:
+                yapyg.entities.disable(state, mover_name)
 
 def create(mover_name, wait_time, on_end_function=None):
         """
@@ -63,5 +65,4 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
         mover[IDX_DESTROY_MOVER_PASSED_TIME] = passed_time
 
         if passed_time == wait_time:
-                yapyg.entities.disable(state, mover_name)
                 movers_to_delete.append((mover_name, mover[IDX_DESTROY_MOVER_ON_END_FUNCTION], True))
