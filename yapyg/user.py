@@ -30,7 +30,7 @@ def initialize(state_idx, state):
         """
         global IDX_STATE_USER
         IDX_STATE_USER = state_idx
-        state[IDX_STATE_USER] = None
+        state[IDX_STATE_USER] = {}
 
 def destroy(state):
         """
@@ -38,14 +38,15 @@ def destroy(state):
         """
         state[IDX_STATE_USER] = None
 
-def get_data(state):
-        """
-        TODO
-        """
-        return state[IDX_STATE_USER]
 
-def set_data(state, data):
+def set_data(state, data_key, data_value):
         """
         TODO
         """
-        state[IDX_STATE_USER] = data
+        state[IDX_STATE_USER][data_key] = data_value
+
+def get_data(state, data_key):
+        """
+        TODO
+        """
+        return state[IDX_STATE_USER][data_key]

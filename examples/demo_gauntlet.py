@@ -27,7 +27,7 @@ from yapyg import controls
 from yapyg import text
 from yapyg import view
 from yapyg import collisions
-from yapyg import debug
+from yapyg import user
 from yapyg_movers import controlled_mover
 from yapyg_movers import linear_mover
 from yapyg_movers import destroy_mover
@@ -36,6 +36,13 @@ from yapyg_helpers import tiles_helpers
 
 ENT_MAN = "500_man"
 ENT_SHOT = "600_throwingstar"
+ENT_TEXT_SCORE = "text_score"
+ENT_TEXT_HEALTH = "text_health"
+ENT_PREFIX_COINS = "700_coins"
+
+FONT_NAME = "DroidSansMonoDotted16x32"
+
+USERDATA_SCORE = "score"
 
 # Called from the menu widget, this function creates and
 # sets up the game state object. Parameters are the usable
@@ -81,33 +88,52 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         collisions.set_handler(state, collision_handler)
 
-        text.load_font(state, "DroidSansMonoDotted16x32", "assets/img/fonts/DroidSansMonoDotted16x32.png", 16, 32)
+        text.load_font(state, FONT_NAME, "assets/img/fonts/%s.png" % FONT_NAME, 16, 32)
+
+        user.set_data(state, USERDATA_SCORE, 0)
+        entities.insert(state,
+                        ENT_TEXT_SCORE,
+                        {
+                                "*": {
+                                      "textures": (("text", "Score:0", FONT_NAME),),
+                                      },
+                         },
+                        (0, 0, 0),
+                        (0,0),
+                        None,
+                        True,
+                        )
 
         entities.insert(state,
-                "000_text_score",
-                {
-                        "*": {
-                                "textures": (("text", "Score:0", "DroidSansMonoDotted16x32"),),
-                        },
-                },
-                (0, 0, 0),
-                (0,0),
-                None,
-                True,
-                )
+                        ENT_TEXT_HEALTH,
+                        {
+                         "*": {
+                               "textures": (("text", "Health:100", FONT_NAME),),
+                               },
+                         },
+                        (fixpoint.float2fix(2.4), 0, 0),
+                        (0,0),
+                        None,
+                        True,
+                        )
 
+        CIRCLE_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 4.0), fixpoint.int2fix(2))
         entities.insert(state,
-                "000_text_health",
-                {
-                        "*": {
-                                "textures": (("text", "Health:100", "DroidSansMonoDotted16x32"),),
-                        },
-                },
-                (fixpoint.float2fix(2.4), 0, 0),
-                (0,0),
-                None,
-                True,
-                )
+                        "%s_1" % (ENT_PREFIX_COINS),
+                        {
+                         "*": {
+                               "textures": ("assets/img/sprites/coins/0.png",
+                                            "assets/img/sprites/coins/1.png",
+                                            "assets/img/sprites/coins/2.png",
+                                            "assets/img/sprites/coins/1.png",
+                                            ),
+                               "speed": fixpoint.float2fix(150.0),
+                               },
+                         },
+                        (fixpoint.float2fix(1.0), fixpoint.float2fix(2.0), 0),
+                        (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)),
+                        collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
+                        )
 
         # We create the ENT_MAN entity which has 2 different sprite representations: standing and walking.
         # The idle sprite is the default sprite, since it starts with an asterisk (*). The animation of
@@ -116,47 +142,50 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         # coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
         # the rotation amount of the entity (0 here) and an offset for drawing the sprite to the actual position,
         # here [0.25, 0.25].
-        CIRCLE_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 4.0), fixpoint.int2fix(2))
-        entities.insert(state, ENT_MAN, {
-                        "*idle": {
-                                "textures": (
-                                        "assets/img/sprites/man_idle/0.png",
-                                        "assets/img/sprites/man_idle/1.png",
-                                        "assets/img/sprites/man_idle/2.png",
-                                        "assets/img/sprites/man_idle/3.png",
-                                        "assets/img/sprites/man_idle/1.png",
-                                        "assets/img/sprites/man_idle/0.png",
-                                        "assets/img/sprites/man_idle/3.png",
-                                        "assets/img/sprites/man_idle/2.png",
-                                        ),
-                                "speed": fixpoint.float2fix(333.0),
-                        },
-                        "walk": {
-                                "textures": (
-                                        "assets/img/sprites/man_walk/1.png",
-                                        "assets/img/sprites/man_walk/2.png",
-                                        "assets/img/sprites/man_walk/3.png",
-                                        ),
-                                "speed" : fixpoint.float2fix(150.0),
-                        },
-                }, (fixpoint.float2fix(1.0), fixpoint.float2fix(1.0), 0),
-                (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)),
-                collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
-                )
+        entities.insert(state,
+                        ENT_MAN,
+                        {
+                         "*idle": {
+                                   "textures": ("assets/img/sprites/man_idle/0.png",
+                                                "assets/img/sprites/man_idle/1.png",
+                                                "assets/img/sprites/man_idle/2.png",
+                                                "assets/img/sprites/man_idle/3.png",
+                                                "assets/img/sprites/man_idle/1.png",
+                                                "assets/img/sprites/man_idle/0.png",
+                                                "assets/img/sprites/man_idle/3.png",
+                                                "assets/img/sprites/man_idle/2.png",
+                                                ),
+                                   "speed": fixpoint.float2fix(333.0),
+                                   },
+                         "walk": {
+                                  "textures": ("assets/img/sprites/man_walk/1.png",
+                                               "assets/img/sprites/man_walk/2.png",
+                                               "assets/img/sprites/man_walk/3.png",
+                                               ),
+                                  "speed" : fixpoint.float2fix(150.0),
+                                  },
+                         },
+                        (fixpoint.float2fix(1.0), fixpoint.float2fix(1.0), 0),
+                        (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)),
+                        collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
+                        )
 
         # We add a mover that will translate joystick movement to moving the man around the area.
         # This particular mover needs the source of control, a factor for the strength of the movement,
         # the allowed range for the movement, what sprites to use for idle and moving state and if to
         # rotate the entity to the movement direction.
         controlled_mover.add(state,
-                ENT_MAN,
-                "joystick",
-                fixpoint.float2fix(0.03),
-                (0, 0, fixpoint.float2fix(10.0), fixpoint.float2fix(10.0)),
-                ("*idle", "walk"),
-                True)
+                             ENT_MAN,
+                             "joystick",
+                             fixpoint.float2fix(0.03),
+                             (0, 0, fixpoint.float2fix(10.0), fixpoint.float2fix(10.0)),
+                             ("*idle", "walk"),
+                             True
+                             )
 
-        view.set_viewer(state, relative_viewer.create(state, ENT_MAN, [fixpoint.float2fix(-1.75), fixpoint.float2fix(-2.5)]))
+        view.set_viewer(state,
+                        relative_viewer.create(state, ENT_MAN,
+                                                      [fixpoint.float2fix(-1.75), fixpoint.float2fix(-2.5)]))
 
         # The state object is finished.
         return state
@@ -164,12 +193,32 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 def collision_handler(state, collisions_list):
         print str(collisions_list)
         for entity_name_1, entity_name_2 in collisions_list:
-                if entity_name_1 == ENT_MAN and entity_name_2 != ENT_SHOT:
-                        entities.undo_last_move(state, entity_name_1)
-
-                if entity_name_1 == ENT_SHOT:
-                        destroy_mover.add(state, ENT_SHOT, do_replace=True)
-                        do_boom(state, entities.get_pos(state, ENT_SHOT))
+                if entity_name_1 == ENT_MAN:
+                        if entity_name_2 == ENT_SHOT:
+                                pass
+                        elif entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
+                                score = user.get_data(state, USERDATA_SCORE)
+                                score += 10
+                                score_text = "Score:%d" % score
+                                user.set_data(state, USERDATA_SCORE, score)
+                                entities.set_sprite(state,
+                                                    ENT_TEXT_SCORE,
+                                                    "*",
+                                                    {
+                                                     "textures": (("text", score_text, FONT_NAME),),
+                                                     },
+                                                    screen_relative=True,
+                                                    )
+                                destroy_mover.add(state, entity_name_2, do_replace=True)
+                                entities.disable(state, entity_name_2)
+                        else:
+                                entities.undo_last_move(state, entity_name_1)
+                elif entity_name_1 == ENT_SHOT:
+                        if entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
+                                pass
+                        else:
+                                destroy_mover.add(state, ENT_SHOT, do_replace=True)
+                                do_boom(state, entities.get_pos(state, ENT_SHOT))
 
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
 FIXP_90 = fixpoint.int2fix(90)

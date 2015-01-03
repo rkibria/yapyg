@@ -361,6 +361,9 @@ cpdef tuple run(list state, str entity_name_1):
         """
         TODO
         """
+        if not entities.is_enabled(state, entity_name_1):
+                return
+
         cdef list state_collisions = state[IDX_STATE_COLLISIONS]
 
         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
@@ -371,11 +374,13 @@ cpdef tuple run(list state, str entity_name_1):
 
         cdef list collision_def_1 = state_collisions_entities[entity_name_1]
         cdef list absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)
-        cdef int is_tile = collision_def_1[IDX_COLLISION_IS_TILE]
+        cdef int is_tile_1 = collision_def_1[IDX_COLLISION_IS_TILE]
 
         cdef tuple entity_1_lower_left
         cdef tuple entity_1_upper_right
-        entity_1_lower_left, entity_1_upper_right = get_hash_area(state, entity_name_1, entities.get_pos(state, entity_name_1), is_tile)
+        entity_1_lower_left, entity_1_upper_right = get_hash_area(state, entity_name_1,
+                                                                  entities.get_pos(state, entity_name_1),
+                                                                  is_tile_1)
 
         cdef set already_checked_set = set()
 
@@ -388,6 +393,7 @@ cpdef tuple run(list state, str entity_name_1):
         cdef list collision_def_2
         cdef list absolute_shapes_2
         cdef list contact_points = []
+        cdef int is_tile_2
 
         for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
                 for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
@@ -408,6 +414,10 @@ cpdef tuple run(list state, str entity_name_1):
 
                                 collision_def_2 = state_collisions_entities[entity_name_2]
                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
+
+                                is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]
+                                if not is_tile_2 and not entities.is_enabled(state, entity_name_2):
+                                        continue
 
                                 for absolute_shape_1 in absolute_shapes_1:
                                         for absolute_shape_2 in absolute_shapes_2:
@@ -447,6 +457,9 @@ cpdef clear_collisions_list(list state):
         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
 
 cpdef notify_collision_handler(list state):
+        """
+        TODO
+        """
         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
 
         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]

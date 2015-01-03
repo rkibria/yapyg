@@ -23,6 +23,7 @@ Destroy entity mover
 """
 
 import yapyg.movers
+import yapyg.entities
 import yapyg.fixpoint
 
 IDX_DESTROY_MOVER_PASSED_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
@@ -62,4 +63,5 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
         mover[IDX_DESTROY_MOVER_PASSED_TIME] = passed_time
 
         if passed_time == wait_time:
+                yapyg.entities.disable(state, mover_name)
                 movers_to_delete.append((mover_name, mover[IDX_DESTROY_MOVER_ON_END_FUNCTION], True))

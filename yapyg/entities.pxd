@@ -48,6 +48,8 @@ cpdef tuple get_pos_offset(list state, str entity_name)
 cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot)
 cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot)
 cpdef undo_last_move(list state, str entity_name)
+cpdef disable(list state, str entity_name)
+cpdef int is_enabled(list state, str entity_name)
 
 cdef c_call_pos_listeners(list state, str entity_name, tuple pos)
 cdef str c_get_full_sprite_name(str entity_name, str sprite_name)

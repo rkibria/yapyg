@@ -43,6 +43,7 @@ cdef int IDX_ENTITY_LAST_POS = 3
 cdef int IDX_ENTITY_SPRITES = 4
 cdef int IDX_ENTITY_COLLISION = 5
 cdef int IDX_ENTITY_PLAYONCE = 6
+cdef int IDX_ENTITY_ENABLE = 7
 
 cpdef initialize(int state_idx, list state):
         """
@@ -75,6 +76,7 @@ cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos
                 [],
                 True if collision else None,
                 True if play_once else False,
+                True,
                 ]
         entities_table[entity_name] = entity
 
@@ -168,18 +170,22 @@ cpdef delete(list state, str entity_name):
         """
         TODO
         """
-        cdef list entity = get(state, entity_name)
-        if entity:
-                sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
-                for sprite_name in entity[IDX_ENTITY_SPRITES]:
-                        sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
+        cdef list entities_db = state[IDX_STATE_ENTITIES]
+        cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
+        cdef list entity
+        if entities_table.has_key(entity_name):
+                entity = entities_table[entity_name]
+                if entity:
+                        sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+                        for sprite_name in entity[IDX_ENTITY_SPRITES]:
+                                sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
 
-                if entity[IDX_ENTITY_COLLISION]:
-                        collisions.delete(state, entity_name)
+                        if entity[IDX_ENTITY_COLLISION]:
+                                collisions.delete(state, entity_name)
 
-                del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
+                        del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
 
-                movers.delete(state, entity_name)
+                        movers.delete(state, entity_name)
 
 cdef c_call_pos_listeners(list state, str entity_name, tuple pos):
         """
@@ -199,8 +205,13 @@ cpdef list get(list state, str entity_name):
         """
         cdef list entities_db = state[IDX_STATE_ENTITIES]
         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
+        cdef list entity
         if entities_table.has_key(entity_name):
-                return entities_table[entity_name]
+                entity = entities_table[entity_name]
+                if entity[IDX_ENTITY_ENABLE]:
+                        return entity
+                else:
+                        return None
         else:
                 return None
 
@@ -306,3 +317,21 @@ cpdef undo_last_move(list state, str entity_name):
                         entity[IDX_ENTITY_LAST_POS] = None
 
                         c_call_pos_listeners(state, entity_name, last_pos)
+
+cpdef disable(list state, str entity_name):
+        """
+        TODO
+        """
+        cdef list entity = get(state, entity_name)
+        if entity:
+                entity[IDX_ENTITY_ENABLE] = False
+
+cpdef int is_enabled(list state, str entity_name):
+        """
+        TODO
+        """
+        cdef list entity = get(state, entity_name)
+        if entity:
+                return entity[IDX_ENTITY_ENABLE]
+        else:
+                return False
