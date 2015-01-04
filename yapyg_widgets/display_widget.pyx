@@ -38,11 +38,11 @@ cdef int MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(1000)
 
 class DisplayWidget(Widget):
         def __init__(self,
-                        state,
-                        view_size,
-                        scale,
-                        **kwargs
-                ):
+                     state,
+                     view_size,
+                     scale,
+                     **kwargs
+                     ):
                 """
                 TODO
                 """
@@ -69,6 +69,7 @@ class DisplayWidget(Widget):
                 TODO
                 """
                 cdef int cur_fps
+                cdef int last_frame_delta
                 if self.state:
                         cur_fps = float2fix(float(Clock.get_fps()))
                         if cur_fps > 0:
@@ -80,12 +81,16 @@ class DisplayWidget(Widget):
                                         self.frame_time = MIN_FRAME_DELTA
 
                                 yapyg.timer.run(self.state, self.frame_time)
-                                c_redraw(self.state, self.frame_time, self.redraw_tiles, self.scale, self.canvas, self.view_size)
+                                redraw(self.state, self.frame_time, self.redraw_tiles, self.scale,
+                                       self.canvas, self.view_size)
 
                 if self.state:
                         Clock.schedule_once(self.on_timer, timeout=0)
 
         def get_frame_time(self):
+                """
+                TODO
+                """
                 return self.frame_time
 
         def enable_redraw_tiles(self, value):
@@ -94,13 +99,14 @@ class DisplayWidget(Widget):
                 """
                 self.redraw_tiles = value
                 if value:
-                        c_redraw(self.state, float2fix(0.01), self.redraw_tiles, self.scale, self.canvas, self.view_size)
+                        redraw(self.state, float2fix(0.01), self.redraw_tiles,
+                               self.scale, self.canvas, self.view_size)
 
-cdef void c_redraw(list state, int frame_time_delta, list redraw_tiles, int scale, canvas, tuple view_size):
+cdef void redraw(list state, int frame_time_delta, list redraw_tiles, int scale, canvas, tuple view_size):
         """
         TODO
         """
-        yapyg.movers.c_run(state, frame_time_delta)
+        yapyg.movers.run(state, frame_time_delta)
 
         if yapyg.view.run(state):
                 redraw_tiles[0] = True

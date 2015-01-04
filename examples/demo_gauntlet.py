@@ -184,8 +184,10 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                              )
 
         view.set_viewer(state,
-                        relative_viewer.create(state, ENT_MAN,
-                                                      [fixpoint.float2fix(-1.75), fixpoint.float2fix(-2.5)]))
+                        relative_viewer.create(state,
+                                               ENT_MAN,
+                                               [fixpoint.float2fix(-1.75),
+                                                fixpoint.float2fix(-2.5)]))
 
         # The state object is finished.
         return state
@@ -209,7 +211,7 @@ def collision_handler(state, collisions_list):
                                                      },
                                                     screen_relative=True,
                                                     )
-                                destroy_mover.add(state, entity_name_2, do_replace=True)
+                                entities.delete(state, entity_name_2)
                         else:
                                 entities.undo_last_move(state, entity_name_1)
                 elif entity_name_1 == ENT_SHOT:
@@ -217,7 +219,7 @@ def collision_handler(state, collisions_list):
                                 pass
                         else:
                                 do_boom(state, entities.get_pos(state, ENT_SHOT))
-                                destroy_mover.add(state, ENT_SHOT, do_replace=True)
+                                entities.delete(state, ENT_SHOT)
 
 FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
 FIXP_90 = fixpoint.int2fix(90)

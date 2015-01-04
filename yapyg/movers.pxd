@@ -37,4 +37,4 @@ cpdef get_type(list state, list mover)
 cpdef remove(list state, str mover_name)
 cpdef delete(list state, str mover_name)
 
-cdef void c_run(list state, int frame_time_delta)
+cdef void run(list state, int frame_time_delta)
