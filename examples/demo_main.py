@@ -76,7 +76,7 @@ class MenuWidget(FloatLayout):
                 debug_layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.1))
                 debug_layout.add_widget(Label(text=" "))
                 self.debug_checkbox = CheckBox()
-                self.debug_checkbox.active = True
+                self.debug_checkbox.active = False
                 debug_layout.add_widget(self.debug_checkbox)
                 debug_layout.add_widget(Label(text="Show debug info", valign="middle", halign="center"))
                 debug_layout.add_widget(Label(text=" "))
@@ -118,7 +118,7 @@ class YapygDemoApp(App):
                         state = demo_gauntlet.create(Window.width, Window.height, tile_size)
                         return ScreenWidget(state,
                                             float2fix(float(Window.width) / screen_width),
-                                            None, True)
+                                            None, False)
 
 if __name__ == "__main__":
         YapygDemoApp().run()

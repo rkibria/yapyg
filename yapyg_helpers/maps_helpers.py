@@ -153,8 +153,8 @@ def make_labyrinth(rows, cols, open_walls_chance=0):
                 visited_row = list()
                 visited.append(visited_row)
                 for col in range(0, cols):
-                   newrow.append([True, True, True, True, ])
-                   visited_row.append(False)
+                        newrow.append([True, True, True, True, ])
+                        visited_row.append(False)
 
         # generate random cells
         dfs_make(visited, labyrinth, start_row, start_col)
@@ -213,7 +213,7 @@ def labyrinth_to_area(labyrinth):
                 numCols = len(rowCells)
                 for col in xrange(numCols):
                         cell = rowCells[col]
-                        
+
                         north = cell[WALL_NORTH]
                         south = cell[WALL_SOUTH]
                         west = cell[WALL_WEST]
@@ -252,7 +252,7 @@ def labyrinth_to_area(labyrinth):
                                         area[areaRow1].append(";")
                                 else:
                                         area[areaRow1].append("x")
-        
+
                         # top right
                         if north and east:
                                 area[areaRow1].append(">")
@@ -282,7 +282,7 @@ def labyrinth_to_area(labyrinth):
                                         area[areaRow2].append(",")
                                 else:
                                         area[areaRow2].append("x")
-        
+
                         # bottom right
                         if south and east:
                                 area[areaRow2].append("]")
@@ -297,7 +297,7 @@ def labyrinth_to_area(labyrinth):
                                         area[areaRow2].append(".")
                                 else:
                                         area[areaRow2].append("x")
-        
+
         return area
 
 if __name__ == "__main__":
@@ -306,7 +306,7 @@ if __name__ == "__main__":
 
         lb = make_labyrinth(5, 5, 20)
         print labyrinth_to_string(lb)
-        
+
         print "area:"
         area = labyrinth_to_area(lb)
         pp.pprint(area)

@@ -32,7 +32,7 @@ from yapyg import tiles
 
 TILE_SIZE = fixpoint.float2fix(1.0)
 WALL_WIDTH = fixpoint.float2fix(1.0 / 4.0)
-OFFSET_WALL = TILE_SIZE - WALL_WIDTH - WALL_WIDTH
+OFFSET_WALL = TILE_SIZE - WALL_WIDTH
 SOUTH_WALL = ("rectangle", 0, 0, TILE_SIZE, WALL_WIDTH)
 WEST_WALL = ("rectangle", 0, 0, WALL_WIDTH, TILE_SIZE)
 NORTH_WALL = ("rectangle", 0, OFFSET_WALL, TILE_SIZE, WALL_WIDTH)

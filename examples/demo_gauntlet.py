@@ -34,6 +34,8 @@ from yapyg_movers import destroy_mover
 from yapyg_viewers import relative_viewer
 from yapyg_helpers import tiles_helpers
 
+DEBUG_MODE = False
+
 ENT_MAN = "500_man"
 ENT_SHOT = "600_throwingstar"
 ENT_TEXT_SCORE = "text_score"
@@ -66,11 +68,21 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         # Create some tiles to use for our game area. Individual tiles are referred to by strings.
         # Each tile can be composed by layering several images over each other
-        floor_tile = "assets/img/tiles/dirtysquares.png"
+        if not DEBUG_MODE:
+                floor_tile = "assets/img/tiles/dirtysquares.png"
+        else:
+                floor_tile = "assets/img/tiles/grid_double.png"
+
         tiles.add_tile_def(state, "x", (floor_tile,))
+        if DEBUG_MODE:
+                TILE_SIZE = fixpoint.float2fix(1.0)
+                tiles.add_tile_def(state, "#", ("assets/img/tiles/plain.png",), (("rectangle", 0, 0, TILE_SIZE, TILE_SIZE),))
 
         # Special wall tile import helper.
-        tiles_helpers.load_walls(state, "", floor_tile, "assets/img/tiles/bricks_walls.png")
+        if not DEBUG_MODE:
+                tiles_helpers.load_walls(state, "", floor_tile, "assets/img/tiles/bricks_walls.png")
+        else:
+                tiles_helpers.load_walls(state, "", floor_tile, "assets/img/tiles/grid_quad_walls.png")
 
         # The tile map is made as a list of lists.
         tiles.set_area(state,
@@ -118,15 +130,19 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                         )
 
         CIRCLE_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 4.0), fixpoint.int2fix(2))
+        if not DEBUG_MODE:
+                coin_textures = ("assets/img/sprites/coins/0.png",
+                                 "assets/img/sprites/coins/1.png",
+                                 "assets/img/sprites/coins/2.png",
+                                 "assets/img/sprites/coins/1.png",
+                                 )
+        else:
+                coin_textures = ("assets/img/sprites/half_ball_2.png",)
         entities.insert(state,
                         "%s_1" % (ENT_PREFIX_COINS),
                         {
                          "*": {
-                               "textures": ("assets/img/sprites/coins/0.png",
-                                            "assets/img/sprites/coins/1.png",
-                                            "assets/img/sprites/coins/2.png",
-                                            "assets/img/sprites/coins/1.png",
-                                            ),
+                               "textures": coin_textures,
                                "speed": fixpoint.float2fix(150.0),
                                },
                          },
@@ -142,32 +158,46 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         # coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
         # the rotation amount of the entity (0 here) and an offset for drawing the sprite to the actual position,
         # here [0.25, 0.25].
+        MAN_RADIUS = fixpoint.float2fix(1.0 / 4.0)
+        if not DEBUG_MODE:
+                man_idle_textures = (
+                                     "assets/img/sprites/man_idle/0.png",
+                                     "assets/img/sprites/man_idle/1.png",
+                                     "assets/img/sprites/man_idle/2.png",
+                                     "assets/img/sprites/man_idle/3.png",
+                                     "assets/img/sprites/man_idle/1.png",
+                                     "assets/img/sprites/man_idle/0.png",
+                                     "assets/img/sprites/man_idle/3.png",
+                                     "assets/img/sprites/man_idle/2.png",
+                                     )
+                man_walk_textures = (
+                                     "assets/img/sprites/man_walk/1.png",
+                                     "assets/img/sprites/man_walk/2.png",
+                                     "assets/img/sprites/man_walk/3.png",
+                                     )
+        else:
+                man_idle_textures = (
+                                     "assets/img/sprites/half_ball.png",
+                                     )
+                man_walk_textures = (
+                                     "assets/img/sprites/half_ball.png",
+                                     )
+
         entities.insert(state,
                         ENT_MAN,
                         {
                          "*idle": {
-                                   "textures": ("assets/img/sprites/man_idle/0.png",
-                                                "assets/img/sprites/man_idle/1.png",
-                                                "assets/img/sprites/man_idle/2.png",
-                                                "assets/img/sprites/man_idle/3.png",
-                                                "assets/img/sprites/man_idle/1.png",
-                                                "assets/img/sprites/man_idle/0.png",
-                                                "assets/img/sprites/man_idle/3.png",
-                                                "assets/img/sprites/man_idle/2.png",
-                                                ),
+                                   "textures": man_idle_textures,
                                    "speed": fixpoint.float2fix(333.0),
                                    },
                          "walk": {
-                                  "textures": ("assets/img/sprites/man_walk/1.png",
-                                               "assets/img/sprites/man_walk/2.png",
-                                               "assets/img/sprites/man_walk/3.png",
-                                               ),
+                                  "textures": man_walk_textures,
                                   "speed" : fixpoint.float2fix(150.0),
                                   },
                          },
                         (fixpoint.float2fix(1.0), fixpoint.float2fix(1.0), 0),
-                        (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)),
-                        collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
+                        (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)), # sprite appears lower and more left of actual entity position
+                        collision=(("circle", MAN_RADIUS, MAN_RADIUS, MAN_RADIUS,),),
                         )
 
         # We add a mover that will translate joystick movement to moving the man around the area.
@@ -193,7 +223,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         return state
 
 def collision_handler(state, collisions_list):
-        print str(collisions_list)
+        # print str(collisions_list)
         for entity_name_1, entity_name_2 in collisions_list:
                 if entity_name_1 == ENT_MAN:
                         if entity_name_2 == ENT_SHOT:
@@ -230,9 +260,13 @@ SHOT_SPEED = fixpoint.float2fix(4.0)
 SHOT_ROTATE_SPEED = fixpoint.float2fix(-1.0)
 SHOT_ROTATE_DEF = ("const", SHOT_ROTATE_SPEED)
 SHOT_COLLISION_DEF = (("circle", SHOT_RADIUS, SHOT_RADIUS, SHOT_RADIUS,),)
+if not DEBUG_MODE:
+        shot_textures = ("assets/img/sprites/throwingstar/0.png",)
+else:
+        shot_textures = ("assets/img/sprites/quarter_ball.png",)
 SHOT_SPRITE_DEF = {
                    "*": {
-                         "textures": ("assets/img/sprites/throwingstar/0.png",),
+                         "textures": shot_textures,
                          "speed": 0,
                          },
                    }

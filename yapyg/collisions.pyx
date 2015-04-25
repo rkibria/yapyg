@@ -26,6 +26,7 @@ cimport fixpoint
 cimport fixpoint_coll
 cimport fixpoint_2d
 cimport entities
+import debug
 
 cdef int IDX_STATE_COLLISIONS
 
@@ -308,6 +309,12 @@ cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):
                         hash_map[(x, y)].remove(entity_name)
         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None
 
+cdef str absolute_shape_to_str(tuple absolute_shape):
+        cdef str output = ""
+        output += "(" + absolute_shape[0]
+        output += fixpoint.fixtuple2str(absolute_shape[1:]) + ") "
+        return output
+
 cpdef list get_collision_shapes(list state, str entity_name, list collision_def):
         """
         Get the absolute shapes taking into account position and rotation
@@ -394,6 +401,12 @@ cpdef tuple run(list state, str entity_name_1):
         cdef list absolute_shapes_2
         cdef list contact_points = []
         cdef int is_tile_2
+        cdef tuple absolute_shape_1
+        cdef tuple absolute_shape_2
+        cdef str absolute_shape_1_type
+        cdef str absolute_shape_2_type
+        cdef x
+        cdef y
 
         for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
                 for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
@@ -429,15 +442,25 @@ cpdef tuple run(list state, str entity_name_1):
                                                 if absolute_shape_1_type == "circle":
                                                         if absolute_shape_2_type == "circle":
                                                                 is_collision = fixpoint_coll.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
+                                                                if is_collision:
+                                                                        debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
                                                         elif absolute_shape_2_type == "rectangle":
                                                                 is_collision = fixpoint_coll.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
+                                                                if is_collision:
+                                                                        debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
                                                 elif absolute_shape_1_type == "rectangle":
                                                         if absolute_shape_2_type == "circle":
                                                                 is_collision = fixpoint_coll.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
+                                                                if is_collision:
+                                                                        debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
                                                         elif absolute_shape_2_type == "rectangle":
                                                                 is_collision = fixpoint_coll.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
+                                                                if is_collision:
+                                                                        debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
 
                                                 if is_collision:
+                                                        debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
+                                                        debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
                                                         if entity_name_1 < entity_name_2:
                                                                 collisions_list.append((entity_name_1, entity_name_2,))
                                                         else:

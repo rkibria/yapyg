@@ -27,6 +27,7 @@ import yapyg.controls
 import yapyg.entities
 import yapyg.fixpoint
 import yapyg.fixpoint_2d
+import yapyg.debug
 
 IDX_CONTROLLED_MOVER_CONTROLLER = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
 IDX_CONTROLLED_MOVER_FACTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
@@ -90,6 +91,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                         heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
                         heading = yapyg.fixpoint.int2fix(heading_int)
 
+                yapyg.debug.print_line(state, "control %s" % yapyg.fixpoint.fixtuple2str((new_x, new_y)))
                 yapyg.entities.set_pos(state, entity_name, new_x, new_y, heading)
                 yapyg.collisions.run(state, entity_name)
         else:
