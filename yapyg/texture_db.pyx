@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,6 @@ Texture storage and operations
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Color, Rectangle, Fbo, Ellipse
-
-cimport fixpoint
 
 import screen
 
@@ -70,13 +68,13 @@ cpdef get(list state, str texture_name):
         else:
                 return None
 
-cpdef insert_combined(list state, int texture_size, str texture_name, tuple texture_list):
+cpdef insert_combined(list state, float texture_size, str texture_name, tuple texture_list):
         """
         TODO
         """
-        cdef int tile_size = screen.get_tile_size(state)
-        texture_size = fixpoint.mul(tile_size, texture_size)
-        cdef int int_texture_size = fixpoint.fix2int(texture_size)
+        cdef float tile_size = screen.get_tile_size(state)
+        texture_size *= tile_size
+        cdef int int_texture_size = int(texture_size)
 
         cdef str texture_filename
         if len(texture_list) == 0:
@@ -97,17 +95,16 @@ cpdef insert_combined(list state, int texture_size, str texture_name, tuple text
                         fbo.draw()
                 insert(state, texture_name, texture)
 
-cpdef insert_color_rect(list state, int texture_w, int texture_h, str texture_name, float c_r, float c_g, float c_b):
+cpdef insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
         TODO
         """
-        cdef int tile_size = screen.get_tile_size(state)
+        cdef float tile_size = screen.get_tile_size(state)
+        texture_w *= tile_size
+        texture_h *= tile_size
 
-        texture_w = fixpoint.mul(texture_w, tile_size)
-        texture_h = fixpoint.mul(texture_h, tile_size)
-
-        cdef int int_texture_w = fixpoint.fix2int(texture_w)
-        cdef int int_texture_h = fixpoint.fix2int(texture_h)
+        cdef int int_texture_w = int(texture_w)
+        cdef int int_texture_h = int(texture_h)
 
         texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
         fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)
@@ -117,17 +114,16 @@ cpdef insert_color_rect(list state, int texture_w, int texture_h, str texture_na
         fbo.draw()
         insert(state, texture_name, texture)
 
-cpdef insert_color_ellipse(list state, int texture_w, int texture_h, str texture_name, float c_r, float c_g, float c_b):
+cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
         TODO
         """
-        cdef int tile_size = screen.get_tile_size(state)
+        cdef float tile_size = screen.get_tile_size(state)
+        texture_w *= tile_size
+        texture_h *= tile_size
 
-        texture_w = fixpoint.mul(texture_w, tile_size)
-        texture_h = fixpoint.mul(texture_h, tile_size)
-
-        cdef int int_texture_w = fixpoint.fix2int(texture_w)
-        cdef int int_texture_h = fixpoint.fix2int(texture_h)
+        cdef int int_texture_w = int(texture_w)
+        cdef int int_texture_h = int(texture_h)
 
         texture = Texture.create(size=(int_texture_w, int_texture_h), colorfmt='rgba')
         fbo = Fbo(size=(int_texture_w, int_texture_h), texture=texture)

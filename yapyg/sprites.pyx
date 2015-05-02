@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,17 +22,15 @@
 2D Sprites
 """
 
+import math
 from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 
-cimport fixpoint
 cimport tiles
 cimport texture_db
 cimport view
 cimport screen
 
 import text
-
-cdef int FIXP_1 = fixpoint.int2fix(1)
 
 cdef int IDX_STATE_SPRITES
 
@@ -62,7 +60,7 @@ cpdef initialize(int state_idx, list state):
                 {},
                 {},
                 {},
-                FIXP_1,
+                1.0,
                 ]
 
 cpdef destroy(list state):
@@ -71,7 +69,7 @@ cpdef destroy(list state):
         """
         state[IDX_STATE_SPRITES] = None
 
-cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_offset,
+cpdef insert(list state, str sprite_name, tuple textures, float speed, list pos_offset,
              tuple scale, int enable, list pos, int screen_relative=False, int play_once=False):
         """
         TODO
@@ -80,7 +78,7 @@ cpdef insert(list state, str sprite_name, tuple textures, int speed, list pos_of
         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
 
         if not scale:
-                scale = (fixpoint.int2fix(1), fixpoint.int2fix(1))
+                scale = (1, 1)
 
         cdef list text_textures = []
         for texture_part in textures:
@@ -206,7 +204,7 @@ cpdef set_enable(list state, str sprite_name, int enable):
                                                 rect.pos = rect_rot_attributes[0]
                                                 rect.size = sprite_size
 
-cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
+cdef void draw(list state, canvas, float frame_time_delta, float view_scale):
         """
         TODO
         """
@@ -221,10 +219,10 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
         cdef list sprite
         cdef list pos
         cdef list scale
-        cdef int rotate
+        cdef float rotate
         cdef int phase
         cdef int speed
-        cdef int time_sum
+        cdef float time_sum
         cdef int phase_increment
         cdef str texture_name
         cdef tuple textures
@@ -257,7 +255,7 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
                 if speed > 0:
                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
                         time_sum += frame_time_delta
-                        phase_increment = fixpoint.fix2int(fixpoint.div(time_sum, speed)) # int
+                        phase_increment = int(time_sum / speed) # int
                         if phase_increment < 1:
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 phase = sprite[IDX_SPRITE_PHASE]
@@ -267,7 +265,7 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
                                         set_enable(state, sprite_name, False)
                                         continue
                                 phase = phase % len(textures)
-                                time_sum = time_sum % speed
+                                time_sum = math.fmod(time_sum, speed)
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 sprite[IDX_SPRITE_PHASE] = phase
 
@@ -276,53 +274,51 @@ cdef void draw(list state, canvas, int frame_time_delta, int view_scale):
                             texture_db.get(state, texture_name), pos, scale,
                             origin_xy, screen_relative)
 
-cdef tuple _get_screen_coords(list state, tuple view_pos, int view_scale, list pos,
+cdef tuple _get_screen_coords(list state, tuple view_pos, float view_scale, list pos,
                               tuple origin_xy, int screen_relative):
         """
         TODO
         """
-        cdef int col = fixpoint.floor(pos[0])
-        cdef int row = fixpoint.floor(pos[1])
-        cdef int scaled_tile_size = fixpoint.mul(tiles.get_tile_size(state), view_scale)
+        cdef float col = math.floor(pos[0])
+        cdef float row = math.floor(pos[1])
+        cdef float scaled_tile_size = tiles.get_tile_size(state) * view_scale
 
-        cdef int tile_x = fixpoint.mul(col, scaled_tile_size)
-        cdef int tile_y = fixpoint.mul(row, scaled_tile_size)
+        cdef float tile_x = col * scaled_tile_size
+        cdef float tile_y = row * scaled_tile_size
 
-        cdef int draw_x
-        cdef int draw_y
+        cdef float draw_x
+        cdef float draw_y
         if not screen_relative:
-                draw_x = tile_x - fixpoint.mul(view_pos[0], scaled_tile_size)
-                draw_y = tile_y - fixpoint.mul(view_pos[1], scaled_tile_size)
+                draw_x = tile_x - (view_pos[0] * scaled_tile_size)
+                draw_y = tile_y - (view_pos[1] * scaled_tile_size)
         else:
                 draw_x = tile_x
                 draw_y = tile_y
 
         cdef tuple draw_pos = (draw_x, draw_y)
         cdef tuple offset = (pos[0] - col, pos[1] - row,)
-        cdef tuple offset_pos = (draw_pos[0] + fixpoint.mul(scaled_tile_size, offset[0]) + origin_xy[0],
-                                 draw_pos[1] + fixpoint.mul(scaled_tile_size, offset[1]) + origin_xy[1])
+        cdef tuple offset_pos = (draw_pos[0] + (scaled_tile_size * offset[0]) + origin_xy[0],
+                                 draw_pos[1] + (scaled_tile_size * offset[1]) + origin_xy[1])
         return offset_pos
 
-cdef tuple _get_rect_rot_attributes(int texture_w, int texture_h, int view_scale, list scale,
-                                    tuple offset_pos, int rotate):
+cdef tuple _get_rect_rot_attributes(int texture_w, int texture_h, float view_scale, list scale,
+                                    tuple offset_pos, float rotate):
         """
         TODO
         """
-        cdef int w = fixpoint.mul(fixpoint.int2fix(texture_w), fixpoint.mul(view_scale, scale[0]))
-        cdef int h = fixpoint.mul(fixpoint.int2fix(texture_h), fixpoint.mul(view_scale, scale[1]))
-        w = fixpoint.fix2int(w)
-        h = fixpoint.fix2int(h)
+        cdef int w = int(texture_w * view_scale * scale[0])
+        cdef int h = int(texture_h * view_scale * scale[1])
 
-        cdef int x = fixpoint.fix2int(offset_pos[0])
-        cdef int y = fixpoint.fix2int(offset_pos[1])
+        cdef int x = int(offset_pos[0])
+        cdef int y = int(offset_pos[1])
 
         return ((x, y),
                 (x + w / 2, y + h / 2),
-                fixpoint.fix2int(rotate),
+                rotate,
                 (w, h),
                 )
 
-cdef void draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sprite_name,
+cdef void draw_sprite(list state, canvas, tuple view_pos, float view_scale, str sprite_name,
                 texture, list pos, list scale, tuple origin_xy, int screen_relative):
         """
         TODO
@@ -330,7 +326,7 @@ cdef void draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sp
         cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]
 
-        cdef int rotate = pos[2]
+        cdef float rotate = pos[2]
         cdef tuple offset_pos = _get_screen_coords(state, view_pos, view_scale, pos, origin_xy, screen_relative)
 
         cdef int int_d_x
@@ -344,11 +340,11 @@ cdef void draw_sprite(list state, canvas, tuple view_pos, int view_scale, str sp
                 if not rect.texture is texture:
                         rect.texture = texture
 
-                int_d_x = abs(int(rect.pos[0]) - fixpoint.fix2int(offset_pos[0]))
-                int_d_y = abs(int(rect.pos[1]) - fixpoint.fix2int(offset_pos[1]))
-                pos_changed = (int_d_x > 0 or int_d_y > 0)
+                int_d_x = abs(int(rect.pos[0] - offset_pos[0]))
+                int_d_y = abs(int(rect.pos[1] - offset_pos[1]))
+                pos_changed = (int_d_x > 1 or int_d_y > 1)
 
-                rot_changed = (abs(rot.angle - fixpoint.fix2int(rotate)) > 0)
+                rot_changed = abs(rot.angle - rotate) >= 0.05
 
                 if pos_changed or rot_changed:
                         rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]), int(texture.size[1]),

@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import math
+
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-from yapyg import fixpoint
-from yapyg import fixpoint_trig
 from yapyg import controls
 from yapyg import text
 from yapyg import view
@@ -75,7 +75,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         tiles.add_tile_def(state, "x", (floor_tile,))
         if DEBUG_MODE:
-                TILE_SIZE = fixpoint.float2fix(1.0)
+                TILE_SIZE = 1.0
                 tiles.add_tile_def(state, "#", ("assets/img/tiles/plain.png",), (("rectangle", 0, 0, TILE_SIZE, TILE_SIZE),))
 
         # Special wall tile import helper.
@@ -123,13 +123,13 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                "textures": (("text", "Health:100", FONT_NAME),),
                                },
                          },
-                        (fixpoint.float2fix(2.4), 0, 0),
+                        (2.4, 0, 0),
                         (0,0),
                         None,
                         True,
                         )
 
-        CIRCLE_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 4.0), fixpoint.int2fix(2))
+        CIRCLE_RADIUS = (((1.0 / 4.0)) / 2)
         if not DEBUG_MODE:
                 coin_textures = ("assets/img/sprites/coins/0.png",
                                  "assets/img/sprites/coins/1.png",
@@ -143,11 +143,11 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                         {
                          "*": {
                                "textures": coin_textures,
-                               "speed": fixpoint.float2fix(150.0),
+                               "speed": 150.0,
                                },
                          },
-                        (fixpoint.float2fix(1.0), fixpoint.float2fix(2.0), 0),
-                        (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)),
+                        (1.0, 2.0, 0),
+                        (-0.25, -0.25),
                         collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
                         )
 
@@ -158,7 +158,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         # coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
         # the rotation amount of the entity (0 here) and an offset for drawing the sprite to the actual position,
         # here [0.25, 0.25].
-        MAN_RADIUS = fixpoint.float2fix(1.0 / 4.0)
+        MAN_RADIUS = (1.0 / 4.0)
         if not DEBUG_MODE:
                 man_idle_textures = (
                                      "assets/img/sprites/man_idle/0.png",
@@ -188,15 +188,15 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                         {
                          "*idle": {
                                    "textures": man_idle_textures,
-                                   "speed": fixpoint.float2fix(333.0),
+                                   "speed": 333.0,
                                    },
                          "walk": {
                                   "textures": man_walk_textures,
-                                  "speed" : fixpoint.float2fix(150.0),
+                                  "speed" : 150.0,
                                   },
                          },
-                        (fixpoint.float2fix(1.0), fixpoint.float2fix(1.0), 0),
-                        (fixpoint.float2fix(-0.25), fixpoint.float2fix(-0.25)), # sprite appears lower and more left of actual entity position
+                        (1.0, 1.0, 0),
+                        (-0.25, -0.25), # sprite appears lower and more left of actual entity position
                         collision=(("circle", MAN_RADIUS, MAN_RADIUS, MAN_RADIUS,),),
                         )
 
@@ -207,8 +207,8 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         controlled_mover.add(state,
                              ENT_MAN,
                              "joystick",
-                             fixpoint.float2fix(0.03),
-                             (0, 0, fixpoint.float2fix(10.0), fixpoint.float2fix(10.0)),
+                             0.03,
+                             (0, 0, 10.0, 10.0),
                              ("*idle", "walk"),
                              True
                              )
@@ -216,8 +216,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         view.set_viewer(state,
                         relative_viewer.create(state,
                                                ENT_MAN,
-                                               [fixpoint.float2fix(-1.75),
-                                                fixpoint.float2fix(-2.5)]))
+                                               [-1.75, -2.5]))
 
         # The state object is finished.
         return state
@@ -251,13 +250,12 @@ def collision_handler(state, collisions_list):
                                 do_boom(state, entities.get_pos(state, ENT_SHOT))
                                 entities.delete(state, ENT_SHOT)
 
-FIXP_TRAVEL_DISTANCE = fixpoint.int2fix(10)
-FIXP_90 = fixpoint.int2fix(90)
-START_OFFSET_FACTOR = fixpoint.float2fix(0.25)
-SHOT_RADIUS = fixpoint.div(fixpoint.float2fix(1.0 / 8.0), fixpoint.int2fix(2))
-SHOT_SPRITE_OFFSET = (fixpoint.float2fix(-0.125), fixpoint.float2fix(-0.125)) 
-SHOT_SPEED = fixpoint.float2fix(4.0)
-SHOT_ROTATE_SPEED = fixpoint.float2fix(-1.0)
+TRAVEL_DISTANCE = 10
+START_OFFSET_FACTOR = 0.25
+SHOT_RADIUS = (((1.0 / 8.0)) / 2)
+SHOT_SPRITE_OFFSET = (-0.125, -0.125) 
+SHOT_SPEED = 4.0
+SHOT_ROTATE_SPEED = -1.0
 SHOT_ROTATE_DEF = ("const", SHOT_ROTATE_SPEED)
 SHOT_COLLISION_DEF = (("circle", SHOT_RADIUS, SHOT_RADIUS, SHOT_RADIUS,),)
 if not DEBUG_MODE:
@@ -275,18 +273,18 @@ def on_fire_button(state, button_pressed):
         if button_pressed and not entities.get(state, ENT_SHOT):
                 man_pos = entities.get_pos(state, ENT_MAN)
 
-                man_rot = man_pos[2] + FIXP_90
+                man_rot = math.radians(man_pos[2] + 90.0)
 
-                heading_x = fixpoint_trig.cos(man_rot)
-                heading_y = fixpoint_trig.sin(man_rot)
+                heading_x = math.cos(man_rot)
+                heading_y = math.sin(man_rot)
 
-                start_pos = (man_pos[0] + fixpoint.mul(START_OFFSET_FACTOR, heading_x),
-                             man_pos[1] + fixpoint.mul(START_OFFSET_FACTOR, heading_y),
+                start_pos = (man_pos[0] + (START_OFFSET_FACTOR * heading_x),
+                             man_pos[1] + (START_OFFSET_FACTOR * heading_y),
                              0,
                              )
 
-                heading = (fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading_x),
-                           fixpoint.mul(FIXP_TRAVEL_DISTANCE, heading_y),
+                heading = ((TRAVEL_DISTANCE * heading_x),
+                           (TRAVEL_DISTANCE * heading_y),
                            )
 
                 entities.insert(state,
@@ -309,10 +307,10 @@ BOOM_TEXTURES = ("assets/img/sprites/explosion_small/0.png",
 BOOM_SPRITEDEF = {
                   "*": {
                         "textures": BOOM_TEXTURES,
-                        "speed": fixpoint.float2fix(50.0),
+                        "speed": 50.0,
                         },
                   }
-BOOM_SPRITEOFFSET = (fixpoint.float2fix(-0.125), fixpoint.float2fix(-0.125))
+BOOM_SPRITEOFFSET = (-0.125, -0.125)
 
 def do_boom(state, pos):
         entities.insert(state,

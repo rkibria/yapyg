@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -45,8 +45,8 @@ cpdef list get(list state, str entity_name)
 cpdef tuple get_pos(list state, str entity_name)
 cpdef tuple get_last_pos(list state, str entity_name)
 cpdef tuple get_pos_offset(list state, str entity_name)
-cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot)
-cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot)
+cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot)
+cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot)
 cpdef undo_last_move(list state, str entity_name)
 cpdef disable(list state, str entity_name)
 cpdef int is_enabled(list state, str entity_name)

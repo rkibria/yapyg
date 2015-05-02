@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,8 @@ Controller-influenced mover
 import yapyg.movers
 import yapyg.controls
 import yapyg.entities
-import yapyg.fixpoint
-import yapyg.fixpoint_2d
+
+import yapyg.math_2d
 import yapyg.debug
 
 IDX_CONTROLLED_MOVER_CONTROLLER = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
@@ -73,13 +73,13 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 pos = yapyg.entities.get_pos(state, entity_name)
                 factor = mover[IDX_CONTROLLED_MOVER_FACTOR]
                 limits = mover[IDX_CONTROLLED_MOVER_LIMITS]
-                new_x = pos[0] + yapyg.fixpoint.mul(factor, direction[0])
+                new_x = pos[0] + (factor * (direction[0]))
                 if new_x < limits[0]:
                         new_x = limits[0]
                 elif new_x > limits[2]:
                         new_x = limits[2]
 
-                new_y = pos[1] + yapyg.fixpoint.mul(factor, direction[1])
+                new_y = pos[1] + (factor * (direction[1]))
                 if new_y < limits[1]:
                         new_y = limits[1]
                 elif new_y > limits[3]:
@@ -87,11 +87,11 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
 
                 heading = pos[2]
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
-                        heading = yapyg.fixpoint_2d.heading_from_to((0, 0), tuple(direction))
-                        heading_int = (yapyg.fixpoint.fix2int(heading) - 90) % 360
-                        heading = yapyg.fixpoint.int2fix(heading_int)
+                        heading = yapyg.math_2d.heading_from_to((0, 0), tuple(direction))
+                        heading_int = (int(heading) - 90) % 360
+                        heading = (heading_int)
 
-                yapyg.debug.print_line(state, "control %s" % yapyg.fixpoint.fixtuple2str((new_x, new_y)))
+                yapyg.debug.print_line(state, "control %s" % str((new_x, new_y)))
                 yapyg.entities.set_pos(state, entity_name, new_x, new_y, heading)
                 yapyg.collisions.run(state, entity_name)
         else:

@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-from yapyg import fixpoint
+
 from yapyg import view
 from yapyg_movers import linear_mover
 from yapyg_movers import wait_mover
@@ -75,7 +75,7 @@ def create(screen_width, screen_height, tile_size):
                                         "assets/img/sprites/man_idle/3.png",
                                         "assets/img/sprites/man_idle/2.png",
                                         ),
-                                "speed": fixpoint.float2fix(333.0),
+                                "speed": 333.0,
                         },
                         "walk": {
                                 "textures": (
@@ -83,13 +83,13 @@ def create(screen_width, screen_height, tile_size):
                                         "assets/img/sprites/man_walk/2.png",
                                         "assets/img/sprites/man_walk/3.png",
                                         ),
-                                "speed" : fixpoint.float2fix(150.0),
+                                "speed" : 150.0,
                         },
-                }, (fixpoint.float2fix(7.0), fixpoint.float2fix(5.0), 0), (fixpoint.float2fix(0.25), fixpoint.float2fix(0.25)))
+                }, (7.0, 5.0, 0), (0.25, 0.25))
 
         start_movement(state, None)
 
-        view.set_viewer(state, relative_viewer.create(state, "man", [fixpoint.float2fix(-1.5), fixpoint.float2fix(-2.5)]))
+        view.set_viewer(state, relative_viewer.create(state, "man", [-1.5, -2.5]))
 
         return state
 
@@ -97,8 +97,8 @@ def start_movement(state, mover_name):
         path = ((5.0, 0), (0, 5.0), (-5.0, 0), (0, -5.0))
         for index in xrange(len(path)):
                 set_property_mover.add(state, "man", "set_active_sprite", "idle")
-                wait_mover.add(state, "man", fixpoint.float2fix(2.0))
+                wait_mover.add(state, "man", 2.0)
                 set_property_mover.add(state, "man", "set_active_sprite", "walk")
-                rel_vector = (fixpoint.float2fix(path[index][0]), fixpoint.float2fix(path[index][1]))
-                linear_mover.add(state, "man", rel_vector, fixpoint.float2fix(1.0),
+                rel_vector = ((path[index][0]), (path[index][1]))
+                linear_mover.add(state, "man", rel_vector, 1.0,
                         ("auto", 0), None if index != len(path) - 1 else start_movement)

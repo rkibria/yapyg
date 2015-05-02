@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,6 @@
 """
 Controls
 """
-
-cimport fixpoint
 
 cdef int IDX_STATE_CONTROLS
 
@@ -113,8 +111,8 @@ cpdef set_joystick(list state, directions):
         TODO
         """
         if state[IDX_STATE_CONTROLS]:
-                state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = fixpoint.float2fix(float(directions[0]))
-                state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = fixpoint.float2fix(float(directions[1]))
+                state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = (float(directions[0]))
+                state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = (float(directions[1]))
 
 cpdef get_joystick(list state):
         """

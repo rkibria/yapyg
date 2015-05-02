@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ from kivy.logger import Logger
 
 import yapyg.view
 import yapyg.entities
-import yapyg.fixpoint
+
 
 IDX_RELATIVE_VIEW_ENTITY = 1
 IDX_RELATIVE_VIEW_OFFSET = 2

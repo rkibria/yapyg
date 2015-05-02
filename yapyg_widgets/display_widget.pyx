@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,6 @@ from kivy.clock import Clock
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 
-cimport yapyg.fixpoint
 cimport yapyg.movers
 cimport yapyg.sprites
 cimport yapyg.tiles
@@ -31,10 +30,7 @@ cimport yapyg.view
 import yapyg.factory
 import yapyg.timer
 
-from yapyg.fixpoint import float2fix
-
-cdef int FIXP_1000 = yapyg.fixpoint.int2fix(1000)
-cdef int MIN_FRAME_DELTA = yapyg.fixpoint.int2fix(1000)
+cdef int MIN_FRAME_DELTA = 1000
 
 class DisplayWidget(Widget):
         def __init__(self,
@@ -68,12 +64,12 @@ class DisplayWidget(Widget):
                 """
                 TODO
                 """
-                cdef int cur_fps
-                cdef int last_frame_delta
+                cdef float cur_fps
+                cdef float last_frame_delta
                 if self.state:
-                        cur_fps = float2fix(float(Clock.get_fps()))
+                        cur_fps = (float(Clock.get_fps()))
                         if cur_fps > 0:
-                                last_frame_delta = yapyg.fixpoint.div(FIXP_1000, cur_fps) # milliseconds
+                                last_frame_delta = (1000.0 / cur_fps) # milliseconds
 
                                 if last_frame_delta < MIN_FRAME_DELTA:
                                         self.frame_time = last_frame_delta
@@ -99,10 +95,10 @@ class DisplayWidget(Widget):
                 """
                 self.redraw_tiles = value
                 if value:
-                        redraw(self.state, float2fix(0.01), self.redraw_tiles,
+                        redraw(self.state, 0.01, self.redraw_tiles,
                                self.scale, self.canvas, self.view_size)
 
-cdef void redraw(list state, int frame_time_delta, list redraw_tiles, int scale, canvas, tuple view_size):
+cdef void redraw(list state, float frame_time_delta, list redraw_tiles, float scale, canvas, tuple view_size):
         """
         TODO
         """

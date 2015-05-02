@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -28,4 +28,4 @@ cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points)
 cpdef int is_point_in_circle(tuple point, tuple circ)
 cpdef int is_point_in_rect(tuple point, tuple rectangle)
 cpdef tuple get_rect_points(tuple rect)
-cpdef int value_in_range(int value, int min_limit, int max_limit)
+cpdef int value_in_range(float value, float min_limit, float max_limit)

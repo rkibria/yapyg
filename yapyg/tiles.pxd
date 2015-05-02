@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,5 +31,5 @@ cpdef set_area(list state, list area)
 cpdef list get_area(list state)
 cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=?)
 cpdef str get_tile(list state, int row, int col)
-cpdef draw(list state, int scale, canvas, tuple view_size)
+cpdef draw(list state, float scale, canvas, tuple view_size)
 cpdef tuple get_area_size(list state)

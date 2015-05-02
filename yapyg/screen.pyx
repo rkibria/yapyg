@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -37,9 +37,9 @@ cpdef initialize(int state_idx, list state, int screen_width, int screen_height,
         IDX_STATE_SCREEN = state_idx
 
         state[IDX_STATE_SCREEN] = [
-                screen_width,
-                screen_height,
-                tile_size,
+                float(screen_width),
+                float(screen_height),
+                float(tile_size),
                 [origin_xy[0], origin_xy[1]],]
 
 cpdef destroy(list state):
@@ -48,19 +48,19 @@ cpdef destroy(list state):
         """
         state[IDX_STATE_SCREEN] = None
 
-cpdef int get_width(list state):
+cpdef float get_width(list state):
         """
         TODO
         """
         return state[IDX_STATE_SCREEN][IDX_SCREEN_WIDTH]
 
-cpdef int get_height(list state):
+cpdef float get_height(list state):
         """
         TODO
         """
         return state[IDX_STATE_SCREEN][IDX_SCREEN_HEIGHT]
 
-cpdef int get_tile_size(list state):
+cpdef float get_tile_size(list state):
         """
         TODO
         """
@@ -71,8 +71,8 @@ cpdef set_origin(list state, tuple origin_xy):
         TODO
         """
         cdef list screen_origin = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
-        screen_origin[0] = origin_xy[0]
-        screen_origin[1] = origin_xy[1]
+        screen_origin[0] = float(origin_xy[0])
+        screen_origin[1] = float(origin_xy[1])
 
 cpdef tuple get_origin(list state):
         """

@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,8 @@ cdef int IDX_STATE_SCREEN = 0
 
 cpdef initialize(int state_idx, list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=?)
 cpdef destroy(list state)
-cpdef int get_width(list state)
-cpdef int get_height(list state)
-cpdef int get_tile_size(list state)
+cpdef float get_width(list state)
+cpdef float get_height(list state)
+cpdef float get_tile_size(list state)
 cpdef set_origin(list state, tuple origin_xy)
 cpdef tuple get_origin(list state)

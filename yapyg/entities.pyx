@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,15 +22,12 @@
 Entities
 """
 
+import math
 import copy
 
 cimport sprites
 cimport collisions
-cimport fixpoint
 cimport movers
-
-cdef int FIXP_1 = fixpoint.int2fix(1)
-cdef int FIXP_360 = fixpoint.int2fix(360)
 
 cdef int IDX_STATE_ENTITIES
 
@@ -128,7 +125,7 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
 
                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
 
-                sprite_scale = (FIXP_1, FIXP_1)
+                sprite_scale = (1.0, 1.0)
 
                 sprite_enable = enable
 
@@ -251,15 +248,15 @@ cpdef tuple get_pos_offset(list state, str entity_name):
         else:
                 return None
 
-cdef void normalize_rotation(entity):
+cdef void normalize_rotation(list entity):
         """
         TODO
         """
-        cdef int old_rot = entity[IDX_ENTITY_POS][2]
-        cdef int modulo_rot = fixpoint.modulo(old_rot, FIXP_360)
+        cdef float old_rot = entity[IDX_ENTITY_POS][2]
+        cdef float modulo_rot = math.fmod(old_rot, 360.0)
         entity[IDX_ENTITY_POS][2] = modulo_rot
 
-cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
+cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
         """
         TODO
         """
@@ -281,7 +278,7 @@ cpdef set_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
 
                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 
-cpdef add_pos(list state, str entity_name, int x_pos, int y_pos, int rot):
+cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
         """
         TODO
         """

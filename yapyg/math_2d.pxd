@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +19,19 @@
 # THE SOFTWARE.
 
 """
-Fixed point math
+2D vectors
 """
 
-cpdef int int2fix(int value)
-cpdef int float2fix(float value)
-cpdef int fix2int(int value)
-cpdef float fix2float(int value)
-cpdef int mul(int op1, int op2)
-cpdef int div(int op1, int op2)
-cdef int _bit_len(int int_type)
-cpdef int sqrt(int x)
-cpdef int floor(int x)
-cpdef int modulo(int x, int d)
-cpdef int negate(int x)
-cpdef list fixtuple2floatlist(fix_tuple)
-cpdef str fixtuple2str(tuple fix_tuple, int precision=*)
+cpdef float dot_product(tuple v_1, tuple v_2)
+cpdef tuple vector_product(tuple vec, float factor)
+cpdef tuple vector_div(tuple vec, float factor)
+cpdef tuple vector_diff(tuple v_1, tuple v_2)
+cpdef tuple vector_sum(tuple v_1, tuple v_2)
+cpdef tuple components(tuple normal_vector, tuple v_vector)
+cpdef tuple complex_multiply(tuple complex_1, tuple complex_2)
+cpdef tuple rotated_point(tuple origin_point, tuple point, float rot)
+cpdef float length(tuple vector)
+cpdef float distance(tuple pos_1, tuple pos_2)
+cpdef tuple unit_vector(tuple pos_1, tuple pos_2)
+cpdef tuple get_unit_vector(tuple vector)
+cpdef float heading_from_to(tuple pos1, tuple pos2)

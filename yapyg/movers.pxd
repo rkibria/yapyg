@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -37,4 +37,4 @@ cpdef get_type(list state, list mover)
 cpdef remove(list state, str mover_name)
 cpdef delete(list state, str mover_name)
 
-cdef void run(list state, int frame_time_delta)
+cdef void run(list state, float frame_time_delta)

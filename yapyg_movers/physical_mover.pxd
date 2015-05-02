@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,34 +24,34 @@ Simulate physical movement
 
 cpdef add(list state,
                 str entity_name,
-                int mass,
-                int vx,
-                int vy,
-                int ax,
-                int ay,
-                int friction,
-                int inelasticity,
-                int vr,
-                int rot_friction,
-                int rot_decay,
-                int stickyness,
+                float mass,
+                float vx,
+                float vy,
+                float ax,
+                float ay,
+                float friction,
+                float inelasticity,
+                float vr,
+                float rot_friction,
+                float rot_decay,
+                float stickyness,
                 int do_replace=*)
 
 cdef list c_create(str entity_name,
-                int mass,
-                int vx,
-                int vy,
-                int ax,
-                int ay,
-                int friction,
-                int inelasticity,
-                int vr,
-                int rot_friction,
-                int rot_decay,
-                int stickyness
+                float mass,
+                float vx,
+                float vy,
+                float ax,
+                float ay,
+                float friction,
+                float inelasticity,
+                float vr,
+                float rot_friction,
+                float rot_decay,
+                float stickyness
                 )
 
-cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete)
+cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete)
 
 cdef c_rectangle_circle_collision(list state,
                 str rectangle_entity_name,
@@ -78,5 +78,5 @@ cpdef collision_handler(list state,
                 tuple absolute_shape_2,
                 list contact_points)
 
-cpdef tuple elastic_collision(int v_1, int v_2, int m_1, int m_2)
-cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, int m_1, int m_2)
+cpdef tuple elastic_collision(float v_1, float v_2, float m_1, float m_2)
+cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2)

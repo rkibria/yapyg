@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.core.window import Keyboard
 
-from yapyg import fixpoint
+
 from yapyg import texture_db
 from yapyg import controls
 from yapyg import debug
@@ -41,12 +41,11 @@ class ScreenWidget(FloatLayout):
 
                 self.state = state
 
-                FIXP_1 = fixpoint.int2fix(1)
-                texture_db.insert_color_rect(state, FIXP_1, FIXP_1, "tl_null", 0.0, 0.0, 0.0)
+                texture_db.insert_color_rect(state, 1.0, 1.0, "tl_null", 0.0, 0.0, 0.0)
 
                 if not scale:
-                        scale = FIXP_1
-                self.display_widget = DisplayWidget(state, [fixpoint.float2fix(float(Window.width)), fixpoint.float2fix(float(Window.height))], scale)
+                        scale = 1.0
+                self.display_widget = DisplayWidget(state, [(float(Window.width)), (float(Window.height))], scale)
                 self.on_exit_function = on_exit_function
 
                 self.add_widget(self.display_widget)
@@ -228,7 +227,7 @@ class ScreenWidget(FloatLayout):
 
         def on_debug_timer(self, dt):
                 frame_time = self.display_widget.get_frame_time()
-                status_output = "fps:%.1f frame_time:%.1fms" % (float(Clock.get_fps()), fixpoint.fix2float(frame_time))
+                status_output = "fps:%.1f frame_time:%.1fms" % (float(Clock.get_fps()), frame_time)
                 self.set_debug_text(0, status_output)
 
                 for i in xrange(debug.NUM_DEBUG_LINES):

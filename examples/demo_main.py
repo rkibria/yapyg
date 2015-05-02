@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,6 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.boxlayout import BoxLayout
 
 from yapyg_widgets.screen_widget import ScreenWidget
-from yapyg.fixpoint import float2fix
 
 DEFAULT_START_CHOICE = "demo_bounce"
 
@@ -102,7 +101,7 @@ class MenuWidget(FloatLayout):
                         exec("state = %s.create(Window.width, Window.height, tile_size)" % self.spinner.text)
 
                         parent.add_widget(ScreenWidget(state,
-                                float2fix(float(Window.width) / screen_width),
+                                (float(Window.width) / screen_width),
                                 self.on_exit_game,
                                 self.debug_checkbox.active))
 
@@ -117,7 +116,7 @@ class YapygDemoApp(App):
                         import demo_gauntlet
                         state = demo_gauntlet.create(Window.width, Window.height, tile_size)
                         return ScreenWidget(state,
-                                            float2fix(float(Window.width) / screen_width),
+                                            (float(Window.width) / screen_width),
                                             None, False)
 
 if __name__ == "__main__":

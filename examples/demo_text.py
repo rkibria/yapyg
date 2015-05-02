@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import time
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-from yapyg import fixpoint
+
 from yapyg import text
 from yapyg import timer
 from yapyg_movers import linear_mover
@@ -51,7 +51,7 @@ def create(screen_width, screen_height, tile_size):
                                 "textures": (("text", "This is text\nSecond line", "DroidSansMonoDotted16x32"),),
                         },
                 },
-                (fixpoint.int2fix(1), fixpoint.int2fix(2), 0))
+                (1, 2, 0))
 
         start_movement(state, None)
 
@@ -71,7 +71,7 @@ def create(screen_width, screen_height, tile_size):
                                         "DroidSansMonoDotted8x12"),),
                         },
                 },
-                (0, fixpoint.int2fix(4), 0))
+                (0, 4, 0))
 
         entities.insert(state,
                 "500_text_3",
@@ -80,7 +80,7 @@ def create(screen_width, screen_height, tile_size):
                                 "textures": (("text", "Title", "DroidSansMonoDotted10x16"),),
                         },
                 },
-                (0, fixpoint.int2fix(5), 0))
+                (0, 5, 0))
 
         entities.insert(state,
                 "500_text_4",
@@ -89,7 +89,7 @@ def create(screen_width, screen_height, tile_size):
                                 "textures": (("text", "Chapter", "DroidSansMonoDotted12x24"),),
                         },
                 },
-                (0, fixpoint.float2fix(5.5), 0))
+                (0, 5.5, 0))
 
         entities.insert(state,
                 "500_text_time",
@@ -98,9 +98,9 @@ def create(screen_width, screen_height, tile_size):
                                 "textures": (("text", get_time_string(), "DroidSansMonoDotted32x64"),),
                         },
                 },
-                (0.0, fixpoint.float2fix(0.5), 0))
+                (0.0, 0.5, 0))
 
-        timer.create(state, on_timer, fixpoint.int2fix(1000))
+        timer.create(state, on_timer, 1000)
 
         return state
 
@@ -119,6 +119,6 @@ def start_movement(state, mover_name):
                 dx = math.cos(math.radians(degrees)) / n_steps
                 dy = math.sin(math.radians(degrees)) / n_steps
                 linear_mover.add(state, "500_text_1",
-                        (fixpoint.float2fix(dx), fixpoint.float2fix(dy)),
-                        fixpoint.float2fix(0.5),
+                        (dx, dy),
+                        0.5,
                         ("auto", 0), None if index != n_steps - 1 else start_movement)

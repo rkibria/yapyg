@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,17 +36,16 @@ import text
 import timer
 import debug
 import user
-import fixpoint
 
 def create(screen_width, screen_height, tile_size, origin_xy=(0, 0)):
         """
         TODO
         """
         state = [None for x in xrange(13)]
-        tile_size = fixpoint.int2fix(tile_size)
-        screen_width = fixpoint.int2fix(screen_width)
-        screen_height = fixpoint.int2fix(screen_height)
-        origin_xy = (fixpoint.int2fix(origin_xy[0]), fixpoint.int2fix(origin_xy[1]))
+        tile_size = (tile_size)
+        screen_width = (screen_width)
+        screen_height = (screen_height)
+        origin_xy = ((origin_xy[0]), (origin_xy[1]))
 
         screen.initialize(0, state, screen_width, screen_height, tile_size, origin_xy)
         texture_db.initialize(1, state)

@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,16 @@
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-from yapyg import fixpoint
+
 from yapyg import controls
 from yapyg_movers import physical_mover
 from yapyg_movers import flipper_mover
 from yapyg_helpers import entities_helpers
 
 def create(screen_width_px, screen_height_px, tile_size_px):
-        BOTTOM_Y = fixpoint.float2fix(0.0)
-        BORDER_THICKNESS = fixpoint.float2fix(2.0)
-        BORDER_OFFSET = fixpoint.float2fix(0.1)
+        BOTTOM_Y = 0.0
+        BORDER_THICKNESS = 2.0
+        BORDER_OFFSET = 0.1
 
         WALLS_COLOR = (0, 0.15, 1)
 
@@ -48,19 +48,19 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                         top=False, # bottom=False,
                         color=WALLS_COLOR)
 
-        BOUNCE_GRAVITY = fixpoint.float2fix(-9.0)
-        BOUNCE_INELASTICITY = fixpoint.float2fix(0.999)
-        BOUNCE_FRICTION = fixpoint.float2fix(0.95)
-        BOUNCE_STICKYNESS = fixpoint.float2fix(0.0)
-        ROT_FRICTION = fixpoint.float2fix(0.35)
-        ROT_DECAY = fixpoint.float2fix(0.999)
+        BOUNCE_GRAVITY = -9.0
+        BOUNCE_INELASTICITY = 0.999
+        BOUNCE_FRICTION = 0.95
+        BOUNCE_STICKYNESS = 0.0
+        ROT_FRICTION = 0.35
+        ROT_DECAY = 0.999
 
         ball_entity_name = "900_ball_0"
 
-        BALL_SIZE = fixpoint.float2fix(1.0 / 4.0)
-        CIRCLE_RADIUS = fixpoint.div(BALL_SIZE, fixpoint.int2fix(2))
+        BALL_SIZE = (1.0 / 4.0)
+        CIRCLE_RADIUS = (BALL_SIZE / 2)
         filename = "assets/img/sprites/quarter_ball.png"
-        mass = fixpoint.int2fix(1)
+        mass = 1
 
         entities.insert(state,
                 ball_entity_name,
@@ -69,7 +69,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                 "textures": (filename,),
                         },
                 },
-                (fixpoint.float2fix(1.75), fixpoint.float2fix(4.3), 0,),
+                (1.75, 4.3, 0,),
                 collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),))
 
         physical_mover.add(state,
@@ -88,11 +88,11 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                 )
 
         ENT_FLIPPER_1 = "000_flipper_1"
-        FLIPPER_X = fixpoint.float2fix(1.0)
-        FLIPPER_Y = fixpoint.float2fix(1.0)
-        FLIPPER_WIDTH = fixpoint.float2fix(1.0)
-        FLIPPER_HEIGHT = fixpoint.float2fix(0.25)
-        FLIPPER_ROTATION_OFFSET = fixpoint.float2fix(-0.5)
+        FLIPPER_X = 1.0
+        FLIPPER_Y = 1.0
+        FLIPPER_WIDTH = 1.0
+        FLIPPER_HEIGHT = 0.25
+        FLIPPER_ROTATION_OFFSET = -0.5
         FLIPPER_COLOR = (1.0, 0.0, 0.0)
         entities.insert(state,
                               ENT_FLIPPER_1,
@@ -102,14 +102,14 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                                    FLIPPER_COLOR[0], FLIPPER_COLOR[1], FLIPPER_COLOR[2]),),
                                      },
                                },
-                              (FLIPPER_X, FLIPPER_Y, fixpoint.float2fix(0.0)),
-                              collision=((("rectangle", 0, 0, FLIPPER_WIDTH, FLIPPER_HEIGHT),))
+                              (FLIPPER_X, FLIPPER_Y, 0.0),
+                              collision=((("rectangle", 0.0, 0.0, FLIPPER_WIDTH, FLIPPER_HEIGHT),))
                               )
 
         flipper_mover.add(state, ENT_FLIPPER_1,
                                  FLIPPER_WIDTH, FLIPPER_HEIGHT,
                                  FLIPPER_ROTATION_OFFSET,
-                                 fixpoint.float2fix(360.0)
+                                 360.0
                                  )
 
         return state

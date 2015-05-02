@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ Helpers for recurring tasks
 
 from yapyg import entities
 from yapyg import screen
-from yapyg import fixpoint
+
 
 def create_screen_wall(state, base_name, border_thickness, border_offset, bottom_y, top=True, bottom=True, left=True, right=True, color=(1,1,1)):
         """
@@ -34,17 +34,16 @@ def create_screen_wall(state, base_name, border_thickness, border_offset, bottom
         screen_height = screen.get_height(state)
         tile_size = screen.get_tile_size(state)
 
-        FIXP_2 = fixpoint.int2fix(2)
         pos = (-border_thickness + border_offset, -border_thickness + bottom_y + border_offset)
         size_w = (
-                fixpoint.div(screen_width, tile_size)
-                + fixpoint.mul(FIXP_2, border_thickness)
-                - fixpoint.mul(FIXP_2, border_offset)
+                (screen_width / tile_size)
+                + (2.0 * border_thickness)
+                - (2.0 * border_offset)
                 )
         size_h = (
-                fixpoint.div(screen_height, tile_size)
-                - bottom_y + fixpoint.mul(FIXP_2, border_thickness)
-                - fixpoint.mul(FIXP_2,  border_offset)
+                (screen_height / tile_size)
+                - bottom_y + (2.0 * border_thickness)
+                - (2.0 * ( border_offset))
                 )
 
         create_collision_box(state, base_name,

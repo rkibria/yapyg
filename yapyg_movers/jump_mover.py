@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ Immediate position change mover
 
 import yapyg.movers
 import yapyg.entities
-import yapyg.fixpoint
+
 
 IDX_JUMP_MOVER_NEW_POS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
 IDX_JUMP_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1

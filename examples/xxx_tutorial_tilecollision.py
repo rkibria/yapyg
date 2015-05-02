@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ from kivy.app import App
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-from yapyg import fixpoint
+
 from yapyg import collisions
 from yapyg import debug
 from yapyg_widgets.screen_widget import ScreenWidget
@@ -41,7 +41,7 @@ class TutorialApp(App):
 
                 tiles.add_tile_def(state, ' ', ("assets/img/tiles/blank.png",))
                 tiles.add_tile_def(state, '+', ("assets/img/tiles/block.png",),
-                                   (("rectangle", 0, 0, fixpoint.int2fix(1), fixpoint.int2fix(1)),))
+                                   (("rectangle", 0, 0, 1, 1),))
                 area_strings = (
                         "    ",
                         " +  ",
@@ -53,8 +53,8 @@ class TutorialApp(App):
 
                 collisions.set_handler(state, collision_handler)
 
-                BALL_SIZE = fixpoint.float2fix(1.0 / 4.0)
-                CIRCLE_RADIUS = fixpoint.div(BALL_SIZE, fixpoint.int2fix(2))
+                BALL_SIZE = (1.0 / 4.0)
+                CIRCLE_RADIUS = BALL_SIZE / 2
                 entities.insert(state,
                                 "ball",
                                 {
@@ -62,11 +62,11 @@ class TutorialApp(App):
                                        "textures": ("assets/img/sprites/quarter_ball.png",),
                                        },
                                  },
-                                (fixpoint.float2fix(1.25), 0, 0,),
+                                (1.25, 0, 0,),
                                 collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),)
                                 )
 
-                linear_mover.add(state, "ball", (0, fixpoint.int2fix(7)), fixpoint.float2fix(1.5))
+                linear_mover.add(state, "ball", (0, 7), 1.5)
 
                 return ScreenWidget(state, debugging=True)
 

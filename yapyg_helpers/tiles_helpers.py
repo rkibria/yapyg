@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,11 +27,11 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 
 from yapyg import screen
-from yapyg import fixpoint
+
 from yapyg import tiles
 
-TILE_SIZE = fixpoint.float2fix(1.0)
-WALL_WIDTH = fixpoint.float2fix(1.0 / 4.0)
+TILE_SIZE = 1.0
+WALL_WIDTH = (1.0 / 4.0)
 OFFSET_WALL = TILE_SIZE - WALL_WIDTH
 SOUTH_WALL = ("rectangle", 0, 0, TILE_SIZE, WALL_WIDTH)
 WEST_WALL = ("rectangle", 0, 0, WALL_WIDTH, TILE_SIZE)
@@ -59,7 +59,7 @@ def load_walls(state, base_name, background_file, tile_file, with_collisions=Tru
         TODO
         """
         tile_size = screen.get_tile_size(state)
-        int_tile_size = fixpoint.fix2int(tile_size)
+        int_tile_size = int(tile_size)
         background_texture = Image(source=background_file).texture
         walls_texture = Image(source=tile_file).texture
         for tile_name, origin_xy, collision in tiles_origin_table:

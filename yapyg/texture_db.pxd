@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,6 @@ cpdef destroy(list state)
 cpdef insert(list state, str texture_name, texture)
 cpdef load(list state, str texture_name, str texture_filename)
 cpdef get(list state, str texture_name)
-cpdef insert_combined(list state, int texture_size, str texture_name, tuple texture_list)
-cpdef insert_color_rect(list state, int texture_w, int texture_h, str texture_name, float c_r, float c_g, float c_b)
-cpdef insert_color_ellipse(list state, int texture_w, int texture_h, str texture_name, float c_r, float c_g, float c_b)
+cpdef insert_combined(list state, float texture_size, str texture_name, tuple texture_list)
+cpdef insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b)
+cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b)

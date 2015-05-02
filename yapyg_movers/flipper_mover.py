@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,10 @@
 
 """
 
+import math
+
 from yapyg import entities
-from yapyg import fixpoint
-from yapyg import fixpoint_2d
-from yapyg import fixpoint_trig
+from yapyg import math_2d
 from yapyg import collisions
 from yapyg import movers
 
@@ -40,11 +40,6 @@ IDX_FLIPPER_MOVER_OFFSET_POS = movers.IDX_MOVER_FIRST_PARAMETER + 5
 IDX_FLIPPER_MOVER_CENTRE_POS = movers.IDX_MOVER_FIRST_PARAMETER + 6
 IDX_FLIPPER_MOVER_ANGLE = movers.IDX_MOVER_FIRST_PARAMETER + 7
 
-FIXP_2 = fixpoint.int2fix(2)
-FIXP_90 = fixpoint.int2fix(90)
-FIXP_360 = fixpoint.int2fix(360)
-FIXP_1000 = fixpoint.int2fix(1000)
-
 def add(state, entity_name, width, height, offset, speed, do_replace=False):
         """
         speed = degrees/sec
@@ -56,8 +51,8 @@ def create(state, entity_name, width, height, offset, speed):
         """
         start_pos = entities.get_pos(state, entity_name)
         orig_x,orig_y,old_angle = start_pos
-        centre_x = orig_x + fixpoint.div(width, FIXP_2)
-        centre_y = orig_y + fixpoint.div(height, FIXP_2)
+        centre_x = orig_x + (width / 2.0)
+        centre_y = orig_y + (height / 2.0)
         offset_x = centre_x + offset
         return [FLIPPER_MOVER_NAME,
                 run,
@@ -70,7 +65,7 @@ def create(state, entity_name, width, height, offset, speed):
                 speed,
                 (offset_x, centre_y),
                 (centre_x, centre_y),
-                0,
+                0.0,
                 ]
 
 def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
@@ -82,7 +77,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
         centre_pos = mover[IDX_FLIPPER_MOVER_CENTRE_POS]
         angle = mover[IDX_FLIPPER_MOVER_ANGLE]
 
-        rotated_centre_x,rotated_centre_y = fixpoint_2d.rotated_point(offset_pos,
+        rotated_centre_x,rotated_centre_y = math_2d.rotated_point(offset_pos,
                                                                       centre_pos,
                                                                       angle)
 
@@ -93,8 +88,8 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                 entities.undo_last_move(state, entity_name)
                 collision_handler(*collision_result)
         else:
-                angle += fixpoint.div(fixpoint.mul(speed, frame_time_delta), FIXP_1000)
-                angle = fixpoint.modulo(angle, FIXP_360)
+                angle += (speed * frame_time_delta) / 1000.0
+                angle = math.fmod(angle, 360.0)
                 mover[IDX_FLIPPER_MOVER_ANGLE] = angle
 
 def collision_handler(state,
@@ -121,13 +116,11 @@ def hit_physical_object(state, flipper_entity_name, flipper_entity_mover, physic
         # centre_pos = flipper_entity_mover[IDX_FLIPPER_MOVER_CENTRE_POS]
         # phys_pos = entities.get_pos(state, physics_entity_name)
         angle = flipper_entity_mover[IDX_FLIPPER_MOVER_ANGLE]
-        # print "flipper:", flipper_entity_name, "hits", physics_entity_name, "angle", fixpoint.fix2float(angle)
-        angle += FIXP_90
-        hit_vector = (fixpoint_trig.cos(angle), fixpoint_trig.sin(angle))
-        # print "vector 1", fixpoint.fixtuple2str(hit_vector)
-        hit_vector = (fixpoint.mul(hit_vector[0], speed), fixpoint.mul(hit_vector[1], speed))
-        factor = FIXP_360
-        hit_vector = (fixpoint.div(hit_vector[0], factor), fixpoint.div(hit_vector[1], factor))
-        # print "vector 2", fixpoint.fixtuple2str(hit_vector)
+        angle += 90.0
+        angle_rad = math.radians(angle)
+        hit_vector = (math.cos(angle_rad), math.sin(angle_rad))
+        hit_vector = (hit_vector[0] * speed, hit_vector[1] * speed)
+        factor = 360.0
+        hit_vector = (hit_vector[0] / factor, hit_vector[1] / factor)
         physics_entity_mover[5] += hit_vector[0]
         physics_entity_mover[6] += hit_vector[1]

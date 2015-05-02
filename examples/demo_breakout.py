@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-from yapyg import fixpoint
-from yapyg import fixpoint_trig
+
+
 from yapyg import controls
 from yapyg import text
 from yapyg import timer
@@ -39,21 +39,21 @@ def create(screen_width, screen_height, tile_size):
         ENT_PADDLE = "500_paddle"
         ENT_BALL = "500_ball"
 
-        PADDLE_WIDTH = fixpoint.float2fix(1.0 / 2.0)
-        PADDLE_HEIGHT = fixpoint.float2fix(1.0 / 8.0)
-        PADDLE_Y = fixpoint.float2fix(2.0)
-        BOTTOM_Y = fixpoint.float2fix(1.5)
-        BORDER_THICKNESS = fixpoint.float2fix(2.0)
-        BORDER_OFFSET = fixpoint.float2fix(0.1)
+        PADDLE_WIDTH = (1.0 / 2.0)
+        PADDLE_HEIGHT = (1.0 / 8.0)
+        PADDLE_Y = 2.0
+        BOTTOM_Y = 1.5
+        BORDER_THICKNESS = 2.0
+        BORDER_OFFSET = 0.1
 
-        BALL_MOVE_SPEED = fixpoint.float2fix(100.0)
-        BALL_ANIM_SPEED = fixpoint.float2fix(3.0)
-        BALL_START_POS = (fixpoint.float2fix(1.0), fixpoint.float2fix(2.0 + 0.5), 0)
-        BALL_VXY = fixpoint.float2fix(2.0)
-        BLOCK_WIDTH = fixpoint.float2fix(1.78 / 3.5)
-        BLOCK_HEIGHT = fixpoint.float2fix(1.0 / 3.5)
-        BLOCK_X = fixpoint.float2fix(0.1)
-        BLOCK_Y = fixpoint.float2fix(4.5)
+        BALL_MOVE_SPEED = 100.0
+        BALL_ANIM_SPEED = 3.0
+        BALL_START_POS = (1.0, (2.0 + 0.5), 0)
+        BALL_VXY = 2.0
+        BLOCK_WIDTH = (1.78 / 3.5)
+        BLOCK_HEIGHT = (1.0 / 3.5)
+        BLOCK_X = 0.1
+        BLOCK_Y = 4.5
 
         state = factory.create(screen_width, screen_height, tile_size)
 
@@ -64,8 +64,8 @@ def create(screen_width, screen_height, tile_size):
 
         for row in xrange(5):
                 for col in xrange(7):
-                        fix_row = fixpoint.int2fix(row)
-                        fix_col = fixpoint.int2fix(col)
+                        fix_row = row
+                        fix_col = col
 
                         block_entity_name = ENT_BLOCK_BASE + "_%d_%d" % (col, row)
                         color = (0.5, 0.2, 1) if ((row + col) % 2 == 0) else (0, 1, 0)
@@ -76,7 +76,7 @@ def create(screen_width, screen_height, tile_size):
                                                 "textures": (("rectangle", BLOCK_WIDTH, BLOCK_HEIGHT, color[0], color[1], color[2]),),
                                         },
                                 },
-                                (BLOCK_X + fixpoint.mul(fix_col, BLOCK_WIDTH), BLOCK_Y + fixpoint.mul(fix_row, BLOCK_HEIGHT), 0),
+                                (BLOCK_X + (fix_col * BLOCK_WIDTH), BLOCK_Y + (fix_row * BLOCK_HEIGHT), 0),
                                 collision=((("rectangle", 0, 0, BLOCK_WIDTH, BLOCK_HEIGHT),)))
 
         entities.insert(state,
@@ -86,10 +86,9 @@ def create(screen_width, screen_height, tile_size):
                                 "textures": (("rectangle", PADDLE_WIDTH, PADDLE_HEIGHT, 1, 1, 1),),
                         },
                 },
-                (fixpoint.float2fix(1.75), PADDLE_Y, 0),
+                (1.75, PADDLE_Y, 0),
                 collision=((("rectangle", 0, 0, PADDLE_WIDTH, PADDLE_HEIGHT),)))
 
-        FIXP_2 = fixpoint.int2fix(2)
         entities.insert(state,
                 ENT_BALL,
                 {
@@ -100,23 +99,23 @@ def create(screen_width, screen_height, tile_size):
                 BALL_START_POS,
                 collision=(((
                         "circle",
-                        fixpoint.div(PADDLE_HEIGHT, FIXP_2),
-                        fixpoint.div(PADDLE_HEIGHT, FIXP_2),
-                        fixpoint.div(PADDLE_HEIGHT, FIXP_2)),))
+                        (PADDLE_HEIGHT / 2.0),
+                        (PADDLE_HEIGHT / 2.0),
+                        (PADDLE_HEIGHT / 2.0)),))
                 )
 
         physical_mover.add(state,
                 ENT_BALL,
-                fixpoint.int2fix(1),
+                1,
                 BALL_VXY,
                 BALL_VXY,
                 0,
                 0,
-                fixpoint.int2fix(1),
-                fixpoint.int2fix(1),
+                1,
+                1,
                 0,
                 0,
-                fixpoint.int2fix(1),
+                1,
                 0,
                 )
 
@@ -127,9 +126,9 @@ def create(screen_width, screen_height, tile_size):
         controlled_mover.add(state,
                 ENT_PADDLE,
                 "joystick",
-                fixpoint.float2fix(0.1),
+                0.1,
                 [BORDER_OFFSET, PADDLE_Y,
-                fixpoint.div(screen_width, tile_size) - PADDLE_WIDTH - BORDER_OFFSET, PADDLE_Y]
+                (float(screen_width) / tile_size) - PADDLE_WIDTH - BORDER_OFFSET, PADDLE_Y]
                 )
 
         return state

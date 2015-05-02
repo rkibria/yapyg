@@ -1,4 +1,4 @@
-# Copyright (c) 2014 Raihan Kibria
+# Copyright (c) 2015 Raihan Kibria
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,6 @@ from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
 from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 
-cimport fixpoint
 cimport texture_db
 cimport view
 cimport screen
@@ -43,8 +42,6 @@ cdef int IDX_TILES_AREASIZE = 4
 # Values of list IDX_TILES_DEFS
 cdef int IDX_TILEDEF_TEXTURES = 0
 cdef int IDX_TILEDEF_COLLISION = 1
-
-cdef int FIXP_1 = fixpoint.int2fix(1)
 
 cpdef initialize(int state_idx, list state, int tile_size):
         """
@@ -106,7 +103,7 @@ cpdef _add_tile_collisions(state):
                                 collision = tile_def[IDX_TILEDEF_COLLISION]
                                 if collision:
                                         collisions.add_tile(state, tile_name,
-                                                            fixpoint.int2fix(col), fixpoint.int2fix(row),
+                                                            col, row,
                                                             collision)
 
 cpdef set_area(list state, list area):
@@ -138,7 +135,7 @@ cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=None
                                 collision,
                                 ]
         if isinstance(texture_list, tuple):
-                texture_db.insert_combined(state, FIXP_1, tile_name, texture_list)
+                texture_db.insert_combined(state, 1.0, tile_name, texture_list)
         else:
                 texture_db.insert(state, tile_name, texture_list)
 
@@ -157,39 +154,46 @@ cpdef str get_tile(list state, int col, int row):
                 return None
         return rowdata[col]
 
-cpdef draw(list state, int scale, canvas, tuple view_size):
+cpdef draw(list state, float scale, canvas, tuple view_size):
         """
         TODO
         """
-        origin_xy = screen.get_origin(state)
+        cdef tuple origin_xy = screen.get_origin(state)
 
-        target_w = view_size[0]
-        target_h = view_size[1]
+        cdef int target_w = view_size[0]
+        cdef int target_h = view_size[1]
 
-        scaled_tile_size = fixpoint.mul(get_tile_size(state), scale)
-        view_pos = view.get_view_pos(state)
-        map_x = fixpoint.mul(view_pos[0], scaled_tile_size)
-        map_y = fixpoint.mul(view_pos[1], scaled_tile_size)
+        cdef float scaled_tile_size = get_tile_size(state) * scale
 
-        first_row = fixpoint.fix2int(fixpoint.div(map_y, scaled_tile_size))
-        total_rows = fixpoint.fix2int(fixpoint.div(target_h, scaled_tile_size))
+        cdef tuple view_pos = view.get_view_pos(state)
+        cdef float map_x = view_pos[0] * scaled_tile_size
+        cdef float map_y = view_pos[1] * scaled_tile_size
 
-        first_col = fixpoint.fix2int(fixpoint.div(map_x, scaled_tile_size))
-        total_cols = fixpoint.fix2int(fixpoint.div(target_w, scaled_tile_size))
+        cdef int first_row = int(map_y / scaled_tile_size)
+        cdef int total_rows = int(target_h / scaled_tile_size)
 
-        tile_rects = state[IDX_STATE_TILES][IDX_TILES_RECTS]
+        cdef int first_col = int(map_x / scaled_tile_size)
+        cdef int total_cols = int(target_w / scaled_tile_size)
 
-        tile_index = 0
+        cdef list tile_rects = state[IDX_STATE_TILES][IDX_TILES_RECTS]
+
+        cdef int tile_index = 0
+        cdef int row
+        cdef int col
+        cdef tuple draw_pos
+        cdef tuple draw_size
+        cdef str tile
+
         with canvas:
                 for row in xrange(first_row, first_row + total_rows + 2):
                         for col in xrange(first_col, first_col + total_cols + 2):
 
-                                tile_x = fixpoint.mul(fixpoint.int2fix(col), scaled_tile_size)
-                                tile_y = fixpoint.mul(fixpoint.int2fix(row), scaled_tile_size)
+                                tile_x = (col * scaled_tile_size)
+                                tile_y = (row * scaled_tile_size)
 
                                 draw_pos = (
-                                        fixpoint.fix2int((tile_x - map_x) + origin_xy[0]),
-                                        fixpoint.fix2int((tile_y - map_y) + origin_xy[1]))
+                                        int((tile_x - map_x) + origin_xy[0]),
+                                        int((tile_y - map_y) + origin_xy[1]))
 
                                 texture = texture_db.get(state, "tl_null")
                                 tile = get_tile(state, col, row)
@@ -197,8 +201,8 @@ cpdef draw(list state, int scale, canvas, tuple view_size):
                                         texture = texture_db.get(state, tile)
 
                                 draw_size = (
-                                        fixpoint.fix2int(fixpoint.mul(fixpoint.int2fix(texture.width), scale)),
-                                        fixpoint.fix2int(fixpoint.mul(fixpoint.int2fix(texture.height), scale)),)
+                                        int(texture.width * scale),
+                                        int(texture.height * scale),)
 
                                 if tile_index >= len(tile_rects):
                                         PushMatrix()
