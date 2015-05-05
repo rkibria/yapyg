@@ -8093,7 +8093,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT = 2;
 
   /* "yapyg\collisions.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

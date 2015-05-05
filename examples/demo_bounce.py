@@ -88,14 +88,14 @@ def create(screen_width, screen_height, tile_size):
                                 BALL_SIZE = (1.0 / 4.0)
                                 CIRCLE_RADIUS = BALL_SIZE / 2
                                 filename = "assets/img/sprites/quarter_ball.png"
-                                mass = 1
+                                mass = 1.0
                         else:
                                 # index += 1
                                 # continue
                                 BALL_SIZE = (1.0 / 8.0)
                                 CIRCLE_RADIUS = BALL_SIZE / 2
                                 filename = "assets/img/sprites/eigth_ball.png"
-                                mass = 1
+                                mass = 0.25
 
                         entities.insert(state,
                                 ball_entity_name,

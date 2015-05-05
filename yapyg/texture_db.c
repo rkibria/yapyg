@@ -3771,7 +3771,7 @@ PyMODINIT_FUNC PyInit_texture_db(void)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "yapyg\texture_db.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

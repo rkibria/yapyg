@@ -582,16 +582,6 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
 static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
 
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
-#else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
-#ifndef __PYX_FORCE_INIT_THREADS
-  #define __PYX_FORCE_INIT_THREADS 0
-#endif
-
 #define __Pyx_GetItemInt(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck) \
     (__Pyx_fits_Py_ssize_t(i, type, is_signed) ? \
     __Pyx_GetItemInt_Fast(o, (Py_ssize_t)i, is_list, wraparound, boundscheck) : \
@@ -612,6 +602,16 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize
 static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j);
 static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
                                                      int is_list, int wraparound, int boundscheck);
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
+#ifndef __PYX_FORCE_INIT_THREADS
+  #define __PYX_FORCE_INIT_THREADS 0
+#endif
 
 static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected);
 
@@ -644,8 +644,6 @@ static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int 
 #define __Pyx_PyString_Equals __Pyx_PyBytes_Equals
 #endif
 
-static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
-
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -668,14 +666,6 @@ static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
-
-static int __Pyx_Print(PyObject*, PyObject *, int);
-#if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
-static PyObject* __pyx_print = 0;
-static PyObject* __pyx_print_kwargs = 0;
-#endif
-
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
@@ -779,13 +769,16 @@ static float __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI;
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_add(PyObject *, PyObject *, float, float, float, float, float, float, float, float, float, float, float, int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_14physical_mover_add *__pyx_optional_args); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_create(PyObject *, float, float, float, float, float, float, float, float, float, float, float); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_run(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_collision(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
-static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_rectangle_circle_collision(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
+static void __pyx_f_12yapyg_movers_14physical_mover_circle_circle_collision(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float, float, float, float, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject *, PyObject *, PyObject *, float, float, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque(PyObject *, float, float, float, float, int); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_rectangle_collision(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_velocities(PyObject *, PyObject *, PyObject *, float, float, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_compute_circle_torque(PyObject *, float, float, float, float, int); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_get_post_rectangle_collision_torque(PyObject *, PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_get_abs_rectangle_center(PyObject *); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_get_post_rectangle_collision_velocity_vector(PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_rectangle_rectangle_collision(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg_movers.physical_mover"
 int __pyx_module_is_main_yapyg_movers__physical_mover = 0;
 
@@ -794,21 +787,20 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_add(CYTHON_UNUSED PyOb
 static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_2run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete); /* proto */
 static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_4collision_handler(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name_1, PyObject *__pyx_v_entity_name_2, PyObject *__pyx_v_collision_def_1, PyObject *__pyx_v_collision_def_2, PyObject *__pyx_v_absolute_shape_1, PyObject *__pyx_v_absolute_shape_2, PyObject *__pyx_v_contact_points); /* proto */
 static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_6elastic_collision(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_v_1, float __pyx_v_v_2, float __pyx_v_m_1, float __pyx_v_m_2); /* proto */
-static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_8reflect_speeds(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_unit_vector, PyObject *__pyx_v_v1_vector, PyObject *__pyx_v_v2_vector, float __pyx_v_m_1, float __pyx_v_m_2); /* proto */
+static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_8reflect_velocities(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_unit_vector, PyObject *__pyx_v_v1_vector, PyObject *__pyx_v_v2_vector, float __pyx_v_m_1, float __pyx_v_m_2); /* proto */
 static char __pyx_k_ax[] = "ax";
 static char __pyx_k_ay[] = "ay";
+static char __pyx_k_pi[] = "pi";
 static char __pyx_k_vr[] = "vr";
 static char __pyx_k_vx[] = "vx";
 static char __pyx_k_vy[] = "vy";
 static char __pyx_k_cos[] = "cos";
-static char __pyx_k_end[] = "end";
 static char __pyx_k_m_1[] = "m_1";
 static char __pyx_k_m_2[] = "m_2";
 static char __pyx_k_run[] = "run";
 static char __pyx_k_sin[] = "sin";
 static char __pyx_k_v_1[] = "v_1";
 static char __pyx_k_v_2[] = "v_2";
-static char __pyx_k_file[] = "file";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_mass[] = "mass";
 static char __pyx_k_math[] = "math";
@@ -816,7 +808,6 @@ static char __pyx_k_test[] = "__test__";
 static char __pyx_k_time[] = "time";
 static char __pyx_k_atan2[] = "atan2";
 static char __pyx_k_mover[] = "mover";
-static char __pyx_k_print[] = "print";
 static char __pyx_k_state[] = "state";
 static char __pyx_k_yapyg[] = "yapyg";
 static char __pyx_k_circle[] = "circle";
@@ -851,13 +842,12 @@ static char __pyx_k_IDX_MOVERS_PHYSICAL_VX[] = "IDX_MOVERS_PHYSICAL_VX";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_VY[] = "IDX_MOVERS_PHYSICAL_VY";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_MASS[] = "IDX_MOVERS_PHYSICAL_MASS";
 static char __pyx_k_IDX_MOVER_FIRST_PARAMETER[] = "IDX_MOVER_FIRST_PARAMETER";
+static char __pyx_k_Simulate_physical_movement[] = "\nSimulate physical movement\n";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_FRICTION[] = "IDX_MOVERS_PHYSICAL_FRICTION";
-static char __pyx_k_yapyg_widgets_display_widget[] = "yapyg_widgets.display_widget";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_ROT_DECAY[] = "IDX_MOVERS_PHYSICAL_ROT_DECAY";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_STICKYNESS[] = "IDX_MOVERS_PHYSICAL_STICKYNESS";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_INELASTICITY[] = "IDX_MOVERS_PHYSICAL_INELASTICITY";
 static char __pyx_k_IDX_MOVERS_PHYSICAL_ROT_FRICTION[] = "IDX_MOVERS_PHYSICAL_ROT_FRICTION";
-static char __pyx_k_TODO_2_physics_rectangles_collis[] = "TODO: 2 physics rectangles collision";
 static PyObject *__pyx_n_s_IDX_MOVERS_PHYSICAL_AX;
 static PyObject *__pyx_n_s_IDX_MOVERS_PHYSICAL_AY;
 static PyObject *__pyx_n_s_IDX_MOVERS_PHYSICAL_FRICTION;
@@ -870,7 +860,6 @@ static PyObject *__pyx_n_s_IDX_MOVERS_PHYSICAL_VR;
 static PyObject *__pyx_n_s_IDX_MOVERS_PHYSICAL_VX;
 static PyObject *__pyx_n_s_IDX_MOVERS_PHYSICAL_VY;
 static PyObject *__pyx_n_s_IDX_MOVER_FIRST_PARAMETER;
-static PyObject *__pyx_kp_s_TODO_2_physics_rectangles_collis;
 static PyObject *__pyx_n_s_absolute_shape_1;
 static PyObject *__pyx_n_s_absolute_shape_2;
 static PyObject *__pyx_n_s_atan2;
@@ -883,11 +872,9 @@ static PyObject *__pyx_n_s_collision_handler;
 static PyObject *__pyx_n_s_contact_points;
 static PyObject *__pyx_n_s_cos;
 static PyObject *__pyx_n_s_do_replace;
-static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_entity_name;
 static PyObject *__pyx_n_s_entity_name_1;
 static PyObject *__pyx_n_s_entity_name_2;
-static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_frame_time_delta;
 static PyObject *__pyx_n_s_friction;
 static PyObject *__pyx_n_s_import;
@@ -901,7 +888,7 @@ static PyObject *__pyx_n_s_mover;
 static PyObject *__pyx_n_s_movers;
 static PyObject *__pyx_n_s_movers_to_delete;
 static PyObject *__pyx_n_s_physics;
-static PyObject *__pyx_n_s_print;
+static PyObject *__pyx_n_s_pi;
 static PyObject *__pyx_n_s_rectangle;
 static PyObject *__pyx_n_s_rot_decay;
 static PyObject *__pyx_n_s_rot_friction;
@@ -920,8 +907,9 @@ static PyObject *__pyx_n_s_vr;
 static PyObject *__pyx_n_s_vx;
 static PyObject *__pyx_n_s_vy;
 static PyObject *__pyx_n_s_yapyg;
-static PyObject *__pyx_n_s_yapyg_widgets_display_widget;
+static PyObject *__pyx_float_0_0;
 static PyObject *__pyx_float_2_0;
+static PyObject *__pyx_float_neg_1_0;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_2;
@@ -933,7 +921,6 @@ static PyObject *__pyx_int_7;
 static PyObject *__pyx_int_8;
 static PyObject *__pyx_int_9;
 static PyObject *__pyx_int_10;
-static PyObject *__pyx_int_neg_1;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
@@ -942,8 +929,8 @@ static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
 
-/* "yapyg_movers\physical_mover.pyx":48
- * cdef str PHYSICS_MOVER_NAME = "physics"
+/* "yapyg_movers\physical_mover.pyx":50
+ * cdef float CONST_2PI = 2 * math.pi
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
  *                 str entity_name,
@@ -953,7 +940,7 @@ static PyObject *__pyx_tuple__7;
 static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_1add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_add(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_mass, float __pyx_v_vx, float __pyx_v_vy, float __pyx_v_ax, float __pyx_v_ay, float __pyx_v_friction, float __pyx_v_inelasticity, float __pyx_v_vr, float __pyx_v_rot_friction, float __pyx_v_rot_decay, float __pyx_v_stickyness, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_14physical_mover_add *__pyx_optional_args) {
 
-  /* "yapyg_movers\physical_mover.pyx":61
+  /* "yapyg_movers\physical_mover.pyx":63
  *                 float rot_decay,
  *                 float stickyness,
  *                 int do_replace=False):             # <<<<<<<<<<<<<<
@@ -976,17 +963,17 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_add(PyObject *__pyx_v_s
     }
   }
 
-  /* "yapyg_movers\physical_mover.pyx":67
+  /* "yapyg_movers\physical_mover.pyx":69
  *         yapyg.movers.add(state,
  *                 entity_name,
  *                 c_create(entity_name,             # <<<<<<<<<<<<<<
  *                         mass,
  *                         vx, vy,
  */
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_c_create(__pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_c_create(__pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg_movers\physical_mover.pyx":65
+  /* "yapyg_movers\physical_mover.pyx":67
  *         vr > 0: counter-clockwise
  *         """
  *         yapyg.movers.add(state,             # <<<<<<<<<<<<<<
@@ -995,13 +982,13 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_add(PyObject *__pyx_v_s
  */
   __pyx_t_3.__pyx_n = 1;
   __pyx_t_3.do_replace = __pyx_v_do_replace;
-  __pyx_t_2 = __pyx_f_5yapyg_6movers_add(__pyx_v_state, __pyx_v_entity_name, ((PyObject*)__pyx_t_1), 0, &__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_5yapyg_6movers_add(__pyx_v_state, __pyx_v_entity_name, ((PyObject*)__pyx_t_1), 0, &__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":48
- * cdef str PHYSICS_MOVER_NAME = "physics"
+  /* "yapyg_movers\physical_mover.pyx":50
+ * cdef float CONST_2PI = 2 * math.pi
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
  *                 str entity_name,
@@ -1078,62 +1065,62 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_1add(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_mass)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_vx)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_vy)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ax)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  6:
         if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ay)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 6); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 6); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  7:
         if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_friction)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 7); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 7); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  8:
         if (likely((values[8] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_inelasticity)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 8); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 8); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  9:
         if (likely((values[9] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_vr)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 9); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 9); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 10:
         if (likely((values[10] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rot_friction)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 10); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 10); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 11:
         if (likely((values[11] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rot_decay)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 11); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 11); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 12:
         if (likely((values[12] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_stickyness)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 12); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, 12); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 13:
         if (kw_args > 0) {
@@ -1142,7 +1129,7 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_1add(PyObject *__pyx_s
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1166,22 +1153,22 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_1add(PyObject *__pyx_s
     }
     __pyx_v_state = ((PyObject*)values[0]);
     __pyx_v_entity_name = ((PyObject*)values[1]);
-    __pyx_v_mass = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_mass == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_vx = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_vx == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_vy = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_vy == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_ax = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_ax == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_ay = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_ay == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_friction = __pyx_PyFloat_AsFloat(values[7]); if (unlikely((__pyx_v_friction == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_inelasticity = __pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_inelasticity == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_vr = __pyx_PyFloat_AsFloat(values[9]); if (unlikely((__pyx_v_vr == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_rot_friction = __pyx_PyFloat_AsFloat(values[10]); if (unlikely((__pyx_v_rot_friction == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_rot_decay = __pyx_PyFloat_AsFloat(values[11]); if (unlikely((__pyx_v_rot_decay == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_stickyness = __pyx_PyFloat_AsFloat(values[12]); if (unlikely((__pyx_v_stickyness == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_mass = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_mass == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_vx = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_vx == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_vy = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_vy == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_ax = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_ax == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_ay = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_ay == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_friction = __pyx_PyFloat_AsFloat(values[7]); if (unlikely((__pyx_v_friction == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_inelasticity = __pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_inelasticity == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_vr = __pyx_PyFloat_AsFloat(values[9]); if (unlikely((__pyx_v_vr == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_rot_friction = __pyx_PyFloat_AsFloat(values[10]); if (unlikely((__pyx_v_rot_friction == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_rot_decay = __pyx_PyFloat_AsFloat(values[11]); if (unlikely((__pyx_v_rot_decay == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_stickyness = __pyx_PyFloat_AsFloat(values[12]); if (unlikely((__pyx_v_stickyness == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     if (values[13]) {
-      __pyx_v_do_replace = __Pyx_PyInt_As_int(values[13]); if (unlikely((__pyx_v_do_replace == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_do_replace = __Pyx_PyInt_As_int(values[13]); if (unlikely((__pyx_v_do_replace == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
 
-      /* "yapyg_movers\physical_mover.pyx":61
+      /* "yapyg_movers\physical_mover.pyx":63
  *                 float rot_decay,
  *                 float stickyness,
  *                 int do_replace=False):             # <<<<<<<<<<<<<<
@@ -1193,18 +1180,18 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_1add(PyObject *__pyx_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("add", 0, 13, 14, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg_movers.physical_mover.add", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_12yapyg_movers_14physical_mover_add(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness, __pyx_v_do_replace);
 
-  /* "yapyg_movers\physical_mover.pyx":48
- * cdef str PHYSICS_MOVER_NAME = "physics"
+  /* "yapyg_movers\physical_mover.pyx":50
+ * cdef float CONST_2PI = 2 * math.pi
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
  *                 str entity_name,
@@ -1232,7 +1219,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_add(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.do_replace = __pyx_v_do_replace;
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_add(__pyx_v_state, __pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_add(__pyx_v_state, __pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1249,7 +1236,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_add(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":81
+/* "yapyg_movers\physical_mover.pyx":83
  *                 )
  * 
  * cdef list c_create(str entity_name,             # <<<<<<<<<<<<<<
@@ -1279,7 +1266,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_create(PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c_create", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":97
+  /* "yapyg_movers\physical_mover.pyx":99
  *         TODO
  *         """
  *         return [PHYSICS_MOVER_NAME,             # <<<<<<<<<<<<<<
@@ -1288,144 +1275,144 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_create(PyObject *__py
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "yapyg_movers\physical_mover.pyx":98
+  /* "yapyg_movers\physical_mover.pyx":100
  *         """
  *         return [PHYSICS_MOVER_NAME,
  *                 run,             # <<<<<<<<<<<<<<
  *                 entity_name,
  *                 collision_handler,
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_run); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_run); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg_movers\physical_mover.pyx":100
+  /* "yapyg_movers\physical_mover.pyx":102
  *                 run,
  *                 entity_name,
  *                 collision_handler,             # <<<<<<<<<<<<<<
  *                 mass,
  *                 vx,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_collision_handler); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_collision_handler); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg_movers\physical_mover.pyx":101
+  /* "yapyg_movers\physical_mover.pyx":103
  *                 entity_name,
  *                 collision_handler,
  *                 mass,             # <<<<<<<<<<<<<<
  *                 vx,
  *                 vy,
  */
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_mass); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_mass); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg_movers\physical_mover.pyx":102
+  /* "yapyg_movers\physical_mover.pyx":104
  *                 collision_handler,
  *                 mass,
  *                 vx,             # <<<<<<<<<<<<<<
  *                 vy,
  *                 ax,
  */
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_vx); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_vx); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "yapyg_movers\physical_mover.pyx":103
+  /* "yapyg_movers\physical_mover.pyx":105
  *                 mass,
  *                 vx,
  *                 vy,             # <<<<<<<<<<<<<<
  *                 ax,
  *                 ay,
  */
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vy); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vy); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "yapyg_movers\physical_mover.pyx":104
+  /* "yapyg_movers\physical_mover.pyx":106
  *                 vx,
  *                 vy,
  *                 ax,             # <<<<<<<<<<<<<<
  *                 ay,
  *                 friction,
  */
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_ax); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_ax); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "yapyg_movers\physical_mover.pyx":105
+  /* "yapyg_movers\physical_mover.pyx":107
  *                 vy,
  *                 ax,
  *                 ay,             # <<<<<<<<<<<<<<
  *                 friction,
  *                 inelasticity,
  */
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_ay); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_ay); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "yapyg_movers\physical_mover.pyx":106
+  /* "yapyg_movers\physical_mover.pyx":108
  *                 ax,
  *                 ay,
  *                 friction,             # <<<<<<<<<<<<<<
  *                 inelasticity,
  *                 vr,
  */
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_friction); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_friction); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
 
-  /* "yapyg_movers\physical_mover.pyx":107
+  /* "yapyg_movers\physical_mover.pyx":109
  *                 ay,
  *                 friction,
  *                 inelasticity,             # <<<<<<<<<<<<<<
  *                 vr,
  *                 rot_friction,
  */
-  __pyx_t_9 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
 
-  /* "yapyg_movers\physical_mover.pyx":108
+  /* "yapyg_movers\physical_mover.pyx":110
  *                 friction,
  *                 inelasticity,
  *                 vr,             # <<<<<<<<<<<<<<
  *                 rot_friction,
  *                 rot_decay,
  */
-  __pyx_t_10 = PyFloat_FromDouble(__pyx_v_vr); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyFloat_FromDouble(__pyx_v_vr); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
 
-  /* "yapyg_movers\physical_mover.pyx":109
+  /* "yapyg_movers\physical_mover.pyx":111
  *                 inelasticity,
  *                 vr,
  *                 rot_friction,             # <<<<<<<<<<<<<<
  *                 rot_decay,
  *                 stickyness,
  */
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_rot_friction); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_rot_friction); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "yapyg_movers\physical_mover.pyx":110
+  /* "yapyg_movers\physical_mover.pyx":112
  *                 vr,
  *                 rot_friction,
  *                 rot_decay,             # <<<<<<<<<<<<<<
  *                 stickyness,
  *                 ]
  */
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_rot_decay); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_rot_decay); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "yapyg_movers\physical_mover.pyx":111
+  /* "yapyg_movers\physical_mover.pyx":113
  *                 rot_friction,
  *                 rot_decay,
  *                 stickyness,             # <<<<<<<<<<<<<<
  *                 ]
  * 
  */
-  __pyx_t_13 = PyFloat_FromDouble(__pyx_v_stickyness); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_13 = PyFloat_FromDouble(__pyx_v_stickyness); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "yapyg_movers\physical_mover.pyx":97
+  /* "yapyg_movers\physical_mover.pyx":99
  *         TODO
  *         """
  *         return [PHYSICS_MOVER_NAME,             # <<<<<<<<<<<<<<
  *                 run,
  *                 entity_name,
  */
-  __pyx_t_14 = PyList_New(15); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_14 = PyList_New(15); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_INCREF(__pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME);
   PyList_SET_ITEM(__pyx_t_14, 0, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME);
@@ -1476,7 +1463,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_create(PyObject *__py
   __pyx_t_14 = 0;
   goto __pyx_L0;
 
-  /* "yapyg_movers\physical_mover.pyx":81
+  /* "yapyg_movers\physical_mover.pyx":83
  *                 )
  * 
  * cdef list c_create(str entity_name,             # <<<<<<<<<<<<<<
@@ -1508,7 +1495,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_create(PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":114
+/* "yapyg_movers\physical_mover.pyx":116
  *                 ]
  * 
  * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
@@ -1518,446 +1505,376 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_create(PyObject *__py
 
 static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_3run(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_14physical_mover_run(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, CYTHON_UNUSED PyObject *__pyx_v_movers_to_delete, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  float __pyx_v_v_x;
-  float __pyx_v_v_y;
-  float __pyx_v_a_x;
-  float __pyx_v_a_y;
-  float __pyx_v_a_x_halfed;
-  float __pyx_v_a_y_halfed;
-  float __pyx_v_time_squared;
-  float __pyx_v_delta_x;
-  float __pyx_v_delta_y;
-  float __pyx_v_delta_vx;
-  float __pyx_v_delta_vy;
+  PyObject *__pyx_v_accel_vector = 0;
+  PyObject *__pyx_v_velocity_vector = 0;
   float __pyx_v_v_r;
+  float __pyx_v_delta_time;
+  PyObject *__pyx_v_delta_dist_vector = 0;
+  PyObject *__pyx_v_delta_velocity_vector = 0;
   float __pyx_v_delta_rot;
-  float __pyx_v_stickyness;
-  float __pyx_v_friction;
-  float __pyx_v_rot_decay;
   PyObject *__pyx_v_collision_result = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  float __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  float __pyx_t_4;
   int __pyx_t_5;
+  float __pyx_t_6;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":118
+  /* "yapyg_movers\physical_mover.pyx":120
  *         TODO
  *         """
- *         cdef float v_x = mover[IDX_MOVERS_PHYSICAL_VX]             # <<<<<<<<<<<<<<
- *         cdef float v_y = mover[IDX_MOVERS_PHYSICAL_VY]
- * 
+ *         cdef tuple accel_vector = (mover[IDX_MOVERS_PHYSICAL_AX], mover[IDX_MOVERS_PHYSICAL_AY])             # <<<<<<<<<<<<<<
+ *         cdef tuple velocity_vector = (mover[IDX_MOVERS_PHYSICAL_VX], mover[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]
  */
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_AX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_v_x = __pyx_t_3;
-
-  /* "yapyg_movers\physical_mover.pyx":119
- *         """
- *         cdef float v_x = mover[IDX_MOVERS_PHYSICAL_VX]
- *         cdef float v_y = mover[IDX_MOVERS_PHYSICAL_VY]             # <<<<<<<<<<<<<<
- * 
- *         cdef float a_x = mover[IDX_MOVERS_PHYSICAL_AX]
- */
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_mover, __pyx_t_2); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_AY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_v_y = __pyx_t_3;
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 0;
+  __pyx_v_accel_vector = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":121
- *         cdef float v_y = mover[IDX_MOVERS_PHYSICAL_VY]
- * 
- *         cdef float a_x = mover[IDX_MOVERS_PHYSICAL_AX]             # <<<<<<<<<<<<<<
- *         cdef float a_y = mover[IDX_MOVERS_PHYSICAL_AY]
- * 
+ *         """
+ *         cdef tuple accel_vector = (mover[IDX_MOVERS_PHYSICAL_AX], mover[IDX_MOVERS_PHYSICAL_AY])
+ *         cdef tuple velocity_vector = (mover[IDX_MOVERS_PHYSICAL_VX], mover[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
+ *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]
+ *         cdef float delta_time = frame_time_delta / 1000.0
  */
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_AX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (unlikely(__pyx_v_mover == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_a_x = __pyx_t_3;
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_3 = 0;
+  __pyx_t_2 = 0;
+  __pyx_v_velocity_vector = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":122
+ *         cdef tuple accel_vector = (mover[IDX_MOVERS_PHYSICAL_AX], mover[IDX_MOVERS_PHYSICAL_AY])
+ *         cdef tuple velocity_vector = (mover[IDX_MOVERS_PHYSICAL_VX], mover[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
+ *         cdef float delta_time = frame_time_delta / 1000.0
  * 
- *         cdef float a_x = mover[IDX_MOVERS_PHYSICAL_AX]
- *         cdef float a_y = mover[IDX_MOVERS_PHYSICAL_AY]             # <<<<<<<<<<<<<<
- * 
- *         cdef float a_x_halfed = (a_x / 2.0)
  */
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_AY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_mover, __pyx_t_2); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_a_y = __pyx_t_3;
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_v_r = __pyx_t_4;
 
-  /* "yapyg_movers\physical_mover.pyx":124
- *         cdef float a_y = mover[IDX_MOVERS_PHYSICAL_AY]
+  /* "yapyg_movers\physical_mover.pyx":123
+ *         cdef tuple velocity_vector = (mover[IDX_MOVERS_PHYSICAL_VX], mover[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]
+ *         cdef float delta_time = frame_time_delta / 1000.0             # <<<<<<<<<<<<<<
  * 
- *         cdef float a_x_halfed = (a_x / 2.0)             # <<<<<<<<<<<<<<
- *         cdef float a_y_halfed = (a_y / 2.0)
- *         cdef float time_squared = (frame_time_delta / 1000.0)
+ *         # s = 0.5 a t^2
  */
-  __pyx_v_a_x_halfed = (__pyx_v_a_x / 2.0);
-
-  /* "yapyg_movers\physical_mover.pyx":125
- * 
- *         cdef float a_x_halfed = (a_x / 2.0)
- *         cdef float a_y_halfed = (a_y / 2.0)             # <<<<<<<<<<<<<<
- *         cdef float time_squared = (frame_time_delta / 1000.0)
- *         time_squared = (time_squared * time_squared)
- */
-  __pyx_v_a_y_halfed = (__pyx_v_a_y / 2.0);
+  __pyx_v_delta_time = (__pyx_v_frame_time_delta / 1000.0);
 
   /* "yapyg_movers\physical_mover.pyx":126
- *         cdef float a_x_halfed = (a_x / 2.0)
- *         cdef float a_y_halfed = (a_y / 2.0)
- *         cdef float time_squared = (frame_time_delta / 1000.0)             # <<<<<<<<<<<<<<
- *         time_squared = (time_squared * time_squared)
  * 
+ *         # s = 0.5 a t^2
+ *         cdef tuple delta_dist_vector = yapyg.math_2d.vector_product(accel_vector, 0.5 * delta_time * delta_time / 1000.0)             # <<<<<<<<<<<<<<
+ * 
+ *         # s = v t
  */
-  __pyx_v_time_squared = (__pyx_v_frame_time_delta / 1000.0);
+  __pyx_t_2 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_accel_vector, (((0.5 * __pyx_v_delta_time) * __pyx_v_delta_time) / 1000.0), 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_delta_dist_vector = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":127
- *         cdef float a_y_halfed = (a_y / 2.0)
- *         cdef float time_squared = (frame_time_delta / 1000.0)
- *         time_squared = (time_squared * time_squared)             # <<<<<<<<<<<<<<
+  /* "yapyg_movers\physical_mover.pyx":129
  * 
- *         # s = 0.5 a t^2 + v t
- */
-  __pyx_v_time_squared = (__pyx_v_time_squared * __pyx_v_time_squared);
-
-  /* "yapyg_movers\physical_mover.pyx":130
- * 
- *         # s = 0.5 a t^2 + v t
- *         cdef float delta_x = (((a_x_halfed * time_squared)) / 1000.0)             # <<<<<<<<<<<<<<
- *         cdef float delta_y = (((a_y_halfed * time_squared)) / 1000.0)
- * 
- */
-  __pyx_v_delta_x = ((__pyx_v_a_x_halfed * __pyx_v_time_squared) / 1000.0);
-
-  /* "yapyg_movers\physical_mover.pyx":131
- *         # s = 0.5 a t^2 + v t
- *         cdef float delta_x = (((a_x_halfed * time_squared)) / 1000.0)
- *         cdef float delta_y = (((a_y_halfed * time_squared)) / 1000.0)             # <<<<<<<<<<<<<<
- * 
- *         delta_x += (((v_x * frame_time_delta)) / 1000.0)
- */
-  __pyx_v_delta_y = ((__pyx_v_a_y_halfed * __pyx_v_time_squared) / 1000.0);
-
-  /* "yapyg_movers\physical_mover.pyx":133
- *         cdef float delta_y = (((a_y_halfed * time_squared)) / 1000.0)
- * 
- *         delta_x += (((v_x * frame_time_delta)) / 1000.0)             # <<<<<<<<<<<<<<
- *         delta_y += (((v_y * frame_time_delta)) / 1000.0)
- * 
- */
-  __pyx_v_delta_x = (__pyx_v_delta_x + ((__pyx_v_v_x * __pyx_v_frame_time_delta) / 1000.0));
-
-  /* "yapyg_movers\physical_mover.pyx":134
- * 
- *         delta_x += (((v_x * frame_time_delta)) / 1000.0)
- *         delta_y += (((v_y * frame_time_delta)) / 1000.0)             # <<<<<<<<<<<<<<
+ *         # s = v t
+ *         delta_dist_vector = yapyg.math_2d.vector_sum(delta_dist_vector, yapyg.math_2d.vector_product(velocity_vector, delta_time))             # <<<<<<<<<<<<<<
  * 
  *         # v = a t
  */
-  __pyx_v_delta_y = (__pyx_v_delta_y + ((__pyx_v_v_y * __pyx_v_frame_time_delta) / 1000.0));
+  __pyx_t_2 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_velocity_vector, __pyx_v_delta_time, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_delta_dist_vector, ((PyObject*)__pyx_t_2), 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(__pyx_v_delta_dist_vector, ((PyObject*)__pyx_t_1));
+  __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":137
+  /* "yapyg_movers\physical_mover.pyx":132
  * 
  *         # v = a t
- *         cdef float delta_vx = (((a_x * frame_time_delta)) / 1000.0)             # <<<<<<<<<<<<<<
- *         cdef float delta_vy = (((a_y * frame_time_delta)) / 1000.0)
+ *         cdef tuple delta_velocity_vector = yapyg.math_2d.vector_product(accel_vector, delta_time)             # <<<<<<<<<<<<<<
+ * 
+ *         # translation friction
+ */
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_accel_vector, __pyx_v_delta_time, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_delta_velocity_vector = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":135
+ * 
+ *         # translation friction
+ *         velocity_vector = yapyg.math_2d.vector_sum(velocity_vector, delta_velocity_vector)             # <<<<<<<<<<<<<<
+ *         velocity_vector = yapyg.math_2d.vector_product(velocity_vector, mover[IDX_MOVERS_PHYSICAL_FRICTION])
  * 
  */
-  __pyx_v_delta_vx = ((__pyx_v_a_x * __pyx_v_frame_time_delta) / 1000.0);
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_velocity_vector, __pyx_v_delta_velocity_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF_SET(__pyx_v_velocity_vector, ((PyObject*)__pyx_t_1));
+  __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":138
- *         # v = a t
- *         cdef float delta_vx = (((a_x * frame_time_delta)) / 1000.0)
- *         cdef float delta_vy = (((a_y * frame_time_delta)) / 1000.0)             # <<<<<<<<<<<<<<
+  /* "yapyg_movers\physical_mover.pyx":136
+ *         # translation friction
+ *         velocity_vector = yapyg.math_2d.vector_sum(velocity_vector, delta_velocity_vector)
+ *         velocity_vector = yapyg.math_2d.vector_product(velocity_vector, mover[IDX_MOVERS_PHYSICAL_FRICTION])             # <<<<<<<<<<<<<<
  * 
- *         v_x += delta_vx
- */
-  __pyx_v_delta_vy = ((__pyx_v_a_y * __pyx_v_frame_time_delta) / 1000.0);
-
-  /* "yapyg_movers\physical_mover.pyx":140
- *         cdef float delta_vy = (((a_y * frame_time_delta)) / 1000.0)
- * 
- *         v_x += delta_vx             # <<<<<<<<<<<<<<
- *         v_y += delta_vy
- * 
- */
-  __pyx_v_v_x = (__pyx_v_v_x + __pyx_v_delta_vx);
-
-  /* "yapyg_movers\physical_mover.pyx":141
- * 
- *         v_x += delta_vx
- *         v_y += delta_vy             # <<<<<<<<<<<<<<
- * 
- *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]
- */
-  __pyx_v_v_y = (__pyx_v_v_y + __pyx_v_delta_vy);
-
-  /* "yapyg_movers\physical_mover.pyx":143
- *         v_y += delta_vy
- * 
- *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
- *         cdef float delta_rot = (v_r * frame_time_delta)
- * 
+ *         # rotation amount
  */
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_FRICTION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_v_r = __pyx_t_3;
+  __pyx_t_2 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_velocity_vector, __pyx_t_4, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF_SET(__pyx_v_velocity_vector, ((PyObject*)__pyx_t_2));
+  __pyx_t_2 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":144
+  /* "yapyg_movers\physical_mover.pyx":139
  * 
- *         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]
- *         cdef float delta_rot = (v_r * frame_time_delta)             # <<<<<<<<<<<<<<
+ *         # rotation amount
+ *         cdef float delta_rot = v_r * frame_time_delta             # <<<<<<<<<<<<<<
  * 
- *         cdef float stickyness = mover[IDX_MOVERS_PHYSICAL_STICKYNESS]
+ *         if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
  */
   __pyx_v_delta_rot = (__pyx_v_v_r * __pyx_v_frame_time_delta);
 
-  /* "yapyg_movers\physical_mover.pyx":146
- *         cdef float delta_rot = (v_r * frame_time_delta)
+  /* "yapyg_movers\physical_mover.pyx":141
+ *         cdef float delta_rot = v_r * frame_time_delta
  * 
- *         cdef float stickyness = mover[IDX_MOVERS_PHYSICAL_STICKYNESS]             # <<<<<<<<<<<<<<
- *         if yapyg.math_2d.length((v_x, v_y,)) < stickyness:
- *                 delta_x = 0
+ *         if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:             # <<<<<<<<<<<<<<
+ *                 delta_dist_vector = (0, 0)
+ *                 delta_rot = 0
  */
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_f_5yapyg_7math_2d_length(__pyx_v_velocity_vector, 0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_STICKYNESS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_mover, __pyx_t_2); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_STICKYNESS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_GetItem(__pyx_v_mover, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_stickyness = __pyx_t_3;
-
-  /* "yapyg_movers\physical_mover.pyx":147
- * 
- *         cdef float stickyness = mover[IDX_MOVERS_PHYSICAL_STICKYNESS]
- *         if yapyg.math_2d.length((v_x, v_y,)) < stickyness:             # <<<<<<<<<<<<<<
- *                 delta_x = 0
- *                 delta_y = 0
- */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_v_y); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_1 = 0;
-  __pyx_t_2 = 0;
-  __pyx_t_5 = ((__pyx_f_5yapyg_7math_2d_length(((PyObject*)__pyx_t_4), 0) < __pyx_v_stickyness) != 0);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_LT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_5) {
 
-    /* "yapyg_movers\physical_mover.pyx":148
- *         cdef float stickyness = mover[IDX_MOVERS_PHYSICAL_STICKYNESS]
- *         if yapyg.math_2d.length((v_x, v_y,)) < stickyness:
- *                 delta_x = 0             # <<<<<<<<<<<<<<
- *                 delta_y = 0
- *                 delta_rot = 0
- */
-    __pyx_v_delta_x = 0.0;
-
-    /* "yapyg_movers\physical_mover.pyx":149
- *         if yapyg.math_2d.length((v_x, v_y,)) < stickyness:
- *                 delta_x = 0
- *                 delta_y = 0             # <<<<<<<<<<<<<<
+    /* "yapyg_movers\physical_mover.pyx":142
+ * 
+ *         if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
+ *                 delta_dist_vector = (0, 0)             # <<<<<<<<<<<<<<
  *                 delta_rot = 0
  * 
  */
-    __pyx_v_delta_y = 0.0;
+    __Pyx_INCREF(__pyx_tuple_);
+    __Pyx_DECREF_SET(__pyx_v_delta_dist_vector, __pyx_tuple_);
 
-    /* "yapyg_movers\physical_mover.pyx":150
- *                 delta_x = 0
- *                 delta_y = 0
+    /* "yapyg_movers\physical_mover.pyx":143
+ *         if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
+ *                 delta_dist_vector = (0, 0)
  *                 delta_rot = 0             # <<<<<<<<<<<<<<
  * 
- *         cdef float friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]
+ *         # rotation velocity decay
  */
     __pyx_v_delta_rot = 0.0;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "yapyg_movers\physical_mover.pyx":152
- *                 delta_rot = 0
+  /* "yapyg_movers\physical_mover.pyx":146
  * 
- *         cdef float friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]             # <<<<<<<<<<<<<<
- *         mover[IDX_MOVERS_PHYSICAL_VX] = (v_x * friction)
- *         mover[IDX_MOVERS_PHYSICAL_VY] = (v_y * friction)
+ *         # rotation velocity decay
+ *         mover[IDX_MOVERS_PHYSICAL_VR] = v_r * mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]             # <<<<<<<<<<<<<<
+ * 
+ *         mover[IDX_MOVERS_PHYSICAL_VX] = velocity_vector[0]
  */
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_FRICTION); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_4); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_DECAY); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_mover, __pyx_t_3); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_friction = __pyx_t_3;
-
-  /* "yapyg_movers\physical_mover.pyx":153
- * 
- *         cdef float friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]
- *         mover[IDX_MOVERS_PHYSICAL_VX] = (v_x * friction)             # <<<<<<<<<<<<<<
- *         mover[IDX_MOVERS_PHYSICAL_VY] = (v_y * friction)
- * 
- */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_v_x * __pyx_v_friction)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_mover, __pyx_t_4, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":154
- *         cdef float friction = mover[IDX_MOVERS_PHYSICAL_FRICTION]
- *         mover[IDX_MOVERS_PHYSICAL_VX] = (v_x * friction)
- *         mover[IDX_MOVERS_PHYSICAL_VY] = (v_y * friction)             # <<<<<<<<<<<<<<
- * 
- *         cdef float rot_decay = mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
- */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_v_y * __pyx_v_friction)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely(__pyx_v_mover == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_mover, __pyx_t_4, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (unlikely(PyObject_SetItem(__pyx_v_mover, __pyx_t_2, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":156
- *         mover[IDX_MOVERS_PHYSICAL_VY] = (v_y * friction)
+  /* "yapyg_movers\physical_mover.pyx":148
+ *         mover[IDX_MOVERS_PHYSICAL_VR] = v_r * mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
  * 
- *         cdef float rot_decay = mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]             # <<<<<<<<<<<<<<
- *         mover[IDX_MOVERS_PHYSICAL_VR] = (v_r * rot_decay)
+ *         mover[IDX_MOVERS_PHYSICAL_VX] = velocity_vector[0]             # <<<<<<<<<<<<<<
+ *         mover[IDX_MOVERS_PHYSICAL_VY] = velocity_vector[1]
  * 
  */
+  if (unlikely(__pyx_v_velocity_vector == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_velocity_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_DECAY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyObject_GetItem(__pyx_v_mover, __pyx_t_2); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_4);
+  if (unlikely(PyObject_SetItem(__pyx_v_mover, __pyx_t_2, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_v_rot_decay = __pyx_t_3;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":157
+  /* "yapyg_movers\physical_mover.pyx":149
  * 
- *         cdef float rot_decay = mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
- *         mover[IDX_MOVERS_PHYSICAL_VR] = (v_r * rot_decay)             # <<<<<<<<<<<<<<
+ *         mover[IDX_MOVERS_PHYSICAL_VX] = velocity_vector[0]
+ *         mover[IDX_MOVERS_PHYSICAL_VY] = velocity_vector[1]             # <<<<<<<<<<<<<<
  * 
- *         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y, delta_rot)
+ *         yapyg.entities.add_pos(state, entity_name, delta_dist_vector[0], delta_dist_vector[1], delta_rot)
  */
-  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_v_r * __pyx_v_rot_decay)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
+  if (unlikely(__pyx_v_velocity_vector == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_velocity_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
   if (unlikely(__pyx_v_mover == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely(PyObject_SetItem(__pyx_v_mover, __pyx_t_2, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_mover, __pyx_t_2, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":159
- *         mover[IDX_MOVERS_PHYSICAL_VR] = (v_r * rot_decay)
+  /* "yapyg_movers\physical_mover.pyx":151
+ *         mover[IDX_MOVERS_PHYSICAL_VY] = velocity_vector[1]
  * 
- *         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y, delta_rot)             # <<<<<<<<<<<<<<
+ *         yapyg.entities.add_pos(state, entity_name, delta_dist_vector[0], delta_dist_vector[1], delta_rot)             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple collision_result = yapyg.collisions.run(state, entity_name)
  */
-  __pyx_t_4 = __pyx_f_5yapyg_8entities_add_pos(__pyx_v_state, __pyx_v_entity_name, __pyx_v_delta_x, __pyx_v_delta_y, __pyx_v_delta_rot, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (unlikely(__pyx_v_delta_dist_vector == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_delta_dist_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(__pyx_v_delta_dist_vector == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_delta_dist_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __pyx_f_5yapyg_8entities_add_pos(__pyx_v_state, __pyx_v_entity_name, __pyx_t_4, __pyx_t_6, __pyx_v_delta_rot, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":161
- *         yapyg.entities.add_pos(state, entity_name, delta_x, delta_y, delta_rot)
+  /* "yapyg_movers\physical_mover.pyx":153
+ *         yapyg.entities.add_pos(state, entity_name, delta_dist_vector[0], delta_dist_vector[1], delta_rot)
  * 
  *         cdef tuple collision_result = yapyg.collisions.run(state, entity_name)             # <<<<<<<<<<<<<<
  *         if collision_result:
  *                 collision_handler(*collision_result)
  */
-  __pyx_t_4 = __pyx_f_5yapyg_10collisions_run(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_v_collision_result = ((PyObject*)__pyx_t_4);
-  __pyx_t_4 = 0;
+  __pyx_t_3 = __pyx_f_5yapyg_10collisions_run(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_collision_result = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":162
+  /* "yapyg_movers\physical_mover.pyx":154
  * 
  *         cdef tuple collision_result = yapyg.collisions.run(state, entity_name)
  *         if collision_result:             # <<<<<<<<<<<<<<
@@ -1967,27 +1884,27 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_run(PyObject *__pyx_v_s
   __pyx_t_5 = (__pyx_v_collision_result != Py_None) && (PyTuple_GET_SIZE(__pyx_v_collision_result) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg_movers\physical_mover.pyx":163
+    /* "yapyg_movers\physical_mover.pyx":155
  *         cdef tuple collision_result = yapyg.collisions.run(state, entity_name)
  *         if collision_result:
  *                 collision_handler(*collision_result)             # <<<<<<<<<<<<<<
  * 
- * cdef float CONST_2PI = (2 * 3.14159265359)
+ * cdef tuple compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_collision_handler); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PySequence_Tuple(__pyx_v_collision_result); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_collision_handler); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = PySequence_Tuple(__pyx_v_collision_result); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     goto __pyx_L4;
   }
   __pyx_L4:;
 
-  /* "yapyg_movers\physical_mover.pyx":114
+  /* "yapyg_movers\physical_mover.pyx":116
  *                 ]
  * 
  * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
@@ -2001,10 +1918,14 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_run(PyObject *__pyx_v_s
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_AddTraceback("yapyg_movers.physical_mover.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_accel_vector);
+  __Pyx_XDECREF(__pyx_v_velocity_vector);
+  __Pyx_XDECREF(__pyx_v_delta_dist_vector);
+  __Pyx_XDECREF(__pyx_v_delta_velocity_vector);
   __Pyx_XDECREF(__pyx_v_collision_result);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -2049,26 +1970,26 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_3run(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_mover)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_frame_time_delta)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_movers_to_delete)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "run") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "run") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -2082,21 +2003,21 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_3run(PyObject *__pyx_s
     __pyx_v_state = ((PyObject*)values[0]);
     __pyx_v_entity_name = ((PyObject*)values[1]);
     __pyx_v_mover = ((PyObject*)values[2]);
-    __pyx_v_frame_time_delta = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_frame_time_delta == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_frame_time_delta = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_frame_time_delta == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     __pyx_v_movers_to_delete = ((PyObject*)values[4]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("run", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg_movers.physical_mover.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_mover), (&PyList_Type), 1, "mover", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_movers_to_delete), (&PyList_Type), 1, "movers_to_delete", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_mover), (&PyList_Type), 1, "mover", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_movers_to_delete), (&PyList_Type), 1, "movers_to_delete", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_12yapyg_movers_14physical_mover_2run(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_mover, __pyx_v_frame_time_delta, __pyx_v_movers_to_delete);
 
   /* function exit code */
@@ -2117,7 +2038,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_2run(CYTHON_UNUSED PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_run(__pyx_v_state, __pyx_v_entity_name, __pyx_v_mover, __pyx_v_frame_time_delta, __pyx_v_movers_to_delete, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_run(__pyx_v_state, __pyx_v_entity_name, __pyx_v_mover, __pyx_v_frame_time_delta, __pyx_v_movers_to_delete, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2134,15 +2055,15 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_2run(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":167
- * cdef float CONST_2PI = (2 * 3.14159265359)
+/* "yapyg_movers\physical_mover.pyx":157
+ *                 collision_handler(*collision_result)
  * 
- * cdef tuple c_compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):             # <<<<<<<<<<<<<<
+ * cdef tuple compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque(CYTHON_UNUSED PyObject *__pyx_v_state, float __pyx_v_v_r, float __pyx_v_v_x, float __pyx_v_rot_friction, float __pyx_v_circle_r, int __pyx_v_clockw_right) {
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_compute_circle_torque(CYTHON_UNUSED PyObject *__pyx_v_state, float __pyx_v_v_r, float __pyx_v_v_x, float __pyx_v_rot_friction, float __pyx_v_circle_r, int __pyx_v_clockw_right) {
   float __pyx_v_circle_circumference;
   float __pyx_v_v_p;
   float __pyx_v_delta;
@@ -2155,28 +2076,28 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("c_compute_circle_torque", 0);
+  __Pyx_RefNannySetupContext("compute_circle_torque", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":171
+  /* "yapyg_movers\physical_mover.pyx":161
  *         TODO
  *         """
- *         cdef float circle_circumference = ((CONST_2PI) * circle_r)             # <<<<<<<<<<<<<<
+ *         cdef float circle_circumference = CONST_2PI * circle_r             # <<<<<<<<<<<<<<
  * 
- *         cdef float v_p = (v_r * circle_circumference)
+ *         cdef float v_p = v_r * circle_circumference
  */
   __pyx_v_circle_circumference = (__pyx_v_12yapyg_movers_14physical_mover_CONST_2PI * __pyx_v_circle_r);
 
-  /* "yapyg_movers\physical_mover.pyx":173
- *         cdef float circle_circumference = ((CONST_2PI) * circle_r)
+  /* "yapyg_movers\physical_mover.pyx":163
+ *         cdef float circle_circumference = CONST_2PI * circle_r
  * 
- *         cdef float v_p = (v_r * circle_circumference)             # <<<<<<<<<<<<<<
+ *         cdef float v_p = v_r * circle_circumference             # <<<<<<<<<<<<<<
  * 
  *         if not clockw_right:
  */
   __pyx_v_v_p = (__pyx_v_v_r * __pyx_v_circle_circumference);
 
-  /* "yapyg_movers\physical_mover.pyx":175
- *         cdef float v_p = (v_r * circle_circumference)
+  /* "yapyg_movers\physical_mover.pyx":165
+ *         cdef float v_p = v_r * circle_circumference
  * 
  *         if not clockw_right:             # <<<<<<<<<<<<<<
  *                 v_p = -v_p
@@ -2185,7 +2106,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   __pyx_t_1 = ((!(__pyx_v_clockw_right != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg_movers\physical_mover.pyx":176
+    /* "yapyg_movers\physical_mover.pyx":166
  * 
  *         if not clockw_right:
  *                 v_p = -v_p             # <<<<<<<<<<<<<<
@@ -2197,26 +2118,26 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   }
   __pyx_L3:;
 
-  /* "yapyg_movers\physical_mover.pyx":178
+  /* "yapyg_movers\physical_mover.pyx":168
  *                 v_p = -v_p
  * 
  *         cdef float delta = v_p + v_x             # <<<<<<<<<<<<<<
- *         delta = (rot_friction * delta)
+ *         delta = rot_friction * delta
  * 
  */
   __pyx_v_delta = (__pyx_v_v_p + __pyx_v_v_x);
 
-  /* "yapyg_movers\physical_mover.pyx":179
+  /* "yapyg_movers\physical_mover.pyx":169
  * 
  *         cdef float delta = v_p + v_x
- *         delta = (rot_friction * delta)             # <<<<<<<<<<<<<<
+ *         delta = rot_friction * delta             # <<<<<<<<<<<<<<
  * 
  *         v_x = v_x - delta
  */
   __pyx_v_delta = (__pyx_v_rot_friction * __pyx_v_delta);
 
-  /* "yapyg_movers\physical_mover.pyx":181
- *         delta = (rot_friction * delta)
+  /* "yapyg_movers\physical_mover.pyx":171
+ *         delta = rot_friction * delta
  * 
  *         v_x = v_x - delta             # <<<<<<<<<<<<<<
  *         v_p = v_p - delta
@@ -2224,7 +2145,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
  */
   __pyx_v_v_x = (__pyx_v_v_x - __pyx_v_delta);
 
-  /* "yapyg_movers\physical_mover.pyx":182
+  /* "yapyg_movers\physical_mover.pyx":172
  * 
  *         v_x = v_x - delta
  *         v_p = v_p - delta             # <<<<<<<<<<<<<<
@@ -2233,7 +2154,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
  */
   __pyx_v_v_p = (__pyx_v_v_p - __pyx_v_delta);
 
-  /* "yapyg_movers\physical_mover.pyx":184
+  /* "yapyg_movers\physical_mover.pyx":174
  *         v_p = v_p - delta
  * 
  *         if not clockw_right:             # <<<<<<<<<<<<<<
@@ -2243,22 +2164,22 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   __pyx_t_1 = ((!(__pyx_v_clockw_right != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg_movers\physical_mover.pyx":185
+    /* "yapyg_movers\physical_mover.pyx":175
  * 
  *         if not clockw_right:
  *                 v_p = -v_p             # <<<<<<<<<<<<<<
  * 
- *         v_r = (v_p / circle_circumference)
+ *         v_r = v_p / circle_circumference
  */
     __pyx_v_v_p = (-__pyx_v_v_p);
     goto __pyx_L4;
   }
   __pyx_L4:;
 
-  /* "yapyg_movers\physical_mover.pyx":187
+  /* "yapyg_movers\physical_mover.pyx":177
  *                 v_p = -v_p
  * 
- *         v_r = (v_p / circle_circumference)             # <<<<<<<<<<<<<<
+ *         v_r = v_p / circle_circumference             # <<<<<<<<<<<<<<
  * 
  *         return (v_r, v_x)
  */
@@ -2270,23 +2191,23 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_v_r = (__pyx_v_v_p / __pyx_v_circle_circumference);
 
-  /* "yapyg_movers\physical_mover.pyx":189
- *         v_r = (v_p / circle_circumference)
+  /* "yapyg_movers\physical_mover.pyx":179
+ *         v_r = v_p / circle_circumference
  * 
  *         return (v_r, v_x)             # <<<<<<<<<<<<<<
  * 
- * cdef c_rectangle_circle_collision(list state,
+ * cdef rectangle_circle_collision(list state,
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
@@ -2298,10 +2219,10 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "yapyg_movers\physical_mover.pyx":167
- * cdef float CONST_2PI = (2 * 3.14159265359)
+  /* "yapyg_movers\physical_mover.pyx":157
+ *                 collision_handler(*collision_result)
  * 
- * cdef tuple c_compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):             # <<<<<<<<<<<<<<
+ * cdef tuple compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -2311,7 +2232,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("yapyg_movers.physical_mover.c_compute_circle_torque", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.compute_circle_torque", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2319,15 +2240,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":191
+/* "yapyg_movers\physical_mover.pyx":181
  *         return (v_r, v_x)
  * 
- * cdef c_rectangle_circle_collision(list state,             # <<<<<<<<<<<<<<
+ * cdef rectangle_circle_collision(list state,             # <<<<<<<<<<<<<<
  *                 str rectangle_entity_name,
  *                 str circle_entity_name,
  */
 
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_collision(PyObject *__pyx_v_state, CYTHON_UNUSED PyObject *__pyx_v_rectangle_entity_name, PyObject *__pyx_v_circle_entity_name, PyObject *__pyx_v_abs_rectangle_shape, PyObject *__pyx_v_abs_circle_shape, CYTHON_UNUSED PyObject *__pyx_v_rectangle_physical_mover, PyObject *__pyx_v_circle_physical_mover) {
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_rectangle_circle_collision(PyObject *__pyx_v_state, CYTHON_UNUSED PyObject *__pyx_v_rectangle_entity_name, PyObject *__pyx_v_circle_entity_name, PyObject *__pyx_v_abs_rectangle_shape, PyObject *__pyx_v_abs_circle_shape, CYTHON_UNUSED PyObject *__pyx_v_rectangle_physical_mover, PyObject *__pyx_v_circle_physical_mover) {
   float __pyx_v_circle_x;
   float __pyx_v_circle_y;
   float __pyx_v_circle_r;
@@ -2367,20 +2288,20 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("c_rectangle_circle_collision", 0);
+  __Pyx_RefNannySetupContext("rectangle_circle_collision", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":201
+  /* "yapyg_movers\physical_mover.pyx":191
  *         TODO
  *         """
  *         yapyg.entities.undo_last_move(state, circle_entity_name)             # <<<<<<<<<<<<<<
  * 
  *         cdef float circle_x = abs_circle_shape[1]
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_circle_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_circle_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":203
+  /* "yapyg_movers\physical_mover.pyx":193
  *         yapyg.entities.undo_last_move(state, circle_entity_name)
  * 
  *         cdef float circle_x = abs_circle_shape[1]             # <<<<<<<<<<<<<<
@@ -2389,15 +2310,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_circle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_circle_x = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":204
+  /* "yapyg_movers\physical_mover.pyx":194
  * 
  *         cdef float circle_x = abs_circle_shape[1]
  *         cdef float circle_y = abs_circle_shape[2]             # <<<<<<<<<<<<<<
@@ -2406,15 +2327,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_circle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_circle_y = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":205
+  /* "yapyg_movers\physical_mover.pyx":195
  *         cdef float circle_x = abs_circle_shape[1]
  *         cdef float circle_y = abs_circle_shape[2]
  *         cdef float circle_r = abs_circle_shape[3]             # <<<<<<<<<<<<<<
@@ -2423,15 +2344,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_circle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_circle_r = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":207
+  /* "yapyg_movers\physical_mover.pyx":197
  *         cdef float circle_r = abs_circle_shape[3]
  * 
  *         cdef float rect_x = abs_rectangle_shape[1]             # <<<<<<<<<<<<<<
@@ -2440,15 +2361,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 207; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rect_x = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":208
+  /* "yapyg_movers\physical_mover.pyx":198
  * 
  *         cdef float rect_x = abs_rectangle_shape[1]
  *         cdef float rect_y = abs_rectangle_shape[2]             # <<<<<<<<<<<<<<
@@ -2457,15 +2378,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rect_y = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":209
+  /* "yapyg_movers\physical_mover.pyx":199
  *         cdef float rect_x = abs_rectangle_shape[1]
  *         cdef float rect_y = abs_rectangle_shape[2]
  *         cdef float rect_w = abs_rectangle_shape[3]             # <<<<<<<<<<<<<<
@@ -2474,15 +2395,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rect_w = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":210
+  /* "yapyg_movers\physical_mover.pyx":200
  *         cdef float rect_y = abs_rectangle_shape[2]
  *         cdef float rect_w = abs_rectangle_shape[3]
  *         cdef float rect_h = abs_rectangle_shape[4]             # <<<<<<<<<<<<<<
@@ -2491,15 +2412,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rect_h = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":211
+  /* "yapyg_movers\physical_mover.pyx":201
  *         cdef float rect_w = abs_rectangle_shape[3]
  *         cdef float rect_h = abs_rectangle_shape[4]
  *         cdef float rect_r = abs_rectangle_shape[5]             # <<<<<<<<<<<<<<
@@ -2508,15 +2429,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
   if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rect_r = __pyx_t_2;
 
-  /* "yapyg_movers\physical_mover.pyx":230
+  /* "yapyg_movers\physical_mover.pyx":220
  *         cdef float rot_friction
  * 
  *         if circle_physical_mover:             # <<<<<<<<<<<<<<
@@ -2526,7 +2447,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
   __pyx_t_3 = (__pyx_v_circle_physical_mover != Py_None) && (PyList_GET_SIZE(__pyx_v_circle_physical_mover) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg_movers\physical_mover.pyx":231
+    /* "yapyg_movers\physical_mover.pyx":221
  * 
  *         if circle_physical_mover:
  *                 circle_move_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
@@ -2535,23 +2456,23 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
@@ -2562,7 +2483,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
     __pyx_v_circle_move_vector = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg_movers\physical_mover.pyx":233
+    /* "yapyg_movers\physical_mover.pyx":223
  *                 circle_move_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
  * 
  *                 inelasticity = circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]             # <<<<<<<<<<<<<<
@@ -2571,18 +2492,18 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_inelasticity = __pyx_t_2;
 
-    /* "yapyg_movers\physical_mover.pyx":236
+    /* "yapyg_movers\physical_mover.pyx":226
  * 
  *                 # rotate coordinate system so that rectangle is not rotated
  *                 if rect_r != 0:             # <<<<<<<<<<<<<<
@@ -2592,18 +2513,18 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
     __pyx_t_3 = ((__pyx_v_rect_r != 0.0) != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg_movers\physical_mover.pyx":238
+      /* "yapyg_movers\physical_mover.pyx":228
  *                 if rect_r != 0:
  *                         rotated_circle = yapyg.math_2d.rotated_point(
  *                                 (rect_x + (rect_w / 2.0), rect_y + (rect_h / 2.0)),             # <<<<<<<<<<<<<<
  *                                 (circle_x, circle_y),
  *                                 -rect_r)
  */
-      __pyx_t_5 = PyFloat_FromDouble((__pyx_v_rect_x + (__pyx_v_rect_w / 2.0))); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyFloat_FromDouble((__pyx_v_rect_x + (__pyx_v_rect_w / 2.0))); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_1 = PyFloat_FromDouble((__pyx_v_rect_y + (__pyx_v_rect_h / 2.0))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyFloat_FromDouble((__pyx_v_rect_y + (__pyx_v_rect_h / 2.0))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_5);
@@ -2612,18 +2533,18 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
       __pyx_t_5 = 0;
       __pyx_t_1 = 0;
 
-      /* "yapyg_movers\physical_mover.pyx":239
+      /* "yapyg_movers\physical_mover.pyx":229
  *                         rotated_circle = yapyg.math_2d.rotated_point(
  *                                 (rect_x + (rect_w / 2.0), rect_y + (rect_h / 2.0)),
  *                                 (circle_x, circle_y),             # <<<<<<<<<<<<<<
  *                                 -rect_r)
  *                         circle_x = rotated_circle[0]
  */
-      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_circle_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_circle_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_circle_y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_circle_y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_1);
@@ -2632,21 +2553,21 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
       __pyx_t_1 = 0;
       __pyx_t_5 = 0;
 
-      /* "yapyg_movers\physical_mover.pyx":237
+      /* "yapyg_movers\physical_mover.pyx":227
  *                 # rotate coordinate system so that rectangle is not rotated
  *                 if rect_r != 0:
  *                         rotated_circle = yapyg.math_2d.rotated_point(             # <<<<<<<<<<<<<<
  *                                 (rect_x + (rect_w / 2.0), rect_y + (rect_h / 2.0)),
  *                                 (circle_x, circle_y),
  */
-      __pyx_t_5 = __pyx_f_5yapyg_7math_2d_rotated_point(((PyObject*)__pyx_t_4), ((PyObject*)__pyx_t_6), (-__pyx_v_rect_r), 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __pyx_f_5yapyg_7math_2d_rotated_point(((PyObject*)__pyx_t_4), ((PyObject*)__pyx_t_6), (-__pyx_v_rect_r), 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_v_rotated_circle = ((PyObject*)__pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "yapyg_movers\physical_mover.pyx":241
+      /* "yapyg_movers\physical_mover.pyx":231
  *                                 (circle_x, circle_y),
  *                                 -rect_r)
  *                         circle_x = rotated_circle[0]             # <<<<<<<<<<<<<<
@@ -2655,15 +2576,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
       if (unlikely(__pyx_v_rotated_circle == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_rotated_circle, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_rotated_circle, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_v_circle_x = __pyx_t_2;
 
-      /* "yapyg_movers\physical_mover.pyx":242
+      /* "yapyg_movers\physical_mover.pyx":232
  *                                 -rect_r)
  *                         circle_x = rotated_circle[0]
  *                         circle_y = rotated_circle[1]             # <<<<<<<<<<<<<<
@@ -2672,22 +2593,22 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
       if (unlikely(__pyx_v_rotated_circle == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_rotated_circle, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_rotated_circle, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_v_circle_y = __pyx_t_2;
 
-      /* "yapyg_movers\physical_mover.pyx":244
+      /* "yapyg_movers\physical_mover.pyx":234
  *                         circle_y = rotated_circle[1]
  * 
  *                         circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, -rect_r)             # <<<<<<<<<<<<<<
  * 
  *                 v_r = circle_physical_mover[IDX_MOVERS_PHYSICAL_VR]
  */
-      __pyx_t_5 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple_, __pyx_v_circle_move_vector, (-__pyx_v_rect_r), 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__2, __pyx_v_circle_move_vector, (-__pyx_v_rect_r), 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF_SET(__pyx_v_circle_move_vector, ((PyObject*)__pyx_t_5));
       __pyx_t_5 = 0;
@@ -2695,7 +2616,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
     }
     __pyx_L4:;
 
-    /* "yapyg_movers\physical_mover.pyx":246
+    /* "yapyg_movers\physical_mover.pyx":236
  *                         circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, -rect_r)
  * 
  *                 v_r = circle_physical_mover[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
@@ -2704,18 +2625,18 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_5); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_6 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_5); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_v_r = __pyx_t_2;
 
-    /* "yapyg_movers\physical_mover.pyx":247
+    /* "yapyg_movers\physical_mover.pyx":237
  * 
  *                 v_r = circle_physical_mover[IDX_MOVERS_PHYSICAL_VR]
  *                 v_x = circle_move_vector[0]             # <<<<<<<<<<<<<<
@@ -2724,15 +2645,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_v_x = __pyx_t_2;
 
-    /* "yapyg_movers\physical_mover.pyx":248
+    /* "yapyg_movers\physical_mover.pyx":238
  *                 v_r = circle_physical_mover[IDX_MOVERS_PHYSICAL_VR]
  *                 v_x = circle_move_vector[0]
  *                 v_y = circle_move_vector[1]             # <<<<<<<<<<<<<<
@@ -2741,15 +2662,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_v_y = __pyx_t_2;
 
-    /* "yapyg_movers\physical_mover.pyx":249
+    /* "yapyg_movers\physical_mover.pyx":239
  *                 v_x = circle_move_vector[0]
  *                 v_y = circle_move_vector[1]
  *                 rot_friction = circle_physical_mover[IDX_MOVERS_PHYSICAL_ROT_FRICTION]             # <<<<<<<<<<<<<<
@@ -2758,18 +2679,18 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover, __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_rot_friction = __pyx_t_2;
 
-    /* "yapyg_movers\physical_mover.pyx":251
+    /* "yapyg_movers\physical_mover.pyx":241
  *                 rot_friction = circle_physical_mover[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
  * 
  *                 if circle_y <= rect_y or circle_y >= rect_y + rect_h:             # <<<<<<<<<<<<<<
@@ -2787,7 +2708,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
     __pyx_L6_bool_binop_done:;
     if (__pyx_t_3) {
 
-      /* "yapyg_movers\physical_mover.pyx":253
+      /* "yapyg_movers\physical_mover.pyx":243
  *                 if circle_y <= rect_y or circle_y >= rect_y + rect_h:
  *                         # circle centre below or above rectangle
  *                         if circle_x > rect_x and circle_x < rect_x + rect_w:             # <<<<<<<<<<<<<<
@@ -2805,24 +2726,24 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
       __pyx_L9_bool_binop_done:;
       if (__pyx_t_3) {
 
-        /* "yapyg_movers\physical_mover.pyx":255
+        /* "yapyg_movers\physical_mover.pyx":245
  *                         if circle_x > rect_x and circle_x < rect_x + rect_w:
  *                                 # lower/upper quadrant
  *                                 if circle_y <= rect_y:             # <<<<<<<<<<<<<<
  *                                         # lower quadrant
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
  */
         __pyx_t_3 = ((__pyx_v_circle_y <= __pyx_v_rect_y) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg_movers\physical_mover.pyx":257
+          /* "yapyg_movers\physical_mover.pyx":247
  *                                 if circle_y <= rect_y:
  *                                         # lower quadrant
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)             # <<<<<<<<<<<<<<
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)             # <<<<<<<<<<<<<<
  *                                         circle_move_vector = (v_x, circle_move_vector[1])
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  */
-          __pyx_t_5 = __pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_x, __pyx_v_rot_friction, __pyx_v_circle_r, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __pyx_f_12yapyg_movers_14physical_mover_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_x, __pyx_v_rot_friction, __pyx_v_circle_r, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           if (likely(__pyx_t_5 != Py_None)) {
             PyObject* sequence = __pyx_t_5;
@@ -2834,7 +2755,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
             if (unlikely(size != 2)) {
               if (size > 2) __Pyx_RaiseTooManyValuesError(2);
               else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
             #if CYTHON_COMPILING_IN_CPYTHON
             __pyx_t_6 = PyTuple_GET_ITEM(sequence, 0); 
@@ -2842,38 +2763,38 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
             __Pyx_INCREF(__pyx_t_6);
             __Pyx_INCREF(__pyx_t_4);
             #else
-            __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_4);
             #endif
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           } else {
-            __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __pyx_v_v_r = __pyx_t_2;
           __pyx_v_v_x = __pyx_t_8;
 
-          /* "yapyg_movers\physical_mover.pyx":258
+          /* "yapyg_movers\physical_mover.pyx":248
  *                                         # lower quadrant
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
  *                                         circle_move_vector = (v_x, circle_move_vector[1])             # <<<<<<<<<<<<<<
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  */
-          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_5);
@@ -2884,65 +2805,65 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           __Pyx_DECREF_SET(__pyx_v_circle_move_vector, ((PyObject*)__pyx_t_6));
           __pyx_t_6 = 0;
 
-          /* "yapyg_movers\physical_mover.pyx":259
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
+          /* "yapyg_movers\physical_mover.pyx":249
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
  *                                         circle_move_vector = (v_x, circle_move_vector[1])
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r             # <<<<<<<<<<<<<<
  * 
  *                                         circle_move_vector = (circle_move_vector[0],
  */
-          __pyx_t_6 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
-          if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_4, __pyx_t_6) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_4, __pyx_t_6) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "yapyg_movers\physical_mover.pyx":261
+          /* "yapyg_movers\physical_mover.pyx":251
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  *                                         circle_move_vector = (circle_move_vector[0],             # <<<<<<<<<<<<<<
  *                                                 -abs(circle_move_vector[1]) * inelasticity)
  *                                 else:
  */
-          __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_6);
 
-          /* "yapyg_movers\physical_mover.pyx":262
+          /* "yapyg_movers\physical_mover.pyx":252
  * 
  *                                         circle_move_vector = (circle_move_vector[0],
  *                                                 -abs(circle_move_vector[1]) * inelasticity)             # <<<<<<<<<<<<<<
  *                                 else:
  *                                         # upper quadrant
  */
-          __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_4);
-          __pyx_t_5 = PyNumber_Absolute(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyNumber_Absolute(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __pyx_t_4 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-          /* "yapyg_movers\physical_mover.pyx":261
+          /* "yapyg_movers\physical_mover.pyx":251
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  *                                         circle_move_vector = (circle_move_vector[0],             # <<<<<<<<<<<<<<
  *                                                 -abs(circle_move_vector[1]) * inelasticity)
  *                                 else:
  */
-          __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6);
           __Pyx_GIVEREF(__pyx_t_6);
@@ -2956,14 +2877,14 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         }
         /*else*/ {
 
-          /* "yapyg_movers\physical_mover.pyx":265
+          /* "yapyg_movers\physical_mover.pyx":255
  *                                 else:
  *                                         # upper quadrant
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)             # <<<<<<<<<<<<<<
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)             # <<<<<<<<<<<<<<
  *                                         circle_move_vector = (v_x, circle_move_vector[1])
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  */
-          __pyx_t_5 = __pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_x, __pyx_v_rot_friction, __pyx_v_circle_r, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __pyx_f_12yapyg_movers_14physical_mover_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_x, __pyx_v_rot_friction, __pyx_v_circle_r, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           if (likely(__pyx_t_5 != Py_None)) {
             PyObject* sequence = __pyx_t_5;
@@ -2975,7 +2896,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
             if (unlikely(size != 2)) {
               if (size > 2) __Pyx_RaiseTooManyValuesError(2);
               else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
             #if CYTHON_COMPILING_IN_CPYTHON
             __pyx_t_1 = PyTuple_GET_ITEM(sequence, 0); 
@@ -2983,38 +2904,38 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
             __Pyx_INCREF(__pyx_t_1);
             __Pyx_INCREF(__pyx_t_6);
             #else
-            __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_6);
             #endif
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           } else {
-            __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_v_v_r = __pyx_t_8;
           __pyx_v_v_x = __pyx_t_2;
 
-          /* "yapyg_movers\physical_mover.pyx":266
+          /* "yapyg_movers\physical_mover.pyx":256
  *                                         # upper quadrant
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)
  *                                         circle_move_vector = (v_x, circle_move_vector[1])             # <<<<<<<<<<<<<<
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  */
-          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_x); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_5);
@@ -3025,62 +2946,62 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           __Pyx_DECREF_SET(__pyx_v_circle_move_vector, ((PyObject*)__pyx_t_1));
           __pyx_t_1 = 0;
 
-          /* "yapyg_movers\physical_mover.pyx":267
- *                                         v_r, v_x = c_compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)
+          /* "yapyg_movers\physical_mover.pyx":257
+ *                                         v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)
  *                                         circle_move_vector = (v_x, circle_move_vector[1])
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r             # <<<<<<<<<<<<<<
  * 
  *                                         circle_move_vector = (circle_move_vector[0],
  */
-          __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_6, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_6, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "yapyg_movers\physical_mover.pyx":269
+          /* "yapyg_movers\physical_mover.pyx":259
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  *                                         circle_move_vector = (circle_move_vector[0],             # <<<<<<<<<<<<<<
  *                                                 abs(circle_move_vector[1]) * inelasticity)
  *                         else:
  */
-          __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_1);
 
-          /* "yapyg_movers\physical_mover.pyx":270
+          /* "yapyg_movers\physical_mover.pyx":260
  * 
  *                                         circle_move_vector = (circle_move_vector[0],
  *                                                 abs(circle_move_vector[1]) * inelasticity)             # <<<<<<<<<<<<<<
  *                         else:
  *                                 # lower/upper left/right quadrant
  */
-          __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+          __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_5 = PyNumber_Absolute(__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyNumber_Absolute(__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_6 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "yapyg_movers\physical_mover.pyx":269
+          /* "yapyg_movers\physical_mover.pyx":259
  *                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  *                                         circle_move_vector = (circle_move_vector[0],             # <<<<<<<<<<<<<<
  *                                                 abs(circle_move_vector[1]) * inelasticity)
  *                         else:
  */
-          __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_1);
@@ -3096,7 +3017,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
       }
       /*else*/ {
 
-        /* "yapyg_movers\physical_mover.pyx":273
+        /* "yapyg_movers\physical_mover.pyx":263
  *                         else:
  *                                 # lower/upper left/right quadrant
  *                                 v_total = yapyg.math_2d.length(circle_move_vector)             # <<<<<<<<<<<<<<
@@ -3105,7 +3026,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
         __pyx_v_v_total = __pyx_f_5yapyg_7math_2d_length(__pyx_v_circle_move_vector, 0);
 
-        /* "yapyg_movers\physical_mover.pyx":274
+        /* "yapyg_movers\physical_mover.pyx":264
  *                                 # lower/upper left/right quadrant
  *                                 v_total = yapyg.math_2d.length(circle_move_vector)
  *                                 corner_y = 0             # <<<<<<<<<<<<<<
@@ -3114,7 +3035,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
         __pyx_v_corner_y = 0.0;
 
-        /* "yapyg_movers\physical_mover.pyx":275
+        /* "yapyg_movers\physical_mover.pyx":265
  *                                 v_total = yapyg.math_2d.length(circle_move_vector)
  *                                 corner_y = 0
  *                                 corner_x = 0             # <<<<<<<<<<<<<<
@@ -3123,7 +3044,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
         __pyx_v_corner_x = 0.0;
 
-        /* "yapyg_movers\physical_mover.pyx":276
+        /* "yapyg_movers\physical_mover.pyx":266
  *                                 corner_y = 0
  *                                 corner_x = 0
  *                                 if circle_y <= rect_y:             # <<<<<<<<<<<<<<
@@ -3133,7 +3054,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         __pyx_t_3 = ((__pyx_v_circle_y <= __pyx_v_rect_y) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg_movers\physical_mover.pyx":277
+          /* "yapyg_movers\physical_mover.pyx":267
  *                                 corner_x = 0
  *                                 if circle_y <= rect_y:
  *                                         corner_y = rect_y             # <<<<<<<<<<<<<<
@@ -3145,7 +3066,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         }
         /*else*/ {
 
-          /* "yapyg_movers\physical_mover.pyx":279
+          /* "yapyg_movers\physical_mover.pyx":269
  *                                         corner_y = rect_y
  *                                 else:
  *                                         corner_y = rect_y + rect_h             # <<<<<<<<<<<<<<
@@ -3156,7 +3077,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         }
         __pyx_L12:;
 
-        /* "yapyg_movers\physical_mover.pyx":280
+        /* "yapyg_movers\physical_mover.pyx":270
  *                                 else:
  *                                         corner_y = rect_y + rect_h
  *                                 if circle_x <= rect_x:             # <<<<<<<<<<<<<<
@@ -3166,7 +3087,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         __pyx_t_3 = ((__pyx_v_circle_x <= __pyx_v_rect_x) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg_movers\physical_mover.pyx":281
+          /* "yapyg_movers\physical_mover.pyx":271
  *                                         corner_y = rect_y + rect_h
  *                                 if circle_x <= rect_x:
  *                                         corner_x = rect_x             # <<<<<<<<<<<<<<
@@ -3178,7 +3099,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         }
         /*else*/ {
 
-          /* "yapyg_movers\physical_mover.pyx":283
+          /* "yapyg_movers\physical_mover.pyx":273
  *                                         corner_x = rect_x
  *                                 else:
  *                                         corner_x = rect_x + rect_w             # <<<<<<<<<<<<<<
@@ -3189,7 +3110,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         }
         __pyx_L13:;
 
-        /* "yapyg_movers\physical_mover.pyx":284
+        /* "yapyg_movers\physical_mover.pyx":274
  *                                 else:
  *                                         corner_x = rect_x + rect_w
  *                                 angle_dx = circle_x - corner_x             # <<<<<<<<<<<<<<
@@ -3198,7 +3119,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
         __pyx_v_angle_dx = (__pyx_v_circle_x - __pyx_v_corner_x);
 
-        /* "yapyg_movers\physical_mover.pyx":285
+        /* "yapyg_movers\physical_mover.pyx":275
  *                                         corner_x = rect_x + rect_w
  *                                 angle_dx = circle_x - corner_x
  *                                 angle_dy = circle_y - corner_y             # <<<<<<<<<<<<<<
@@ -3207,21 +3128,21 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
         __pyx_v_angle_dy = (__pyx_v_circle_y - __pyx_v_corner_y);
 
-        /* "yapyg_movers\physical_mover.pyx":286
+        /* "yapyg_movers\physical_mover.pyx":276
  *                                 angle_dx = circle_x - corner_x
  *                                 angle_dy = circle_y - corner_y
  *                                 angle = math.atan2(angle_dy, angle_dx)             # <<<<<<<<<<<<<<
  * 
  *                                 new_vy = math.sin(angle) * v_total
  */
-        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_atan2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_atan2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_angle_dy); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_angle_dy); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_angle_dx); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_angle_dx); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __pyx_t_9 = NULL;
         __pyx_t_10 = 0;
@@ -3235,7 +3156,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
             __pyx_t_10 = 1;
           }
         }
-        __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
         if (__pyx_t_9) {
           PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_9); __Pyx_GIVEREF(__pyx_t_9); __pyx_t_9 = NULL;
@@ -3246,27 +3167,27 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         __Pyx_GIVEREF(__pyx_t_5);
         __pyx_t_4 = 0;
         __pyx_t_5 = 0;
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_v_angle = __pyx_t_2;
 
-        /* "yapyg_movers\physical_mover.pyx":288
+        /* "yapyg_movers\physical_mover.pyx":278
  *                                 angle = math.atan2(angle_dy, angle_dx)
  * 
  *                                 new_vy = math.sin(angle) * v_total             # <<<<<<<<<<<<<<
  *                                 new_vx = math.cos(angle) * v_total
  *                                 circle_move_vector = (
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sin); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sin); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_angle); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_angle); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __pyx_t_5 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -3279,44 +3200,44 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           }
         }
         if (!__pyx_t_5) {
-          __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_GOTREF(__pyx_t_6);
         } else {
-          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
           PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_1);
           __pyx_t_1 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyFloat_FromDouble(__pyx_v_v_total); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = PyFloat_FromDouble(__pyx_v_v_total); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_4 = PyNumber_Multiply(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyNumber_Multiply(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_new_vy = __pyx_t_2;
 
-        /* "yapyg_movers\physical_mover.pyx":289
+        /* "yapyg_movers\physical_mover.pyx":279
  * 
  *                                 new_vy = math.sin(angle) * v_total
  *                                 new_vx = math.cos(angle) * v_total             # <<<<<<<<<<<<<<
  *                                 circle_move_vector = (
  *                                         (new_vx * inelasticity),
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_cos); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_cos); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyFloat_FromDouble(__pyx_v_angle); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = PyFloat_FromDouble(__pyx_v_angle); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
         __pyx_t_1 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -3329,59 +3250,59 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           }
         }
         if (!__pyx_t_1) {
-          __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_GOTREF(__pyx_t_4);
         } else {
-          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
           PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_11);
           __Pyx_GIVEREF(__pyx_t_11);
           __pyx_t_11 = 0;
-          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_v_total); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_v_total); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_5 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_v_new_vx = __pyx_t_2;
 
-        /* "yapyg_movers\physical_mover.pyx":291
+        /* "yapyg_movers\physical_mover.pyx":281
  *                                 new_vx = math.cos(angle) * v_total
  *                                 circle_move_vector = (
  *                                         (new_vx * inelasticity),             # <<<<<<<<<<<<<<
  *                                         (new_vy * inelasticity))
  *                 else:
  */
-        __pyx_t_5 = PyFloat_FromDouble((__pyx_v_new_vx * __pyx_v_inelasticity)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyFloat_FromDouble((__pyx_v_new_vx * __pyx_v_inelasticity)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
 
-        /* "yapyg_movers\physical_mover.pyx":292
+        /* "yapyg_movers\physical_mover.pyx":282
  *                                 circle_move_vector = (
  *                                         (new_vx * inelasticity),
  *                                         (new_vy * inelasticity))             # <<<<<<<<<<<<<<
  *                 else:
  *                         # circle same height as rectangle
  */
-        __pyx_t_6 = PyFloat_FromDouble((__pyx_v_new_vy * __pyx_v_inelasticity)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyFloat_FromDouble((__pyx_v_new_vy * __pyx_v_inelasticity)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
 
-        /* "yapyg_movers\physical_mover.pyx":291
+        /* "yapyg_movers\physical_mover.pyx":281
  *                                 new_vx = math.cos(angle) * v_total
  *                                 circle_move_vector = (
  *                                         (new_vx * inelasticity),             # <<<<<<<<<<<<<<
  *                                         (new_vy * inelasticity))
  *                 else:
  */
-        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_5);
@@ -3397,24 +3318,24 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
     }
     /*else*/ {
 
-      /* "yapyg_movers\physical_mover.pyx":295
+      /* "yapyg_movers\physical_mover.pyx":285
  *                 else:
  *                         # circle same height as rectangle
  *                         if circle_x < rect_x:             # <<<<<<<<<<<<<<
  *                                 # left quadrant
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
  */
       __pyx_t_3 = ((__pyx_v_circle_x < __pyx_v_rect_x) != 0);
       if (__pyx_t_3) {
 
-        /* "yapyg_movers\physical_mover.pyx":297
+        /* "yapyg_movers\physical_mover.pyx":287
  *                         if circle_x < rect_x:
  *                                 # left quadrant
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)             # <<<<<<<<<<<<<<
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)             # <<<<<<<<<<<<<<
  *                                 circle_move_vector = (circle_move_vector[0], v_y)
  *                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  */
-        __pyx_t_4 = __pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_y, __pyx_v_rot_friction, __pyx_v_circle_r, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __pyx_f_12yapyg_movers_14physical_mover_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_y, __pyx_v_rot_friction, __pyx_v_circle_r, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         if (likely(__pyx_t_4 != Py_None)) {
           PyObject* sequence = __pyx_t_4;
@@ -3426,7 +3347,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           if (unlikely(size != 2)) {
             if (size > 2) __Pyx_RaiseTooManyValuesError(2);
             else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           #if CYTHON_COMPILING_IN_CPYTHON
           __pyx_t_6 = PyTuple_GET_ITEM(sequence, 0); 
@@ -3434,38 +3355,38 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           __Pyx_INCREF(__pyx_t_6);
           __Pyx_INCREF(__pyx_t_5);
           #else
-          __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         } else {
-          __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_v_v_r = __pyx_t_2;
         __pyx_v_v_y = __pyx_t_8;
 
-        /* "yapyg_movers\physical_mover.pyx":298
+        /* "yapyg_movers\physical_mover.pyx":288
  *                                 # left quadrant
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
  *                                 circle_move_vector = (circle_move_vector[0], v_y)             # <<<<<<<<<<<<<<
  *                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  */
         if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_4);
@@ -3476,65 +3397,65 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         __Pyx_DECREF_SET(__pyx_v_circle_move_vector, ((PyObject*)__pyx_t_6));
         __pyx_t_6 = 0;
 
-        /* "yapyg_movers\physical_mover.pyx":299
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
+        /* "yapyg_movers\physical_mover.pyx":289
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
  *                                 circle_move_vector = (circle_move_vector[0], v_y)
  *                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r             # <<<<<<<<<<<<<<
  * 
  *                                 circle_move_vector = (
  */
-        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_5, __pyx_t_6) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_5, __pyx_t_6) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg_movers\physical_mover.pyx":302
+        /* "yapyg_movers\physical_mover.pyx":292
  * 
  *                                 circle_move_vector = (
  *                                         -abs(circle_move_vector[0]) * inelasticity,             # <<<<<<<<<<<<<<
  *                                         circle_move_vector[1])
  *                         elif circle_x > rect_x + rect_w:
  */
-        __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_5 = PyNumber_Absolute(__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyNumber_Absolute(__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_4 = PyNumber_Multiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyNumber_Multiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-        /* "yapyg_movers\physical_mover.pyx":303
+        /* "yapyg_movers\physical_mover.pyx":293
  *                                 circle_move_vector = (
  *                                         -abs(circle_move_vector[0]) * inelasticity,
  *                                         circle_move_vector[1])             # <<<<<<<<<<<<<<
  *                         elif circle_x > rect_x + rect_w:
  *                                 # right quadrant
  */
-        __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_5);
 
-        /* "yapyg_movers\physical_mover.pyx":302
+        /* "yapyg_movers\physical_mover.pyx":292
  * 
  *                                 circle_move_vector = (
  *                                         -abs(circle_move_vector[0]) * inelasticity,             # <<<<<<<<<<<<<<
  *                                         circle_move_vector[1])
  *                         elif circle_x > rect_x + rect_w:
  */
-        __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_4);
@@ -3547,24 +3468,24 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         goto __pyx_L14;
       }
 
-      /* "yapyg_movers\physical_mover.pyx":304
+      /* "yapyg_movers\physical_mover.pyx":294
  *                                         -abs(circle_move_vector[0]) * inelasticity,
  *                                         circle_move_vector[1])
  *                         elif circle_x > rect_x + rect_w:             # <<<<<<<<<<<<<<
  *                                 # right quadrant
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
  */
       __pyx_t_3 = ((__pyx_v_circle_x > (__pyx_v_rect_x + __pyx_v_rect_w)) != 0);
       if (__pyx_t_3) {
 
-        /* "yapyg_movers\physical_mover.pyx":306
+        /* "yapyg_movers\physical_mover.pyx":296
  *                         elif circle_x > rect_x + rect_w:
  *                                 # right quadrant
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)             # <<<<<<<<<<<<<<
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)             # <<<<<<<<<<<<<<
  *                                 circle_move_vector = (circle_move_vector[0], v_y)
  *                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  */
-        __pyx_t_6 = __pyx_f_12yapyg_movers_14physical_mover_c_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_y, __pyx_v_rot_friction, __pyx_v_circle_r, 0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __pyx_f_12yapyg_movers_14physical_mover_compute_circle_torque(__pyx_v_state, __pyx_v_v_r, __pyx_v_v_y, __pyx_v_rot_friction, __pyx_v_circle_r, 0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         if (likely(__pyx_t_6 != Py_None)) {
           PyObject* sequence = __pyx_t_6;
@@ -3576,7 +3497,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           if (unlikely(size != 2)) {
             if (size > 2) __Pyx_RaiseTooManyValuesError(2);
             else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           #if CYTHON_COMPILING_IN_CPYTHON
           __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0); 
@@ -3584,38 +3505,38 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
           __Pyx_INCREF(__pyx_t_5);
           __Pyx_INCREF(__pyx_t_4);
           #else
-          __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           #endif
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         } else {
-          __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_v_r = __pyx_t_8;
         __pyx_v_v_y = __pyx_t_2;
 
-        /* "yapyg_movers\physical_mover.pyx":307
+        /* "yapyg_movers\physical_mover.pyx":297
  *                                 # right quadrant
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
  *                                 circle_move_vector = (circle_move_vector[0], v_y)             # <<<<<<<<<<<<<<
  *                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
  * 
  */
         if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_v_y); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_v_y); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_6);
@@ -3626,62 +3547,62 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
         __Pyx_DECREF_SET(__pyx_v_circle_move_vector, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg_movers\physical_mover.pyx":308
- *                                 v_r, v_y = c_compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
+        /* "yapyg_movers\physical_mover.pyx":298
+ *                                 v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
  *                                 circle_move_vector = (circle_move_vector[0], v_y)
  *                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r             # <<<<<<<<<<<<<<
  * 
  *                                 circle_move_vector = (
  */
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v_r); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_4, __pyx_t_5) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_4, __pyx_t_5) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-        /* "yapyg_movers\physical_mover.pyx":311
+        /* "yapyg_movers\physical_mover.pyx":301
  * 
  *                                 circle_move_vector = (
  *                                         abs(circle_move_vector[0]) * inelasticity,             # <<<<<<<<<<<<<<
  *                                         circle_move_vector[1])
  *                         else:
  */
-        __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_4 = PyNumber_Absolute(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyNumber_Absolute(__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_inelasticity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-        /* "yapyg_movers\physical_mover.pyx":312
+        /* "yapyg_movers\physical_mover.pyx":302
  *                                 circle_move_vector = (
  *                                         abs(circle_move_vector[0]) * inelasticity,
  *                                         circle_move_vector[1])             # <<<<<<<<<<<<<<
  *                         else:
  *                                 # inside rectangle
  */
-        __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_5);
 
-        /* "yapyg_movers\physical_mover.pyx":311
+        /* "yapyg_movers\physical_mover.pyx":301
  * 
  *                                 circle_move_vector = (
  *                                         abs(circle_move_vector[0]) * inelasticity,             # <<<<<<<<<<<<<<
  *                                         circle_move_vector[1])
  *                         else:
  */
-        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_6);
@@ -3695,7 +3616,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
       }
       /*else*/ {
 
-        /* "yapyg_movers\physical_mover.pyx":316
+        /* "yapyg_movers\physical_mover.pyx":306
  *                                 # inside rectangle
  *                                 # print "WARNING: physical mover circle inside a rectangle"
  *                                 circle_move_vector = (-circle_move_vector[0], -circle_move_vector[1])             # <<<<<<<<<<<<<<
@@ -3704,23 +3625,23 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
         if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_5);
@@ -3735,19 +3656,19 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
     }
     __pyx_L5:;
 
-    /* "yapyg_movers\physical_mover.pyx":319
+    /* "yapyg_movers\physical_mover.pyx":309
  * 
  *                 # rotate back to original coordinate system
  *                 circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, rect_r)             # <<<<<<<<<<<<<<
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
  */
-    __pyx_t_4 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__2, __pyx_v_circle_move_vector, __pyx_v_rect_r, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__3, __pyx_v_circle_move_vector, __pyx_v_rect_r, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_circle_move_vector, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "yapyg_movers\physical_mover.pyx":320
+    /* "yapyg_movers\physical_mover.pyx":310
  *                 # rotate back to original coordinate system
  *                 circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, rect_r)
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]             # <<<<<<<<<<<<<<
@@ -3756,50 +3677,50 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
  */
     if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 310; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 310; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 310; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 310; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_6, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_6, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 310; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg_movers\physical_mover.pyx":321
+    /* "yapyg_movers\physical_mover.pyx":311
  *                 circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, rect_r)
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]             # <<<<<<<<<<<<<<
  * 
- * cdef void c_circle_circle_collision(list state,
+ * cdef void circle_circle_collision(list state,
  */
     if (unlikely(__pyx_v_circle_move_vector == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_circle_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_circle_physical_mover == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_6, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover, __pyx_t_6, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "yapyg_movers\physical_mover.pyx":191
+  /* "yapyg_movers\physical_mover.pyx":181
  *         return (v_r, v_x)
  * 
- * cdef c_rectangle_circle_collision(list state,             # <<<<<<<<<<<<<<
+ * cdef rectangle_circle_collision(list state,             # <<<<<<<<<<<<<<
  *                 str rectangle_entity_name,
  *                 str circle_entity_name,
  */
@@ -3814,7 +3735,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_AddTraceback("yapyg_movers.physical_mover.c_rectangle_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.rectangle_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_circle_move_vector);
@@ -3824,22 +3745,22 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_coll
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":323
+/* "yapyg_movers\physical_mover.pyx":313
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
  * 
- * cdef void c_circle_circle_collision(list state,             # <<<<<<<<<<<<<<
+ * cdef void circle_circle_collision(list state,             # <<<<<<<<<<<<<<
  *                 str circle_entity_name_1,
  *                 str circle_entity_name_2,
  */
 
-static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(PyObject *__pyx_v_state, PyObject *__pyx_v_circle_entity_name_1, CYTHON_UNUSED PyObject *__pyx_v_circle_entity_name_2, PyObject *__pyx_v_abs_circle_shape_1, PyObject *__pyx_v_abs_circle_shape_2, PyObject *__pyx_v_circle_physical_mover_1, PyObject *__pyx_v_circle_physical_mover_2) {
+static void __pyx_f_12yapyg_movers_14physical_mover_circle_circle_collision(PyObject *__pyx_v_state, PyObject *__pyx_v_circle_entity_name_1, CYTHON_UNUSED PyObject *__pyx_v_circle_entity_name_2, PyObject *__pyx_v_abs_circle_shape_1, PyObject *__pyx_v_abs_circle_shape_2, PyObject *__pyx_v_circle_physical_mover_1, PyObject *__pyx_v_circle_physical_mover_2) {
   PyObject *__pyx_v_abs_pos_1 = 0;
   PyObject *__pyx_v_abs_pos_2 = 0;
-  PyObject *__pyx_v_speed_vector_1 = 0;
-  PyObject *__pyx_v_speed_vector_2 = 0;
+  PyObject *__pyx_v_velocity_vector_1 = 0;
+  PyObject *__pyx_v_velocity_vector_2 = 0;
   PyObject *__pyx_v_centre_to_centre_vector = 0;
   float __pyx_v_centre_to_centre_vector_angle;
-  float __pyx_v_speed_vector_angle;
+  float __pyx_v_velocity_vector_angle;
   float __pyx_v_angle_delta;
   float __pyx_v_torque_creation_factor;
   float __pyx_v_circle_r_1;
@@ -3884,20 +3805,20 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("c_circle_circle_collision", 0);
+  __Pyx_RefNannySetupContext("circle_circle_collision", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":333
+  /* "yapyg_movers\physical_mover.pyx":323
  *         TODO
  *         """
  *         yapyg.entities.undo_last_move(state, circle_entity_name_1)             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_circle_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_circle_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":335
+  /* "yapyg_movers\physical_mover.pyx":325
  *         yapyg.entities.undo_last_move(state, circle_entity_name_1)
  * 
  *         cdef tuple abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])             # <<<<<<<<<<<<<<
@@ -3906,17 +3827,17 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_abs_circle_shape_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_abs_circle_shape_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -3927,26 +3848,26 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __pyx_v_abs_pos_1 = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":336
+  /* "yapyg_movers\physical_mover.pyx":326
  * 
  *         cdef tuple abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
  *         cdef tuple abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])             # <<<<<<<<<<<<<<
  * 
- *         cdef tuple speed_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef tuple velocity_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
  */
   if (unlikely(__pyx_v_abs_circle_shape_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
   if (unlikely(__pyx_v_abs_circle_shape_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 326; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
@@ -3957,32 +3878,32 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __pyx_v_abs_pos_2 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":338
+  /* "yapyg_movers\physical_mover.pyx":328
  *         cdef tuple abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
  * 
- *         cdef tuple speed_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
- *         cdef tuple speed_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef tuple velocity_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
+ *         cdef tuple velocity_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
  * 
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
@@ -3990,35 +3911,35 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_v_speed_vector_1 = ((PyObject*)__pyx_t_1);
+  __pyx_v_velocity_vector_1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":339
+  /* "yapyg_movers\physical_mover.pyx":329
  * 
- *         cdef tuple speed_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
- *         cdef tuple speed_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
+ *         cdef tuple velocity_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef tuple velocity_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
  * 
  *         # torque creation
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
@@ -4026,44 +3947,44 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_3 = 0;
   __pyx_t_2 = 0;
-  __pyx_v_speed_vector_2 = ((PyObject*)__pyx_t_1);
+  __pyx_v_velocity_vector_2 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":342
+  /* "yapyg_movers\physical_mover.pyx":332
  * 
  *         # torque creation
  *         cdef tuple centre_to_centre_vector = yapyg.math_2d.vector_diff(abs_pos_2, abs_pos_1)             # <<<<<<<<<<<<<<
  * 
  *         cdef float centre_to_centre_vector_angle = math.atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_abs_pos_2, __pyx_v_abs_pos_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_abs_pos_2, __pyx_v_abs_pos_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_centre_to_centre_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":344
+  /* "yapyg_movers\physical_mover.pyx":334
  *         cdef tuple centre_to_centre_vector = yapyg.math_2d.vector_diff(abs_pos_2, abs_pos_1)
  * 
  *         cdef float centre_to_centre_vector_angle = math.atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])             # <<<<<<<<<<<<<<
- *         cdef float speed_vector_angle = math.atan2(speed_vector_1[1], speed_vector_1[0])
+ *         cdef float velocity_vector_angle = math.atan2(velocity_vector_1[1], velocity_vector_1[0])
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_atan2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_atan2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_v_centre_to_centre_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_centre_to_centre_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_centre_to_centre_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_centre_to_centre_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_centre_to_centre_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_centre_to_centre_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -4077,7 +3998,7 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (__pyx_t_5) {
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -4088,29 +4009,29 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_centre_to_centre_vector_angle = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":345
+  /* "yapyg_movers\physical_mover.pyx":335
  * 
  *         cdef float centre_to_centre_vector_angle = math.atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])
- *         cdef float speed_vector_angle = math.atan2(speed_vector_1[1], speed_vector_1[0])             # <<<<<<<<<<<<<<
+ *         cdef float velocity_vector_angle = math.atan2(velocity_vector_1[1], velocity_vector_1[0])             # <<<<<<<<<<<<<<
  * 
- *         cdef float angle_delta = centre_to_centre_vector_angle - speed_vector_angle
+ *         cdef float angle_delta = centre_to_centre_vector_angle - velocity_vector_angle
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_atan2); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_atan2); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_speed_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_speed_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
@@ -4124,7 +4045,7 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -4135,36 +4056,36 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_speed_vector_angle = __pyx_t_8;
+  __pyx_v_velocity_vector_angle = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":347
- *         cdef float speed_vector_angle = math.atan2(speed_vector_1[1], speed_vector_1[0])
+  /* "yapyg_movers\physical_mover.pyx":337
+ *         cdef float velocity_vector_angle = math.atan2(velocity_vector_1[1], velocity_vector_1[0])
  * 
- *         cdef float angle_delta = centre_to_centre_vector_angle - speed_vector_angle             # <<<<<<<<<<<<<<
+ *         cdef float angle_delta = centre_to_centre_vector_angle - velocity_vector_angle             # <<<<<<<<<<<<<<
  * 
  *         cdef float torque_creation_factor = math.sin(angle_delta)
  */
-  __pyx_v_angle_delta = (__pyx_v_centre_to_centre_vector_angle - __pyx_v_speed_vector_angle);
+  __pyx_v_angle_delta = (__pyx_v_centre_to_centre_vector_angle - __pyx_v_velocity_vector_angle);
 
-  /* "yapyg_movers\physical_mover.pyx":349
- *         cdef float angle_delta = centre_to_centre_vector_angle - speed_vector_angle
+  /* "yapyg_movers\physical_mover.pyx":339
+ *         cdef float angle_delta = centre_to_centre_vector_angle - velocity_vector_angle
  * 
  *         cdef float torque_creation_factor = math.sin(angle_delta)             # <<<<<<<<<<<<<<
  * 
  *         cdef float circle_r_1 = abs_circle_shape_1[3]
  */
-  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_sin); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_sin); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_angle_delta); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_angle_delta); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -4177,26 +4098,26 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
     PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_7);
     __pyx_t_7 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_torque_creation_factor = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":351
+  /* "yapyg_movers\physical_mover.pyx":341
  *         cdef float torque_creation_factor = math.sin(angle_delta)
  * 
  *         cdef float circle_r_1 = abs_circle_shape_1[3]             # <<<<<<<<<<<<<<
@@ -4205,15 +4126,15 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_abs_circle_shape_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_circle_r_1 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":352
+  /* "yapyg_movers\physical_mover.pyx":342
  * 
  *         cdef float circle_r_1 = abs_circle_shape_1[3]
  *         cdef float circle_r_2 = abs_circle_shape_2[3]             # <<<<<<<<<<<<<<
@@ -4222,15 +4143,15 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_abs_circle_shape_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_circle_shape_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_circle_r_2 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":354
+  /* "yapyg_movers\physical_mover.pyx":344
  *         cdef float circle_r_2 = abs_circle_shape_2[3]
  * 
  *         cdef float v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
@@ -4239,18 +4160,18 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_v_r_1 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":355
+  /* "yapyg_movers\physical_mover.pyx":345
  * 
  *         cdef float v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
  *         cdef float rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]             # <<<<<<<<<<<<<<
@@ -4259,18 +4180,18 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rot_friction_1 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":356
+  /* "yapyg_movers\physical_mover.pyx":346
  *         cdef float v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
  *         cdef float rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
  *         cdef float m_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]             # <<<<<<<<<<<<<<
@@ -4279,18 +4200,18 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_m_1 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":358
+  /* "yapyg_movers\physical_mover.pyx":348
  *         cdef float m_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
  * 
  *         cdef float v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
@@ -4299,18 +4220,18 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 348; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_v_r_2 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":359
+  /* "yapyg_movers\physical_mover.pyx":349
  * 
  *         cdef float v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
  *         cdef float rot_friction_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_ROT_FRICTION]             # <<<<<<<<<<<<<<
@@ -4319,52 +4240,52 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_rot_friction_2 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":360
+  /* "yapyg_movers\physical_mover.pyx":350
  *         cdef float v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
  *         cdef float rot_friction_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
  *         cdef float m_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]             # <<<<<<<<<<<<<<
  * 
- *         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(speed_vector_1)
+ *         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(velocity_vector_1)
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_m_2 = __pyx_t_8;
 
-  /* "yapyg_movers\physical_mover.pyx":362
+  /* "yapyg_movers\physical_mover.pyx":352
  *         cdef float m_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]
  * 
- *         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(speed_vector_1)             # <<<<<<<<<<<<<<
+ *         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(velocity_vector_1)             # <<<<<<<<<<<<<<
  * 
  *         cdef float torque_transfer_factor = min(rot_friction_1, rot_friction_2)
  */
-  __pyx_v_created_v_p = (__pyx_v_torque_creation_factor * __pyx_f_5yapyg_7math_2d_length(__pyx_v_speed_vector_1, 0));
+  __pyx_v_created_v_p = (__pyx_v_torque_creation_factor * __pyx_f_5yapyg_7math_2d_length(__pyx_v_velocity_vector_1, 0));
 
-  /* "yapyg_movers\physical_mover.pyx":364
- *         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(speed_vector_1)
+  /* "yapyg_movers\physical_mover.pyx":354
+ *         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(velocity_vector_1)
  * 
  *         cdef float torque_transfer_factor = min(rot_friction_1, rot_friction_2)             # <<<<<<<<<<<<<<
  * 
- *         cdef float created_v_r_1 = (created_v_p / (circle_r_1))
+ *         cdef float created_v_r_1 = created_v_p / circle_r_1
  */
   __pyx_t_8 = __pyx_v_rot_friction_2;
   __pyx_t_9 = __pyx_v_rot_friction_1;
@@ -4375,12 +4296,12 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   }
   __pyx_v_torque_transfer_factor = __pyx_t_10;
 
-  /* "yapyg_movers\physical_mover.pyx":366
+  /* "yapyg_movers\physical_mover.pyx":356
  *         cdef float torque_transfer_factor = min(rot_friction_1, rot_friction_2)
  * 
- *         cdef float created_v_r_1 = (created_v_p / (circle_r_1))             # <<<<<<<<<<<<<<
- *         created_v_r_1 = ((created_v_r_1) / (CONST_2PI))
- *         created_v_r_1 = ((created_v_r_1) * torque_transfer_factor)
+ *         cdef float created_v_r_1 = created_v_p / circle_r_1             # <<<<<<<<<<<<<<
+ *         created_v_r_1 = created_v_r_1 / CONST_2PI
+ *         created_v_r_1 = created_v_r_1 * torque_transfer_factor
  */
   if (unlikely(__pyx_v_circle_r_1 == 0)) {
     #ifdef WITH_THREAD
@@ -4390,15 +4311,15 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_created_v_r_1 = (__pyx_v_created_v_p / __pyx_v_circle_r_1);
 
-  /* "yapyg_movers\physical_mover.pyx":367
+  /* "yapyg_movers\physical_mover.pyx":357
  * 
- *         cdef float created_v_r_1 = (created_v_p / (circle_r_1))
- *         created_v_r_1 = ((created_v_r_1) / (CONST_2PI))             # <<<<<<<<<<<<<<
- *         created_v_r_1 = ((created_v_r_1) * torque_transfer_factor)
+ *         cdef float created_v_r_1 = created_v_p / circle_r_1
+ *         created_v_r_1 = created_v_r_1 / CONST_2PI             # <<<<<<<<<<<<<<
+ *         created_v_r_1 = created_v_r_1 * torque_transfer_factor
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1
  */
   if (unlikely(__pyx_v_12yapyg_movers_14physical_mover_CONST_2PI == 0)) {
@@ -4409,61 +4330,61 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_created_v_r_1 = (__pyx_v_created_v_r_1 / __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI);
 
-  /* "yapyg_movers\physical_mover.pyx":368
- *         cdef float created_v_r_1 = (created_v_p / (circle_r_1))
- *         created_v_r_1 = ((created_v_r_1) / (CONST_2PI))
- *         created_v_r_1 = ((created_v_r_1) * torque_transfer_factor)             # <<<<<<<<<<<<<<
+  /* "yapyg_movers\physical_mover.pyx":358
+ *         cdef float created_v_r_1 = created_v_p / circle_r_1
+ *         created_v_r_1 = created_v_r_1 / CONST_2PI
+ *         created_v_r_1 = created_v_r_1 * torque_transfer_factor             # <<<<<<<<<<<<<<
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1
  * 
  */
   __pyx_v_created_v_r_1 = (__pyx_v_created_v_r_1 * __pyx_v_torque_transfer_factor);
 
-  /* "yapyg_movers\physical_mover.pyx":369
- *         created_v_r_1 = ((created_v_r_1) / (CONST_2PI))
- *         created_v_r_1 = ((created_v_r_1) * torque_transfer_factor)
+  /* "yapyg_movers\physical_mover.pyx":359
+ *         created_v_r_1 = created_v_r_1 / CONST_2PI
+ *         created_v_r_1 = created_v_r_1 * torque_transfer_factor
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1             # <<<<<<<<<<<<<<
  * 
- *         cdef float created_v_r_2 = (created_v_p / (circle_r_2))
+ *         cdef float created_v_r_2 = created_v_p / circle_r_2
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_INCREF(__pyx_v_circle_physical_mover_1);
   __pyx_t_11 = __pyx_v_circle_physical_mover_1;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_11 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = PyObject_GetItem(__pyx_t_11, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = PyObject_GetItem(__pyx_t_11, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_created_v_r_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_created_v_r_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_7 = PyNumber_InPlaceAdd(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyNumber_InPlaceAdd(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (unlikely(__pyx_t_11 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(PyObject_SetItem(__pyx_t_11, __pyx_t_1, __pyx_t_7) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_t_11, __pyx_t_1, __pyx_t_7) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":371
+  /* "yapyg_movers\physical_mover.pyx":361
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1
  * 
- *         cdef float created_v_r_2 = (created_v_p / (circle_r_2))             # <<<<<<<<<<<<<<
- *         created_v_r_2 = ((created_v_r_2) / (CONST_2PI))
- *         created_v_r_2 = ((created_v_r_2) * torque_transfer_factor)
+ *         cdef float created_v_r_2 = created_v_p / circle_r_2             # <<<<<<<<<<<<<<
+ *         created_v_r_2 = created_v_r_2 / CONST_2PI
+ *         created_v_r_2 = created_v_r_2 * torque_transfer_factor
  */
   if (unlikely(__pyx_v_circle_r_2 == 0)) {
     #ifdef WITH_THREAD
@@ -4473,15 +4394,15 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_created_v_r_2 = (__pyx_v_created_v_p / __pyx_v_circle_r_2);
 
-  /* "yapyg_movers\physical_mover.pyx":372
+  /* "yapyg_movers\physical_mover.pyx":362
  * 
- *         cdef float created_v_r_2 = (created_v_p / (circle_r_2))
- *         created_v_r_2 = ((created_v_r_2) / (CONST_2PI))             # <<<<<<<<<<<<<<
- *         created_v_r_2 = ((created_v_r_2) * torque_transfer_factor)
+ *         cdef float created_v_r_2 = created_v_p / circle_r_2
+ *         created_v_r_2 = created_v_r_2 / CONST_2PI             # <<<<<<<<<<<<<<
+ *         created_v_r_2 = created_v_r_2 * torque_transfer_factor
  *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2
  */
   if (unlikely(__pyx_v_12yapyg_movers_14physical_mover_CONST_2PI == 0)) {
@@ -4492,88 +4413,88 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_created_v_r_2 = (__pyx_v_created_v_r_2 / __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI);
 
-  /* "yapyg_movers\physical_mover.pyx":373
- *         cdef float created_v_r_2 = (created_v_p / (circle_r_2))
- *         created_v_r_2 = ((created_v_r_2) / (CONST_2PI))
- *         created_v_r_2 = ((created_v_r_2) * torque_transfer_factor)             # <<<<<<<<<<<<<<
+  /* "yapyg_movers\physical_mover.pyx":363
+ *         cdef float created_v_r_2 = created_v_p / circle_r_2
+ *         created_v_r_2 = created_v_r_2 / CONST_2PI
+ *         created_v_r_2 = created_v_r_2 * torque_transfer_factor             # <<<<<<<<<<<<<<
  *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2
  * 
  */
   __pyx_v_created_v_r_2 = (__pyx_v_created_v_r_2 * __pyx_v_torque_transfer_factor);
 
-  /* "yapyg_movers\physical_mover.pyx":374
- *         created_v_r_2 = ((created_v_r_2) / (CONST_2PI))
- *         created_v_r_2 = ((created_v_r_2) * torque_transfer_factor)
+  /* "yapyg_movers\physical_mover.pyx":364
+ *         created_v_r_2 = created_v_r_2 / CONST_2PI
+ *         created_v_r_2 = created_v_r_2 * torque_transfer_factor
  *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2             # <<<<<<<<<<<<<<
  * 
  *         # ellastic collision
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_INCREF(__pyx_v_circle_physical_mover_2);
   __pyx_t_11 = __pyx_v_circle_physical_mover_2;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_11 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_7 = PyObject_GetItem(__pyx_t_11, __pyx_t_1); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_7 = PyObject_GetItem(__pyx_t_11, __pyx_t_1); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_created_v_r_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_created_v_r_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_7, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_7, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (unlikely(__pyx_t_11 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(PyObject_SetItem(__pyx_t_11, __pyx_t_1, __pyx_t_5) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_t_11, __pyx_t_1, __pyx_t_5) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":377
+  /* "yapyg_movers\physical_mover.pyx":367
  * 
  *         # ellastic collision
  *         cdef tuple unit_vector_1_to_2 = yapyg.math_2d.unit_vector(abs_pos_1, abs_pos_2)             # <<<<<<<<<<<<<<
  *         cdef float new_vx1
  *         cdef float new_vx2
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_unit_vector(__pyx_v_abs_pos_1, __pyx_v_abs_pos_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_unit_vector(__pyx_v_abs_pos_1, __pyx_v_abs_pos_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_unit_vector_1_to_2 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":386
- *                 speed_vector_1,
- *                 speed_vector_2,
+  /* "yapyg_movers\physical_mover.pyx":376
+ *                 velocity_vector_1,
+ *                 velocity_vector_2,
  *                 circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS],             # <<<<<<<<<<<<<<
  *                 circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS])
  * 
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":387
- *                 speed_vector_2,
+  /* "yapyg_movers\physical_mover.pyx":377
+ *                 velocity_vector_2,
  *                 circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS],
  *                 circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS])             # <<<<<<<<<<<<<<
  * 
@@ -4581,24 +4502,24 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_5); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":382
+  /* "yapyg_movers\physical_mover.pyx":372
  *         cdef float new_vy1
  *         cdef float new_vy2
- *         new_vx1, new_vy1, new_vx2, new_vy2 = reflect_speeds(             # <<<<<<<<<<<<<<
+ *         new_vx1, new_vy1, new_vx2, new_vy2 = reflect_velocities(             # <<<<<<<<<<<<<<
  *                 unit_vector_1_to_2,
- *                 speed_vector_1,
+ *                 velocity_vector_1,
  */
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(__pyx_v_unit_vector_1_to_2, __pyx_v_speed_vector_1, __pyx_v_speed_vector_2, __pyx_t_10, __pyx_t_8, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_reflect_velocities(__pyx_v_unit_vector_1_to_2, __pyx_v_velocity_vector_1, __pyx_v_velocity_vector_2, __pyx_t_10, __pyx_t_8, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(__pyx_t_1 != Py_None)) {
     PyObject* sequence = __pyx_t_1;
@@ -4610,7 +4531,7 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0); 
@@ -4626,7 +4547,7 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_5,&__pyx_t_3,&__pyx_t_7,&__pyx_t_4};
       for (i=0; i < 4; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -4634,138 +4555,138 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
-    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_7); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_7); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_new_vx1 = __pyx_t_8;
   __pyx_v_new_vy1 = __pyx_t_10;
   __pyx_v_new_vx2 = __pyx_t_9;
   __pyx_v_new_vy2 = __pyx_t_12;
 
-  /* "yapyg_movers\physical_mover.pyx":390
+  /* "yapyg_movers\physical_mover.pyx":380
  * 
  *         cdef float inelasticity_1
  *         inelasticity_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]             # <<<<<<<<<<<<<<
- *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = ((new_vx1) * (inelasticity_1))
- *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = ((new_vy1) * (inelasticity_1))
+ *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_vx1 * inelasticity_1
+ *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_vy1 * inelasticity_1
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_inelasticity_1 = __pyx_t_12;
 
-  /* "yapyg_movers\physical_mover.pyx":391
+  /* "yapyg_movers\physical_mover.pyx":381
  *         cdef float inelasticity_1
  *         inelasticity_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
- *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = ((new_vx1) * (inelasticity_1))             # <<<<<<<<<<<<<<
- *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = ((new_vy1) * (inelasticity_1))
+ *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_vx1 * inelasticity_1             # <<<<<<<<<<<<<<
+ *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_vy1 * inelasticity_1
  * 
  */
-  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_new_vx1 * __pyx_v_inelasticity_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_new_vx1 * __pyx_v_inelasticity_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":392
+  /* "yapyg_movers\physical_mover.pyx":382
  *         inelasticity_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
- *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = ((new_vx1) * (inelasticity_1))
- *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = ((new_vy1) * (inelasticity_1))             # <<<<<<<<<<<<<<
+ *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_vx1 * inelasticity_1
+ *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_vy1 * inelasticity_1             # <<<<<<<<<<<<<<
  * 
  *         cdef float inelasticity_2
  */
-  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_new_vy1 * __pyx_v_inelasticity_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_new_vy1 * __pyx_v_inelasticity_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1, __pyx_t_4) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":395
+  /* "yapyg_movers\physical_mover.pyx":385
  * 
  *         cdef float inelasticity_2
  *         inelasticity_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]             # <<<<<<<<<<<<<<
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = ((new_vx2) * (inelasticity_2))
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = ((new_vy2) * (inelasticity_2))
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_vx2 * inelasticity_2
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_vy2 * inelasticity_2
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_inelasticity_2 = __pyx_t_12;
 
-  /* "yapyg_movers\physical_mover.pyx":396
+  /* "yapyg_movers\physical_mover.pyx":386
  *         cdef float inelasticity_2
  *         inelasticity_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = ((new_vx2) * (inelasticity_2))             # <<<<<<<<<<<<<<
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = ((new_vy2) * (inelasticity_2))
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_vx2 * inelasticity_2             # <<<<<<<<<<<<<<
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_vy2 * inelasticity_2
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_new_vx2 * __pyx_v_inelasticity_2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_new_vx2 * __pyx_v_inelasticity_2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":397
+  /* "yapyg_movers\physical_mover.pyx":387
  *         inelasticity_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = ((new_vx2) * (inelasticity_2))
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = ((new_vy2) * (inelasticity_2))             # <<<<<<<<<<<<<<
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_vx2 * inelasticity_2
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_vy2 * inelasticity_2             # <<<<<<<<<<<<<<
  * 
  *         # torque tranmission
  */
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_new_vy2 * __pyx_v_inelasticity_2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_new_vy2 * __pyx_v_inelasticity_2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":400
+  /* "yapyg_movers\physical_mover.pyx":390
  * 
  *         # torque tranmission
  *         v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
@@ -4774,87 +4695,87 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
  */
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = PyObject_GetItem(__pyx_v_circle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_v_r_1 = __pyx_t_12;
 
-  /* "yapyg_movers\physical_mover.pyx":401
+  /* "yapyg_movers\physical_mover.pyx":391
  *         # torque tranmission
  *         v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
  *         v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
  * 
- *         cdef float v_p_1 = ((v_r_1) * (circle_r_1))
+ *         cdef float v_p_1 = v_r_1 * circle_r_1
  */
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = PyObject_GetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_v_r_2 = __pyx_t_12;
 
-  /* "yapyg_movers\physical_mover.pyx":403
+  /* "yapyg_movers\physical_mover.pyx":393
  *         v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
  * 
- *         cdef float v_p_1 = ((v_r_1) * (circle_r_1))             # <<<<<<<<<<<<<<
- *         v_p_1 = ((v_p_1) * (CONST_2PI))
+ *         cdef float v_p_1 = v_r_1 * circle_r_1             # <<<<<<<<<<<<<<
+ *         v_p_1 = v_p_1 * CONST_2PI
  * 
  */
   __pyx_v_v_p_1 = (__pyx_v_v_r_1 * __pyx_v_circle_r_1);
 
-  /* "yapyg_movers\physical_mover.pyx":404
+  /* "yapyg_movers\physical_mover.pyx":394
  * 
- *         cdef float v_p_1 = ((v_r_1) * (circle_r_1))
- *         v_p_1 = ((v_p_1) * (CONST_2PI))             # <<<<<<<<<<<<<<
+ *         cdef float v_p_1 = v_r_1 * circle_r_1
+ *         v_p_1 = v_p_1 * CONST_2PI             # <<<<<<<<<<<<<<
  * 
- *         cdef float v_p_2 = ((v_r_2) * (circle_r_2))
+ *         cdef float v_p_2 = v_r_2 * circle_r_2
  */
   __pyx_v_v_p_1 = (__pyx_v_v_p_1 * __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI);
 
-  /* "yapyg_movers\physical_mover.pyx":406
- *         v_p_1 = ((v_p_1) * (CONST_2PI))
+  /* "yapyg_movers\physical_mover.pyx":396
+ *         v_p_1 = v_p_1 * CONST_2PI
  * 
- *         cdef float v_p_2 = ((v_r_2) * (circle_r_2))             # <<<<<<<<<<<<<<
- *         v_p_2 = ((v_p_2) * (CONST_2PI))
+ *         cdef float v_p_2 = v_r_2 * circle_r_2             # <<<<<<<<<<<<<<
+ *         v_p_2 = v_p_2 * CONST_2PI
  * 
  */
   __pyx_v_v_p_2 = (__pyx_v_v_r_2 * __pyx_v_circle_r_2);
 
-  /* "yapyg_movers\physical_mover.pyx":407
+  /* "yapyg_movers\physical_mover.pyx":397
  * 
- *         cdef float v_p_2 = ((v_r_2) * (circle_r_2))
- *         v_p_2 = ((v_p_2) * (CONST_2PI))             # <<<<<<<<<<<<<<
+ *         cdef float v_p_2 = v_r_2 * circle_r_2
+ *         v_p_2 = v_p_2 * CONST_2PI             # <<<<<<<<<<<<<<
  * 
  *         cdef float delta_v = v_p_1 + v_p_2
  */
   __pyx_v_v_p_2 = (__pyx_v_v_p_2 * __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI);
 
-  /* "yapyg_movers\physical_mover.pyx":409
- *         v_p_2 = ((v_p_2) * (CONST_2PI))
+  /* "yapyg_movers\physical_mover.pyx":399
+ *         v_p_2 = v_p_2 * CONST_2PI
  * 
  *         cdef float delta_v = v_p_1 + v_p_2             # <<<<<<<<<<<<<<
  * 
- *         cdef float mass_factor_1 = ((m_2) / (m_1 + m_2))
+ *         cdef float mass_factor_1 = m_2 / (m_1 + m_2)
  */
   __pyx_v_delta_v = (__pyx_v_v_p_1 + __pyx_v_v_p_2);
 
-  /* "yapyg_movers\physical_mover.pyx":411
+  /* "yapyg_movers\physical_mover.pyx":401
  *         cdef float delta_v = v_p_1 + v_p_2
  * 
- *         cdef float mass_factor_1 = ((m_2) / (m_1 + m_2))             # <<<<<<<<<<<<<<
- *         cdef float mass_factor_2 = ((m_1) / (m_1 + m_2))
+ *         cdef float mass_factor_1 = m_2 / (m_1 + m_2)             # <<<<<<<<<<<<<<
+ *         cdef float mass_factor_2 = m_1 / (m_1 + m_2)
  * 
  */
   __pyx_t_12 = (__pyx_v_m_1 + __pyx_v_m_2);
@@ -4866,16 +4787,16 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_mass_factor_1 = (__pyx_v_m_2 / __pyx_t_12);
 
-  /* "yapyg_movers\physical_mover.pyx":412
+  /* "yapyg_movers\physical_mover.pyx":402
  * 
- *         cdef float mass_factor_1 = ((m_2) / (m_1 + m_2))
- *         cdef float mass_factor_2 = ((m_1) / (m_1 + m_2))             # <<<<<<<<<<<<<<
+ *         cdef float mass_factor_1 = m_2 / (m_1 + m_2)
+ *         cdef float mass_factor_2 = m_1 / (m_1 + m_2)             # <<<<<<<<<<<<<<
  * 
- *         cdef float torque_transfer_factor_1 = (torque_transfer_factor * (mass_factor_1))
+ *         cdef float torque_transfer_factor_1 = torque_transfer_factor * mass_factor_1
  */
   __pyx_t_12 = (__pyx_v_m_1 + __pyx_v_m_2);
   if (unlikely(__pyx_t_12 == 0)) {
@@ -4886,51 +4807,51 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_mass_factor_2 = (__pyx_v_m_1 / __pyx_t_12);
 
-  /* "yapyg_movers\physical_mover.pyx":414
- *         cdef float mass_factor_2 = ((m_1) / (m_1 + m_2))
+  /* "yapyg_movers\physical_mover.pyx":404
+ *         cdef float mass_factor_2 = m_1 / (m_1 + m_2)
  * 
- *         cdef float torque_transfer_factor_1 = (torque_transfer_factor * (mass_factor_1))             # <<<<<<<<<<<<<<
- *         cdef float torque_transfer_factor_2 = (torque_transfer_factor * (mass_factor_2))
+ *         cdef float torque_transfer_factor_1 = torque_transfer_factor * mass_factor_1             # <<<<<<<<<<<<<<
+ *         cdef float torque_transfer_factor_2 = torque_transfer_factor * mass_factor_2
  * 
  */
   __pyx_v_torque_transfer_factor_1 = (__pyx_v_torque_transfer_factor * __pyx_v_mass_factor_1);
 
-  /* "yapyg_movers\physical_mover.pyx":415
+  /* "yapyg_movers\physical_mover.pyx":405
  * 
- *         cdef float torque_transfer_factor_1 = (torque_transfer_factor * (mass_factor_1))
- *         cdef float torque_transfer_factor_2 = (torque_transfer_factor * (mass_factor_2))             # <<<<<<<<<<<<<<
+ *         cdef float torque_transfer_factor_1 = torque_transfer_factor * mass_factor_1
+ *         cdef float torque_transfer_factor_2 = torque_transfer_factor * mass_factor_2             # <<<<<<<<<<<<<<
  * 
- *         v_p_1 = v_p_1 - ((torque_transfer_factor_1) * delta_v)
+ *         v_p_1 = v_p_1 - (torque_transfer_factor_1 * delta_v)
  */
   __pyx_v_torque_transfer_factor_2 = (__pyx_v_torque_transfer_factor * __pyx_v_mass_factor_2);
 
-  /* "yapyg_movers\physical_mover.pyx":417
- *         cdef float torque_transfer_factor_2 = (torque_transfer_factor * (mass_factor_2))
+  /* "yapyg_movers\physical_mover.pyx":407
+ *         cdef float torque_transfer_factor_2 = torque_transfer_factor * mass_factor_2
  * 
- *         v_p_1 = v_p_1 - ((torque_transfer_factor_1) * delta_v)             # <<<<<<<<<<<<<<
- *         v_p_2 = v_p_2 - ((torque_transfer_factor_2) * delta_v)
+ *         v_p_1 = v_p_1 - (torque_transfer_factor_1 * delta_v)             # <<<<<<<<<<<<<<
+ *         v_p_2 = v_p_2 - (torque_transfer_factor_2 * delta_v)
  * 
  */
   __pyx_v_v_p_1 = (__pyx_v_v_p_1 - (__pyx_v_torque_transfer_factor_1 * __pyx_v_delta_v));
 
-  /* "yapyg_movers\physical_mover.pyx":418
+  /* "yapyg_movers\physical_mover.pyx":408
  * 
- *         v_p_1 = v_p_1 - ((torque_transfer_factor_1) * delta_v)
- *         v_p_2 = v_p_2 - ((torque_transfer_factor_2) * delta_v)             # <<<<<<<<<<<<<<
+ *         v_p_1 = v_p_1 - (torque_transfer_factor_1 * delta_v)
+ *         v_p_2 = v_p_2 - (torque_transfer_factor_2 * delta_v)             # <<<<<<<<<<<<<<
  * 
- *         v_r_1 = ((v_p_1) / (circle_r_1))
+ *         v_r_1 = v_p_1 / circle_r_1
  */
   __pyx_v_v_p_2 = (__pyx_v_v_p_2 - (__pyx_v_torque_transfer_factor_2 * __pyx_v_delta_v));
 
-  /* "yapyg_movers\physical_mover.pyx":420
- *         v_p_2 = v_p_2 - ((torque_transfer_factor_2) * delta_v)
+  /* "yapyg_movers\physical_mover.pyx":410
+ *         v_p_2 = v_p_2 - (torque_transfer_factor_2 * delta_v)
  * 
- *         v_r_1 = ((v_p_1) / (circle_r_1))             # <<<<<<<<<<<<<<
- *         v_r_1 = ((v_r_1) / (CONST_2PI))
+ *         v_r_1 = v_p_1 / circle_r_1             # <<<<<<<<<<<<<<
+ *         v_r_1 = v_r_1 / CONST_2PI
  * 
  */
   if (unlikely(__pyx_v_circle_r_1 == 0)) {
@@ -4941,16 +4862,16 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_v_r_1 = (__pyx_v_v_p_1 / __pyx_v_circle_r_1);
 
-  /* "yapyg_movers\physical_mover.pyx":421
+  /* "yapyg_movers\physical_mover.pyx":411
  * 
- *         v_r_1 = ((v_p_1) / (circle_r_1))
- *         v_r_1 = ((v_r_1) / (CONST_2PI))             # <<<<<<<<<<<<<<
+ *         v_r_1 = v_p_1 / circle_r_1
+ *         v_r_1 = v_r_1 / CONST_2PI             # <<<<<<<<<<<<<<
  * 
- *         v_r_2 = ((v_p_2) / (circle_r_2))
+ *         v_r_2 = v_p_2 / circle_r_2
  */
   if (unlikely(__pyx_v_12yapyg_movers_14physical_mover_CONST_2PI == 0)) {
     #ifdef WITH_THREAD
@@ -4960,15 +4881,15 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 421; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_v_r_1 = (__pyx_v_v_r_1 / __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI);
 
-  /* "yapyg_movers\physical_mover.pyx":423
- *         v_r_1 = ((v_r_1) / (CONST_2PI))
+  /* "yapyg_movers\physical_mover.pyx":413
+ *         v_r_1 = v_r_1 / CONST_2PI
  * 
- *         v_r_2 = ((v_p_2) / (circle_r_2))             # <<<<<<<<<<<<<<
- *         v_r_2 = ((v_r_2) / (CONST_2PI))
+ *         v_r_2 = v_p_2 / circle_r_2             # <<<<<<<<<<<<<<
+ *         v_r_2 = v_r_2 / CONST_2PI
  * 
  */
   if (unlikely(__pyx_v_circle_r_2 == 0)) {
@@ -4979,14 +4900,14 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_v_r_2 = (__pyx_v_v_p_2 / __pyx_v_circle_r_2);
 
-  /* "yapyg_movers\physical_mover.pyx":424
+  /* "yapyg_movers\physical_mover.pyx":414
  * 
- *         v_r_2 = ((v_p_2) / (circle_r_2))
- *         v_r_2 = ((v_r_2) / (CONST_2PI))             # <<<<<<<<<<<<<<
+ *         v_r_2 = v_p_2 / circle_r_2
+ *         v_r_2 = v_r_2 / CONST_2PI             # <<<<<<<<<<<<<<
  * 
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = v_r_1
  */
@@ -4998,52 +4919,52 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
     #ifdef WITH_THREAD
     PyGILState_Release(__pyx_gilstate_save);
     #endif
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 414; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_v_v_r_2 = (__pyx_v_v_r_2 / __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI);
 
-  /* "yapyg_movers\physical_mover.pyx":426
- *         v_r_2 = ((v_r_2) / (CONST_2PI))
+  /* "yapyg_movers\physical_mover.pyx":416
+ *         v_r_2 = v_r_2 / CONST_2PI
  * 
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = v_r_1             # <<<<<<<<<<<<<<
  *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_circle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_1, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_1, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":427
+  /* "yapyg_movers\physical_mover.pyx":417
  * 
  *         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = v_r_1
  *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2             # <<<<<<<<<<<<<<
  * 
- * cdef c_rectangle_rectangle_collision(list state,
+ * cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_center, velocity_vector):
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_v_r_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_circle_physical_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyObject_SetItem(__pyx_v_circle_physical_mover_2, __pyx_t_4, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":323
+  /* "yapyg_movers\physical_mover.pyx":313
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
  * 
- * cdef void c_circle_circle_collision(list state,             # <<<<<<<<<<<<<<
+ * cdef void circle_circle_collision(list state,             # <<<<<<<<<<<<<<
  *                 str circle_entity_name_1,
  *                 str circle_entity_name_2,
  */
@@ -5058,46 +4979,367 @@ static void __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(Py
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_WriteUnraisable("yapyg_movers.physical_mover.c_circle_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename, 0);
+  __Pyx_WriteUnraisable("yapyg_movers.physical_mover.circle_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename, 0);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_abs_pos_1);
   __Pyx_XDECREF(__pyx_v_abs_pos_2);
-  __Pyx_XDECREF(__pyx_v_speed_vector_1);
-  __Pyx_XDECREF(__pyx_v_speed_vector_2);
+  __Pyx_XDECREF(__pyx_v_velocity_vector_1);
+  __Pyx_XDECREF(__pyx_v_velocity_vector_2);
   __Pyx_XDECREF(__pyx_v_centre_to_centre_vector);
   __Pyx_XDECREF(__pyx_v_unit_vector_1_to_2);
   __Pyx_RefNannyFinishContext();
 }
 
-/* "yapyg_movers\physical_mover.pyx":429
+/* "yapyg_movers\physical_mover.pyx":419
  *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
  * 
- * cdef c_rectangle_rectangle_collision(list state,             # <<<<<<<<<<<<<<
- *                 str rectangle_entity_name_1,
- *                 str rectangle_entity_name_2,
+ * cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_center, velocity_vector):             # <<<<<<<<<<<<<<
+ *         """
+ *         Compute a single representative contact point between the rectangles,
  */
 
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_rectangle_collision(PyObject *__pyx_v_state, PyObject *__pyx_v_rectangle_entity_name_1, CYTHON_UNUSED PyObject *__pyx_v_rectangle_entity_name_2, PyObject *__pyx_v_abs_rectangle_shape_1, PyObject *__pyx_v_abs_rectangle_shape_2, PyObject *__pyx_v_rectangle_physical_mover_1, PyObject *__pyx_v_rectangle_physical_mover_2, PyObject *__pyx_v_contact_points) {
-  CYTHON_UNUSED PyObject *__pyx_v_abs_pos_1 = 0;
-  CYTHON_UNUSED float __pyx_v_v_r_1;
-  CYTHON_UNUSED float __pyx_v_rot_friction_1;
-  CYTHON_UNUSED float __pyx_v_m_1;
-  PyObject *__pyx_v_speed_vector_1 = 0;
-  CYTHON_UNUSED float __pyx_v_inelasticity_1;
-  CYTHON_UNUSED PyObject *__pyx_v_abs_pos_2 = 0;
-  CYTHON_UNUSED float __pyx_v_v_r_2;
-  CYTHON_UNUSED float __pyx_v_rot_friction_2;
-  CYTHON_UNUSED float __pyx_v_m_2;
-  CYTHON_UNUSED PyObject *__pyx_v_speed_vector_2 = 0;
-  float __pyx_v_rect_rot_2;
-  PyObject *__pyx_v_rectangle_center_1 = 0;
-  PyObject *__pyx_v_rectangle_center_2 = 0;
-  PyObject *__pyx_v_contact_point = 0;
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_get_post_rectangle_collision_torque(PyObject *__pyx_v_contact_points, PyObject *__pyx_v_rectangle_center, PyObject *__pyx_v_velocity_vector) {
   PyObject *__pyx_v_contact_sum_vector = 0;
-  PyObject *__pyx_v_rotated_point = 0;
+  float __pyx_v_resulting_torque;
+  PyObject *__pyx_v_contact_point = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *(*__pyx_t_3)(PyObject *);
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_post_rectangle_collision_torque", 0);
+
+  /* "yapyg_movers\physical_mover.pyx":426
+ *           inside the bounds of the other rectangle.
+ *         """
+ *         cdef tuple contact_sum_vector = (0.0, 0.0)             # <<<<<<<<<<<<<<
+ *         cdef float resulting_torque = 0.0
+ *         cdef tuple contact_point
+ */
+  __Pyx_INCREF(__pyx_tuple__4);
+  __pyx_v_contact_sum_vector = __pyx_tuple__4;
+
+  /* "yapyg_movers\physical_mover.pyx":427
+ *         """
+ *         cdef tuple contact_sum_vector = (0.0, 0.0)
+ *         cdef float resulting_torque = 0.0             # <<<<<<<<<<<<<<
+ *         cdef tuple contact_point
+ *         for contact_point in contact_points:
+ */
+  __pyx_v_resulting_torque = 0.0;
+
+  /* "yapyg_movers\physical_mover.pyx":429
+ *         cdef float resulting_torque = 0.0
+ *         cdef tuple contact_point
+ *         for contact_point in contact_points:             # <<<<<<<<<<<<<<
+ *                 contact_sum_vector = yapyg.math_2d.vector_sum(
+ *                         contact_sum_vector,
+ */
+  if (likely(PyList_CheckExact(__pyx_v_contact_points)) || PyTuple_CheckExact(__pyx_v_contact_points)) {
+    __pyx_t_1 = __pyx_v_contact_points; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+    __pyx_t_3 = NULL;
+  } else {
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_contact_points); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  for (;;) {
+    if (likely(!__pyx_t_3)) {
+      if (likely(PyList_CheckExact(__pyx_t_1))) {
+        if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_COMPILING_IN_CPYTHON
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        #else
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        #endif
+      } else {
+        if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_COMPILING_IN_CPYTHON
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        #else
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        #endif
+      }
+    } else {
+      __pyx_t_4 = __pyx_t_3(__pyx_t_1);
+      if (unlikely(!__pyx_t_4)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_4);
+    }
+    if (!(likely(PyTuple_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_4)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_XDECREF_SET(__pyx_v_contact_point, ((PyObject*)__pyx_t_4));
+    __pyx_t_4 = 0;
+
+    /* "yapyg_movers\physical_mover.pyx":432
+ *                 contact_sum_vector = yapyg.math_2d.vector_sum(
+ *                         contact_sum_vector,
+ *                         yapyg.math_2d.vector_diff(contact_point, rectangle_center)             # <<<<<<<<<<<<<<
+ *                         )
+ *                 resulting_torque += yapyg.math_2d.dot_product(
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v_rectangle_center))||((__pyx_v_rectangle_center) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_rectangle_center)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_contact_point, ((PyObject*)__pyx_v_rectangle_center), 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+
+    /* "yapyg_movers\physical_mover.pyx":430
+ *         cdef tuple contact_point
+ *         for contact_point in contact_points:
+ *                 contact_sum_vector = yapyg.math_2d.vector_sum(             # <<<<<<<<<<<<<<
+ *                         contact_sum_vector,
+ *                         yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+ */
+    __pyx_t_5 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_contact_sum_vector, ((PyObject*)__pyx_t_4), 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF_SET(__pyx_v_contact_sum_vector, ((PyObject*)__pyx_t_5));
+    __pyx_t_5 = 0;
+
+    /* "yapyg_movers\physical_mover.pyx":437
+ *                         yapyg.math_2d.complex_multiply(
+ *                                 (0.0, -1.0),
+ *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center)             # <<<<<<<<<<<<<<
+ *                                 ),
+ *                         velocity_vector)
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v_rectangle_center))||((__pyx_v_rectangle_center) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_rectangle_center)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_contact_point, ((PyObject*)__pyx_v_rectangle_center), 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_5);
+
+    /* "yapyg_movers\physical_mover.pyx":435
+ *                         )
+ *                 resulting_torque += yapyg.math_2d.dot_product(
+ *                         yapyg.math_2d.complex_multiply(             # <<<<<<<<<<<<<<
+ *                                 (0.0, -1.0),
+ *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+ */
+    __pyx_t_4 = __pyx_f_5yapyg_7math_2d_complex_multiply(__pyx_tuple__5, ((PyObject*)__pyx_t_5), 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 435; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+    /* "yapyg_movers\physical_mover.pyx":439
+ *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+ *                                 ),
+ *                         velocity_vector)             # <<<<<<<<<<<<<<
+ *         return (contact_sum_vector, resulting_torque)
+ * 
+ */
+    if (!(likely(PyTuple_CheckExact(__pyx_v_velocity_vector))||((__pyx_v_velocity_vector) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_velocity_vector)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+    /* "yapyg_movers\physical_mover.pyx":434
+ *                         yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+ *                         )
+ *                 resulting_torque += yapyg.math_2d.dot_product(             # <<<<<<<<<<<<<<
+ *                         yapyg.math_2d.complex_multiply(
+ *                                 (0.0, -1.0),
+ */
+    __pyx_v_resulting_torque = (__pyx_v_resulting_torque + __pyx_f_5yapyg_7math_2d_dot_product(((PyObject*)__pyx_t_4), ((PyObject*)__pyx_v_velocity_vector), 0));
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "yapyg_movers\physical_mover.pyx":429
+ *         cdef float resulting_torque = 0.0
+ *         cdef tuple contact_point
+ *         for contact_point in contact_points:             # <<<<<<<<<<<<<<
+ *                 contact_sum_vector = yapyg.math_2d.vector_sum(
+ *                         contact_sum_vector,
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":440
+ *                                 ),
+ *                         velocity_vector)
+ *         return (contact_sum_vector, resulting_torque)             # <<<<<<<<<<<<<<
+ * 
+ * cdef tuple get_abs_rectangle_center(tuple abs_rectangle_shape):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_resulting_torque); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_INCREF(__pyx_v_contact_sum_vector);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_contact_sum_vector);
+  __Pyx_GIVEREF(__pyx_v_contact_sum_vector);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+  goto __pyx_L0;
+
+  /* "yapyg_movers\physical_mover.pyx":419
+ *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
+ * 
+ * cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_center, velocity_vector):             # <<<<<<<<<<<<<<
+ *         """
+ *         Compute a single representative contact point between the rectangles,
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.get_post_rectangle_collision_torque", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_contact_sum_vector);
+  __Pyx_XDECREF(__pyx_v_contact_point);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg_movers\physical_mover.pyx":442
+ *         return (contact_sum_vector, resulting_torque)
+ * 
+ * cdef tuple get_abs_rectangle_center(tuple abs_rectangle_shape):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_get_abs_rectangle_center(PyObject *__pyx_v_abs_rectangle_shape) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_abs_rectangle_center", 0);
+
+  /* "yapyg_movers\physical_mover.pyx":446
+ *         TODO
+ *         """
+ *         return (             # <<<<<<<<<<<<<<
+ *                 abs_rectangle_shape[1] + (abs_rectangle_shape[3] / 2.0),
+ *                 abs_rectangle_shape[2] + (abs_rectangle_shape[4] / 2.0)
+ */
+  __Pyx_XDECREF(__pyx_r);
+
+  /* "yapyg_movers\physical_mover.pyx":447
+ *         """
+ *         return (
+ *                 abs_rectangle_shape[1] + (abs_rectangle_shape[3] / 2.0),             # <<<<<<<<<<<<<<
+ *                 abs_rectangle_shape[2] + (abs_rectangle_shape[4] / 2.0)
+ *                 )
+ */
+  if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_float_2_0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":448
+ *         return (
+ *                 abs_rectangle_shape[1] + (abs_rectangle_shape[3] / 2.0),
+ *                 abs_rectangle_shape[2] + (abs_rectangle_shape[4] / 2.0)             # <<<<<<<<<<<<<<
+ *                 )
+ * 
+ */
+  if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
+  if (unlikely(__pyx_v_abs_rectangle_shape == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_float_2_0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 448; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":447
+ *         """
+ *         return (
+ *                 abs_rectangle_shape[1] + (abs_rectangle_shape[3] / 2.0),             # <<<<<<<<<<<<<<
+ *                 abs_rectangle_shape[2] + (abs_rectangle_shape[4] / 2.0)
+ *                 )
+ */
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_2 = 0;
+  __pyx_t_1 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+  goto __pyx_L0;
+
+  /* "yapyg_movers\physical_mover.pyx":442
+ *         return (contact_sum_vector, resulting_torque)
+ * 
+ * cdef tuple get_abs_rectangle_center(tuple abs_rectangle_shape):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.get_abs_rectangle_center", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg_movers\physical_mover.pyx":451
+ *                 )
+ * 
+ * cdef tuple get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_get_post_rectangle_collision_velocity_vector(PyObject *__pyx_v_rectangle_center_1, PyObject *__pyx_v_abs_rectangle_shape_2, PyObject *__pyx_v_velocity_vector_1, PyObject *__pyx_v_rel_contact_point_vector) {
+  PyObject *__pyx_v_abs_contact_point_vector = 0;
+  float __pyx_v_rect_rot_2;
+  PyObject *__pyx_v_post_collision_velocity_vector_1 = 0;
+  PyObject *__pyx_v_rectangle_center_2 = 0;
   float __pyx_v_contact_x;
   float __pyx_v_contact_y;
-  PyObject *__pyx_v_rect_move_vector = 0;
   float __pyx_v_rect_x_1;
   float __pyx_v_rect_y_1;
   float __pyx_v_rect_x_2;
@@ -5108,1458 +5350,970 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_rectangle_c
   float __pyx_v_rect_right_2;
   float __pyx_v_rect_top_2;
   float __pyx_v_rect_bottom_2;
-  PyObject *__pyx_v_rotation_vector = 0;
-  PyObject *__pyx_v_vector_center_to_contact = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  float __pyx_t_5;
+  float __pyx_t_6;
+  int __pyx_t_7;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_post_rectangle_collision_velocity_vector", 0);
+
+  /* "yapyg_movers\physical_mover.pyx":455
+ *         TODO
+ *         """
+ *         cdef tuple abs_contact_point_vector = (rel_contact_point_vector[0] + rectangle_center_1[0],             # <<<<<<<<<<<<<<
+ *                                                rel_contact_point_vector[1] + rectangle_center_1[1])
+ * 
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_rel_contact_point_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_rectangle_center_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":456
+ *         """
+ *         cdef tuple abs_contact_point_vector = (rel_contact_point_vector[0] + rectangle_center_1[0],
+ *                                                rel_contact_point_vector[1] + rectangle_center_1[1])             # <<<<<<<<<<<<<<
+ * 
+ *         # Rotate coordinate system so rectangle 2 is not rotated
+ */
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_rel_contact_point_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_rectangle_center_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":455
+ *         TODO
+ *         """
+ *         cdef tuple abs_contact_point_vector = (rel_contact_point_vector[0] + rectangle_center_1[0],             # <<<<<<<<<<<<<<
+ *                                                rel_contact_point_vector[1] + rectangle_center_1[1])
+ * 
+ */
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  __pyx_t_3 = 0;
+  __pyx_t_4 = 0;
+  __pyx_v_abs_contact_point_vector = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":459
+ * 
+ *         # Rotate coordinate system so rectangle 2 is not rotated
+ *         cdef float rect_rot_2 = abs_rectangle_shape_2[5]             # <<<<<<<<<<<<<<
+ *         cdef tuple post_collision_velocity_vector_1 = velocity_vector_1
+ *         cdef tuple rectangle_center_2 = get_abs_rectangle_center(abs_rectangle_shape_2)
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_abs_rectangle_shape_2, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_rect_rot_2 = __pyx_t_5;
+
+  /* "yapyg_movers\physical_mover.pyx":460
+ *         # Rotate coordinate system so rectangle 2 is not rotated
+ *         cdef float rect_rot_2 = abs_rectangle_shape_2[5]
+ *         cdef tuple post_collision_velocity_vector_1 = velocity_vector_1             # <<<<<<<<<<<<<<
+ *         cdef tuple rectangle_center_2 = get_abs_rectangle_center(abs_rectangle_shape_2)
+ *         cdef float contact_x
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v_velocity_vector_1))||((__pyx_v_velocity_vector_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_velocity_vector_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_v_velocity_vector_1;
+  __Pyx_INCREF(__pyx_t_1);
+  __pyx_v_post_collision_velocity_vector_1 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":461
+ *         cdef float rect_rot_2 = abs_rectangle_shape_2[5]
+ *         cdef tuple post_collision_velocity_vector_1 = velocity_vector_1
+ *         cdef tuple rectangle_center_2 = get_abs_rectangle_center(abs_rectangle_shape_2)             # <<<<<<<<<<<<<<
+ *         cdef float contact_x
+ *         cdef float contact_y
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v_abs_rectangle_shape_2))||((__pyx_v_abs_rectangle_shape_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_abs_rectangle_shape_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_get_abs_rectangle_center(((PyObject*)__pyx_v_abs_rectangle_shape_2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_rectangle_center_2 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":464
+ *         cdef float contact_x
+ *         cdef float contact_y
+ *         contact_x, contact_y = yapyg.math_2d.rotated_point(rectangle_center_2, abs_contact_point_vector, -rect_rot_2)             # <<<<<<<<<<<<<<
+ *         post_collision_velocity_vector_1 = yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, -rect_rot_2)
+ * 
+ */
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_rectangle_center_2, __pyx_v_abs_contact_point_vector, (-__pyx_v_rect_rot_2), 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  if (likely(__pyx_t_1 != Py_None)) {
+    PyObject* sequence = __pyx_t_1;
+    #if CYTHON_COMPILING_IN_CPYTHON
+    Py_ssize_t size = Py_SIZE(sequence);
+    #else
+    Py_ssize_t size = PySequence_Size(sequence);
+    #endif
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    #if CYTHON_COMPILING_IN_CPYTHON
+    __pyx_t_4 = PyTuple_GET_ITEM(sequence, 0); 
+    __pyx_t_3 = PyTuple_GET_ITEM(sequence, 1); 
+    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_3);
+    #else
+    __pyx_t_4 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_contact_x = __pyx_t_5;
+  __pyx_v_contact_y = __pyx_t_6;
+
+  /* "yapyg_movers\physical_mover.pyx":465
+ *         cdef float contact_y
+ *         contact_x, contact_y = yapyg.math_2d.rotated_point(rectangle_center_2, abs_contact_point_vector, -rect_rot_2)
+ *         post_collision_velocity_vector_1 = yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, -rect_rot_2)             # <<<<<<<<<<<<<<
+ * 
+ *         cdef float rect_x_1
+ */
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__6, __pyx_v_post_collision_velocity_vector_1, (-__pyx_v_rect_rot_2), 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_1));
+  __pyx_t_1 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":469
+ *         cdef float rect_x_1
+ *         cdef float rect_y_1
+ *         rect_x_1, rect_y_1 = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)             # <<<<<<<<<<<<<<
+ * 
+ *         cdef float rect_x_2 = rectangle_center_2[0]
+ */
+  if (!(likely(PyTuple_CheckExact(__pyx_v_rectangle_center_1))||((__pyx_v_rectangle_center_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_rectangle_center_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_rectangle_center_2, ((PyObject*)__pyx_v_rectangle_center_1), (-__pyx_v_rect_rot_2), 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  if (likely(__pyx_t_1 != Py_None)) {
+    PyObject* sequence = __pyx_t_1;
+    #if CYTHON_COMPILING_IN_CPYTHON
+    Py_ssize_t size = Py_SIZE(sequence);
+    #else
+    Py_ssize_t size = PySequence_Size(sequence);
+    #endif
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    #if CYTHON_COMPILING_IN_CPYTHON
+    __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0); 
+    __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1); 
+    __Pyx_INCREF(__pyx_t_3);
+    __Pyx_INCREF(__pyx_t_4);
+    #else
+    __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_v_rect_x_1 = __pyx_t_6;
+  __pyx_v_rect_y_1 = __pyx_t_5;
+
+  /* "yapyg_movers\physical_mover.pyx":471
+ *         rect_x_1, rect_y_1 = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)
+ * 
+ *         cdef float rect_x_2 = rectangle_center_2[0]             # <<<<<<<<<<<<<<
+ *         cdef float rect_y_2 = rectangle_center_2[1]
+ *         cdef float rect_w_2 = abs_rectangle_shape_2[3] / 2.0
+ */
+  if (unlikely(__pyx_v_rectangle_center_2 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_rect_x_2 = __pyx_t_5;
+
+  /* "yapyg_movers\physical_mover.pyx":472
+ * 
+ *         cdef float rect_x_2 = rectangle_center_2[0]
+ *         cdef float rect_y_2 = rectangle_center_2[1]             # <<<<<<<<<<<<<<
+ *         cdef float rect_w_2 = abs_rectangle_shape_2[3] / 2.0
+ *         cdef float rect_h_2 = abs_rectangle_shape_2[4] / 2.0
+ */
+  if (unlikely(__pyx_v_rectangle_center_2 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 472; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 472; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 472; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_rect_y_2 = __pyx_t_5;
+
+  /* "yapyg_movers\physical_mover.pyx":473
+ *         cdef float rect_x_2 = rectangle_center_2[0]
+ *         cdef float rect_y_2 = rectangle_center_2[1]
+ *         cdef float rect_w_2 = abs_rectangle_shape_2[3] / 2.0             # <<<<<<<<<<<<<<
+ *         cdef float rect_h_2 = abs_rectangle_shape_2[4] / 2.0
+ * 
+ */
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_abs_rectangle_shape_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_float_2_0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_v_rect_w_2 = __pyx_t_5;
+
+  /* "yapyg_movers\physical_mover.pyx":474
+ *         cdef float rect_y_2 = rectangle_center_2[1]
+ *         cdef float rect_w_2 = abs_rectangle_shape_2[3] / 2.0
+ *         cdef float rect_h_2 = abs_rectangle_shape_2[4] / 2.0             # <<<<<<<<<<<<<<
+ * 
+ *         cdef float rect_left_2 = rect_x_2 - rect_w_2
+ */
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_abs_rectangle_shape_2, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_4, __pyx_float_2_0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_rect_h_2 = __pyx_t_5;
+
+  /* "yapyg_movers\physical_mover.pyx":476
+ *         cdef float rect_h_2 = abs_rectangle_shape_2[4] / 2.0
+ * 
+ *         cdef float rect_left_2 = rect_x_2 - rect_w_2             # <<<<<<<<<<<<<<
+ *         cdef float rect_right_2 = rect_x_2 + rect_w_2
+ *         cdef float rect_top_2 = rect_y_2 + rect_h_2
+ */
+  __pyx_v_rect_left_2 = (__pyx_v_rect_x_2 - __pyx_v_rect_w_2);
+
+  /* "yapyg_movers\physical_mover.pyx":477
+ * 
+ *         cdef float rect_left_2 = rect_x_2 - rect_w_2
+ *         cdef float rect_right_2 = rect_x_2 + rect_w_2             # <<<<<<<<<<<<<<
+ *         cdef float rect_top_2 = rect_y_2 + rect_h_2
+ *         cdef float rect_bottom_2 = rect_y_2 - rect_h_2
+ */
+  __pyx_v_rect_right_2 = (__pyx_v_rect_x_2 + __pyx_v_rect_w_2);
+
+  /* "yapyg_movers\physical_mover.pyx":478
+ *         cdef float rect_left_2 = rect_x_2 - rect_w_2
+ *         cdef float rect_right_2 = rect_x_2 + rect_w_2
+ *         cdef float rect_top_2 = rect_y_2 + rect_h_2             # <<<<<<<<<<<<<<
+ *         cdef float rect_bottom_2 = rect_y_2 - rect_h_2
+ * 
+ */
+  __pyx_v_rect_top_2 = (__pyx_v_rect_y_2 + __pyx_v_rect_h_2);
+
+  /* "yapyg_movers\physical_mover.pyx":479
+ *         cdef float rect_right_2 = rect_x_2 + rect_w_2
+ *         cdef float rect_top_2 = rect_y_2 + rect_h_2
+ *         cdef float rect_bottom_2 = rect_y_2 - rect_h_2             # <<<<<<<<<<<<<<
+ * 
+ *         if contact_x < rect_x_2:
+ */
+  __pyx_v_rect_bottom_2 = (__pyx_v_rect_y_2 - __pyx_v_rect_h_2);
+
+  /* "yapyg_movers\physical_mover.pyx":481
+ *         cdef float rect_bottom_2 = rect_y_2 - rect_h_2
+ * 
+ *         if contact_x < rect_x_2:             # <<<<<<<<<<<<<<
+ *                 if contact_y < rect_y_2:
+ *                         # lower left
+ */
+  __pyx_t_7 = ((__pyx_v_contact_x < __pyx_v_rect_x_2) != 0);
+  if (__pyx_t_7) {
+
+    /* "yapyg_movers\physical_mover.pyx":482
+ * 
+ *         if contact_x < rect_x_2:
+ *                 if contact_y < rect_y_2:             # <<<<<<<<<<<<<<
+ *                         # lower left
+ *                         if rect_x_1 < rect_left_2:
+ */
+    __pyx_t_7 = ((__pyx_v_contact_y < __pyx_v_rect_y_2) != 0);
+    if (__pyx_t_7) {
+
+      /* "yapyg_movers\physical_mover.pyx":484
+ *                 if contact_y < rect_y_2:
+ *                         # lower left
+ *                         if rect_x_1 < rect_left_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 < rect_bottom_2:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_x_1 < __pyx_v_rect_left_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":485
+ *                         # lower left
+ *                         if rect_x_1 < rect_left_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *                         if rect_y_1 < rect_bottom_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_1);
+        __pyx_t_4 = 0;
+        __pyx_t_1 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_3));
+        __pyx_t_3 = 0;
+        goto __pyx_L5;
+      }
+      __pyx_L5:;
+
+      /* "yapyg_movers\physical_mover.pyx":486
+ *                         if rect_x_1 < rect_left_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 < rect_bottom_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ *                 else:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_y_1 < __pyx_v_rect_bottom_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":487
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 < rect_bottom_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *                 else:
+ *                         # upper left
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_3);
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_3 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_1));
+        __pyx_t_1 = 0;
+        goto __pyx_L6;
+      }
+      __pyx_L6:;
+      goto __pyx_L4;
+    }
+    /*else*/ {
+
+      /* "yapyg_movers\physical_mover.pyx":490
+ *                 else:
+ *                         # upper left
+ *                         if rect_x_1 < rect_left_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 > rect_top_2:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_x_1 < __pyx_v_rect_left_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":491
+ *                         # upper left
+ *                         if rect_x_1 < rect_left_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *                         if rect_y_1 > rect_top_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_1);
+        __pyx_t_4 = 0;
+        __pyx_t_1 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_3));
+        __pyx_t_3 = 0;
+        goto __pyx_L7;
+      }
+      __pyx_L7:;
+
+      /* "yapyg_movers\physical_mover.pyx":492
+ *                         if rect_x_1 < rect_left_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 > rect_top_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ *         else:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_y_1 > __pyx_v_rect_top_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":493
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 > rect_top_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *         else:
+ *                 if contact_y < rect_y_2:
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_3);
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_3 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_1));
+        __pyx_t_1 = 0;
+        goto __pyx_L8;
+      }
+      __pyx_L8:;
+    }
+    __pyx_L4:;
+    goto __pyx_L3;
+  }
+  /*else*/ {
+
+    /* "yapyg_movers\physical_mover.pyx":495
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ *         else:
+ *                 if contact_y < rect_y_2:             # <<<<<<<<<<<<<<
+ *                         # lower right
+ *                         if rect_x_1 > rect_right_2:
+ */
+    __pyx_t_7 = ((__pyx_v_contact_y < __pyx_v_rect_y_2) != 0);
+    if (__pyx_t_7) {
+
+      /* "yapyg_movers\physical_mover.pyx":497
+ *                 if contact_y < rect_y_2:
+ *                         # lower right
+ *                         if rect_x_1 > rect_right_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 < rect_bottom_2:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_x_1 > __pyx_v_rect_right_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":498
+ *                         # lower right
+ *                         if rect_x_1 > rect_right_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *                         if rect_y_1 < rect_bottom_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_1);
+        __pyx_t_4 = 0;
+        __pyx_t_1 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_3));
+        __pyx_t_3 = 0;
+        goto __pyx_L10;
+      }
+      __pyx_L10:;
+
+      /* "yapyg_movers\physical_mover.pyx":499
+ *                         if rect_x_1 > rect_right_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 < rect_bottom_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ *                 else:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_y_1 < __pyx_v_rect_bottom_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":500
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 < rect_bottom_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *                 else:
+ *                         # upper right
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_3);
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_3 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_1));
+        __pyx_t_1 = 0;
+        goto __pyx_L11;
+      }
+      __pyx_L11:;
+      goto __pyx_L9;
+    }
+    /*else*/ {
+
+      /* "yapyg_movers\physical_mover.pyx":503
+ *                 else:
+ *                         # upper right
+ *                         if rect_x_1 > rect_right_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 > rect_top_2:
+ */
+      __pyx_t_7 = ((__pyx_v_rect_x_1 > __pyx_v_rect_right_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":504
+ *                         # upper right
+ *                         if rect_x_1 > rect_right_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ *                         if rect_y_1 > rect_top_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_1);
+        __pyx_t_4 = 0;
+        __pyx_t_1 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_3));
+        __pyx_t_3 = 0;
+        goto __pyx_L12;
+      }
+      __pyx_L12:;
+
+      /* "yapyg_movers\physical_mover.pyx":505
+ *                         if rect_x_1 > rect_right_2:
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 > rect_top_2:             # <<<<<<<<<<<<<<
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+ * 
+ */
+      __pyx_t_7 = ((__pyx_v_rect_y_1 > __pyx_v_rect_top_2) != 0);
+      if (__pyx_t_7) {
+
+        /* "yapyg_movers\physical_mover.pyx":506
+ *                                 post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
+ *                         if rect_y_1 > rect_top_2:
+ *                                 post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])             # <<<<<<<<<<<<<<
+ * 
+ *         # rotate back to original coordinate system
+ */
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_3);
+        if (unlikely(__pyx_v_post_collision_velocity_vector_1 == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 506; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_3 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_post_collision_velocity_vector_1, ((PyObject*)__pyx_t_1));
+        __pyx_t_1 = 0;
+        goto __pyx_L13;
+      }
+      __pyx_L13:;
+    }
+    __pyx_L9:;
+  }
+  __pyx_L3:;
+
+  /* "yapyg_movers\physical_mover.pyx":509
+ * 
+ *         # rotate back to original coordinate system
+ *         return yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, rect_rot_2)             # <<<<<<<<<<<<<<
+ * 
+ * cdef rectangle_rectangle_collision(list state,
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__7, __pyx_v_post_collision_velocity_vector_1, __pyx_v_rect_rot_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "yapyg_movers\physical_mover.pyx":451
+ *                 )
+ * 
+ * cdef tuple get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.get_post_rectangle_collision_velocity_vector", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_abs_contact_point_vector);
+  __Pyx_XDECREF(__pyx_v_post_collision_velocity_vector_1);
+  __Pyx_XDECREF(__pyx_v_rectangle_center_2);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg_movers\physical_mover.pyx":511
+ *         return yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, rect_rot_2)
+ * 
+ * cdef rectangle_rectangle_collision(list state,             # <<<<<<<<<<<<<<
+ *                 str rectangle_entity_name_1,
+ *                 str rectangle_entity_name_2,
+ */
+
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_rectangle_rectangle_collision(PyObject *__pyx_v_state, PyObject *__pyx_v_rectangle_entity_name_1, CYTHON_UNUSED PyObject *__pyx_v_rectangle_entity_name_2, PyObject *__pyx_v_abs_rectangle_shape_1, PyObject *__pyx_v_abs_rectangle_shape_2, PyObject *__pyx_v_rectangle_physical_mover_1, CYTHON_UNUSED PyObject *__pyx_v_rectangle_physical_mover_2, PyObject *__pyx_v_contact_points) {
+  PyObject *__pyx_v_velocity_vector_1 = 0;
+  PyObject *__pyx_v_rectangle_center_1 = 0;
+  PyObject *__pyx_v_rel_contact_point_vector = 0;
   float __pyx_v_resulting_torque;
-  float __pyx_v_torque_factor;
-  PyObject *__pyx_v_rotated_vector = NULL;
+  PyObject *__pyx_v_post_collision_velocity_vector = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   float __pyx_t_4;
-  PyObject *__pyx_t_5 = NULL;
-  int __pyx_t_6;
-  Py_ssize_t __pyx_t_7;
-  float __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("c_rectangle_rectangle_collision", 0);
+  __Pyx_RefNannySetupContext("rectangle_rectangle_collision", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":440
+  /* "yapyg_movers\physical_mover.pyx":522
  *         TODO
  *         """
  *         yapyg.entities.undo_last_move(state, rectangle_entity_name_1)             # <<<<<<<<<<<<<<
  * 
- *         cdef tuple abs_pos_1 = (abs_rectangle_shape_1[1], abs_rectangle_shape_1[2])
+ *         # Get new torque of rectangle after collision
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_rectangle_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_rectangle_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":442
- *         yapyg.entities.undo_last_move(state, rectangle_entity_name_1)
+  /* "yapyg_movers\physical_mover.pyx":525
  * 
- *         cdef tuple abs_pos_1 = (abs_rectangle_shape_1[1], abs_rectangle_shape_1[2])             # <<<<<<<<<<<<<<
- *         cdef float v_r_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
- *         cdef float rot_friction_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
+ *         # Get new torque of rectangle after collision
+ *         cdef tuple velocity_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
+ *         cdef tuple rectangle_center_1 = get_abs_rectangle_center(abs_rectangle_shape_1)
+ *         cdef tuple rel_contact_point_vector
  */
-  if (unlikely(__pyx_v_abs_rectangle_shape_1 == Py_None)) {
+  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(__pyx_v_abs_rectangle_shape_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_1 = 0;
-  __pyx_t_2 = 0;
-  __pyx_v_abs_pos_1 = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":443
- * 
- *         cdef tuple abs_pos_1 = (abs_rectangle_shape_1[1], abs_rectangle_shape_1[2])
- *         cdef float v_r_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]             # <<<<<<<<<<<<<<
- *         cdef float rot_friction_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
- *         cdef float m_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
- */
-  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_3); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 443; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_v_r_1 = __pyx_t_4;
-
-  /* "yapyg_movers\physical_mover.pyx":444
- *         cdef tuple abs_pos_1 = (abs_rectangle_shape_1[1], abs_rectangle_shape_1[2])
- *         cdef float v_r_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
- *         cdef float rot_friction_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]             # <<<<<<<<<<<<<<
- *         cdef float m_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
- *         cdef tuple speed_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
- */
-  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 444; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_rot_friction_1 = __pyx_t_4;
-
-  /* "yapyg_movers\physical_mover.pyx":445
- *         cdef float v_r_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
- *         cdef float rot_friction_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
- *         cdef float m_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]             # <<<<<<<<<<<<<<
- *         cdef tuple speed_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
- *         cdef float inelasticity_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
- */
-  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_MASS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_3); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 445; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_m_1 = __pyx_t_4;
-
-  /* "yapyg_movers\physical_mover.pyx":446
- *         cdef float rot_friction_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
- *         cdef float m_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
- *         cdef tuple speed_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])             # <<<<<<<<<<<<<<
- *         cdef float inelasticity_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
- * 
- */
-  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_3 = 0;
-  __pyx_t_1 = 0;
-  __pyx_v_speed_vector_1 = ((PyObject*)__pyx_t_2);
-  __pyx_t_2 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":447
- *         cdef float m_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
- *         cdef tuple speed_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
- *         cdef float inelasticity_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]             # <<<<<<<<<<<<<<
- * 
- *         cdef tuple abs_pos_2 = (abs_rectangle_shape_2[1], abs_rectangle_shape_2[2])
- */
-  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_inelasticity_1 = __pyx_t_4;
-
-  /* "yapyg_movers\physical_mover.pyx":449
- *         cdef float inelasticity_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
- * 
- *         cdef tuple abs_pos_2 = (abs_rectangle_shape_2[1], abs_rectangle_shape_2[2])             # <<<<<<<<<<<<<<
- *         cdef float v_r_2 = 0
- *         cdef float rot_friction_2 = 1
- */
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_1 = 0;
-  __pyx_t_2 = 0;
-  __pyx_v_abs_pos_2 = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":450
- * 
- *         cdef tuple abs_pos_2 = (abs_rectangle_shape_2[1], abs_rectangle_shape_2[2])
- *         cdef float v_r_2 = 0             # <<<<<<<<<<<<<<
- *         cdef float rot_friction_2 = 1
- *         cdef float m_2 = -1
- */
-  __pyx_v_v_r_2 = 0.0;
-
-  /* "yapyg_movers\physical_mover.pyx":451
- *         cdef tuple abs_pos_2 = (abs_rectangle_shape_2[1], abs_rectangle_shape_2[2])
- *         cdef float v_r_2 = 0
- *         cdef float rot_friction_2 = 1             # <<<<<<<<<<<<<<
- *         cdef float m_2 = -1
- *         cdef tuple speed_vector_2 = (0, 0)
- */
-  __pyx_v_rot_friction_2 = 1.0;
-
-  /* "yapyg_movers\physical_mover.pyx":452
- *         cdef float v_r_2 = 0
- *         cdef float rot_friction_2 = 1
- *         cdef float m_2 = -1             # <<<<<<<<<<<<<<
- *         cdef tuple speed_vector_2 = (0, 0)
- *         cdef float inelasticity_2
- */
-  __pyx_v_m_2 = -1.0;
-
-  /* "yapyg_movers\physical_mover.pyx":453
- *         cdef float rot_friction_2 = 1
- *         cdef float m_2 = -1
- *         cdef tuple speed_vector_2 = (0, 0)             # <<<<<<<<<<<<<<
- *         cdef float inelasticity_2
- * 
- */
-  __Pyx_INCREF(__pyx_tuple__3);
-  __pyx_v_speed_vector_2 = __pyx_tuple__3;
-
-  /* "yapyg_movers\physical_mover.pyx":456
- *         cdef float inelasticity_2
- * 
- *         cdef float rect_rot_2 = abs_rectangle_shape_2[5]             # <<<<<<<<<<<<<<
- * 
- *         cdef tuple rectangle_center_1 = (abs_rectangle_shape_1[1] + ((abs_rectangle_shape_1[3]) / 2.0),
- */
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_rect_rot_2 = __pyx_t_4;
-
-  /* "yapyg_movers\physical_mover.pyx":458
- *         cdef float rect_rot_2 = abs_rectangle_shape_2[5]
- * 
- *         cdef tuple rectangle_center_1 = (abs_rectangle_shape_1[1] + ((abs_rectangle_shape_1[3]) / 2.0),             # <<<<<<<<<<<<<<
- *                 abs_rectangle_shape_1[2] + ((abs_rectangle_shape_1[4]) / 2.0))
- * 
- */
-  if (unlikely(__pyx_v_abs_rectangle_shape_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_3);
-  if (unlikely(__pyx_v_abs_rectangle_shape_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_float_2_0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":459
- * 
- *         cdef tuple rectangle_center_1 = (abs_rectangle_shape_1[1] + ((abs_rectangle_shape_1[3]) / 2.0),
- *                 abs_rectangle_shape_1[2] + ((abs_rectangle_shape_1[4]) / 2.0))             # <<<<<<<<<<<<<<
- * 
- *         cdef tuple rectangle_center_2 = (abs_rectangle_shape_2[1] + ((abs_rectangle_shape_2[3]) / 2.0),
- */
-  if (unlikely(__pyx_v_abs_rectangle_shape_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(__pyx_v_abs_rectangle_shape_1 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_1, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_float_2_0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":458
- *         cdef float rect_rot_2 = abs_rectangle_shape_2[5]
- * 
- *         cdef tuple rectangle_center_1 = (abs_rectangle_shape_1[1] + ((abs_rectangle_shape_1[3]) / 2.0),             # <<<<<<<<<<<<<<
- *                 abs_rectangle_shape_1[2] + ((abs_rectangle_shape_1[4]) / 2.0))
- * 
- */
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_v_rectangle_center_1 = ((PyObject*)__pyx_t_5);
-  __pyx_t_5 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":461
- *                 abs_rectangle_shape_1[2] + ((abs_rectangle_shape_1[4]) / 2.0))
- * 
- *         cdef tuple rectangle_center_2 = (abs_rectangle_shape_2[1] + ((abs_rectangle_shape_2[3]) / 2.0),             # <<<<<<<<<<<<<<
- *                 abs_rectangle_shape_2[2] + ((abs_rectangle_shape_2[4]) / 2.0))
- * 
- */
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_5);
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_float_2_0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":462
- * 
- *         cdef tuple rectangle_center_2 = (abs_rectangle_shape_2[1] + ((abs_rectangle_shape_2[3]) / 2.0),
- *                 abs_rectangle_shape_2[2] + ((abs_rectangle_shape_2[4]) / 2.0))             # <<<<<<<<<<<<<<
- * 
- *         cdef tuple contact_point
- */
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_t_5, __pyx_float_2_0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":461
- *                 abs_rectangle_shape_1[2] + ((abs_rectangle_shape_1[4]) / 2.0))
- * 
- *         cdef tuple rectangle_center_2 = (abs_rectangle_shape_2[1] + ((abs_rectangle_shape_2[3]) / 2.0),             # <<<<<<<<<<<<<<
- *                 abs_rectangle_shape_2[2] + ((abs_rectangle_shape_2[4]) / 2.0))
- * 
- */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_5);
-  __pyx_t_3 = 0;
-  __pyx_t_5 = 0;
-  __pyx_v_rectangle_center_2 = ((PyObject*)__pyx_t_1);
+  __pyx_v_velocity_vector_1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":482
- *         cdef float rect_bottom_2
- * 
- *         cdef tuple rotation_vector = (0, -1)             # <<<<<<<<<<<<<<
- *         cdef tuple vector_center_to_contact
- *         # cdef tuple max_positive_torque_vector
- */
-  __Pyx_INCREF(__pyx_tuple__4);
-  __pyx_v_rotation_vector = __pyx_tuple__4;
-
-  /* "yapyg_movers\physical_mover.pyx":487
- *         # cdef tuple rotated_vector
+  /* "yapyg_movers\physical_mover.pyx":526
+ *         # Get new torque of rectangle after collision
+ *         cdef tuple velocity_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
+ *         cdef tuple rectangle_center_1 = get_abs_rectangle_center(abs_rectangle_shape_1)             # <<<<<<<<<<<<<<
+ *         cdef tuple rel_contact_point_vector
  *         cdef float resulting_torque
- *         cdef float torque_factor = 0.25             # <<<<<<<<<<<<<<
- * 
- *         if rectangle_physical_mover_2:
  */
-  __pyx_v_torque_factor = 0.25;
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_get_abs_rectangle_center(__pyx_v_abs_rectangle_shape_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 526; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_rectangle_center_1 = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":489
- *         cdef float torque_factor = 0.25
- * 
- *         if rectangle_physical_mover_2:             # <<<<<<<<<<<<<<
- *                 print "TODO: 2 physics rectangles collision"
- *         else:
+  /* "yapyg_movers\physical_mover.pyx":529
+ *         cdef tuple rel_contact_point_vector
+ *         cdef float resulting_torque
+ *         rel_contact_point_vector, resulting_torque = get_post_rectangle_collision_torque(contact_points, rectangle_center_1, velocity_vector_1)             # <<<<<<<<<<<<<<
+ *         # TODO This wipes out any previous torque!
+ *         # TODO The returned torque is too high sometimes, needs damping therefore or the object gets stuck
  */
-  __pyx_t_6 = (__pyx_v_rectangle_physical_mover_2 != Py_None) && (PyList_GET_SIZE(__pyx_v_rectangle_physical_mover_2) != 0);
-  if (__pyx_t_6) {
-
-    /* "yapyg_movers\physical_mover.pyx":490
- * 
- *         if rectangle_physical_mover_2:
- *                 print "TODO: 2 physics rectangles collision"             # <<<<<<<<<<<<<<
- *         else:
- *                 # print "physics rectangle 1 with static rectangle collision 2"
- */
-    if (__Pyx_PrintOne(0, __pyx_kp_s_TODO_2_physics_rectangles_collis) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 490; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    goto __pyx_L3;
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_get_post_rectangle_collision_torque(__pyx_v_contact_points, __pyx_v_rectangle_center_1, __pyx_v_velocity_vector_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  if (likely(__pyx_t_1 != Py_None)) {
+    PyObject* sequence = __pyx_t_1;
+    #if CYTHON_COMPILING_IN_CPYTHON
+    Py_ssize_t size = Py_SIZE(sequence);
+    #else
+    Py_ssize_t size = PySequence_Size(sequence);
+    #endif
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    #if CYTHON_COMPILING_IN_CPYTHON
+    __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0); 
+    __pyx_t_2 = PyTuple_GET_ITEM(sequence, 1); 
+    __Pyx_INCREF(__pyx_t_3);
+    __Pyx_INCREF(__pyx_t_2);
+    #else
+    __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  /*else*/ {
+  if (!(likely(PyTuple_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_3)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_rel_contact_point_vector = ((PyObject*)__pyx_t_3);
+  __pyx_t_3 = 0;
+  __pyx_v_resulting_torque = __pyx_t_4;
 
-    /* "yapyg_movers\physical_mover.pyx":493
- *         else:
- *                 # print "physics rectangle 1 with static rectangle collision 2"
- *                 contact_sum_vector = (0, 0)             # <<<<<<<<<<<<<<
- *                 resulting_torque = 0
- *                 for contact_point in contact_points:
+  /* "yapyg_movers\physical_mover.pyx":532
+ *         # TODO This wipes out any previous torque!
+ *         # TODO The returned torque is too high sometimes, needs damping therefore or the object gets stuck
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque * 0.5             # <<<<<<<<<<<<<<
+ * 
+ *         # Get new velocity vector of rectangle after collision
  */
-    __Pyx_INCREF(__pyx_tuple__5);
-    __pyx_v_contact_sum_vector = __pyx_tuple__5;
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_resulting_torque * 0.5)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg_movers\physical_mover.pyx":494
- *                 # print "physics rectangle 1 with static rectangle collision 2"
- *                 contact_sum_vector = (0, 0)
- *                 resulting_torque = 0             # <<<<<<<<<<<<<<
- *                 for contact_point in contact_points:
- *                         contact_sum_vector = yapyg.math_2d.vector_sum(contact_sum_vector,
+  /* "yapyg_movers\physical_mover.pyx":535
+ * 
+ *         # Get new velocity vector of rectangle after collision
+ *         cdef tuple post_collision_velocity_vector = get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector)             # <<<<<<<<<<<<<<
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = post_collision_velocity_vector[0]
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = post_collision_velocity_vector[1]
  */
-    __pyx_v_resulting_torque = 0.0;
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_get_post_rectangle_collision_velocity_vector(__pyx_v_rectangle_center_1, __pyx_v_abs_rectangle_shape_2, __pyx_v_velocity_vector_1, __pyx_v_rel_contact_point_vector); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_post_collision_velocity_vector = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
 
-    /* "yapyg_movers\physical_mover.pyx":495
- *                 contact_sum_vector = (0, 0)
- *                 resulting_torque = 0
- *                 for contact_point in contact_points:             # <<<<<<<<<<<<<<
- *                         contact_sum_vector = yapyg.math_2d.vector_sum(contact_sum_vector,
- *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center_1))
- */
-    if (unlikely(__pyx_v_contact_points == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 495; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_1 = __pyx_v_contact_points; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
-    for (;;) {
-      if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
-      #if CYTHON_COMPILING_IN_CPYTHON
-      __pyx_t_5 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 495; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      #else
-      __pyx_t_5 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 495; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      #endif
-      if (!(likely(PyTuple_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 495; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_XDECREF_SET(__pyx_v_contact_point, ((PyObject*)__pyx_t_5));
-      __pyx_t_5 = 0;
-
-      /* "yapyg_movers\physical_mover.pyx":497
- *                 for contact_point in contact_points:
- *                         contact_sum_vector = yapyg.math_2d.vector_sum(contact_sum_vector,
- *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center_1))             # <<<<<<<<<<<<<<
- *                         vector_center_to_contact = yapyg.math_2d.vector_diff(contact_point, rectangle_center_1)
- *                         rotated_vector = yapyg.math_2d.complex_multiply(rotation_vector, vector_center_to_contact)
- */
-      __pyx_t_5 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_contact_point, __pyx_v_rectangle_center_1, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_5);
-
-      /* "yapyg_movers\physical_mover.pyx":496
- *                 resulting_torque = 0
- *                 for contact_point in contact_points:
- *                         contact_sum_vector = yapyg.math_2d.vector_sum(contact_sum_vector,             # <<<<<<<<<<<<<<
- *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center_1))
- *                         vector_center_to_contact = yapyg.math_2d.vector_diff(contact_point, rectangle_center_1)
- */
-      __pyx_t_3 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_contact_sum_vector, ((PyObject*)__pyx_t_5), 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 496; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF_SET(__pyx_v_contact_sum_vector, ((PyObject*)__pyx_t_3));
-      __pyx_t_3 = 0;
-
-      /* "yapyg_movers\physical_mover.pyx":498
- *                         contact_sum_vector = yapyg.math_2d.vector_sum(contact_sum_vector,
- *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center_1))
- *                         vector_center_to_contact = yapyg.math_2d.vector_diff(contact_point, rectangle_center_1)             # <<<<<<<<<<<<<<
- *                         rotated_vector = yapyg.math_2d.complex_multiply(rotation_vector, vector_center_to_contact)
- *                         resulting_torque += yapyg.math_2d.dot_product(rotated_vector, speed_vector_1)
- */
-      __pyx_t_3 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_contact_point, __pyx_v_rectangle_center_1, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_XDECREF_SET(__pyx_v_vector_center_to_contact, ((PyObject*)__pyx_t_3));
-      __pyx_t_3 = 0;
-
-      /* "yapyg_movers\physical_mover.pyx":499
- *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center_1))
- *                         vector_center_to_contact = yapyg.math_2d.vector_diff(contact_point, rectangle_center_1)
- *                         rotated_vector = yapyg.math_2d.complex_multiply(rotation_vector, vector_center_to_contact)             # <<<<<<<<<<<<<<
- *                         resulting_torque += yapyg.math_2d.dot_product(rotated_vector, speed_vector_1)
+  /* "yapyg_movers\physical_mover.pyx":536
+ *         # Get new velocity vector of rectangle after collision
+ *         cdef tuple post_collision_velocity_vector = get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector)
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = post_collision_velocity_vector[0]             # <<<<<<<<<<<<<<
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = post_collision_velocity_vector[1]
  * 
  */
-      __pyx_t_3 = __pyx_f_5yapyg_7math_2d_complex_multiply(__pyx_v_rotation_vector, __pyx_v_vector_center_to_contact, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_XDECREF_SET(__pyx_v_rotated_vector, ((PyObject*)__pyx_t_3));
-      __pyx_t_3 = 0;
+  if (unlikely(__pyx_v_post_collision_velocity_vector == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg_movers\physical_mover.pyx":500
- *                         vector_center_to_contact = yapyg.math_2d.vector_diff(contact_point, rectangle_center_1)
- *                         rotated_vector = yapyg.math_2d.complex_multiply(rotation_vector, vector_center_to_contact)
- *                         resulting_torque += yapyg.math_2d.dot_product(rotated_vector, speed_vector_1)             # <<<<<<<<<<<<<<
- * 
- *                 resulting_torque = (resulting_torque * torque_factor)
- */
-      __pyx_v_resulting_torque = (__pyx_v_resulting_torque + __pyx_f_5yapyg_7math_2d_dot_product(__pyx_v_rotated_vector, __pyx_v_speed_vector_1, 0));
-
-      /* "yapyg_movers\physical_mover.pyx":495
- *                 contact_sum_vector = (0, 0)
- *                 resulting_torque = 0
- *                 for contact_point in contact_points:             # <<<<<<<<<<<<<<
- *                         contact_sum_vector = yapyg.math_2d.vector_sum(contact_sum_vector,
- *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center_1))
- */
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "yapyg_movers\physical_mover.pyx":502
- *                         resulting_torque += yapyg.math_2d.dot_product(rotated_vector, speed_vector_1)
- * 
- *                 resulting_torque = (resulting_torque * torque_factor)             # <<<<<<<<<<<<<<
- *                 # Seems to fix rectangles getting stuck sometimes
- *                 if resulting_torque != rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]:
- */
-    __pyx_v_resulting_torque = (__pyx_v_resulting_torque * __pyx_v_torque_factor);
-
-    /* "yapyg_movers\physical_mover.pyx":504
- *                 resulting_torque = (resulting_torque * torque_factor)
- *                 # Seems to fix rectangles getting stuck sometimes
- *                 if resulting_torque != rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]:             # <<<<<<<<<<<<<<
- *                         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque
- *                 else:
- */
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_resulting_torque); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = PyObject_GetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_3); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_t_5, Py_NE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__pyx_t_6) {
-
-      /* "yapyg_movers\physical_mover.pyx":505
- *                 # Seems to fix rectangles getting stuck sometimes
- *                 if resulting_torque != rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]:
- *                         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque             # <<<<<<<<<<<<<<
- *                 else:
- *                         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = 0
- */
-      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_resulting_torque); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_5, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 505; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      goto __pyx_L6;
-    }
-    /*else*/ {
-
-      /* "yapyg_movers\physical_mover.pyx":507
- *                         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque
- *                 else:
- *                         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = 0             # <<<<<<<<<<<<<<
- * 
- *                 contact_sum_vector = (contact_sum_vector[0] + rectangle_center_1[0], contact_sum_vector[1] + rectangle_center_1[1])
- */
-      if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VR); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_3, __pyx_int_0) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 507; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    }
-    __pyx_L6:;
-
-    /* "yapyg_movers\physical_mover.pyx":509
- *                         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = 0
- * 
- *                 contact_sum_vector = (contact_sum_vector[0] + rectangle_center_1[0], contact_sum_vector[1] + rectangle_center_1[1])             # <<<<<<<<<<<<<<
- *                 contact_x,contact_y = contact_sum_vector
- * 
- */
-    if (unlikely(__pyx_v_contact_sum_vector == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_contact_sum_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(__pyx_v_contact_sum_vector == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_contact_sum_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Add(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
-    __Pyx_GIVEREF(__pyx_t_2);
-    __pyx_t_1 = 0;
-    __pyx_t_2 = 0;
-    __Pyx_DECREF_SET(__pyx_v_contact_sum_vector, ((PyObject*)__pyx_t_3));
-    __pyx_t_3 = 0;
-
-    /* "yapyg_movers\physical_mover.pyx":510
- * 
- *                 contact_sum_vector = (contact_sum_vector[0] + rectangle_center_1[0], contact_sum_vector[1] + rectangle_center_1[1])
- *                 contact_x,contact_y = contact_sum_vector             # <<<<<<<<<<<<<<
- * 
- *                 # rotate coordinate system so that static rectangle 2 is not rotated
- */
-    if (1) {
-      PyObject* sequence = __pyx_v_contact_sum_vector;
-      #if CYTHON_COMPILING_IN_CPYTHON
-      Py_ssize_t size = Py_SIZE(sequence);
-      #else
-      Py_ssize_t size = PySequence_Size(sequence);
-      #endif
-      if (unlikely(size != 2)) {
-        if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-        else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      #if CYTHON_COMPILING_IN_CPYTHON
-      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0); 
-      __pyx_t_2 = PyTuple_GET_ITEM(sequence, 1); 
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
-      #else
-      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_2);
-      #endif
-    }
-    __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_contact_x = __pyx_t_4;
-    __pyx_v_contact_y = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":513
- * 
- *                 # rotate coordinate system so that static rectangle 2 is not rotated
- *                 rect_move_vector = speed_vector_1             # <<<<<<<<<<<<<<
- * 
- *                 rect_x_1 = rectangle_center_1[0]
- */
-    __Pyx_INCREF(__pyx_v_speed_vector_1);
-    __pyx_v_rect_move_vector = __pyx_v_speed_vector_1;
-
-    /* "yapyg_movers\physical_mover.pyx":515
- *                 rect_move_vector = speed_vector_1
- * 
- *                 rect_x_1 = rectangle_center_1[0]             # <<<<<<<<<<<<<<
- *                 rect_y_1 = rectangle_center_1[1]
- * 
- */
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 515; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_rect_x_1 = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":516
- * 
- *                 rect_x_1 = rectangle_center_1[0]
- *                 rect_y_1 = rectangle_center_1[1]             # <<<<<<<<<<<<<<
- * 
- *                 rect_x_2 = rectangle_center_2[0]
- */
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 516; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 516; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_rect_y_1 = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":518
- *                 rect_y_1 = rectangle_center_1[1]
- * 
- *                 rect_x_2 = rectangle_center_2[0]             # <<<<<<<<<<<<<<
- *                 rect_y_2 = rectangle_center_2[1]
- *                 rect_w_2 = ((abs_rectangle_shape_2[3]) / 2.0)
- */
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_rect_x_2 = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":519
- * 
- *                 rect_x_2 = rectangle_center_2[0]
- *                 rect_y_2 = rectangle_center_2[1]             # <<<<<<<<<<<<<<
- *                 rect_w_2 = ((abs_rectangle_shape_2[3]) / 2.0)
- *                 rect_h_2 = ((abs_rectangle_shape_2[4]) / 2.0)
- */
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rectangle_center_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_rect_y_2 = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":520
- *                 rect_x_2 = rectangle_center_2[0]
- *                 rect_y_2 = rectangle_center_2[1]
- *                 rect_w_2 = ((abs_rectangle_shape_2[3]) / 2.0)             # <<<<<<<<<<<<<<
- *                 rect_h_2 = ((abs_rectangle_shape_2[4]) / 2.0)
- * 
- */
-    if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_float_2_0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_v_rect_w_2 = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":521
- *                 rect_y_2 = rectangle_center_2[1]
- *                 rect_w_2 = ((abs_rectangle_shape_2[3]) / 2.0)
- *                 rect_h_2 = ((abs_rectangle_shape_2[4]) / 2.0)             # <<<<<<<<<<<<<<
- * 
- *                 rect_left_2 = rect_x_2 - rect_w_2
- */
-    if (unlikely(__pyx_v_abs_rectangle_shape_2 == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 521; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_abs_rectangle_shape_2, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 521; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_float_2_0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 521; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 521; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_rect_h_2 = __pyx_t_8;
-
-    /* "yapyg_movers\physical_mover.pyx":523
- *                 rect_h_2 = ((abs_rectangle_shape_2[4]) / 2.0)
- * 
- *                 rect_left_2 = rect_x_2 - rect_w_2             # <<<<<<<<<<<<<<
- *                 rect_right_2 = rect_x_2 + rect_w_2
- *                 rect_top_2 = rect_y_2 + rect_h_2
- */
-    __pyx_v_rect_left_2 = (__pyx_v_rect_x_2 - __pyx_v_rect_w_2);
-
-    /* "yapyg_movers\physical_mover.pyx":524
- * 
- *                 rect_left_2 = rect_x_2 - rect_w_2
- *                 rect_right_2 = rect_x_2 + rect_w_2             # <<<<<<<<<<<<<<
- *                 rect_top_2 = rect_y_2 + rect_h_2
- *                 rect_bottom_2 = rect_y_2 - rect_h_2
- */
-    __pyx_v_rect_right_2 = (__pyx_v_rect_x_2 + __pyx_v_rect_w_2);
-
-    /* "yapyg_movers\physical_mover.pyx":525
- *                 rect_left_2 = rect_x_2 - rect_w_2
- *                 rect_right_2 = rect_x_2 + rect_w_2
- *                 rect_top_2 = rect_y_2 + rect_h_2             # <<<<<<<<<<<<<<
- *                 rect_bottom_2 = rect_y_2 - rect_h_2
- * 
- */
-    __pyx_v_rect_top_2 = (__pyx_v_rect_y_2 + __pyx_v_rect_h_2);
-
-    /* "yapyg_movers\physical_mover.pyx":526
- *                 rect_right_2 = rect_x_2 + rect_w_2
- *                 rect_top_2 = rect_y_2 + rect_h_2
- *                 rect_bottom_2 = rect_y_2 - rect_h_2             # <<<<<<<<<<<<<<
- * 
- *                 if rect_rot_2 != 0:
- */
-    __pyx_v_rect_bottom_2 = (__pyx_v_rect_y_2 - __pyx_v_rect_h_2);
-
-    /* "yapyg_movers\physical_mover.pyx":528
- *                 rect_bottom_2 = rect_y_2 - rect_h_2
- * 
- *                 if rect_rot_2 != 0:             # <<<<<<<<<<<<<<
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, contact_sum_vector, -rect_rot_2)
- *                         contact_x,contact_y = rotated_point
- */
-    __pyx_t_6 = ((__pyx_v_rect_rot_2 != 0.0) != 0);
-    if (__pyx_t_6) {
-
-      /* "yapyg_movers\physical_mover.pyx":529
- * 
- *                 if rect_rot_2 != 0:
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, contact_sum_vector, -rect_rot_2)             # <<<<<<<<<<<<<<
- *                         contact_x,contact_y = rotated_point
- * 
- */
-      __pyx_t_2 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_rectangle_center_2, __pyx_v_contact_sum_vector, (-__pyx_v_rect_rot_2), 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_v_rotated_point = ((PyObject*)__pyx_t_2);
-      __pyx_t_2 = 0;
-
-      /* "yapyg_movers\physical_mover.pyx":530
- *                 if rect_rot_2 != 0:
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, contact_sum_vector, -rect_rot_2)
- *                         contact_x,contact_y = rotated_point             # <<<<<<<<<<<<<<
- * 
- *                         rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, -rect_rot_2)
- */
-      if (likely(__pyx_v_rotated_point != Py_None)) {
-        PyObject* sequence = __pyx_v_rotated_point;
-        #if CYTHON_COMPILING_IN_CPYTHON
-        Py_ssize_t size = Py_SIZE(sequence);
-        #else
-        Py_ssize_t size = PySequence_Size(sequence);
-        #endif
-        if (unlikely(size != 2)) {
-          if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-          else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        }
-        #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0); 
-        __pyx_t_3 = PyTuple_GET_ITEM(sequence, 1); 
-        __Pyx_INCREF(__pyx_t_2);
-        __Pyx_INCREF(__pyx_t_3);
-        #else
-        __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        #endif
-      } else {
-        __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_v_contact_x = __pyx_t_8;
-      __pyx_v_contact_y = __pyx_t_4;
-
-      /* "yapyg_movers\physical_mover.pyx":532
- *                         contact_x,contact_y = rotated_point
- * 
- *                         rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, -rect_rot_2)             # <<<<<<<<<<<<<<
- * 
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)
- */
-      __pyx_t_3 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__6, __pyx_v_rect_move_vector, (-__pyx_v_rect_rot_2), 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_3));
-      __pyx_t_3 = 0;
-
-      /* "yapyg_movers\physical_mover.pyx":534
- *                         rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, -rect_rot_2)
- * 
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)             # <<<<<<<<<<<<<<
- *                         rect_x_1,rect_y_1 = rotated_point
- * 
- */
-      __pyx_t_3 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_rectangle_center_2, __pyx_v_rectangle_center_1, (-__pyx_v_rect_rot_2), 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF_SET(__pyx_v_rotated_point, ((PyObject*)__pyx_t_3));
-      __pyx_t_3 = 0;
-
-      /* "yapyg_movers\physical_mover.pyx":535
- * 
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)
- *                         rect_x_1,rect_y_1 = rotated_point             # <<<<<<<<<<<<<<
- * 
- *                 if contact_x < rect_x_2:
- */
-      if (likely(__pyx_v_rotated_point != Py_None)) {
-        PyObject* sequence = __pyx_v_rotated_point;
-        #if CYTHON_COMPILING_IN_CPYTHON
-        Py_ssize_t size = Py_SIZE(sequence);
-        #else
-        Py_ssize_t size = PySequence_Size(sequence);
-        #endif
-        if (unlikely(size != 2)) {
-          if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-          else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        }
-        #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0); 
-        __pyx_t_2 = PyTuple_GET_ITEM(sequence, 1); 
-        __Pyx_INCREF(__pyx_t_3);
-        __Pyx_INCREF(__pyx_t_2);
-        #else
-        __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_2 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        #endif
-      } else {
-        __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_v_rect_x_1 = __pyx_t_4;
-      __pyx_v_rect_y_1 = __pyx_t_8;
-      goto __pyx_L7;
-    }
-    __pyx_L7:;
-
-    /* "yapyg_movers\physical_mover.pyx":537
- *                         rect_x_1,rect_y_1 = rotated_point
- * 
- *                 if contact_x < rect_x_2:             # <<<<<<<<<<<<<<
- *                         if contact_y < rect_y_2:
- *                                 # lower left
- */
-    __pyx_t_6 = ((__pyx_v_contact_x < __pyx_v_rect_x_2) != 0);
-    if (__pyx_t_6) {
-
-      /* "yapyg_movers\physical_mover.pyx":538
- * 
- *                 if contact_x < rect_x_2:
- *                         if contact_y < rect_y_2:             # <<<<<<<<<<<<<<
- *                                 # lower left
- *                                 if rect_x_1 < rect_left_2:
- */
-      __pyx_t_6 = ((__pyx_v_contact_y < __pyx_v_rect_y_2) != 0);
-      if (__pyx_t_6) {
-
-        /* "yapyg_movers\physical_mover.pyx":540
- *                         if contact_y < rect_y_2:
- *                                 # lower left
- *                                 if rect_x_1 < rect_left_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 < rect_bottom_2:
- */
-        __pyx_t_6 = ((__pyx_v_rect_x_1 < __pyx_v_rect_left_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":541
- *                                 # lower left
- *                                 if rect_x_1 < rect_left_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                                 if rect_y_1 < rect_bottom_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
-          __Pyx_GIVEREF(__pyx_t_2);
-          __pyx_t_3 = 0;
-          __pyx_t_2 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_1));
-          __pyx_t_1 = 0;
-          goto __pyx_L10;
-        }
-        __pyx_L10:;
-
-        /* "yapyg_movers\physical_mover.pyx":542
- *                                 if rect_x_1 < rect_left_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 < rect_bottom_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- *                         else:
- */
-        __pyx_t_6 = ((__pyx_v_rect_y_1 < __pyx_v_rect_bottom_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":543
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 < rect_bottom_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                         else:
- *                                 # upper left
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_1);
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
-          __Pyx_GIVEREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          __pyx_t_1 = 0;
-          __pyx_t_3 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_2));
-          __pyx_t_2 = 0;
-          goto __pyx_L11;
-        }
-        __pyx_L11:;
-        goto __pyx_L9;
-      }
-      /*else*/ {
-
-        /* "yapyg_movers\physical_mover.pyx":546
- *                         else:
- *                                 # upper left
- *                                 if rect_x_1 < rect_left_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 > rect_top_2:
- */
-        __pyx_t_6 = ((__pyx_v_rect_x_1 < __pyx_v_rect_left_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":547
- *                                 # upper left
- *                                 if rect_x_1 < rect_left_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                                 if rect_y_1 > rect_top_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
-          __Pyx_GIVEREF(__pyx_t_2);
-          __pyx_t_3 = 0;
-          __pyx_t_2 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_1));
-          __pyx_t_1 = 0;
-          goto __pyx_L12;
-        }
-        __pyx_L12:;
-
-        /* "yapyg_movers\physical_mover.pyx":548
- *                                 if rect_x_1 < rect_left_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 > rect_top_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- *                 else:
- */
-        __pyx_t_6 = ((__pyx_v_rect_y_1 > __pyx_v_rect_top_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":549
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 > rect_top_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                 else:
- *                         if contact_y < rect_y_2:
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_1);
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
-          __Pyx_GIVEREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          __pyx_t_1 = 0;
-          __pyx_t_3 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_2));
-          __pyx_t_2 = 0;
-          goto __pyx_L13;
-        }
-        __pyx_L13:;
-      }
-      __pyx_L9:;
-      goto __pyx_L8;
-    }
-    /*else*/ {
-
-      /* "yapyg_movers\physical_mover.pyx":551
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- *                 else:
- *                         if contact_y < rect_y_2:             # <<<<<<<<<<<<<<
- *                                 # lower right
- *                                 if rect_x_1 > rect_right_2:
- */
-      __pyx_t_6 = ((__pyx_v_contact_y < __pyx_v_rect_y_2) != 0);
-      if (__pyx_t_6) {
-
-        /* "yapyg_movers\physical_mover.pyx":553
- *                         if contact_y < rect_y_2:
- *                                 # lower right
- *                                 if rect_x_1 > rect_right_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 < rect_bottom_2:
- */
-        __pyx_t_6 = ((__pyx_v_rect_x_1 > __pyx_v_rect_right_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":554
- *                                 # lower right
- *                                 if rect_x_1 > rect_right_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                                 if rect_y_1 < rect_bottom_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
-          __Pyx_GIVEREF(__pyx_t_2);
-          __pyx_t_3 = 0;
-          __pyx_t_2 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_1));
-          __pyx_t_1 = 0;
-          goto __pyx_L15;
-        }
-        __pyx_L15:;
-
-        /* "yapyg_movers\physical_mover.pyx":555
- *                                 if rect_x_1 > rect_right_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 < rect_bottom_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- *                         else:
- */
-        __pyx_t_6 = ((__pyx_v_rect_y_1 < __pyx_v_rect_bottom_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":556
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 < rect_bottom_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                         else:
- *                                 # upper right
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_1);
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
-          __Pyx_GIVEREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          __pyx_t_1 = 0;
-          __pyx_t_3 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_2));
-          __pyx_t_2 = 0;
-          goto __pyx_L16;
-        }
-        __pyx_L16:;
-        goto __pyx_L14;
-      }
-      /*else*/ {
-
-        /* "yapyg_movers\physical_mover.pyx":559
- *                         else:
- *                                 # upper right
- *                                 if rect_x_1 > rect_right_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 > rect_top_2:
- */
-        __pyx_t_6 = ((__pyx_v_rect_x_1 > __pyx_v_rect_right_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":560
- *                                 # upper right
- *                                 if rect_x_1 > rect_right_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])             # <<<<<<<<<<<<<<
- *                                 if rect_y_1 > rect_top_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
-          __Pyx_GIVEREF(__pyx_t_2);
-          __pyx_t_3 = 0;
-          __pyx_t_2 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_1));
-          __pyx_t_1 = 0;
-          goto __pyx_L17;
-        }
-        __pyx_L17:;
-
-        /* "yapyg_movers\physical_mover.pyx":561
- *                                 if rect_x_1 > rect_right_2:
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 > rect_top_2:             # <<<<<<<<<<<<<<
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])
- * 
- */
-        __pyx_t_6 = ((__pyx_v_rect_y_1 > __pyx_v_rect_top_2) != 0);
-        if (__pyx_t_6) {
-
-          /* "yapyg_movers\physical_mover.pyx":562
- *                                         rect_move_vector = (-rect_move_vector[0], rect_move_vector[1])
- *                                 if rect_y_1 > rect_top_2:
- *                                         rect_move_vector = (rect_move_vector[0], -rect_move_vector[1])             # <<<<<<<<<<<<<<
- * 
- *                 # rotate back to original coordinate system
- */
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_1);
-          if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_3 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
-          __Pyx_GIVEREF(__pyx_t_1);
-          PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_3);
-          __pyx_t_1 = 0;
-          __pyx_t_3 = 0;
-          __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_2));
-          __pyx_t_2 = 0;
-          goto __pyx_L18;
-        }
-        __pyx_L18:;
-      }
-      __pyx_L14:;
-    }
-    __pyx_L8:;
-
-    /* "yapyg_movers\physical_mover.pyx":565
- * 
- *                 # rotate back to original coordinate system
- *                 rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, rect_rot_2)             # <<<<<<<<<<<<<<
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = rect_move_vector[0]
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = rect_move_vector[1]
- */
-    __pyx_t_2 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_tuple__7, __pyx_v_rect_move_vector, __pyx_v_rect_rot_2, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 565; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF_SET(__pyx_v_rect_move_vector, ((PyObject*)__pyx_t_2));
-    __pyx_t_2 = 0;
-
-    /* "yapyg_movers\physical_mover.pyx":566
- *                 # rotate back to original coordinate system
- *                 rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, rect_rot_2)
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = rect_move_vector[0]             # <<<<<<<<<<<<<<
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = rect_move_vector[1]
- * 
- */
-    if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VX); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_3, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "yapyg_movers\physical_mover.pyx":567
- *                 rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, rect_rot_2)
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = rect_move_vector[0]
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = rect_move_vector[1]             # <<<<<<<<<<<<<<
+  /* "yapyg_movers\physical_mover.pyx":537
+ *         cdef tuple post_collision_velocity_vector = get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector)
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = post_collision_velocity_vector[0]
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = post_collision_velocity_vector[1]             # <<<<<<<<<<<<<<
  * 
  * cpdef collision_handler(list state,
  */
-    if (unlikely(__pyx_v_rect_move_vector == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_rect_move_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_2);
-    if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_3, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(__pyx_v_post_collision_velocity_vector == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_L3:;
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_post_collision_velocity_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  if (unlikely(__pyx_v_rectangle_physical_mover_1 == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_MOVERS_PHYSICAL_VY); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(PyObject_SetItem(__pyx_v_rectangle_physical_mover_1, __pyx_t_2, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":429
- *         circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
+  /* "yapyg_movers\physical_mover.pyx":511
+ *         return yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, rect_rot_2)
  * 
- * cdef c_rectangle_rectangle_collision(list state,             # <<<<<<<<<<<<<<
+ * cdef rectangle_rectangle_collision(list state,             # <<<<<<<<<<<<<<
  *                 str rectangle_entity_name_1,
  *                 str rectangle_entity_name_2,
  */
@@ -6571,30 +6325,20 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_rectangle_c
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("yapyg_movers.physical_mover.c_rectangle_rectangle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.rectangle_rectangle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_abs_pos_1);
-  __Pyx_XDECREF(__pyx_v_speed_vector_1);
-  __Pyx_XDECREF(__pyx_v_abs_pos_2);
-  __Pyx_XDECREF(__pyx_v_speed_vector_2);
+  __Pyx_XDECREF(__pyx_v_velocity_vector_1);
   __Pyx_XDECREF(__pyx_v_rectangle_center_1);
-  __Pyx_XDECREF(__pyx_v_rectangle_center_2);
-  __Pyx_XDECREF(__pyx_v_contact_point);
-  __Pyx_XDECREF(__pyx_v_contact_sum_vector);
-  __Pyx_XDECREF(__pyx_v_rotated_point);
-  __Pyx_XDECREF(__pyx_v_rect_move_vector);
-  __Pyx_XDECREF(__pyx_v_rotation_vector);
-  __Pyx_XDECREF(__pyx_v_vector_center_to_contact);
-  __Pyx_XDECREF(__pyx_v_rotated_vector);
+  __Pyx_XDECREF(__pyx_v_rel_contact_point_vector);
+  __Pyx_XDECREF(__pyx_v_post_collision_velocity_vector);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":569
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = rect_move_vector[1]
+/* "yapyg_movers\physical_mover.pyx":539
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = post_collision_velocity_vector[1]
  * 
  * cpdef collision_handler(list state,             # <<<<<<<<<<<<<<
  *                 str entity_name_1,
@@ -6621,33 +6365,33 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("collision_handler", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":585
+  /* "yapyg_movers\physical_mover.pyx":553
  *         cdef list entity_mover_1
  *         cdef list entity_mover_2
  *         entity_mover_1 = yapyg.movers.get_active(state, entity_name_1)             # <<<<<<<<<<<<<<
  *         entity_mover_2 = yapyg.movers.get_active(state, entity_name_2)
  * 
  */
-  __pyx_t_1 = __pyx_f_5yapyg_6movers_get_active(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_6movers_get_active(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 553; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 553; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entity_mover_1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":586
+  /* "yapyg_movers\physical_mover.pyx":554
  *         cdef list entity_mover_2
  *         entity_mover_1 = yapyg.movers.get_active(state, entity_name_1)
  *         entity_mover_2 = yapyg.movers.get_active(state, entity_name_2)             # <<<<<<<<<<<<<<
  * 
  *         cdef list physics_mover_1
  */
-  __pyx_t_1 = __pyx_f_5yapyg_6movers_get_active(__pyx_v_state, __pyx_v_entity_name_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_6movers_get_active(__pyx_v_state, __pyx_v_entity_name_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 554; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entity_mover_2 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":590
+  /* "yapyg_movers\physical_mover.pyx":558
  *         cdef list physics_mover_1
  *         cdef list physics_mover_2
  *         physics_mover_1 = None             # <<<<<<<<<<<<<<
@@ -6657,7 +6401,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   __Pyx_INCREF(Py_None);
   __pyx_v_physics_mover_1 = ((PyObject*)Py_None);
 
-  /* "yapyg_movers\physical_mover.pyx":591
+  /* "yapyg_movers\physical_mover.pyx":559
  *         cdef list physics_mover_2
  *         physics_mover_1 = None
  *         physics_mover_2 = None             # <<<<<<<<<<<<<<
@@ -6667,7 +6411,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   __Pyx_INCREF(Py_None);
   __pyx_v_physics_mover_2 = ((PyObject*)Py_None);
 
-  /* "yapyg_movers\physical_mover.pyx":592
+  /* "yapyg_movers\physical_mover.pyx":560
  *         physics_mover_1 = None
  *         physics_mover_2 = None
  *         if (entity_mover_1 and entity_mover_1[0] == PHYSICS_MOVER_NAME):             # <<<<<<<<<<<<<<
@@ -6682,17 +6426,17 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   if (unlikely(__pyx_v_entity_mover_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 592; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_1, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 592; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_1, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 592; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_2 = __pyx_t_3;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "yapyg_movers\physical_mover.pyx":593
+    /* "yapyg_movers\physical_mover.pyx":561
  *         physics_mover_2 = None
  *         if (entity_mover_1 and entity_mover_1[0] == PHYSICS_MOVER_NAME):
  *                 physics_mover_1 = entity_mover_1             # <<<<<<<<<<<<<<
@@ -6705,7 +6449,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   __pyx_L3:;
 
-  /* "yapyg_movers\physical_mover.pyx":594
+  /* "yapyg_movers\physical_mover.pyx":562
  *         if (entity_mover_1 and entity_mover_1[0] == PHYSICS_MOVER_NAME):
  *                 physics_mover_1 = entity_mover_1
  *         if (entity_mover_2 and entity_mover_2[0] == PHYSICS_MOVER_NAME):             # <<<<<<<<<<<<<<
@@ -6720,17 +6464,17 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   if (unlikely(__pyx_v_entity_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 594; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 594; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 594; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_2 = __pyx_t_3;
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "yapyg_movers\physical_mover.pyx":595
+    /* "yapyg_movers\physical_mover.pyx":563
  *                 physics_mover_1 = entity_mover_1
  *         if (entity_mover_2 and entity_mover_2[0] == PHYSICS_MOVER_NAME):
  *                 physics_mover_2 = entity_mover_2             # <<<<<<<<<<<<<<
@@ -6743,7 +6487,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   __pyx_L6:;
 
-  /* "yapyg_movers\physical_mover.pyx":597
+  /* "yapyg_movers\physical_mover.pyx":565
  *                 physics_mover_2 = entity_mover_2
  * 
  *         if (physics_mover_1 or physics_mover_2):             # <<<<<<<<<<<<<<
@@ -6761,78 +6505,78 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   __pyx_L10_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "yapyg_movers\physical_mover.pyx":598
+    /* "yapyg_movers\physical_mover.pyx":566
  * 
  *         if (physics_mover_1 or physics_mover_2):
  *                 if absolute_shape_1[0] == "rectangle":             # <<<<<<<<<<<<<<
  *                         if absolute_shape_2[0] == "rectangle":
- *                                 c_rectangle_rectangle_collision(state, entity_name_1, entity_name_2,
+ *                                 rectangle_rectangle_collision(state, entity_name_1, entity_name_2,
  */
     if (unlikely(__pyx_v_absolute_shape_1 == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg_movers\physical_mover.pyx":599
+      /* "yapyg_movers\physical_mover.pyx":567
  *         if (physics_mover_1 or physics_mover_2):
  *                 if absolute_shape_1[0] == "rectangle":
  *                         if absolute_shape_2[0] == "rectangle":             # <<<<<<<<<<<<<<
- *                                 c_rectangle_rectangle_collision(state, entity_name_1, entity_name_2,
+ *                                 rectangle_rectangle_collision(state, entity_name_1, entity_name_2,
  *                                         absolute_shape_1, absolute_shape_2,
  */
       if (unlikely(__pyx_v_absolute_shape_2 == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_2) {
 
-        /* "yapyg_movers\physical_mover.pyx":600
+        /* "yapyg_movers\physical_mover.pyx":568
  *                 if absolute_shape_1[0] == "rectangle":
  *                         if absolute_shape_2[0] == "rectangle":
- *                                 c_rectangle_rectangle_collision(state, entity_name_1, entity_name_2,             # <<<<<<<<<<<<<<
+ *                                 rectangle_rectangle_collision(state, entity_name_1, entity_name_2,             # <<<<<<<<<<<<<<
  *                                         absolute_shape_1, absolute_shape_2,
  *                                         physics_mover_1, physics_mover_2,
  */
-        __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_c_rectangle_rectangle_collision(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_physics_mover_1, __pyx_v_physics_mover_2, __pyx_v_contact_points); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_rectangle_rectangle_collision(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_physics_mover_1, __pyx_v_physics_mover_2, __pyx_v_contact_points); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 568; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         goto __pyx_L13;
       }
 
-      /* "yapyg_movers\physical_mover.pyx":604
+      /* "yapyg_movers\physical_mover.pyx":572
  *                                         physics_mover_1, physics_mover_2,
  *                                         contact_points)
  *                         elif absolute_shape_2[0] == "circle":             # <<<<<<<<<<<<<<
- *                                 c_rectangle_circle_collision(state, entity_name_1, entity_name_2,
+ *                                 rectangle_circle_collision(state, entity_name_1, entity_name_2,
  *                                         absolute_shape_1, absolute_shape_2,
  */
       if (unlikely(__pyx_v_absolute_shape_2 == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 572; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 572; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 572; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_2) {
 
-        /* "yapyg_movers\physical_mover.pyx":605
+        /* "yapyg_movers\physical_mover.pyx":573
  *                                         contact_points)
  *                         elif absolute_shape_2[0] == "circle":
- *                                 c_rectangle_circle_collision(state, entity_name_1, entity_name_2,             # <<<<<<<<<<<<<<
+ *                                 rectangle_circle_collision(state, entity_name_1, entity_name_2,             # <<<<<<<<<<<<<<
  *                                         absolute_shape_1, absolute_shape_2,
  *                                         physics_mover_1, physics_mover_2)
  */
-        __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_collision(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_physics_mover_1, __pyx_v_physics_mover_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 605; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_rectangle_circle_collision(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_physics_mover_1, __pyx_v_physics_mover_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 573; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         goto __pyx_L13;
@@ -6841,78 +6585,78 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
       goto __pyx_L12;
     }
 
-    /* "yapyg_movers\physical_mover.pyx":608
+    /* "yapyg_movers\physical_mover.pyx":576
  *                                         absolute_shape_1, absolute_shape_2,
  *                                         physics_mover_1, physics_mover_2)
  *                 elif absolute_shape_1[0] == "circle":             # <<<<<<<<<<<<<<
  *                         if absolute_shape_2[0] == "rectangle":
- *                                 c_rectangle_circle_collision(state, entity_name_2, entity_name_1,
+ *                                 rectangle_circle_collision(state, entity_name_2, entity_name_1,
  */
     if (unlikely(__pyx_v_absolute_shape_1 == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg_movers\physical_mover.pyx":609
+      /* "yapyg_movers\physical_mover.pyx":577
  *                                         physics_mover_1, physics_mover_2)
  *                 elif absolute_shape_1[0] == "circle":
  *                         if absolute_shape_2[0] == "rectangle":             # <<<<<<<<<<<<<<
- *                                 c_rectangle_circle_collision(state, entity_name_2, entity_name_1,
+ *                                 rectangle_circle_collision(state, entity_name_2, entity_name_1,
  *                                         absolute_shape_2, absolute_shape_1,
  */
       if (unlikely(__pyx_v_absolute_shape_2 == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 609; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 609; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 609; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_2) {
 
-        /* "yapyg_movers\physical_mover.pyx":610
+        /* "yapyg_movers\physical_mover.pyx":578
  *                 elif absolute_shape_1[0] == "circle":
  *                         if absolute_shape_2[0] == "rectangle":
- *                                 c_rectangle_circle_collision(state, entity_name_2, entity_name_1,             # <<<<<<<<<<<<<<
+ *                                 rectangle_circle_collision(state, entity_name_2, entity_name_1,             # <<<<<<<<<<<<<<
  *                                         absolute_shape_2, absolute_shape_1,
  *                                         physics_mover_2, physics_mover_1)
  */
-        __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_collision(__pyx_v_state, __pyx_v_entity_name_2, __pyx_v_entity_name_1, __pyx_v_absolute_shape_2, __pyx_v_absolute_shape_1, __pyx_v_physics_mover_2, __pyx_v_physics_mover_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 610; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_rectangle_circle_collision(__pyx_v_state, __pyx_v_entity_name_2, __pyx_v_entity_name_1, __pyx_v_absolute_shape_2, __pyx_v_absolute_shape_1, __pyx_v_physics_mover_2, __pyx_v_physics_mover_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         goto __pyx_L14;
       }
 
-      /* "yapyg_movers\physical_mover.pyx":613
+      /* "yapyg_movers\physical_mover.pyx":581
  *                                         absolute_shape_2, absolute_shape_1,
  *                                         physics_mover_2, physics_mover_1)
  *                         elif absolute_shape_2[0] == "circle":             # <<<<<<<<<<<<<<
- *                                 c_circle_circle_collision(state, entity_name_1, entity_name_2,
+ *                                 circle_circle_collision(state, entity_name_1, entity_name_2,
  *                                         absolute_shape_1, absolute_shape_2,
  */
       if (unlikely(__pyx_v_absolute_shape_2 == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_2) {
 
-        /* "yapyg_movers\physical_mover.pyx":614
+        /* "yapyg_movers\physical_mover.pyx":582
  *                                         physics_mover_2, physics_mover_1)
  *                         elif absolute_shape_2[0] == "circle":
- *                                 c_circle_circle_collision(state, entity_name_1, entity_name_2,             # <<<<<<<<<<<<<<
+ *                                 circle_circle_collision(state, entity_name_1, entity_name_2,             # <<<<<<<<<<<<<<
  *                                         absolute_shape_1, absolute_shape_2,
  *                                         physics_mover_1, physics_mover_2)
  */
-        __pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_physics_mover_1, __pyx_v_physics_mover_2);
+        __pyx_f_12yapyg_movers_14physical_mover_circle_circle_collision(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_physics_mover_1, __pyx_v_physics_mover_2);
         goto __pyx_L14;
       }
       __pyx_L14:;
@@ -6923,7 +6667,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   __pyx_L9:;
 
-  /* "yapyg_movers\physical_mover.pyx":618
+  /* "yapyg_movers\physical_mover.pyx":586
  *                                         physics_mover_1, physics_mover_2)
  * 
  *         if entity_mover_2 and entity_mover_2[0] != PHYSICS_MOVER_NAME:             # <<<<<<<<<<<<<<
@@ -6938,17 +6682,17 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   if (unlikely(__pyx_v_entity_mover_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, Py_NE)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, Py_NE)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_2 = __pyx_t_3;
   __pyx_L16_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "yapyg_movers\physical_mover.pyx":619
+    /* "yapyg_movers\physical_mover.pyx":587
  * 
  *         if entity_mover_2 and entity_mover_2[0] != PHYSICS_MOVER_NAME:
  *                 if (entity_mover_2[yapyg.movers.IDX_MOVER_COLLISION_HANDLER]):             # <<<<<<<<<<<<<<
@@ -6957,15 +6701,15 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
  */
     if (unlikely(__pyx_v_entity_mover_2 == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 619; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 619; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 619; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg_movers\physical_mover.pyx":620
+      /* "yapyg_movers\physical_mover.pyx":588
  *         if entity_mover_2 and entity_mover_2[0] != PHYSICS_MOVER_NAME:
  *                 if (entity_mover_2[yapyg.movers.IDX_MOVER_COLLISION_HANDLER]):
  *                         (entity_mover_2[yapyg.movers.IDX_MOVER_COLLISION_HANDLER])(state,             # <<<<<<<<<<<<<<
@@ -6974,12 +6718,12 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
  */
       if (unlikely(__pyx_v_entity_mover_2 == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity_mover_2, __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_4);
 
-      /* "yapyg_movers\physical_mover.pyx":627
+      /* "yapyg_movers\physical_mover.pyx":595
  *                         absolute_shape_1,
  *                         absolute_shape_2,
  *                         contact_points)             # <<<<<<<<<<<<<<
@@ -6998,7 +6742,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
           __pyx_t_6 = 1;
         }
       }
-      __pyx_t_7 = PyTuple_New(8+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = PyTuple_New(8+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       if (__pyx_t_5) {
         PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -7027,7 +6771,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
       __Pyx_INCREF(__pyx_v_contact_points);
       PyTuple_SET_ITEM(__pyx_t_7, 7+__pyx_t_6, __pyx_v_contact_points);
       __Pyx_GIVEREF(__pyx_v_contact_points);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -7039,8 +6783,8 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_collision_handler(PyObj
   }
   __pyx_L15:;
 
-  /* "yapyg_movers\physical_mover.pyx":569
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = rect_move_vector[1]
+  /* "yapyg_movers\physical_mover.pyx":539
+ *         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = post_collision_velocity_vector[1]
  * 
  * cpdef collision_handler(list state,             # <<<<<<<<<<<<<<
  *                 str entity_name_1,
@@ -7111,41 +6855,41 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_5collision_handler(PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_collision_def_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_collision_def_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_absolute_shape_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  6:
         if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_absolute_shape_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 6); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 6); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  7:
         if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_contact_points)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 7); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, 7); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "collision_handler") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "collision_handler") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 8) {
       goto __pyx_L5_argtuple_error;
@@ -7170,20 +6914,20 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_5collision_handler(PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("collision_handler", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg_movers.physical_mover.collision_handler", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name_1), (&PyString_Type), 1, "entity_name_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 570; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name_2), (&PyString_Type), 1, "entity_name_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 571; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision_def_1), (&PyList_Type), 1, "collision_def_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 572; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision_def_2), (&PyList_Type), 1, "collision_def_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 573; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_absolute_shape_1), (&PyTuple_Type), 1, "absolute_shape_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_absolute_shape_2), (&PyTuple_Type), 1, "absolute_shape_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 575; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_contact_points), (&PyList_Type), 1, "contact_points", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name_1), (&PyString_Type), 1, "entity_name_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 540; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name_2), (&PyString_Type), 1, "entity_name_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 541; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision_def_1), (&PyList_Type), 1, "collision_def_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision_def_2), (&PyList_Type), 1, "collision_def_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 543; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_absolute_shape_1), (&PyTuple_Type), 1, "absolute_shape_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 544; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_absolute_shape_2), (&PyTuple_Type), 1, "absolute_shape_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_contact_points), (&PyList_Type), 1, "contact_points", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_12yapyg_movers_14physical_mover_4collision_handler(__pyx_self, __pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_collision_def_1, __pyx_v_collision_def_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_contact_points);
 
   /* function exit code */
@@ -7204,7 +6948,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_4collision_handler(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("collision_handler", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_collision_handler(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_collision_def_1, __pyx_v_collision_def_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_contact_points, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_collision_handler(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_entity_name_2, __pyx_v_collision_def_1, __pyx_v_collision_def_2, __pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_contact_points, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 539; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7221,7 +6965,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_4collision_handler(CYT
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":629
+/* "yapyg_movers\physical_mover.pyx":597
  *                         contact_points)
  * 
  * cpdef tuple elastic_collision(float v_1, float v_2, float m_1, float m_2):             # <<<<<<<<<<<<<<
@@ -7247,7 +6991,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("elastic_collision", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":637
+  /* "yapyg_movers\physical_mover.pyx":605
  *         cdef float new_v_1
  *         cdef float new_v_2
  *         if m_1 < 0:             # <<<<<<<<<<<<<<
@@ -7257,7 +7001,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
   __pyx_t_1 = ((__pyx_v_m_1 < 0.0) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg_movers\physical_mover.pyx":638
+    /* "yapyg_movers\physical_mover.pyx":606
  *         cdef float new_v_2
  *         if m_1 < 0:
  *                 return (v_1, -v_2)             # <<<<<<<<<<<<<<
@@ -7265,11 +7009,11 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
  *                 return (-v_1, v_2)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_v_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_v_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyFloat_FromDouble((-__pyx_v_v_2)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble((-__pyx_v_v_2)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
@@ -7282,7 +7026,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
     goto __pyx_L0;
   }
 
-  /* "yapyg_movers\physical_mover.pyx":639
+  /* "yapyg_movers\physical_mover.pyx":607
  *         if m_1 < 0:
  *                 return (v_1, -v_2)
  *         elif m_2 < 0:             # <<<<<<<<<<<<<<
@@ -7292,7 +7036,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
   __pyx_t_1 = ((__pyx_v_m_2 < 0.0) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg_movers\physical_mover.pyx":640
+    /* "yapyg_movers\physical_mover.pyx":608
  *                 return (v_1, -v_2)
  *         elif m_2 < 0:
  *                 return (-v_1, v_2)             # <<<<<<<<<<<<<<
@@ -7300,11 +7044,11 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
  *                 mass_sum = m_1 + m_2
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = PyFloat_FromDouble((-__pyx_v_v_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyFloat_FromDouble((-__pyx_v_v_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_v_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_v_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
@@ -7318,7 +7062,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
   }
   /*else*/ {
 
-    /* "yapyg_movers\physical_mover.pyx":642
+    /* "yapyg_movers\physical_mover.pyx":610
  *                 return (-v_1, v_2)
  *         else:
  *                 mass_sum = m_1 + m_2             # <<<<<<<<<<<<<<
@@ -7327,7 +7071,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
  */
     __pyx_v_mass_sum = (__pyx_v_m_1 + __pyx_v_m_2);
 
-    /* "yapyg_movers\physical_mover.pyx":643
+    /* "yapyg_movers\physical_mover.pyx":611
  *         else:
  *                 mass_sum = m_1 + m_2
  *                 diff_1 = m_1 - m_2             # <<<<<<<<<<<<<<
@@ -7336,7 +7080,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
  */
     __pyx_v_diff_1 = (__pyx_v_m_1 - __pyx_v_m_2);
 
-    /* "yapyg_movers\physical_mover.pyx":644
+    /* "yapyg_movers\physical_mover.pyx":612
  *                 mass_sum = m_1 + m_2
  *                 diff_1 = m_1 - m_2
  *                 new_v_1 =  ((v_1 * diff_1) + (2.0 * m_2 * v_2)) / mass_sum             # <<<<<<<<<<<<<<
@@ -7352,11 +7096,11 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
       #ifdef WITH_THREAD
       PyGILState_Release(__pyx_gilstate_save);
       #endif
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 644; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 612; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_v_new_v_1 = (__pyx_t_5 / __pyx_v_mass_sum);
 
-    /* "yapyg_movers\physical_mover.pyx":645
+    /* "yapyg_movers\physical_mover.pyx":613
  *                 diff_1 = m_1 - m_2
  *                 new_v_1 =  ((v_1 * diff_1) + (2.0 * m_2 * v_2)) / mass_sum
  *                 new_v_2 = ((v_2 * -diff_1) + (2.0 * m_1 * v_1)) / mass_sum             # <<<<<<<<<<<<<<
@@ -7372,23 +7116,23 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
       #ifdef WITH_THREAD
       PyGILState_Release(__pyx_gilstate_save);
       #endif
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 645; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_v_new_v_2 = (__pyx_t_5 / __pyx_v_mass_sum);
 
-    /* "yapyg_movers\physical_mover.pyx":646
+    /* "yapyg_movers\physical_mover.pyx":614
  *                 new_v_1 =  ((v_1 * diff_1) + (2.0 * m_2 * v_2)) / mass_sum
  *                 new_v_2 = ((v_2 * -diff_1) + (2.0 * m_1 * v_1)) / mass_sum
  *                 return (new_v_1, new_v_2)             # <<<<<<<<<<<<<<
  * 
- * cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2):
+ * cpdef tuple reflect_velocities(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2):
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_new_v_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_new_v_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_new_v_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_new_v_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
@@ -7401,7 +7145,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_elastic_collision(float
     goto __pyx_L0;
   }
 
-  /* "yapyg_movers\physical_mover.pyx":629
+  /* "yapyg_movers\physical_mover.pyx":597
  *                         contact_points)
  * 
  * cpdef tuple elastic_collision(float v_1, float v_2, float m_1, float m_2):             # <<<<<<<<<<<<<<
@@ -7458,21 +7202,21 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_7elastic_collision(PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_v_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_m_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_m_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "elastic_collision") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "elastic_collision") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -7482,14 +7226,14 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_7elastic_collision(PyO
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_v_1 = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_v_1 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_v_2 = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_v_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_m_1 = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_m_1 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_m_2 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_m_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_v_1 = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_v_1 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_v_2 = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_v_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_m_1 = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_m_1 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_m_2 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_m_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("elastic_collision", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg_movers.physical_mover.elastic_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -7511,7 +7255,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_6elastic_collision(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("elastic_collision", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_elastic_collision(__pyx_v_v_1, __pyx_v_v_2, __pyx_v_m_1, __pyx_v_m_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 629; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_elastic_collision(__pyx_v_v_1, __pyx_v_v_2, __pyx_v_m_1, __pyx_v_m_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 597; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7528,16 +7272,16 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_6elastic_collision(CYT
   return __pyx_r;
 }
 
-/* "yapyg_movers\physical_mover.pyx":648
+/* "yapyg_movers\physical_mover.pyx":616
  *                 return (new_v_1, new_v_2)
  * 
- * cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2):             # <<<<<<<<<<<<<<
+ * cpdef tuple reflect_velocities(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject *__pyx_v_unit_vector, PyObject *__pyx_v_v1_vector, PyObject *__pyx_v_v2_vector, float __pyx_v_m_1, float __pyx_v_m_2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_velocities(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_velocities(PyObject *__pyx_v_unit_vector, PyObject *__pyx_v_v1_vector, PyObject *__pyx_v_v2_vector, float __pyx_v_m_1, float __pyx_v_m_2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   float __pyx_v_v1_eff;
   float __pyx_v_v2_eff;
   PyObject *__pyx_v_v1_eff_vector = 0;
@@ -7562,9 +7306,9 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("reflect_speeds", 0);
+  __Pyx_RefNannySetupContext("reflect_velocities", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":652
+  /* "yapyg_movers\physical_mover.pyx":620
  *         TODO
  *         """
  *         cdef float v1_eff = yapyg.math_2d.dot_product(unit_vector, v1_vector)             # <<<<<<<<<<<<<<
@@ -7573,7 +7317,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
  */
   __pyx_v_v1_eff = __pyx_f_5yapyg_7math_2d_dot_product(__pyx_v_unit_vector, __pyx_v_v1_vector, 0);
 
-  /* "yapyg_movers\physical_mover.pyx":653
+  /* "yapyg_movers\physical_mover.pyx":621
  *         """
  *         cdef float v1_eff = yapyg.math_2d.dot_product(unit_vector, v1_vector)
  *         cdef float v2_eff = yapyg.math_2d.dot_product(unit_vector, v2_vector)             # <<<<<<<<<<<<<<
@@ -7582,62 +7326,62 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
  */
   __pyx_v_v2_eff = __pyx_f_5yapyg_7math_2d_dot_product(__pyx_v_unit_vector, __pyx_v_v2_vector, 0);
 
-  /* "yapyg_movers\physical_mover.pyx":655
+  /* "yapyg_movers\physical_mover.pyx":623
  *         cdef float v2_eff = yapyg.math_2d.dot_product(unit_vector, v2_vector)
  * 
  *         cdef tuple v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, v1_eff)             # <<<<<<<<<<<<<<
  *         cdef tuple v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, v2_eff)
  * 
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_v1_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_v1_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_v1_eff_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":656
+  /* "yapyg_movers\physical_mover.pyx":624
  * 
  *         cdef tuple v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, v1_eff)
  *         cdef tuple v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, v2_eff)             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple v1_tangent_vector = yapyg.math_2d.vector_diff(v1_vector, v1_eff_vector)
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_v2_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_v2_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_v2_eff_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":658
+  /* "yapyg_movers\physical_mover.pyx":626
  *         cdef tuple v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, v2_eff)
  * 
  *         cdef tuple v1_tangent_vector = yapyg.math_2d.vector_diff(v1_vector, v1_eff_vector)             # <<<<<<<<<<<<<<
  *         cdef tuple v2_tangent_vector = yapyg.math_2d.vector_diff(v2_vector, v2_eff_vector)
  * 
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_v1_vector, __pyx_v_v1_eff_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 658; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_v1_vector, __pyx_v_v1_eff_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 626; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_v1_tangent_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":659
+  /* "yapyg_movers\physical_mover.pyx":627
  * 
  *         cdef tuple v1_tangent_vector = yapyg.math_2d.vector_diff(v1_vector, v1_eff_vector)
  *         cdef tuple v2_tangent_vector = yapyg.math_2d.vector_diff(v2_vector, v2_eff_vector)             # <<<<<<<<<<<<<<
  * 
  *         cdef float new_v1_eff
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_v2_vector, __pyx_v_v2_eff_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_diff(__pyx_v_v2_vector, __pyx_v_v2_eff_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 627; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_v2_tangent_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":663
+  /* "yapyg_movers\physical_mover.pyx":631
  *         cdef float new_v1_eff
  *         cdef float new_v2_eff
  *         new_v1_eff, new_v2_eff = elastic_collision(v1_eff, v2_eff, m_1, m_2)             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple new_v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v1_eff)
  */
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_elastic_collision(__pyx_v_v1_eff, __pyx_v_v2_eff, __pyx_v_m_1, __pyx_v_m_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_elastic_collision(__pyx_v_v1_eff, __pyx_v_v2_eff, __pyx_v_m_1, __pyx_v_m_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(__pyx_t_1 != Py_None)) {
     PyObject* sequence = __pyx_t_1;
@@ -7649,7 +7393,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0); 
@@ -7657,71 +7401,71 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_3);
     #else
-    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
-    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 663; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_new_v1_eff = __pyx_t_4;
   __pyx_v_new_v2_eff = __pyx_t_5;
 
-  /* "yapyg_movers\physical_mover.pyx":665
+  /* "yapyg_movers\physical_mover.pyx":633
  *         new_v1_eff, new_v2_eff = elastic_collision(v1_eff, v2_eff, m_1, m_2)
  * 
  *         cdef tuple new_v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v1_eff)             # <<<<<<<<<<<<<<
  *         cdef tuple new_v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v2_eff)
  * 
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_new_v1_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 665; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_new_v1_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_new_v1_eff_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":666
+  /* "yapyg_movers\physical_mover.pyx":634
  * 
  *         cdef tuple new_v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v1_eff)
  *         cdef tuple new_v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v2_eff)             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple new_v1_vector = yapyg.math_2d.vector_sum(new_v1_eff_vector, v1_tangent_vector)
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_new_v2_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_product(__pyx_v_unit_vector, __pyx_v_new_v2_eff, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_new_v2_eff_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":668
+  /* "yapyg_movers\physical_mover.pyx":636
  *         cdef tuple new_v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v2_eff)
  * 
  *         cdef tuple new_v1_vector = yapyg.math_2d.vector_sum(new_v1_eff_vector, v1_tangent_vector)             # <<<<<<<<<<<<<<
  *         cdef tuple new_v2_vector = yapyg.math_2d.vector_sum(new_v2_eff_vector, v2_tangent_vector)
  * 
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_new_v1_eff_vector, __pyx_v_v1_tangent_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 668; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_new_v1_eff_vector, __pyx_v_v1_tangent_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_new_v1_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":669
+  /* "yapyg_movers\physical_mover.pyx":637
  * 
  *         cdef tuple new_v1_vector = yapyg.math_2d.vector_sum(new_v1_eff_vector, v1_tangent_vector)
  *         cdef tuple new_v2_vector = yapyg.math_2d.vector_sum(new_v2_eff_vector, v2_tangent_vector)             # <<<<<<<<<<<<<<
  * 
  *         return (new_v1_vector[0], new_v1_vector[1],
  */
-  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_new_v2_eff_vector, __pyx_v_v2_tangent_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_sum(__pyx_v_new_v2_eff_vector, __pyx_v_v2_tangent_vector, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_new_v2_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":671
+  /* "yapyg_movers\physical_mover.pyx":639
  *         cdef tuple new_v2_vector = yapyg.math_2d.vector_sum(new_v2_eff_vector, v2_tangent_vector)
  * 
  *         return (new_v1_vector[0], new_v1_vector[1],             # <<<<<<<<<<<<<<
@@ -7730,42 +7474,42 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_new_v1_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v1_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v1_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_new_v1_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v1_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v1_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg_movers\physical_mover.pyx":672
+  /* "yapyg_movers\physical_mover.pyx":640
  * 
  *         return (new_v1_vector[0], new_v1_vector[1],
  *                 new_v2_vector[0], new_v2_vector[1])             # <<<<<<<<<<<<<<
  */
   if (unlikely(__pyx_v_new_v2_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v2_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v2_vector, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_new_v2_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v2_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_new_v2_vector, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "yapyg_movers\physical_mover.pyx":671
+  /* "yapyg_movers\physical_mover.pyx":639
  *         cdef tuple new_v2_vector = yapyg.math_2d.vector_sum(new_v2_eff_vector, v2_tangent_vector)
  * 
  *         return (new_v1_vector[0], new_v1_vector[1],             # <<<<<<<<<<<<<<
  *                 new_v2_vector[0], new_v2_vector[1])
  */
-  __pyx_t_7 = PyTuple_New(4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -7783,10 +7527,10 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "yapyg_movers\physical_mover.pyx":648
+  /* "yapyg_movers\physical_mover.pyx":616
  *                 return (new_v_1, new_v_2)
  * 
- * cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2):             # <<<<<<<<<<<<<<
+ * cpdef tuple reflect_velocities(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -7798,7 +7542,7 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("yapyg_movers.physical_mover.reflect_speeds", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.reflect_velocities", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_v1_eff_vector);
@@ -7815,9 +7559,9 @@ static PyObject *__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(PyObject
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_12yapyg_movers_14physical_mover_8reflect_speeds[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_velocities(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_12yapyg_movers_14physical_mover_8reflect_velocities[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_velocities(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_unit_vector = 0;
   PyObject *__pyx_v_v1_vector = 0;
   PyObject *__pyx_v_v2_vector = 0;
@@ -7828,7 +7572,7 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObje
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("reflect_speeds (wrapper)", 0);
+  __Pyx_RefNannySetupContext("reflect_velocities (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_unit_vector,&__pyx_n_s_v1_vector,&__pyx_n_s_v2_vector,&__pyx_n_s_m_1,&__pyx_n_s_m_2,0};
     PyObject* values[5] = {0,0,0,0,0};
@@ -7852,26 +7596,26 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObje
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_v1_vector)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("reflect_speeds", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("reflect_velocities", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_v2_vector)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("reflect_speeds", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("reflect_velocities", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_m_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("reflect_speeds", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("reflect_velocities", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_m_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("reflect_speeds", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("reflect_velocities", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reflect_speeds") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "reflect_velocities") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -7885,21 +7629,21 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObje
     __pyx_v_unit_vector = ((PyObject*)values[0]);
     __pyx_v_v1_vector = ((PyObject*)values[1]);
     __pyx_v_v2_vector = ((PyObject*)values[2]);
-    __pyx_v_m_1 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_m_1 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_m_2 = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_m_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_m_1 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_m_1 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_m_2 = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_m_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("reflect_speeds", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("reflect_velocities", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("yapyg_movers.physical_mover.reflect_speeds", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.reflect_velocities", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unit_vector), (&PyTuple_Type), 1, "unit_vector", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v1_vector), (&PyTuple_Type), 1, "v1_vector", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v2_vector), (&PyTuple_Type), 1, "v2_vector", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_12yapyg_movers_14physical_mover_8reflect_speeds(__pyx_self, __pyx_v_unit_vector, __pyx_v_v1_vector, __pyx_v_v2_vector, __pyx_v_m_1, __pyx_v_m_2);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_unit_vector), (&PyTuple_Type), 1, "unit_vector", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v1_vector), (&PyTuple_Type), 1, "v1_vector", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_v2_vector), (&PyTuple_Type), 1, "v2_vector", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_12yapyg_movers_14physical_mover_8reflect_velocities(__pyx_self, __pyx_v_unit_vector, __pyx_v_v1_vector, __pyx_v_v2_vector, __pyx_v_m_1, __pyx_v_m_2);
 
   /* function exit code */
   goto __pyx_L0;
@@ -7910,16 +7654,16 @@ static PyObject *__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds(PyObje
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_8reflect_speeds(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_unit_vector, PyObject *__pyx_v_v1_vector, PyObject *__pyx_v_v2_vector, float __pyx_v_m_1, float __pyx_v_m_2) {
+static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_8reflect_velocities(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_unit_vector, PyObject *__pyx_v_v1_vector, PyObject *__pyx_v_v2_vector, float __pyx_v_m_1, float __pyx_v_m_2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("reflect_speeds", 0);
+  __Pyx_RefNannySetupContext("reflect_velocities", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_reflect_speeds(__pyx_v_unit_vector, __pyx_v_v1_vector, __pyx_v_v2_vector, __pyx_v_m_1, __pyx_v_m_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_12yapyg_movers_14physical_mover_reflect_velocities(__pyx_v_unit_vector, __pyx_v_v1_vector, __pyx_v_v2_vector, __pyx_v_m_1, __pyx_v_m_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 616; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7928,7 +7672,7 @@ static PyObject *__pyx_pf_12yapyg_movers_14physical_mover_8reflect_speeds(CYTHON
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("yapyg_movers.physical_mover.reflect_speeds", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg_movers.physical_mover.reflect_velocities", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -7941,7 +7685,7 @@ static PyMethodDef __pyx_methods[] = {
   {"run", (PyCFunction)__pyx_pw_12yapyg_movers_14physical_mover_3run, METH_VARARGS|METH_KEYWORDS, __pyx_doc_12yapyg_movers_14physical_mover_2run},
   {"collision_handler", (PyCFunction)__pyx_pw_12yapyg_movers_14physical_mover_5collision_handler, METH_VARARGS|METH_KEYWORDS, __pyx_doc_12yapyg_movers_14physical_mover_4collision_handler},
   {"elastic_collision", (PyCFunction)__pyx_pw_12yapyg_movers_14physical_mover_7elastic_collision, METH_VARARGS|METH_KEYWORDS, __pyx_doc_12yapyg_movers_14physical_mover_6elastic_collision},
-  {"reflect_speeds", (PyCFunction)__pyx_pw_12yapyg_movers_14physical_mover_9reflect_speeds, METH_VARARGS|METH_KEYWORDS, __pyx_doc_12yapyg_movers_14physical_mover_8reflect_speeds},
+  {"reflect_velocities", (PyCFunction)__pyx_pw_12yapyg_movers_14physical_mover_9reflect_velocities, METH_VARARGS|METH_KEYWORDS, __pyx_doc_12yapyg_movers_14physical_mover_8reflect_velocities},
   {0, 0, 0, 0}
 };
 
@@ -7953,7 +7697,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "physical_mover",
-    0, /* m_doc */
+    __pyx_k_Simulate_physical_movement, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -7976,7 +7720,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_IDX_MOVERS_PHYSICAL_VX, __pyx_k_IDX_MOVERS_PHYSICAL_VX, sizeof(__pyx_k_IDX_MOVERS_PHYSICAL_VX), 0, 0, 1, 1},
   {&__pyx_n_s_IDX_MOVERS_PHYSICAL_VY, __pyx_k_IDX_MOVERS_PHYSICAL_VY, sizeof(__pyx_k_IDX_MOVERS_PHYSICAL_VY), 0, 0, 1, 1},
   {&__pyx_n_s_IDX_MOVER_FIRST_PARAMETER, __pyx_k_IDX_MOVER_FIRST_PARAMETER, sizeof(__pyx_k_IDX_MOVER_FIRST_PARAMETER), 0, 0, 1, 1},
-  {&__pyx_kp_s_TODO_2_physics_rectangles_collis, __pyx_k_TODO_2_physics_rectangles_collis, sizeof(__pyx_k_TODO_2_physics_rectangles_collis), 0, 0, 1, 0},
   {&__pyx_n_s_absolute_shape_1, __pyx_k_absolute_shape_1, sizeof(__pyx_k_absolute_shape_1), 0, 0, 1, 1},
   {&__pyx_n_s_absolute_shape_2, __pyx_k_absolute_shape_2, sizeof(__pyx_k_absolute_shape_2), 0, 0, 1, 1},
   {&__pyx_n_s_atan2, __pyx_k_atan2, sizeof(__pyx_k_atan2), 0, 0, 1, 1},
@@ -7989,11 +7732,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_contact_points, __pyx_k_contact_points, sizeof(__pyx_k_contact_points), 0, 0, 1, 1},
   {&__pyx_n_s_cos, __pyx_k_cos, sizeof(__pyx_k_cos), 0, 0, 1, 1},
   {&__pyx_n_s_do_replace, __pyx_k_do_replace, sizeof(__pyx_k_do_replace), 0, 0, 1, 1},
-  {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_entity_name, __pyx_k_entity_name, sizeof(__pyx_k_entity_name), 0, 0, 1, 1},
   {&__pyx_n_s_entity_name_1, __pyx_k_entity_name_1, sizeof(__pyx_k_entity_name_1), 0, 0, 1, 1},
   {&__pyx_n_s_entity_name_2, __pyx_k_entity_name_2, sizeof(__pyx_k_entity_name_2), 0, 0, 1, 1},
-  {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_frame_time_delta, __pyx_k_frame_time_delta, sizeof(__pyx_k_frame_time_delta), 0, 0, 1, 1},
   {&__pyx_n_s_friction, __pyx_k_friction, sizeof(__pyx_k_friction), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -8007,7 +7748,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_movers, __pyx_k_movers, sizeof(__pyx_k_movers), 0, 0, 1, 1},
   {&__pyx_n_s_movers_to_delete, __pyx_k_movers_to_delete, sizeof(__pyx_k_movers_to_delete), 0, 0, 1, 1},
   {&__pyx_n_s_physics, __pyx_k_physics, sizeof(__pyx_k_physics), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
+  {&__pyx_n_s_pi, __pyx_k_pi, sizeof(__pyx_k_pi), 0, 0, 1, 1},
   {&__pyx_n_s_rectangle, __pyx_k_rectangle, sizeof(__pyx_k_rectangle), 0, 0, 1, 1},
   {&__pyx_n_s_rot_decay, __pyx_k_rot_decay, sizeof(__pyx_k_rot_decay), 0, 0, 1, 1},
   {&__pyx_n_s_rot_friction, __pyx_k_rot_friction, sizeof(__pyx_k_rot_friction), 0, 0, 1, 1},
@@ -8026,7 +7767,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_vx, __pyx_k_vx, sizeof(__pyx_k_vx), 0, 0, 1, 1},
   {&__pyx_n_s_vy, __pyx_k_vy, sizeof(__pyx_k_vy), 0, 0, 1, 1},
   {&__pyx_n_s_yapyg, __pyx_k_yapyg, sizeof(__pyx_k_yapyg), 0, 0, 1, 1},
-  {&__pyx_n_s_yapyg_widgets_display_widget, __pyx_k_yapyg_widgets_display_widget, sizeof(__pyx_k_yapyg_widgets_display_widget), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
@@ -8037,80 +7777,80 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg_movers\physical_mover.pyx":244
+  /* "yapyg_movers\physical_mover.pyx":142
+ * 
+ *         if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
+ *                 delta_dist_vector = (0, 0)             # <<<<<<<<<<<<<<
+ *                 delta_rot = 0
+ * 
+ */
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "yapyg_movers\physical_mover.pyx":234
  *                         circle_y = rotated_circle[1]
  * 
  *                         circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, -rect_r)             # <<<<<<<<<<<<<<
  * 
  *                 v_r = circle_physical_mover[IDX_MOVERS_PHYSICAL_VR]
  */
-  __pyx_tuple_ = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "yapyg_movers\physical_mover.pyx":319
+  /* "yapyg_movers\physical_mover.pyx":309
  * 
  *                 # rotate back to original coordinate system
  *                 circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, rect_r)             # <<<<<<<<<<<<<<
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]
  *                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
  */
-  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
-
-  /* "yapyg_movers\physical_mover.pyx":453
- *         cdef float rot_friction_2 = 1
- *         cdef float m_2 = -1
- *         cdef tuple speed_vector_2 = (0, 0)             # <<<<<<<<<<<<<<
- *         cdef float inelasticity_2
- * 
- */
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "yapyg_movers\physical_mover.pyx":482
- *         cdef float rect_bottom_2
- * 
- *         cdef tuple rotation_vector = (0, -1)             # <<<<<<<<<<<<<<
- *         cdef tuple vector_center_to_contact
- *         # cdef tuple max_positive_torque_vector
+  /* "yapyg_movers\physical_mover.pyx":426
+ *           inside the bounds of the other rectangle.
+ *         """
+ *         cdef tuple contact_sum_vector = (0.0, 0.0)             # <<<<<<<<<<<<<<
+ *         cdef float resulting_torque = 0.0
+ *         cdef tuple contact_point
  */
-  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_neg_1); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_float_0_0, __pyx_float_0_0); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "yapyg_movers\physical_mover.pyx":493
- *         else:
- *                 # print "physics rectangle 1 with static rectangle collision 2"
- *                 contact_sum_vector = (0, 0)             # <<<<<<<<<<<<<<
- *                 resulting_torque = 0
- *                 for contact_point in contact_points:
+  /* "yapyg_movers\physical_mover.pyx":436
+ *                 resulting_torque += yapyg.math_2d.dot_product(
+ *                         yapyg.math_2d.complex_multiply(
+ *                                 (0.0, -1.0),             # <<<<<<<<<<<<<<
+ *                                 yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+ *                                 ),
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_float_0_0, __pyx_float_neg_1_0); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 436; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "yapyg_movers\physical_mover.pyx":532
- *                         contact_x,contact_y = rotated_point
+  /* "yapyg_movers\physical_mover.pyx":465
+ *         cdef float contact_y
+ *         contact_x, contact_y = yapyg.math_2d.rotated_point(rectangle_center_2, abs_contact_point_vector, -rect_rot_2)
+ *         post_collision_velocity_vector_1 = yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, -rect_rot_2)             # <<<<<<<<<<<<<<
  * 
- *                         rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, -rect_rot_2)             # <<<<<<<<<<<<<<
- * 
- *                         rotated_point = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)
+ *         cdef float rect_x_1
  */
-  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "yapyg_movers\physical_mover.pyx":565
+  /* "yapyg_movers\physical_mover.pyx":509
  * 
- *                 # rotate back to original coordinate system
- *                 rect_move_vector = yapyg.math_2d.rotated_point((0, 0), rect_move_vector, rect_rot_2)             # <<<<<<<<<<<<<<
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = rect_move_vector[0]
- *                 rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = rect_move_vector[1]
+ *         # rotate back to original coordinate system
+ *         return yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, rect_rot_2)             # <<<<<<<<<<<<<<
+ * 
+ * cdef rectangle_rectangle_collision(list state,
  */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 565; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 509; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
   __Pyx_RefNannyFinishContext();
@@ -8122,7 +7862,9 @@ static int __Pyx_InitCachedConstants(void) {
 
 static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_float_0_0 = PyFloat_FromDouble(0.0); if (unlikely(!__pyx_float_0_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_float_2_0 = PyFloat_FromDouble(2.0); if (unlikely(!__pyx_float_2_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_float_neg_1_0 = PyFloat_FromDouble(-1.0); if (unlikely(!__pyx_float_neg_1_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_2 = PyInt_FromLong(2); if (unlikely(!__pyx_int_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -8134,7 +7876,6 @@ static int __Pyx_InitGlobals(void) {
   __pyx_int_8 = PyInt_FromLong(8); if (unlikely(!__pyx_int_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_9 = PyInt_FromLong(9); if (unlikely(!__pyx_int_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_10 = PyInt_FromLong(10); if (unlikely(!__pyx_int_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -8157,6 +7898,7 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
   PyObject *__pyx_t_7 = NULL;
   PyObject *__pyx_t_8 = NULL;
   PyObject *__pyx_t_9 = NULL;
+  float __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -8192,7 +7934,7 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("physical_mover", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("physical_mover", __pyx_methods, __pyx_k_Simulate_physical_movement, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -8231,11 +7973,11 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
   if (__Pyx_ExportFunction("add", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_add, "PyObject *(PyObject *, PyObject *, float, float, float, float, float, float, float, float, float, float, float, int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_14physical_mover_add *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("c_create", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_c_create, "PyObject *(PyObject *, float, float, float, float, float, float, float, float, float, float, float)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("run", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_run, "PyObject *(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("c_rectangle_circle_collision", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_c_rectangle_circle_collision, "PyObject *(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("c_circle_circle_collision", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_c_circle_circle_collision, "void (PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("rectangle_circle_collision", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_rectangle_circle_collision, "PyObject *(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("circle_circle_collision", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_circle_circle_collision, "void (PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("collision_handler", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_collision_handler, "PyObject *(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("elastic_collision", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_elastic_collision, "PyObject *(float, float, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("reflect_speeds", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_reflect_speeds, "PyObject *(PyObject *, PyObject *, PyObject *, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("reflect_velocities", (void (*)(void))__pyx_f_12yapyg_movers_14physical_mover_reflect_velocities, "PyObject *(PyObject *, PyObject *, PyObject *, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -8293,50 +8035,41 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
   Py_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg_movers\physical_mover.pyx":20
- * # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * # THE SOFTWARE.
- * from yapyg_widgets.display_widget import yapyg             # <<<<<<<<<<<<<<
- * 
- * """
- */
-  __pyx_t_8 = PyList_New(1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_INCREF(__pyx_n_s_yapyg);
-  PyList_SET_ITEM(__pyx_t_8, 0, __pyx_n_s_yapyg);
-  __Pyx_GIVEREF(__pyx_n_s_yapyg);
-  __pyx_t_9 = __Pyx_Import(__pyx_n_s_yapyg_widgets_display_widget, __pyx_t_8, -1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_ImportFrom(__pyx_t_9, __pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-
-  /* "yapyg_movers\physical_mover.pyx":26
+  /* "yapyg_movers\physical_mover.pyx":25
  * """
  * 
  * import math             # <<<<<<<<<<<<<<
  * import time
  * 
  */
-  __pyx_t_9 = __Pyx_Import(__pyx_n_s_math, 0, -1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_math, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  __pyx_t_8 = __Pyx_Import(__pyx_n_s_math, 0, -1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_math, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "yapyg_movers\physical_mover.pyx":27
+  /* "yapyg_movers\physical_mover.pyx":26
  * 
  * import math
  * import time             # <<<<<<<<<<<<<<
  * 
- * cimport yapyg.math_2d
+ * import yapyg
  */
-  __pyx_t_9 = __Pyx_Import(__pyx_n_s_time, 0, -1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_time, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  __pyx_t_8 = __Pyx_Import(__pyx_n_s_time, 0, -1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_time, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+  /* "yapyg_movers\physical_mover.pyx":28
+ * import time
+ * 
+ * import yapyg             # <<<<<<<<<<<<<<
+ * cimport yapyg.math_2d
+ * cimport yapyg.movers
+ */
+  __pyx_t_8 = __Pyx_Import(__pyx_n_s_yapyg, 0, -1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":34
  * cimport yapyg.collisions
@@ -8345,16 +8078,16 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_VX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
  * IDX_MOVERS_PHYSICAL_VY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
  */
-  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_MASS, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_MASS, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":35
  * 
@@ -8363,19 +8096,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_VY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
  * IDX_MOVERS_PHYSICAL_AX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
  */
-  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_VX, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_VX, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":36
  * IDX_MOVERS_PHYSICAL_MASS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
@@ -8384,19 +8117,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_AX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
  * IDX_MOVERS_PHYSICAL_AY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
  */
-  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_2); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_VY, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_2); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_VY, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":37
  * IDX_MOVERS_PHYSICAL_VX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
@@ -8405,19 +8138,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_AY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
  * IDX_MOVERS_PHYSICAL_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
  */
-  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_3); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_AX, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_3); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_AX, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":38
  * IDX_MOVERS_PHYSICAL_VY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
@@ -8426,19 +8159,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
  * IDX_MOVERS_PHYSICAL_INELASTICITY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
  */
-  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_4); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_AY, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_4); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_AY, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":39
  * IDX_MOVERS_PHYSICAL_AX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
@@ -8447,19 +8180,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_INELASTICITY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
  * IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
  */
-  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_5); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_FRICTION, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_5); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_FRICTION, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 39; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":40
  * IDX_MOVERS_PHYSICAL_AY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
@@ -8468,19 +8201,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
  * IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
  */
-  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_6); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_6); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_INELASTICITY, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":41
  * IDX_MOVERS_PHYSICAL_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
@@ -8489,19 +8222,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
  * IDX_MOVERS_PHYSICAL_ROT_DECAY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 9
  */
-  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_7); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_VR, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_7); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_VR, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":42
  * IDX_MOVERS_PHYSICAL_INELASTICITY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
@@ -8510,19 +8243,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_ROT_DECAY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 9
  * IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
  */
-  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_8); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_FRICTION, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":43
  * IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
@@ -8531,19 +8264,19 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
  * 
  */
-  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_9); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_DECAY, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_ROT_DECAY, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":44
  * IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
@@ -8552,50 +8285,60 @@ PyMODINIT_FUNC PyInit_physical_mover(void)
  * 
  * cdef str PHYSICS_MOVER_NAME = "physics"
  */
-  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_movers); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_movers); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Add(__pyx_t_8, __pyx_int_10); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_STICKYNESS, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = PyNumber_Add(__pyx_t_9, __pyx_int_10); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVERS_PHYSICAL_STICKYNESS, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /* "yapyg_movers\physical_mover.pyx":46
  * IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
  * 
  * cdef str PHYSICS_MOVER_NAME = "physics"             # <<<<<<<<<<<<<<
  * 
- * cpdef add(list state,
+ * cdef float CONST_2PI = 2 * math.pi
  */
   __Pyx_INCREF(__pyx_n_s_physics);
   __Pyx_XGOTREF(__pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME);
   __Pyx_DECREF_SET(__pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME, __pyx_n_s_physics);
   __Pyx_GIVEREF(__pyx_n_s_physics);
 
-  /* "yapyg_movers\physical_mover.pyx":165
- *                 collision_handler(*collision_result)
+  /* "yapyg_movers\physical_mover.pyx":48
+ * cdef str PHYSICS_MOVER_NAME = "physics"
  * 
- * cdef float CONST_2PI = (2 * 3.14159265359)             # <<<<<<<<<<<<<<
+ * cdef float CONST_2PI = 2 * math.pi             # <<<<<<<<<<<<<<
  * 
- * cdef tuple c_compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):
+ * cpdef add(list state,
  */
-  __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI = (2.0 * 3.14159265359);
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_math); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_pi); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  __pyx_t_8 = PyNumber_Multiply(__pyx_int_2, __pyx_t_9); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_8); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  __pyx_v_12yapyg_movers_14physical_mover_CONST_2PI = __pyx_t_10;
 
   /* "yapyg_movers\physical_mover.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */
-  __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  __pyx_t_8 = PyDict_New(); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -8839,25 +8582,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
     return result;
 }
 
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
 static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
     PyObject *r;
     if (!j) return NULL;
@@ -8935,6 +8659,25 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
 #endif
     return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
 }
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
 
 static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
     PyErr_Format(PyExc_ValueError,
@@ -9176,19 +8919,6 @@ return_ne:
     #endif
     return (equals == Py_NE);
 #endif
-}
-
-static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
-    PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
-    if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
-        PyErr_Format(PyExc_ImportError,
-        #if PY_MAJOR_VERSION < 3
-            "cannot import name %.230s", PyString_AS_STRING(name));
-        #else
-            "cannot import name %S", name);
-        #endif
-    }
-    return value;
 }
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
@@ -9564,147 +9294,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
                                      little, !is_unsigned);
     }
 }
-
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static PyObject *__Pyx_GetStdout(void) {
-    PyObject *f = PySys_GetObject((char *)"stdout");
-    if (!f) {
-        PyErr_SetString(PyExc_RuntimeError, "lost sys.stdout");
-    }
-    return f;
-}
-static int __Pyx_Print(PyObject* f, PyObject *arg_tuple, int newline) {
-    int i;
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    for (i=0; i < PyTuple_GET_SIZE(arg_tuple); i++) {
-        PyObject* v;
-        if (PyFile_SoftSpace(f, 1)) {
-            if (PyFile_WriteString(" ", f) < 0)
-                goto error;
-        }
-        v = PyTuple_GET_ITEM(arg_tuple, i);
-        if (PyFile_WriteObject(v, f, Py_PRINT_RAW) < 0)
-            goto error;
-        if (PyString_Check(v)) {
-            char *s = PyString_AsString(v);
-            Py_ssize_t len = PyString_Size(v);
-            if (len > 0) {
-                switch (s[len-1]) {
-                    case ' ': break;
-                    case '\f': case '\r': case '\n': case '\t': case '\v':
-                        PyFile_SoftSpace(f, 0);
-                        break;
-                    default:  break;
-                }
-            }
-        }
-    }
-    if (newline) {
-        if (PyFile_WriteString("\n", f) < 0)
-            goto error;
-        PyFile_SoftSpace(f, 0);
-    }
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-}
-#else
-static int __Pyx_Print(PyObject* stream, PyObject *arg_tuple, int newline) {
-    PyObject* kwargs = 0;
-    PyObject* result = 0;
-    PyObject* end_string;
-    if (unlikely(!__pyx_print)) {
-        __pyx_print = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);
-        if (!__pyx_print)
-            return -1;
-    }
-    if (stream) {
-        kwargs = PyDict_New();
-        if (unlikely(!kwargs))
-            return -1;
-        if (unlikely(PyDict_SetItem(kwargs, __pyx_n_s_file, stream) < 0))
-            goto bad;
-        if (!newline) {
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                goto bad;
-            if (PyDict_SetItem(kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                goto bad;
-            }
-            Py_DECREF(end_string);
-        }
-    } else if (!newline) {
-        if (unlikely(!__pyx_print_kwargs)) {
-            __pyx_print_kwargs = PyDict_New();
-            if (unlikely(!__pyx_print_kwargs))
-                return -1;
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                return -1;
-            if (PyDict_SetItem(__pyx_print_kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                return -1;
-            }
-            Py_DECREF(end_string);
-        }
-        kwargs = __pyx_print_kwargs;
-    }
-    result = PyObject_Call(__pyx_print, arg_tuple, kwargs);
-    if (unlikely(kwargs) && (kwargs != __pyx_print_kwargs))
-        Py_DECREF(kwargs);
-    if (!result)
-        return -1;
-    Py_DECREF(result);
-    return 0;
-bad:
-    if (kwargs != __pyx_print_kwargs)
-        Py_XDECREF(kwargs);
-    return -1;
-}
-#endif
-
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static int __Pyx_PrintOne(PyObject* f, PyObject *o) {
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    if (PyFile_SoftSpace(f, 0)) {
-        if (PyFile_WriteString(" ", f) < 0)
-            goto error;
-    }
-    if (PyFile_WriteObject(o, f, Py_PRINT_RAW) < 0)
-        goto error;
-    if (PyFile_WriteString("\n", f) < 0)
-        goto error;
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-    /* the line below is just to avoid C compiler
-     * warnings about unused functions */
-    return __Pyx_Print(f, NULL, 0);
-}
-#else
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o) {
-    int res;
-    PyObject* arg_tuple = PyTuple_Pack(1, o);
-    if (unlikely(!arg_tuple))
-        return -1;
-    res = __Pyx_Print(stream, arg_tuple, 1);
-    Py_DECREF(arg_tuple);
-    return res;
-}
-#endif
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     const int neg_one = (int) -1, const_zero = 0;

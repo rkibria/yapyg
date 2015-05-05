@@ -2610,7 +2610,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __pyx_t_6 = 0;
 
   /* "yapyg_movers\linear_mover.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

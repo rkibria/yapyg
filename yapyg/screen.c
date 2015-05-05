@@ -1926,7 +1926,7 @@ PyMODINIT_FUNC PyInit_screen(void)
   __pyx_v_5yapyg_6screen_IDX_SCREEN_ORIGIN_XY = 3;
 
   /* "yapyg\screen.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

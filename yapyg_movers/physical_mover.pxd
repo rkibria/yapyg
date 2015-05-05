@@ -53,7 +53,7 @@ cdef list c_create(str entity_name,
 
 cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete)
 
-cdef c_rectangle_circle_collision(list state,
+cdef rectangle_circle_collision(list state,
                 str rectangle_entity_name,
                 str circle_entity_name,
                 tuple abs_rectangle_shape,
@@ -61,7 +61,7 @@ cdef c_rectangle_circle_collision(list state,
                 list rectangle_physical_mover,
                 list circle_physical_mover)
 
-cdef void c_circle_circle_collision(list state,
+cdef void circle_circle_collision(list state,
                 str circle_entity_name_1,
                 str circle_entity_name_2,
                 tuple abs_circle_shape_1,
@@ -79,4 +79,4 @@ cpdef collision_handler(list state,
                 list contact_points)
 
 cpdef tuple elastic_collision(float v_1, float v_2, float m_1, float m_2)
-cpdef tuple reflect_speeds(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2)
+cpdef tuple reflect_velocities(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2)

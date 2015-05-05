@@ -4155,7 +4155,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
   __pyx_v_5yapyg_5tiles_IDX_TILEDEF_COLLISION = 1;
 
   /* "yapyg\tiles.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

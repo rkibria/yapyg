@@ -87,15 +87,7 @@ cpdef float length(tuple vector):
         """
         TODO
         """
-        cdef float x_dist
-        x_dist = vector[0]
-        x_dist = (x_dist * x_dist)
-
-        cdef float y_dist
-        y_dist = vector[1]
-        y_dist = (y_dist * y_dist)
-
-        return math.sqrt(x_dist + y_dist)
+        return math.hypot(vector[0], vector[1])
 
 cpdef float distance(tuple pos_1, tuple pos_2):
         """

@@ -2958,7 +2958,7 @@ PyMODINIT_FUNC PyInit_movers(void)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "yapyg\movers.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

@@ -6349,7 +6349,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_PLAYONCE = 9;
 
   /* "yapyg\sprites.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */
