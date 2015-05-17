@@ -48,10 +48,12 @@ class TutorialApp(App):
 
                 # collisions.set_handler(state, collision_handler)
 
-                show_collision = False # True
+                show_collision = True # False
+                speed_factor = 1.0
+                target_is_physical = False
 
                 if show_collision:
-                        # Rectangle collision
+                        # circle collision
                         BOUNCE_GRAVITY = 0.0
                         BOUNCE_INELASTICITY = 0.999
                         BOUNCE_FRICTION = 0.999
@@ -60,9 +62,8 @@ class TutorialApp(App):
                         ROT_DECAY = 0.9
                         VX_1 = 0.0
                         VY_1 = -1.0
-                        R_1 = 0.0
                 else:
-                        # Single rectangle
+                        # Single circle
                         BOUNCE_GRAVITY = 0.0
                         BOUNCE_INELASTICITY = 0.9
                         BOUNCE_FRICTION = 0.9999
@@ -71,21 +72,22 @@ class TutorialApp(App):
                         ROT_DECAY = 0.9999
                         VX_1 = 0.5
                         VY_1 = -1.0
-                        R_1 = 40.0
+                VX_1 *= speed_factor
+                VY_1 *= speed_factor
 
                 entities.insert(state,
-                                "sq_1",
+                                "c_1",
                                 {
                                  "*": {
-                                       "textures": ("assets/img/sprites/half_square.png",),
+                                       "textures": ("assets/img/sprites/half_ball.png",),
                                        },
                                  },
-                                (1.75, 5, R_1,),
-                                collision=(("rectangle", 0, 0, 0.5, 0.5),)
+                                (1.75, 5.0, 0.0,),
+                                collision=(("circle", 0.25, 0.25, 0.25),)
                                 )
 
                 physical_mover.add(state,
-                        "sq_1",
+                        "c_1",
                         1.0,
                         VX_1,
                         VY_1,
@@ -101,30 +103,31 @@ class TutorialApp(App):
 
                 if show_collision:
                         entities.insert(state,
-                                        "sq_2",
+                                        "c_2",
                                         {
                                          "*": {
-                                               "textures": ("assets/img/sprites/half_square.png",),
+                                               "textures": ("assets/img/sprites/half_ball_2.png",),
                                                },
                                          },
-                                        (1.75, 4, 0,),
-                                        collision=(("rectangle", 0, 0, 0.5, 0.5),)
+                                        (1.75, 4.0, 0.0,),
+                                        collision=(("circle", 0.25, 0.25, 0.25),)
                                         )
 
-                        physical_mover.add(state,
-                                "sq_2",
-                                1.0,
-                                0,
-                                0,
-                                0,
-                                BOUNCE_GRAVITY,
-                                BOUNCE_FRICTION,
-                                BOUNCE_INELASTICITY,
-                                0,
-                                ROT_FRICTION,
-                                ROT_DECAY,
-                                BOUNCE_STICKYNESS,
-                                )
+                        if target_is_physical:
+                                physical_mover.add(state,
+                                        "c_2",
+                                        1.0,
+                                        0,
+                                        0,
+                                        0,
+                                        BOUNCE_GRAVITY,
+                                        BOUNCE_FRICTION,
+                                        BOUNCE_INELASTICITY,
+                                        0,
+                                        ROT_FRICTION,
+                                        ROT_DECAY,
+                                        BOUNCE_STICKYNESS,
+                                        )
 
                 return ScreenWidget(state, debugging=False)
 

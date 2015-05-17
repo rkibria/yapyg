@@ -28,27 +28,27 @@ cpdef float dot_product(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return ((v_1[0]) * (v_2[0])) + ((v_1[1]) * (v_2[1]))
+        return (v_1[0] * v_2[0]) + (v_1[1] * v_2[1])
 
-cpdef tuple vector_product(tuple vec, float factor):
+cpdef tuple vector_mul(tuple vec, float factor):
         """
         TODO
         """
-        return (((vec[0]) * factor), ((vec[1]) * factor))
+        return (vec[0] * factor, vec[1] * factor)
 
 cpdef tuple vector_div(tuple vec, float factor):
         """
         TODO
         """
-        return (((vec[0]) / factor), ((vec[1]) / factor))
+        return (vec[0] / factor, vec[1] / factor)
 
-cpdef tuple vector_diff(tuple v_1, tuple v_2):
+cpdef tuple vector_sub(tuple v_1, tuple v_2):
         """
         TODO
         """
         return (v_1[0] - v_2[0], v_1[1] - v_2[1])
 
-cpdef tuple vector_sum(tuple v_1, tuple v_2):
+cpdef tuple vector_add(tuple v_1, tuple v_2):
         """
         TODO
         """
@@ -58,20 +58,18 @@ cpdef tuple components(tuple normal_vector, tuple v_vector):
         """
         TODO
         """
-        cdef tuple parallel_vector
-        parallel_vector = vector_product(normal_vector, dot_product(normal_vector, v_vector))
-
-        cdef tuple perpendicular_vector
-        perpendicular_vector = vector_diff(v_vector, parallel_vector)
-
+        cdef tuple parallel_vector = vector_mul(normal_vector, dot_product(normal_vector, v_vector))
+        cdef tuple perpendicular_vector = vector_sub(v_vector, parallel_vector)
         return (parallel_vector, perpendicular_vector)
 
-cpdef tuple complex_multiply(tuple complex_1, tuple complex_2):
+cpdef tuple complex_mul(tuple complex_1, tuple complex_2):
         """
         TODO
         """
-        return (((complex_1[0]) * (complex_2[0])) - ((complex_1[1]) * (complex_2[1])),
-                ((complex_1[0]) * (complex_2[1])) + ((complex_1[1]) * (complex_2[0])))
+        return (
+                (complex_1[0] * complex_2[0]) - (complex_1[1] * complex_2[1]),
+                (complex_1[0] * complex_2[1]) + (complex_1[1] * complex_2[0])
+                )
 
 cpdef tuple rotated_point(tuple origin_point, tuple point, float rot):
         """
@@ -79,7 +77,7 @@ cpdef tuple rotated_point(tuple origin_point, tuple point, float rot):
         """
         cdef float rot_rad = math.radians(rot)
         cdef tuple rot_relative_point
-        rot_relative_point = complex_multiply((point[0] - origin_point[0],
+        rot_relative_point = complex_mul((point[0] - origin_point[0],
                 point[1] - origin_point[1]), (math.cos(rot_rad), math.sin(rot_rad)))
         return (origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1])
 
@@ -95,12 +93,11 @@ cpdef float distance(tuple pos_1, tuple pos_2):
         """
         return length((pos_2[0] - pos_1[0], pos_2[1] - pos_1[1],))
 
-cpdef tuple unit_vector(tuple pos_1, tuple pos_2):
+cpdef tuple get_direction_unit_vector(tuple pos_1, tuple pos_2):
         """
         TODO
         """
-        cdef float vector_distance
-        vector_distance = distance(pos_1, pos_2)
+        cdef float vector_distance = distance(pos_1, pos_2)
         return ((pos_2[0] - pos_1[0]) / vector_distance,
                 (pos_2[1] - pos_1[1]) / vector_distance,)
 
@@ -114,8 +111,11 @@ cpdef tuple get_unit_vector(tuple vector):
         else:
                 return vector_div(vector, vlen)
 
-cpdef float heading_from_to(tuple pos1, tuple pos2):
+cpdef float get_angle(tuple pos1, tuple pos2):
         """
         TODO
         """
-        return math.degrees(math.atan2(pos2[1] - pos1[1], pos2[0] - pos1[0]))
+        cdef float heading_degrees = math.degrees(math.atan2(pos2[1] - pos1[1], pos2[0] - pos1[0]))
+        if heading_degrees < 0.0:
+                heading_degrees += 360.0
+        return heading_degrees

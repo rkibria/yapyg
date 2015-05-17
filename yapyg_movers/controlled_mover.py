@@ -87,7 +87,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
 
                 heading = pos[2]
                 if mover[IDX_CONTROLLED_MOVER_ROTATE]:
-                        heading = yapyg.math_2d.heading_from_to((0, 0), tuple(direction))
+                        heading = yapyg.math_2d.get_angle((0, 0), tuple(direction))
                         heading_int = (int(heading) - 90) % 360
                         heading = (heading_int)
 

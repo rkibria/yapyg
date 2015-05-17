@@ -21,8 +21,6 @@
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
-
-
 from yapyg import controls
 from yapyg import text
 from yapyg import timer

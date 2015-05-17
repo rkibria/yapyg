@@ -1609,6 +1609,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
   int __pyx_t_6;
+  int __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1834,7 +1835,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
  *                 if (is_point_in_rect(point, rect_1)):
  *                         contact_points.append(point)             # <<<<<<<<<<<<<<
  * 
- *         cdef tuple rect_1_rotated_points = get_rect_points(rect_1)
+ *         cdef tuple rect_1_rotated_points
  */
       if (unlikely(__pyx_v_contact_points == Py_None)) {
         PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
@@ -1855,79 +1856,93 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":103
- *                         contact_points.append(point)
- * 
- *         cdef tuple rect_1_rotated_points = get_rect_points(rect_1)             # <<<<<<<<<<<<<<
- *         for point in rect_1_rotated_points:
- *                 if (is_point_in_rect(point, rect_2)):
- */
-  __pyx_t_1 = __pyx_f_5yapyg_14math_collision_get_rect_points(__pyx_v_rect_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_rect_1_rotated_points = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
-
   /* "yapyg\math_collision.pyx":104
  * 
- *         cdef tuple rect_1_rotated_points = get_rect_points(rect_1)
- *         for point in rect_1_rotated_points:             # <<<<<<<<<<<<<<
- *                 if (is_point_in_rect(point, rect_2)):
- *                         contact_points.append(point)
+ *         cdef tuple rect_1_rotated_points
+ *         if not contact_points:             # <<<<<<<<<<<<<<
+ *                 rect_1_rotated_points = get_rect_points(rect_1)
+ *                 for point in rect_1_rotated_points:
  */
-  if (unlikely(__pyx_v_rect_1_rotated_points == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __pyx_t_1 = __pyx_v_rect_1_rotated_points; __Pyx_INCREF(__pyx_t_1); __pyx_t_3 = 0;
-  for (;;) {
-    if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
-    #if CYTHON_COMPILING_IN_CPYTHON
-    __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_4); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    #else
-    __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    #endif
-    __Pyx_XDECREF_SET(__pyx_v_point, __pyx_t_4);
-    __pyx_t_4 = 0;
+  __pyx_t_5 = (__pyx_v_contact_points != Py_None) && (PyList_GET_SIZE(__pyx_v_contact_points) != 0);
+  __pyx_t_7 = ((!__pyx_t_5) != 0);
+  if (__pyx_t_7) {
 
     /* "yapyg\math_collision.pyx":105
- *         cdef tuple rect_1_rotated_points = get_rect_points(rect_1)
- *         for point in rect_1_rotated_points:
- *                 if (is_point_in_rect(point, rect_2)):             # <<<<<<<<<<<<<<
- *                         contact_points.append(point)
+ *         cdef tuple rect_1_rotated_points
+ *         if not contact_points:
+ *                 rect_1_rotated_points = get_rect_points(rect_1)             # <<<<<<<<<<<<<<
+ *                 for point in rect_1_rotated_points:
+ *                         if (is_point_in_rect(point, rect_2)):
+ */
+    __pyx_t_1 = __pyx_f_5yapyg_14math_collision_get_rect_points(__pyx_v_rect_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_v_rect_1_rotated_points = ((PyObject*)__pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "yapyg\math_collision.pyx":106
+ *         if not contact_points:
+ *                 rect_1_rotated_points = get_rect_points(rect_1)
+ *                 for point in rect_1_rotated_points:             # <<<<<<<<<<<<<<
+ *                         if (is_point_in_rect(point, rect_2)):
+ *                                 contact_points.append(point)
+ */
+    if (unlikely(__pyx_v_rect_1_rotated_points == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    __pyx_t_1 = __pyx_v_rect_1_rotated_points; __Pyx_INCREF(__pyx_t_1); __pyx_t_3 = 0;
+    for (;;) {
+      if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+      #if CYTHON_COMPILING_IN_CPYTHON
+      __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_4); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      #else
+      __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      #endif
+      __Pyx_XDECREF_SET(__pyx_v_point, __pyx_t_4);
+      __pyx_t_4 = 0;
+
+      /* "yapyg\math_collision.pyx":107
+ *                 rect_1_rotated_points = get_rect_points(rect_1)
+ *                 for point in rect_1_rotated_points:
+ *                         if (is_point_in_rect(point, rect_2)):             # <<<<<<<<<<<<<<
+ *                                 contact_points.append(point)
  * 
  */
-    if (!(likely(PyTuple_CheckExact(__pyx_v_point))||((__pyx_v_point) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_point)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = (__pyx_f_5yapyg_14math_collision_is_point_in_rect(((PyObject*)__pyx_v_point), __pyx_v_rect_2, 0) != 0);
-    if (__pyx_t_5) {
+      if (!(likely(PyTuple_CheckExact(__pyx_v_point))||((__pyx_v_point) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_point)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = (__pyx_f_5yapyg_14math_collision_is_point_in_rect(((PyObject*)__pyx_v_point), __pyx_v_rect_2, 0) != 0);
+      if (__pyx_t_7) {
 
-      /* "yapyg\math_collision.pyx":106
- *         for point in rect_1_rotated_points:
- *                 if (is_point_in_rect(point, rect_2)):
- *                         contact_points.append(point)             # <<<<<<<<<<<<<<
+        /* "yapyg\math_collision.pyx":108
+ *                 for point in rect_1_rotated_points:
+ *                         if (is_point_in_rect(point, rect_2)):
+ *                                 contact_points.append(point)             # <<<<<<<<<<<<<<
  * 
  *         return len(contact_points) > 0
  */
-      if (unlikely(__pyx_v_contact_points == Py_None)) {
-        PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (unlikely(__pyx_v_contact_points == Py_None)) {
+          PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_contact_points, __pyx_v_point); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        goto __pyx_L9;
       }
-      __pyx_t_6 = __Pyx_PyList_Append(__pyx_v_contact_points, __pyx_v_point); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      goto __pyx_L8;
-    }
-    __pyx_L8:;
+      __pyx_L9:;
 
-    /* "yapyg\math_collision.pyx":104
- * 
- *         cdef tuple rect_1_rotated_points = get_rect_points(rect_1)
- *         for point in rect_1_rotated_points:             # <<<<<<<<<<<<<<
- *                 if (is_point_in_rect(point, rect_2)):
- *                         contact_points.append(point)
+      /* "yapyg\math_collision.pyx":106
+ *         if not contact_points:
+ *                 rect_1_rotated_points = get_rect_points(rect_1)
+ *                 for point in rect_1_rotated_points:             # <<<<<<<<<<<<<<
+ *                         if (is_point_in_rect(point, rect_2)):
+ *                                 contact_points.append(point)
  */
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    goto __pyx_L6;
   }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_L6:;
 
-  /* "yapyg\math_collision.pyx":108
- *                         contact_points.append(point)
+  /* "yapyg\math_collision.pyx":110
+ *                                 contact_points.append(point)
  * 
  *         return len(contact_points) > 0             # <<<<<<<<<<<<<<
  * 
@@ -1935,9 +1950,9 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
  */
   if (unlikely(__pyx_v_contact_points == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_3 = PyList_GET_SIZE(__pyx_v_contact_points); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyList_GET_SIZE(__pyx_v_contact_points); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = (__pyx_t_3 > 0);
   goto __pyx_L0;
 
@@ -2067,7 +2082,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_6is_rect_rect_collision(CYTHON
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":110
+/* "yapyg\math_collision.pyx":112
  *         return len(contact_points) > 0
  * 
  * cpdef int is_circle_circle_collision(tuple c_1, tuple c_2, list contact_points):             # <<<<<<<<<<<<<<
@@ -2095,7 +2110,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_circle_circle_collision", 0);
 
-  /* "yapyg\math_collision.pyx":114
+  /* "yapyg\math_collision.pyx":116
  *         TODO
  *         """
  *         cdef float c1_x = c_1[1]             # <<<<<<<<<<<<<<
@@ -2104,15 +2119,15 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   if (unlikely(__pyx_v_c_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c1_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":115
+  /* "yapyg\math_collision.pyx":117
  *         """
  *         cdef float c1_x = c_1[1]
  *         cdef float c1_y = c_1[2]             # <<<<<<<<<<<<<<
@@ -2121,15 +2136,15 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   if (unlikely(__pyx_v_c_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c1_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":116
+  /* "yapyg\math_collision.pyx":118
  *         cdef float c1_x = c_1[1]
  *         cdef float c1_y = c_1[2]
  *         cdef float c1_r = c_1[3]             # <<<<<<<<<<<<<<
@@ -2138,15 +2153,15 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   if (unlikely(__pyx_v_c_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_1, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c1_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":118
+  /* "yapyg\math_collision.pyx":120
  *         cdef float c1_r = c_1[3]
  * 
  *         cdef float c2_x = c_2[1]             # <<<<<<<<<<<<<<
@@ -2155,15 +2170,15 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   if (unlikely(__pyx_v_c_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c2_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":119
+  /* "yapyg\math_collision.pyx":121
  * 
  *         cdef float c2_x = c_2[1]
  *         cdef float c2_y = c_2[2]             # <<<<<<<<<<<<<<
@@ -2172,15 +2187,15 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   if (unlikely(__pyx_v_c_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_2, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c2_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":120
+  /* "yapyg\math_collision.pyx":122
  *         cdef float c2_x = c_2[1]
  *         cdef float c2_y = c_2[2]
  *         cdef float c2_r = c_2[3]             # <<<<<<<<<<<<<<
@@ -2189,70 +2204,70 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   if (unlikely(__pyx_v_c_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_c_2, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c2_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":122
+  /* "yapyg\math_collision.pyx":124
  *         cdef float c2_r = c_2[3]
  * 
  *         cdef float sq_1 = c2_x - c1_x             # <<<<<<<<<<<<<<
- *         sq_1 = ((sq_1) * (sq_1))
+ *         sq_1 *= sq_1
  * 
  */
   __pyx_v_sq_1 = (__pyx_v_c2_x - __pyx_v_c1_x);
 
-  /* "yapyg\math_collision.pyx":123
+  /* "yapyg\math_collision.pyx":125
  * 
  *         cdef float sq_1 = c2_x - c1_x
- *         sq_1 = ((sq_1) * (sq_1))             # <<<<<<<<<<<<<<
+ *         sq_1 *= sq_1             # <<<<<<<<<<<<<<
  * 
  *         cdef float sq_2 = c2_y - c1_y
  */
   __pyx_v_sq_1 = (__pyx_v_sq_1 * __pyx_v_sq_1);
 
-  /* "yapyg\math_collision.pyx":125
- *         sq_1 = ((sq_1) * (sq_1))
+  /* "yapyg\math_collision.pyx":127
+ *         sq_1 *= sq_1
  * 
  *         cdef float sq_2 = c2_y - c1_y             # <<<<<<<<<<<<<<
- *         sq_2 = ((sq_2) * (sq_2))
+ *         sq_2 *= sq_2
  * 
  */
   __pyx_v_sq_2 = (__pyx_v_c2_y - __pyx_v_c1_y);
 
-  /* "yapyg\math_collision.pyx":126
+  /* "yapyg\math_collision.pyx":128
  * 
  *         cdef float sq_2 = c2_y - c1_y
- *         sq_2 = ((sq_2) * (sq_2))             # <<<<<<<<<<<<<<
+ *         sq_2 *= sq_2             # <<<<<<<<<<<<<<
  * 
  *         cdef float sq_3 = c1_r + c2_r
  */
   __pyx_v_sq_2 = (__pyx_v_sq_2 * __pyx_v_sq_2);
 
-  /* "yapyg\math_collision.pyx":128
- *         sq_2 = ((sq_2) * (sq_2))
+  /* "yapyg\math_collision.pyx":130
+ *         sq_2 *= sq_2
  * 
  *         cdef float sq_3 = c1_r + c2_r             # <<<<<<<<<<<<<<
- *         sq_3 = ((sq_3) * (sq_3))
+ *         sq_3 *= sq_3
  * 
  */
   __pyx_v_sq_3 = (__pyx_v_c1_r + __pyx_v_c2_r);
 
-  /* "yapyg\math_collision.pyx":129
+  /* "yapyg\math_collision.pyx":131
  * 
  *         cdef float sq_3 = c1_r + c2_r
- *         sq_3 = ((sq_3) * (sq_3))             # <<<<<<<<<<<<<<
+ *         sq_3 *= sq_3             # <<<<<<<<<<<<<<
  * 
  *         return sq_3 >= (sq_1 + sq_2)
  */
   __pyx_v_sq_3 = (__pyx_v_sq_3 * __pyx_v_sq_3);
 
-  /* "yapyg\math_collision.pyx":131
- *         sq_3 = ((sq_3) * (sq_3))
+  /* "yapyg\math_collision.pyx":133
+ *         sq_3 *= sq_3
  * 
  *         return sq_3 >= (sq_1 + sq_2)             # <<<<<<<<<<<<<<
  * 
@@ -2261,7 +2276,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __pyx_r = (__pyx_v_sq_3 >= (__pyx_v_sq_1 + __pyx_v_sq_2));
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":110
+  /* "yapyg\math_collision.pyx":112
  *         return len(contact_points) > 0
  * 
  * cpdef int is_circle_circle_collision(tuple c_1, tuple c_2, list contact_points):             # <<<<<<<<<<<<<<
@@ -2313,16 +2328,16 @@ static PyObject *__pyx_pw_5yapyg_14math_collision_9is_circle_circle_collision(Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_c_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_circle_circle_collision", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("is_circle_circle_collision", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_contact_points)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_circle_circle_collision", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("is_circle_circle_collision", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_circle_circle_collision") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_circle_circle_collision") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2337,15 +2352,15 @@ static PyObject *__pyx_pw_5yapyg_14math_collision_9is_circle_circle_collision(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_circle_circle_collision", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("is_circle_circle_collision", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.math_collision.is_circle_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c_1), (&PyTuple_Type), 1, "c_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c_2), (&PyTuple_Type), 1, "c_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_contact_points), (&PyList_Type), 1, "contact_points", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c_1), (&PyTuple_Type), 1, "c_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_c_2), (&PyTuple_Type), 1, "c_2", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_contact_points), (&PyList_Type), 1, "contact_points", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_14math_collision_8is_circle_circle_collision(__pyx_self, __pyx_v_c_1, __pyx_v_c_2, __pyx_v_contact_points);
 
   /* function exit code */
@@ -2366,7 +2381,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_8is_circle_circle_collision(CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_circle_circle_collision", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_circle_circle_collision(__pyx_v_c_1, __pyx_v_c_2, __pyx_v_contact_points, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_circle_circle_collision(__pyx_v_c_1, __pyx_v_c_2, __pyx_v_contact_points, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2383,7 +2398,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_8is_circle_circle_collision(CY
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":133
+/* "yapyg\math_collision.pyx":135
  *         return sq_3 >= (sq_1 + sq_2)
  * 
  * cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points):             # <<<<<<<<<<<<<<
@@ -2392,42 +2407,37 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_8is_circle_circle_collision(CY
  */
 
 static PyObject *__pyx_pw_5yapyg_14math_collision_11is_rect_circle_collision(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__pyx_v_circ, PyObject *__pyx_v_rect, CYTHON_UNUSED PyObject *__pyx_v_contact_points, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__pyx_v_circ, PyObject *__pyx_v_rect, PyObject *__pyx_v_contact_points, CYTHON_UNUSED int __pyx_skip_dispatch) {
   float __pyx_v_c_x;
   float __pyx_v_c_y;
   float __pyx_v_c_r;
-  float __pyx_v_r_x1;
-  float __pyx_v_r_y1;
+  float __pyx_v_r_x_left;
+  float __pyx_v_r_y_bottom;
   float __pyx_v_r_w;
   float __pyx_v_r_h;
   float __pyx_v_r_rot;
-  float __pyx_v_r_x2;
-  float __pyx_v_r_y3;
-  PyObject *__pyx_v_rotated_circle = 0;
-  int __pyx_v_circle_outside;
-  PyObject *__pyx_v_corner_circles = 0;
-  PyObject *__pyx_v_circle_point = 0;
-  PyObject *__pyx_v_corner_circle = NULL;
+  float __pyx_v_r_x_right;
+  float __pyx_v_r_y_top;
+  PyObject *__pyx_v_r_centre = 0;
+  PyObject *__pyx_v_found_contact_point = 0;
+  PyObject *__pyx_v_corner_circle = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   float __pyx_t_2;
-  int __pyx_t_3;
+  PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
+  int __pyx_t_5;
+  float __pyx_t_6;
   PyObject *__pyx_t_7 = NULL;
-  PyObject *__pyx_t_8 = NULL;
-  PyObject *__pyx_t_9 = NULL;
-  Py_ssize_t __pyx_t_10;
-  int __pyx_t_11;
-  int __pyx_t_12;
+  int __pyx_t_8;
+  Py_ssize_t __pyx_t_9;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_rect_circle_collision", 0);
 
-  /* "yapyg\math_collision.pyx":138
+  /* "yapyg\math_collision.pyx":140
  *         rect = ("rectangle", x, y, w, h, rot)
  *         """
  *         cdef float c_x = circ[1]             # <<<<<<<<<<<<<<
@@ -2436,15 +2446,15 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
  */
   if (unlikely(__pyx_v_circ == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":139
+  /* "yapyg\math_collision.pyx":141
  *         """
  *         cdef float c_x = circ[1]
  *         cdef float c_y = circ[2]             # <<<<<<<<<<<<<<
@@ -2453,84 +2463,84 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
  */
   if (unlikely(__pyx_v_circ == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":140
+  /* "yapyg\math_collision.pyx":142
  *         cdef float c_x = circ[1]
  *         cdef float c_y = circ[2]
  *         cdef float c_r = circ[3]             # <<<<<<<<<<<<<<
  * 
- *         cdef float r_x1 = rect[1]
+ *         cdef float r_x_left = rect[1]
  */
   if (unlikely(__pyx_v_circ == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":142
+  /* "yapyg\math_collision.pyx":144
  *         cdef float c_r = circ[3]
  * 
- *         cdef float r_x1 = rect[1]             # <<<<<<<<<<<<<<
- *         cdef float r_y1 = rect[2]
+ *         cdef float r_x_left = rect[1]             # <<<<<<<<<<<<<<
+ *         cdef float r_y_bottom = rect[2]
  *         cdef float r_w = rect[3]
  */
   if (unlikely(__pyx_v_rect == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_r_x1 = __pyx_t_2;
+  __pyx_v_r_x_left = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":143
+  /* "yapyg\math_collision.pyx":145
  * 
- *         cdef float r_x1 = rect[1]
- *         cdef float r_y1 = rect[2]             # <<<<<<<<<<<<<<
+ *         cdef float r_x_left = rect[1]
+ *         cdef float r_y_bottom = rect[2]             # <<<<<<<<<<<<<<
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]
  */
   if (unlikely(__pyx_v_rect == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_r_y1 = __pyx_t_2;
+  __pyx_v_r_y_bottom = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":144
- *         cdef float r_x1 = rect[1]
- *         cdef float r_y1 = rect[2]
+  /* "yapyg\math_collision.pyx":146
+ *         cdef float r_x_left = rect[1]
+ *         cdef float r_y_bottom = rect[2]
  *         cdef float r_w = rect[3]             # <<<<<<<<<<<<<<
  *         cdef float r_h = rect[4]
  *         cdef float r_rot = rect[5]
  */
   if (unlikely(__pyx_v_rect == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_w = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":145
- *         cdef float r_y1 = rect[2]
+  /* "yapyg\math_collision.pyx":147
+ *         cdef float r_y_bottom = rect[2]
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]             # <<<<<<<<<<<<<<
  *         cdef float r_rot = rect[5]
@@ -2538,450 +2548,632 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
  */
   if (unlikely(__pyx_v_rect == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_h = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":146
+  /* "yapyg\math_collision.pyx":148
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]
  *         cdef float r_rot = rect[5]             # <<<<<<<<<<<<<<
  * 
- *         cdef float r_x2 = r_x1 + r_w
+ *         cdef float r_x_right = r_x_left + r_w
  */
   if (unlikely(__pyx_v_rect == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rect, 5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_rot = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":148
+  /* "yapyg\math_collision.pyx":150
  *         cdef float r_rot = rect[5]
  * 
- *         cdef float r_x2 = r_x1 + r_w             # <<<<<<<<<<<<<<
- *         cdef float r_y3 = r_y1 + r_h
+ *         cdef float r_x_right = r_x_left + r_w             # <<<<<<<<<<<<<<
+ *         cdef float r_y_top = r_y_bottom + r_h
  * 
  */
-  __pyx_v_r_x2 = (__pyx_v_r_x1 + __pyx_v_r_w);
+  __pyx_v_r_x_right = (__pyx_v_r_x_left + __pyx_v_r_w);
 
-  /* "yapyg\math_collision.pyx":149
+  /* "yapyg\math_collision.pyx":151
  * 
- *         cdef float r_x2 = r_x1 + r_w
- *         cdef float r_y3 = r_y1 + r_h             # <<<<<<<<<<<<<<
+ *         cdef float r_x_right = r_x_left + r_w
+ *         cdef float r_y_top = r_y_bottom + r_h             # <<<<<<<<<<<<<<
  * 
- *         cdef tuple rotated_circle
+ *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))
  */
-  __pyx_v_r_y3 = (__pyx_v_r_y1 + __pyx_v_r_h);
+  __pyx_v_r_y_top = (__pyx_v_r_y_bottom + __pyx_v_r_h);
 
-  /* "yapyg\math_collision.pyx":152
+  /* "yapyg\math_collision.pyx":153
+ *         cdef float r_y_top = r_y_bottom + r_h
  * 
- *         cdef tuple rotated_circle
+ *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))             # <<<<<<<<<<<<<<
+ *         if r_rot != 0:
+ *                 c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)
+ */
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_r_x_left + (__pyx_v_r_w / 2.0))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = PyFloat_FromDouble((__pyx_v_r_y_bottom + (__pyx_v_r_h / 2.0))); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_1 = 0;
+  __pyx_t_3 = 0;
+  __pyx_v_r_centre = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "yapyg\math_collision.pyx":154
+ * 
+ *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))
  *         if r_rot != 0:             # <<<<<<<<<<<<<<
- *                 rotated_circle = math_2d.rotated_point((r_x1 + (r_w / 2.0), r_y1 + (r_h / 2.0)), (c_x, c_y), -r_rot)
- *                 c_x = rotated_circle[0]
- */
-  __pyx_t_3 = ((__pyx_v_r_rot != 0.0) != 0);
-  if (__pyx_t_3) {
-
-    /* "yapyg\math_collision.pyx":153
- *         cdef tuple rotated_circle
- *         if r_rot != 0:
- *                 rotated_circle = math_2d.rotated_point((r_x1 + (r_w / 2.0), r_y1 + (r_h / 2.0)), (c_x, c_y), -r_rot)             # <<<<<<<<<<<<<<
- *                 c_x = rotated_circle[0]
- *                 c_y = rotated_circle[1]
- */
-    __pyx_t_1 = PyFloat_FromDouble((__pyx_v_r_x1 + (__pyx_v_r_w / 2.0))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PyFloat_FromDouble((__pyx_v_r_y1 + (__pyx_v_r_h / 2.0))); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_5);
-    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_4);
-    __pyx_t_1 = 0;
-    __pyx_t_4 = 0;
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_6);
-    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_4);
-    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1);
-    __Pyx_GIVEREF(__pyx_t_1);
-    __pyx_t_4 = 0;
-    __pyx_t_1 = 0;
-    __pyx_t_1 = __pyx_f_5yapyg_7math_2d_rotated_point(((PyObject*)__pyx_t_5), ((PyObject*)__pyx_t_6), (-__pyx_v_r_rot), 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_v_rotated_circle = ((PyObject*)__pyx_t_1);
-    __pyx_t_1 = 0;
-
-    /* "yapyg\math_collision.pyx":154
- *         if r_rot != 0:
- *                 rotated_circle = math_2d.rotated_point((r_x1 + (r_w / 2.0), r_y1 + (r_h / 2.0)), (c_x, c_y), -r_rot)
- *                 c_x = rotated_circle[0]             # <<<<<<<<<<<<<<
- *                 c_y = rotated_circle[1]
+ *                 c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)
  * 
  */
-    if (unlikely(__pyx_v_rotated_circle == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rotated_circle, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_v_c_x = __pyx_t_2;
+  __pyx_t_5 = ((__pyx_v_r_rot != 0.0) != 0);
+  if (__pyx_t_5) {
 
     /* "yapyg\math_collision.pyx":155
- *                 rotated_circle = math_2d.rotated_point((r_x1 + (r_w / 2.0), r_y1 + (r_h / 2.0)), (c_x, c_y), -r_rot)
- *                 c_x = rotated_circle[0]
- *                 c_y = rotated_circle[1]             # <<<<<<<<<<<<<<
+ *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))
+ *         if r_rot != 0:
+ *                 c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)             # <<<<<<<<<<<<<<
  * 
- *         cdef int circle_outside = True
+ *         cdef tuple found_contact_point = None
  */
-    if (unlikely(__pyx_v_rotated_circle == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_rotated_circle, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
+    __pyx_t_4 = 0;
+    __pyx_t_3 = 0;
+    __pyx_t_3 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_r_centre, ((PyObject*)__pyx_t_1), (-__pyx_v_r_rot), 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (likely(__pyx_t_3 != Py_None)) {
+      PyObject* sequence = __pyx_t_3;
+      #if CYTHON_COMPILING_IN_CPYTHON
+      Py_ssize_t size = Py_SIZE(sequence);
+      #else
+      Py_ssize_t size = PySequence_Size(sequence);
+      #endif
+      if (unlikely(size != 2)) {
+        if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+        else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+      #if CYTHON_COMPILING_IN_CPYTHON
+      __pyx_t_1 = PyTuple_GET_ITEM(sequence, 0); 
+      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1); 
+      __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_4);
+      #else
+      __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      #endif
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    } else {
+      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
     __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_v_c_y = __pyx_t_2;
+    __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_v_c_x = __pyx_t_2;
+    __pyx_v_c_y = __pyx_t_6;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
   /* "yapyg\math_collision.pyx":157
- *                 c_y = rotated_circle[1]
+ *                 c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)
  * 
- *         cdef int circle_outside = True             # <<<<<<<<<<<<<<
+ *         cdef tuple found_contact_point = None             # <<<<<<<<<<<<<<
+ *         cdef tuple corner_circle = None
  * 
- *         cdef tuple corner_circles = (
  */
-  __pyx_v_circle_outside = 1;
+  __Pyx_INCREF(Py_None);
+  __pyx_v_found_contact_point = ((PyObject*)Py_None);
+
+  /* "yapyg\math_collision.pyx":158
+ * 
+ *         cdef tuple found_contact_point = None
+ *         cdef tuple corner_circle = None             # <<<<<<<<<<<<<<
+ * 
+ *         if c_x <= r_x_left:
+ */
+  __Pyx_INCREF(Py_None);
+  __pyx_v_corner_circle = ((PyObject*)Py_None);
 
   /* "yapyg\math_collision.pyx":160
+ *         cdef tuple corner_circle = None
  * 
- *         cdef tuple corner_circles = (
- *                 (r_y1, r_x1, c_r),             # <<<<<<<<<<<<<<
- *                 (r_y1, r_x2, c_r),
- *                 (r_y3, r_x1, c_r),
+ *         if c_x <= r_x_left:             # <<<<<<<<<<<<<<
+ *                 if c_y < r_y_bottom:
+ *                         corner_circle = (r_x_left, r_y_bottom, c_r)
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_y1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r_x1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_5);
-  __pyx_t_1 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_5 = 0;
+  __pyx_t_5 = ((__pyx_v_c_x <= __pyx_v_r_x_left) != 0);
+  if (__pyx_t_5) {
 
-  /* "yapyg\math_collision.pyx":161
- *         cdef tuple corner_circles = (
- *                 (r_y1, r_x1, c_r),
- *                 (r_y1, r_x2, c_r),             # <<<<<<<<<<<<<<
- *                 (r_y3, r_x1, c_r),
- *                 (r_y3, r_x2, c_r),
- */
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_r_y1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r_x2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_7);
-  PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_5 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_1 = 0;
-
-  /* "yapyg\math_collision.pyx":162
- *                 (r_y1, r_x1, c_r),
- *                 (r_y1, r_x2, c_r),
- *                 (r_y3, r_x1, c_r),             # <<<<<<<<<<<<<<
- *                 (r_y3, r_x2, c_r),
- *         )
- */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_y3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r_x1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_8, 2, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_5);
-  __pyx_t_1 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_5 = 0;
-
-  /* "yapyg\math_collision.pyx":163
- *                 (r_y1, r_x2, c_r),
- *                 (r_y3, r_x1, c_r),
- *                 (r_y3, r_x2, c_r),             # <<<<<<<<<<<<<<
- *         )
+    /* "yapyg\math_collision.pyx":161
  * 
+ *         if c_x <= r_x_left:
+ *                 if c_y < r_y_bottom:             # <<<<<<<<<<<<<<
+ *                         corner_circle = (r_x_left, r_y_bottom, c_r)
+ *                 elif c_y > r_y_top:
  */
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_r_y3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r_x2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_9, 2, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_5 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_1 = 0;
+    __pyx_t_5 = ((__pyx_v_c_y < __pyx_v_r_y_bottom) != 0);
+    if (__pyx_t_5) {
 
-  /* "yapyg\math_collision.pyx":160
- * 
- *         cdef tuple corner_circles = (
- *                 (r_y1, r_x1, c_r),             # <<<<<<<<<<<<<<
- *                 (r_y1, r_x2, c_r),
- *                 (r_y3, r_x1, c_r),
+      /* "yapyg\math_collision.pyx":162
+ *         if c_x <= r_x_left:
+ *                 if c_y < r_y_bottom:
+ *                         corner_circle = (r_x_left, r_y_bottom, c_r)             # <<<<<<<<<<<<<<
+ *                 elif c_y > r_y_top:
+ *                         corner_circle = (r_x_left, r_y_top, c_r)
  */
-  __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_7);
-  __Pyx_GIVEREF(__pyx_t_7);
-  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_8);
-  __Pyx_GIVEREF(__pyx_t_8);
-  PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_t_9);
-  __Pyx_GIVEREF(__pyx_t_9);
-  __pyx_t_4 = 0;
-  __pyx_t_7 = 0;
-  __pyx_t_8 = 0;
-  __pyx_t_9 = 0;
-  __pyx_v_corner_circles = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_r_x_left); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_r_y_bottom); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_7);
+      PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_4);
+      PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_1);
+      __pyx_t_3 = 0;
+      __pyx_t_4 = 0;
+      __pyx_t_1 = 0;
+      __Pyx_DECREF_SET(__pyx_v_corner_circle, ((PyObject*)__pyx_t_7));
+      __pyx_t_7 = 0;
+      goto __pyx_L5;
+    }
 
-  /* "yapyg\math_collision.pyx":166
- *         )
- * 
- *         cdef tuple circle_point = (c_y, c_x)             # <<<<<<<<<<<<<<
- * 
- *         for corner_circle in corner_circles:
+    /* "yapyg\math_collision.pyx":163
+ *                 if c_y < r_y_bottom:
+ *                         corner_circle = (r_x_left, r_y_bottom, c_r)
+ *                 elif c_y > r_y_top:             # <<<<<<<<<<<<<<
+ *                         corner_circle = (r_x_left, r_y_top, c_r)
+ *                 else:
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_9 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_8);
-  PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_9);
-  __Pyx_GIVEREF(__pyx_t_9);
-  __pyx_t_1 = 0;
-  __pyx_t_9 = 0;
-  __pyx_v_circle_point = ((PyObject*)__pyx_t_8);
-  __pyx_t_8 = 0;
+    __pyx_t_5 = ((__pyx_v_c_y > __pyx_v_r_y_top) != 0);
+    if (__pyx_t_5) {
+
+      /* "yapyg\math_collision.pyx":164
+ *                         corner_circle = (r_x_left, r_y_bottom, c_r)
+ *                 elif c_y > r_y_top:
+ *                         corner_circle = (r_x_left, r_y_top, c_r)             # <<<<<<<<<<<<<<
+ *                 else:
+ *                         if c_x + c_r >= r_x_left:
+ */
+      __pyx_t_7 = PyFloat_FromDouble(__pyx_v_r_x_left); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_7);
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_y_top); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_7);
+      __Pyx_GIVEREF(__pyx_t_7);
+      PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_4);
+      __pyx_t_7 = 0;
+      __pyx_t_1 = 0;
+      __pyx_t_4 = 0;
+      __Pyx_DECREF_SET(__pyx_v_corner_circle, ((PyObject*)__pyx_t_3));
+      __pyx_t_3 = 0;
+      goto __pyx_L5;
+    }
+    /*else*/ {
+
+      /* "yapyg\math_collision.pyx":166
+ *                         corner_circle = (r_x_left, r_y_top, c_r)
+ *                 else:
+ *                         if c_x + c_r >= r_x_left:             # <<<<<<<<<<<<<<
+ *                                 found_contact_point = (r_x_left, c_y)
+ *         elif c_x >= r_x_right:
+ */
+      __pyx_t_5 = (((__pyx_v_c_x + __pyx_v_c_r) >= __pyx_v_r_x_left) != 0);
+      if (__pyx_t_5) {
+
+        /* "yapyg\math_collision.pyx":167
+ *                 else:
+ *                         if c_x + c_r >= r_x_left:
+ *                                 found_contact_point = (r_x_left, c_y)             # <<<<<<<<<<<<<<
+ *         elif c_x >= r_x_right:
+ *                 if c_y < r_y_bottom:
+ */
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_r_x_left); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_3 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_found_contact_point, ((PyObject*)__pyx_t_1));
+        __pyx_t_1 = 0;
+        goto __pyx_L6;
+      }
+      __pyx_L6:;
+    }
+    __pyx_L5:;
+    goto __pyx_L4;
+  }
 
   /* "yapyg\math_collision.pyx":168
- *         cdef tuple circle_point = (c_y, c_x)
- * 
- *         for corner_circle in corner_circles:             # <<<<<<<<<<<<<<
- *                 circle_outside = not is_point_in_circle(circle_point, corner_circle)
- *                 if not circle_outside:
+ *                         if c_x + c_r >= r_x_left:
+ *                                 found_contact_point = (r_x_left, c_y)
+ *         elif c_x >= r_x_right:             # <<<<<<<<<<<<<<
+ *                 if c_y < r_y_bottom:
+ *                         corner_circle = (r_x_right, r_y_bottom, c_r)
  */
-  __pyx_t_8 = __pyx_v_corner_circles; __Pyx_INCREF(__pyx_t_8); __pyx_t_10 = 0;
-  for (;;) {
-    if (__pyx_t_10 >= PyTuple_GET_SIZE(__pyx_t_8)) break;
-    #if CYTHON_COMPILING_IN_CPYTHON
-    __pyx_t_9 = PyTuple_GET_ITEM(__pyx_t_8, __pyx_t_10); __Pyx_INCREF(__pyx_t_9); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    #else
-    __pyx_t_9 = PySequence_ITEM(__pyx_t_8, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    #endif
-    __Pyx_XDECREF_SET(__pyx_v_corner_circle, ((PyObject*)__pyx_t_9));
-    __pyx_t_9 = 0;
+  __pyx_t_5 = ((__pyx_v_c_x >= __pyx_v_r_x_right) != 0);
+  if (__pyx_t_5) {
 
     /* "yapyg\math_collision.pyx":169
- * 
- *         for corner_circle in corner_circles:
- *                 circle_outside = not is_point_in_circle(circle_point, corner_circle)             # <<<<<<<<<<<<<<
- *                 if not circle_outside:
- *                         break
+ *                                 found_contact_point = (r_x_left, c_y)
+ *         elif c_x >= r_x_right:
+ *                 if c_y < r_y_bottom:             # <<<<<<<<<<<<<<
+ *                         corner_circle = (r_x_right, r_y_bottom, c_r)
+ *                 elif c_y > r_y_top:
  */
-    __pyx_v_circle_outside = (!(__pyx_f_5yapyg_14math_collision_is_point_in_circle(__pyx_v_circle_point, __pyx_v_corner_circle, 0) != 0));
+    __pyx_t_5 = ((__pyx_v_c_y < __pyx_v_r_y_bottom) != 0);
+    if (__pyx_t_5) {
 
-    /* "yapyg\math_collision.pyx":170
- *         for corner_circle in corner_circles:
- *                 circle_outside = not is_point_in_circle(circle_point, corner_circle)
- *                 if not circle_outside:             # <<<<<<<<<<<<<<
- *                         break
- * 
+      /* "yapyg\math_collision.pyx":170
+ *         elif c_x >= r_x_right:
+ *                 if c_y < r_y_bottom:
+ *                         corner_circle = (r_x_right, r_y_bottom, c_r)             # <<<<<<<<<<<<<<
+ *                 elif c_y > r_y_top:
+ *                         corner_circle = (r_x_right, r_y_top, c_r)
  */
-    __pyx_t_3 = ((!(__pyx_v_circle_outside != 0)) != 0);
-    if (__pyx_t_3) {
-
-      /* "yapyg\math_collision.pyx":171
- *                 circle_outside = not is_point_in_circle(circle_point, corner_circle)
- *                 if not circle_outside:
- *                         break             # <<<<<<<<<<<<<<
- * 
- *         if circle_outside:
- */
-      goto __pyx_L5_break;
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_x_right); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_r_y_bottom); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_7);
+      PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_4);
+      PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_3);
+      __pyx_t_1 = 0;
+      __pyx_t_4 = 0;
+      __pyx_t_3 = 0;
+      __Pyx_DECREF_SET(__pyx_v_corner_circle, ((PyObject*)__pyx_t_7));
+      __pyx_t_7 = 0;
+      goto __pyx_L7;
     }
 
-    /* "yapyg\math_collision.pyx":168
- *         cdef tuple circle_point = (c_y, c_x)
- * 
- *         for corner_circle in corner_circles:             # <<<<<<<<<<<<<<
- *                 circle_outside = not is_point_in_circle(circle_point, corner_circle)
- *                 if not circle_outside:
+    /* "yapyg\math_collision.pyx":171
+ *                 if c_y < r_y_bottom:
+ *                         corner_circle = (r_x_right, r_y_bottom, c_r)
+ *                 elif c_y > r_y_top:             # <<<<<<<<<<<<<<
+ *                         corner_circle = (r_x_right, r_y_top, c_r)
+ *                 else:
  */
+    __pyx_t_5 = ((__pyx_v_c_y > __pyx_v_r_y_top) != 0);
+    if (__pyx_t_5) {
+
+      /* "yapyg\math_collision.pyx":172
+ *                         corner_circle = (r_x_right, r_y_bottom, c_r)
+ *                 elif c_y > r_y_top:
+ *                         corner_circle = (r_x_right, r_y_top, c_r)             # <<<<<<<<<<<<<<
+ *                 else:
+ *                         if c_x - c_r <= r_x_right:
+ */
+      __pyx_t_7 = PyFloat_FromDouble(__pyx_v_r_x_right); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_7);
+      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_r_y_top); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_r); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_7);
+      __Pyx_GIVEREF(__pyx_t_7);
+      PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_4);
+      __pyx_t_7 = 0;
+      __pyx_t_3 = 0;
+      __pyx_t_4 = 0;
+      __Pyx_DECREF_SET(__pyx_v_corner_circle, ((PyObject*)__pyx_t_1));
+      __pyx_t_1 = 0;
+      goto __pyx_L7;
+    }
+    /*else*/ {
+
+      /* "yapyg\math_collision.pyx":174
+ *                         corner_circle = (r_x_right, r_y_top, c_r)
+ *                 else:
+ *                         if c_x - c_r <= r_x_right:             # <<<<<<<<<<<<<<
+ *                                 found_contact_point = (r_x_right, c_y)
+ *         else:
+ */
+      __pyx_t_5 = (((__pyx_v_c_x - __pyx_v_c_r) <= __pyx_v_r_x_right) != 0);
+      if (__pyx_t_5) {
+
+        /* "yapyg\math_collision.pyx":175
+ *                 else:
+ *                         if c_x - c_r <= r_x_right:
+ *                                 found_contact_point = (r_x_right, c_y)             # <<<<<<<<<<<<<<
+ *         else:
+ *                 if c_y < r_y_bottom:
+ */
+        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_x_right); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_1 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_found_contact_point, ((PyObject*)__pyx_t_3));
+        __pyx_t_3 = 0;
+        goto __pyx_L8;
+      }
+      __pyx_L8:;
+    }
+    __pyx_L7:;
+    goto __pyx_L4;
   }
-  __pyx_L5_break:;
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  /*else*/ {
 
-  /* "yapyg\math_collision.pyx":173
- *                         break
- * 
- *         if circle_outside:             # <<<<<<<<<<<<<<
- *                 if ((c_x >= r_x1 and c_x <= r_x2)
- *                         or
+    /* "yapyg\math_collision.pyx":177
+ *                                 found_contact_point = (r_x_right, c_y)
+ *         else:
+ *                 if c_y < r_y_bottom:             # <<<<<<<<<<<<<<
+ *                         if c_y + c_r >= r_y_bottom:
+ *                                 found_contact_point = (c_x, r_y_bottom)
  */
-  __pyx_t_3 = (__pyx_v_circle_outside != 0);
-  if (__pyx_t_3) {
-
-    /* "yapyg\math_collision.pyx":174
- * 
- *         if circle_outside:
- *                 if ((c_x >= r_x1 and c_x <= r_x2)             # <<<<<<<<<<<<<<
- *                         or
- *                         (c_y >= r_y1 and c_y <= r_y3)
- */
-    __pyx_t_11 = ((__pyx_v_c_x >= __pyx_v_r_x1) != 0);
-    if (!__pyx_t_11) {
-      goto __pyx_L10_next_or;
-    } else {
-    }
-    __pyx_t_11 = ((__pyx_v_c_x <= __pyx_v_r_x2) != 0);
-    if (!__pyx_t_11) {
-    } else {
-      __pyx_t_3 = __pyx_t_11;
-      goto __pyx_L9_bool_binop_done;
-    }
-    __pyx_L10_next_or:;
-
-    /* "yapyg\math_collision.pyx":176
- *                 if ((c_x >= r_x1 and c_x <= r_x2)
- *                         or
- *                         (c_y >= r_y1 and c_y <= r_y3)             # <<<<<<<<<<<<<<
- *                         ):
- *                         circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
- */
-    __pyx_t_11 = ((__pyx_v_c_y >= __pyx_v_r_y1) != 0);
-    if (__pyx_t_11) {
-    } else {
-      __pyx_t_3 = __pyx_t_11;
-      goto __pyx_L9_bool_binop_done;
-    }
-    __pyx_t_11 = ((__pyx_v_c_y <= __pyx_v_r_y3) != 0);
-    __pyx_t_3 = __pyx_t_11;
-    __pyx_L9_bool_binop_done:;
-    if (__pyx_t_3) {
+    __pyx_t_5 = ((__pyx_v_c_y < __pyx_v_r_y_bottom) != 0);
+    if (__pyx_t_5) {
 
       /* "yapyg\math_collision.pyx":178
- *                         (c_y >= r_y1 and c_y <= r_y3)
- *                         ):
- *                         circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r             # <<<<<<<<<<<<<<
- *                                 or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
- * 
+ *         else:
+ *                 if c_y < r_y_bottom:
+ *                         if c_y + c_r >= r_y_bottom:             # <<<<<<<<<<<<<<
+ *                                 found_contact_point = (c_x, r_y_bottom)
+ *                 elif c_y > r_y_top:
  */
-      __pyx_t_3 = (__pyx_v_c_x < (__pyx_v_r_x1 - __pyx_v_c_r));
-      if (!__pyx_t_3) {
-      } else {
-        __pyx_t_12 = __pyx_t_3;
-        goto __pyx_L13_bool_binop_done;
-      }
+      __pyx_t_5 = (((__pyx_v_c_y + __pyx_v_c_r) >= __pyx_v_r_y_bottom) != 0);
+      if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":179
- *                         ):
- *                         circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
- *                                 or c_y < r_y1 - c_r or c_y > r_y3 + c_r)             # <<<<<<<<<<<<<<
- * 
- *         return not circle_outside
+        /* "yapyg\math_collision.pyx":179
+ *                 if c_y < r_y_bottom:
+ *                         if c_y + c_r >= r_y_bottom:
+ *                                 found_contact_point = (c_x, r_y_bottom)             # <<<<<<<<<<<<<<
+ *                 elif c_y > r_y_top:
+ *                         if c_y - c_r <= r_y_top:
  */
-      __pyx_t_3 = (__pyx_v_c_x > (__pyx_v_r_x2 + __pyx_v_c_r));
-      if (!__pyx_t_3) {
-      } else {
-        __pyx_t_12 = __pyx_t_3;
-        goto __pyx_L13_bool_binop_done;
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_r_y_bottom); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_3 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_found_contact_point, ((PyObject*)__pyx_t_1));
+        __pyx_t_1 = 0;
+        goto __pyx_L10;
       }
-      __pyx_t_3 = (__pyx_v_c_y < (__pyx_v_r_y1 - __pyx_v_c_r));
-      if (!__pyx_t_3) {
-      } else {
-        __pyx_t_12 = __pyx_t_3;
-        goto __pyx_L13_bool_binop_done;
-      }
-      __pyx_t_3 = (__pyx_v_c_y > (__pyx_v_r_y3 + __pyx_v_c_r));
-      __pyx_t_12 = __pyx_t_3;
-      __pyx_L13_bool_binop_done:;
-      __pyx_v_circle_outside = __pyx_t_12;
-      goto __pyx_L8;
+      __pyx_L10:;
+      goto __pyx_L9;
     }
-    __pyx_L8:;
-    goto __pyx_L7;
-  }
-  __pyx_L7:;
 
-  /* "yapyg\math_collision.pyx":181
- *                                 or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
+    /* "yapyg\math_collision.pyx":180
+ *                         if c_y + c_r >= r_y_bottom:
+ *                                 found_contact_point = (c_x, r_y_bottom)
+ *                 elif c_y > r_y_top:             # <<<<<<<<<<<<<<
+ *                         if c_y - c_r <= r_y_top:
+ *                                 found_contact_point = (c_x, r_y_top)
+ */
+    __pyx_t_5 = ((__pyx_v_c_y > __pyx_v_r_y_top) != 0);
+    if (__pyx_t_5) {
+
+      /* "yapyg\math_collision.pyx":181
+ *                                 found_contact_point = (c_x, r_y_bottom)
+ *                 elif c_y > r_y_top:
+ *                         if c_y - c_r <= r_y_top:             # <<<<<<<<<<<<<<
+ *                                 found_contact_point = (c_x, r_y_top)
+ *                 else:
+ */
+      __pyx_t_5 = (((__pyx_v_c_y - __pyx_v_c_r) <= __pyx_v_r_y_top) != 0);
+      if (__pyx_t_5) {
+
+        /* "yapyg\math_collision.pyx":182
+ *                 elif c_y > r_y_top:
+ *                         if c_y - c_r <= r_y_top:
+ *                                 found_contact_point = (c_x, r_y_top)             # <<<<<<<<<<<<<<
+ *                 else:
+ *                         found_contact_point = (c_x, c_y)
+ */
+        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_r_y_top); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4);
+        __Pyx_GIVEREF(__pyx_t_4);
+        __pyx_t_1 = 0;
+        __pyx_t_4 = 0;
+        __Pyx_DECREF_SET(__pyx_v_found_contact_point, ((PyObject*)__pyx_t_3));
+        __pyx_t_3 = 0;
+        goto __pyx_L11;
+      }
+      __pyx_L11:;
+      goto __pyx_L9;
+    }
+    /*else*/ {
+
+      /* "yapyg\math_collision.pyx":184
+ *                                 found_contact_point = (c_x, r_y_top)
+ *                 else:
+ *                         found_contact_point = (c_x, c_y)             # <<<<<<<<<<<<<<
  * 
- *         return not circle_outside             # <<<<<<<<<<<<<<
+ *         if corner_circle:
+ */
+      __pyx_t_3 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_4);
+      __pyx_t_3 = 0;
+      __pyx_t_4 = 0;
+      __Pyx_DECREF_SET(__pyx_v_found_contact_point, ((PyObject*)__pyx_t_1));
+      __pyx_t_1 = 0;
+    }
+    __pyx_L9:;
+  }
+  __pyx_L4:;
+
+  /* "yapyg\math_collision.pyx":186
+ *                         found_contact_point = (c_x, c_y)
+ * 
+ *         if corner_circle:             # <<<<<<<<<<<<<<
+ *                 if is_point_in_circle((c_x, c_y), corner_circle):
+ *                         found_contact_point = corner_circle
+ */
+  __pyx_t_5 = (__pyx_v_corner_circle != Py_None) && (PyTuple_GET_SIZE(__pyx_v_corner_circle) != 0);
+  if (__pyx_t_5) {
+
+    /* "yapyg\math_collision.pyx":187
+ * 
+ *         if corner_circle:
+ *                 if is_point_in_circle((c_x, c_y), corner_circle):             # <<<<<<<<<<<<<<
+ *                         found_contact_point = corner_circle
+ * 
+ */
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+    __Pyx_GIVEREF(__pyx_t_1);
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_4);
+    __pyx_t_1 = 0;
+    __pyx_t_4 = 0;
+    __pyx_t_5 = (__pyx_f_5yapyg_14math_collision_is_point_in_circle(((PyObject*)__pyx_t_3), __pyx_v_corner_circle, 0) != 0);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (__pyx_t_5) {
+
+      /* "yapyg\math_collision.pyx":188
+ *         if corner_circle:
+ *                 if is_point_in_circle((c_x, c_y), corner_circle):
+ *                         found_contact_point = corner_circle             # <<<<<<<<<<<<<<
+ * 
+ *         if found_contact_point:
+ */
+      __Pyx_INCREF(__pyx_v_corner_circle);
+      __Pyx_DECREF_SET(__pyx_v_found_contact_point, __pyx_v_corner_circle);
+      goto __pyx_L13;
+    }
+    __pyx_L13:;
+    goto __pyx_L12;
+  }
+  __pyx_L12:;
+
+  /* "yapyg\math_collision.pyx":190
+ *                         found_contact_point = corner_circle
+ * 
+ *         if found_contact_point:             # <<<<<<<<<<<<<<
+ *                 contact_points.append(math_2d.rotated_point(r_centre, found_contact_point, r_rot))
+ * 
+ */
+  __pyx_t_5 = (__pyx_v_found_contact_point != Py_None) && (PyTuple_GET_SIZE(__pyx_v_found_contact_point) != 0);
+  if (__pyx_t_5) {
+
+    /* "yapyg\math_collision.pyx":191
+ * 
+ *         if found_contact_point:
+ *                 contact_points.append(math_2d.rotated_point(r_centre, found_contact_point, r_rot))             # <<<<<<<<<<<<<<
+ * 
+ *         return len(contact_points) > 0
+ */
+    if (unlikely(__pyx_v_contact_points == Py_None)) {
+      PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    __pyx_t_3 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_r_centre, __pyx_v_found_contact_point, __pyx_v_r_rot, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_contact_points, __pyx_t_3); if (unlikely(__pyx_t_8 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    goto __pyx_L14;
+  }
+  __pyx_L14:;
+
+  /* "yapyg\math_collision.pyx":193
+ *                 contact_points.append(math_2d.rotated_point(r_centre, found_contact_point, r_rot))
+ * 
+ *         return len(contact_points) > 0             # <<<<<<<<<<<<<<
  * 
  * cpdef int is_point_in_circle(tuple point, tuple circ):
  */
-  __pyx_r = (!(__pyx_v_circle_outside != 0));
+  if (unlikely(__pyx_v_contact_points == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_9 = PyList_GET_SIZE(__pyx_v_contact_points); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = (__pyx_t_9 > 0);
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":133
+  /* "yapyg\math_collision.pyx":135
  *         return sq_3 >= (sq_1 + sq_2)
  * 
  * cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points):             # <<<<<<<<<<<<<<
@@ -2992,18 +3184,14 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_WriteUnraisable("yapyg.math_collision.is_rect_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename, 0);
   __pyx_r = 0;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_rotated_circle);
-  __Pyx_XDECREF(__pyx_v_corner_circles);
-  __Pyx_XDECREF(__pyx_v_circle_point);
+  __Pyx_XDECREF(__pyx_v_r_centre);
+  __Pyx_XDECREF(__pyx_v_found_contact_point);
   __Pyx_XDECREF(__pyx_v_corner_circle);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -3043,16 +3231,16 @@ static PyObject *__pyx_pw_5yapyg_14math_collision_11is_rect_circle_collision(PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rect)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_rect_circle_collision", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("is_rect_circle_collision", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_contact_points)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_rect_circle_collision", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("is_rect_circle_collision", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_rect_circle_collision") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_rect_circle_collision") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3067,15 +3255,15 @@ static PyObject *__pyx_pw_5yapyg_14math_collision_11is_rect_circle_collision(PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_rect_circle_collision", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("is_rect_circle_collision", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.math_collision.is_rect_circle_collision", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_circ), (&PyTuple_Type), 1, "circ", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rect), (&PyTuple_Type), 1, "rect", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_contact_points), (&PyList_Type), 1, "contact_points", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_circ), (&PyTuple_Type), 1, "circ", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rect), (&PyTuple_Type), 1, "rect", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_contact_points), (&PyList_Type), 1, "contact_points", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_14math_collision_10is_rect_circle_collision(__pyx_self, __pyx_v_circ, __pyx_v_rect, __pyx_v_contact_points);
 
   /* function exit code */
@@ -3096,7 +3284,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_10is_rect_circle_collision(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_rect_circle_collision", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_rect_circle_collision(__pyx_v_circ, __pyx_v_rect, __pyx_v_contact_points, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_rect_circle_collision(__pyx_v_circ, __pyx_v_rect, __pyx_v_contact_points, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3113,8 +3301,8 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_10is_rect_circle_collision(CYT
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":183
- *         return not circle_outside
+/* "yapyg\math_collision.pyx":195
+ *         return len(contact_points) > 0
  * 
  * cpdef int is_point_in_circle(tuple point, tuple circ):             # <<<<<<<<<<<<<<
  *         """
@@ -3128,8 +3316,8 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   float __pyx_v_c_r;
   float __pyx_v_p_x;
   float __pyx_v_p_y;
-  float __pyx_v_y_d;
   float __pyx_v_x_d;
+  float __pyx_v_y_d;
   float __pyx_v_dist;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -3140,7 +3328,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_point_in_circle", 0);
 
-  /* "yapyg\math_collision.pyx":187
+  /* "yapyg\math_collision.pyx":199
  *         TODO
  *         """
  *         cdef float c_x = circ[0]             # <<<<<<<<<<<<<<
@@ -3149,120 +3337,120 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   if (unlikely(__pyx_v_circ == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":188
+  /* "yapyg\math_collision.pyx":200
  *         """
  *         cdef float c_x = circ[0]
  *         cdef float c_y = circ[1]             # <<<<<<<<<<<<<<
  *         cdef float c_r = circ[2]
- *         cdef float p_x = point[0]
+ * 
  */
   if (unlikely(__pyx_v_circ == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":189
+  /* "yapyg\math_collision.pyx":201
  *         cdef float c_x = circ[0]
  *         cdef float c_y = circ[1]
  *         cdef float c_r = circ[2]             # <<<<<<<<<<<<<<
+ * 
  *         cdef float p_x = point[0]
- *         cdef float p_y = point[1]
  */
   if (unlikely(__pyx_v_circ == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_circ, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":190
- *         cdef float c_y = circ[1]
+  /* "yapyg\math_collision.pyx":203
  *         cdef float c_r = circ[2]
+ * 
  *         cdef float p_x = point[0]             # <<<<<<<<<<<<<<
  *         cdef float p_y = point[1]
  * 
  */
   if (unlikely(__pyx_v_point == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_point, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_point, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":191
- *         cdef float c_r = circ[2]
+  /* "yapyg\math_collision.pyx":204
+ * 
  *         cdef float p_x = point[0]
  *         cdef float p_y = point[1]             # <<<<<<<<<<<<<<
  * 
- *         cdef float y_d = p_y - c_y
+ *         cdef float x_d = p_x - c_x
  */
   if (unlikely(__pyx_v_point == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_point, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_point, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_2 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":193
+  /* "yapyg\math_collision.pyx":206
  *         cdef float p_y = point[1]
  * 
- *         cdef float y_d = p_y - c_y             # <<<<<<<<<<<<<<
- *         y_d = (y_d * y_d)
- * 
- */
-  __pyx_v_y_d = (__pyx_v_p_y - __pyx_v_c_y);
-
-  /* "yapyg\math_collision.pyx":194
- * 
- *         cdef float y_d = p_y - c_y
- *         y_d = (y_d * y_d)             # <<<<<<<<<<<<<<
- * 
- *         cdef float x_d = p_x - c_x
- */
-  __pyx_v_y_d = (__pyx_v_y_d * __pyx_v_y_d);
-
-  /* "yapyg\math_collision.pyx":196
- *         y_d = (y_d * y_d)
- * 
  *         cdef float x_d = p_x - c_x             # <<<<<<<<<<<<<<
- *         x_d = (x_d * x_d)
+ *         x_d *= x_d
  * 
  */
   __pyx_v_x_d = (__pyx_v_p_x - __pyx_v_c_x);
 
-  /* "yapyg\math_collision.pyx":197
+  /* "yapyg\math_collision.pyx":207
  * 
  *         cdef float x_d = p_x - c_x
- *         x_d = (x_d * x_d)             # <<<<<<<<<<<<<<
+ *         x_d *= x_d             # <<<<<<<<<<<<<<
  * 
- *         cdef float dist = y_d + x_d
+ *         cdef float y_d = p_y - c_y
  */
   __pyx_v_x_d = (__pyx_v_x_d * __pyx_v_x_d);
 
-  /* "yapyg\math_collision.pyx":199
- *         x_d = (x_d * x_d)
+  /* "yapyg\math_collision.pyx":209
+ *         x_d *= x_d
+ * 
+ *         cdef float y_d = p_y - c_y             # <<<<<<<<<<<<<<
+ *         y_d *= y_d
+ * 
+ */
+  __pyx_v_y_d = (__pyx_v_p_y - __pyx_v_c_y);
+
+  /* "yapyg\math_collision.pyx":210
+ * 
+ *         cdef float y_d = p_y - c_y
+ *         y_d *= y_d             # <<<<<<<<<<<<<<
+ * 
+ *         cdef float dist = y_d + x_d
+ */
+  __pyx_v_y_d = (__pyx_v_y_d * __pyx_v_y_d);
+
+  /* "yapyg\math_collision.pyx":212
+ *         y_d *= y_d
  * 
  *         cdef float dist = y_d + x_d             # <<<<<<<<<<<<<<
  * 
@@ -3270,7 +3458,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   __pyx_v_dist = (__pyx_v_y_d + __pyx_v_x_d);
 
-  /* "yapyg\math_collision.pyx":201
+  /* "yapyg\math_collision.pyx":214
  *         cdef float dist = y_d + x_d
  * 
  *         return dist <= (c_r * c_r)             # <<<<<<<<<<<<<<
@@ -3278,8 +3466,8 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __pyx_r = (__pyx_v_dist <= (__pyx_v_c_r * __pyx_v_c_r));
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":183
- *         return not circle_outside
+  /* "yapyg\math_collision.pyx":195
+ *         return len(contact_points) > 0
  * 
  * cpdef int is_point_in_circle(tuple point, tuple circ):             # <<<<<<<<<<<<<<
  *         """
@@ -3328,11 +3516,11 @@ static PyObject *__pyx_pw_5yapyg_14math_collision_13is_point_in_circle(PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_circ)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_point_in_circle", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("is_point_in_circle", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_point_in_circle") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_point_in_circle") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3345,14 +3533,14 @@ static PyObject *__pyx_pw_5yapyg_14math_collision_13is_point_in_circle(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_point_in_circle", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("is_point_in_circle", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.math_collision.is_point_in_circle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), (&PyTuple_Type), 1, "point", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_circ), (&PyTuple_Type), 1, "circ", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_point), (&PyTuple_Type), 1, "point", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_circ), (&PyTuple_Type), 1, "circ", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_14math_collision_12is_point_in_circle(__pyx_self, __pyx_v_point, __pyx_v_circ);
 
   /* function exit code */
@@ -3373,7 +3561,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_12is_point_in_circle(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_point_in_circle", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_point_in_circle(__pyx_v_point, __pyx_v_circ, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_point_in_circle(__pyx_v_point, __pyx_v_circ, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;

@@ -42,10 +42,15 @@ IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
 IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
 IDX_MOVERS_PHYSICAL_ROT_DECAY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 9
 IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
+IDX_MOVERS_PHYSICAL_NO_ROTATE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 11
 
 cdef str PHYSICS_MOVER_NAME = "physics"
 
 cdef float CONST_2PI = 2 * math.pi
+cdef float CONST_TORQUE_DAMPENING = 0.5
+
+# sys.float_info.max leads to overflow, just choose a very high number instead
+cdef float CONST_INF_MASS = 999999999.9
 
 cpdef add(list state,
                 str entity_name,
@@ -66,7 +71,7 @@ cpdef add(list state,
         """
         yapyg.movers.add(state,
                 entity_name,
-                c_create(entity_name,
+                create(entity_name,
                         mass,
                         vx, vy,
                         ax, ay,
@@ -80,7 +85,7 @@ cpdef add(list state,
                         do_replace
                 )
 
-cdef list c_create(str entity_name,
+cdef list create(str entity_name,
                 float mass,
                 float vx,
                 float vy,
@@ -111,6 +116,7 @@ cdef list c_create(str entity_name,
                 rot_friction,
                 rot_decay,
                 stickyness,
+                False
                 ]
 
 cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):
@@ -123,27 +129,29 @@ cpdef run(list state, str entity_name, list mover, float frame_time_delta, list 
         cdef float delta_time = frame_time_delta / 1000.0
 
         # s = 0.5 a t^2
-        cdef tuple delta_dist_vector = yapyg.math_2d.vector_product(accel_vector, 0.5 * delta_time * delta_time / 1000.0)
+        cdef tuple delta_dist_vector = yapyg.math_2d.vector_mul(accel_vector, 0.5 * delta_time * delta_time / 1000.0)
 
         # s = v t
-        delta_dist_vector = yapyg.math_2d.vector_sum(delta_dist_vector, yapyg.math_2d.vector_product(velocity_vector, delta_time))
+        delta_dist_vector = yapyg.math_2d.vector_add(delta_dist_vector, yapyg.math_2d.vector_mul(velocity_vector, delta_time))
 
         # v = a t
-        cdef tuple delta_velocity_vector = yapyg.math_2d.vector_product(accel_vector, delta_time)
+        cdef tuple delta_velocity_vector = yapyg.math_2d.vector_mul(accel_vector, delta_time)
 
         # translation friction
-        velocity_vector = yapyg.math_2d.vector_sum(velocity_vector, delta_velocity_vector)
-        velocity_vector = yapyg.math_2d.vector_product(velocity_vector, mover[IDX_MOVERS_PHYSICAL_FRICTION])
+        velocity_vector = yapyg.math_2d.vector_add(velocity_vector, delta_velocity_vector)
+        velocity_vector = yapyg.math_2d.vector_mul(velocity_vector, mover[IDX_MOVERS_PHYSICAL_FRICTION])
 
-        # rotation amount
-        cdef float delta_rot = v_r * frame_time_delta
+        # rotation amount and velocity decay
+        cdef float delta_rot = 0.0
+        if not mover[IDX_MOVERS_PHYSICAL_NO_ROTATE]:
+                delta_rot = v_r * frame_time_delta
+                mover[IDX_MOVERS_PHYSICAL_VR] = v_r * mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
+        else:
+                mover[IDX_MOVERS_PHYSICAL_NO_ROTATE] = False
 
         if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
                 delta_dist_vector = (0, 0)
                 delta_rot = 0
-
-        # rotation velocity decay
-        mover[IDX_MOVERS_PHYSICAL_VR] = v_r * mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
 
         mover[IDX_MOVERS_PHYSICAL_VX] = velocity_vector[0]
         mover[IDX_MOVERS_PHYSICAL_VY] = velocity_vector[1]
@@ -154,22 +162,25 @@ cpdef run(list state, str entity_name, list mover, float frame_time_delta, list 
         if collision_result:
                 collision_handler(*collision_result)
 
-cdef tuple compute_circle_torque(list state, float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):
+cdef tuple compute_circle_torque(float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):
         """
-        TODO
+        Get new revolution velocity and translation velocity after circle hits a surface.
+        Depending on friction more or less of the revolution v is transformed into trans v
+        and vice versa. The velocities will attempt to be equal (leading to rolling).
+        Needs indication if clockwise revolution means translation to the right.
+        Returns tuple of new revolution v and translation v.
         """
         cdef float circle_circumference = CONST_2PI * circle_r
-
         cdef float v_p = v_r * circle_circumference
 
         if not clockw_right:
                 v_p = -v_p
 
-        cdef float delta = v_p + v_x
-        delta = rot_friction * delta
+        # Difference between the two surfaces
+        cdef float delta = (v_p + v_x) * rot_friction
 
-        v_x = v_x - delta
-        v_p = v_p - delta
+        v_x -= delta
+        v_p -= delta
 
         if not clockw_right:
                 v_p = -v_p
@@ -184,15 +195,17 @@ cdef rectangle_circle_collision(list state,
                 tuple abs_rectangle_shape,
                 tuple abs_circle_shape,
                 list rectangle_physical_mover,
-                list circle_physical_mover):
+                list circle_physical_mover,
+                list contact_points):
         """
         TODO
         """
-        yapyg.entities.undo_last_move(state, circle_entity_name)
-
         cdef float circle_x = abs_circle_shape[1]
         cdef float circle_y = abs_circle_shape[2]
         cdef float circle_r = abs_circle_shape[3]
+        cdef tuple circle_centre_vector = (circle_x, circle_y)
+
+        cdef tuple contact_point_vector = contact_points[0]
 
         cdef float rect_x = abs_rectangle_shape[1]
         cdef float rect_y = abs_rectangle_shape[2]
@@ -200,7 +213,6 @@ cdef rectangle_circle_collision(list state,
         cdef float rect_h = abs_rectangle_shape[4]
         cdef float rect_r = abs_rectangle_shape[5]
 
-        cdef tuple circle_move_vector
         cdef float inelasticity
         cdef tuple rotated_circle
         cdef float v_total
@@ -217,9 +229,26 @@ cdef rectangle_circle_collision(list state,
         cdef float v_y
         cdef float rot_friction
 
+        # If two physical objects, compute relative velocities
+        cdef tuple circle_velocity_vector
+        cdef tuple old_circle_velocity_vector
         if circle_physical_mover:
-                circle_move_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
+                yapyg.entities.undo_last_move(state, circle_entity_name)
+                circle_velocity_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
+                old_circle_velocity_vector = (circle_physical_mover[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
 
+        cdef tuple rectangle_velocity_vector
+        cdef tuple old_rectangle_velocity_vector
+        if rectangle_physical_mover:
+                yapyg.entities.undo_last_move(state, rectangle_entity_name)
+                rectangle_velocity_vector = (rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
+                old_rectangle_velocity_vector = (rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VY])
+
+        if circle_physical_mover and rectangle_physical_mover:
+                circle_velocity_vector = yapyg.math_2d.vector_sub(circle_velocity_vector, old_rectangle_velocity_vector)
+                rectangle_velocity_vector = yapyg.math_2d.vector_sub(rectangle_velocity_vector, old_circle_velocity_vector)
+
+        if circle_physical_mover:
                 inelasticity = circle_physical_mover[IDX_MOVERS_PHYSICAL_INELASTICITY]
 
                 # rotate coordinate system so that rectangle is not rotated
@@ -230,12 +259,11 @@ cdef rectangle_circle_collision(list state,
                                 -rect_r)
                         circle_x = rotated_circle[0]
                         circle_y = rotated_circle[1]
-
-                        circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, -rect_r)
+                        circle_velocity_vector = yapyg.math_2d.rotated_point((0, 0), circle_velocity_vector, -rect_r)
 
                 v_r = circle_physical_mover[IDX_MOVERS_PHYSICAL_VR]
-                v_x = circle_move_vector[0]
-                v_y = circle_move_vector[1]
+                v_x = circle_velocity_vector[0]
+                v_y = circle_velocity_vector[1]
                 rot_friction = circle_physical_mover[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
 
                 if circle_y <= rect_y or circle_y >= rect_y + rect_h:
@@ -244,23 +272,19 @@ cdef rectangle_circle_collision(list state,
                                 # lower/upper quadrant
                                 if circle_y <= rect_y:
                                         # lower quadrant
-                                        v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, False)
-                                        circle_move_vector = (v_x, circle_move_vector[1])
+                                        v_r, v_x = compute_circle_torque(v_r, v_x, rot_friction, circle_r, False)
+                                        circle_velocity_vector = (v_x, circle_velocity_vector[1])
                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
-
-                                        circle_move_vector = (circle_move_vector[0],
-                                                -abs(circle_move_vector[1]) * inelasticity)
+                                        circle_velocity_vector = (circle_velocity_vector[0], -abs(circle_velocity_vector[1]) * inelasticity)
                                 else:
                                         # upper quadrant
-                                        v_r, v_x = compute_circle_torque(state, v_r, v_x, rot_friction, circle_r, True)
-                                        circle_move_vector = (v_x, circle_move_vector[1])
+                                        v_r, v_x = compute_circle_torque(v_r, v_x, rot_friction, circle_r, True)
+                                        circle_velocity_vector = (v_x, circle_velocity_vector[1])
                                         circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
-
-                                        circle_move_vector = (circle_move_vector[0],
-                                                abs(circle_move_vector[1]) * inelasticity)
+                                        circle_velocity_vector = (circle_velocity_vector[0], abs(circle_velocity_vector[1]) * inelasticity)
                         else:
                                 # lower/upper left/right quadrant
-                                v_total = yapyg.math_2d.length(circle_move_vector)
+                                v_total = yapyg.math_2d.length(circle_velocity_vector)
                                 corner_y = 0
                                 corner_x = 0
                                 if circle_y <= rect_y:
@@ -277,94 +301,138 @@ cdef rectangle_circle_collision(list state,
 
                                 new_vy = math.sin(angle) * v_total
                                 new_vx = math.cos(angle) * v_total
-                                circle_move_vector = (
-                                        (new_vx * inelasticity),
-                                        (new_vy * inelasticity))
+                                circle_velocity_vector = (new_vx * inelasticity, new_vy * inelasticity)
                 else:
                         # circle same height as rectangle
                         if circle_x < rect_x:
                                 # left quadrant
-                                v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, True)
-                                circle_move_vector = (circle_move_vector[0], v_y)
+                                v_r, v_y = compute_circle_torque(v_r, v_y, rot_friction, circle_r, True)
+                                circle_velocity_vector = (circle_velocity_vector[0], v_y)
                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
-
-                                circle_move_vector = (
-                                        -abs(circle_move_vector[0]) * inelasticity,
-                                        circle_move_vector[1])
+                                circle_velocity_vector = (-abs(circle_velocity_vector[0]) * inelasticity, circle_velocity_vector[1])
                         elif circle_x > rect_x + rect_w:
                                 # right quadrant
-                                v_r, v_y = compute_circle_torque(state, v_r, v_y, rot_friction, circle_r, False)
-                                circle_move_vector = (circle_move_vector[0], v_y)
+                                v_r, v_y = compute_circle_torque(v_r, v_y, rot_friction, circle_r, False)
+                                circle_velocity_vector = (circle_velocity_vector[0], v_y)
                                 circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = v_r
-
-                                circle_move_vector = (
-                                        abs(circle_move_vector[0]) * inelasticity,
-                                        circle_move_vector[1])
+                                circle_velocity_vector = (abs(circle_velocity_vector[0]) * inelasticity, circle_velocity_vector[1])
                         else:
                                 # inside rectangle
                                 # print "WARNING: physical mover circle inside a rectangle"
-                                circle_move_vector = (-circle_move_vector[0], -circle_move_vector[1])
+                                circle_velocity_vector = (-circle_velocity_vector[0], -circle_velocity_vector[1])
 
                 # rotate back to original coordinate system
-                circle_move_vector = yapyg.math_2d.rotated_point((0, 0), circle_move_vector, rect_r)
-                circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_move_vector[0]
-                circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_move_vector[1]
+                circle_velocity_vector = yapyg.math_2d.rotated_point((0, 0), circle_velocity_vector, rect_r)
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = circle_velocity_vector[0]
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = circle_velocity_vector[1]
 
-cdef void circle_circle_collision(list state,
+        cdef tuple contact_to_circle_unit_vector
+        cdef tuple parallel_rectangle_velocity_vector
+        cdef float parallel_velocity_component
+        cdef tuple new_rectangle_velocity_vector
+        cdef tuple rel_contact_point_vector
+        cdef float resulting_torque
+        if rectangle_physical_mover:
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_NO_ROTATE] = True
+                contact_to_circle_unit_vector = yapyg.math_2d.get_direction_unit_vector(contact_point_vector, circle_centre_vector)
+                parallel_velocity_component = yapyg.math_2d.dot_product(contact_to_circle_unit_vector, rectangle_velocity_vector)
+                parallel_rectangle_velocity_vector = yapyg.math_2d.vector_mul(contact_to_circle_unit_vector, parallel_velocity_component)
+                new_rectangle_velocity_vector = yapyg.math_2d.vector_sub(
+                        rectangle_velocity_vector,
+                        yapyg.math_2d.vector_mul(parallel_rectangle_velocity_vector, 2.0)
+                        )
+                rel_contact_point_vector, resulting_torque = get_post_rectangle_collision_torque(
+                        contact_points,
+                        get_abs_rectangle_center(abs_rectangle_shape),
+                        rectangle_velocity_vector
+                        )
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VX] = new_rectangle_velocity_vector[0]
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VY] = new_rectangle_velocity_vector[1]
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VR] = resulting_torque * 1.0 * CONST_TORQUE_DAMPENING
+
+        cdef float m_rectangle
+        if rectangle_physical_mover:
+                m_rectangle = rectangle_physical_mover[IDX_MOVERS_PHYSICAL_MASS]
+        else:
+                m_rectangle = CONST_INF_MASS
+
+        cdef float m_circle
+        if circle_physical_mover:
+                m_circle = circle_physical_mover[IDX_MOVERS_PHYSICAL_MASS]
+        else:
+                m_circle = CONST_INF_MASS
+
+        cdef float mass_factor_rectangle = m_circle / (m_rectangle + m_circle)
+        cdef float mass_factor_circle = m_rectangle / (m_rectangle + m_circle)
+
+        if rectangle_physical_mover:
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VX] *= mass_factor_rectangle
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VY] *= mass_factor_rectangle
+                rectangle_physical_mover[IDX_MOVERS_PHYSICAL_VR] *= mass_factor_rectangle
+
+        if circle_physical_mover:
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VX] *= mass_factor_circle
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VY] *= mass_factor_circle
+                circle_physical_mover[IDX_MOVERS_PHYSICAL_VR] *= mass_factor_circle
+
+cdef void circle_circle_collision(
+                list state,
                 str circle_entity_name_1,
                 str circle_entity_name_2,
                 tuple abs_circle_shape_1,
                 tuple abs_circle_shape_2,
                 list circle_physical_mover_1,
-                list circle_physical_mover_2):
+                list circle_physical_mover_2
+                ):
         """
         TODO
         """
         yapyg.entities.undo_last_move(state, circle_entity_name_1)
 
+        # torque creation
         cdef tuple abs_pos_1 = (abs_circle_shape_1[1], abs_circle_shape_1[2])
         cdef tuple abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
-
         cdef tuple velocity_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
-        cdef tuple velocity_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
-
-        # torque creation
-        cdef tuple centre_to_centre_vector = yapyg.math_2d.vector_diff(abs_pos_2, abs_pos_1)
-
+        cdef tuple centre_to_centre_vector = yapyg.math_2d.vector_sub(abs_pos_2, abs_pos_1)
         cdef float centre_to_centre_vector_angle = math.atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])
         cdef float velocity_vector_angle = math.atan2(velocity_vector_1[1], velocity_vector_1[0])
-
         cdef float angle_delta = centre_to_centre_vector_angle - velocity_vector_angle
-
         cdef float torque_creation_factor = math.sin(angle_delta)
-
-        cdef float circle_r_1 = abs_circle_shape_1[3]
-        cdef float circle_r_2 = abs_circle_shape_2[3]
-
-        cdef float v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
-        cdef float rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
-        cdef float m_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
-
-        cdef float v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
-        cdef float rot_friction_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
-        cdef float m_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]
-
         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(velocity_vector_1)
 
+        cdef float rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
+        cdef float rot_friction_2
+        if circle_physical_mover_2:
+                rot_friction_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
+        else:
+                rot_friction_2 = 0.0
         cdef float torque_transfer_factor = min(rot_friction_1, rot_friction_2)
 
+        cdef float circle_r_1 = abs_circle_shape_1[3]
         cdef float created_v_r_1 = created_v_p / circle_r_1
         created_v_r_1 = created_v_r_1 / CONST_2PI
         created_v_r_1 = created_v_r_1 * torque_transfer_factor
         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] += created_v_r_1
 
-        cdef float created_v_r_2 = created_v_p / circle_r_2
-        created_v_r_2 = created_v_r_2 / CONST_2PI
-        created_v_r_2 = created_v_r_2 * torque_transfer_factor
-        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2
+        cdef float circle_r_2 = abs_circle_shape_2[3]
+        cdef float created_v_r_2
+        if circle_physical_mover_2:
+                created_v_r_2 = created_v_p / circle_r_2
+                created_v_r_2 = created_v_r_2 / CONST_2PI
+                created_v_r_2 = created_v_r_2 * torque_transfer_factor
+                circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] += created_v_r_2
 
         # ellastic collision
-        cdef tuple unit_vector_1_to_2 = yapyg.math_2d.unit_vector(abs_pos_1, abs_pos_2)
+        cdef float m_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
+        cdef float m_2
+        cdef tuple velocity_vector_2
+        if circle_physical_mover_2:
+                velocity_vector_2 = (circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
+                m_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]
+        else:
+                velocity_vector_2 = (0, 0)
+                m_2 = CONST_INF_MASS
+        cdef tuple unit_vector_1_to_2 = yapyg.math_2d.get_direction_unit_vector(abs_pos_1, abs_pos_2)
         cdef float new_vx1
         cdef float new_vx2
         cdef float new_vy1
@@ -373,50 +441,46 @@ cdef void circle_circle_collision(list state,
                 unit_vector_1_to_2,
                 velocity_vector_1,
                 velocity_vector_2,
-                circle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS],
-                circle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS])
+                m_1,
+                m_2)
 
-        cdef float inelasticity_1
-        inelasticity_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
+        cdef float inelasticity_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_INELASTICITY]
         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_vx1 * inelasticity_1
         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_vy1 * inelasticity_1
 
         cdef float inelasticity_2
-        inelasticity_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]
-        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_vx2 * inelasticity_2
-        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_vy2 * inelasticity_2
+        if circle_physical_mover_2:
+                inelasticity_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_INELASTICITY]
+                circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_vx2 * inelasticity_2
+                circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_vy2 * inelasticity_2
 
         # torque tranmission
-        v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
-        v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
-
-        cdef float v_p_1 = v_r_1 * circle_r_1
-        v_p_1 = v_p_1 * CONST_2PI
-
-        cdef float v_p_2 = v_r_2 * circle_r_2
-        v_p_2 = v_p_2 * CONST_2PI
+        cdef float v_r_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR]
+        cdef float v_r_2
+        if circle_physical_mover_2:
+                v_r_2 = circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR]
+        else:
+                v_r_2 = 0.0
+        cdef float v_p_1 = v_r_1 * circle_r_1 * CONST_2PI
+        cdef float v_p_2 = v_r_2 * circle_r_2 * CONST_2PI
 
         cdef float delta_v = v_p_1 + v_p_2
-
         cdef float mass_factor_1 = m_2 / (m_1 + m_2)
-        cdef float mass_factor_2 = m_1 / (m_1 + m_2)
-
         cdef float torque_transfer_factor_1 = torque_transfer_factor * mass_factor_1
-        cdef float torque_transfer_factor_2 = torque_transfer_factor * mass_factor_2
-
-        v_p_1 = v_p_1 - (torque_transfer_factor_1 * delta_v)
-        v_p_2 = v_p_2 - (torque_transfer_factor_2 * delta_v)
-
-        v_r_1 = v_p_1 / circle_r_1
-        v_r_1 = v_r_1 / CONST_2PI
-
-        v_r_2 = v_p_2 / circle_r_2
-        v_r_2 = v_r_2 / CONST_2PI
-
+        v_p_1 -= torque_transfer_factor_1 * delta_v
+        v_r_1 = (v_p_1 / circle_r_1) / CONST_2PI
         circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = v_r_1
-        circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
 
-cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_center, velocity_vector):
+        cdef float mass_factor_2
+        cdef float torque_transfer_factor_2
+        if circle_physical_mover_2:
+                mass_factor_2 = m_1 / (m_1 + m_2)
+                torque_transfer_factor_2 = torque_transfer_factor * mass_factor_2
+                v_p_2 -= torque_transfer_factor_2 * delta_v
+                v_r_2 = (v_p_2 / circle_r_2) / CONST_2PI
+                circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
+
+cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_centre, velocity_vector):
         """
         Compute a single representative contact point between the rectangles,
         and the total torque applied on the rectangle by collision with a certain velocity.
@@ -425,19 +489,19 @@ cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_center,
         """
         cdef tuple contact_sum_vector = (0.0, 0.0)
         cdef float resulting_torque = 0.0
-        cdef tuple contact_point
-        for contact_point in contact_points:
-                contact_sum_vector = yapyg.math_2d.vector_sum(
+        cdef tuple contact_point_vector
+        for contact_point_vector in contact_points:
+                contact_sum_vector = yapyg.math_2d.vector_add(
                         contact_sum_vector,
-                        yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+                        yapyg.math_2d.vector_sub(contact_point_vector, rectangle_centre)
                         )
                 resulting_torque += yapyg.math_2d.dot_product(
-                        yapyg.math_2d.complex_multiply(
+                        yapyg.math_2d.complex_mul(
                                 (0.0, -1.0),
-                                yapyg.math_2d.vector_diff(contact_point, rectangle_center)
+                                yapyg.math_2d.vector_sub(contact_point_vector, rectangle_centre)
                                 ),
                         velocity_vector)
-        return (contact_sum_vector, resulting_torque)
+        return (yapyg.math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points)), resulting_torque)
 
 cdef tuple get_abs_rectangle_center(tuple abs_rectangle_shape):
         """
@@ -457,53 +521,42 @@ cdef tuple get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_
 
         # Rotate coordinate system so rectangle 2 is not rotated
         cdef float rect_rot_2 = abs_rectangle_shape_2[5]
-        cdef tuple post_collision_velocity_vector_1 = velocity_vector_1
         cdef tuple rectangle_center_2 = get_abs_rectangle_center(abs_rectangle_shape_2)
         cdef float contact_x
         cdef float contact_y
         contact_x, contact_y = yapyg.math_2d.rotated_point(rectangle_center_2, abs_contact_point_vector, -rect_rot_2)
-        post_collision_velocity_vector_1 = yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, -rect_rot_2)
+        post_collision_velocity_vector_1 = yapyg.math_2d.rotated_point((0, 0), velocity_vector_1, -rect_rot_2)
 
-        cdef float rect_x_1
-        cdef float rect_y_1
-        rect_x_1, rect_y_1 = yapyg.math_2d.rotated_point(rectangle_center_2, rectangle_center_1, -rect_rot_2)
+        cdef float rectangle_width_2 = abs_rectangle_shape_2[3]
+        cdef float rectangle_height_2 = abs_rectangle_shape_2[4]
+        cdef float diagonals_angle_delta = math.degrees(math.atan2(rectangle_height_2 / 2.0, rectangle_width_2 / 2.0))
 
-        cdef float rect_x_2 = rectangle_center_2[0]
-        cdef float rect_y_2 = rectangle_center_2[1]
-        cdef float rect_w_2 = abs_rectangle_shape_2[3] / 2.0
-        cdef float rect_h_2 = abs_rectangle_shape_2[4] / 2.0
+        cdef float diagonal_angle_1 = diagonals_angle_delta
+        cdef float diagonal_angle_2 = 180.0 - diagonals_angle_delta
+        cdef float diagonal_angle_3 = 180.0 + diagonals_angle_delta
+        cdef float diagonal_angle_4 = 360.0 - diagonals_angle_delta
 
-        cdef float rect_left_2 = rect_x_2 - rect_w_2
-        cdef float rect_right_2 = rect_x_2 + rect_w_2
-        cdef float rect_top_2 = rect_y_2 + rect_h_2
-        cdef float rect_bottom_2 = rect_y_2 - rect_h_2
+        cdef float heading_to_contact = yapyg.math_2d.get_angle(rectangle_center_2, (contact_x, contact_y))
 
-        if contact_x < rect_x_2:
-                if contact_y < rect_y_2:
-                        # lower left
-                        if rect_x_1 < rect_left_2:
-                                post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
-                        if rect_y_1 < rect_bottom_2:
-                                post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
-                else:
-                        # upper left
-                        if rect_x_1 < rect_left_2:
-                                post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
-                        if rect_y_1 > rect_top_2:
-                                post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+        cdef float diagonal_range_degrees = 1.0
+        if heading_to_contact >= 0.0 and heading_to_contact <= diagonal_angle_1 - diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (abs(post_collision_velocity_vector_1[0]), post_collision_velocity_vector_1[1])
+        elif heading_to_contact > diagonal_angle_1 - diagonal_range_degrees and heading_to_contact <= diagonal_angle_1 + diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (abs(post_collision_velocity_vector_1[0]), abs(post_collision_velocity_vector_1[1])) #
+        elif heading_to_contact > diagonal_angle_1 + diagonal_range_degrees and heading_to_contact <= diagonal_angle_2 - diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], abs(post_collision_velocity_vector_1[1]))
+        elif heading_to_contact > diagonal_angle_2 - diagonal_range_degrees and heading_to_contact <= diagonal_angle_2 + diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (-abs(post_collision_velocity_vector_1[0]), abs(post_collision_velocity_vector_1[1])) #
+        elif heading_to_contact > diagonal_angle_2 + diagonal_range_degrees and heading_to_contact <= diagonal_angle_3 - diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (-abs(post_collision_velocity_vector_1[0]), post_collision_velocity_vector_1[1])
+        elif heading_to_contact > diagonal_angle_3 - diagonal_range_degrees and heading_to_contact <= diagonal_angle_3 + diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (-abs(post_collision_velocity_vector_1[0]), -abs(post_collision_velocity_vector_1[1])) #
+        elif heading_to_contact > diagonal_angle_3 + diagonal_range_degrees and heading_to_contact <= diagonal_angle_4 - diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -abs(post_collision_velocity_vector_1[1]))
+        elif heading_to_contact > diagonal_angle_4 - diagonal_range_degrees and heading_to_contact <= diagonal_angle_4 + diagonal_range_degrees:
+                post_collision_velocity_vector_1 = (abs(post_collision_velocity_vector_1[0]), -abs(post_collision_velocity_vector_1[1])) #
         else:
-                if contact_y < rect_y_2:
-                        # lower right
-                        if rect_x_1 > rect_right_2:
-                                post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
-                        if rect_y_1 < rect_bottom_2:
-                                post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
-                else:
-                        # upper right
-                        if rect_x_1 > rect_right_2:
-                                post_collision_velocity_vector_1 = (-post_collision_velocity_vector_1[0], post_collision_velocity_vector_1[1])
-                        if rect_y_1 > rect_top_2:
-                                post_collision_velocity_vector_1 = (post_collision_velocity_vector_1[0], -post_collision_velocity_vector_1[1])
+                post_collision_velocity_vector_1 = (abs(post_collision_velocity_vector_1[0]), post_collision_velocity_vector_1[1])
 
         # rotate back to original coordinate system
         return yapyg.math_2d.rotated_point((0, 0), post_collision_velocity_vector_1, rect_rot_2)
@@ -520,21 +573,74 @@ cdef rectangle_rectangle_collision(list state,
         TODO
         """
         yapyg.entities.undo_last_move(state, rectangle_entity_name_1)
+        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_NO_ROTATE] = True
 
-        # Get new torque of rectangle after collision
+        # Get new torque of rectangles after collision
         cdef tuple velocity_vector_1 = (rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
+        cdef tuple old_velocity_vector_1 = (velocity_vector_1[0], velocity_vector_1[1])
         cdef tuple rectangle_center_1 = get_abs_rectangle_center(abs_rectangle_shape_1)
-        cdef tuple rel_contact_point_vector
-        cdef float resulting_torque
-        rel_contact_point_vector, resulting_torque = get_post_rectangle_collision_torque(contact_points, rectangle_center_1, velocity_vector_1)
-        # TODO This wipes out any previous torque!
-        # TODO The returned torque is too high sometimes, needs damping therefore or the object gets stuck
-        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque * 0.5
 
-        # Get new velocity vector of rectangle after collision
-        cdef tuple post_collision_velocity_vector = get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector)
-        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = post_collision_velocity_vector[0]
-        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = post_collision_velocity_vector[1]
+        # If two physical vectors, compute relative velocities
+        cdef tuple velocity_vector_2
+        cdef tuple old_velocity_vector_2
+        if rectangle_physical_mover_2:
+                velocity_vector_2 = (rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX], rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY])
+                old_velocity_vector_2 = (velocity_vector_2[0], velocity_vector_2[1])
+                velocity_vector_1 = yapyg.math_2d.vector_sub(velocity_vector_1, old_velocity_vector_2)
+                velocity_vector_2 = yapyg.math_2d.vector_sub(velocity_vector_2, old_velocity_vector_1)
+        else:
+                velocity_vector_2 = (0, 0)
+                old_velocity_vector_2 = (0, 0)
+
+        cdef tuple rel_contact_point_vector_1
+        cdef float resulting_torque_1
+        rel_contact_point_vector_1, resulting_torque_1 = get_post_rectangle_collision_torque(contact_points, rectangle_center_1, velocity_vector_1)
+
+        cdef tuple rectangle_center_2 = get_abs_rectangle_center(abs_rectangle_shape_2)
+        cdef tuple rel_contact_point_vector_2
+        cdef float resulting_torque_2
+        if rectangle_physical_mover_2:
+                rel_contact_point_vector_2, resulting_torque_2 = get_post_rectangle_collision_torque(contact_points, rectangle_center_2, velocity_vector_2)
+
+        # Get new velocity vector of rectangles after collision
+        cdef tuple post_collision_velocity_vector_1 = get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector_1)
+
+        cdef tuple post_collision_velocity_vector_2
+        if rectangle_physical_mover_2:
+                post_collision_velocity_vector_2 = get_post_rectangle_collision_velocity_vector(rectangle_center_2, abs_rectangle_shape_1, velocity_vector_2, rel_contact_point_vector_2)
+
+        cdef float m_1 = rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_MASS]
+        cdef float m_2
+        if rectangle_physical_mover_2:
+                m_2 = rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_MASS]
+        else:
+                velocity_vector_2 = (0, 0)
+                m_2 = CONST_INF_MASS
+        cdef float mass_factor_1 = m_2 / (m_1 + m_2)
+
+        # TODO This wipes out any previous torque!
+        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VR] = resulting_torque_1 * mass_factor_1 * CONST_TORQUE_DAMPENING
+        cdef float mass_factor_2
+        if rectangle_physical_mover_2:
+                mass_factor_2 = m_1 / (m_1 + m_2)
+                rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = resulting_torque_2 * mass_factor_2 * CONST_TORQUE_DAMPENING
+
+        # Apply mass factor
+        cdef tuple new_velocity_vector_1
+        new_velocity_vector_1 = yapyg.math_2d.vector_mul(post_collision_velocity_vector_1, mass_factor_1)
+
+        # Actually set new velocity
+        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_velocity_vector_1[0]
+        rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_velocity_vector_1[1]
+
+        cdef tuple new_velocity_vector_2
+        if rectangle_physical_mover_2:
+                # Apply mass factor
+                new_velocity_vector_2 = yapyg.math_2d.vector_mul(post_collision_velocity_vector_2, mass_factor_2)
+
+                # Actually set new velocity
+                rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_velocity_vector_2[0]
+                rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_velocity_vector_2[1]
 
 cpdef collision_handler(list state,
                 str entity_name_1,
@@ -548,40 +654,34 @@ cpdef collision_handler(list state,
         """
         TODO
         """
-        cdef list entity_mover_1
-        cdef list entity_mover_2
-        entity_mover_1 = yapyg.movers.get_active(state, entity_name_1)
-        entity_mover_2 = yapyg.movers.get_active(state, entity_name_2)
+        cdef list entity_mover_1 = yapyg.movers.get_active(state, entity_name_1)
+        cdef list entity_mover_2 = yapyg.movers.get_active(state, entity_name_2)
 
-        cdef list physics_mover_1
-        cdef list physics_mover_2
-        physics_mover_1 = None
-        physics_mover_2 = None
-        if (entity_mover_1 and entity_mover_1[0] == PHYSICS_MOVER_NAME):
-                physics_mover_1 = entity_mover_1
+        cdef list physics_mover_2 = None
         if (entity_mover_2 and entity_mover_2[0] == PHYSICS_MOVER_NAME):
                 physics_mover_2 = entity_mover_2
 
-        if (physics_mover_1 or physics_mover_2):
-                if absolute_shape_1[0] == "rectangle":
-                        if absolute_shape_2[0] == "rectangle":
-                                rectangle_rectangle_collision(state, entity_name_1, entity_name_2,
-                                        absolute_shape_1, absolute_shape_2,
-                                        physics_mover_1, physics_mover_2,
-                                        contact_points)
-                        elif absolute_shape_2[0] == "circle":
-                                rectangle_circle_collision(state, entity_name_1, entity_name_2,
-                                        absolute_shape_1, absolute_shape_2,
-                                        physics_mover_1, physics_mover_2)
-                elif absolute_shape_1[0] == "circle":
-                        if absolute_shape_2[0] == "rectangle":
-                                rectangle_circle_collision(state, entity_name_2, entity_name_1,
-                                        absolute_shape_2, absolute_shape_1,
-                                        physics_mover_2, physics_mover_1)
-                        elif absolute_shape_2[0] == "circle":
-                                circle_circle_collision(state, entity_name_1, entity_name_2,
-                                        absolute_shape_1, absolute_shape_2,
-                                        physics_mover_1, physics_mover_2)
+        if absolute_shape_1[0] == "rectangle":
+                if absolute_shape_2[0] == "rectangle":
+                        rectangle_rectangle_collision(state, entity_name_1, entity_name_2,
+                                absolute_shape_1, absolute_shape_2,
+                                entity_mover_1, physics_mover_2,
+                                contact_points)
+                elif absolute_shape_2[0] == "circle":
+                        rectangle_circle_collision(state, entity_name_1, entity_name_2,
+                                absolute_shape_1, absolute_shape_2,
+                                entity_mover_1, physics_mover_2,
+                                contact_points)
+        elif absolute_shape_1[0] == "circle":
+                if absolute_shape_2[0] == "rectangle":
+                        rectangle_circle_collision(state, entity_name_2, entity_name_1,
+                                absolute_shape_2, absolute_shape_1,
+                                physics_mover_2, entity_mover_1,
+                                contact_points)
+                elif absolute_shape_2[0] == "circle":
+                        circle_circle_collision(state, entity_name_1, entity_name_2,
+                                absolute_shape_1, absolute_shape_2,
+                                entity_mover_1, physics_mover_2)
 
         if entity_mover_2 and entity_mover_2[0] != PHYSICS_MOVER_NAME:
                 if (entity_mover_2[yapyg.movers.IDX_MOVER_COLLISION_HANDLER]):
@@ -620,21 +720,21 @@ cpdef tuple reflect_velocities(tuple unit_vector, tuple v1_vector, tuple v2_vect
         cdef float v1_eff = yapyg.math_2d.dot_product(unit_vector, v1_vector)
         cdef float v2_eff = yapyg.math_2d.dot_product(unit_vector, v2_vector)
 
-        cdef tuple v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, v1_eff)
-        cdef tuple v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, v2_eff)
+        cdef tuple v1_eff_vector = yapyg.math_2d.vector_mul(unit_vector, v1_eff)
+        cdef tuple v2_eff_vector = yapyg.math_2d.vector_mul(unit_vector, v2_eff)
 
-        cdef tuple v1_tangent_vector = yapyg.math_2d.vector_diff(v1_vector, v1_eff_vector)
-        cdef tuple v2_tangent_vector = yapyg.math_2d.vector_diff(v2_vector, v2_eff_vector)
+        cdef tuple v1_tangent_vector = yapyg.math_2d.vector_sub(v1_vector, v1_eff_vector)
+        cdef tuple v2_tangent_vector = yapyg.math_2d.vector_sub(v2_vector, v2_eff_vector)
 
         cdef float new_v1_eff
         cdef float new_v2_eff
         new_v1_eff, new_v2_eff = elastic_collision(v1_eff, v2_eff, m_1, m_2)
 
-        cdef tuple new_v1_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v1_eff)
-        cdef tuple new_v2_eff_vector = yapyg.math_2d.vector_product(unit_vector, new_v2_eff)
+        cdef tuple new_v1_eff_vector = yapyg.math_2d.vector_mul(unit_vector, new_v1_eff)
+        cdef tuple new_v2_eff_vector = yapyg.math_2d.vector_mul(unit_vector, new_v2_eff)
 
-        cdef tuple new_v1_vector = yapyg.math_2d.vector_sum(new_v1_eff_vector, v1_tangent_vector)
-        cdef tuple new_v2_vector = yapyg.math_2d.vector_sum(new_v2_eff_vector, v2_tangent_vector)
+        cdef tuple new_v1_vector = yapyg.math_2d.vector_add(new_v1_eff_vector, v1_tangent_vector)
+        cdef tuple new_v2_vector = yapyg.math_2d.vector_add(new_v2_eff_vector, v2_tangent_vector)
 
         return (new_v1_vector[0], new_v1_vector[1],
                 new_v2_vector[0], new_v2_vector[1])

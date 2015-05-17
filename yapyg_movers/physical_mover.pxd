@@ -37,37 +37,7 @@ cpdef add(list state,
                 float stickyness,
                 int do_replace=*)
 
-cdef list c_create(str entity_name,
-                float mass,
-                float vx,
-                float vy,
-                float ax,
-                float ay,
-                float friction,
-                float inelasticity,
-                float vr,
-                float rot_friction,
-                float rot_decay,
-                float stickyness
-                )
-
 cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete)
-
-cdef rectangle_circle_collision(list state,
-                str rectangle_entity_name,
-                str circle_entity_name,
-                tuple abs_rectangle_shape,
-                tuple abs_circle_shape,
-                list rectangle_physical_mover,
-                list circle_physical_mover)
-
-cdef void circle_circle_collision(list state,
-                str circle_entity_name_1,
-                str circle_entity_name_2,
-                tuple abs_circle_shape_1,
-                tuple abs_circle_shape_2,
-                list circle_physical_mover_1,
-                list circle_physical_mover_2)
 
 cpdef collision_handler(list state,
                 str entity_name_1,
@@ -77,6 +47,3 @@ cpdef collision_handler(list state,
                 tuple absolute_shape_1,
                 tuple absolute_shape_2,
                 list contact_points)
-
-cpdef tuple elastic_collision(float v_1, float v_2, float m_1, float m_2)
-cpdef tuple reflect_velocities(tuple unit_vector, tuple v1_vector, tuple v2_vector, float m_1, float m_2)

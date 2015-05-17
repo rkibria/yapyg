@@ -100,10 +100,12 @@ cpdef int is_rect_rect_collision(tuple rect_1, tuple rect_2, list contact_points
                 if (is_point_in_rect(point, rect_1)):
                         contact_points.append(point)
 
-        cdef tuple rect_1_rotated_points = get_rect_points(rect_1)
-        for point in rect_1_rotated_points:
-                if (is_point_in_rect(point, rect_2)):
-                        contact_points.append(point)
+        cdef tuple rect_1_rotated_points
+        if not contact_points:
+                rect_1_rotated_points = get_rect_points(rect_1)
+                for point in rect_1_rotated_points:
+                        if (is_point_in_rect(point, rect_2)):
+                                contact_points.append(point)
 
         return len(contact_points) > 0
 
@@ -120,13 +122,13 @@ cpdef int is_circle_circle_collision(tuple c_1, tuple c_2, list contact_points):
         cdef float c2_r = c_2[3]
 
         cdef float sq_1 = c2_x - c1_x
-        sq_1 = ((sq_1) * (sq_1))
+        sq_1 *= sq_1
 
         cdef float sq_2 = c2_y - c1_y
-        sq_2 = ((sq_2) * (sq_2))
+        sq_2 *= sq_2
 
         cdef float sq_3 = c1_r + c2_r
-        sq_3 = ((sq_3) * (sq_3))
+        sq_3 *= sq_3
 
         return sq_3 >= (sq_1 + sq_2)
 
@@ -139,46 +141,56 @@ cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points):
         cdef float c_y = circ[2]
         cdef float c_r = circ[3]
 
-        cdef float r_x1 = rect[1]
-        cdef float r_y1 = rect[2]
+        cdef float r_x_left = rect[1]
+        cdef float r_y_bottom = rect[2]
         cdef float r_w = rect[3]
         cdef float r_h = rect[4]
         cdef float r_rot = rect[5]
 
-        cdef float r_x2 = r_x1 + r_w
-        cdef float r_y3 = r_y1 + r_h
+        cdef float r_x_right = r_x_left + r_w
+        cdef float r_y_top = r_y_bottom + r_h
 
-        cdef tuple rotated_circle
+        cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))
         if r_rot != 0:
-                rotated_circle = math_2d.rotated_point((r_x1 + (r_w / 2.0), r_y1 + (r_h / 2.0)), (c_x, c_y), -r_rot)
-                c_x = rotated_circle[0]
-                c_y = rotated_circle[1]
+                c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)
 
-        cdef int circle_outside = True
+        cdef tuple found_contact_point = None
+        cdef tuple corner_circle = None
 
-        cdef tuple corner_circles = (
-                (r_y1, r_x1, c_r),
-                (r_y1, r_x2, c_r),
-                (r_y3, r_x1, c_r),
-                (r_y3, r_x2, c_r),
-        )
+        if c_x <= r_x_left:
+                if c_y < r_y_bottom:
+                        corner_circle = (r_x_left, r_y_bottom, c_r)
+                elif c_y > r_y_top:
+                        corner_circle = (r_x_left, r_y_top, c_r)
+                else:
+                        if c_x + c_r >= r_x_left:
+                                found_contact_point = (r_x_left, c_y)
+        elif c_x >= r_x_right:
+                if c_y < r_y_bottom:
+                        corner_circle = (r_x_right, r_y_bottom, c_r)
+                elif c_y > r_y_top:
+                        corner_circle = (r_x_right, r_y_top, c_r)
+                else:
+                        if c_x - c_r <= r_x_right:
+                                found_contact_point = (r_x_right, c_y)
+        else:
+                if c_y < r_y_bottom:
+                        if c_y + c_r >= r_y_bottom:
+                                found_contact_point = (c_x, r_y_bottom)
+                elif c_y > r_y_top:
+                        if c_y - c_r <= r_y_top:
+                                found_contact_point = (c_x, r_y_top)
+                else:
+                        found_contact_point = (c_x, c_y)
 
-        cdef tuple circle_point = (c_y, c_x)
+        if corner_circle:
+                if is_point_in_circle((c_x, c_y), corner_circle):
+                        found_contact_point = corner_circle
 
-        for corner_circle in corner_circles:
-                circle_outside = not is_point_in_circle(circle_point, corner_circle)
-                if not circle_outside:
-                        break
+        if found_contact_point:
+                contact_points.append(math_2d.rotated_point(r_centre, found_contact_point, r_rot))
 
-        if circle_outside:
-                if ((c_x >= r_x1 and c_x <= r_x2)
-                        or
-                        (c_y >= r_y1 and c_y <= r_y3)
-                        ):
-                        circle_outside = (c_x < r_x1 - c_r or c_x > r_x2 + c_r
-                                or c_y < r_y1 - c_r or c_y > r_y3 + c_r)
-
-        return not circle_outside
+        return len(contact_points) > 0
 
 cpdef int is_point_in_circle(tuple point, tuple circ):
         """
@@ -187,14 +199,15 @@ cpdef int is_point_in_circle(tuple point, tuple circ):
         cdef float c_x = circ[0]
         cdef float c_y = circ[1]
         cdef float c_r = circ[2]
+
         cdef float p_x = point[0]
         cdef float p_y = point[1]
 
-        cdef float y_d = p_y - c_y
-        y_d = (y_d * y_d)
-
         cdef float x_d = p_x - c_x
-        x_d = (x_d * x_d)
+        x_d *= x_d
+
+        cdef float y_d = p_y - c_y
+        y_d *= y_d
 
         cdef float dist = y_d + x_d
 

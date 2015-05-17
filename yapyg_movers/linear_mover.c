@@ -703,7 +703,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'yapyg.math_2d' */
 static float (*__pyx_f_5yapyg_7math_2d_length)(PyObject *, int __pyx_skip_dispatch); /*proto*/
-static float (*__pyx_f_5yapyg_7math_2d_heading_from_to)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static float (*__pyx_f_5yapyg_7math_2d_get_angle)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 
 /* Module declarations from 'yapyg.entities' */
 static int *__pyx_vp_5yapyg_8entities_IDX_STATE_ENTITIES = 0;
@@ -1715,7 +1715,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  * 
  *         if rot_type == N_ROTATE_MODE_AUTO:             # <<<<<<<<<<<<<<
  *                 if passed_time == 0:
- *                         heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)
+ *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
  */
   __pyx_t_4 = ((__pyx_v_rot_type == __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_AUTO) != 0);
   if (__pyx_t_4) {
@@ -1724,7 +1724,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  * 
  *         if rot_type == N_ROTATE_MODE_AUTO:
  *                 if passed_time == 0:             # <<<<<<<<<<<<<<
- *                         heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)
+ *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
  *                         heading_int = (int(heading) - 90) % 360
  */
     __pyx_t_4 = ((__pyx_v_passed_time == 0.0) != 0);
@@ -1733,15 +1733,15 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
       /* "yapyg_movers\linear_mover.pyx":99
  *         if rot_type == N_ROTATE_MODE_AUTO:
  *                 if passed_time == 0:
- *                         heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)             # <<<<<<<<<<<<<<
+ *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)             # <<<<<<<<<<<<<<
  *                         heading_int = (int(heading) - 90) % 360
  *                         heading = float(heading_int)
  */
-      __pyx_v_heading = __pyx_f_5yapyg_7math_2d_heading_from_to(__pyx_tuple__3, __pyx_v_travel_vector, 0);
+      __pyx_v_heading = __pyx_f_5yapyg_7math_2d_get_angle(__pyx_tuple__3, __pyx_v_travel_vector, 0);
 
       /* "yapyg_movers\linear_mover.pyx":100
  *                 if passed_time == 0:
- *                         heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)
+ *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
  *                         heading_int = (int(heading) - 90) % 360             # <<<<<<<<<<<<<<
  *                         heading = float(heading_int)
  *                         delta_rot = -old_rot + heading
@@ -1767,7 +1767,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
       __pyx_v_heading_int = __pyx_t_3;
 
       /* "yapyg_movers\linear_mover.pyx":101
- *                         heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)
+ *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
  *                         heading_int = (int(heading) - 90) % 360
  *                         heading = float(heading_int)             # <<<<<<<<<<<<<<
  *                         delta_rot = -old_rot + heading
@@ -2212,7 +2212,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "yapyg_movers\linear_mover.pyx":99
  *         if rot_type == N_ROTATE_MODE_AUTO:
  *                 if passed_time == 0:
- *                         heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)             # <<<<<<<<<<<<<<
+ *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)             # <<<<<<<<<<<<<<
  *                         heading_int = (int(heading) - 90) % 360
  *                         heading = float(heading_int)
  */
@@ -2358,7 +2358,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   /*--- Function import code ---*/
   __pyx_t_3 = __Pyx_ImportModule("yapyg.math_2d"); if (!__pyx_t_3) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_3, "length", (void (**)(void))&__pyx_f_5yapyg_7math_2d_length, "float (PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_3, "heading_from_to", (void (**)(void))&__pyx_f_5yapyg_7math_2d_heading_from_to, "float (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "get_angle", (void (**)(void))&__pyx_f_5yapyg_7math_2d_get_angle, "float (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_4 = __Pyx_ImportModule("yapyg.entities"); if (!__pyx_t_4) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_4, "get_pos", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

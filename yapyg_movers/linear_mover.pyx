@@ -96,7 +96,7 @@ cpdef run(list state, str entity_name, list mover, float frame_time_delta, list 
 
         if rot_type == N_ROTATE_MODE_AUTO:
                 if passed_time == 0:
-                        heading = yapyg.math_2d.heading_from_to((0, 0), travel_vector)
+                        heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
                         heading_int = (int(heading) - 90) % 360
                         heading = float(heading_int)
                         delta_rot = -old_rot + heading
