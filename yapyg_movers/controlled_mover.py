@@ -91,7 +91,7 @@ def run(state, entity_name, mover, frame_time_delta, movers_to_delete):
                         heading_int = (int(heading) - 90) % 360
                         heading = (heading_int)
 
-                yapyg.debug.print_line(state, "control %s" % str((new_x, new_y)))
+                # yapyg.debug.print_line(state, "control %s" % str((new_x, new_y)))
                 yapyg.entities.set_pos(state, entity_name, new_x, new_y, heading)
                 yapyg.collisions.run(state, entity_name)
         else:

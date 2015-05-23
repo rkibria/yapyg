@@ -203,7 +203,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                "speed": 150.0,
                                },
                          },
-                        (1.0, 2.0, 0),
+                        (1.0, 7.0, 0),
                         (COINS_OFFSET, COINS_OFFSET),
                         collision=(("circle", COINS_RADIUS, COINS_RADIUS, COINS_RADIUS,),),
                         )
@@ -229,7 +229,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                    "speed": 200.0,
                                    },
                          },
-                        (2.0, 4.0, 0),
+                        (1.0, 3.0, 0),
                         (GHOST_OFFSET, GHOST_OFFSET), # sprite appears lower and more left of actual entity position
                         collision=(("circle", GHOST_RADIUS, GHOST_RADIUS, GHOST_RADIUS,),),
                         )
@@ -252,8 +252,21 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                                ENT_MAN,
                                                [-1.75, -2.5]))
 
+        start_ghost_movement(state, None)
+
         # The state object is finished.
         return state
+
+def start_ghost_movement(state, mover_name):
+        path = (
+                (2.0, 0.0),
+                (0.0, 2.0),
+                (-2.0, 0.0),
+                (0.0, -2.0),
+                )
+        for index in xrange(len(path)):
+                rel_vector = ((path[index][0]), (path[index][1]))
+                linear_mover.add(state, ENT_GHOST, rel_vector, 1.0, on_end_function=None if index != len(path) - 1 else start_ghost_movement)
 
 def collision_handler(state, collisions_list):
         # print str(collisions_list)
@@ -280,8 +293,13 @@ def collision_handler(state, collisions_list):
                 elif entity_name_1 == ENT_SHOT:
                         if entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
                                 pass
+                        elif entity_name_2 == ENT_GHOST:
+                                do_ghost_boom(state, entities.get_pos(state, ENT_GHOST))
+                                entities.delete(state, ENT_GHOST)
+                                do_shot_boom(state, entities.get_pos(state, ENT_SHOT))
+                                entities.delete(state, ENT_SHOT)
                         else:
-                                do_boom(state, entities.get_pos(state, ENT_SHOT))
+                                do_shot_boom(state, entities.get_pos(state, ENT_SHOT))
                                 entities.delete(state, ENT_SHOT)
 
 TRAVEL_DISTANCE = 10
@@ -332,25 +350,52 @@ def on_fire_button(state, button_pressed):
                 linear_mover.add(state, ENT_SHOT, heading, SHOT_SPEED, SHOT_ROTATE_DEF, None, True)
                 destroy_mover.add(state, ENT_SHOT)
 
-BOOM_TEXTURES = ("assets/img/sprites/explosion_small/0.png",
+SHOT_BOOM_TEXTURES = ("assets/img/sprites/explosion_small/0.png",
                  "assets/img/sprites/explosion_small/1.png",
                  "assets/img/sprites/explosion_small/2.png",
                  "assets/img/sprites/explosion_small/3.png",
                  "assets/img/sprites/explosion_small/4.png",
                  )
-BOOM_SPRITEDEF = {
+SHOT_BOOM_SPRITEDEF = {
                   "*": {
-                        "textures": BOOM_TEXTURES,
+                        "textures": SHOT_BOOM_TEXTURES,
                         "speed": 50.0,
                         },
                   }
-BOOM_SPRITEOFFSET = (-0.125, -0.125)
+SHOT_BOOM_SPRITEOFFSET = (-0.125, -0.125)
 
-def do_boom(state, pos):
+def do_shot_boom(state, pos):
         entities.insert(state,
-                        "boom",
-                        BOOM_SPRITEDEF,
+                        "shot_boom",
+                        SHOT_BOOM_SPRITEDEF,
                         pos,
-                        BOOM_SPRITEOFFSET,
+                        SHOT_BOOM_SPRITEOFFSET,
                         play_once=True,
                         )
+
+GHOST_BOOM_TEXTURES = ("assets/img/sprites/explosion_smoke/0.png",
+                       "assets/img/sprites/explosion_smoke/1.png",
+                       "assets/img/sprites/explosion_smoke/2.png",
+                       "assets/img/sprites/explosion_smoke/3.png",
+                       "assets/img/sprites/explosion_smoke/4.png",
+                       "assets/img/sprites/explosion_smoke/5.png",
+                       "assets/img/sprites/explosion_smoke/6.png",
+                       "assets/img/sprites/explosion_smoke/7.png",
+                       )
+GHOST_BOOM_SPRITEDEF = {
+                  "*": {
+                        "textures": GHOST_BOOM_TEXTURES,
+                        "speed": 50.0,
+                        },
+                  }
+GHOST_BOOM_SPRITEOFFSET = (-0.5, -0.5)
+
+def do_ghost_boom(state, pos):
+        entities.insert(state,
+                        "ghost_boom",
+                        GHOST_BOOM_SPRITEDEF,
+                        pos,
+                        GHOST_BOOM_SPRITEOFFSET,
+                        play_once=True,
+                        )
+

@@ -453,25 +453,25 @@ cpdef tuple run(list state, str entity_name_1):
                                                 if absolute_shape_1_type == "circle":
                                                         if absolute_shape_2_type == "circle":
                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
-                                                                if is_collision:
-                                                                        debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
+                                                                # if is_collision:
+                                                                        # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
                                                         elif absolute_shape_2_type == "rectangle":
                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
-                                                                if is_collision:
-                                                                        debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
+                                                                # if is_collision:
+                                                                        # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
                                                 elif absolute_shape_1_type == "rectangle":
                                                         if absolute_shape_2_type == "circle":
                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
-                                                                if is_collision:
-                                                                        debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
+                                                                # if is_collision:
+                                                                        # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
                                                         elif absolute_shape_2_type == "rectangle":
                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
-                                                                if is_collision:
-                                                                        debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
+                                                                # if is_collision:
+                                                                        # debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
 
                                                 if is_collision:
-                                                        debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
-                                                        debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
+                                                        # debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
+                                                        # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
                                                         if entity_name_1 < entity_name_2:
                                                                 collisions_list.append((entity_name_1, entity_name_2,))
                                                         else:

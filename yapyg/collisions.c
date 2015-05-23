@@ -671,8 +671,6 @@ static CYTHON_INLINE int __Pyx_PyObject_SetSlice(
         PyObject** py_start, PyObject** py_stop, PyObject** py_slice,
         int has_cstart, int has_cstop, int wraparound);
 
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
-
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -802,7 +800,6 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *, Py
 static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_10collisions_clear_collisions_list(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg.collisions"
 int __pyx_module_is_main_yapyg__collisions = 0;
 
@@ -829,7 +826,6 @@ static char __pyx_k__2[] = "(";
 static char __pyx_k__3[] = ") ";
 static char __pyx_k_add[] = "add";
 static char __pyx_k_pos[] = "pos";
-static char __pyx_k_s_s[] = "%s %s";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_debug[] = "debug";
@@ -846,17 +842,12 @@ static char __pyx_k_rectangle[] = "rectangle";
 static char __pyx_k_state_idx[] = "state_idx";
 static char __pyx_k_tile_name[] = "tile_name";
 static char __pyx_k_Collisions[] = "\nCollisions\n";
-static char __pyx_k_print_line[] = "print_line";
 static char __pyx_k_entity_name[] = "entity_name";
 static char __pyx_k_shapes_list[] = "shapes_list";
 static char __pyx_k_TILE__s__d__d[] = "TILE_%s_%d_%d";
 static char __pyx_k_collision_def[] = "collision_def";
 static char __pyx_k_entity_name_1[] = "entity_name_1";
-static char __pyx_k_cc_collision_s_s[] = "cc collision %s %s";
-static char __pyx_k_cr_collision_s_s[] = "cr collision %s %s";
 static char __pyx_k_handler_function[] = "handler_function";
-static char __pyx_k_rc_collision_s_s[] = "rc collision %s %s";
-static char __pyx_k_rr_collision_s_s[] = "rr collision %s %s";
 static char __pyx_k_entity_lower_left[] = "entity_lower_left";
 static char __pyx_k_IDX_COLLISION_CACHE[] = "IDX_COLLISION_CACHE";
 static char __pyx_k_IDX_COLLISION_SHAPES[] = "IDX_COLLISION_SHAPES";
@@ -885,10 +876,8 @@ static PyObject *__pyx_kp_s_TILE__s__d__d;
 static PyObject *__pyx_kp_s__2;
 static PyObject *__pyx_kp_s__3;
 static PyObject *__pyx_n_s_add;
-static PyObject *__pyx_kp_s_cc_collision_s_s;
 static PyObject *__pyx_n_s_circle;
 static PyObject *__pyx_n_s_collision_def;
-static PyObject *__pyx_kp_s_cr_collision_s_s;
 static PyObject *__pyx_n_s_debug;
 static PyObject *__pyx_n_s_entity_lower_left;
 static PyObject *__pyx_n_s_entity_name;
@@ -899,14 +888,10 @@ static PyObject *__pyx_n_s_is_tile;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_new_pos;
 static PyObject *__pyx_n_s_pos;
-static PyObject *__pyx_n_s_print_line;
 static PyObject *__pyx_n_s_pyx_capi;
 static PyObject *__pyx_n_s_range;
-static PyObject *__pyx_kp_s_rc_collision_s_s;
 static PyObject *__pyx_n_s_rectangle;
 static PyObject *__pyx_n_s_remove;
-static PyObject *__pyx_kp_s_rr_collision_s_s;
-static PyObject *__pyx_kp_s_s_s;
 static PyObject *__pyx_n_s_shapes_list;
 static PyObject *__pyx_n_s_state;
 static PyObject *__pyx_n_s_state_idx;
@@ -5896,11 +5881,6 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
   PyObject *__pyx_t_15 = NULL;
-  PyObject *__pyx_t_16 = NULL;
-  PyObject *__pyx_t_17 = NULL;
-  PyObject *__pyx_t_18 = NULL;
-  Py_ssize_t __pyx_t_19;
-  PyObject *__pyx_t_20 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -6570,7 +6550,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:
+ *                                                                 # if is_collision:
  */
               __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_1 = (__pyx_t_3 != 0);
@@ -6580,162 +6560,32 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  */
                 __pyx_v_is_collision = __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(__pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_contact_points, 0);
-
-                /* "yapyg\collisions.pyx":456
- *                                                         if absolute_shape_2_type == "circle":
- *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:             # <<<<<<<<<<<<<<
- *                                                                         debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
- *                                                         elif absolute_shape_2_type == "rectangle":
- */
-                __pyx_t_1 = (__pyx_v_is_collision != 0);
-                if (__pyx_t_1) {
-
-                  /* "yapyg\collisions.pyx":457
- *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))             # <<<<<<<<<<<<<<
- *                                                         elif absolute_shape_2_type == "rectangle":
- *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- */
-                  __pyx_t_16 = __Pyx_GetModuleGlobalName(__pyx_n_s_debug); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_16);
-                  __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_n_s_print_line); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_17);
-                  __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-                  __pyx_t_16 = PyTuple_New(2); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_16);
-                  __Pyx_INCREF(__pyx_v_entity_name_1);
-                  PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_entity_name_1);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_1);
-                  __Pyx_INCREF(__pyx_v_entity_name_2);
-                  PyTuple_SET_ITEM(__pyx_t_16, 1, __pyx_v_entity_name_2);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_2);
-                  __pyx_t_18 = __Pyx_PyString_Format(__pyx_kp_s_cc_collision_s_s, __pyx_t_16); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-                  __pyx_t_16 = NULL;
-                  __pyx_t_19 = 0;
-                  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_17))) {
-                    __pyx_t_16 = PyMethod_GET_SELF(__pyx_t_17);
-                    if (likely(__pyx_t_16)) {
-                      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_17);
-                      __Pyx_INCREF(__pyx_t_16);
-                      __Pyx_INCREF(function);
-                      __Pyx_DECREF_SET(__pyx_t_17, function);
-                      __pyx_t_19 = 1;
-                    }
-                  }
-                  __pyx_t_20 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_20);
-                  if (__pyx_t_16) {
-                    PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_t_16); __Pyx_GIVEREF(__pyx_t_16); __pyx_t_16 = NULL;
-                  }
-                  __Pyx_INCREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_20, 0+__pyx_t_19, __pyx_v_state);
-                  __Pyx_GIVEREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_20, 1+__pyx_t_19, __pyx_t_18);
-                  __Pyx_GIVEREF(__pyx_t_18);
-                  __pyx_t_18 = 0;
-                  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_20, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_15);
-                  __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-                  __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                  goto __pyx_L23;
-                }
-                __pyx_L23:;
                 goto __pyx_L22;
               }
 
               /* "yapyg\collisions.pyx":458
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:
+ *                                                                 # if is_collision:
  */
               __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_3 = (__pyx_t_1 != 0);
               if (__pyx_t_3) {
 
                 /* "yapyg\collisions.pyx":459
- *                                                                         debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  */
                 __pyx_v_is_collision = __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(__pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_contact_points, 0);
-
-                /* "yapyg\collisions.pyx":460
- *                                                         elif absolute_shape_2_type == "rectangle":
- *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:             # <<<<<<<<<<<<<<
- *                                                                         debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
- *                                                 elif absolute_shape_1_type == "rectangle":
- */
-                __pyx_t_3 = (__pyx_v_is_collision != 0);
-                if (__pyx_t_3) {
-
-                  /* "yapyg\collisions.pyx":461
- *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))             # <<<<<<<<<<<<<<
- *                                                 elif absolute_shape_1_type == "rectangle":
- *                                                         if absolute_shape_2_type == "circle":
- */
-                  __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_debug); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_17);
-                  __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_print_line); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_20);
-                  __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-                  __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_17);
-                  __Pyx_INCREF(__pyx_v_entity_name_1);
-                  PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_v_entity_name_1);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_1);
-                  __Pyx_INCREF(__pyx_v_entity_name_2);
-                  PyTuple_SET_ITEM(__pyx_t_17, 1, __pyx_v_entity_name_2);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_2);
-                  __pyx_t_18 = __Pyx_PyString_Format(__pyx_kp_s_cr_collision_s_s, __pyx_t_17); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-                  __pyx_t_17 = NULL;
-                  __pyx_t_19 = 0;
-                  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_20))) {
-                    __pyx_t_17 = PyMethod_GET_SELF(__pyx_t_20);
-                    if (likely(__pyx_t_17)) {
-                      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_20);
-                      __Pyx_INCREF(__pyx_t_17);
-                      __Pyx_INCREF(function);
-                      __Pyx_DECREF_SET(__pyx_t_20, function);
-                      __pyx_t_19 = 1;
-                    }
-                  }
-                  __pyx_t_16 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_16);
-                  if (__pyx_t_17) {
-                    PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_17); __Pyx_GIVEREF(__pyx_t_17); __pyx_t_17 = NULL;
-                  }
-                  __Pyx_INCREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_16, 0+__pyx_t_19, __pyx_v_state);
-                  __Pyx_GIVEREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_16, 1+__pyx_t_19, __pyx_t_18);
-                  __Pyx_GIVEREF(__pyx_t_18);
-                  __pyx_t_18 = 0;
-                  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_20, __pyx_t_16, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_15);
-                  __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-                  __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                  goto __pyx_L24;
-                }
-                __pyx_L24:;
                 goto __pyx_L22;
               }
               __pyx_L22:;
@@ -6743,8 +6593,8 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             }
 
             /* "yapyg\collisions.pyx":462
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  *                                                 elif absolute_shape_1_type == "rectangle":             # <<<<<<<<<<<<<<
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
@@ -6754,11 +6604,11 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             if (__pyx_t_1) {
 
               /* "yapyg\collisions.pyx":463
- *                                                                         debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  *                                                 elif absolute_shape_1_type == "rectangle":
  *                                                         if absolute_shape_2_type == "circle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
- *                                                                 if is_collision:
+ *                                                                 # if is_collision:
  */
               __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_3 = (__pyx_t_1 != 0);
@@ -6768,290 +6618,52 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  *                                                 elif absolute_shape_1_type == "rectangle":
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)             # <<<<<<<<<<<<<<
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  */
                 __pyx_v_is_collision = __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(__pyx_v_absolute_shape_2, __pyx_v_absolute_shape_1, __pyx_v_contact_points, 0);
-
-                /* "yapyg\collisions.pyx":465
- *                                                         if absolute_shape_2_type == "circle":
- *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
- *                                                                 if is_collision:             # <<<<<<<<<<<<<<
- *                                                                         debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
- *                                                         elif absolute_shape_2_type == "rectangle":
- */
-                __pyx_t_3 = (__pyx_v_is_collision != 0);
-                if (__pyx_t_3) {
-
-                  /* "yapyg\collisions.pyx":466
- *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))             # <<<<<<<<<<<<<<
- *                                                         elif absolute_shape_2_type == "rectangle":
- *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
- */
-                  __pyx_t_20 = __Pyx_GetModuleGlobalName(__pyx_n_s_debug); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_20);
-                  __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_20, __pyx_n_s_print_line); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_16);
-                  __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __pyx_t_20 = PyTuple_New(2); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_20);
-                  __Pyx_INCREF(__pyx_v_entity_name_1);
-                  PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_v_entity_name_1);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_1);
-                  __Pyx_INCREF(__pyx_v_entity_name_2);
-                  PyTuple_SET_ITEM(__pyx_t_20, 1, __pyx_v_entity_name_2);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_2);
-                  __pyx_t_18 = __Pyx_PyString_Format(__pyx_kp_s_rc_collision_s_s, __pyx_t_20); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __pyx_t_20 = NULL;
-                  __pyx_t_19 = 0;
-                  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_16))) {
-                    __pyx_t_20 = PyMethod_GET_SELF(__pyx_t_16);
-                    if (likely(__pyx_t_20)) {
-                      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_16);
-                      __Pyx_INCREF(__pyx_t_20);
-                      __Pyx_INCREF(function);
-                      __Pyx_DECREF_SET(__pyx_t_16, function);
-                      __pyx_t_19 = 1;
-                    }
-                  }
-                  __pyx_t_17 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_17);
-                  if (__pyx_t_20) {
-                    PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_20); __Pyx_GIVEREF(__pyx_t_20); __pyx_t_20 = NULL;
-                  }
-                  __Pyx_INCREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_17, 0+__pyx_t_19, __pyx_v_state);
-                  __Pyx_GIVEREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_17, 1+__pyx_t_19, __pyx_t_18);
-                  __Pyx_GIVEREF(__pyx_t_18);
-                  __pyx_t_18 = 0;
-                  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_16, __pyx_t_17, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_15);
-                  __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-                  __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-                  __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                  goto __pyx_L26;
-                }
-                __pyx_L26:;
-                goto __pyx_L25;
+                goto __pyx_L23;
               }
 
               /* "yapyg\collisions.pyx":467
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:
+ *                                                                 # if is_collision:
  */
               __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_1 = (__pyx_t_3 != 0);
               if (__pyx_t_1) {
 
                 /* "yapyg\collisions.pyx":468
- *                                                                         debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":
  *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                 # if is_collision:
+ *                                                                         # debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
  */
                 __pyx_v_is_collision = __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(__pyx_v_absolute_shape_1, __pyx_v_absolute_shape_2, __pyx_v_contact_points, 0);
-
-                /* "yapyg\collisions.pyx":469
- *                                                         elif absolute_shape_2_type == "rectangle":
- *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:             # <<<<<<<<<<<<<<
- *                                                                         debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
- * 
- */
-                __pyx_t_1 = (__pyx_v_is_collision != 0);
-                if (__pyx_t_1) {
-
-                  /* "yapyg\collisions.pyx":470
- *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
- *                                                                 if is_collision:
- *                                                                         debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))             # <<<<<<<<<<<<<<
- * 
- *                                                 if is_collision:
- */
-                  __pyx_t_16 = __Pyx_GetModuleGlobalName(__pyx_n_s_debug); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_16);
-                  __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_n_s_print_line); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_17);
-                  __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-                  __pyx_t_16 = PyTuple_New(2); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_16);
-                  __Pyx_INCREF(__pyx_v_entity_name_1);
-                  PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_entity_name_1);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_1);
-                  __Pyx_INCREF(__pyx_v_entity_name_2);
-                  PyTuple_SET_ITEM(__pyx_t_16, 1, __pyx_v_entity_name_2);
-                  __Pyx_GIVEREF(__pyx_v_entity_name_2);
-                  __pyx_t_18 = __Pyx_PyString_Format(__pyx_kp_s_rr_collision_s_s, __pyx_t_16); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-                  __pyx_t_16 = NULL;
-                  __pyx_t_19 = 0;
-                  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_17))) {
-                    __pyx_t_16 = PyMethod_GET_SELF(__pyx_t_17);
-                    if (likely(__pyx_t_16)) {
-                      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_17);
-                      __Pyx_INCREF(__pyx_t_16);
-                      __Pyx_INCREF(function);
-                      __Pyx_DECREF_SET(__pyx_t_17, function);
-                      __pyx_t_19 = 1;
-                    }
-                  }
-                  __pyx_t_20 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_20);
-                  if (__pyx_t_16) {
-                    PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_t_16); __Pyx_GIVEREF(__pyx_t_16); __pyx_t_16 = NULL;
-                  }
-                  __Pyx_INCREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_20, 0+__pyx_t_19, __pyx_v_state);
-                  __Pyx_GIVEREF(__pyx_v_state);
-                  PyTuple_SET_ITEM(__pyx_t_20, 1+__pyx_t_19, __pyx_t_18);
-                  __Pyx_GIVEREF(__pyx_t_18);
-                  __pyx_t_18 = 0;
-                  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_20, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-                  __Pyx_GOTREF(__pyx_t_15);
-                  __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-                  __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                  goto __pyx_L27;
-                }
-                __pyx_L27:;
-                goto __pyx_L25;
+                goto __pyx_L23;
               }
-              __pyx_L25:;
+              __pyx_L23:;
               goto __pyx_L21;
             }
             __pyx_L21:;
 
             /* "yapyg\collisions.pyx":472
- *                                                                         debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
+ *                                                                         # debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
  * 
  *                                                 if is_collision:             # <<<<<<<<<<<<<<
- *                                                         debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
- *                                                         debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
+ *                                                         # debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
+ *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  */
             __pyx_t_1 = (__pyx_v_is_collision != 0);
             if (__pyx_t_1) {
 
-              /* "yapyg\collisions.pyx":473
- * 
- *                                                 if is_collision:
- *                                                         debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))             # <<<<<<<<<<<<<<
- *                                                         debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
- *                                                         if entity_name_1 < entity_name_2:
- */
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_debug); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_print_line); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_20);
-              __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_17 = __pyx_f_5yapyg_10collisions_absolute_shape_to_str(__pyx_v_absolute_shape_1); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_18 = PyTuple_New(2); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_18);
-              __Pyx_INCREF(__pyx_v_entity_name_1);
-              PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_v_entity_name_1);
-              __Pyx_GIVEREF(__pyx_v_entity_name_1);
-              PyTuple_SET_ITEM(__pyx_t_18, 1, __pyx_t_17);
-              __Pyx_GIVEREF(__pyx_t_17);
-              __pyx_t_17 = 0;
-              __pyx_t_17 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_18); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_17);
-              __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-              __pyx_t_18 = NULL;
-              __pyx_t_19 = 0;
-              if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_20))) {
-                __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_20);
-                if (likely(__pyx_t_18)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_20);
-                  __Pyx_INCREF(__pyx_t_18);
-                  __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_20, function);
-                  __pyx_t_19 = 1;
-                }
-              }
-              __pyx_t_16 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_16);
-              if (__pyx_t_18) {
-                PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_18); __Pyx_GIVEREF(__pyx_t_18); __pyx_t_18 = NULL;
-              }
-              __Pyx_INCREF(__pyx_v_state);
-              PyTuple_SET_ITEM(__pyx_t_16, 0+__pyx_t_19, __pyx_v_state);
-              __Pyx_GIVEREF(__pyx_v_state);
-              PyTuple_SET_ITEM(__pyx_t_16, 1+__pyx_t_19, __pyx_t_17);
-              __Pyx_GIVEREF(__pyx_t_17);
-              __pyx_t_17 = 0;
-              __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_20, __pyx_t_16, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 473; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_15);
-              __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-
-              /* "yapyg\collisions.pyx":474
- *                                                 if is_collision:
- *                                                         debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
- *                                                         debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))             # <<<<<<<<<<<<<<
- *                                                         if entity_name_1 < entity_name_2:
- *                                                                 collisions_list.append((entity_name_1, entity_name_2,))
- */
-              __pyx_t_20 = __Pyx_GetModuleGlobalName(__pyx_n_s_debug); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_20);
-              __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_20, __pyx_n_s_print_line); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_16);
-              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-              __pyx_t_20 = __pyx_f_5yapyg_10collisions_absolute_shape_to_str(__pyx_v_absolute_shape_2); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_20);
-              __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_17);
-              __Pyx_INCREF(__pyx_v_entity_name_2);
-              PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_v_entity_name_2);
-              __Pyx_GIVEREF(__pyx_v_entity_name_2);
-              PyTuple_SET_ITEM(__pyx_t_17, 1, __pyx_t_20);
-              __Pyx_GIVEREF(__pyx_t_20);
-              __pyx_t_20 = 0;
-              __pyx_t_20 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_17); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_20);
-              __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_17 = NULL;
-              __pyx_t_19 = 0;
-              if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_16))) {
-                __pyx_t_17 = PyMethod_GET_SELF(__pyx_t_16);
-                if (likely(__pyx_t_17)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_16);
-                  __Pyx_INCREF(__pyx_t_17);
-                  __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_16, function);
-                  __pyx_t_19 = 1;
-                }
-              }
-              __pyx_t_18 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_18);
-              if (__pyx_t_17) {
-                PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_17); __Pyx_GIVEREF(__pyx_t_17); __pyx_t_17 = NULL;
-              }
-              __Pyx_INCREF(__pyx_v_state);
-              PyTuple_SET_ITEM(__pyx_t_18, 0+__pyx_t_19, __pyx_v_state);
-              __Pyx_GIVEREF(__pyx_v_state);
-              PyTuple_SET_ITEM(__pyx_t_18, 1+__pyx_t_19, __pyx_t_20);
-              __Pyx_GIVEREF(__pyx_t_20);
-              __pyx_t_20 = 0;
-              __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_16, __pyx_t_18, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_15);
-              __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-              __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-
               /* "yapyg\collisions.pyx":475
- *                                                         debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
- *                                                         debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
+ *                                                         # debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
+ *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  *                                                         if entity_name_1 < entity_name_2:             # <<<<<<<<<<<<<<
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))
  *                                                         else:
@@ -7062,7 +6674,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               if (__pyx_t_1) {
 
                 /* "yapyg\collisions.pyx":476
- *                                                         debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
+ *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  *                                                         if entity_name_1 < entity_name_2:
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))             # <<<<<<<<<<<<<<
  *                                                         else:
@@ -7082,7 +6694,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 __Pyx_GIVEREF(__pyx_v_entity_name_2);
                 __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_collisions_list, __pyx_t_15); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                goto __pyx_L29;
+                goto __pyx_L25;
               }
               /*else*/ {
 
@@ -7108,7 +6720,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_collisions_list, __pyx_t_15); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
               }
-              __pyx_L29:;
+              __pyx_L25:;
 
               /* "yapyg\collisions.pyx":479
  *                                                         else:
@@ -7220,10 +6832,6 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_15);
-  __Pyx_XDECREF(__pyx_t_16);
-  __Pyx_XDECREF(__pyx_t_17);
-  __Pyx_XDECREF(__pyx_t_18);
-  __Pyx_XDECREF(__pyx_t_20);
   __Pyx_AddTraceback("yapyg.collisions.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -7700,10 +7308,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 1, 0},
   {&__pyx_kp_s__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 0, 1, 0},
   {&__pyx_n_s_add, __pyx_k_add, sizeof(__pyx_k_add), 0, 0, 1, 1},
-  {&__pyx_kp_s_cc_collision_s_s, __pyx_k_cc_collision_s_s, sizeof(__pyx_k_cc_collision_s_s), 0, 0, 1, 0},
   {&__pyx_n_s_circle, __pyx_k_circle, sizeof(__pyx_k_circle), 0, 0, 1, 1},
   {&__pyx_n_s_collision_def, __pyx_k_collision_def, sizeof(__pyx_k_collision_def), 0, 0, 1, 1},
-  {&__pyx_kp_s_cr_collision_s_s, __pyx_k_cr_collision_s_s, sizeof(__pyx_k_cr_collision_s_s), 0, 0, 1, 0},
   {&__pyx_n_s_debug, __pyx_k_debug, sizeof(__pyx_k_debug), 0, 0, 1, 1},
   {&__pyx_n_s_entity_lower_left, __pyx_k_entity_lower_left, sizeof(__pyx_k_entity_lower_left), 0, 0, 1, 1},
   {&__pyx_n_s_entity_name, __pyx_k_entity_name, sizeof(__pyx_k_entity_name), 0, 0, 1, 1},
@@ -7714,14 +7320,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_new_pos, __pyx_k_new_pos, sizeof(__pyx_k_new_pos), 0, 0, 1, 1},
   {&__pyx_n_s_pos, __pyx_k_pos, sizeof(__pyx_k_pos), 0, 0, 1, 1},
-  {&__pyx_n_s_print_line, __pyx_k_print_line, sizeof(__pyx_k_print_line), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_capi, __pyx_k_pyx_capi, sizeof(__pyx_k_pyx_capi), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
-  {&__pyx_kp_s_rc_collision_s_s, __pyx_k_rc_collision_s_s, sizeof(__pyx_k_rc_collision_s_s), 0, 0, 1, 0},
   {&__pyx_n_s_rectangle, __pyx_k_rectangle, sizeof(__pyx_k_rectangle), 0, 0, 1, 1},
   {&__pyx_n_s_remove, __pyx_k_remove, sizeof(__pyx_k_remove), 0, 0, 1, 1},
-  {&__pyx_kp_s_rr_collision_s_s, __pyx_k_rr_collision_s_s, sizeof(__pyx_k_rr_collision_s_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_s_s, __pyx_k_s_s, sizeof(__pyx_k_s_s), 0, 0, 1, 0},
   {&__pyx_n_s_shapes_list, __pyx_k_shapes_list, sizeof(__pyx_k_shapes_list), 0, 0, 1, 1},
   {&__pyx_n_s_state, __pyx_k_state, sizeof(__pyx_k_state), 0, 0, 1, 1},
   {&__pyx_n_s_state_idx, __pyx_k_state_idx, sizeof(__pyx_k_state_idx), 0, 0, 1, 1},
@@ -8750,23 +8352,6 @@ static CYTHON_INLINE int __Pyx_PyObject_SetSlice(
         Py_TYPE(obj)->tp_name, value ? "assignment" : "deletion");
 bad:
     return -1;
-}
-
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
-    PyObject *result;
-#if CYTHON_COMPILING_IN_CPYTHON
-    result = PyDict_GetItem(__pyx_d, name);
-    if (likely(result)) {
-        Py_INCREF(result);
-    } else {
-#else
-    result = PyObject_GetItem(__pyx_d, name);
-    if (!result) {
-        PyErr_Clear();
-#endif
-        result = __Pyx_GetBuiltinName(name);
-    }
-    return result;
 }
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {

@@ -245,6 +245,7 @@ class ScreenWidget(FloatLayout):
                         self.display_widget.destroy()
                         parent = self.parent
                         parent.remove_widget(self)
+                        self.state = None
                         if self.on_exit_function:
                                 (self.on_exit_function)(self.state, parent)
 
@@ -266,10 +267,10 @@ class ScreenWidget(FloatLayout):
 
         def _on_keyboard_down(self, window, keycode, scancode, codepoint, modifier):
                 if self.state:
-                        if keycode == self.KEYCODE_SPACE:
+                        if keycode == self.KEYCODE_SPACE and self.state:
                                 controls.set_button_state(self.state, 0, True)
 
         def _on_keyboard_up(self, window, keycode, scancode):
                 if self.state:
-                        if keycode == self.KEYCODE_SPACE:
+                        if keycode == self.KEYCODE_SPACE and self.state:
                                 controls.set_button_state(self.state, 0, False)
