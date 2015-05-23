@@ -825,6 +825,11 @@ static int *__pyx_vp_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER = 0;
 #define __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER (*__pyx_vp_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER)
 static PyObject *(*__pyx_f_5yapyg_6movers_delete)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 
+/* Module declarations from 'yapyg.math_2d' */
+static float *__pyx_vp_5yapyg_7math_2d_CONST_PI = 0;
+#define __pyx_v_5yapyg_7math_2d_CONST_PI (*__pyx_vp_5yapyg_7math_2d_CONST_PI)
+static PyObject *(*__pyx_f_5yapyg_7math_2d_vector_add)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+
 /* Module declarations from 'yapyg.entities' */
 static int __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES;
 static int __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE;
@@ -846,13 +851,14 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *, PyObject *, int __pyx_
 static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *, PyObject *, float, float, float, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *, PyObject *, float, float, float, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_5yapyg_8entities_c_call_pos_listeners(PyObject *, PyObject *, PyObject *); /*proto*/
-static PyObject *__pyx_f_5yapyg_8entities_c_get_full_sprite_name(PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_5yapyg_8entities_call_pos_listeners(PyObject *, PyObject *, PyObject *); /*proto*/
+static PyObject *__pyx_f_5yapyg_8entities_get_full_sprite_name(PyObject *, PyObject *); /*proto*/
 static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg.entities"
 int __pyx_module_is_main_yapyg__entities = 0;
@@ -868,11 +874,12 @@ static PyObject *__pyx_pf_5yapyg_8entities_12get(CYTHON_UNUSED PyObject *__pyx_s
 static PyObject *__pyx_pf_5yapyg_8entities_14get_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
 static PyObject *__pyx_pf_5yapyg_8entities_16get_last_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
 static PyObject *__pyx_pf_5yapyg_8entities_18get_pos_offset(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
-static PyObject *__pyx_pf_5yapyg_8entities_20set_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot); /* proto */
-static PyObject *__pyx_pf_5yapyg_8entities_22add_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot); /* proto */
-static PyObject *__pyx_pf_5yapyg_8entities_24undo_last_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
-static PyObject *__pyx_pf_5yapyg_8entities_26disable(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
-static PyObject *__pyx_pf_5yapyg_8entities_28is_enabled(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
+static PyObject *__pyx_pf_5yapyg_8entities_20get_pos_with_offset(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
+static PyObject *__pyx_pf_5yapyg_8entities_22set_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot); /* proto */
+static PyObject *__pyx_pf_5yapyg_8entities_24add_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot); /* proto */
+static PyObject *__pyx_pf_5yapyg_8entities_26undo_last_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
+static PyObject *__pyx_pf_5yapyg_8entities_28disable(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
+static PyObject *__pyx_pf_5yapyg_8entities_30is_enabled(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name); /* proto */
 static char __pyx_k__2[] = "*";
 static char __pyx_k__5[] = "_";
 static char __pyx_k_pos[] = "pos";
@@ -949,7 +956,7 @@ static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__6;
 
-/* "yapyg\entities.pyx":46
+/* "yapyg\entities.pyx":47
  * cdef int IDX_ENTITY_ENABLE = 7
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -968,7 +975,7 @@ static PyObject *__pyx_f_5yapyg_8entities_initialize(int __pyx_v_state_idx, PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg\entities.pyx":51
+  /* "yapyg\entities.pyx":52
  *         """
  *         global IDX_STATE_ENTITIES
  *         IDX_STATE_ENTITIES = state_idx             # <<<<<<<<<<<<<<
@@ -977,36 +984,36 @@ static PyObject *__pyx_f_5yapyg_8entities_initialize(int __pyx_v_state_idx, PyOb
  */
   __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES = __pyx_v_state_idx;
 
-  /* "yapyg\entities.pyx":53
+  /* "yapyg\entities.pyx":54
  *         IDX_STATE_ENTITIES = state_idx
  *         state[IDX_STATE_ENTITIES] = [
  *                 {},             # <<<<<<<<<<<<<<
  *                 ]
  * 
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg\entities.pyx":52
+  /* "yapyg\entities.pyx":53
  *         global IDX_STATE_ENTITIES
  *         IDX_STATE_ENTITIES = state_idx
  *         state[IDX_STATE_ENTITIES] = [             # <<<<<<<<<<<<<<
  *                 {},
  *                 ]
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   PyList_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\entities.pyx":46
+  /* "yapyg\entities.pyx":47
  * cdef int IDX_ENTITY_ENABLE = 7
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -1060,11 +1067,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_1initialize(PyObject *__pyx_self, PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_state)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("initialize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("initialize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initialize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initialize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1072,18 +1079,18 @@ static PyObject *__pyx_pw_5yapyg_8entities_1initialize(PyObject *__pyx_self, PyO
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_state_idx = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_state_idx == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_state_idx = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_state_idx == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     __pyx_v_state = ((PyObject*)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("initialize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("initialize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.initialize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_initialize(__pyx_self, __pyx_v_state_idx, __pyx_v_state);
 
   /* function exit code */
@@ -1104,7 +1111,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_initialize(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_initialize(__pyx_v_state_idx, __pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_initialize(__pyx_v_state_idx, __pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1121,7 +1128,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_initialize(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":56
+/* "yapyg\entities.pyx":57
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1138,7 +1145,7 @@ static PyObject *__pyx_f_5yapyg_8entities_destroy(PyObject *__pyx_v_state, CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg\entities.pyx":60
+  /* "yapyg\entities.pyx":61
  *         TODO
  *         """
  *         state[IDX_STATE_ENTITIES] = None             # <<<<<<<<<<<<<<
@@ -1147,11 +1154,11 @@ static PyObject *__pyx_f_5yapyg_8entities_destroy(PyObject *__pyx_v_state, CYTHO
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\entities.pyx":56
+  /* "yapyg\entities.pyx":57
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1181,7 +1188,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_3destroy(PyObject *__pyx_self, PyObje
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("destroy (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_2destroy(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -1202,7 +1209,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_2destroy(CYTHON_UNUSED PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_destroy(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_destroy(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1219,7 +1226,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_2destroy(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":62
+/* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -1231,7 +1238,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
 static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_sprite_defs, PyObject *__pyx_v_pos, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_8entities_insert *__pyx_optional_args) {
   PyObject *__pyx_v_pos_offset = ((PyObject*)__pyx_tuple_);
 
-  /* "yapyg\entities.pyx":63
+  /* "yapyg\entities.pyx":64
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),
  *              tuple collision=None, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -1281,7 +1288,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     }
   }
 
-  /* "yapyg\entities.pyx":67
+  /* "yapyg\entities.pyx":68
  *         TODO
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1290,15 +1297,15 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entities_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":68
+  /* "yapyg\entities.pyx":69
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]             # <<<<<<<<<<<<<<
@@ -1307,15 +1314,15 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entities_db == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entities_db, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entities_db, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entities_table = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":70
+  /* "yapyg\entities.pyx":71
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity = [
  *                 [pos[0], pos[1], pos[2]],             # <<<<<<<<<<<<<<
@@ -1324,23 +1331,23 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_pos == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_pos == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_pos == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyList_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyList_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   PyList_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -1352,7 +1359,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
 
-  /* "yapyg\entities.pyx":71
+  /* "yapyg\entities.pyx":72
  *         cdef list entity = [
  *                 [pos[0], pos[1], pos[2]],
  *                 [pos_offset[0], pos_offset[1]],             # <<<<<<<<<<<<<<
@@ -1361,17 +1368,17 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_pos_offset == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
   if (unlikely(__pyx_v_pos_offset == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 72; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_3);
@@ -1380,17 +1387,17 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_3 = 0;
   __pyx_t_2 = 0;
 
-  /* "yapyg\entities.pyx":74
+  /* "yapyg\entities.pyx":75
  *                 None,
  *                 None,
  *                 [],             # <<<<<<<<<<<<<<
  *                 True if collision else None,
  *                 True if play_once else False,
  */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 74; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg\entities.pyx":75
+  /* "yapyg\entities.pyx":76
  *                 None,
  *                 [],
  *                 True if collision else None,             # <<<<<<<<<<<<<<
@@ -1406,7 +1413,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __pyx_t_3 = Py_None;
   }
 
-  /* "yapyg\entities.pyx":76
+  /* "yapyg\entities.pyx":77
  *                 [],
  *                 True if collision else None,
  *                 True if play_once else False,             # <<<<<<<<<<<<<<
@@ -1421,14 +1428,14 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __pyx_t_6 = Py_False;
   }
 
-  /* "yapyg\entities.pyx":69
+  /* "yapyg\entities.pyx":70
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity = [             # <<<<<<<<<<<<<<
  *                 [pos[0], pos[1], pos[2]],
  *                 [pos_offset[0], pos_offset[1]],
  */
-  __pyx_t_7 = PyList_New(8); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyList_New(8); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   PyList_SET_ITEM(__pyx_t_7, 0, __pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_4);
@@ -1457,7 +1464,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_v_entity = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "yapyg\entities.pyx":79
+  /* "yapyg\entities.pyx":80
  *                 True,
  *                 ]
  *         entities_table[entity_name] = entity             # <<<<<<<<<<<<<<
@@ -1466,11 +1473,11 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entities_table == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(PyDict_SetItem(__pyx_v_entities_table, __pyx_v_entity_name, __pyx_v_entity) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyDict_SetItem(__pyx_v_entities_table, __pyx_v_entity_name, __pyx_v_entity) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\entities.pyx":81
+  /* "yapyg\entities.pyx":82
  *         entities_table[entity_name] = entity
  * 
  *         if collision:             # <<<<<<<<<<<<<<
@@ -1480,21 +1487,21 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_5 = (__pyx_v_collision != Py_None) && (PyTuple_GET_SIZE(__pyx_v_collision) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\entities.pyx":82
+    /* "yapyg\entities.pyx":83
  * 
  *         if collision:
  *                 collisions.add_entity(state, entity_name, collision)             # <<<<<<<<<<<<<<
  * 
  *         cdef str default_sprite = None
  */
-    __pyx_t_7 = __pyx_f_5yapyg_10collisions_add_entity(__pyx_v_state, __pyx_v_entity_name, __pyx_v_collision, 0); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __pyx_f_5yapyg_10collisions_add_entity(__pyx_v_state, __pyx_v_entity_name, __pyx_v_collision, 0); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":84
+  /* "yapyg\entities.pyx":85
  *                 collisions.add_entity(state, entity_name, collision)
  * 
  *         cdef str default_sprite = None             # <<<<<<<<<<<<<<
@@ -1504,7 +1511,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __Pyx_INCREF(Py_None);
   __pyx_v_default_sprite = ((PyObject*)Py_None);
 
-  /* "yapyg\entities.pyx":88
+  /* "yapyg\entities.pyx":89
  *         cdef str sprite_name
  *         cdef dict sprite_def
  *         for sprite_name, sprite_def in sprite_defs.iteritems():             # <<<<<<<<<<<<<<
@@ -1514,9 +1521,9 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_8 = 0;
   if (unlikely(__pyx_v_sprite_defs == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "iteritems");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_dict_iterator(__pyx_v_sprite_defs, 1, __pyx_n_s_iteritems, (&__pyx_t_9), (&__pyx_t_10)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_dict_iterator(__pyx_v_sprite_defs, 1, __pyx_n_s_iteritems, (&__pyx_t_9), (&__pyx_t_10)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __pyx_t_7 = __pyx_t_6;
@@ -1524,42 +1531,42 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   while (1) {
     __pyx_t_11 = __Pyx_dict_iter_next(__pyx_t_7, __pyx_t_9, &__pyx_t_8, &__pyx_t_6, &__pyx_t_3, NULL, __pyx_t_10);
     if (unlikely(__pyx_t_11 == 0)) break;
-    if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(PyString_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!(likely(PyDict_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_3)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyString_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyDict_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_3)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_XDECREF_SET(__pyx_v_sprite_name, ((PyObject*)__pyx_t_6));
     __pyx_t_6 = 0;
     __Pyx_XDECREF_SET(__pyx_v_sprite_def, ((PyObject*)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "yapyg\entities.pyx":90
+    /* "yapyg\entities.pyx":91
  *         for sprite_name, sprite_def in sprite_defs.iteritems():
  * 
  *                 entity[IDX_ENTITY_SPRITES].append(sprite_name)             # <<<<<<<<<<<<<<
  * 
  *                 if sprite_name[0] == "*":
  */
-    __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_SPRITES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_SPRITES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_12 = __Pyx_PyObject_Append(__pyx_t_3, __pyx_v_sprite_name); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = __Pyx_PyObject_Append(__pyx_t_3, __pyx_v_sprite_name); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "yapyg\entities.pyx":92
+    /* "yapyg\entities.pyx":93
  *                 entity[IDX_ENTITY_SPRITES].append(sprite_name)
  * 
  *                 if sprite_name[0] == "*":             # <<<<<<<<<<<<<<
  *                         default_sprite = sprite_name
  * 
  */
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_sprite_name, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_sprite_name, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_t_3, __pyx_kp_s__2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = (__Pyx_PyString_Equals(__pyx_t_3, __pyx_kp_s__2, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "yapyg\entities.pyx":93
+      /* "yapyg\entities.pyx":94
  * 
  *                 if sprite_name[0] == "*":
  *                         default_sprite = sprite_name             # <<<<<<<<<<<<<<
@@ -1572,7 +1579,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     }
     __pyx_L6:;
 
-    /* "yapyg\entities.pyx":95
+    /* "yapyg\entities.pyx":96
  *                         default_sprite = sprite_name
  * 
  *                 set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative, play_once)             # <<<<<<<<<<<<<<
@@ -1583,37 +1590,37 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __pyx_t_13.enable = 0;
     __pyx_t_13.screen_relative = __pyx_v_screen_relative;
     __pyx_t_13.play_once = __pyx_v_play_once;
-    __pyx_t_3 = __pyx_f_5yapyg_8entities_set_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_sprite_def, 0, &__pyx_t_13); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __pyx_f_5yapyg_8entities_set_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_sprite_def, 0, &__pyx_t_13); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "yapyg\entities.pyx":97
+  /* "yapyg\entities.pyx":98
  *                 set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative, play_once)
  * 
  *         if default_sprite:             # <<<<<<<<<<<<<<
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_default_sprite); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_default_sprite); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_5) {
 
-    /* "yapyg\entities.pyx":98
+    /* "yapyg\entities.pyx":99
  * 
  *         if default_sprite:
  *                 set_active_sprite(state, entity_name, default_sprite)             # <<<<<<<<<<<<<<
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  */
-    __pyx_t_7 = __pyx_f_5yapyg_8entities_set_active_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_default_sprite, 0, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __pyx_f_5yapyg_8entities_set_active_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_default_sprite, 0, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     goto __pyx_L7;
   }
   __pyx_L7:;
 
-  /* "yapyg\entities.pyx":62
+  /* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -1668,7 +1675,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
     PyObject* values[8] = {0,0,0,0,0,0,0,0};
     values[4] = ((PyObject*)__pyx_tuple__3);
 
-    /* "yapyg\entities.pyx":63
+    /* "yapyg\entities.pyx":64
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),
  *              tuple collision=None, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -1699,17 +1706,17 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sprite_defs)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (kw_args > 0) {
@@ -1733,7 +1740,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "insert") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "insert") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1756,33 +1763,33 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
     __pyx_v_pos_offset = ((PyObject*)values[4]);
     __pyx_v_collision = ((PyObject*)values[5]);
     if (values[6]) {
-      __pyx_v_screen_relative = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_screen_relative == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_screen_relative = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_screen_relative == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_screen_relative = ((int)0);
     }
     if (values[7]) {
-      __pyx_v_play_once = __Pyx_PyInt_As_int(values[7]); if (unlikely((__pyx_v_play_once == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_play_once = __Pyx_PyInt_As_int(values[7]); if (unlikely((__pyx_v_play_once == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_play_once = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("insert", 0, 4, 8, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.insert", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_defs), (&PyDict_Type), 1, "sprite_defs", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos), (&PyTuple_Type), 1, "pos", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos_offset), (&PyTuple_Type), 1, "pos_offset", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision), (&PyTuple_Type), 1, "collision", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_defs), (&PyDict_Type), 1, "sprite_defs", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos), (&PyTuple_Type), 1, "pos", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos_offset), (&PyTuple_Type), 1, "pos_offset", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision), (&PyTuple_Type), 1, "collision", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_4insert(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_defs, __pyx_v_pos, __pyx_v_pos_offset, __pyx_v_collision, __pyx_v_screen_relative, __pyx_v_play_once);
 
-  /* "yapyg\entities.pyx":62
+  /* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -1814,7 +1821,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_4insert(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_2.collision = __pyx_v_collision;
   __pyx_t_2.screen_relative = __pyx_v_screen_relative;
   __pyx_t_2.play_once = __pyx_v_play_once;
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_insert(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_defs, __pyx_v_pos, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_insert(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_defs, __pyx_v_pos, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1831,7 +1838,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_4insert(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":100
+/* "yapyg\entities.pyx":101
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -1842,7 +1849,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_4insert(CYTHON_UNUSED PyObject *__pyx
 static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_sprite_name, PyObject *__pyx_v_sprite_def, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_8entities_set_sprite *__pyx_optional_args) {
 
-  /* "yapyg\entities.pyx":101
+  /* "yapyg\entities.pyx":102
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=False, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -1884,42 +1891,42 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     }
   }
 
-  /* "yapyg\entities.pyx":105
+  /* "yapyg\entities.pyx":106
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  * 
  *         cdef str full_sprite_name
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":118
+  /* "yapyg\entities.pyx":119
  *         cdef str enabled_sprite_name
  * 
  *         if entity:             # <<<<<<<<<<<<<<
- *                 full_sprite_name = c_get_full_sprite_name(entity_name, sprite_name)
+ *                 full_sprite_name = get_full_sprite_name(entity_name, sprite_name)
  * 
  */
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":119
+    /* "yapyg\entities.pyx":120
  * 
  *         if entity:
- *                 full_sprite_name = c_get_full_sprite_name(entity_name, sprite_name)             # <<<<<<<<<<<<<<
+ *                 full_sprite_name = get_full_sprite_name(entity_name, sprite_name)             # <<<<<<<<<<<<<<
  * 
  *                 sprite_textures = sprite_def["textures"]
  */
-    __pyx_t_1 = __pyx_f_5yapyg_8entities_c_get_full_sprite_name(__pyx_v_entity_name, __pyx_v_sprite_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_8entities_get_full_sprite_name(__pyx_v_entity_name, __pyx_v_sprite_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_full_sprite_name = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":121
- *                 full_sprite_name = c_get_full_sprite_name(entity_name, sprite_name)
+    /* "yapyg\entities.pyx":122
+ *                 full_sprite_name = get_full_sprite_name(entity_name, sprite_name)
  * 
  *                 sprite_textures = sprite_def["textures"]             # <<<<<<<<<<<<<<
  * 
@@ -1927,15 +1934,15 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     if (unlikely(__pyx_v_sprite_def == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_sprite_def, __pyx_n_s_textures); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_sprite_def, __pyx_n_s_textures); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_sprite_textures = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":123
+    /* "yapyg\entities.pyx":124
  *                 sprite_textures = sprite_def["textures"]
  * 
  *                 sprite_speed = 0             # <<<<<<<<<<<<<<
@@ -1944,7 +1951,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     __pyx_v_sprite_speed = 0;
 
-    /* "yapyg\entities.pyx":124
+    /* "yapyg\entities.pyx":125
  * 
  *                 sprite_speed = 0
  *                 if sprite_def.has_key("speed"):             # <<<<<<<<<<<<<<
@@ -1953,13 +1960,13 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     if (unlikely(__pyx_v_sprite_def == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "has_key");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_2 = PyDict_Contains(__pyx_v_sprite_def, __pyx_n_s_speed); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyDict_Contains(__pyx_v_sprite_def, __pyx_n_s_speed); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg\entities.pyx":125
+      /* "yapyg\entities.pyx":126
  *                 sprite_speed = 0
  *                 if sprite_def.has_key("speed"):
  *                         sprite_speed = sprite_def["speed"]             # <<<<<<<<<<<<<<
@@ -1968,18 +1975,18 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
       if (unlikely(__pyx_v_sprite_def == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_sprite_def, __pyx_n_s_speed); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_sprite_def, __pyx_n_s_speed); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_v_sprite_speed = __pyx_t_4;
       goto __pyx_L4;
     }
     __pyx_L4:;
 
-    /* "yapyg\entities.pyx":127
+    /* "yapyg\entities.pyx":128
  *                         sprite_speed = sprite_def["speed"]
  * 
  *                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]             # <<<<<<<<<<<<<<
@@ -1988,15 +1995,15 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_sprite_pos_offset = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":129
+    /* "yapyg\entities.pyx":130
  *                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
  * 
  *                 sprite_scale = (1.0, 1.0)             # <<<<<<<<<<<<<<
@@ -2006,7 +2013,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __Pyx_INCREF(__pyx_tuple__4);
     __pyx_v_sprite_scale = __pyx_tuple__4;
 
-    /* "yapyg\entities.pyx":131
+    /* "yapyg\entities.pyx":132
  *                 sprite_scale = (1.0, 1.0)
  * 
  *                 sprite_enable = enable             # <<<<<<<<<<<<<<
@@ -2015,7 +2022,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     __pyx_v_sprite_enable = __pyx_v_enable;
 
-    /* "yapyg\entities.pyx":133
+    /* "yapyg\entities.pyx":134
  *                 sprite_enable = enable
  * 
  *                 sprite_pos = entity[IDX_ENTITY_POS]             # <<<<<<<<<<<<<<
@@ -2024,15 +2031,15 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_sprite_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":135
+    /* "yapyg\entities.pyx":136
  *                 sprite_pos = entity[IDX_ENTITY_POS]
  * 
  *                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]             # <<<<<<<<<<<<<<
@@ -2041,51 +2048,51 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_enabled_sprite_name = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":136
+    /* "yapyg\entities.pyx":137
  * 
  *                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]
  *                 if enabled_sprite_name == sprite_name:             # <<<<<<<<<<<<<<
  *                         sprites.set_enable(state, full_sprite_name, False)
  * 
  */
-    __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_enabled_sprite_name, __pyx_v_sprite_name, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_enabled_sprite_name, __pyx_v_sprite_name, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_2 = (__pyx_t_3 != 0);
     if (__pyx_t_2) {
 
-      /* "yapyg\entities.pyx":137
+      /* "yapyg\entities.pyx":138
  *                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]
  *                 if enabled_sprite_name == sprite_name:
  *                         sprites.set_enable(state, full_sprite_name, False)             # <<<<<<<<<<<<<<
  * 
  *                 sprites.delete(state, full_sprite_name)
  */
-      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, __pyx_v_full_sprite_name, 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, __pyx_v_full_sprite_name, 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       goto __pyx_L5;
     }
     __pyx_L5:;
 
-    /* "yapyg\entities.pyx":139
+    /* "yapyg\entities.pyx":140
  *                         sprites.set_enable(state, full_sprite_name, False)
  * 
  *                 sprites.delete(state, full_sprite_name)             # <<<<<<<<<<<<<<
  * 
  *                 sprites.insert(state,
  */
-    __pyx_t_1 = __pyx_f_5yapyg_7sprites_delete(__pyx_v_state, __pyx_v_full_sprite_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_7sprites_delete(__pyx_v_state, __pyx_v_full_sprite_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":141
+    /* "yapyg\entities.pyx":142
  *                 sprites.delete(state, full_sprite_name)
  * 
  *                 sprites.insert(state,             # <<<<<<<<<<<<<<
@@ -2095,29 +2102,29 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_t_5.__pyx_n = 2;
     __pyx_t_5.screen_relative = __pyx_v_screen_relative;
     __pyx_t_5.play_once = __pyx_v_play_once;
-    __pyx_t_1 = __pyx_f_5yapyg_7sprites_insert(__pyx_v_state, __pyx_v_full_sprite_name, __pyx_v_sprite_textures, __pyx_v_sprite_speed, __pyx_v_sprite_pos_offset, __pyx_v_sprite_scale, __pyx_v_sprite_enable, __pyx_v_sprite_pos, 0, &__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_7sprites_insert(__pyx_v_state, __pyx_v_full_sprite_name, __pyx_v_sprite_textures, __pyx_v_sprite_speed, __pyx_v_sprite_pos_offset, __pyx_v_sprite_scale, __pyx_v_sprite_enable, __pyx_v_sprite_pos, 0, &__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":153
+    /* "yapyg\entities.pyx":154
  *                         )
  * 
  *                 if enabled_sprite_name == sprite_name:             # <<<<<<<<<<<<<<
  *                         sprites.set_enable(state, full_sprite_name, True)
  * 
  */
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_enabled_sprite_name, __pyx_v_sprite_name, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_v_enabled_sprite_name, __pyx_v_sprite_name, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg\entities.pyx":154
+      /* "yapyg\entities.pyx":155
  * 
  *                 if enabled_sprite_name == sprite_name:
  *                         sprites.set_enable(state, full_sprite_name, True)             # <<<<<<<<<<<<<<
  * 
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):
  */
-      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, __pyx_v_full_sprite_name, 1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, __pyx_v_full_sprite_name, 1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       goto __pyx_L6;
@@ -2127,7 +2134,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":100
+  /* "yapyg\entities.pyx":101
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -2197,17 +2204,17 @@ static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sprite_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sprite_def)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (kw_args > 0) {
@@ -2226,7 +2233,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyO
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_sprite") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_sprite") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2246,10 +2253,10 @@ static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyO
     __pyx_v_sprite_name = ((PyObject*)values[2]);
     __pyx_v_sprite_def = ((PyObject*)values[3]);
     if (values[4]) {
-      __pyx_v_enable = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_enable == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_enable = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_enable == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
 
-      /* "yapyg\entities.pyx":101
+      /* "yapyg\entities.pyx":102
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=False, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -2259,31 +2266,31 @@ static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyO
       __pyx_v_enable = ((int)0);
     }
     if (values[5]) {
-      __pyx_v_screen_relative = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_screen_relative == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_screen_relative = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_screen_relative == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_screen_relative = ((int)0);
     }
     if (values[6]) {
-      __pyx_v_play_once = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_play_once == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_play_once = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_play_once == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_play_once = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("set_sprite", 0, 4, 7, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.set_sprite", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_name), (&PyString_Type), 1, "sprite_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_def), (&PyDict_Type), 1, "sprite_def", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_name), (&PyString_Type), 1, "sprite_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_def), (&PyDict_Type), 1, "sprite_def", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_6set_sprite(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_sprite_def, __pyx_v_enable, __pyx_v_screen_relative, __pyx_v_play_once);
 
-  /* "yapyg\entities.pyx":100
+  /* "yapyg\entities.pyx":101
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -2314,7 +2321,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_6set_sprite(CYTHON_UNUSED PyObject *_
   __pyx_t_2.enable = __pyx_v_enable;
   __pyx_t_2.screen_relative = __pyx_v_screen_relative;
   __pyx_t_2.play_once = __pyx_v_play_once;
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_set_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_sprite_def, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_set_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_sprite_def, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2331,7 +2338,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_6set_sprite(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":156
+/* "yapyg\entities.pyx":157
  *                         sprites.set_enable(state, full_sprite_name, True)
  * 
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):             # <<<<<<<<<<<<<<
@@ -2358,63 +2365,63 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
     }
   }
 
-  /* "yapyg\entities.pyx":160
+  /* "yapyg\entities.pyx":161
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":161
+  /* "yapyg\entities.pyx":162
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  */
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":162
+    /* "yapyg\entities.pyx":163
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:             # <<<<<<<<<<<<<<
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
- *                 sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), enable)
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg\entities.pyx":163
+      /* "yapyg\entities.pyx":164
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)             # <<<<<<<<<<<<<<
- *                 sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), enable)
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)             # <<<<<<<<<<<<<<
+ *                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
  */
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_3 = __pyx_f_5yapyg_8entities_c_get_full_sprite_name(__pyx_v_entity_name, ((PyObject*)__pyx_t_1)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __pyx_f_5yapyg_8entities_get_full_sprite_name(__pyx_v_entity_name, ((PyObject*)__pyx_t_1)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, ((PyObject*)__pyx_t_3), 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, ((PyObject*)__pyx_t_3), 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2422,37 +2429,37 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
     }
     __pyx_L4:;
 
-    /* "yapyg\entities.pyx":164
+    /* "yapyg\entities.pyx":165
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
- *                 sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), enable)             # <<<<<<<<<<<<<<
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)             # <<<<<<<<<<<<<<
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
  * 
  */
-    __pyx_t_1 = __pyx_f_5yapyg_8entities_c_get_full_sprite_name(__pyx_v_entity_name, __pyx_v_sprite_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_8entities_get_full_sprite_name(__pyx_v_entity_name, __pyx_v_sprite_name); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, ((PyObject*)__pyx_t_1), __pyx_v_enable, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, ((PyObject*)__pyx_t_1), __pyx_v_enable, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "yapyg\entities.pyx":165
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
- *                 sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), enable)
+    /* "yapyg\entities.pyx":166
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name             # <<<<<<<<<<<<<<
  * 
  * cpdef delete(list state, str entity_name):
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, __pyx_v_sprite_name, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, __pyx_v_sprite_name, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":156
+  /* "yapyg\entities.pyx":157
  *                         sprites.set_enable(state, full_sprite_name, True)
  * 
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):             # <<<<<<<<<<<<<<
@@ -2511,12 +2518,12 @@ static PyObject *__pyx_pw_5yapyg_8entities_9set_active_sprite(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_active_sprite", 0, 3, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_active_sprite", 0, 3, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sprite_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_active_sprite", 0, 3, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_active_sprite", 0, 3, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (kw_args > 0) {
@@ -2525,7 +2532,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_9set_active_sprite(PyObject *__pyx_se
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_active_sprite") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_active_sprite") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2541,22 +2548,22 @@ static PyObject *__pyx_pw_5yapyg_8entities_9set_active_sprite(PyObject *__pyx_se
     __pyx_v_entity_name = ((PyObject*)values[1]);
     __pyx_v_sprite_name = ((PyObject*)values[2]);
     if (values[3]) {
-      __pyx_v_enable = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_enable == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_v_enable = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_enable == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
       __pyx_v_enable = ((int)1);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_active_sprite", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("set_active_sprite", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.set_active_sprite", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_name), (&PyString_Type), 1, "sprite_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_name), (&PyString_Type), 1, "sprite_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_8set_active_sprite(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_enable);
 
   /* function exit code */
@@ -2580,7 +2587,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_8set_active_sprite(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.enable = __pyx_v_enable;
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_set_active_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_set_active_sprite(__pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2597,7 +2604,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_8set_active_sprite(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":167
+/* "yapyg\entities.pyx":168
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2625,7 +2632,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
 
-  /* "yapyg\entities.pyx":171
+  /* "yapyg\entities.pyx":172
  *         TODO
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2634,15 +2641,15 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entities_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":172
+  /* "yapyg\entities.pyx":173
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]             # <<<<<<<<<<<<<<
@@ -2651,15 +2658,15 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entities_db == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entities_db, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entities_db, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entities_table = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":174
+  /* "yapyg\entities.pyx":175
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity
  *         if entities_table.has_key(entity_name):             # <<<<<<<<<<<<<<
@@ -2668,81 +2675,81 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entities_table == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "has_key");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = PyDict_Contains(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyDict_Contains(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\entities.pyx":175
+    /* "yapyg\entities.pyx":176
  *         cdef list entity
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]             # <<<<<<<<<<<<<<
  *                 if entity:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  */
     if (unlikely(__pyx_v_entities_table == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_entity = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":176
+    /* "yapyg\entities.pyx":177
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]
  *                 if entity:             # <<<<<<<<<<<<<<
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:
  */
     __pyx_t_3 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg\entities.pyx":177
+      /* "yapyg\entities.pyx":178
  *                 entity = entities_table[entity_name]
  *                 if entity:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)             # <<<<<<<<<<<<<<
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)             # <<<<<<<<<<<<<<
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:
- *                                 sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
- */
-      if (unlikely(__pyx_v_entity == Py_None)) {
-        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-      __Pyx_GOTREF(__pyx_t_1);
-      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_4 = __pyx_f_5yapyg_8entities_c_get_full_sprite_name(__pyx_v_entity_name, ((PyObject*)__pyx_t_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, ((PyObject*)__pyx_t_4), 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "yapyg\entities.pyx":178
- *                 if entity:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
- *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:             # <<<<<<<<<<<<<<
- *                                 sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
- * 
+ *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))
  */
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_SPRITES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_f_5yapyg_8entities_get_full_sprite_name(__pyx_v_entity_name, ((PyObject*)__pyx_t_1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_1 = __pyx_f_5yapyg_7sprites_set_enable(__pyx_v_state, ((PyObject*)__pyx_t_4), 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+      /* "yapyg\entities.pyx":179
+ *                 if entity:
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:             # <<<<<<<<<<<<<<
+ *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))
+ * 
+ */
+      if (unlikely(__pyx_v_entity == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_SPRITES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
         __pyx_t_4 = __pyx_t_1; __Pyx_INCREF(__pyx_t_4); __pyx_t_5 = 0;
         __pyx_t_6 = NULL;
       } else {
-        __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (;;) {
@@ -2750,16 +2757,16 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
           if (likely(PyList_CheckExact(__pyx_t_4))) {
             if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_4)) break;
             #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #else
-            __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #endif
           } else {
             if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
             #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #else
-            __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #endif
           }
         } else {
@@ -2768,7 +2775,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
             break;
           }
@@ -2777,33 +2784,33 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
         __Pyx_XDECREF_SET(__pyx_v_sprite_name, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "yapyg\entities.pyx":179
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+        /* "yapyg\entities.pyx":180
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:
- *                                 sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))             # <<<<<<<<<<<<<<
+ *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))             # <<<<<<<<<<<<<<
  * 
  *                         if entity[IDX_ENTITY_COLLISION]:
  */
-        if (!(likely(PyString_CheckExact(__pyx_v_sprite_name))||((__pyx_v_sprite_name) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_sprite_name)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __pyx_t_1 = __pyx_f_5yapyg_8entities_c_get_full_sprite_name(__pyx_v_entity_name, ((PyObject*)__pyx_v_sprite_name)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (!(likely(PyString_CheckExact(__pyx_v_sprite_name))||((__pyx_v_sprite_name) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_sprite_name)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __pyx_f_5yapyg_8entities_get_full_sprite_name(__pyx_v_entity_name, ((PyObject*)__pyx_v_sprite_name)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_7 = __pyx_f_5yapyg_7sprites_delete(__pyx_v_state, ((PyObject*)__pyx_t_1), 0); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __pyx_f_5yapyg_7sprites_delete(__pyx_v_state, ((PyObject*)__pyx_t_1), 0); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-        /* "yapyg\entities.pyx":178
+        /* "yapyg\entities.pyx":179
  *                 if entity:
- *                         sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+ *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:             # <<<<<<<<<<<<<<
- *                                 sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
+ *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))
  * 
  */
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "yapyg\entities.pyx":181
- *                                 sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
+      /* "yapyg\entities.pyx":182
+ *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))
  * 
  *                         if entity[IDX_ENTITY_COLLISION]:             # <<<<<<<<<<<<<<
  *                                 collisions.delete(state, entity_name)
@@ -2811,29 +2818,29 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
  */
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_COLLISION, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_COLLISION, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg\entities.pyx":182
+        /* "yapyg\entities.pyx":183
  * 
  *                         if entity[IDX_ENTITY_COLLISION]:
  *                                 collisions.delete(state, entity_name)             # <<<<<<<<<<<<<<
  * 
  *                         del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
  */
-        __pyx_t_4 = __pyx_f_5yapyg_10collisions_delete(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __pyx_f_5yapyg_10collisions_delete(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         goto __pyx_L7;
       }
       __pyx_L7:;
 
-      /* "yapyg\entities.pyx":184
+      /* "yapyg\entities.pyx":185
  *                                 collisions.delete(state, entity_name)
  * 
  *                         del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]             # <<<<<<<<<<<<<<
@@ -2842,24 +2849,24 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
  */
       if (unlikely(__pyx_v_state == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_7 = __Pyx_GetItemInt(__pyx_t_4, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_7 = __Pyx_GetItemInt(__pyx_t_4, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_7 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (PyObject_DelItem(__pyx_t_7, __pyx_v_entity_name) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (PyObject_DelItem(__pyx_t_7, __pyx_v_entity_name) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "yapyg\entities.pyx":186
+      /* "yapyg\entities.pyx":187
  *                         del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
  * 
  *                         movers.delete(state, entity_name)             # <<<<<<<<<<<<<<
  * 
- * cdef c_call_pos_listeners(list state, str entity_name, tuple pos):
+ * cdef call_pos_listeners(list state, str entity_name, tuple pos):
  */
-      __pyx_t_7 = __pyx_f_5yapyg_6movers_delete(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __pyx_f_5yapyg_6movers_delete(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       goto __pyx_L4;
@@ -2869,7 +2876,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":167
+  /* "yapyg\entities.pyx":168
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2928,11 +2935,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_11delete(PyObject *__pyx_self, PyObje
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("delete", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("delete", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "delete") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "delete") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2945,14 +2952,14 @@ static PyObject *__pyx_pw_5yapyg_8entities_11delete(PyObject *__pyx_self, PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("delete", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("delete", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.delete", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_10delete(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
@@ -2973,7 +2980,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_10delete(CYTHON_UNUSED PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_delete(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_delete(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2990,38 +2997,38 @@ static PyObject *__pyx_pf_5yapyg_8entities_10delete(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":188
+/* "yapyg\entities.pyx":189
  *                         movers.delete(state, entity_name)
  * 
- * cdef c_call_pos_listeners(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
+ * cdef call_pos_listeners(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_f_5yapyg_8entities_c_call_pos_listeners(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_pos) {
+static PyObject *__pyx_f_5yapyg_8entities_call_pos_listeners(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_pos) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("c_call_pos_listeners", 0);
+  __Pyx_RefNannySetupContext("call_pos_listeners", 0);
 
-  /* "yapyg\entities.pyx":192
+  /* "yapyg\entities.pyx":193
  *         TODO
  *         """
  *         collisions.entity_pos_listener(state, entity_name, pos)             # <<<<<<<<<<<<<<
  * 
- * cdef str c_get_full_sprite_name(str entity_name, str sprite_name):
+ * cdef str get_full_sprite_name(str entity_name, str sprite_name):
  */
-  __pyx_t_1 = __pyx_f_5yapyg_10collisions_entity_pos_listener(__pyx_v_state, __pyx_v_entity_name, __pyx_v_pos, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_10collisions_entity_pos_listener(__pyx_v_state, __pyx_v_entity_name, __pyx_v_pos, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":188
+  /* "yapyg\entities.pyx":189
  *                         movers.delete(state, entity_name)
  * 
- * cdef c_call_pos_listeners(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
+ * cdef call_pos_listeners(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -3031,7 +3038,7 @@ static PyObject *__pyx_f_5yapyg_8entities_c_call_pos_listeners(PyObject *__pyx_v
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("yapyg.entities.c_call_pos_listeners", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg.entities.call_pos_listeners", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3039,15 +3046,15 @@ static PyObject *__pyx_f_5yapyg_8entities_c_call_pos_listeners(PyObject *__pyx_v
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":194
+/* "yapyg\entities.pyx":195
  *         collisions.entity_pos_listener(state, entity_name, pos)
  * 
- * cdef str c_get_full_sprite_name(str entity_name, str sprite_name):             # <<<<<<<<<<<<<<
+ * cdef str get_full_sprite_name(str entity_name, str sprite_name):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_f_5yapyg_8entities_c_get_full_sprite_name(PyObject *__pyx_v_entity_name, PyObject *__pyx_v_sprite_name) {
+static PyObject *__pyx_f_5yapyg_8entities_get_full_sprite_name(PyObject *__pyx_v_entity_name, PyObject *__pyx_v_sprite_name) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3055,9 +3062,9 @@ static PyObject *__pyx_f_5yapyg_8entities_c_get_full_sprite_name(PyObject *__pyx
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("c_get_full_sprite_name", 0);
+  __Pyx_RefNannySetupContext("get_full_sprite_name", 0);
 
-  /* "yapyg\entities.pyx":198
+  /* "yapyg\entities.pyx":199
  *         TODO
  *         """
  *         return entity_name + "_" + sprite_name             # <<<<<<<<<<<<<<
@@ -3065,19 +3072,19 @@ static PyObject *__pyx_f_5yapyg_8entities_c_get_full_sprite_name(PyObject *__pyx
  * cpdef list get(list state, str entity_name):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyNumber_Add(__pyx_v_entity_name, __pyx_n_s__5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyNumber_Add(__pyx_v_entity_name, __pyx_n_s__5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_v_sprite_name); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_v_sprite_name); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\entities.pyx":194
+  /* "yapyg\entities.pyx":195
  *         collisions.entity_pos_listener(state, entity_name, pos)
  * 
- * cdef str c_get_full_sprite_name(str entity_name, str sprite_name):             # <<<<<<<<<<<<<<
+ * cdef str get_full_sprite_name(str entity_name, str sprite_name):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -3086,7 +3093,7 @@ static PyObject *__pyx_f_5yapyg_8entities_c_get_full_sprite_name(PyObject *__pyx
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("yapyg.entities.c_get_full_sprite_name", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("yapyg.entities.get_full_sprite_name", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3094,7 +3101,7 @@ static PyObject *__pyx_f_5yapyg_8entities_c_get_full_sprite_name(PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":200
+/* "yapyg\entities.pyx":201
  *         return entity_name + "_" + sprite_name
  * 
  * cpdef list get(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3117,7 +3124,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "yapyg\entities.pyx":204
+  /* "yapyg\entities.pyx":205
  *         TODO
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]             # <<<<<<<<<<<<<<
@@ -3126,15 +3133,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entities_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":205
+  /* "yapyg\entities.pyx":206
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]             # <<<<<<<<<<<<<<
@@ -3143,15 +3150,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
  */
   if (unlikely(__pyx_v_entities_db == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entities_db, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entities_db, __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 206; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entities_table = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":207
+  /* "yapyg\entities.pyx":208
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity
  *         if entities_table.has_key(entity_name):             # <<<<<<<<<<<<<<
@@ -3160,13 +3167,13 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
  */
   if (unlikely(__pyx_v_entities_table == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "has_key");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = PyDict_Contains(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyDict_Contains(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\entities.pyx":208
+    /* "yapyg\entities.pyx":209
  *         cdef list entity
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]             # <<<<<<<<<<<<<<
@@ -3175,15 +3182,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
  */
     if (unlikely(__pyx_v_entities_table == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_entities_table, __pyx_v_entity_name); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_entity = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":209
+    /* "yapyg\entities.pyx":210
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]
  *                 if entity[IDX_ENTITY_ENABLE]:             # <<<<<<<<<<<<<<
@@ -3192,15 +3199,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "yapyg\entities.pyx":210
+      /* "yapyg\entities.pyx":211
  *                 entity = entities_table[entity_name]
  *                 if entity[IDX_ENTITY_ENABLE]:
  *                         return entity             # <<<<<<<<<<<<<<
@@ -3214,7 +3221,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
     }
     /*else*/ {
 
-      /* "yapyg\entities.pyx":212
+      /* "yapyg\entities.pyx":213
  *                         return entity
  *                 else:
  *                         return None             # <<<<<<<<<<<<<<
@@ -3229,7 +3236,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   }
   /*else*/ {
 
-    /* "yapyg\entities.pyx":214
+    /* "yapyg\entities.pyx":215
  *                         return None
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -3242,7 +3249,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
     goto __pyx_L0;
   }
 
-  /* "yapyg\entities.pyx":200
+  /* "yapyg\entities.pyx":201
  *         return entity_name + "_" + sprite_name
  * 
  * cpdef list get(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3296,11 +3303,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_13get(PyObject *__pyx_self, PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3313,14 +3320,14 @@ static PyObject *__pyx_pw_5yapyg_8entities_13get(PyObject *__pyx_self, PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.get", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_12get(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
@@ -3341,7 +3348,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_12get(CYTHON_UNUSED PyObject *__pyx_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3358,7 +3365,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_12get(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":216
+/* "yapyg\entities.pyx":217
  *                 return None
  * 
  * cpdef tuple get_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3379,19 +3386,19 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos", 0);
 
-  /* "yapyg\entities.pyx":220
+  /* "yapyg\entities.pyx":221
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         cdef list pos
  *         if entity:
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":222
+  /* "yapyg\entities.pyx":223
  *         cdef list entity = get(state, entity_name)
  *         cdef list pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -3401,7 +3408,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":223
+    /* "yapyg\entities.pyx":224
  *         cdef list pos
  *         if entity:
  *                 pos = entity[IDX_ENTITY_POS]             # <<<<<<<<<<<<<<
@@ -3410,15 +3417,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":224
+    /* "yapyg\entities.pyx":225
  *         if entity:
  *                 pos = entity[IDX_ENTITY_POS]
  *                 return tuple(pos)             # <<<<<<<<<<<<<<
@@ -3428,9 +3435,9 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_XDECREF(__pyx_r);
     if (unlikely(__pyx_v_pos == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = PyList_AsTuple(__pyx_v_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyList_AsTuple(__pyx_v_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
@@ -3438,7 +3445,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   }
   /*else*/ {
 
-    /* "yapyg\entities.pyx":226
+    /* "yapyg\entities.pyx":227
  *                 return tuple(pos)
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -3451,7 +3458,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
     goto __pyx_L0;
   }
 
-  /* "yapyg\entities.pyx":216
+  /* "yapyg\entities.pyx":217
  *                 return None
  * 
  * cpdef tuple get_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3504,11 +3511,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_15get_pos(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_pos", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_pos", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3521,14 +3528,14 @@ static PyObject *__pyx_pw_5yapyg_8entities_15get_pos(PyObject *__pyx_self, PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_pos", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_pos", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.get_pos", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_14get_pos(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
@@ -3549,7 +3556,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_14get_pos(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3566,7 +3573,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_14get_pos(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":228
+/* "yapyg\entities.pyx":229
  *                 return None
  * 
  * cpdef tuple get_last_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3587,19 +3594,19 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_last_pos", 0);
 
-  /* "yapyg\entities.pyx":232
+  /* "yapyg\entities.pyx":233
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         cdef tuple last_pos
  *         if entity:
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":234
+  /* "yapyg\entities.pyx":235
  *         cdef list entity = get(state, entity_name)
  *         cdef tuple last_pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -3609,7 +3616,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":235
+    /* "yapyg\entities.pyx":236
  *         cdef tuple last_pos
  *         if entity:
  *                 last_pos = entity[IDX_ENTITY_LAST_POS]             # <<<<<<<<<<<<<<
@@ -3618,15 +3625,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_last_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":236
+    /* "yapyg\entities.pyx":237
  *         if entity:
  *                 last_pos = entity[IDX_ENTITY_LAST_POS]
  *                 return last_pos             # <<<<<<<<<<<<<<
@@ -3640,7 +3647,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   }
   /*else*/ {
 
-    /* "yapyg\entities.pyx":238
+    /* "yapyg\entities.pyx":239
  *                 return last_pos
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -3653,7 +3660,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
     goto __pyx_L0;
   }
 
-  /* "yapyg\entities.pyx":228
+  /* "yapyg\entities.pyx":229
  *                 return None
  * 
  * cpdef tuple get_last_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3706,11 +3713,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_17get_last_pos(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_last_pos", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_last_pos", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_last_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_last_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3723,14 +3730,14 @@ static PyObject *__pyx_pw_5yapyg_8entities_17get_last_pos(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_last_pos", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_last_pos", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.get_last_pos", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_16get_last_pos(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
@@ -3751,7 +3758,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_16get_last_pos(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_last_pos", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_last_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_last_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3768,7 +3775,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_16get_last_pos(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":240
+/* "yapyg\entities.pyx":241
  *                 return None
  * 
  * cpdef tuple get_pos_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3789,19 +3796,19 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos_offset", 0);
 
-  /* "yapyg\entities.pyx":244
+  /* "yapyg\entities.pyx":245
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         cdef list pos_offset
  *         if entity:
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":246
+  /* "yapyg\entities.pyx":247
  *         cdef list entity = get(state, entity_name)
  *         cdef list pos_offset
  *         if entity:             # <<<<<<<<<<<<<<
@@ -3811,7 +3818,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":247
+    /* "yapyg\entities.pyx":248
  *         cdef list pos_offset
  *         if entity:
  *                 pos_offset = entity[IDX_ENTITY_POS_OFFSET]             # <<<<<<<<<<<<<<
@@ -3820,15 +3827,15 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_pos_offset = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":248
+    /* "yapyg\entities.pyx":249
  *         if entity:
  *                 pos_offset = entity[IDX_ENTITY_POS_OFFSET]
  *                 return tuple(pos_offset)             # <<<<<<<<<<<<<<
@@ -3838,9 +3845,9 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
     __Pyx_XDECREF(__pyx_r);
     if (unlikely(__pyx_v_pos_offset == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = PyList_AsTuple(__pyx_v_pos_offset); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyList_AsTuple(__pyx_v_pos_offset); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
@@ -3848,12 +3855,12 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   }
   /*else*/ {
 
-    /* "yapyg\entities.pyx":250
+    /* "yapyg\entities.pyx":251
  *                 return tuple(pos_offset)
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
  * 
- * cdef void normalize_rotation(list entity):
+ * cpdef tuple get_pos_with_offset(list state, str entity_name):
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(Py_None);
@@ -3861,7 +3868,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
     goto __pyx_L0;
   }
 
-  /* "yapyg\entities.pyx":240
+  /* "yapyg\entities.pyx":241
  *                 return None
  * 
  * cpdef tuple get_pos_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3914,11 +3921,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_19get_pos_offset(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_pos_offset", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_pos_offset", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_pos_offset") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_pos_offset") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3931,14 +3938,14 @@ static PyObject *__pyx_pw_5yapyg_8entities_19get_pos_offset(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_pos_offset", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_pos_offset", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.get_pos_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_18get_pos_offset(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
@@ -3959,7 +3966,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_18get_pos_offset(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos_offset", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos_offset(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos_offset(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3976,7 +3983,245 @@ static PyObject *__pyx_pf_5yapyg_8entities_18get_pos_offset(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":252
+/* "yapyg\entities.pyx":253
+ *                 return None
+ * 
+ * cpdef tuple get_pos_with_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
+ *         cdef list entity = get(state, entity_name)
+ *         cdef tuple last_pos
+ */
+
+static PyObject *__pyx_pw_5yapyg_8entities_21get_pos_with_offset(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_v_entity = 0;
+  PyObject *__pyx_v_last_pos = 0;
+  PyObject *__pyx_v_pos_offset = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_pos_with_offset", 0);
+
+  /* "yapyg\entities.pyx":254
+ * 
+ * cpdef tuple get_pos_with_offset(list state, str entity_name):
+ *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
+ *         cdef tuple last_pos
+ *         cdef tuple pos_offset
+ */
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_entity = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "yapyg\entities.pyx":257
+ *         cdef tuple last_pos
+ *         cdef tuple pos_offset
+ *         if entity:             # <<<<<<<<<<<<<<
+ *                 last_pos = tuple(entity[IDX_ENTITY_POS])
+ *                 pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])
+ */
+  __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
+  if (__pyx_t_2) {
+
+    /* "yapyg\entities.pyx":258
+ *         cdef tuple pos_offset
+ *         if entity:
+ *                 last_pos = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
+ *                 pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])
+ *                 return math_2d.vector_add(last_pos, pos_offset)
+ */
+    if (unlikely(__pyx_v_entity == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+    __Pyx_GIVEREF(__pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_v_last_pos = ((PyObject*)__pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "yapyg\entities.pyx":259
+ *         if entity:
+ *                 last_pos = tuple(entity[IDX_ENTITY_POS])
+ *                 pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])             # <<<<<<<<<<<<<<
+ *                 return math_2d.vector_add(last_pos, pos_offset)
+ *         else:
+ */
+    if (unlikely(__pyx_v_entity == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
+    __Pyx_GIVEREF(__pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_v_pos_offset = ((PyObject*)__pyx_t_1);
+    __pyx_t_1 = 0;
+
+    /* "yapyg\entities.pyx":260
+ *                 last_pos = tuple(entity[IDX_ENTITY_POS])
+ *                 pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])
+ *                 return math_2d.vector_add(last_pos, pos_offset)             # <<<<<<<<<<<<<<
+ *         else:
+ *                 return None
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = __pyx_f_5yapyg_7math_2d_vector_add(__pyx_v_last_pos, __pyx_v_pos_offset, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_r = ((PyObject*)__pyx_t_1);
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+  }
+  /*else*/ {
+
+    /* "yapyg\entities.pyx":262
+ *                 return math_2d.vector_add(last_pos, pos_offset)
+ *         else:
+ *                 return None             # <<<<<<<<<<<<<<
+ * 
+ * cdef void normalize_rotation(list entity):
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(Py_None);
+    __pyx_r = ((PyObject*)Py_None);
+    goto __pyx_L0;
+  }
+
+  /* "yapyg\entities.pyx":253
+ *                 return None
+ * 
+ * cpdef tuple get_pos_with_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
+ *         cdef list entity = get(state, entity_name)
+ *         cdef tuple last_pos
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("yapyg.entities.get_pos_with_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_entity);
+  __Pyx_XDECREF(__pyx_v_last_pos);
+  __Pyx_XDECREF(__pyx_v_pos_offset);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5yapyg_8entities_21get_pos_with_offset(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_8entities_21get_pos_with_offset(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_state = 0;
+  PyObject *__pyx_v_entity_name = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_pos_with_offset (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_state,&__pyx_n_s_entity_name,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_state)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_pos_with_offset", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_pos_with_offset") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_state = ((PyObject*)values[0]);
+    __pyx_v_entity_name = ((PyObject*)values[1]);
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("get_pos_with_offset", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("yapyg.entities.get_pos_with_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_8entities_20get_pos_with_offset(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5yapyg_8entities_20get_pos_with_offset(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_pos_with_offset", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos_with_offset(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("yapyg.entities.get_pos_with_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg\entities.pyx":264
  *                 return None
  * 
  * cdef void normalize_rotation(list entity):             # <<<<<<<<<<<<<<
@@ -3996,7 +4241,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("normalize_rotation", 0);
 
-  /* "yapyg\entities.pyx":256
+  /* "yapyg\entities.pyx":268
  *         TODO
  *         """
  *         cdef float old_rot = entity[IDX_ENTITY_POS][2]             # <<<<<<<<<<<<<<
@@ -4005,18 +4250,18 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
  */
   if (unlikely(__pyx_v_entity == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_old_rot = __pyx_t_3;
 
-  /* "yapyg\entities.pyx":257
+  /* "yapyg\entities.pyx":269
  *         """
  *         cdef float old_rot = entity[IDX_ENTITY_POS][2]
  *         cdef float modulo_rot = fmod(old_rot, 360.0)             # <<<<<<<<<<<<<<
@@ -4025,26 +4270,26 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
  */
   __pyx_v_modulo_rot = fmod(__pyx_v_old_rot, 360.0);
 
-  /* "yapyg\entities.pyx":258
+  /* "yapyg\entities.pyx":270
  *         cdef float old_rot = entity[IDX_ENTITY_POS][2]
  *         cdef float modulo_rot = fmod(old_rot, 360.0)
  *         entity[IDX_ENTITY_POS][2] = modulo_rot             # <<<<<<<<<<<<<<
  * 
  * cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_modulo_rot); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_modulo_rot); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_entity == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(__Pyx_SetItemInt(__pyx_t_1, 2, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_1, 2, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\entities.pyx":252
+  /* "yapyg\entities.pyx":264
  *                 return None
  * 
  * cdef void normalize_rotation(list entity):             # <<<<<<<<<<<<<<
@@ -4062,7 +4307,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   __Pyx_RefNannyFinishContext();
 }
 
-/* "yapyg\entities.pyx":260
+/* "yapyg\entities.pyx":272
  *         entity[IDX_ENTITY_POS][2] = modulo_rot
  * 
  * cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
@@ -4070,7 +4315,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_8entities_21set_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_8entities_23set_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_entity = 0;
   PyObject *__pyx_v_old_pos = 0;
@@ -4086,19 +4331,19 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_pos", 0);
 
-  /* "yapyg\entities.pyx":264
+  /* "yapyg\entities.pyx":276
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         cdef tuple old_pos
  *         if entity:
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":266
+  /* "yapyg\entities.pyx":278
  *         cdef list entity = get(state, entity_name)
  *         cdef tuple old_pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -4108,7 +4353,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":267
+    /* "yapyg\entities.pyx":279
  *         cdef tuple old_pos
  *         if entity:
  *                 old_pos = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -4117,22 +4362,22 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_old_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":269
+    /* "yapyg\entities.pyx":281
  *                 old_pos = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -4141,39 +4386,39 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":271
+    /* "yapyg\entities.pyx":283
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 if (x_pos, y_pos, rot) == old_pos:             # <<<<<<<<<<<<<<
  *                         return
  * 
  */
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
@@ -4184,13 +4429,13 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     __pyx_t_1 = 0;
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_v_old_pos, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_v_old_pos, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg\entities.pyx":272
+      /* "yapyg\entities.pyx":284
  * 
  *                 if (x_pos, y_pos, rot) == old_pos:
  *                         return             # <<<<<<<<<<<<<<
@@ -4202,94 +4447,94 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
       goto __pyx_L0;
     }
 
-    /* "yapyg\entities.pyx":274
+    /* "yapyg\entities.pyx":286
  *                         return
  * 
  *                 entity[IDX_ENTITY_POS][0] = x_pos             # <<<<<<<<<<<<<<
  *                 entity[IDX_ENTITY_POS][1] = y_pos
  *                 entity[IDX_ENTITY_POS][2] = rot
  */
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 0, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 0, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\entities.pyx":275
+    /* "yapyg\entities.pyx":287
  * 
  *                 entity[IDX_ENTITY_POS][0] = x_pos
  *                 entity[IDX_ENTITY_POS][1] = y_pos             # <<<<<<<<<<<<<<
  *                 entity[IDX_ENTITY_POS][2] = rot
  * 
  */
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 1, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 1, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\entities.pyx":276
+    /* "yapyg\entities.pyx":288
  *                 entity[IDX_ENTITY_POS][0] = x_pos
  *                 entity[IDX_ENTITY_POS][1] = y_pos
  *                 entity[IDX_ENTITY_POS][2] = rot             # <<<<<<<<<<<<<<
  * 
  *                 normalize_rotation(entity)
  */
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 2, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 2, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\entities.pyx":278
+    /* "yapyg\entities.pyx":290
  *                 entity[IDX_ENTITY_POS][2] = rot
  * 
  *                 normalize_rotation(entity)             # <<<<<<<<<<<<<<
  * 
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  */
     __pyx_f_5yapyg_8entities_normalize_rotation(__pyx_v_entity);
 
-    /* "yapyg\entities.pyx":280
+    /* "yapyg\entities.pyx":292
  *                 normalize_rotation(entity)
  * 
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))             # <<<<<<<<<<<<<<
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))             # <<<<<<<<<<<<<<
  * 
  * cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __pyx_f_5yapyg_8entities_c_call_pos_listeners(__pyx_v_state, __pyx_v_entity_name, ((PyObject*)__pyx_t_4)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __pyx_f_5yapyg_8entities_call_pos_listeners(__pyx_v_state, __pyx_v_entity_name, ((PyObject*)__pyx_t_4)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4297,7 +4542,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":260
+  /* "yapyg\entities.pyx":272
  *         entity[IDX_ENTITY_POS][2] = modulo_rot
  * 
  * cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
@@ -4324,9 +4569,9 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_8entities_21set_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_5yapyg_8entities_20set_pos[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_8entities_21set_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5yapyg_8entities_23set_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_8entities_22set_pos[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_8entities_23set_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   float __pyx_v_x_pos;
@@ -4361,26 +4606,26 @@ static PyObject *__pyx_pw_5yapyg_8entities_21set_pos(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_x_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rot)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -4393,21 +4638,21 @@ static PyObject *__pyx_pw_5yapyg_8entities_21set_pos(PyObject *__pyx_self, PyObj
     }
     __pyx_v_state = ((PyObject*)values[0]);
     __pyx_v_entity_name = ((PyObject*)values[1]);
-    __pyx_v_x_pos = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_x_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_y_pos = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_y_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_rot = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_rot == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_x_pos = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_x_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_y_pos = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_y_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_rot = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_rot == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("set_pos", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.set_pos", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_8entities_20set_pos(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_8entities_22set_pos(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4418,7 +4663,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_21set_pos(PyObject *__pyx_self, PyObj
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_8entities_20set_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot) {
+static PyObject *__pyx_pf_5yapyg_8entities_22set_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4427,7 +4672,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_20set_pos(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_pos", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_set_pos(__pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_set_pos(__pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4444,15 +4689,15 @@ static PyObject *__pyx_pf_5yapyg_8entities_20set_pos(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":282
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+/* "yapyg\entities.pyx":294
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_8entities_23add_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_8entities_25add_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_entity = 0;
   PyObject *__pyx_r = NULL;
@@ -4468,19 +4713,19 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_pos", 0);
 
-  /* "yapyg\entities.pyx":286
+  /* "yapyg\entities.pyx":298
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         if entity:
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 298; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":287
+  /* "yapyg\entities.pyx":299
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -4490,7 +4735,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":288
+    /* "yapyg\entities.pyx":300
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -4499,39 +4744,39 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\entities.pyx":290
+    /* "yapyg\entities.pyx":302
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 if (x_pos, y_pos, rot) == (0, 0, 0):             # <<<<<<<<<<<<<<
  *                         return
  * 
  */
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
@@ -4542,13 +4787,13 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
     __pyx_t_1 = 0;
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_tuple__6, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_tuple__6, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg\entities.pyx":291
+      /* "yapyg\entities.pyx":303
  * 
  *                 if (x_pos, y_pos, rot) == (0, 0, 0):
  *                         return             # <<<<<<<<<<<<<<
@@ -4560,7 +4805,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
       goto __pyx_L0;
     }
 
-    /* "yapyg\entities.pyx":293
+    /* "yapyg\entities.pyx":305
  *                         return
  * 
  *                 entity[IDX_ENTITY_POS][0] += x_pos             # <<<<<<<<<<<<<<
@@ -4569,24 +4814,24 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = 0;
-    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_4, __pyx_t_6, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_4, __pyx_t_6, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_x_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, __pyx_t_6, __pyx_t_1, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, __pyx_t_6, __pyx_t_1, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\entities.pyx":294
+    /* "yapyg\entities.pyx":306
  * 
  *                 entity[IDX_ENTITY_POS][0] += x_pos
  *                 entity[IDX_ENTITY_POS][1] += y_pos             # <<<<<<<<<<<<<<
@@ -4595,24 +4840,24 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = 1;
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, __pyx_t_6, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_4, __pyx_t_6, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_y_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyNumber_InPlaceAdd(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, __pyx_t_6, __pyx_t_5, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, __pyx_t_6, __pyx_t_5, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\entities.pyx":295
+    /* "yapyg\entities.pyx":307
  *                 entity[IDX_ENTITY_POS][0] += x_pos
  *                 entity[IDX_ENTITY_POS][1] += y_pos
  *                 entity[IDX_ENTITY_POS][2] += rot             # <<<<<<<<<<<<<<
@@ -4621,54 +4866,54 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = 2;
-    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_4, __pyx_t_6, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_4, __pyx_t_6, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, __pyx_t_6, __pyx_t_1, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, __pyx_t_6, __pyx_t_1, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\entities.pyx":297
+    /* "yapyg\entities.pyx":309
  *                 entity[IDX_ENTITY_POS][2] += rot
  * 
  *                 normalize_rotation(entity)             # <<<<<<<<<<<<<<
  * 
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  */
     __pyx_f_5yapyg_8entities_normalize_rotation(__pyx_v_entity);
 
-    /* "yapyg\entities.pyx":299
+    /* "yapyg\entities.pyx":311
  *                 normalize_rotation(entity)
  * 
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))             # <<<<<<<<<<<<<<
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))             # <<<<<<<<<<<<<<
  * 
  * cpdef undo_last_move(list state, str entity_name):
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyTuple_Type))), __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __pyx_f_5yapyg_8entities_c_call_pos_listeners(__pyx_v_state, __pyx_v_entity_name, ((PyObject*)__pyx_t_4)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_8entities_call_pos_listeners(__pyx_v_state, __pyx_v_entity_name, ((PyObject*)__pyx_t_4)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4676,8 +4921,8 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":282
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+  /* "yapyg\entities.pyx":294
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
  *         """
@@ -4702,9 +4947,9 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_8entities_23add_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_5yapyg_8entities_22add_pos[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_8entities_23add_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5yapyg_8entities_25add_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_8entities_24add_pos[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_8entities_25add_pos(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   float __pyx_v_x_pos;
@@ -4739,26 +4984,26 @@ static PyObject *__pyx_pw_5yapyg_8entities_23add_pos(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_x_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rot)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_pos") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -4771,21 +5016,21 @@ static PyObject *__pyx_pw_5yapyg_8entities_23add_pos(PyObject *__pyx_self, PyObj
     }
     __pyx_v_state = ((PyObject*)values[0]);
     __pyx_v_entity_name = ((PyObject*)values[1]);
-    __pyx_v_x_pos = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_x_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_y_pos = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_y_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_rot = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_rot == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_x_pos = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_x_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_y_pos = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_y_pos == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_rot = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_rot == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("add_pos", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.add_pos", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_8entities_22add_pos(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_8entities_24add_pos(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot);
 
   /* function exit code */
   goto __pyx_L0;
@@ -4796,7 +5041,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_23add_pos(PyObject *__pyx_self, PyObj
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_8entities_22add_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot) {
+static PyObject *__pyx_pf_5yapyg_8entities_24add_pos(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_x_pos, float __pyx_v_y_pos, float __pyx_v_rot) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4805,7 +5050,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_22add_pos(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_pos", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_add_pos(__pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_add_pos(__pyx_v_state, __pyx_v_entity_name, __pyx_v_x_pos, __pyx_v_y_pos, __pyx_v_rot, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4822,15 +5067,15 @@ static PyObject *__pyx_pf_5yapyg_8entities_22add_pos(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":301
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+/* "yapyg\entities.pyx":313
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef undo_last_move(list state, str entity_name):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_8entities_25undo_last_move(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_8entities_27undo_last_move(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_entity = 0;
   PyObject *__pyx_v_last_pos = 0;
@@ -4844,19 +5089,19 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("undo_last_move", 0);
 
-  /* "yapyg\entities.pyx":305
+  /* "yapyg\entities.pyx":317
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         cdef tuple last_pos
  *         if entity:
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":307
+  /* "yapyg\entities.pyx":319
  *         cdef list entity = get(state, entity_name)
  *         cdef tuple last_pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -4866,7 +5111,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":308
+    /* "yapyg\entities.pyx":320
  *         cdef tuple last_pos
  *         if entity:
  *                 if entity[IDX_ENTITY_LAST_POS]:             # <<<<<<<<<<<<<<
@@ -4875,15 +5120,15 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg\entities.pyx":309
+      /* "yapyg\entities.pyx":321
  *         if entity:
  *                 if entity[IDX_ENTITY_LAST_POS]:
  *                         last_pos = entity[IDX_ENTITY_LAST_POS]             # <<<<<<<<<<<<<<
@@ -4892,15 +5137,15 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
  */
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_v_last_pos = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg\entities.pyx":311
+      /* "yapyg\entities.pyx":323
  *                         last_pos = entity[IDX_ENTITY_LAST_POS]
  * 
  *                         entity[IDX_ENTITY_POS][0] = last_pos[0]             # <<<<<<<<<<<<<<
@@ -4909,21 +5154,21 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
  */
       if (unlikely(__pyx_v_last_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_last_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_last_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg\entities.pyx":312
+      /* "yapyg\entities.pyx":324
  * 
  *                         entity[IDX_ENTITY_POS][0] = last_pos[0]
  *                         entity[IDX_ENTITY_POS][1] = last_pos[1]             # <<<<<<<<<<<<<<
@@ -4932,21 +5177,21 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
  */
       if (unlikely(__pyx_v_last_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_last_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_last_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg\entities.pyx":313
+      /* "yapyg\entities.pyx":325
  *                         entity[IDX_ENTITY_POS][0] = last_pos[0]
  *                         entity[IDX_ENTITY_POS][1] = last_pos[1]
  *                         entity[IDX_ENTITY_POS][2] = last_pos[2]             # <<<<<<<<<<<<<<
@@ -4955,41 +5200,41 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
  */
       if (unlikely(__pyx_v_last_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_last_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_last_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg\entities.pyx":315
+      /* "yapyg\entities.pyx":327
  *                         entity[IDX_ENTITY_POS][2] = last_pos[2]
  * 
  *                         entity[IDX_ENTITY_LAST_POS] = None             # <<<<<<<<<<<<<<
  * 
- *                         c_call_pos_listeners(state, entity_name, last_pos)
+ *                         call_pos_listeners(state, entity_name, last_pos)
  */
       if (unlikely(__pyx_v_entity == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "yapyg\entities.pyx":317
+      /* "yapyg\entities.pyx":329
  *                         entity[IDX_ENTITY_LAST_POS] = None
  * 
- *                         c_call_pos_listeners(state, entity_name, last_pos)             # <<<<<<<<<<<<<<
+ *                         call_pos_listeners(state, entity_name, last_pos)             # <<<<<<<<<<<<<<
  * 
  * cpdef disable(list state, str entity_name):
  */
-      __pyx_t_1 = __pyx_f_5yapyg_8entities_c_call_pos_listeners(__pyx_v_state, __pyx_v_entity_name, __pyx_v_last_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __pyx_f_5yapyg_8entities_call_pos_listeners(__pyx_v_state, __pyx_v_entity_name, __pyx_v_last_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       goto __pyx_L4;
@@ -4999,8 +5244,8 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":301
- *                 c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+  /* "yapyg\entities.pyx":313
+ *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef undo_last_move(list state, str entity_name):             # <<<<<<<<<<<<<<
  *         """
@@ -5024,9 +5269,9 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_8entities_25undo_last_move(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_5yapyg_8entities_24undo_last_move[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_8entities_25undo_last_move(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5yapyg_8entities_27undo_last_move(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_8entities_26undo_last_move[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_8entities_27undo_last_move(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   int __pyx_lineno = 0;
@@ -5055,11 +5300,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_25undo_last_move(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("undo_last_move", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("undo_last_move", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "undo_last_move") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "undo_last_move") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5072,15 +5317,15 @@ static PyObject *__pyx_pw_5yapyg_8entities_25undo_last_move(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("undo_last_move", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("undo_last_move", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.undo_last_move", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_8entities_24undo_last_move(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_8entities_26undo_last_move(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -5091,7 +5336,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_25undo_last_move(PyObject *__pyx_self
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_8entities_24undo_last_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
+static PyObject *__pyx_pf_5yapyg_8entities_26undo_last_move(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5100,7 +5345,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_24undo_last_move(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("undo_last_move", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_undo_last_move(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5117,15 +5362,15 @@ static PyObject *__pyx_pf_5yapyg_8entities_24undo_last_move(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":319
- *                         c_call_pos_listeners(state, entity_name, last_pos)
+/* "yapyg\entities.pyx":331
+ *                         call_pos_listeners(state, entity_name, last_pos)
  * 
  * cpdef disable(list state, str entity_name):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_8entities_27disable(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_8entities_29disable(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_entity = 0;
   PyObject *__pyx_r = NULL;
@@ -5137,19 +5382,19 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("disable", 0);
 
-  /* "yapyg\entities.pyx":323
+  /* "yapyg\entities.pyx":335
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         if entity:
  *                 entity[IDX_ENTITY_ENABLE] = False
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":324
+  /* "yapyg\entities.pyx":336
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -5159,7 +5404,7 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":325
+    /* "yapyg\entities.pyx":337
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 entity[IDX_ENTITY_ENABLE] = False             # <<<<<<<<<<<<<<
@@ -5168,15 +5413,15 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE, Py_False, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE, Py_False, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "yapyg\entities.pyx":319
- *                         c_call_pos_listeners(state, entity_name, last_pos)
+  /* "yapyg\entities.pyx":331
+ *                         call_pos_listeners(state, entity_name, last_pos)
  * 
  * cpdef disable(list state, str entity_name):             # <<<<<<<<<<<<<<
  *         """
@@ -5198,9 +5443,9 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_8entities_27disable(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_5yapyg_8entities_26disable[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_8entities_27disable(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5yapyg_8entities_29disable(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_8entities_28disable[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_8entities_29disable(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   int __pyx_lineno = 0;
@@ -5229,11 +5474,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_27disable(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("disable", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("disable", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "disable") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "disable") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5246,15 +5491,15 @@ static PyObject *__pyx_pw_5yapyg_8entities_27disable(PyObject *__pyx_self, PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("disable", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("disable", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.disable", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_8entities_26disable(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_8entities_28disable(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -5265,7 +5510,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_27disable(PyObject *__pyx_self, PyObj
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_8entities_26disable(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
+static PyObject *__pyx_pf_5yapyg_8entities_28disable(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5274,7 +5519,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_26disable(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("disable", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_disable(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_disable(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5291,7 +5536,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_26disable(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg\entities.pyx":327
+/* "yapyg\entities.pyx":339
  *                 entity[IDX_ENTITY_ENABLE] = False
  * 
  * cpdef int is_enabled(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5299,7 +5544,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_26disable(CYTHON_UNUSED PyObject *__p
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_8entities_29is_enabled(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_8entities_31is_enabled(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_entity = 0;
   int __pyx_r;
@@ -5312,19 +5557,19 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_enabled", 0);
 
-  /* "yapyg\entities.pyx":331
+  /* "yapyg\entities.pyx":343
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
  *         if entity:
  *                 return entity[IDX_ENTITY_ENABLE]
  */
-  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 331; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8entities_get(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\entities.pyx":332
+  /* "yapyg\entities.pyx":344
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -5334,7 +5579,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\entities.pyx":333
+    /* "yapyg\entities.pyx":345
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 return entity[IDX_ENTITY_ENABLE]             # <<<<<<<<<<<<<<
@@ -5343,18 +5588,18 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
  */
     if (unlikely(__pyx_v_entity == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_r = __pyx_t_3;
     goto __pyx_L0;
   }
   /*else*/ {
 
-    /* "yapyg\entities.pyx":335
+    /* "yapyg\entities.pyx":347
  *                 return entity[IDX_ENTITY_ENABLE]
  *         else:
  *                 return False             # <<<<<<<<<<<<<<
@@ -5363,7 +5608,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
     goto __pyx_L0;
   }
 
-  /* "yapyg\entities.pyx":327
+  /* "yapyg\entities.pyx":339
  *                 entity[IDX_ENTITY_ENABLE] = False
  * 
  * cpdef int is_enabled(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5383,9 +5628,9 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_8entities_29is_enabled(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_5yapyg_8entities_28is_enabled[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_8entities_29is_enabled(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5yapyg_8entities_31is_enabled(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_8entities_30is_enabled[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_8entities_31is_enabled(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   int __pyx_lineno = 0;
@@ -5414,11 +5659,11 @@ static PyObject *__pyx_pw_5yapyg_8entities_29is_enabled(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_enabled", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("is_enabled", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_enabled") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_enabled") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5431,15 +5676,15 @@ static PyObject *__pyx_pw_5yapyg_8entities_29is_enabled(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_enabled", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("is_enabled", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.entities.is_enabled", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_8entities_28is_enabled(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_8entities_30is_enabled(__pyx_self, __pyx_v_state, __pyx_v_entity_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -5450,7 +5695,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_29is_enabled(PyObject *__pyx_self, Py
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_8entities_28is_enabled(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
+static PyObject *__pyx_pf_5yapyg_8entities_30is_enabled(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5459,7 +5704,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_28is_enabled(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_enabled", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8entities_is_enabled(__pyx_v_state, __pyx_v_entity_name, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8entities_is_enabled(__pyx_v_state, __pyx_v_entity_name, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5487,11 +5732,12 @@ static PyMethodDef __pyx_methods[] = {
   {"get_pos", (PyCFunction)__pyx_pw_5yapyg_8entities_15get_pos, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_14get_pos},
   {"get_last_pos", (PyCFunction)__pyx_pw_5yapyg_8entities_17get_last_pos, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_16get_last_pos},
   {"get_pos_offset", (PyCFunction)__pyx_pw_5yapyg_8entities_19get_pos_offset, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_18get_pos_offset},
-  {"set_pos", (PyCFunction)__pyx_pw_5yapyg_8entities_21set_pos, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_20set_pos},
-  {"add_pos", (PyCFunction)__pyx_pw_5yapyg_8entities_23add_pos, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_22add_pos},
-  {"undo_last_move", (PyCFunction)__pyx_pw_5yapyg_8entities_25undo_last_move, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_24undo_last_move},
-  {"disable", (PyCFunction)__pyx_pw_5yapyg_8entities_27disable, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_26disable},
-  {"is_enabled", (PyCFunction)__pyx_pw_5yapyg_8entities_29is_enabled, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_28is_enabled},
+  {"get_pos_with_offset", (PyCFunction)__pyx_pw_5yapyg_8entities_21get_pos_with_offset, METH_VARARGS|METH_KEYWORDS, 0},
+  {"set_pos", (PyCFunction)__pyx_pw_5yapyg_8entities_23set_pos, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_22set_pos},
+  {"add_pos", (PyCFunction)__pyx_pw_5yapyg_8entities_25add_pos, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_24add_pos},
+  {"undo_last_move", (PyCFunction)__pyx_pw_5yapyg_8entities_27undo_last_move, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_26undo_last_move},
+  {"disable", (PyCFunction)__pyx_pw_5yapyg_8entities_29disable, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_28disable},
+  {"is_enabled", (PyCFunction)__pyx_pw_5yapyg_8entities_31is_enabled, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_8entities_30is_enabled},
   {0, 0, 0, 0}
 };
 
@@ -5558,39 +5804,39 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg\entities.pyx":62
+  /* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
  *              tuple collision=None, int screen_relative=False, int play_once=False):
  *         """
  */
-  __pyx_tuple_ = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "yapyg\entities.pyx":129
+  /* "yapyg\entities.pyx":130
  *                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
  * 
  *                 sprite_scale = (1.0, 1.0)             # <<<<<<<<<<<<<<
  * 
  *                 sprite_enable = enable
  */
-  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_float_1_0, __pyx_float_1_0); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_float_1_0, __pyx_float_1_0); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "yapyg\entities.pyx":290
+  /* "yapyg\entities.pyx":302
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 if (x_pos, y_pos, rot) == (0, 0, 0):             # <<<<<<<<<<<<<<
  *                         return
  * 
  */
-  __pyx_tuple__6 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__6 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
   __Pyx_RefNannyFinishContext();
@@ -5624,6 +5870,8 @@ PyMODINIT_FUNC PyInit_entities(void)
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_9 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5712,13 +5960,14 @@ PyMODINIT_FUNC PyInit_entities(void)
   if (__Pyx_ExportFunction("get_pos", (void (*)(void))__pyx_f_5yapyg_8entities_get_pos, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("get_last_pos", (void (*)(void))__pyx_f_5yapyg_8entities_get_last_pos, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("get_pos_offset", (void (*)(void))__pyx_f_5yapyg_8entities_get_pos_offset, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("get_pos_with_offset", (void (*)(void))__pyx_f_5yapyg_8entities_get_pos_with_offset, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("set_pos", (void (*)(void))__pyx_f_5yapyg_8entities_set_pos, "PyObject *(PyObject *, PyObject *, float, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("add_pos", (void (*)(void))__pyx_f_5yapyg_8entities_add_pos, "PyObject *(PyObject *, PyObject *, float, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("undo_last_move", (void (*)(void))__pyx_f_5yapyg_8entities_undo_last_move, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("disable", (void (*)(void))__pyx_f_5yapyg_8entities_disable, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("is_enabled", (void (*)(void))__pyx_f_5yapyg_8entities_is_enabled, "int (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("c_call_pos_listeners", (void (*)(void))__pyx_f_5yapyg_8entities_c_call_pos_listeners, "PyObject *(PyObject *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("c_get_full_sprite_name", (void (*)(void))__pyx_f_5yapyg_8entities_c_get_full_sprite_name, "PyObject *(PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("call_pos_listeners", (void (*)(void))__pyx_f_5yapyg_8entities_call_pos_listeners, "PyObject *(PyObject *, PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("get_full_sprite_name", (void (*)(void))__pyx_f_5yapyg_8entities_get_full_sprite_name, "PyObject *(PyObject *, PyObject *)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -5745,20 +5994,26 @@ PyMODINIT_FUNC PyInit_entities(void)
   if (__Pyx_ImportVoidPtr(__pyx_t_3, "IDX_MOVER_ENTITY_NAME", (void **)&__pyx_vp_5yapyg_6movers_IDX_MOVER_ENTITY_NAME, "int") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportVoidPtr(__pyx_t_3, "IDX_MOVER_COLLISION_HANDLER", (void **)&__pyx_vp_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER, "int") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  /*--- Function import code ---*/
-  __pyx_t_4 = __Pyx_ImportModule("yapyg.sprites"); if (!__pyx_t_4) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_4, "insert", (void (**)(void))&__pyx_f_5yapyg_7sprites_insert, "PyObject *(PyObject *, PyObject *, PyObject *, float, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_7sprites_insert *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_4, "delete", (void (**)(void))&__pyx_f_5yapyg_7sprites_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_4, "set_enable", (void (**)(void))&__pyx_f_5yapyg_7sprites_set_enable, "PyObject *(PyObject *, PyObject *, int, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_ImportModule("yapyg.math_2d"); if (!__pyx_t_4) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportVoidPtr(__pyx_t_4, "CONST_PI", (void **)&__pyx_vp_5yapyg_7math_2d_CONST_PI, "float") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __Pyx_ImportModule("yapyg.collisions"); if (!__pyx_t_5) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "entity_pos_listener", (void (**)(void))&__pyx_f_5yapyg_10collisions_entity_pos_listener, "PyObject *(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "add_entity", (void (**)(void))&__pyx_f_5yapyg_10collisions_add_entity, "PyObject *(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "delete", (void (**)(void))&__pyx_f_5yapyg_10collisions_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  /*--- Function import code ---*/
+  __pyx_t_5 = __Pyx_ImportModule("yapyg.sprites"); if (!__pyx_t_5) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_5, "insert", (void (**)(void))&__pyx_f_5yapyg_7sprites_insert, "PyObject *(PyObject *, PyObject *, PyObject *, float, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_7sprites_insert *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_5, "delete", (void (**)(void))&__pyx_f_5yapyg_7sprites_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_5, "set_enable", (void (**)(void))&__pyx_f_5yapyg_7sprites_set_enable, "PyObject *(PyObject *, PyObject *, int, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_ImportModule("yapyg.movers"); if (!__pyx_t_6) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_6, "delete", (void (**)(void))&__pyx_f_5yapyg_6movers_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_ImportModule("yapyg.collisions"); if (!__pyx_t_6) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_6, "entity_pos_listener", (void (**)(void))&__pyx_f_5yapyg_10collisions_entity_pos_listener, "PyObject *(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_6, "add_entity", (void (**)(void))&__pyx_f_5yapyg_10collisions_add_entity, "PyObject *(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_6, "delete", (void (**)(void))&__pyx_f_5yapyg_10collisions_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_7 = __Pyx_ImportModule("yapyg.movers"); if (!__pyx_t_7) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_7, "delete", (void (**)(void))&__pyx_f_5yapyg_6movers_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  Py_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_8 = __Pyx_ImportModule("yapyg.math_2d"); if (!__pyx_t_8) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_8, "vector_add", (void (**)(void))&__pyx_f_5yapyg_7math_2d_vector_add, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  Py_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   /*--- Execution code ---*/
 
   /* "yapyg\entities.pyx":27
@@ -5768,12 +6023,12 @@ PyMODINIT_FUNC PyInit_entities(void)
  * 
  * cimport sprites
  */
-  __pyx_t_7 = __Pyx_Import(__pyx_n_s_copy, 0, -1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_9 = __Pyx_Import(__pyx_n_s_copy, 0, -1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "yapyg\entities.pyx":35
+  /* "yapyg\entities.pyx":36
  * cdef int IDX_STATE_ENTITIES
  * 
  * cdef int IDX_ENTITIES_TABLE = 0             # <<<<<<<<<<<<<<
@@ -5782,7 +6037,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE = 0;
 
-  /* "yapyg\entities.pyx":37
+  /* "yapyg\entities.pyx":38
  * cdef int IDX_ENTITIES_TABLE = 0
  * 
  * cdef int IDX_ENTITY_POS = 0             # <<<<<<<<<<<<<<
@@ -5791,7 +6046,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_POS = 0;
 
-  /* "yapyg\entities.pyx":38
+  /* "yapyg\entities.pyx":39
  * 
  * cdef int IDX_ENTITY_POS = 0
  * cdef int IDX_ENTITY_POS_OFFSET = 1             # <<<<<<<<<<<<<<
@@ -5800,7 +6055,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET = 1;
 
-  /* "yapyg\entities.pyx":39
+  /* "yapyg\entities.pyx":40
  * cdef int IDX_ENTITY_POS = 0
  * cdef int IDX_ENTITY_POS_OFFSET = 1
  * cdef int IDX_ENTITY_ENABLED_SPRITE = 2             # <<<<<<<<<<<<<<
@@ -5809,7 +6064,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE = 2;
 
-  /* "yapyg\entities.pyx":40
+  /* "yapyg\entities.pyx":41
  * cdef int IDX_ENTITY_POS_OFFSET = 1
  * cdef int IDX_ENTITY_ENABLED_SPRITE = 2
  * cdef int IDX_ENTITY_LAST_POS = 3             # <<<<<<<<<<<<<<
@@ -5818,7 +6073,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS = 3;
 
-  /* "yapyg\entities.pyx":41
+  /* "yapyg\entities.pyx":42
  * cdef int IDX_ENTITY_ENABLED_SPRITE = 2
  * cdef int IDX_ENTITY_LAST_POS = 3
  * cdef int IDX_ENTITY_SPRITES = 4             # <<<<<<<<<<<<<<
@@ -5827,7 +6082,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_SPRITES = 4;
 
-  /* "yapyg\entities.pyx":42
+  /* "yapyg\entities.pyx":43
  * cdef int IDX_ENTITY_LAST_POS = 3
  * cdef int IDX_ENTITY_SPRITES = 4
  * cdef int IDX_ENTITY_COLLISION = 5             # <<<<<<<<<<<<<<
@@ -5836,7 +6091,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_COLLISION = 5;
 
-  /* "yapyg\entities.pyx":43
+  /* "yapyg\entities.pyx":44
  * cdef int IDX_ENTITY_SPRITES = 4
  * cdef int IDX_ENTITY_COLLISION = 5
  * cdef int IDX_ENTITY_PLAYONCE = 6             # <<<<<<<<<<<<<<
@@ -5845,7 +6100,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_PLAYONCE = 6;
 
-  /* "yapyg\entities.pyx":44
+  /* "yapyg\entities.pyx":45
  * cdef int IDX_ENTITY_COLLISION = 5
  * cdef int IDX_ENTITY_PLAYONCE = 6
  * cdef int IDX_ENTITY_ENABLE = 7             # <<<<<<<<<<<<<<
@@ -5859,10 +6114,10 @@ PyMODINIT_FUNC PyInit_entities(void)
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */
-  __pyx_t_7 = PyDict_New(); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_9);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -5875,6 +6130,8 @@ PyMODINIT_FUNC PyInit_entities(void)
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init yapyg.entities", __pyx_clineno, __pyx_lineno, __pyx_filename);

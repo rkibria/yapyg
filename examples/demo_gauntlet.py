@@ -38,6 +38,7 @@ DEBUG_MODE = False
 
 ENT_MAN = "500_man"
 ENT_SHOT = "600_throwingstar"
+ENT_GHOST = "700_ghost"
 ENT_TEXT_SCORE = "text_score"
 ENT_TEXT_HEALTH = "text_health"
 ENT_PREFIX_COINS = "700_coins"
@@ -129,36 +130,18 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                         True,
                         )
 
-        CIRCLE_RADIUS = (((1.0 / 4.0)) / 2)
-        if not DEBUG_MODE:
-                coin_textures = ("assets/img/sprites/coins/0.png",
-                                 "assets/img/sprites/coins/1.png",
-                                 "assets/img/sprites/coins/2.png",
-                                 "assets/img/sprites/coins/1.png",
-                                 )
-        else:
-                coin_textures = ("assets/img/sprites/half_ball_2.png",)
-        entities.insert(state,
-                        "%s_1" % (ENT_PREFIX_COINS),
-                        {
-                         "*": {
-                               "textures": coin_textures,
-                               "speed": 150.0,
-                               },
-                         },
-                        (1.0, 2.0, 0),
-                        (-0.25, -0.25),
-                        collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),),
-                        )
-
         # We create the ENT_MAN entity which has 2 different sprite representations: standing and walking.
-        # The idle sprite is the default sprite, since it starts with an asterisk (*). The animation of
-        # the sprites is defined by a list of images that will be played in order, then repeated, where
-        # the playback speed is defined individually for the sprite as well. We also define the starting
-        # coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
+        # The idle sprite is the default sprite, since it starts with an asterisk (*).
+
+        # The animation of the sprites is defined by a list of images that will be played in order,
+        # then repeated, where the playback speed is defined individually for the sprite as well.
+
+        # We define the starting coordinates (in "map coordinates", which are relative to tile size, not pixels!), here [1,1],
         # the rotation amount of the entity (0 here) and an offset for drawing the sprite to the actual position,
         # here [0.25, 0.25].
-        MAN_RADIUS = (1.0 / 4.0)
+        MAN_SIZE = 1.0 / 2.0 # 64 px = 128 px tile / 2
+        MAN_RADIUS = MAN_SIZE / 2.0
+        MAN_OFFSET = -MAN_RADIUS # entity position defines the center of the sprite (sprite drawn left+lower of position)
         if not DEBUG_MODE:
                 man_idle_textures = (
                                      "assets/img/sprites/man_idle/0.png",
@@ -196,8 +179,59 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                   },
                          },
                         (1.0, 1.0, 0),
-                        (-0.25, -0.25), # sprite appears lower and more left of actual entity position
+                        (MAN_OFFSET, MAN_OFFSET),
                         collision=(("circle", MAN_RADIUS, MAN_RADIUS, MAN_RADIUS,),),
+                        )
+
+        # A pile of coins
+        COINS_SIZE = 1.0 / 2.0 # 64 px = 128 px tile / 2
+        COINS_RADIUS = COINS_SIZE / 2.0
+        COINS_OFFSET = -COINS_RADIUS
+        if not DEBUG_MODE:
+                coin_textures = ("assets/img/sprites/coins/0.png",
+                                 "assets/img/sprites/coins/1.png",
+                                 "assets/img/sprites/coins/2.png",
+                                 "assets/img/sprites/coins/1.png",
+                                 )
+        else:
+                coin_textures = ("assets/img/sprites/half_ball_2.png",)
+        entities.insert(state,
+                        "%s_1" % (ENT_PREFIX_COINS),
+                        {
+                         "*": {
+                               "textures": coin_textures,
+                               "speed": 150.0,
+                               },
+                         },
+                        (1.0, 2.0, 0),
+                        (COINS_OFFSET, COINS_OFFSET),
+                        collision=(("circle", COINS_RADIUS, COINS_RADIUS, COINS_RADIUS,),),
+                        )
+
+        GHOST_SIZE = 1.0
+        GHOST_RADIUS = GHOST_SIZE / 2.0
+        GHOST_OFFSET = -(GHOST_RADIUS)
+        if not DEBUG_MODE:
+                ghost_textures = (
+                                  "assets/img/sprites/ghost/1.png",
+                                  "assets/img/sprites/ghost/2.png",
+                                  "assets/img/sprites/ghost/3.png",
+                                  "assets/img/sprites/ghost/2.png",
+                                )
+        else:
+                ghost_textures = ("assets/img/sprites/full_ball.png",)
+
+        entities.insert(state,
+                        ENT_GHOST,
+                        {
+                         "*": {
+                                   "textures": ghost_textures,
+                                   "speed": 200.0,
+                                   },
+                         },
+                        (2.0, 4.0, 0),
+                        (GHOST_OFFSET, GHOST_OFFSET), # sprite appears lower and more left of actual entity position
+                        collision=(("circle", GHOST_RADIUS, GHOST_RADIUS, GHOST_RADIUS,),),
                         )
 
         # We add a mover that will translate joystick movement to moving the man around the area.

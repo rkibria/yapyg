@@ -29,6 +29,7 @@ import copy
 cimport sprites
 cimport collisions
 cimport movers
+cimport math_2d
 
 cdef int IDX_STATE_ENTITIES
 
@@ -116,7 +117,7 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
         cdef str enabled_sprite_name
 
         if entity:
-                full_sprite_name = c_get_full_sprite_name(entity_name, sprite_name)
+                full_sprite_name = get_full_sprite_name(entity_name, sprite_name)
 
                 sprite_textures = sprite_def["textures"]
 
@@ -160,8 +161,8 @@ cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable
         cdef list entity = get(state, entity_name)
         if entity:
                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
-                        sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
-                sprites.set_enable(state, c_get_full_sprite_name(entity_name, sprite_name), enable)
+                        sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+                sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)
                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
 
 cpdef delete(list state, str entity_name):
@@ -174,9 +175,9 @@ cpdef delete(list state, str entity_name):
         if entities_table.has_key(entity_name):
                 entity = entities_table[entity_name]
                 if entity:
-                        sprites.set_enable(state, c_get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+                        sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
                         for sprite_name in entity[IDX_ENTITY_SPRITES]:
-                                sprites.delete(state, c_get_full_sprite_name(entity_name, sprite_name))
+                                sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))
 
                         if entity[IDX_ENTITY_COLLISION]:
                                 collisions.delete(state, entity_name)
@@ -185,13 +186,13 @@ cpdef delete(list state, str entity_name):
 
                         movers.delete(state, entity_name)
 
-cdef c_call_pos_listeners(list state, str entity_name, tuple pos):
+cdef call_pos_listeners(list state, str entity_name, tuple pos):
         """
         TODO
         """
         collisions.entity_pos_listener(state, entity_name, pos)
 
-cdef str c_get_full_sprite_name(str entity_name, str sprite_name):
+cdef str get_full_sprite_name(str entity_name, str sprite_name):
         """
         TODO
         """
@@ -249,6 +250,17 @@ cpdef tuple get_pos_offset(list state, str entity_name):
         else:
                 return None
 
+cpdef tuple get_pos_with_offset(list state, str entity_name):
+        cdef list entity = get(state, entity_name)
+        cdef tuple last_pos
+        cdef tuple pos_offset
+        if entity:
+                last_pos = tuple(entity[IDX_ENTITY_POS])
+                pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])
+                return math_2d.vector_add(last_pos, pos_offset)
+        else:
+                return None
+
 cdef void normalize_rotation(list entity):
         """
         TODO
@@ -277,7 +289,7 @@ cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
 
                 normalize_rotation(entity)
 
-                c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+                call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 
 cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
         """
@@ -296,7 +308,7 @@ cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
 
                 normalize_rotation(entity)
 
-                c_call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
+                call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
 
 cpdef undo_last_move(list state, str entity_name):
         """
@@ -314,7 +326,7 @@ cpdef undo_last_move(list state, str entity_name):
 
                         entity[IDX_ENTITY_LAST_POS] = None
 
-                        c_call_pos_listeners(state, entity_name, last_pos)
+                        call_pos_listeners(state, entity_name, last_pos)
 
 cpdef disable(list state, str entity_name):
         """

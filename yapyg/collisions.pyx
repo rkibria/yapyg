@@ -31,7 +31,7 @@ import debug
 
 cdef int IDX_STATE_COLLISIONS
 
-cdef int HASH_SCALE_FACTOR = 4
+cdef int HASH_SCALE_FACTOR = 2
 
 cdef int IDX_COLLISIONDB_ENTITIES = 0
 cdef int IDX_COLLISIONDB_HASH_MAP = 1
@@ -86,7 +86,7 @@ cpdef entity_pos_listener(list state, str entity_name, tuple pos):
                 cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]
                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = None
 
-                update_hash(state, entity_name, pos, False)
+                update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
 
 cpdef set_handler(list state, handler_function):
         """
@@ -106,7 +106,7 @@ cpdef add_entity(list state, str entity_name, tuple shapes_list):
                 [None, None, None],
                 False,
                 ]
-        update_hash(state, entity_name, entities.get_pos(state, entity_name), False)
+        update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
 
 cpdef add_tile(list state, str tile_name, int x, int y, tuple shapes_list):
         """
@@ -414,8 +414,13 @@ cpdef tuple run(list state, str entity_name_1):
         cdef int x
         cdef int y
 
-        for x in xrange(entity_1_lower_left[0], entity_1_upper_right[0] + 1):
-                for y in xrange(entity_1_lower_left[1], entity_1_upper_right[1] + 1):
+        cdef int lower_x = entity_1_lower_left[0]
+        cdef int upper_x = entity_1_upper_right[0]
+        cdef int lower_y = entity_1_lower_left[1]
+        cdef int upper_y = entity_1_upper_right[1]
+
+        for x in xrange(lower_x, upper_x + 1):
+                for y in xrange(lower_y, upper_y + 1):
                         hash = (x, y)
                         if not hash_map.has_key(hash):
                                 continue
