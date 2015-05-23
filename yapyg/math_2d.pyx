@@ -22,7 +22,15 @@
 2D vectors
 """
 
-import math
+from libc.math cimport sin, cos, sqrt, atan2
+
+cdef float CONST_PI = 3.14159265359
+
+cpdef float rad_to_deg(float rads):
+        return (rads / CONST_PI) * 180.0
+
+cpdef float deg_to_rad(float degs):
+        return (degs / 180.0) * CONST_PI
 
 cpdef float dot_product(tuple v_1, tuple v_2):
         """
@@ -75,17 +83,21 @@ cpdef tuple rotated_point(tuple origin_point, tuple point, float rot):
         """
         TODO
         """
-        cdef float rot_rad = math.radians(rot)
+        cdef float rot_rad = deg_to_rad(rot)
         cdef tuple rot_relative_point
         rot_relative_point = complex_mul((point[0] - origin_point[0],
-                point[1] - origin_point[1]), (math.cos(rot_rad), math.sin(rot_rad)))
+                point[1] - origin_point[1]), (cos(rot_rad), sin(rot_rad)))
         return (origin_point[0] + rot_relative_point[0], origin_point[1] + rot_relative_point[1])
 
 cpdef float length(tuple vector):
         """
         TODO
         """
-        return math.hypot(vector[0], vector[1])
+        cdef float x = vector[0]
+        x *= x
+        cdef float y = vector[1]
+        y *= y
+        return sqrt(x + y)
 
 cpdef float distance(tuple pos_1, tuple pos_2):
         """
@@ -115,7 +127,7 @@ cpdef float get_angle(tuple pos1, tuple pos2):
         """
         TODO
         """
-        cdef float heading_degrees = math.degrees(math.atan2(pos2[1] - pos1[1], pos2[0] - pos1[0]))
+        cdef float heading_degrees = rad_to_deg(atan2(pos2[1] - pos1[1], pos2[0] - pos1[0]))
         if heading_degrees < 0.0:
                 heading_degrees += 360.0
         return heading_degrees

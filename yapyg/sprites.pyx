@@ -22,7 +22,8 @@
 2D Sprites
 """
 
-import math
+from libc.math cimport fmod, floor
+
 from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
 
 cimport tiles
@@ -265,7 +266,7 @@ cdef void draw(list state, canvas, float frame_time_delta, float view_scale):
                                         set_enable(state, sprite_name, False)
                                         continue
                                 phase = phase % len(textures)
-                                time_sum = math.fmod(time_sum, speed)
+                                time_sum = fmod(time_sum, speed)
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 sprite[IDX_SPRITE_PHASE] = phase
 
@@ -279,8 +280,8 @@ cdef tuple _get_screen_coords(list state, tuple view_pos, float view_scale, list
         """
         TODO
         """
-        cdef float col = math.floor(pos[0])
-        cdef float row = math.floor(pos[1])
+        cdef float col = floor(pos[0])
+        cdef float row = floor(pos[1])
         cdef float scaled_tile_size = tiles.get_tile_size(state) * view_scale
 
         cdef float tile_x = col * scaled_tile_size

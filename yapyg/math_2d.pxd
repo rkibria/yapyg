@@ -22,6 +22,10 @@
 2D vectors
 """
 
+cpdef float CONST_PI = 3.14159265359
+
+cpdef float rad_to_deg(float rads)
+cpdef float deg_to_rad(float degs)
 cpdef float dot_product(tuple v_1, tuple v_2)
 cpdef tuple vector_mul(tuple vec, float factor)
 cpdef tuple vector_div(tuple vec, float factor)

@@ -22,7 +22,8 @@
 Simulate physical movement
 """
 
-import math
+from libc.math cimport atan2, sin, cos
+
 import time
 
 import yapyg
@@ -46,7 +47,7 @@ IDX_MOVERS_PHYSICAL_NO_ROTATE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 11
 
 cdef str PHYSICS_MOVER_NAME = "physics"
 
-cdef float CONST_2PI = 2 * math.pi
+cdef float CONST_2PI = 2 * yapyg.math_2d.CONST_PI
 cdef float CONST_TORQUE_DAMPENING = 0.5
 
 # sys.float_info.max leads to overflow, just choose a very high number instead
@@ -297,10 +298,10 @@ cdef rectangle_circle_collision(list state,
                                         corner_x = rect_x + rect_w
                                 angle_dx = circle_x - corner_x
                                 angle_dy = circle_y - corner_y
-                                angle = math.atan2(angle_dy, angle_dx)
+                                angle = atan2(angle_dy, angle_dx)
 
-                                new_vy = math.sin(angle) * v_total
-                                new_vx = math.cos(angle) * v_total
+                                new_vy = sin(angle) * v_total
+                                new_vx = cos(angle) * v_total
                                 circle_velocity_vector = (new_vx * inelasticity, new_vy * inelasticity)
                 else:
                         # circle same height as rectangle
@@ -394,10 +395,10 @@ cdef void circle_circle_collision(
         cdef tuple abs_pos_2 = (abs_circle_shape_2[1], abs_circle_shape_2[2])
         cdef tuple velocity_vector_1 = (circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX], circle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY])
         cdef tuple centre_to_centre_vector = yapyg.math_2d.vector_sub(abs_pos_2, abs_pos_1)
-        cdef float centre_to_centre_vector_angle = math.atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])
-        cdef float velocity_vector_angle = math.atan2(velocity_vector_1[1], velocity_vector_1[0])
+        cdef float centre_to_centre_vector_angle = atan2(centre_to_centre_vector[1], centre_to_centre_vector[0])
+        cdef float velocity_vector_angle = atan2(velocity_vector_1[1], velocity_vector_1[0])
         cdef float angle_delta = centre_to_centre_vector_angle - velocity_vector_angle
-        cdef float torque_creation_factor = math.sin(angle_delta)
+        cdef float torque_creation_factor = sin(angle_delta)
         cdef float created_v_p = torque_creation_factor * yapyg.math_2d.length(velocity_vector_1)
 
         cdef float rot_friction_1 = circle_physical_mover_1[IDX_MOVERS_PHYSICAL_ROT_FRICTION]
@@ -529,7 +530,7 @@ cdef tuple get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_
 
         cdef float rectangle_width_2 = abs_rectangle_shape_2[3]
         cdef float rectangle_height_2 = abs_rectangle_shape_2[4]
-        cdef float diagonals_angle_delta = math.degrees(math.atan2(rectangle_height_2 / 2.0, rectangle_width_2 / 2.0))
+        cdef float diagonals_angle_delta = yapyg.math_2d.rad_to_deg(atan2(rectangle_height_2 / 2.0, rectangle_width_2 / 2.0))
 
         cdef float diagonal_angle_1 = diagonals_angle_delta
         cdef float diagonal_angle_2 = 180.0 - diagonals_angle_delta

@@ -22,7 +22,7 @@
 Collisions
 """
 
-import math
+from libc.math cimport floor
 
 cimport math_collision
 cimport math_2d
@@ -280,8 +280,8 @@ cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, 
         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,
                             entity_lower_left[1] + upper_right_y_offset)
 
-        area_lower_left = (int(math.floor(area_lower_left[0])), int(math.floor(area_lower_left[1])))
-        area_upper_right = (int(math.floor(area_upper_right[0])), int(math.floor(area_upper_right[1])))
+        area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))
+        area_upper_right = (int(floor(area_upper_right[0])), int(floor(area_upper_right[1])))
         return (area_lower_left, area_upper_right)
 
 cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):

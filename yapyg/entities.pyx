@@ -22,7 +22,8 @@
 Entities
 """
 
-import math
+from libc.math cimport fmod
+
 import copy
 
 cimport sprites
@@ -253,7 +254,7 @@ cdef void normalize_rotation(list entity):
         TODO
         """
         cdef float old_rot = entity[IDX_ENTITY_POS][2]
-        cdef float modulo_rot = math.fmod(old_rot, 360.0)
+        cdef float modulo_rot = fmod(old_rot, 360.0)
         entity[IDX_ENTITY_POS][2] = modulo_rot
 
 cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):
