@@ -24,8 +24,6 @@ Simulate physical movement
 
 from libc.math cimport atan2, sin, cos
 
-import time
-
 import yapyg
 cimport yapyg.math_2d
 cimport yapyg.movers
