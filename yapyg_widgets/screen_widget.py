@@ -25,7 +25,7 @@ from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.core.window import Keyboard
-
+from kivy import platform
 
 from yapyg import texture_db
 from yapyg import controls
@@ -52,12 +52,12 @@ class ScreenWidget(FloatLayout):
 
                 self.joystick = None
 
-                joystick_panel_height = 0.2
+                joystick_panel_height = 0.25
                 joystick_x = 0.01
                 joystick_y = 0.01
 
                 if controls.need_joystick(state) or controls.need_buttons(state):
-                        joystick_height = 0.18
+                        joystick_height = 0.24
                         joystick_width = (joystick_height * Window.height) / Window.width
                         self.add_widget(Image(source="assets/img/ui/joy_panel.png",
                                 size_hint=(1, joystick_panel_height),
@@ -71,11 +71,12 @@ class ScreenWidget(FloatLayout):
                         Clock.schedule_interval(self.on_timer, 0.1)
 
                 if controls.need_buttons(state):
-                        Window.bind(on_key_down=self._on_keyboard_down)
-                        Window.bind(on_key_up=self._on_keyboard_up)
+                        if platform == 'win' or platform == 'linux' or platform == 'macosx':
+                                Window.bind(on_key_down=self._on_keyboard_down)
+                                Window.bind(on_key_up=self._on_keyboard_up)
 
-                        button_width = joystick_width / 2.0
-                        button_height = joystick_height / 2.0
+                        button_width = joystick_width / 2.1
+                        button_height = joystick_height / 2.1
                         button_width_big = 2 * button_width
                         button_height_big = 2 * button_height
 
@@ -195,13 +196,15 @@ class ScreenWidget(FloatLayout):
                                         button_3.bind(state=self.on_button_3)
 
                 if self.on_exit_function:
+                        exit_button_size = (0.15, 0.05)
+                        exit_button_x = (1.0 - exit_button_size[0]) / 2.0
                         exit_button = Button(text='[color=000000]Menu[/color]',
                                         font_size=26,
                                         markup=True,
                                         background_normal="assets/img/ui/joy_option_button.png",
                                         background_down="assets/img/ui/joy_option_button_down.png",
-                                        size_hint=(0.2, 0.05),
-                                        pos_hint = {"x":0.4, "y":0.01},
+                                        size_hint=exit_button_size,
+                                        pos_hint = {"x":exit_button_x, "y":0.01},
                                         )
                         exit_button.bind(state=self.on_exit)
                         self.add_widget(exit_button)

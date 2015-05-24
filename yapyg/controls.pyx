@@ -128,5 +128,5 @@ cpdef dict get_joystick_properties():
                 "x" : 0.0,
                 "y" : 0.0,
                 "w" : 1.0,
-                "h" : 0.2,
+                "h" : 0.25,
                 }

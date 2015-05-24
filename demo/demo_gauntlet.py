@@ -250,7 +250,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         view.set_viewer(state,
                         relative_viewer.create(state,
                                                ENT_MAN,
-                                               [-1.75, -2.5]))
+                                               [-2.0, -2.25]))
 
         start_ghost_movement(state, None)
 
@@ -287,7 +287,7 @@ def collision_handler(state, collisions_list):
                                                      },
                                                     screen_relative=True,
                                                     )
-                                entities.delete(state, entity_name_2)
+                                destroy_mover.add(state, entity_name_2, do_replace=True)
                         else:
                                 entities.undo_last_move(state, entity_name_1)
                 elif entity_name_1 == ENT_SHOT:
@@ -295,12 +295,12 @@ def collision_handler(state, collisions_list):
                                 pass
                         elif entity_name_2 == ENT_GHOST:
                                 do_ghost_boom(state, entities.get_pos(state, ENT_GHOST))
-                                entities.delete(state, ENT_GHOST)
+                                destroy_mover.add(state, ENT_GHOST, do_replace=True)
                                 do_shot_boom(state, entities.get_pos(state, ENT_SHOT))
-                                entities.delete(state, ENT_SHOT)
+                                destroy_mover.add(state, ENT_SHOT, do_replace=True)
                         else:
                                 do_shot_boom(state, entities.get_pos(state, ENT_SHOT))
-                                entities.delete(state, ENT_SHOT)
+                                destroy_mover.add(state, ENT_SHOT, do_replace=True)
 
 TRAVEL_DISTANCE = 10
 START_OFFSET_FACTOR = 0.25
