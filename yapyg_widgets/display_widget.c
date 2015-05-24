@@ -2379,7 +2379,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
  * import yapyg.factory
  * import yapyg.timer             # <<<<<<<<<<<<<<
  * 
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = 100.0
+ * cdef float MAX_FRAME_DELTA_MICROSECONDS = 1000.0 / 30.0
  */
   __pyx_t_10 = __Pyx_Import(__pyx_n_s_yapyg_timer, 0, -1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
@@ -2389,14 +2389,14 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   /* "yapyg_widgets\display_widget.pyx":33
  * import yapyg.timer
  * 
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = 100.0             # <<<<<<<<<<<<<<
+ * cdef float MAX_FRAME_DELTA_MICROSECONDS = 1000.0 / 30.0             # <<<<<<<<<<<<<<
  * 
  * class DisplayWidget(Widget):
  */
-  __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS = 100.0;
+  __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS = (1000.0 / 30.0);
 
   /* "yapyg_widgets\display_widget.pyx":35
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = 100.0
+ * cdef float MAX_FRAME_DELTA_MICROSECONDS = 1000.0 / 30.0
  * 
  * class DisplayWidget(Widget):             # <<<<<<<<<<<<<<
  *         def __init__(self,
@@ -2475,7 +2475,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
   /* "yapyg_widgets\display_widget.pyx":35
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = 100.0
+ * cdef float MAX_FRAME_DELTA_MICROSECONDS = 1000.0 / 30.0
  * 
  * class DisplayWidget(Widget):             # <<<<<<<<<<<<<<
  *         def __init__(self,

@@ -30,7 +30,7 @@ cimport yapyg.view
 import yapyg.factory
 import yapyg.timer
 
-cdef float MAX_FRAME_DELTA_MICROSECONDS = 100.0
+cdef float MAX_FRAME_DELTA_MICROSECONDS = 1000.0 / 30.0
 
 class DisplayWidget(Widget):
         def __init__(self,

@@ -46,6 +46,7 @@ ENT_PREFIX_COINS = "700_coins"
 FONT_NAME = "DroidSansMonoDotted16x32"
 
 USERDATA_SCORE = "score"
+USERDATA_HEALTH = "health"
 
 # Called from the menu widget, this function creates and
 # sets up the game state object. Parameters are the usable
@@ -117,6 +118,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                         True,
                         )
 
+        user.set_data(state, USERDATA_HEALTH, 100)
         entities.insert(state,
                         ENT_TEXT_HEALTH,
                         {
@@ -274,6 +276,21 @@ def collision_handler(state, collisions_list):
                 if entity_name_1 == ENT_MAN:
                         if entity_name_2 == ENT_SHOT:
                                 pass
+                        elif entity_name_2 == ENT_GHOST:
+                                health = user.get_data(state, USERDATA_HEALTH)
+                                health -= 40
+                                health_text = "Health:%d" % health
+                                user.set_data(state, USERDATA_HEALTH, health)
+                                entities.set_sprite(state,
+                                                    ENT_TEXT_HEALTH,
+                                                    "*",
+                                                    {
+                                                     "textures": (("text", health_text, FONT_NAME),),
+                                                     },
+                                                    screen_relative=True,
+                                                    )
+                                do_ghost_boom(state, entities.get_pos(state, ENT_GHOST))
+                                destroy_mover.add(state, ENT_GHOST, do_replace=True)
                         elif entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
                                 score = user.get_data(state, USERDATA_SCORE)
                                 score += 10
