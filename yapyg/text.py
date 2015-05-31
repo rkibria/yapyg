@@ -26,7 +26,7 @@ from kivy.uix.image import Image
 from kivy.graphics.texture import Texture
 from kivy.graphics import Rectangle, Fbo
 
-
+import entities
 import texture_db
 
 IDX_STATE_TEXT = None
@@ -90,3 +90,27 @@ def create_texture(state, text, font_name):
                                 Rectangle(pos=(x_pos, y_pos), size=(font_def[IDX_TEXT_WIDTH], font_def[IDX_TEXT_HEIGHT]), texture=char_texture)
                         fbo.draw()
         return texture
+
+def create_text_entity(state, entity_name, text, font_name, pos, pos_offset=(0,0), screen_relative=False):
+        entities.insert(state,
+                        entity_name,
+                        {
+                                "*": {
+                                      "textures": (("text", text, font_name),),
+                                      },
+                         },
+                        pos,
+                        pos_offset,
+                        None,
+                        screen_relative,
+                        )
+
+def set_text_sprite(state, entity_name, text, font_name, screen_relative=False):
+        entities.set_sprite(state,
+                            entity_name,
+                            "*",
+                            {
+                             "textures": (("text", text, font_name),),
+                             },
+                            screen_relative=screen_relative,
+                            )

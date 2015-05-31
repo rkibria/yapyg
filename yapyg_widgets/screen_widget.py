@@ -198,9 +198,7 @@ class ScreenWidget(FloatLayout):
                 if self.on_exit_function:
                         exit_button_size = (0.15, 0.05)
                         exit_button_x = (1.0 - exit_button_size[0]) / 2.0
-                        exit_button = Button(text='[color=000000]Menu[/color]',
-                                        font_size=26,
-                                        markup=True,
+                        exit_button = Button(text="",
                                         background_normal="assets/img/ui/joy_option_button.png",
                                         background_down="assets/img/ui/joy_option_button_down.png",
                                         size_hint=exit_button_size,

@@ -102,35 +102,15 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         collisions.set_handler(state, collision_handler)
 
+        # Font is 16x32 px size
         text.load_font(state, FONT_NAME, "assets/img/fonts/%s.png" % FONT_NAME, 16, 32)
 
         user.set_data(state, USERDATA_SCORE, 0)
-        entities.insert(state,
-                        ENT_TEXT_SCORE,
-                        {
-                                "*": {
-                                      "textures": (("text", "Score:0", FONT_NAME),),
-                                      },
-                         },
-                        (0, 0, 0),
-                        (0,0),
-                        None,
-                        True,
-                        )
+        text.create_text_entity(state, ENT_TEXT_SCORE, get_score_text(state), FONT_NAME, (0, 0, 0), screen_relative=True)
 
         user.set_data(state, USERDATA_HEALTH, 100)
-        entities.insert(state,
-                        ENT_TEXT_HEALTH,
-                        {
-                         "*": {
-                               "textures": (("text", "Health:100", FONT_NAME),),
-                               },
-                         },
-                        (2.4, 0, 0),
-                        (0,0),
-                        None,
-                        True,
-                        )
+        text.create_text_entity(state, ENT_TEXT_HEALTH, get_health_text(state), FONT_NAME,
+                (screen_width_px / tile_size_px / 2.0, 0, 0), screen_relative=True)
 
         # We create the ENT_MAN entity which has 2 different sprite representations: standing and walking.
         # The idle sprite is the default sprite, since it starts with an asterisk (*).
@@ -277,33 +257,13 @@ def collision_handler(state, collisions_list):
                         if entity_name_2 == ENT_SHOT:
                                 pass
                         elif entity_name_2 == ENT_GHOST:
-                                health = user.get_data(state, USERDATA_HEALTH)
-                                health -= 40
-                                health_text = "Health:%d" % health
-                                user.set_data(state, USERDATA_HEALTH, health)
-                                entities.set_sprite(state,
-                                                    ENT_TEXT_HEALTH,
-                                                    "*",
-                                                    {
-                                                     "textures": (("text", health_text, FONT_NAME),),
-                                                     },
-                                                    screen_relative=True,
-                                                    )
+                                incr_health(state, -40)
+                                text.set_text_sprite(state, ENT_TEXT_HEALTH, get_health_text(state), FONT_NAME, True)
                                 do_ghost_boom(state, entities.get_pos(state, ENT_GHOST))
                                 destroy_mover.add(state, ENT_GHOST, do_replace=True)
                         elif entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
-                                score = user.get_data(state, USERDATA_SCORE)
-                                score += 10
-                                score_text = "Score:%d" % score
-                                user.set_data(state, USERDATA_SCORE, score)
-                                entities.set_sprite(state,
-                                                    ENT_TEXT_SCORE,
-                                                    "*",
-                                                    {
-                                                     "textures": (("text", score_text, FONT_NAME),),
-                                                     },
-                                                    screen_relative=True,
-                                                    )
+                                incr_score(state, 10)
+                                text.set_text_sprite(state, ENT_TEXT_SCORE, get_score_text(state), FONT_NAME, True)
                                 destroy_mover.add(state, entity_name_2, do_replace=True)
                         else:
                                 entities.undo_last_move(state, entity_name_1)
@@ -416,3 +376,22 @@ def do_ghost_boom(state, pos):
                         play_once=True,
                         )
 
+def get_score_text(state):
+        score = user.get_data(state, USERDATA_SCORE)
+        score_text = "Score:%d" % score
+        return score_text
+
+def incr_score(state, points):
+        score = user.get_data(state, USERDATA_SCORE)
+        score += points
+        user.set_data(state, USERDATA_SCORE, score)
+
+def get_health_text(state):
+        hp = user.get_data(state, USERDATA_HEALTH)
+        hp_text = "Health:%d" % hp
+        return hp_text
+
+def incr_health(state, points):
+        hp = user.get_data(state, USERDATA_HEALTH)
+        hp += points
+        user.set_data(state, USERDATA_HEALTH, hp)

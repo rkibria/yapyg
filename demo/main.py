@@ -18,8 +18,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-screen_width = 480
-screen_height = 800
+SCREEN_SCALE = 0.8
+
+screen_width = int(480 * SCREEN_SCALE)
+screen_height = int(800 * SCREEN_SCALE)
 tile_size = 128
 import yapyg.bootstrap
 yapyg.bootstrap.initialize_screen(screen_width, screen_height)

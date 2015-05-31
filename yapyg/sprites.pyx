@@ -77,6 +77,8 @@ cpdef insert(list state, str sprite_name, tuple textures, float speed, list pos_
         """
         cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
+        cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
+        cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
 
         if not scale:
                 scale = (1, 1)
@@ -96,8 +98,12 @@ cpdef insert(list state, str sprite_name, tuple textures, float speed, list pos_
                                                                 texture_name, texture_part[3], texture_part[4],
                                                                 texture_part[5])
                         elif texture_part[0] == "text":
-                                texture_db.insert(state, texture_name,
-                                                  text.create_texture(state, texture_part[1], texture_part[2]))
+                                new_texture = text.create_texture(state, texture_part[1], texture_part[2])
+                                texture_db.insert(state, texture_name, new_texture)
+                                if sprites_rects_rots.has_key(sprite_name):
+                                        rect, rot = sprites_rects_rots[sprite_name]
+                                        rect.size = (new_texture.size[0] * scale[0], new_texture.size[1] * scale[1])
+                                        sprite_sizes[sprite_name] = rect.size
                         else:
                                 print "unknown texture type", texture_part[0]
                 elif type(texture_part) == str:
