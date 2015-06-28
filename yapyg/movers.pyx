@@ -118,12 +118,14 @@ cdef void run(list state, float frame_time_delta):
         cdef str mover_name
         cdef list mover
         for mover_name, mover_deque in movers_dict.iteritems():
-                mover = mover_deque[0]
-                (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
+                if mover_deque:
+                        mover = mover_deque[0]
+                        (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
 
         for mover_to_delete in movers_to_delete:
-                mover_name = mover_to_delete[0]
-                remove(state, mover_name)
+                if mover_to_delete:
+                        mover_name = mover_to_delete[0]
+                        remove(state, mover_name)
 
         for mover_to_delete in movers_to_delete:
                 if len(mover_to_delete) > 2:
@@ -133,9 +135,10 @@ cdef void run(list state, float frame_time_delta):
                                 entities.delete(state, mover_name)
 
         for mover_to_delete in movers_to_delete:
-                mover_name = mover_to_delete[0]
-                on_end_function = mover_to_delete[1]
-                if on_end_function:
-                        (on_end_function)(state, mover_name)
+                if mover_to_delete:
+                        mover_name = mover_to_delete[0]
+                        on_end_function = mover_to_delete[1]
+                        if on_end_function:
+                                (on_end_function)(state, mover_name)
 
         collisions.notify_collision_handler(state)
