@@ -18,6 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+DEBUG_MODE = False
+
 from yapyg import factory
 from yapyg import entities
 from yapyg import factory
@@ -47,13 +49,19 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         controls.add_joystick(state)
         controls.add_buttons(state, (("Fire", None, "right", "big"),))
 
-        for x in xrange((screen_width_px / 256) + 1):
-                for y in xrange((screen_height_px / 256) + 2):
+        n_x = (screen_width_px / 256) + 1
+        n_y = (screen_height_px / 256) + 2
+        for x in xrange(n_x):
+                for y in xrange(n_y):
                         entity_name = star_name(x, y)
+                        textures_tuple = ("assets/img/sprites/stars.png",)
+                        if DEBUG_MODE:
+                                color = (float(x) / n_x, float(y) / n_y, 0)
+                                textures_tuple = (("rectangle", 2, 2, color[0], color[1], color[2]),)
                         entities.insert(state, entity_name, {
                                         "*": {
-                                                "textures": ("assets/img/sprites/stars.png",),
-                                                "speed": 100,
+                                                "textures": textures_tuple,
+                                                "speed": 0,
                                         },
                                 }, ((x * 2), (y * 2), 0)
                                 )
