@@ -20,21 +20,35 @@
 
 from yapyg import factory
 from yapyg import entities
-
+from yapyg import factory
+from yapyg import tiles
+from yapyg import entities
+from yapyg import controls
+from yapyg import text
+from yapyg import view
+from yapyg import collisions
+from yapyg import user
 from yapyg import screen
 from yapyg_movers import jump_mover
 from yapyg_movers import linear_mover
 from yapyg_movers import wait_mover
 from yapyg_movers import set_property_mover
+from yapyg_movers import controlled_mover
+
+ENT_SHIP = "500_ship"
 
 def star_name(x, y):
         return "000_stars_%d_%d" % (x, y)
 
-def create(screen_width, screen_height, tile_size):
-        state = factory.create(screen_width, screen_height, tile_size)
+def create(screen_width_px, screen_height_px, tile_size_px):
+        joystick_props = controls.get_joystick_properties()
+        origin_xy = (0, joystick_props["h"] * screen_height_px)
+        state = factory.create(screen_width_px, screen_height_px, tile_size_px, origin_xy)
+        controls.add_joystick(state)
+        controls.add_buttons(state, (("Fire", None, "right", "big"),))
 
-        for x in xrange((screen_width / 256) + 1):
-                for y in xrange((screen_height / 256) + 2):
+        for x in xrange((screen_width_px / 256) + 1):
+                for y in xrange((screen_height_px / 256) + 2):
                         entity_name = star_name(x, y)
                         entities.insert(state, entity_name, {
                                         "*": {
@@ -44,7 +58,7 @@ def create(screen_width, screen_height, tile_size):
                                 }, ((x * 2), (y * 2), 0)
                                 )
 
-        entities.insert(state, "500_ship",
+        entities.insert(state, ENT_SHIP,
                 {
                         "*idle": {
                                 "textures": (
@@ -64,7 +78,15 @@ def create(screen_width, screen_height, tile_size):
                 )
 
         start_stars_movement(state, None)
-        start_ship_movement(state, None)
+
+        controlled_mover.add(state,
+                             ENT_SHIP,
+                             "joystick",
+                             0.03,
+                             (0, 0, 3.25, 1.0),
+                             ("*idle", "thrust"),
+                             False
+                             )
 
         return state
 
@@ -77,13 +99,3 @@ def start_stars_movement(state, mover_name):
                         jump_mover.add(state, entity_name, ((x * 2), (y * 2), 0))
                         linear_mover.add(state, entity_name, (0, -2), 0.25)
         wait_mover.add(state, entity_name, 0, start_stars_movement)
-
-def start_ship_movement(state, mover_name):
-        path = ((0, 0.66), (0.33, 0.33), (0.66, 0), (0.33, -0.33),
-                (0, -0.66), (-0.33, -0.33), (-0.66, 0), (-0.33, 0.33))
-        for index in xrange(len(path)):
-                set_property_mover.add(state, "500_ship", "set_active_sprite", "*idle")
-                wait_mover.add(state, "500_ship", 0.5)
-                set_property_mover.add(state, "500_ship", "set_active_sprite", "thrust")
-                rel_vector = ((path[index][0]), (path[index][1]))
-                linear_mover.add(state, "500_ship", rel_vector, 1.0, ("auto", 0), None if index != len(path) - 1 else start_ship_movement)

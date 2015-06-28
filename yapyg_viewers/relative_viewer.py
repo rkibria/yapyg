@@ -45,10 +45,10 @@ def run(state, viewer):
         """
         old_view_pos = yapyg.view.get_view_pos(state)
         entity_pos = yapyg.entities.get_pos(state, viewer[IDX_RELATIVE_VIEW_ENTITY])
-        new_view_pos = [entity_pos[0] + viewer[IDX_RELATIVE_VIEW_OFFSET][0],
-                entity_pos[1] + viewer[IDX_RELATIVE_VIEW_OFFSET][1]]
-        if old_view_pos != new_view_pos:
-                yapyg.view.set_view_pos(state, new_view_pos)
-                return True
-        else:
-                return False
+        if entity_pos:
+                new_view_pos = [entity_pos[0] + viewer[IDX_RELATIVE_VIEW_OFFSET][0],
+                        entity_pos[1] + viewer[IDX_RELATIVE_VIEW_OFFSET][1]]
+                if old_view_pos != new_view_pos:
+                        yapyg.view.set_view_pos(state, new_view_pos)
+                        return True
+        return False

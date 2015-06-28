@@ -58,7 +58,7 @@ cpdef destroy(list state):
         """
         state[IDX_STATE_MOVERS] = None
 
-cpdef add(list state, str mover_name, list mover, int do_replace=False):
+cpdef add(list state, str mover_name, list mover, int do_replace=False, int prepend=False):
         """
         TODO
         """
@@ -69,7 +69,10 @@ cpdef add(list state, str mover_name, list mover, int do_replace=False):
         else:
                 if not movers_dict.has_key(mover_name):
                         movers_dict[mover_name] = deque()
-                movers_dict[mover_name].append(mover)
+                if not prepend:
+                        movers_dict[mover_name].append(mover)
+                else:
+                        movers_dict[mover_name].appendleft(mover)
 
 cpdef get_active(list state, str mover_name):
         """

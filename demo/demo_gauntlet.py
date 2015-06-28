@@ -28,10 +28,15 @@ from yapyg import text
 from yapyg import view
 from yapyg import collisions
 from yapyg import user
+from yapyg import movers
+
 from yapyg_movers import controlled_mover
 from yapyg_movers import linear_mover
 from yapyg_movers import destroy_mover
+from yapyg_movers import wait_mover
+
 from yapyg_viewers import relative_viewer
+
 from yapyg_helpers import tiles_helpers
 
 DEBUG_MODE = False
@@ -251,19 +256,21 @@ def start_ghost_movement(state, mover_name):
                 linear_mover.add(state, ENT_GHOST, rel_vector, 1.0, on_end_function=None if index != len(path) - 1 else start_ghost_movement)
 
 def collision_handler(state, collisions_list):
-        # print str(collisions_list)
         for entity_name_1, entity_name_2 in collisions_list:
                 if entity_name_1 == ENT_MAN:
                         if entity_name_2 == ENT_SHOT:
                                 pass
                         elif entity_name_2 == ENT_GHOST:
-                                incr_health(state, -40)
-                                text.set_text_sprite(state, ENT_TEXT_HEALTH, get_health_text(state), FONT_NAME, True)
-                                do_ghost_boom(state, entities.get_pos(state, ENT_GHOST))
-                                destroy_mover.add(state, ENT_GHOST, do_replace=True)
+                                entities.undo_last_move(state, ENT_MAN)
+                                if not movers.get_active(state, ENT_GHOST)[0] == "wait":
+                                        wait_mover.add(state, ENT_GHOST, 1.0, prepend=True)
+                                        incr_health(state, -80)
+                                        if get_health(state) <= 0:
+                                                do_game_over(state)
+                                else:
+                                        entities.undo_last_move(state, ENT_GHOST)
                         elif entity_name_2[0:len(ENT_PREFIX_COINS)] == ENT_PREFIX_COINS:
                                 incr_score(state, 10)
-                                text.set_text_sprite(state, ENT_TEXT_SCORE, get_score_text(state), FONT_NAME, True)
                                 destroy_mover.add(state, entity_name_2, do_replace=True)
                         else:
                                 entities.undo_last_move(state, entity_name_1)
@@ -385,13 +392,36 @@ def incr_score(state, points):
         score = user.get_data(state, USERDATA_SCORE)
         score += points
         user.set_data(state, USERDATA_SCORE, score)
+        text.set_text_sprite(state, ENT_TEXT_SCORE, get_score_text(state), FONT_NAME, True)
 
 def get_health_text(state):
         hp = user.get_data(state, USERDATA_HEALTH)
         hp_text = "Health:%d" % hp
         return hp_text
 
+def get_health(state):
+        return user.get_data(state, USERDATA_HEALTH)
+
 def incr_health(state, points):
-        hp = user.get_data(state, USERDATA_HEALTH)
+        hp = get_health(state)
         hp += points
         user.set_data(state, USERDATA_HEALTH, hp)
+        text.set_text_sprite(state, ENT_TEXT_HEALTH, get_health_text(state), FONT_NAME, True)
+
+GAME_OVER_TEXTURES = ("assets/img/sprites/gameover.png",)
+GAME_OVER_SPRITEDEF = {
+                  "*": {
+                        "textures": GAME_OVER_TEXTURES,
+                        "speed": 0.0,
+                        },
+                  }
+
+def do_game_over(state):
+        destroy_mover.add(state, ENT_MAN, do_replace=True)
+        entities.insert(state,
+                        "game_over",
+                        GAME_OVER_SPRITEDEF,
+                        (1.0, 2.0, 0.0),
+                        (0,0),
+                        screen_relative=True
+                        )

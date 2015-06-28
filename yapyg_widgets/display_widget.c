@@ -424,13 +424,14 @@ struct __pyx_opt_args_5yapyg_6movers_add;
 /* "yapyg\movers.pxd":34
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
- * cpdef add(list state, str mover_name, list mover, int do_replace=*)             # <<<<<<<<<<<<<<
+ * cpdef add(list state, str mover_name, list mover, int do_replace=*, int prepend=*)             # <<<<<<<<<<<<<<
  * cpdef get_active(list state, str mover_name)
  * cpdef get_type(list state, list mover)
  */
 struct __pyx_opt_args_5yapyg_6movers_add {
   int __pyx_n;
   int do_replace;
+  int prepend;
 };
 struct __pyx_opt_args_5yapyg_7sprites_insert;
 

@@ -31,7 +31,7 @@ cpdef int IDX_MOVER_COLLISION_HANDLER = 3
 
 cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
-cpdef add(list state, str mover_name, list mover, int do_replace=*)
+cpdef add(list state, str mover_name, list mover, int do_replace=*, int prepend=*)
 cpdef get_active(list state, str mover_name)
 cpdef get_type(list state, list mover)
 cpdef remove(list state, str mover_name)

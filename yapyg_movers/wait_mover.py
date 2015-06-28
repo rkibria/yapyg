@@ -29,11 +29,11 @@ IDX_WAIT_MOVER_PASSED_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
 IDX_WAIT_MOVER_WAIT_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
 IDX_WAIT_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
 
-def add(state, mover_name, wait_time, on_end_function=None, do_replace=False):
+def add(state, mover_name, wait_time, on_end_function=None, do_replace=False, prepend=False):
         """
         TODO
         """
-        yapyg.movers.add(state, mover_name, create(mover_name, wait_time, on_end_function), do_replace)
+        yapyg.movers.add(state, mover_name, create(mover_name, wait_time, on_end_function), do_replace, prepend)
 
 def create(mover_name, wait_time, on_end_function=None):
         """
