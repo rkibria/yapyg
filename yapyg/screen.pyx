@@ -22,12 +22,16 @@
 Main screen/window
 """
 
+from kivy.core.window import Window
+from kivy.logger import Logger
+
 cdef int IDX_STATE_SCREEN = 0
 
 cdef int IDX_SCREEN_WIDTH = 0
 cdef int IDX_SCREEN_HEIGHT = 1
 cdef int IDX_SCREEN_TILE_SIZE = 2
 cdef int IDX_SCREEN_ORIGIN_XY = 3
+cdef int IDX_SCREEN_SCREEN_SCALE = 4
 
 cpdef initialize(int state_idx, list state, int screen_width, int screen_height, int tile_size, tuple origin_xy=(0, 0)):
         """
@@ -36,11 +40,26 @@ cpdef initialize(int state_idx, list state, int screen_width, int screen_height,
         global IDX_STATE_SCREEN
         IDX_STATE_SCREEN = state_idx
 
+        cdef int win_w = Window.width
+        cdef int win_h = Window.height
+        Logger.info("YAPYG window w %d h %d" % (win_w, win_h))
+
+        cdef float screen_scale_x = float(Window.width) / screen_width
+        cdef float screen_scale_y = float(Window.height) / screen_height
         state[IDX_STATE_SCREEN] = [
-                float(screen_width),
-                float(screen_height),
-                float(tile_size),
-                [origin_xy[0], origin_xy[1]],]
+                                   float(screen_width),
+                                   float(screen_height),
+                                   float(tile_size),
+                                   [
+                                    origin_xy[0] * screen_scale_x,
+                                    origin_xy[1] * screen_scale_y,
+                                    ],
+                                   (
+                                    screen_scale_x,
+                                    screen_scale_y,
+                                    ),
+                                   ]
+        Logger.info("YAPYG screen w %f h %f tile %f scale %s" % (get_width(state), get_height(state), get_tile_size(state), str(get_screen_scale(state))))
 
 cpdef destroy(list state):
         """
@@ -80,3 +99,9 @@ cpdef tuple get_origin(list state):
         """
         cdef list origin_xy = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
         return (origin_xy[0], origin_xy[1])
+
+cpdef tuple get_screen_scale(list state):
+        """
+        TODO
+        """
+        return state[IDX_STATE_SCREEN][IDX_SCREEN_SCREEN_SCALE]

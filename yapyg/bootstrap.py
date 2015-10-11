@@ -20,14 +20,23 @@
 
 import os
 from kivy.config import Config
+from kivy.logger import Logger
 
 def initialize_screen(screen_width, screen_height):
         """
         TODO
         """
+        Logger.info("YAPYG bootstrap w %d h %d" % (screen_width, screen_height))
+
         Config.set("input", "mouse", "mouse,disable_multitouch")
         Config.set('graphics', 'resizable', 0)
+        Config.set('graphics', 'position', "custom")
+        Config.set('graphics', 'top', 0)
+        Config.set('graphics', 'left', 0)
         Config.set('graphics', 'width', screen_width)
         Config.set('graphics', 'height', screen_height)
+        Config.set('graphics', 'multisamples', 0)
+        Config.set('graphics', 'borderless', 1)
+        Config.set('graphics', 'maxfps', 30)
 
         os.environ['KIVY_AUDIO'] = 'pygame'

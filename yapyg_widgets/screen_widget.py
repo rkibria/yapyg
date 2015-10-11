@@ -35,17 +35,16 @@ from yapyg_widgets.joystick_widget import JoystickWidget
 
 class ScreenWidget(FloatLayout):
         KEYCODE_SPACE = Keyboard.keycodes['spacebar']
+        KEYCODE_R = Keyboard.keycodes['r']
 
-        def __init__(self, state, scale=None, on_exit_function=None, debugging=False, **kwargs):
+        def __init__(self, state, on_exit_function=None, debugging=False, **kwargs):
                 super(ScreenWidget, self).__init__(**kwargs)
 
                 self.state = state
 
                 texture_db.insert_color_rect(state, 1.0, 1.0, "tl_null", 0.0, 0.0, 0.0)
 
-                if not scale:
-                        scale = 1.0
-                self.display_widget = DisplayWidget(state, [(float(Window.width)), (float(Window.height))], scale)
+                self.display_widget = DisplayWidget(state)
                 self.on_exit_function = on_exit_function
 
                 self.add_widget(self.display_widget)
@@ -60,8 +59,11 @@ class ScreenWidget(FloatLayout):
                         joystick_height = 0.24
                         joystick_width = (joystick_height * Window.height) / Window.width
                         self.add_widget(Image(source="assets/img/ui/joy_panel.png",
-                                size_hint=(1, joystick_panel_height),
-                                pos_hint = {"x" : 0.0, "y" : 0.0}))
+                                size_hint=(1.0, joystick_panel_height),
+                                pos_hint = {"x" : 0.0, "y" : 0.0},
+                                allow_stretch = True,
+                                ),
+                                )
 
                 if controls.need_joystick(state):
                         self.joystick = JoystickWidget(
@@ -71,10 +73,6 @@ class ScreenWidget(FloatLayout):
                         Clock.schedule_interval(self.on_timer, 0.1)
 
                 if controls.need_buttons(state):
-                        if platform == 'win' or platform == 'linux' or platform == 'macosx':
-                                Window.bind(on_key_down=self._on_keyboard_down)
-                                Window.bind(on_key_up=self._on_keyboard_up)
-
                         button_width = joystick_width / 2.1
                         button_height = joystick_height / 2.1
                         button_width_big = 2 * button_width
@@ -203,6 +201,7 @@ class ScreenWidget(FloatLayout):
                                         background_down="assets/img/ui/joy_option_button_down.png",
                                         size_hint=exit_button_size,
                                         pos_hint = {"x":exit_button_x, "y":0.01},
+                                        allow_stretch = True,
                                         )
                         exit_button.bind(state=self.on_exit)
                         self.add_widget(exit_button)
@@ -222,6 +221,10 @@ class ScreenWidget(FloatLayout):
                                 self.debug_label_array[i].bind(texture_size=self.setter('size'))
                                 self.add_widget(self.debug_label_array[i])
                         Clock.schedule_interval(self.on_debug_timer, 0.5)
+
+                if platform == 'win' or platform == 'linux' or platform == 'macosx':
+                        Window.bind(on_key_down=self._on_keyboard_down)
+                        Window.bind(on_key_up=self._on_keyboard_up)
 
         def set_debug_text(self, line_no, txt):
                 self.debug_label_array[line_no].text = txt
@@ -268,10 +271,12 @@ class ScreenWidget(FloatLayout):
 
         def _on_keyboard_down(self, window, keycode, scancode, codepoint, modifier):
                 if self.state:
-                        if keycode == self.KEYCODE_SPACE and self.state:
+                        if keycode == self.KEYCODE_SPACE:
                                 controls.set_button_state(self.state, 0, True)
 
         def _on_keyboard_up(self, window, keycode, scancode):
                 if self.state:
-                        if keycode == self.KEYCODE_SPACE and self.state:
+                        if keycode == self.KEYCODE_SPACE:
                                 controls.set_button_state(self.state, 0, False)
+                        elif keycode == self.KEYCODE_R:
+                                self.on_exit(None, None)

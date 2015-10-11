@@ -70,15 +70,14 @@ def create(screen_width, screen_height, tile_size):
         index = 0
         n_rows = 6
         n_columns = 4
-
-        BOUNCE_GRAVITY = -20.0
-        BOUNCE_INELASTICITY = 0.9
-        BOUNCE_FRICTION = 0.95
-        BOUNCE_STICKYNESS = 0.5
-
         BALL_DISTANCE = (1.0 / 4.0)
-        ROT_FRICTION = 0.35
-        ROT_DECAY = 0.9
+
+        BOUNCE_GRAVITY = -10.0
+        BOUNCE_INELASTICITY = 0.8 # lower => stronger
+        BOUNCE_FRICTION = 0.98
+        BOUNCE_STICKYNESS = 0.1
+        ROT_FRICTION = 0.5
+        ROT_DECAY = 0.5
 
         for column in xrange(n_columns):
                 for row in xrange(n_rows):

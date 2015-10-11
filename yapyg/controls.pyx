@@ -78,10 +78,11 @@ cpdef set_button_state(list state, int button_index, int button_pressed):
         """
         TODO
         """
-        button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
-        button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
-        if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
-                (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
+        if state[IDX_STATE_CONTROLS]:
+                button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
+                button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
+                if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
+                        (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
 
 cpdef int get_button_is_down(list state, int button_index):
         """

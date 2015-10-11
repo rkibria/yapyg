@@ -18,11 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-screen_width = 480
-screen_height = 800
-tile_size = 128
+SCREEN_LOGICAL_WIDTH = 480
+SCREEN_LOGICAL_HEIGHT = 800
+TILE_SIZE = 128
+
 import yapyg.bootstrap
-yapyg.bootstrap.initialize_screen(screen_width, screen_height)
+SCREEN_SCALE = 0.5
+yapyg.bootstrap.initialize_screen(int(SCREEN_LOGICAL_WIDTH * SCREEN_SCALE), int(SCREEN_LOGICAL_HEIGHT * SCREEN_SCALE))
 
 from kivy.app import App
 from yapyg import factory
@@ -32,17 +34,18 @@ from yapyg_widgets.screen_widget import ScreenWidget
 
 class TutorialApp(App):
         def build(self):
-                state = factory.create(screen_width, screen_height, tile_size)
-                tiles.add_tile_def(state, '+', ("assets/img/tiles/grid_simple.png",))
+                state = factory.create(SCREEN_LOGICAL_WIDTH, SCREEN_LOGICAL_HEIGHT, TILE_SIZE)
+                tiles.add_tile_def(state, '+', ("../demo/assets/img/tiles/grid_simple.png",))
                 tiles.set_area(state, [["+"] * 9] * 9)
                 entities.insert(state,
                                 "ball",
                                 {
                                  "*": {
-                                       "textures": ("assets/img/sprites/quarter_ball.png",),
+                                       "textures": ("../demo/assets/img/sprites/full_ball.png",),
                                        },
                                  },
                                 (0, 0, 0,),
+                                pos_offset=(0.5, 0.5),
                                 )
                 return ScreenWidget(state, debugging=True)
 

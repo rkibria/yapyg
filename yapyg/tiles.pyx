@@ -154,26 +154,28 @@ cpdef str get_tile(list state, int col, int row):
                 return None
         return rowdata[col]
 
-cpdef draw(list state, float scale, canvas, tuple view_size):
+cpdef draw(list state, canvas):
         """
         TODO
         """
         cdef tuple origin_xy = screen.get_origin(state)
+        cdef float target_w = screen.get_width(state)
+        cdef float target_h = screen.get_height(state)
+        cdef int tile_size = get_tile_size(state)
+        cdef tuple screen_scale = screen.get_screen_scale(state)
 
-        cdef int target_w = view_size[0]
-        cdef int target_h = view_size[1]
-
-        cdef float scaled_tile_size = get_tile_size(state) * scale
+        cdef float scaled_tile_size_x = float(tile_size) * screen_scale[0]
+        cdef float scaled_tile_size_y = float(tile_size) * screen_scale[1]
 
         cdef tuple view_pos = view.get_view_pos(state)
-        cdef float map_x = view_pos[0] * scaled_tile_size
-        cdef float map_y = view_pos[1] * scaled_tile_size
+        cdef float map_x = view_pos[0] * scaled_tile_size_x
+        cdef float map_y = view_pos[1] * scaled_tile_size_y
 
-        cdef int first_row = int(map_y / scaled_tile_size)
-        cdef int total_rows = int(target_h / scaled_tile_size)
+        cdef int first_row = int(map_y / scaled_tile_size_y)
+        cdef int total_rows = int(target_h * screen_scale[0] / scaled_tile_size_y)
 
-        cdef int first_col = int(map_x / scaled_tile_size)
-        cdef int total_cols = int(target_w / scaled_tile_size)
+        cdef int first_col = int(map_x / scaled_tile_size_x)
+        cdef int total_cols = int(target_w * screen_scale[1] / scaled_tile_size_x)
 
         cdef list tile_rects = state[IDX_STATE_TILES][IDX_TILES_RECTS]
 
@@ -188,12 +190,13 @@ cpdef draw(list state, float scale, canvas, tuple view_size):
                 for row in xrange(first_row, first_row + total_rows + 2):
                         for col in xrange(first_col, first_col + total_cols + 2):
 
-                                tile_x = (col * scaled_tile_size)
-                                tile_y = (row * scaled_tile_size)
+                                tile_x = (col * scaled_tile_size_x)
+                                tile_y = (row * scaled_tile_size_y)
 
                                 draw_pos = (
-                                        int((tile_x - map_x) + origin_xy[0]),
-                                        int((tile_y - map_y) + origin_xy[1]))
+                                            int((tile_x - map_x) + origin_xy[0]),
+                                            int((tile_y - map_y) + origin_xy[1])
+                                            )
 
                                 texture = texture_db.get(state, "tl_null")
                                 tile = get_tile(state, col, row)
@@ -201,14 +204,15 @@ cpdef draw(list state, float scale, canvas, tuple view_size):
                                         texture = texture_db.get(state, tile)
 
                                 draw_size = (
-                                        int(texture.width * scale),
-                                        int(texture.height * scale),)
+                                             int(texture.width * screen_scale[0]),
+                                             int(texture.height * screen_scale[1]),
+                                             )
 
                                 if tile_index >= len(tile_rects):
                                         PushMatrix()
                                         tile_rect = Rectangle(texture=texture,
-                                                pos=draw_pos,
-                                                size=draw_size)
+                                                              pos=draw_pos,
+                                                              size=draw_size)
                                         tile_rects.append(tile_rect)
                                         PopMatrix()
                                 else:

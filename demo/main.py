@@ -18,13 +18,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-SCREEN_SCALE = 1.0
+SCREEN_LOGICAL_WIDTH = 480
+SCREEN_LOGICAL_HEIGHT = 800
+TILE_SIZE = 128
 
-screen_width = int(480 * SCREEN_SCALE)
-screen_height = int(800 * SCREEN_SCALE)
-tile_size = 128
 import yapyg.bootstrap
-yapyg.bootstrap.initialize_screen(screen_width, screen_height)
+SCREEN_SCALE = 1.0
+SCREEN_REAL_WIDTH = int(SCREEN_LOGICAL_WIDTH * SCREEN_SCALE)
+SCREEN_REAL_HEIGHT = int(SCREEN_LOGICAL_HEIGHT * SCREEN_SCALE)
+yapyg.bootstrap.initialize_screen(SCREEN_REAL_WIDTH, SCREEN_REAL_HEIGHT)
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -40,7 +42,7 @@ from kivy.uix.boxlayout import BoxLayout
 
 from yapyg_widgets.screen_widget import ScreenWidget
 
-DEFAULT_START_CHOICE = "demo_starship"
+DEFAULT_START_CHOICE = "demo_bounce"
 
 class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
@@ -59,7 +61,7 @@ class MenuWidget(FloatLayout):
 
                 layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])
 
-                layout.add_widget(Image(source="assets/img/ui/logo.png", size_hint=(1, 0.4)))
+                layout.add_widget(Image(source="assets/img/ui/logo.png", size_hint=(1, 0.4), allow_stretch = True,))
 
                 layout.add_widget(Label(text="Choose demo:", size_hint=(1, 0.1)))
 
@@ -87,6 +89,11 @@ class MenuWidget(FloatLayout):
 
                 self.add_widget(layout)
 
+                Window.bind(on_key_up=self._on_keyboard_up)
+
+        def _on_keyboard_up(self, window, keycode, scancode):
+                self.on_run(None, None)
+
         def show_selected_value(self, spinner, value):
                 self.description_label.text = self.choices[value]
 
@@ -101,12 +108,13 @@ class MenuWidget(FloatLayout):
                         DEFAULT_START_CHOICE = module_name
 
                         exec("import %s" % module_name)
-                        exec("state = %s.create(Window.width, Window.height, tile_size)" % self.spinner.text)
+                        exec("state = %s.create(SCREEN_LOGICAL_WIDTH, SCREEN_LOGICAL_HEIGHT, TILE_SIZE)" % self.spinner.text)
 
                         parent.add_widget(ScreenWidget(state,
-                                (float(Window.width) / screen_width),
-                                self.on_exit_game,
-                                self.debug_checkbox.active))
+                                                       self.on_exit_game,
+                                                       self.debug_checkbox.active
+                                                       )
+                                          )
 
         def on_exit_game(self, state, parent_widget):
                 parent_widget.add_widget(MenuWidget())
@@ -117,9 +125,9 @@ class YapygDemoApp(App):
                         return MenuWidget()
                 else:
                         import demo_gauntlet
-                        state = demo_gauntlet.create(Window.width, Window.height, tile_size)
+                        state = demo_gauntlet.create(SCREEN_LOGICAL_WIDTH, SCREEN_LOGICAL_HEIGHT, TILE_SIZE)
                         return ScreenWidget(state,
-                                            (float(Window.width) / screen_width),
+                                            (float(Window.width) / SCREEN_LOGICAL_WIDTH),
                                             None, False)
 
 if __name__ == "__main__":
