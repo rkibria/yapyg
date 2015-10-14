@@ -18,14 +18,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import random
+
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
 from yapyg import collisions
 from yapyg import debug
+
 from yapyg_widgets.screen_widget import ScreenWidget
 from yapyg_movers import physical_mover
 from yapyg_helpers import entities_helpers
+
+from physics_params import *
 
 def create(screen_width, screen_height, tile_size):
         state = factory.create(screen_width, screen_height, tile_size)
@@ -38,246 +43,81 @@ def create(screen_width, screen_height, tile_size):
         tiles.set_area(state, [[" " for x in xrange(10)] for x in xrange(10)])
         entities_helpers.create_screen_wall(state, "000_screenbox", BORDER_THICKNESS, BORDER_OFFSET, BOTTOM_Y, color=WALLS_COLOR)
 
-        collisions.set_handler(state, collision_handler)
+        # collisions.set_handler(state, collision_handler)
 
-        speed_factor = 4
+        for i in xrange(4):
+                objtype = random.randint(0, 2)
+                ent_name = "%d" % i
+                ent_mass = 1.0
+                angle = random.randint(0, 20) - 10.0
 
-        # True # False
-        show_collision = True
-        target_is_physical = True
-        both_moving = True
-        shifted = True
-        more_rectangles = True
-        circle_collision = True
-        more_circles = True
-
-        if show_collision:
-                # 2 rectangles collide
-                BOUNCE_GRAVITY = 0.0
-                BOUNCE_INELASTICITY = 1.0
-                BOUNCE_FRICTION = 1.0
-                BOUNCE_STICKYNESS = 0.0
-                ROT_FRICTION = 0.35
-                ROT_DECAY = 1.0
-                VX_1 = 0.0
-                VY_1 = -1.0
-                R_1 = 0.0
-                VX_2 = 0.0
-                VY_2 = 0.0
-                R_2 = 0.0
-                if both_moving:
-                        VY_2 = 1.0
-        else:
-                # Single rectangle collides with walls
-                BOUNCE_GRAVITY = 0.0
-                BOUNCE_INELASTICITY = 0.9
-                BOUNCE_FRICTION = 1.0
-                BOUNCE_STICKYNESS = 0.0
-                ROT_FRICTION = 0.35
-                ROT_DECAY = 1.0
-                VX_1 = 0.5
-                VY_1 = -1.0
-                R_1 = 40.0
-                VX_2 = 0.0
-                VY_2 = 0.0
-
-        VX_1 *= speed_factor
-        VY_1 *= speed_factor
-
-        VX_2 *= speed_factor
-        VY_2 *= speed_factor
-
-        X_1 = 1.75
-        if shifted:
-                X_1 += 0.33
-                VX_1 -= speed_factor
-
-        entities.insert(state,
-                        "sq_1",
-                        {
-                         "*": {
-                               "textures": ("assets/img/sprites/half_square.png",),
-                               },
-                         },
-                        (X_1, 5, R_1,),
-                        collision=(("rectangle", 0, 0, 0.5, 0.5),)
-                        )
-
-        physical_mover.add(state,
-                "sq_1",
-                1.0,
-                VX_1,
-                VY_1,
-                0.0,
-                BOUNCE_GRAVITY,
-                BOUNCE_FRICTION,
-                BOUNCE_INELASTICITY,
-                0,
-                ROT_FRICTION,
-                ROT_DECAY,
-                BOUNCE_STICKYNESS,
-                )
-
-        if circle_collision:
-                entities.insert(state,
-                        "circ_1",
-                        {
-                                "*": {
-                                        "textures": ("assets/img/sprites/half_ball.png",),
-                                },
-                        },
-                        (1.0, 2.55, 0.0),
-                        collision=(("circle", 0.25, 0.25, 0.25),))
-
-                if target_is_physical:
-                        physical_mover.add(state,
-                                "circ_1",
-                                1.0,
-                                0,
-                                0,
-                                0,
-                                BOUNCE_GRAVITY,
-                                BOUNCE_FRICTION,
-                                BOUNCE_INELASTICITY,
-                                0,
-                                ROT_FRICTION,
-                                ROT_DECAY,
-                                BOUNCE_STICKYNESS,
-                                )
-
-                if more_circles:
-                        entities.insert(state,
-                                "circ_2",
-                                {
-                                        "*": {
-                                                "textures": ("assets/img/sprites/half_ball.png",),
-                                        },
-                                },
-                                (1.0, 1.25, 0.0),
-                                collision=(("circle", 0.25, 0.25, 0.25),))
-
-                        if target_is_physical:
-                                physical_mover.add(state,
-                                        "circ_2",
-                                        1.0,
-                                        0,
-                                        0,
-                                        0,
-                                        BOUNCE_GRAVITY,
-                                        BOUNCE_FRICTION,
-                                        BOUNCE_INELASTICITY,
-                                        0,
-                                        ROT_FRICTION,
-                                        ROT_DECAY,
-                                        BOUNCE_STICKYNESS,
-                                        )
+                if objtype == 0:
+                        ent_name = "square_" + ent_name
+                        if i % 2 == 0:
+                                tx = "assets/img/sprites/half_square.png"
+                        else:
+                                tx = "assets/img/sprites/half_square_2.png"
 
                         entities.insert(state,
-                                "circ_3",
-                                {
-                                        "*": {
-                                                "textures": ("assets/img/sprites/half_ball.png",),
-                                        },
-                                },
-                                (1.0, 3.75, 0.0),
-                                collision=(("circle", 0.25, 0.25, 0.25),))
-
-                        if target_is_physical:
-                                physical_mover.add(state,
-                                        "circ_3",
-                                        1.0,
-                                        0,
-                                        0,
-                                        0,
-                                        BOUNCE_GRAVITY,
-                                        BOUNCE_FRICTION,
-                                        BOUNCE_INELASTICITY,
-                                        0,
-                                        ROT_FRICTION,
-                                        ROT_DECAY,
-                                        BOUNCE_STICKYNESS,
-                                        )
-
-        if show_collision:
-                entities.insert(state,
-                                "sq_2",
-                                {
-                                 "*": {
-                                       "textures": ("assets/img/sprites/half_square_2.png",),
-                                       },
-                                 },
-                                (1.75, 4, R_2,),
-                                collision=(("rectangle", 0, 0, 0.5, 0.5),)
-                                )
-
-                if target_is_physical:
-                        physical_mover.add(state,
-                                "sq_2",
-                                1.0,
-                                VX_2,
-                                VY_2,
-                                0,
-                                BOUNCE_GRAVITY,
-                                BOUNCE_FRICTION,
-                                BOUNCE_INELASTICITY,
-                                0,
-                                ROT_FRICTION,
-                                ROT_DECAY,
-                                BOUNCE_STICKYNESS,
-                                )
-
-                if more_rectangles:
-                        entities.insert(state,
-                                        "sq_3",
+                                        ent_name,
                                         {
                                          "*": {
-                                               "textures": ("assets/img/sprites/one_by_half_rectangle.png",),
+                                               "textures": (tx,),
                                                },
                                          },
-                                        (1.0, 2.0, 0,),
+                                        (0.5 + i * 0.75, 5, angle,),
+                                        collision=(("rectangle", 0, 0, 0.5, 0.5),)
+                                        )
+                elif objtype == 1:
+                        ent_name = "circle_" + ent_name
+                        if i % 2 == 0:
+                                tx = "assets/img/sprites/half_ball.png"
+                        else:
+                                tx = "assets/img/sprites/half_ball_2.png"
+
+                        entities.insert(state,
+                                ent_name,
+                                {
+                                        "*": {
+                                                "textures": (tx,),
+                                        },
+                                },
+                                (0.5 + i * 0.75, 4.0, angle),
+                                collision=(("circle", 0.25, 0.25, 0.25),))
+
+                elif objtype == 2:
+                        ent_mass = 2.0
+                        ent_name = "rect_" + ent_name
+                        if i % 2 == 0:
+                                tx = "assets/img/sprites/one_by_half_rectangle.png"
+                        else:
+                                tx = "assets/img/sprites/one_by_half_rectangle_2.png"
+
+                        entities.insert(state,
+                                        ent_name,
+                                        {
+                                         "*": {
+                                               "textures": (tx,),
+                                               },
+                                         },
+                                        (0.5 + i * 0.75, 3.0, 90 + angle,),
                                         collision=(("rectangle", 0, 0, 1.0, 0.5),)
                                         )
 
-                        physical_mover.add(state,
-                                "sq_3",
-                                2.0,
-                                0,
-                                0,
-                                0,
-                                BOUNCE_GRAVITY,
-                                BOUNCE_FRICTION,
-                                BOUNCE_INELASTICITY,
-                                0,
-                                ROT_FRICTION,
-                                ROT_DECAY,
-                                BOUNCE_STICKYNESS,
-                                )
-
-                        entities.insert(state,
-                                        "sq_4",
-                                        {
-                                         "*": {
-                                               "textures": ("assets/img/sprites/one_by_half_rectangle_2.png",),
-                                               },
-                                         },
-                                        (2.0, 2.5, 90.0,),
-                                        collision=(("rectangle", 0, 0, 1.0, 0.5),)
-                                        )
-
-                        physical_mover.add(state,
-                                "sq_4",
-                                2.0,
-                                0,
-                                0,
-                                0,
-                                BOUNCE_GRAVITY,
-                                BOUNCE_FRICTION,
-                                BOUNCE_INELASTICITY,
-                                0,
-                                ROT_FRICTION,
-                                ROT_DECAY,
-                                BOUNCE_STICKYNESS,
-                                )
+                physical_mover.add (state,
+                                    ent_name,
+                                    ent_mass,
+                                    0,
+                                    0,
+                                    0.0,
+                                    YAPYG_STD_GRAVITY,
+                                    YAPYG_STD_FRICTION,
+                                    YAPYG_STD_INELASTICITY,
+                                    0,
+                                    YAPYG_STD_ROT_FRICTION,
+                                    YAPYG_STD_ROT_DECAY,
+                                    YAPYG_STD_STICKYNESS,
+                                    )
 
         return state
 

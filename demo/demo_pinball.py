@@ -27,6 +27,8 @@ from yapyg_movers import physical_mover
 from yapyg_movers import flipper_mover
 from yapyg_helpers import entities_helpers
 
+from physics_params import *
+
 def create(screen_width_px, screen_height_px, tile_size_px):
         BOTTOM_Y = 0.0
         BORDER_THICKNESS = 2.0
@@ -47,13 +49,6 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         entities_helpers.create_screen_wall(state, "000_screenbox", BORDER_THICKNESS, BORDER_OFFSET, BOTTOM_Y,
                         top=False, # bottom=False,
                         color=WALLS_COLOR)
-
-        BOUNCE_GRAVITY = -9.0
-        BOUNCE_INELASTICITY = 0.999
-        BOUNCE_FRICTION = 0.95
-        BOUNCE_STICKYNESS = 0.0
-        ROT_FRICTION = 0.35
-        ROT_DECAY = 0.999
 
         ball_entity_name = "900_ball_0"
 
@@ -78,13 +73,13 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                 0,
                 0,
                 0,
-                BOUNCE_GRAVITY,
-                BOUNCE_FRICTION,
-                BOUNCE_INELASTICITY,
+                YAPYG_STD_GRAVITY,
+                YAPYG_STD_FRICTION,
+                YAPYG_STD_INELASTICITY,
                 0,
-                ROT_FRICTION,
-                ROT_DECAY,
-                BOUNCE_STICKYNESS,
+                YAPYG_STD_ROT_FRICTION,
+                YAPYG_STD_ROT_DECAY,
+                YAPYG_STD_STICKYNESS,
                 )
 
         ENT_FLIPPER_1 = "000_flipper_1"

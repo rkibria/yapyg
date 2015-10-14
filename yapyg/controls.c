@@ -415,7 +415,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg\\controls.pyx",
+  "yapyg/controls.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -702,7 +702,7 @@ static PyObject *__pyx_int_2;
 static PyObject *__pyx_int_3;
 static PyObject *__pyx_int_4;
 
-/* "yapyg\controls.pyx":37
+/* "yapyg/controls.pyx":37
  * IDX_CONTROL_BUTTON_SIZE = 4
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -722,7 +722,7 @@ static PyObject *__pyx_f_5yapyg_8controls_initialize(int __pyx_v_state_idx, PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg\controls.pyx":42
+  /* "yapyg/controls.pyx":42
  *         """
  *         global IDX_STATE_CONTROLS
  *         IDX_STATE_CONTROLS = state_idx             # <<<<<<<<<<<<<<
@@ -731,7 +731,7 @@ static PyObject *__pyx_f_5yapyg_8controls_initialize(int __pyx_v_state_idx, PyOb
  */
   __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS = __pyx_v_state_idx;
 
-  /* "yapyg\controls.pyx":45
+  /* "yapyg/controls.pyx":45
  *         state[IDX_STATE_CONTROLS] = [
  *                 False,
  *                 [0, 0],             # <<<<<<<<<<<<<<
@@ -747,7 +747,7 @@ static PyObject *__pyx_f_5yapyg_8controls_initialize(int __pyx_v_state_idx, PyOb
   PyList_SET_ITEM(__pyx_t_1, 1, __pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
 
-  /* "yapyg\controls.pyx":46
+  /* "yapyg/controls.pyx":46
  *                 False,
  *                 [0, 0],
  *                 []             # <<<<<<<<<<<<<<
@@ -757,7 +757,7 @@ static PyObject *__pyx_f_5yapyg_8controls_initialize(int __pyx_v_state_idx, PyOb
   __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg\controls.pyx":43
+  /* "yapyg/controls.pyx":43
  *         global IDX_STATE_CONTROLS
  *         IDX_STATE_CONTROLS = state_idx
  *         state[IDX_STATE_CONTROLS] = [             # <<<<<<<<<<<<<<
@@ -782,7 +782,7 @@ static PyObject *__pyx_f_5yapyg_8controls_initialize(int __pyx_v_state_idx, PyOb
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, __pyx_t_3, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg\controls.pyx":37
+  /* "yapyg/controls.pyx":37
  * IDX_CONTROL_BUTTON_SIZE = 4
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -898,7 +898,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_initialize(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":49
+/* "yapyg/controls.pyx":49
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -915,7 +915,7 @@ static PyObject *__pyx_f_5yapyg_8controls_destroy(PyObject *__pyx_v_state, CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg\controls.pyx":53
+  /* "yapyg/controls.pyx":53
  *         TODO
  *         """
  *         state[IDX_STATE_CONTROLS] = None             # <<<<<<<<<<<<<<
@@ -928,7 +928,7 @@ static PyObject *__pyx_f_5yapyg_8controls_destroy(PyObject *__pyx_v_state, CYTHO
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\controls.pyx":49
+  /* "yapyg/controls.pyx":49
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -996,7 +996,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_2destroy(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":55
+/* "yapyg/controls.pyx":55
  *         state[IDX_STATE_CONTROLS] = None
  * 
  * cpdef add_buttons(list state, tuple button_defs):             # <<<<<<<<<<<<<<
@@ -1023,7 +1023,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_buttons", 0);
 
-  /* "yapyg\controls.pyx":61
+  /* "yapyg/controls.pyx":61
  *         size can be "small", "big"
  *         """
  *         state_button_defs = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]             # <<<<<<<<<<<<<<
@@ -1042,7 +1042,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
   __pyx_v_state_button_defs = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "yapyg\controls.pyx":62
+  /* "yapyg/controls.pyx":62
  *         """
  *         state_button_defs = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
  *         for button_def in button_defs:             # <<<<<<<<<<<<<<
@@ -1064,7 +1064,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
     __Pyx_XDECREF_SET(__pyx_v_button_def, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\controls.pyx":64
+    /* "yapyg/controls.pyx":64
  *         for button_def in button_defs:
  *                 state_button_defs.append([
  *                         button_def[0],             # <<<<<<<<<<<<<<
@@ -1074,7 +1074,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
     __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_button_def, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "yapyg\controls.pyx":65
+    /* "yapyg/controls.pyx":65
  *                 state_button_defs.append([
  *                         button_def[0],
  *                         button_def[1],             # <<<<<<<<<<<<<<
@@ -1084,7 +1084,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
     __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_button_def, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
 
-    /* "yapyg\controls.pyx":67
+    /* "yapyg/controls.pyx":67
  *                         button_def[1],
  *                         False,
  *                         button_def[2],             # <<<<<<<<<<<<<<
@@ -1094,7 +1094,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
     __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_button_def, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
 
-    /* "yapyg\controls.pyx":68
+    /* "yapyg/controls.pyx":68
  *                         False,
  *                         button_def[2],
  *                         button_def[3],             # <<<<<<<<<<<<<<
@@ -1104,7 +1104,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
     __pyx_t_6 = __Pyx_GetItemInt(__pyx_v_button_def, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_6);
 
-    /* "yapyg\controls.pyx":63
+    /* "yapyg/controls.pyx":63
  *         state_button_defs = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
  *         for button_def in button_defs:
  *                 state_button_defs.append([             # <<<<<<<<<<<<<<
@@ -1131,7 +1131,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
     __pyx_t_8 = __Pyx_PyObject_Append(__pyx_v_state_button_defs, __pyx_t_7); if (unlikely(__pyx_t_8 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "yapyg\controls.pyx":62
+    /* "yapyg/controls.pyx":62
  *         """
  *         state_button_defs = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
  *         for button_def in button_defs:             # <<<<<<<<<<<<<<
@@ -1141,7 +1141,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_buttons(PyObject *__pyx_v_state, P
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\controls.pyx":55
+  /* "yapyg/controls.pyx":55
  *         state[IDX_STATE_CONTROLS] = None
  * 
  * cpdef add_buttons(list state, tuple button_defs):             # <<<<<<<<<<<<<<
@@ -1263,7 +1263,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_4add_buttons(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":71
+/* "yapyg/controls.pyx":71
  *                         ])
  * 
  * cpdef list get_buttons(list state):             # <<<<<<<<<<<<<<
@@ -1282,7 +1282,7 @@ static PyObject *__pyx_f_5yapyg_8controls_get_buttons(PyObject *__pyx_v_state, C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_buttons", 0);
 
-  /* "yapyg\controls.pyx":75
+  /* "yapyg/controls.pyx":75
  *         TODO
  *         """
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]             # <<<<<<<<<<<<<<
@@ -1304,7 +1304,7 @@ static PyObject *__pyx_f_5yapyg_8controls_get_buttons(PyObject *__pyx_v_state, C
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\controls.pyx":71
+  /* "yapyg/controls.pyx":71
  *                         ])
  * 
  * cpdef list get_buttons(list state):             # <<<<<<<<<<<<<<
@@ -1372,7 +1372,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_6get_buttons(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":77
+/* "yapyg/controls.pyx":77
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
  * 
  * cpdef set_button_state(list state, int button_index, int button_pressed):             # <<<<<<<<<<<<<<
@@ -1382,133 +1382,166 @@ static PyObject *__pyx_pf_5yapyg_8controls_6get_buttons(CYTHON_UNUSED PyObject *
 
 static PyObject *__pyx_pw_5yapyg_8controls_9set_button_state(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8controls_set_button_state(PyObject *__pyx_v_state, int __pyx_v_button_index, int __pyx_v_button_pressed, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_v_buttons_list = 0;
   PyObject *__pyx_v_button_state = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
+  Py_ssize_t __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
-  Py_ssize_t __pyx_t_6;
+  PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_button_state", 0);
 
-  /* "yapyg\controls.pyx":81
- *         TODO
+  /* "yapyg/controls.pyx":82
  *         """
+ *         cdef list buttons_list
  *         if state[IDX_STATE_CONTROLS]:             # <<<<<<<<<<<<<<
- *                 button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
- *                 button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
+ *                 buttons_list = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+ *                 if button_index < len(buttons_list):
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "yapyg\controls.pyx":82
- *         """
+    /* "yapyg/controls.pyx":83
+ *         cdef list buttons_list
  *         if state[IDX_STATE_CONTROLS]:
- *                 button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]             # <<<<<<<<<<<<<<
- *                 button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
- *                 if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
+ *                 buttons_list = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]             # <<<<<<<<<<<<<<
+ *                 if button_index < len(buttons_list):
+ *                         button_state = buttons_list[button_index]
  */
     if (unlikely(__pyx_v_state == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, __pyx_v_button_index, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_v_button_state = __pyx_t_1;
-    __pyx_t_1 = 0;
+    if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_3)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_v_buttons_list = ((PyObject*)__pyx_t_3);
+    __pyx_t_3 = 0;
 
-    /* "yapyg\controls.pyx":83
+    /* "yapyg/controls.pyx":84
  *         if state[IDX_STATE_CONTROLS]:
- *                 button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
- *                 button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed             # <<<<<<<<<<<<<<
- *                 if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
- *                         (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
+ *                 buttons_list = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+ *                 if button_index < len(buttons_list):             # <<<<<<<<<<<<<<
+ *                         button_state = buttons_list[button_index]
+ *                         button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
  */
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_button_pressed); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_STATE); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
-    if (unlikely(PyObject_SetItem(__pyx_v_button_state, __pyx_t_3, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "yapyg\controls.pyx":84
- *                 button_state = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index]
- *                 button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
- *                 if button_state[IDX_CONTROL_BUTTON_CALLBACK]:             # <<<<<<<<<<<<<<
- *                         (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
- * 
- */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_CALLBACK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_GetItem(__pyx_v_button_state, __pyx_t_1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(__pyx_v_buttons_list == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    }
+    __pyx_t_4 = PyList_GET_SIZE(__pyx_v_buttons_list); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = ((__pyx_v_button_index < __pyx_t_4) != 0);
     if (__pyx_t_2) {
 
-      /* "yapyg\controls.pyx":85
- *                 button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
- *                 if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
- *                         (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)             # <<<<<<<<<<<<<<
+      /* "yapyg/controls.pyx":85
+ *                 buttons_list = state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
+ *                 if button_index < len(buttons_list):
+ *                         button_state = buttons_list[button_index]             # <<<<<<<<<<<<<<
+ *                         button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
+ *                         if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
+ */
+      if (unlikely(__pyx_v_buttons_list == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+      __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_buttons_list, __pyx_v_button_index, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_v_button_state = __pyx_t_3;
+      __pyx_t_3 = 0;
+
+      /* "yapyg/controls.pyx":86
+ *                 if button_index < len(buttons_list):
+ *                         button_state = buttons_list[button_index]
+ *                         button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed             # <<<<<<<<<<<<<<
+ *                         if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
+ *                                 (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
+ */
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_button_pressed); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_STATE); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      if (unlikely(PyObject_SetItem(__pyx_v_button_state, __pyx_t_1, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+      /* "yapyg/controls.pyx":87
+ *                         button_state = buttons_list[button_index]
+ *                         button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
+ *                         if button_state[IDX_CONTROL_BUTTON_CALLBACK]:             # <<<<<<<<<<<<<<
+ *                                 (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
+ * 
+ */
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_CALLBACK); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_1 = PyObject_GetItem(__pyx_v_button_state, __pyx_t_3); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      if (__pyx_t_2) {
+
+        /* "yapyg/controls.pyx":88
+ *                         button_state[IDX_CONTROL_BUTTON_STATE] = button_pressed
+ *                         if button_state[IDX_CONTROL_BUTTON_CALLBACK]:
+ *                                 (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)             # <<<<<<<<<<<<<<
  * 
  * cpdef int get_button_is_down(list state, int button_index):
  */
-      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_CALLBACK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = PyObject_GetItem(__pyx_v_button_state, __pyx_t_1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_button_pressed); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = NULL;
-      __pyx_t_6 = 0;
-      if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
-        __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-        if (likely(__pyx_t_5)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-          __Pyx_INCREF(__pyx_t_5);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_4, function);
-          __pyx_t_6 = 1;
+        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_CALLBACK); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_5 = PyObject_GetItem(__pyx_v_button_state, __pyx_t_3); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_button_pressed); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_6 = NULL;
+        __pyx_t_4 = 0;
+        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
+          __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+          if (likely(__pyx_t_6)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+            __Pyx_INCREF(__pyx_t_6);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_5, function);
+            __pyx_t_4 = 1;
+          }
         }
+        __pyx_t_7 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_7);
+        if (__pyx_t_6) {
+          PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __Pyx_GIVEREF(__pyx_t_6); __pyx_t_6 = NULL;
+        }
+        __Pyx_INCREF(__pyx_v_state);
+        PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_4, __pyx_v_state);
+        __Pyx_GIVEREF(__pyx_v_state);
+        PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_4, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_3);
+        __pyx_t_3 = 0;
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L5;
       }
-      __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_7);
-      if (__pyx_t_5) {
-        PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
-      }
-      __Pyx_INCREF(__pyx_v_state);
-      PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_v_state);
-      __Pyx_GIVEREF(__pyx_v_state);
-      PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_1);
-      __Pyx_GIVEREF(__pyx_t_1);
-      __pyx_t_1 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_L5:;
       goto __pyx_L4;
     }
     __pyx_L4:;
@@ -1516,7 +1549,7 @@ static PyObject *__pyx_f_5yapyg_8controls_set_button_state(PyObject *__pyx_v_sta
   }
   __pyx_L3:;
 
-  /* "yapyg\controls.pyx":77
+  /* "yapyg/controls.pyx":77
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]
  * 
  * cpdef set_button_state(list state, int button_index, int button_pressed):             # <<<<<<<<<<<<<<
@@ -1530,12 +1563,13 @@ static PyObject *__pyx_f_5yapyg_8controls_set_button_state(PyObject *__pyx_v_sta
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("yapyg.controls.set_button_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_buttons_list);
   __Pyx_XDECREF(__pyx_v_button_state);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -1644,8 +1678,8 @@ static PyObject *__pyx_pf_5yapyg_8controls_8set_button_state(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":87
- *                         (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
+/* "yapyg/controls.pyx":90
+ *                                 (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
  * 
  * cpdef int get_button_is_down(list state, int button_index):             # <<<<<<<<<<<<<<
  *         """
@@ -1665,7 +1699,7 @@ static int __pyx_f_5yapyg_8controls_get_button_is_down(PyObject *__pyx_v_state, 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_button_is_down", 0);
 
-  /* "yapyg\controls.pyx":91
+  /* "yapyg/controls.pyx":94
  *         TODO
  *         """
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][IDX_CONTROL_BUTTON_STATE]             # <<<<<<<<<<<<<<
@@ -1674,29 +1708,29 @@ static int __pyx_f_5yapyg_8controls_get_button_is_down(PyObject *__pyx_v_state, 
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_button_index, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_button_index, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_STATE); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_IDX_CONTROL_BUTTON_STATE); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_GetItem(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_3 = PyObject_GetItem(__pyx_t_1, __pyx_t_2); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_4;
   goto __pyx_L0;
 
-  /* "yapyg\controls.pyx":87
- *                         (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
+  /* "yapyg/controls.pyx":90
+ *                                 (button_state[IDX_CONTROL_BUTTON_CALLBACK])(state, button_pressed)
  * 
  * cpdef int get_button_is_down(list state, int button_index):             # <<<<<<<<<<<<<<
  *         """
@@ -1747,11 +1781,11 @@ static PyObject *__pyx_pw_5yapyg_8controls_11get_button_is_down(PyObject *__pyx_
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_button_index)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_button_is_down", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_button_is_down", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_button_is_down") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_button_is_down") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1760,17 +1794,17 @@ static PyObject *__pyx_pw_5yapyg_8controls_11get_button_is_down(PyObject *__pyx_
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_state = ((PyObject*)values[0]);
-    __pyx_v_button_index = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_button_index == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_button_index = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_button_index == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_button_is_down", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_button_is_down", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.controls.get_button_is_down", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8controls_10get_button_is_down(__pyx_self, __pyx_v_state, __pyx_v_button_index);
 
   /* function exit code */
@@ -1791,7 +1825,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_10get_button_is_down(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_button_is_down", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8controls_get_button_is_down(__pyx_v_state, __pyx_v_button_index, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8controls_get_button_is_down(__pyx_v_state, __pyx_v_button_index, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1808,7 +1842,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_10get_button_is_down(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":93
+/* "yapyg/controls.pyx":96
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][IDX_CONTROL_BUTTON_STATE]
  * 
  * cpdef add_joystick(list state):             # <<<<<<<<<<<<<<
@@ -1826,7 +1860,7 @@ static PyObject *__pyx_f_5yapyg_8controls_add_joystick(PyObject *__pyx_v_state, 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_joystick", 0);
 
-  /* "yapyg\controls.pyx":97
+  /* "yapyg/controls.pyx":100
  *         TODO
  *         """
  *         state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK] = True             # <<<<<<<<<<<<<<
@@ -1835,14 +1869,14 @@ static PyObject *__pyx_f_5yapyg_8controls_add_joystick(PyObject *__pyx_v_state, 
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK, Py_True, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK, Py_True, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\controls.pyx":93
+  /* "yapyg/controls.pyx":96
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS][button_index][IDX_CONTROL_BUTTON_STATE]
  * 
  * cpdef add_joystick(list state):             # <<<<<<<<<<<<<<
@@ -1873,7 +1907,7 @@ static PyObject *__pyx_pw_5yapyg_8controls_13add_joystick(PyObject *__pyx_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_joystick (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8controls_12add_joystick(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -1894,7 +1928,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_12add_joystick(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_joystick", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8controls_add_joystick(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8controls_add_joystick(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1911,7 +1945,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_12add_joystick(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":99
+/* "yapyg/controls.pyx":102
  *         state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK] = True
  * 
  * cpdef int need_joystick(list state):             # <<<<<<<<<<<<<<
@@ -1931,7 +1965,7 @@ static int __pyx_f_5yapyg_8controls_need_joystick(PyObject *__pyx_v_state, CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("need_joystick", 0);
 
-  /* "yapyg\controls.pyx":103
+  /* "yapyg/controls.pyx":106
  *         TODO
  *         """
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]             # <<<<<<<<<<<<<<
@@ -1940,19 +1974,19 @@ static int __pyx_f_5yapyg_8controls_need_joystick(PyObject *__pyx_v_state, CYTHO
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_3;
   goto __pyx_L0;
 
-  /* "yapyg\controls.pyx":99
+  /* "yapyg/controls.pyx":102
  *         state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK] = True
  * 
  * cpdef int need_joystick(list state):             # <<<<<<<<<<<<<<
@@ -1981,7 +2015,7 @@ static PyObject *__pyx_pw_5yapyg_8controls_15need_joystick(PyObject *__pyx_self,
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("need_joystick (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8controls_14need_joystick(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -2002,7 +2036,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_14need_joystick(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("need_joystick", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8controls_need_joystick(__pyx_v_state, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8controls_need_joystick(__pyx_v_state, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2019,7 +2053,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_14need_joystick(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":105
+/* "yapyg/controls.pyx":108
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]
  * 
  * cpdef int need_buttons(list state):             # <<<<<<<<<<<<<<
@@ -2039,7 +2073,7 @@ static int __pyx_f_5yapyg_8controls_need_buttons(PyObject *__pyx_v_state, CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("need_buttons", 0);
 
-  /* "yapyg\controls.pyx":109
+  /* "yapyg/controls.pyx":112
  *         TODO
  *         """
  *         return len(state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]) > 0             # <<<<<<<<<<<<<<
@@ -2048,19 +2082,19 @@ static int __pyx_f_5yapyg_8controls_need_buttons(PyObject *__pyx_v_state, CYTHON
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = (__pyx_t_3 > 0);
   goto __pyx_L0;
 
-  /* "yapyg\controls.pyx":105
+  /* "yapyg/controls.pyx":108
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK]
  * 
  * cpdef int need_buttons(list state):             # <<<<<<<<<<<<<<
@@ -2089,7 +2123,7 @@ static PyObject *__pyx_pw_5yapyg_8controls_17need_buttons(PyObject *__pyx_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("need_buttons (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8controls_16need_buttons(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -2110,7 +2144,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_16need_buttons(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("need_buttons", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8controls_need_buttons(__pyx_v_state, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_8controls_need_buttons(__pyx_v_state, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2127,7 +2161,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_16need_buttons(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":111
+/* "yapyg/controls.pyx":114
  *         return len(state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]) > 0
  * 
  * cpdef set_joystick(list state, directions):             # <<<<<<<<<<<<<<
@@ -2149,7 +2183,7 @@ static PyObject *__pyx_f_5yapyg_8controls_set_joystick(PyObject *__pyx_v_state, 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_joystick", 0);
 
-  /* "yapyg\controls.pyx":115
+  /* "yapyg/controls.pyx":118
  *         TODO
  *         """
  *         if state[IDX_STATE_CONTROLS]:             # <<<<<<<<<<<<<<
@@ -2158,70 +2192,70 @@ static PyObject *__pyx_f_5yapyg_8controls_set_joystick(PyObject *__pyx_v_state, 
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "yapyg\controls.pyx":116
+    /* "yapyg/controls.pyx":119
  *         """
  *         if state[IDX_STATE_CONTROLS]:
  *                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = (float(directions[0]))             # <<<<<<<<<<<<<<
  *                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = (float(directions[1]))
  * 
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_directions, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_directions, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_state == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_4, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_4, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_5, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\controls.pyx":117
+    /* "yapyg/controls.pyx":120
  *         if state[IDX_STATE_CONTROLS]:
  *                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = (float(directions[0]))
  *                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = (float(directions[1]))             # <<<<<<<<<<<<<<
  * 
  * cpdef get_joystick(list state):
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_directions, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_directions, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_state == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_SetItemInt(__pyx_t_4, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "yapyg\controls.pyx":111
+  /* "yapyg/controls.pyx":114
  *         return len(state[IDX_STATE_CONTROLS][IDX_CONTROLS_BUTTONS]) > 0
  * 
  * cpdef set_joystick(list state, directions):             # <<<<<<<<<<<<<<
@@ -2276,11 +2310,11 @@ static PyObject *__pyx_pw_5yapyg_8controls_19set_joystick(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_directions)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_joystick", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_joystick", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_joystick") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_joystick") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2293,13 +2327,13 @@ static PyObject *__pyx_pw_5yapyg_8controls_19set_joystick(PyObject *__pyx_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_joystick", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("set_joystick", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.controls.set_joystick", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8controls_18set_joystick(__pyx_self, __pyx_v_state, __pyx_v_directions);
 
   /* function exit code */
@@ -2320,7 +2354,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_18set_joystick(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_joystick", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8controls_set_joystick(__pyx_v_state, __pyx_v_directions, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8controls_set_joystick(__pyx_v_state, __pyx_v_directions, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2337,7 +2371,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_18set_joystick(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":119
+/* "yapyg/controls.pyx":122
  *                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = (float(directions[1]))
  * 
  * cpdef get_joystick(list state):             # <<<<<<<<<<<<<<
@@ -2356,7 +2390,7 @@ static PyObject *__pyx_f_5yapyg_8controls_get_joystick(PyObject *__pyx_v_state, 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_joystick", 0);
 
-  /* "yapyg\controls.pyx":123
+  /* "yapyg/controls.pyx":126
  *         TODO
  *         """
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION]             # <<<<<<<<<<<<<<
@@ -2366,18 +2400,18 @@ static PyObject *__pyx_f_5yapyg_8controls_get_joystick(PyObject *__pyx_v_state, 
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_8controls_IDX_STATE_CONTROLS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\controls.pyx":119
+  /* "yapyg/controls.pyx":122
  *                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = (float(directions[1]))
  * 
  * cpdef get_joystick(list state):             # <<<<<<<<<<<<<<
@@ -2407,7 +2441,7 @@ static PyObject *__pyx_pw_5yapyg_8controls_21get_joystick(PyObject *__pyx_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_joystick (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8controls_20get_joystick(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -2428,7 +2462,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_20get_joystick(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_joystick", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8controls_get_joystick(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8controls_get_joystick(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2445,7 +2479,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_20get_joystick(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg\controls.pyx":125
+/* "yapyg/controls.pyx":128
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION]
  * 
  * cpdef dict get_joystick_properties():             # <<<<<<<<<<<<<<
@@ -2463,7 +2497,7 @@ static PyObject *__pyx_f_5yapyg_8controls_get_joystick_properties(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_joystick_properties", 0);
 
-  /* "yapyg\controls.pyx":129
+  /* "yapyg/controls.pyx":132
  *         TODO
  *         """
  *         return {             # <<<<<<<<<<<<<<
@@ -2471,17 +2505,17 @@ static PyObject *__pyx_f_5yapyg_8controls_get_joystick_properties(CYTHON_UNUSED 
  *                 "y" : 0.0,
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_x, __pyx_float_0_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_y, __pyx_float_0_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_w, __pyx_float_1_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_h, __pyx_float_0_25) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_x, __pyx_float_0_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_y, __pyx_float_0_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_w, __pyx_float_1_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_h, __pyx_float_0_25) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\controls.pyx":125
+  /* "yapyg/controls.pyx":128
  *         return state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION]
  * 
  * cpdef dict get_joystick_properties():             # <<<<<<<<<<<<<<
@@ -2523,7 +2557,7 @@ static PyObject *__pyx_pf_5yapyg_8controls_22get_joystick_properties(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_joystick_properties", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_8controls_get_joystick_properties(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_8controls_get_joystick_properties(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2706,7 +2740,7 @@ PyMODINIT_FUNC PyInit_controls(void)
   /*--- Function import code ---*/
   /*--- Execution code ---*/
 
-  /* "yapyg\controls.pyx":27
+  /* "yapyg/controls.pyx":27
  * cdef int IDX_STATE_CONTROLS
  * 
  * cdef int IDX_CONTROLS_JOYSTICK = 0             # <<<<<<<<<<<<<<
@@ -2715,7 +2749,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK = 0;
 
-  /* "yapyg\controls.pyx":28
+  /* "yapyg/controls.pyx":28
  * 
  * cdef int IDX_CONTROLS_JOYSTICK = 0
  * cdef int IDX_CONTROLS_JOYSTICK_DIRECTION = 1             # <<<<<<<<<<<<<<
@@ -2724,7 +2758,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   __pyx_v_5yapyg_8controls_IDX_CONTROLS_JOYSTICK_DIRECTION = 1;
 
-  /* "yapyg\controls.pyx":29
+  /* "yapyg/controls.pyx":29
  * cdef int IDX_CONTROLS_JOYSTICK = 0
  * cdef int IDX_CONTROLS_JOYSTICK_DIRECTION = 1
  * cdef int IDX_CONTROLS_BUTTONS = 2             # <<<<<<<<<<<<<<
@@ -2733,7 +2767,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   __pyx_v_5yapyg_8controls_IDX_CONTROLS_BUTTONS = 2;
 
-  /* "yapyg\controls.pyx":31
+  /* "yapyg/controls.pyx":31
  * cdef int IDX_CONTROLS_BUTTONS = 2
  * 
  * IDX_CONTROL_BUTTON_LABEL = 0             # <<<<<<<<<<<<<<
@@ -2742,7 +2776,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_CONTROL_BUTTON_LABEL, __pyx_int_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\controls.pyx":32
+  /* "yapyg/controls.pyx":32
  * 
  * IDX_CONTROL_BUTTON_LABEL = 0
  * IDX_CONTROL_BUTTON_CALLBACK = 1             # <<<<<<<<<<<<<<
@@ -2751,7 +2785,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_CONTROL_BUTTON_CALLBACK, __pyx_int_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\controls.pyx":33
+  /* "yapyg/controls.pyx":33
  * IDX_CONTROL_BUTTON_LABEL = 0
  * IDX_CONTROL_BUTTON_CALLBACK = 1
  * IDX_CONTROL_BUTTON_STATE = 2             # <<<<<<<<<<<<<<
@@ -2760,7 +2794,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_CONTROL_BUTTON_STATE, __pyx_int_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\controls.pyx":34
+  /* "yapyg/controls.pyx":34
  * IDX_CONTROL_BUTTON_CALLBACK = 1
  * IDX_CONTROL_BUTTON_STATE = 2
  * IDX_CONTROL_BUTTON_POS = 3             # <<<<<<<<<<<<<<
@@ -2769,7 +2803,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_CONTROL_BUTTON_POS, __pyx_int_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\controls.pyx":35
+  /* "yapyg/controls.pyx":35
  * IDX_CONTROL_BUTTON_STATE = 2
  * IDX_CONTROL_BUTTON_POS = 3
  * IDX_CONTROL_BUTTON_SIZE = 4             # <<<<<<<<<<<<<<
@@ -2778,7 +2812,7 @@ PyMODINIT_FUNC PyInit_controls(void)
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_CONTROL_BUTTON_SIZE, __pyx_int_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\controls.pyx":1
+  /* "yapyg/controls.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

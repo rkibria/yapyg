@@ -479,7 +479,11 @@ cdef void circle_circle_collision(
                 v_r_2 = (v_p_2 / circle_r_2) / CONST_2PI
                 circle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = v_r_2
 
-cdef tuple get_post_rectangle_collision_torque(contact_points, rectangle_centre, velocity_vector):
+cdef tuple get_post_rectangle_collision_torque(
+                list contact_points,
+                tuple rectangle_centre,
+                tuple velocity_vector
+                ):
         """
         Compute a single representative contact point between the rectangles,
         and the total torque applied on the rectangle by collision with a certain velocity.
@@ -511,7 +515,11 @@ cdef tuple get_abs_rectangle_center(tuple abs_rectangle_shape):
                 abs_rectangle_shape[2] + (abs_rectangle_shape[4] / 2.0)
                 )
 
-cdef tuple get_post_rectangle_collision_velocity_vector(rectangle_center_1, abs_rectangle_shape_2, velocity_vector_1, rel_contact_point_vector):
+cdef tuple get_post_rectangle_collision_velocity_vector(
+                tuple rectangle_center_1,
+                tuple abs_rectangle_shape_2,
+                tuple velocity_vector_1,
+                tuple rel_contact_point_vector):
         """
         TODO
         """
@@ -624,20 +632,19 @@ cdef rectangle_rectangle_collision(list state,
                 mass_factor_2 = m_1 / (m_1 + m_2)
                 rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = resulting_torque_2 * mass_factor_2 * CONST_TORQUE_DAMPENING
 
-        # Apply mass factor
-        cdef tuple new_velocity_vector_1
-        new_velocity_vector_1 = yapyg.math_2d.vector_mul(post_collision_velocity_vector_1, mass_factor_1)
-
-        # Actually set new velocity
+        cdef tuple new_velocity_vector_1 = yapyg.math_2d.vector_mul(
+                yapyg.math_2d.get_unit_vector(rel_contact_point_vector_1),
+                -1.0 * yapyg.math_2d.length(post_collision_velocity_vector_1) * mass_factor_1
+                )
         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_velocity_vector_1[0]
         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_velocity_vector_1[1]
 
         cdef tuple new_velocity_vector_2
         if rectangle_physical_mover_2:
-                # Apply mass factor
-                new_velocity_vector_2 = yapyg.math_2d.vector_mul(post_collision_velocity_vector_2, mass_factor_2)
-
-                # Actually set new velocity
+                new_velocity_vector_2 = yapyg.math_2d.vector_mul(
+                        yapyg.math_2d.get_unit_vector(rel_contact_point_vector_2),
+                        -1.0 * yapyg.math_2d.length(post_collision_velocity_vector_2) * mass_factor_2
+                        )
                 rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_velocity_vector_2[0]
                 rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_velocity_vector_2[1]
 

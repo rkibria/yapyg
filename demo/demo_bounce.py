@@ -25,6 +25,8 @@ from yapyg import entities
 from yapyg_helpers import entities_helpers
 from yapyg_movers import physical_mover
 
+from physics_params import *
+
 def create(screen_width, screen_height, tile_size):
         ENT_BOUNCE_BLOCK_1 = "000_block_1"
         ENT_BOUNCE_BLOCK_2 = "100_block_2"
@@ -72,13 +74,6 @@ def create(screen_width, screen_height, tile_size):
         n_columns = 4
         BALL_DISTANCE = (1.0 / 4.0)
 
-        BOUNCE_GRAVITY = -10.0
-        BOUNCE_INELASTICITY = 0.8 # lower => stronger
-        BOUNCE_FRICTION = 0.98
-        BOUNCE_STICKYNESS = 0.1
-        ROT_FRICTION = 0.5
-        ROT_DECAY = 0.5
-
         for column in xrange(n_columns):
                 for row in xrange(n_rows):
                         ball_entity_name = "900_ball_%d" % index
@@ -116,13 +111,13 @@ def create(screen_width, screen_height, tile_size):
                                 BOUNCE_VX,
                                 0,
                                 0,
-                                BOUNCE_GRAVITY,
-                                BOUNCE_FRICTION,
-                                BOUNCE_INELASTICITY,
+                                YAPYG_STD_GRAVITY,
+                                YAPYG_STD_FRICTION,
+                                YAPYG_STD_INELASTICITY,
                                 0,
-                                ROT_FRICTION,
-                                ROT_DECAY,
-                                BOUNCE_STICKYNESS,
+                                YAPYG_STD_ROT_FRICTION,
+                                YAPYG_STD_ROT_DECAY,
+                                YAPYG_STD_STICKYNESS,
                                 )
 
                         index += 1

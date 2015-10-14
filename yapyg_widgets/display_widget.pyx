@@ -30,7 +30,8 @@ cimport yapyg.view
 import yapyg.factory
 import yapyg.timer
 
-cdef float MAX_FRAME_DELTA_MICROSECONDS = 1000.0 / 30.0
+cdef float FRAME_DELTA_SECONDS = 1.0 / 30.0
+cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
 
 class DisplayWidget(Widget):
         def __init__(self,
@@ -46,12 +47,13 @@ class DisplayWidget(Widget):
                 self.redraw_tiles = [True]
 
                 self.frame_time = 0
-                Clock.schedule_once(self.on_timer, timeout=0)
+                Clock.schedule_interval(self.on_timer, timeout=FRAME_DELTA_SECONDS)
 
         def destroy(self):
                 """
                 TODO
                 """
+                Clock.unschedule(self.on_timer)
                 state = self.state
                 self.state = None
                 yapyg.factory.destroy(state)
@@ -79,9 +81,6 @@ class DisplayWidget(Widget):
                                        self.redraw_tiles,
                                        self.canvas
                                        )
-
-                if self.state:
-                        Clock.schedule_once(self.on_timer, timeout=0)
 
         def get_frame_time(self):
                 """
