@@ -88,60 +88,67 @@ class ScreenWidget(FloatLayout):
                         if button_defs:
                                 if button_defs[0][controls.IDX_CONTROL_BUTTON_POS] == "right":
                                         if button_defs[0][controls.IDX_CONTROL_BUTTON_SIZE] == "small":
-                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                        font_size=16,
-                                                        markup=True,
+                                                button_0 = Button(
                                                         background_normal=background_file,
                                                         background_down=background_down_file,
                                                         size_hint=(button_width, button_height),
                                                         pos_hint = {"x" : 1.0 - button_width - 0.01, "y" : 0.0 + 0.01},
                                                         )
                                         else:
-                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                        font_size=16,
-                                                        markup=True,
+                                                button_0 = Button(
                                                         background_normal=background_file_big,
                                                         background_down=background_down_file_big,
                                                         size_hint=(button_width_big, button_height_big),
-                                                        pos_hint = {"x" : 1.0 - button_width_big - 0.01, "y" : 0.0 + 0.01},
+                                                        pos_hint={"x" : 1.0 - button_width_big - 0.01, "y" : 0.0 + 0.01},
                                                         )
                                 elif button_defs[0][controls.IDX_CONTROL_BUTTON_POS] == "left":
                                         if button_defs[0][controls.IDX_CONTROL_BUTTON_SIZE] == "small":
-                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                        font_size=16,
-                                                        markup=True,
+                                                button_0 = Button(
                                                         background_normal=background_file,
                                                         background_down=background_down_file,
                                                         size_hint=(button_width, button_height),
                                                         pos_hint = {"x" : joystick_x, "y" : joystick_y},
                                                         )
                                         else:
-                                                button_0 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[0][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                        font_size=16,
-                                                        markup=True,
+                                                button_0 = Button(
                                                         background_normal=background_file_big,
                                                         background_down=background_down_file_big,
                                                         size_hint=(button_width_big, button_height_big),
                                                         pos_hint = {"x" : joystick_x, "y" : joystick_y},
                                                         )
                                 self.add_widget(button_0)
+                                if button_defs[0][controls.IDX_CONTROL_BUTTON_POS] == "right":
+                                        if button_defs[0][controls.IDX_CONTROL_BUTTON_SIZE] == "small":
+                                                pass
+                                        else:
+                                                self.add_widget(Image(source="assets/img/ui/button_a.png",
+                                                                      allow_stretch = True,
+                                                                      pos_hint = {"x" : 1.0 - button_width_big - 0.01, "y" : 0.0 + 0.01},
+                                                                      size_hint=(button_width_big, button_height_big),
+                                                                      ))
+                                else:
+                                        if button_defs[0][controls.IDX_CONTROL_BUTTON_SIZE] == "small":
+                                                pass
+                                        else:
+                                                self.add_widget(Image(source="assets/img/ui/button_a.png",
+                                                                      allow_stretch = True,
+                                                                      size_hint=(button_width_big, button_height_big),
+                                                                      pos_hint = {"x" : joystick_x, "y" : joystick_y},
+                                                                      ))
+
                                 button_0.bind(state=self.on_button_0)
 
                                 if len(button_defs) > 1:
                                         if button_defs[1][controls.IDX_CONTROL_BUTTON_POS] == "right":
                                                 if button_defs[1][controls.IDX_CONTROL_BUTTON_SIZE] == "small":
-                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                                font_size=16,
-                                                                markup=True,
+                                                        button_1 = Button(
                                                                 background_normal=background_file,
                                                                 background_down=background_down_file,
                                                                 size_hint=(button_width, button_height),
                                                                 pos_hint = {"x" : 1.0 - joystick_width - 0.01, "y" : 0.0 + 0.01},
                                                                 )
                                                 else:
-                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                                font_size=16,
-                                                                markup=True,
+                                                        button_1 = Button(
                                                                 background_normal=background_file_big,
                                                                 background_down=background_down_file_big,
                                                                 size_hint=(button_width_big, button_height_big),
@@ -149,18 +156,14 @@ class ScreenWidget(FloatLayout):
                                                                 )
                                         elif button_defs[1][controls.IDX_CONTROL_BUTTON_POS] == "left":
                                                 if button_defs[1][controls.IDX_CONTROL_BUTTON_SIZE] == "small":
-                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                                font_size=16,
-                                                                markup=True,
+                                                        button_1 = Button(
                                                                 background_normal=background_file,
                                                                 background_down=background_down_file,
                                                                 size_hint=(button_width, button_height),
                                                                 pos_hint = {"x" : joystick_x, "y" : joystick_y},
                                                                 )
                                                 else:
-                                                        button_1 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[1][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                                font_size=16,
-                                                                markup=True,
+                                                        button_1 = Button(
                                                                 background_normal=background_file_big,
                                                                 background_down=background_down_file_big,
                                                                 size_hint=(button_width_big, button_height_big),
@@ -169,10 +172,16 @@ class ScreenWidget(FloatLayout):
                                         self.add_widget(button_1)
                                         button_1.bind(state=self.on_button_1)
 
+                                        if button_defs[1][controls.IDX_CONTROL_BUTTON_POS] == "right":
+                                                if button_defs[1][controls.IDX_CONTROL_BUTTON_SIZE] == "big":
+                                                        self.add_widget(Image(source="assets/img/ui/button_b.png",
+                                                                              allow_stretch = True,
+                                                                              pos_hint = {"x" : 1.0 - button_width_big - 0.01, "y" : 0.0 + 0.01},
+                                                                              size_hint=(button_width_big, button_height_big),
+                                                                              ))
+
                                 if len(button_defs) > 2:
-                                        button_2 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[2][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                font_size=16,
-                                                markup=True,
+                                        button_2 = Button(
                                                 background_normal=background_file,
                                                 background_down=background_down_file,
                                                 size_hint=(button_width, button_height),
@@ -182,9 +191,7 @@ class ScreenWidget(FloatLayout):
                                         button_2.bind(state=self.on_button_2)
 
                                 if len(button_defs) > 3:
-                                        button_3 = Button(text='[color=000000][b]%s[/b][/color]' % button_defs[3][controls.IDX_CONTROL_BUTTON_LABEL],
-                                                font_size=16,
-                                                markup=True,
+                                        button_3 = Button(
                                                 background_normal=background_file,
                                                 background_down=background_down_file,
                                                 size_hint=(button_width, button_height),
