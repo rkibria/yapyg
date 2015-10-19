@@ -42,7 +42,7 @@ from kivy.uix.boxlayout import BoxLayout
 
 from yapyg_widgets.screen_widget import ScreenWidget
 
-DEFAULT_START_CHOICE = "demo_gauntlet"
+DEFAULT_START_CHOICE = "demo_car"
 
 class MenuWidget(FloatLayout):
         def __init__(self, **kwargs):
@@ -57,6 +57,7 @@ class MenuWidget(FloatLayout):
                         "demo_tiles": "Tile map scrolling",
                         "demo_pinball": "Simple pinball demo",
                         "demo_squares": "Random set of falling physical objects",
+                        "demo_car": "Top down car driving game",
                         }
 
                 layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])

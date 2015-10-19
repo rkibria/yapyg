@@ -212,3 +212,13 @@ cpdef int is_point_in_circle(tuple point, tuple circ):
         cdef float dist = y_d + x_d
 
         return dist <= (c_r * c_r)
+
+cpdef tuple get_contact_sum_vector(list contact_points, tuple origin_point):
+        """
+        TODO
+        """
+        cdef tuple contact_sum_vector = (0.0, 0.0)
+        cdef tuple contact_point_vector
+        for contact_point_vector in contact_points:
+                contact_sum_vector = math_2d.vector_add(contact_sum_vector, math_2d.vector_sub(contact_point_vector, origin_point))
+        return math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points))

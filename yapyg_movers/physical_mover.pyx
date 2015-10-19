@@ -515,6 +515,58 @@ cdef tuple get_abs_rectangle_center(tuple abs_rectangle_shape):
                 abs_rectangle_shape[2] + (abs_rectangle_shape[4] / 2.0)
                 )
 
+cdef tuple get_rect_rect_central_collision_velocity(tuple velocity_vector,
+                                                    tuple rel_contact_point_vector,
+                                                    float mass_factor):
+        return yapyg.math_2d.vector_mul(
+                                        yapyg.math_2d.get_unit_vector(rel_contact_point_vector),
+                                        -1.0 * yapyg.math_2d.length(velocity_vector) * mass_factor
+                                        )
+
+cdef tuple get_rect_rect_reflect_collision_velocity(tuple rectangle_center_A,
+                                                    tuple rectangle_center_B,
+                                                    tuple abs_rectangle_shape_B,
+                                                    tuple rel_contact_point_vector_A,
+                                                    tuple velocity_vector_A,
+                                                    float mass_factor_A
+                                                    ):
+        cdef tuple contact_point_vector = yapyg.math_2d.vector_add(rectangle_center_A, rel_contact_point_vector_A)
+        cdef tuple rect_B_to_contact_vector = yapyg.math_2d.vector_sub(contact_point_vector, rectangle_center_B)
+        cdef float rect_B_contact_angle = yapyg.math_2d.get_angle((0.0, 0.0), rect_B_to_contact_vector)
+        cdef float rect_B_angle = abs_rectangle_shape_B[5]
+        cdef float rect_B_diag_angle = yapyg.math_2d.get_angle((0.0, 0.0), (abs_rectangle_shape_B[3], abs_rectangle_shape_B[4]))
+        cdef float contact_angle_delta = rect_B_contact_angle - rect_B_angle
+        if (contact_angle_delta < rect_B_diag_angle) or (contact_angle_delta > (180.0 - rect_B_diag_angle) and contact_angle_delta < (180.0 + rect_B_diag_angle)) or (contact_angle_delta > (360.0 - rect_B_diag_angle)):
+                rect_B_angle += 90.0
+        cdef tuple rect_B_unit_axis_vector = yapyg.math_2d.create_unit_vector(rect_B_angle)
+        cdef tuple parallel_v
+        cdef tuple perpend_v
+        parallel_v,perpend_v = yapyg.math_2d.get_projection_vectors(rect_B_unit_axis_vector, velocity_vector_A)
+        return yapyg.math_2d.vector_mul(yapyg.math_2d.vector_sub(velocity_vector_A, yapyg.math_2d.vector_mul(perpend_v, 2.0)), mass_factor_A)
+
+cdef tuple get_rect_rect_post_collision_velocity(tuple rectangle_center_A,
+                                                 tuple rectangle_center_B,
+                                                 tuple abs_rectangle_shape_B,
+                                                 tuple rel_contact_point_vector_A,
+                                                 tuple velocity_vector_A,
+                                                 float mass_factor_A
+                                                 ):
+        cdef tuple new_velocity_vector_A_central = get_rect_rect_central_collision_velocity(velocity_vector_A,
+                                                                                            rel_contact_point_vector_A,
+                                                                                            mass_factor_A
+                                                                                            )
+        cdef tuple new_velocity_vector_A_reflect = get_rect_rect_reflect_collision_velocity(rectangle_center_A,
+                                                                                            rectangle_center_B,
+                                                                                            abs_rectangle_shape_B,
+                                                                                            rel_contact_point_vector_A,
+                                                                                            velocity_vector_A,
+                                                                                            mass_factor_A
+                                                                                            )
+        cdef float reflect_weight = 0.6
+        return yapyg.math_2d.vector_add(yapyg.math_2d.vector_mul(new_velocity_vector_A_reflect, reflect_weight),
+                                        yapyg.math_2d.vector_mul(new_velocity_vector_A_central, 1.0 - reflect_weight)
+                                        )
+
 cdef rectangle_rectangle_collision(list state,
                 str rectangle_entity_name_1,
                 str rectangle_entity_name_2,
@@ -572,19 +624,26 @@ cdef rectangle_rectangle_collision(list state,
                 mass_factor_2 = m_1 / (m_1 + m_2)
                 rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VR] = resulting_torque_2 * mass_factor_2 * CONST_TORQUE_DAMPENING / m_2
 
-        cdef tuple new_velocity_vector_1 = yapyg.math_2d.vector_mul(
-                yapyg.math_2d.get_unit_vector(rel_contact_point_vector_1),
-                -1.0 * yapyg.math_2d.length(velocity_vector_1) * mass_factor_1
-                )
+        # Post-collision velocities
+        cdef tuple new_velocity_vector_1 = get_rect_rect_post_collision_velocity(rectangle_center_1,
+                                                                                 rectangle_center_2,
+                                                                                 abs_rectangle_shape_2,
+                                                                                 rel_contact_point_vector_1,
+                                                                                 velocity_vector_1,
+                                                                                 mass_factor_1
+                                                                                 )
         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VX] = new_velocity_vector_1[0]
         rectangle_physical_mover_1[IDX_MOVERS_PHYSICAL_VY] = new_velocity_vector_1[1]
 
         cdef tuple new_velocity_vector_2
         if rectangle_physical_mover_2:
-                new_velocity_vector_2 = yapyg.math_2d.vector_mul(
-                        yapyg.math_2d.get_unit_vector(rel_contact_point_vector_2),
-                        -1.0 * yapyg.math_2d.length(velocity_vector_2) * mass_factor_2
-                        )
+                new_velocity_vector_2 = get_rect_rect_post_collision_velocity(rectangle_center_2,
+                                                                              rectangle_center_1,
+                                                                              abs_rectangle_shape_1,
+                                                                              rel_contact_point_vector_2,
+                                                                              velocity_vector_2,
+                                                                              mass_factor_2
+                                                                              )
                 rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VX] = new_velocity_vector_2[0]
                 rectangle_physical_mover_2[IDX_MOVERS_PHYSICAL_VY] = new_velocity_vector_2[1]
 

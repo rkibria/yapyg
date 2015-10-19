@@ -266,6 +266,8 @@ cdef void normalize_rotation(list entity):
         TODO
         """
         cdef float old_rot = entity[IDX_ENTITY_POS][2]
+        if old_rot < 0.0:
+                old_rot += ((int(old_rot) / -360) + 1) * 360.0
         cdef float modulo_rot = fmod(old_rot, 360.0)
         entity[IDX_ENTITY_POS][2] = modulo_rot
 

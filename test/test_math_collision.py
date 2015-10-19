@@ -50,6 +50,18 @@ class TestMathCollisionRectCircle(unittest.TestCase):
                 self.assertEqual(math_collision.is_rect_circle_collision(circ, rect, contact_points), 1)
                 self.assertEqual(contact_points, [(0.0, 1.0)])
 
+class TestMathCollisionRectRect(unittest.TestCase):
+        def test_contact_top(self):
+                rect_1 = ("rectangle", 0.0, 0.0, 1.0, 1.0, 0.0)
+                rect_2 = ("rectangle", 0.0, 1.0, 1.0, 1.0, 0.0)
+                contact_points = []
+                result = math_collision.is_rect_rect_collision(rect_1, rect_2, contact_points)
+                self.assertEqual(result, True)
+                self.assertEqual(contact_points, [(0.0, 1.0), (1.0, 1.0)])
+
 if __name__ == '__main__':
         suite = unittest.TestLoader().loadTestsFromTestCase(TestMathCollisionRectCircle)
+        unittest.TextTestRunner(verbosity=2).run(suite)
+
+        suite = unittest.TestLoader().loadTestsFromTestCase(TestMathCollisionRectRect)
         unittest.TextTestRunner(verbosity=2).run(suite)

@@ -36,38 +36,38 @@ cpdef float dot_product(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return (v_1[0] * v_2[0]) + (v_1[1] * v_2[1])
+        return float(v_1[0]) * float(v_2[0]) + float(v_1[1]) * float(v_2[1])
 
 cpdef tuple vector_mul(tuple vec, float factor):
         """
         TODO
         """
-        return (vec[0] * factor, vec[1] * factor)
+        return (float(vec[0]) * factor, float(vec[1]) * factor)
 
 cpdef tuple vector_div(tuple vec, float factor):
         """
         TODO
         """
-        return (vec[0] / factor, vec[1] / factor)
+        return (float(vec[0]) / factor, float(vec[1]) / factor)
 
 cpdef tuple vector_sub(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return (v_1[0] - v_2[0], v_1[1] - v_2[1])
+        return (float(v_1[0]) - float(v_2[0]), float(v_1[1]) - float(v_2[1]))
 
 cpdef tuple vector_add(tuple v_1, tuple v_2):
         """
         TODO
         """
-        return (v_1[0] + v_2[0], v_1[1] + v_2[1])
+        return (float(v_1[0]) + float(v_2[0]), float(v_1[1]) + float(v_2[1]))
 
-cpdef tuple components(tuple normal_vector, tuple v_vector):
+cpdef tuple get_projection_vectors(tuple unit_axis_vector, tuple projected_vector):
         """
         TODO
         """
-        cdef tuple parallel_vector = vector_mul(normal_vector, dot_product(normal_vector, v_vector))
-        cdef tuple perpendicular_vector = vector_sub(v_vector, parallel_vector)
+        cdef tuple parallel_vector = vector_mul(unit_axis_vector, dot_product(unit_axis_vector, projected_vector))
+        cdef tuple perpendicular_vector = vector_sub(projected_vector, parallel_vector)
         return (parallel_vector, perpendicular_vector)
 
 cpdef tuple complex_mul(tuple complex_1, tuple complex_2):
@@ -131,3 +131,9 @@ cpdef float get_angle(tuple pos1, tuple pos2):
         if heading_degrees < 0.0:
                 heading_degrees += 360.0
         return heading_degrees
+
+cpdef tuple create_unit_vector(float angle_deg):
+        """
+        TODO
+        """
+        return (cos(deg_to_rad(angle_deg)), sin(deg_to_rad(angle_deg)))
