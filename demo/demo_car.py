@@ -52,26 +52,26 @@ def create(screen_width_px, screen_height_px, tile_size_px):
         controls.add_joystick(state)
         controls.add_buttons(state, (("Fire", on_fire_button, "right", "big"),))
 
-        floor_tile = "assets/img/tiles/sanddunes.png"
-        tiles.add_tile_def(state, "x", (floor_tile,))
+        floor_tile = "assets/img/tiles/dirt_ground.png"
+        tiles.add_tile_def(state, ' ', (floor_tile,))
         tiles_helpers.load_walls(state, "", floor_tile, "assets/img/tiles/bricks_walls.png")
         tiles.set_area(state,
                 [ ['<', '-', '-', '-', '-', '-', '-', '-', '-', '>'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', '<', '>', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', '[', ']', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', '<', '>', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', '[', ']', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', '<', '>', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', '[', ']', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
-                  ['(', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', '<', '>', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', '[', ']', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', '<', '>', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', '[', ']', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ')', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ')', ' ', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', '<', '>', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', '[', ']', ' ', ')', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ':', ' ', ' ', ' ', ')'],
+                  ['(', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ')'],
                   ['[', '_', '_', '_', '_', '_', '_', '_', '_', ']']]
                   )
 
@@ -83,6 +83,18 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                          "*": {
                                    "textures": (
                                                 "assets/img/sprites/car/0.png",
+                                                ),
+                                   "speed": 0.0,
+                                   },
+                         "+": {
+                                   "textures": (
+                                                "assets/img/sprites/car/1.png",
+                                                ),
+                                   "speed": 0.0,
+                                   },
+                         "-": {
+                                   "textures": (
+                                                "assets/img/sprites/car/2.png",
                                                 ),
                                    "speed": 0.0,
                                    },
@@ -113,11 +125,9 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                            )
 
         for i in xrange(3):
-                ball_entity_name = "barrel_%d" % i
-                BALL_SIZE = (1.0 / 4.0)
-                CIRCLE_RADIUS = BALL_SIZE / 2
+                barrel_entity_name = "barrel_%d" % i
                 entities.insert(state,
-                        ball_entity_name,
+                        barrel_entity_name,
                         {
                                 "*": {
                                         "textures": ("assets/img/sprites/barrel.png",),
@@ -128,10 +138,40 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                 5.5,
                                 0,
                         ),
-                        collision=(("circle", CIRCLE_RADIUS, CIRCLE_RADIUS, CIRCLE_RADIUS,),))
+                        collision=(("circle", (1.0 / 4.0) / 2.0, (1.0 / 4.0) / 2.0, (1.0 / 4.0) / 2.0,),))
                 physical_mover.add(state,
-                        ball_entity_name,
+                        barrel_entity_name,
                         0.01,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0.92,
+                        YAPYG_STD_INELASTICITY,
+                        0,
+                        YAPYG_STD_ROT_FRICTION,
+                        YAPYG_STD_ROT_DECAY,
+                        YAPYG_STD_STICKYNESS,
+                        )
+
+        for i in xrange(2):
+                barrier_entity_name = "barrier_%d" % i
+                entities.insert(state,
+                        barrier_entity_name,
+                        {
+                                "*": {
+                                        "textures": ("assets/img/sprites/barrier.png",),
+                                },
+                        },
+                        (
+                                0.4 + i * 0.6,
+                                3.5,
+                                0,
+                        ),
+                        collision=(("rectangle", 0.0, 0.0, 0.5, 0.125),))
+                physical_mover.add(state,
+                        barrier_entity_name,
+                        0.5,
                         0,
                         0,
                         0,
@@ -166,6 +206,13 @@ def on_timer(state, last_frame_delta):
                 phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_AX] = accel_vector[0]
                 phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_AY] = accel_vector[1]
                 phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_VR] += (-joy_dir) * dir_factor * (-1 if joy_accel < 0 else 1)
+
+                if joy_accel > 0.0:
+                        entities.set_active_sprite(state, ENT_PLAYER_CAR, "+")
+                elif joy_accel == 0.0:
+                        entities.set_active_sprite(state, ENT_PLAYER_CAR, "*")
+                else:
+                        entities.set_active_sprite(state, ENT_PLAYER_CAR, "-")
 
 def on_fire_button(state, button_pressed):
         pass

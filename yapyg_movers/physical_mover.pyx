@@ -536,7 +536,15 @@ cdef tuple get_rect_rect_reflect_collision_velocity(tuple rectangle_center_A,
         cdef float rect_B_angle = abs_rectangle_shape_B[5]
         cdef float rect_B_diag_angle = yapyg.math_2d.get_angle((0.0, 0.0), (abs_rectangle_shape_B[3], abs_rectangle_shape_B[4]))
         cdef float contact_angle_delta = rect_B_contact_angle - rect_B_angle
-        if (contact_angle_delta < rect_B_diag_angle) or (contact_angle_delta > (180.0 - rect_B_diag_angle) and contact_angle_delta < (180.0 + rect_B_diag_angle)) or (contact_angle_delta > (360.0 - rect_B_diag_angle)):
+        # Adjust angle if contact point is on the left or right side of the rectangle
+        #        ________
+        #       |    ___/| rect_B_diag_angle
+        #       |   /....|
+        #       |________|
+        #
+        cdef int contact_on_right_side = (contact_angle_delta <= (rect_B_diag_angle - 1.0) and contact_angle_delta >= 0) or (contact_angle_delta >= (361.0 - rect_B_diag_angle) and contact_angle_delta <= 360.0)
+        cdef int contact_on_left_side = (contact_angle_delta >= (181.0 - rect_B_diag_angle)) and contact_angle_delta < (179.0 + rect_B_diag_angle)
+        if contact_on_left_side or contact_on_right_side:
                 rect_B_angle += 90.0
         cdef tuple rect_B_unit_axis_vector = yapyg.math_2d.create_unit_vector(rect_B_angle)
         cdef tuple parallel_v
