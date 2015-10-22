@@ -24,16 +24,25 @@ TODO
 from kivy.logger import Logger
 
 import yapyg.view
-import yapyg.entities
-
+import yapyg.screen
 
 IDX_RELATIVE_VIEW_ENTITY = 1
 IDX_RELATIVE_VIEW_OFFSET = 2
 
-def create(state, entity_name, offset):
+def create(state, entity_name, offset=None):
         """
-        TODO
+        If offset=None center the view on the entity.
         """
+        if not offset:
+                scr_w = yapyg.screen.get_width(state)
+                scr_h = yapyg.screen.get_height(state)
+                tile_s = float(yapyg.screen.get_tile_size(state))
+                scr_orig = yapyg.screen.get_origin(state)
+                viewable_area_px = (scr_w - scr_orig[0], scr_h - scr_orig[1])
+                centre_scr_px = (viewable_area_px[0] / 2, viewable_area_px[1] / 2)
+                centre_scr = (centre_scr_px[0] / tile_s, centre_scr_px[1] / tile_s)
+                offset = (-centre_scr[0], -centre_scr[1])
+
         return [run,
                 entity_name,
                 (offset[0], offset[1]),

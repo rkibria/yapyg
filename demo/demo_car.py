@@ -18,9 +18,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import math
+
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
+from yapyg import sprites
 from yapyg import controls
 from yapyg import text
 from yapyg import view
@@ -42,6 +45,7 @@ from physics_params import *
 FONT_NAME = "DroidSansMonoDotted16x32"
 
 ENT_PLAYER_CAR = "player_car"
+ENT_PLAYER_CAR_EXHAUST = "player_car_exhaust"
 
 def create(screen_width_px, screen_height_px, tile_size_px):
         joystick_props = controls.get_joystick_properties()
@@ -49,33 +53,53 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         state = factory.create(screen_width_px, screen_height_px, tile_size_px, origin_xy)
 
+        user.set_data(state, "n_barrels", 0)
+        user.set_data(state, "n_barriers", 0)
+
         controls.add_joystick(state)
         controls.add_buttons(state, (("Fire", on_fire_button, "right", "big"),))
 
         floor_tile = "assets/img/tiles/dirt_ground.png"
         tiles.add_tile_def(state, ' ', (floor_tile,))
         tiles_helpers.load_walls(state, "", floor_tile, "assets/img/tiles/bricks_walls.png")
+        tiles_helpers.load_walls(state, "/", "assets/img/tiles/grass.png", "assets/img/tiles/bricks_walls.png")
+        tiles.add_tile_def(state, '|', (floor_tile, "assets/img/tiles/road-I.png",))
+        tiles.add_tile_def(state, '~', (floor_tile, "assets/img/tiles/road-h.png",))
+        tiles.add_tile_def(state, 'L', (floor_tile, "assets/img/tiles/road-cnr-bl.png",))
+        tiles.add_tile_def(state, 'T', (floor_tile, "assets/img/tiles/road-cnr-tl.png",))
+        tiles.add_tile_def(state, 'J', (floor_tile, "assets/img/tiles/road-cnr-br.png",))
+        tiles.add_tile_def(state, 'j', (floor_tile, "assets/img/tiles/road-cnr-ur.png",))
+        tiles.add_tile_def(state, '/', ("assets/img/tiles/grass.png",))
+        tiles.add_tile_def(state, 't', ("assets/img/tiles/grass.png", "assets/img/tiles/tree.png"))
         tiles.set_area(state,
-                [ ['<', '-', '-', '-', '-', '-', '-', '-', '-', '>'],
-                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', '<', '>', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', '[', ']', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ' ', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', '<', '>', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', '[', ']', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ')', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ')', ' ', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', '<', '>', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', '[', ']', ' ', ')', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ' ', ' ', ' ', ':', ' ', ' ', ' ', ')'],
-                  ['(', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ')'],
-                  ['[', '_', '_', '_', '_', '_', '_', '_', '_', ']']]
-                  )
+                 [
+                  ['t', '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/'],
+                  ['/', '/.', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/,', '/'],
+                  ['t', '/)', '<' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '>' , '/(', 't'],
+                  ['/', '/)', '(' , 'T' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , 'j' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , '|' , '.' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , ',' , '|' , ')' , '/(', 't'],
+                  ['/', '/)', '(' , '|' , ')' , '/<', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/>', '(' , '|' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , '|' , ')' , '/(', '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/)', '(' , '|' , ')' , '/(', 't'],
+                  ['/', '/)', '(' , '|' , ')' , '/(', 't' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/)', '(' , '|' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , '|' , ')' , '/(', '/' , '/' , '/' , '/' , '/' , '/' , '/' , 't' , '/)', '(' , '|' , ')' , '/(', 't'],
+                  ['/', '/)', '(' , '|' , ')' , '/(', 't' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/)', '(' , '|' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , '|' , ')' , '/(', '/' , '/' , '/' , '/' , '/' , '/' , '/' , 't' , '/)', '(' , '|' , ')' , '/(', 't'],
+                  ['/', '/)', '(' , '|' , ')' , '/(', 't' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/)', '(' , '|' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , '|' , ')' , '/(', '/' , '/' , '/' , '/' , '/' , '/' , '/' , 't' , '/)', '(' , '|' , ')' , '/(', 't'],
+                  ['/', '/)', '(' , '|' , ')' , '/(', 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , '/)', '(' , '|' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , '|' , ')' , '/[', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/_', '/]', '(' , '|' , ')' , '/(', 't'],
+                  ['/', '/)', '(' , '|' , ':' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , '-' , ';' , '|' , ')' , '/(', '/'],
+                  ['t', '/)', '(' , 'L' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , '~' , 'J' , ')' , '/(', 't'],
+                  ['/', '/)', '[' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , '_' , ']' , '/(', '/'],
+                  ['t', '/:', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/-', '/;', '/'],
+                  ['/', 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't' , '/' , 't'],
+                  ['/', '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/'],
+                 ]
+                 )
 
         text.load_font(state, FONT_NAME, "assets/img/fonts/%s.png" % FONT_NAME, 16, 32)
+
+        play_area_origin = (2.0, 3.0)
 
         entities.insert(state,
                         ENT_PLAYER_CAR,
@@ -99,15 +123,12 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                                    "speed": 0.0,
                                    },
                          },
-                        (1.0, 1.0, 0),
-                        (0, 0),
+                        (play_area_origin[0] + 1.5, play_area_origin[1] + 6.0, 0),
+                        (-0.125, -0.25),
                         collision=(("rectangle", 0.0, 0.0, 0.25, 0.5),),
                         )
 
-        view.set_viewer(state,
-                        relative_viewer.create(state,
-                                               ENT_PLAYER_CAR,
-                                               [-2.0, -2.25]))
+        view.set_viewer(state, relative_viewer.create(state, ENT_PLAYER_CAR))
 
         physical_mover.add(state,
                            ENT_PLAYER_CAR,
@@ -124,65 +145,47 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                            YAPYG_STD_STICKYNESS,
                            )
 
-        for i in xrange(3):
-                barrel_entity_name = "barrel_%d" % i
-                entities.insert(state,
-                        barrel_entity_name,
-                        {
-                                "*": {
-                                        "textures": ("assets/img/sprites/barrel.png",),
-                                },
-                        },
-                        (
-                                0.5 + i * 0.5,
-                                5.5,
-                                0,
-                        ),
-                        collision=(("circle", (1.0 / 4.0) / 2.0, (1.0 / 4.0) / 2.0, (1.0 / 4.0) / 2.0,),))
-                physical_mover.add(state,
-                        barrel_entity_name,
-                        0.01,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0.92,
-                        YAPYG_STD_INELASTICITY,
-                        0,
-                        YAPYG_STD_ROT_FRICTION,
-                        YAPYG_STD_ROT_DECAY,
-                        YAPYG_STD_STICKYNESS,
-                        )
+        for i in xrange(7):
+                add_barrel(state, play_area_origin[0] + 0.5, play_area_origin[1] + 2.0 + 2.0 * i)
 
-        for i in xrange(2):
-                barrier_entity_name = "barrier_%d" % i
-                entities.insert(state,
-                        barrier_entity_name,
-                        {
-                                "*": {
-                                        "textures": ("assets/img/sprites/barrier.png",),
-                                },
-                        },
-                        (
-                                0.4 + i * 0.6,
-                                3.5,
-                                0,
-                        ),
-                        collision=(("rectangle", 0.0, 0.0, 0.5, 0.125),))
-                physical_mover.add(state,
-                        barrier_entity_name,
-                        0.5,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0.92,
-                        YAPYG_STD_INELASTICITY,
-                        0,
-                        YAPYG_STD_ROT_FRICTION,
-                        YAPYG_STD_ROT_DECAY,
-                        YAPYG_STD_STICKYNESS,
-                        )
+        for i in xrange(7):
+                add_barrel(state, play_area_origin[0] + 15.25, play_area_origin[1] + 2.0 + 2.0 * i)
+
+        for i in xrange(8):
+                add_barrier(state, play_area_origin[0] + 0.5 - 0.125, play_area_origin[1] + 1.0 + 2.0 * i, 90.0)
+
+        for i in xrange(8):
+                add_barrier(state, play_area_origin[0] + 1.0 + 0.125 + 2.0 * i, play_area_origin[1] + 0.5, 0.0)
+
+        for i in xrange(7):
+                add_barrier(state, play_area_origin[0] + 1.0 + 0.125 + 2.0 * i, play_area_origin[1] + 15.25, 0.0)
+
+        for i in xrange(7):
+                add_barrel(state, play_area_origin[0] + 2.0 + 0.125 + 2.0 * i, play_area_origin[1] + 15.25)
+
+        for i in xrange(6):
+                add_barrel(state, play_area_origin[0] + 2.0 + 0.25 + 2.0 * i, play_area_origin[1] + 13.5)
+
+        for i in xrange(6):
+                add_barrier(state, play_area_origin[0] + 3.0 + 0.25 + 2.0 * i, play_area_origin[1] + 13.5, 0.0)
+
+        for i in xrange(7):
+                add_barrel(state, play_area_origin[0] + 2.0 + 0.125 + 2.0 * i, play_area_origin[1] + 0.5)
+
+        for i in xrange(8):
+                add_barrier(state, play_area_origin[0] + 15.25 - 0.125, play_area_origin[1] + 1.0 + 2.0 * i, 90.0)
+
+        for i in xrange(1, 6):
+                add_barrel(state, play_area_origin[0] + 2.25, play_area_origin[1] + 2.0 + 2.0 * i)
+                add_barrel(state, play_area_origin[0] + 13.5, play_area_origin[1] + 2.0 + 2.0 * i)
+
+        for i in xrange(6):
+                add_barrier(state, play_area_origin[0] + 2.25 - 0.125, play_area_origin[1] + 3.0 + 2.0 * i, 90.0)
+                add_barrier(state, play_area_origin[0] + 13.5 - 0.125, play_area_origin[1] + 3.0 + 2.0 * i, 90.0)
+
+        for i in xrange(6):
+                add_barrel(state, play_area_origin[0] + 2.25 + 2.0 * i, play_area_origin[1] + 2.25)
+                add_barrier(state, play_area_origin[0] + 3.25 - 0.125 + 2.0 * i, play_area_origin[1] + 2.25, 0.0)
 
         timer.create(state, on_timer, 100)
 
@@ -198,7 +201,7 @@ def on_timer(state, last_frame_delta):
                 player_speed = (phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_VX], phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_VY])
                 player_rot = player_pos[2]
                 if joy_accel > 0.0:
-                        accel_factor = 10.0
+                        accel_factor = 11.0
                 else:
                         accel_factor = 4.0
                 dir_factor = 0.01 * math_2d.length(player_speed)
@@ -214,5 +217,100 @@ def on_timer(state, last_frame_delta):
                 else:
                         entities.set_active_sprite(state, ENT_PLAYER_CAR, "-")
 
+                exhaust_sprite_name = entities.get_active_sprite_name(state, ENT_PLAYER_CAR_EXHAUST)
+                if joy_accel > 0.0 or not sprites.is_enabled(state, exhaust_sprite_name):
+                        pos = entities.get_pos(state, ENT_PLAYER_CAR)
+                        rot = math.radians(pos[2] + 90.0)
+                        START_OFFSET_FACTOR = -0.25 # - 0.125
+                        start_pos = (pos[0] + (START_OFFSET_FACTOR * math.cos(rot)),
+                                     pos[1] + (START_OFFSET_FACTOR * math.sin(rot)),
+                                     pos[2],
+                                     )
+                        do_exhaust(state, start_pos)
+
 def on_fire_button(state, button_pressed):
         pass
+
+def add_barrel(state, x, y):
+        barrel_count = user.get_data(state, "n_barrels")
+        barrel_entity_name = "barrel_%d" % barrel_count
+        user.set_data(state, "n_barrels", barrel_count + 1)
+
+        entities.insert(state,
+                barrel_entity_name,
+                {
+                        "*": {
+                                "textures": ("assets/img/sprites/barrel.png",),
+                        },
+                },
+                (
+                        x,
+                        y,
+                        0,
+                ),
+                collision=(("circle", (1.0 / 4.0) / 2.0, (1.0 / 4.0) / 2.0, (1.0 / 4.0) / 2.0,),))
+        physical_mover.add(state,
+                barrel_entity_name,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.92,
+                YAPYG_STD_INELASTICITY,
+                0,
+                YAPYG_STD_ROT_FRICTION,
+                YAPYG_STD_ROT_DECAY,
+                YAPYG_STD_STICKYNESS,
+                )
+
+def add_barrier(state, x, y, r):
+        barrier_count = user.get_data(state, "n_barriers")
+        barrier_entity_name = "barrier_%d" % barrier_count
+        user.set_data(state, "n_barriers", barrier_count + 1)
+
+        entities.insert(state,
+                barrier_entity_name,
+                {
+                        "*": {
+                                "textures": ("assets/img/sprites/barrier.png",),
+                        },
+                },
+                (
+                        x,
+                        y,
+                        r,
+                ),
+                collision=(("rectangle", 0.0, 0.0, 0.5, 0.125),))
+        physical_mover.add(state,
+                barrier_entity_name,
+                0.5,
+                0,
+                0,
+                0,
+                0,
+                0.92,
+                YAPYG_STD_INELASTICITY,
+                0,
+                YAPYG_STD_ROT_FRICTION,
+                YAPYG_STD_ROT_DECAY,
+                YAPYG_STD_STICKYNESS,
+                )
+
+def do_exhaust(state, pos):
+        entities.insert(state,
+                        ENT_PLAYER_CAR_EXHAUST,
+                        {
+                          "*": {
+                                "textures": ("assets/img/sprites/exhaust/0.png",
+                                             "assets/img/sprites/exhaust/1.png",
+                                             "assets/img/sprites/exhaust/2.png",
+                                             "assets/img/sprites/exhaust/1.png",
+                                             ),
+                                "speed": 50.0,
+                                },
+                          },
+                        pos,
+                        (-0.125, -0.125),
+                        play_once=True,
+                        )

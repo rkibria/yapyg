@@ -415,13 +415,13 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg_widgets/display_widget.pyx",
+  "yapyg_widgets\\display_widget.pyx",
 };
 
 /*--- Type declarations ---*/
 struct __pyx_opt_args_5yapyg_6movers_add;
 
-/* "yapyg/movers.pxd":34
+/* "yapyg\movers.pxd":34
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef add(list state, str mover_name, list mover, int do_replace=*, int prepend=*)             # <<<<<<<<<<<<<<
@@ -435,7 +435,7 @@ struct __pyx_opt_args_5yapyg_6movers_add {
 };
 struct __pyx_opt_args_5yapyg_7sprites_insert;
 
-/* "yapyg/sprites.pxd":29
+/* "yapyg\sprites.pxd":29
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef insert(list state, str sprite_name, tuple textures, float speed, list pos_offset,             # <<<<<<<<<<<<<<
@@ -449,7 +449,7 @@ struct __pyx_opt_args_5yapyg_7sprites_insert {
 };
 struct __pyx_opt_args_5yapyg_5tiles_add_tile_def;
 
-/* "yapyg/tiles.pxd":32
+/* "yapyg\tiles.pxd":32
  * cpdef set_area(list state, list area)
  * cpdef list get_area(list state)
  * cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=?)             # <<<<<<<<<<<<<<
@@ -836,8 +836,9 @@ static char __pyx_k_DisplayWidget_destroy[] = "DisplayWidget.destroy";
 static char __pyx_k_DisplayWidget_on_timer[] = "DisplayWidget.on_timer";
 static char __pyx_k_DisplayWidget_get_frame_time[] = "DisplayWidget.get_frame_time";
 static char __pyx_k_yapyg_widgets_display_widget[] = "yapyg_widgets.display_widget";
-static char __pyx_k_Users_raihan_kibria_rk_yapyg_tr[] = "/Users/raihan.kibria/rk/yapyg/trunk/yapyg_widgets/display_widget.pyx";
+static char __pyx_k_C_projects_yapyg_trunk_yapyg_wid[] = "C:\\projects\\yapyg\\trunk\\yapyg_widgets\\display_widget.pyx";
 static char __pyx_k_DisplayWidget_enable_redraw_tile[] = "DisplayWidget.enable_redraw_tiles";
+static PyObject *__pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid;
 static PyObject *__pyx_n_s_Clock;
 static PyObject *__pyx_n_s_DisplayWidget;
 static PyObject *__pyx_n_s_DisplayWidget___init;
@@ -845,7 +846,6 @@ static PyObject *__pyx_n_s_DisplayWidget_destroy;
 static PyObject *__pyx_n_s_DisplayWidget_enable_redraw_tile;
 static PyObject *__pyx_n_s_DisplayWidget_get_frame_time;
 static PyObject *__pyx_n_s_DisplayWidget_on_timer;
-static PyObject *__pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr;
 static PyObject *__pyx_n_s_Widget;
 static PyObject *__pyx_n_s_Window;
 static PyObject *__pyx_n_s_canvas;
@@ -898,7 +898,7 @@ static PyObject *__pyx_codeobj__6;
 static PyObject *__pyx_codeobj__8;
 static PyObject *__pyx_codeobj__10;
 
-/* "yapyg_widgets/display_widget.pyx":37
+/* "yapyg_widgets\display_widget.pyx":37
  * 
  * class DisplayWidget(Widget):
  *         def __init__(self,             # <<<<<<<<<<<<<<
@@ -986,7 +986,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":44
+  /* "yapyg_widgets\display_widget.pyx":44
  *                 TODO
  *                 """
  *                 super(DisplayWidget, self).__init__(**kwargs)             # <<<<<<<<<<<<<<
@@ -1017,7 +1017,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":46
+  /* "yapyg_widgets\display_widget.pyx":46
  *                 super(DisplayWidget, self).__init__(**kwargs)
  * 
  *                 self.state = state             # <<<<<<<<<<<<<<
@@ -1026,7 +1026,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_state, __pyx_v_state) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":47
+  /* "yapyg_widgets\display_widget.pyx":47
  * 
  *                 self.state = state
  *                 self.redraw_tiles = [True]             # <<<<<<<<<<<<<<
@@ -1041,7 +1041,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_redraw_tiles, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":49
+  /* "yapyg_widgets\display_widget.pyx":49
  *                 self.redraw_tiles = [True]
  * 
  *                 self.frame_time = 0             # <<<<<<<<<<<<<<
@@ -1050,7 +1050,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame_time, __pyx_int_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":50
+  /* "yapyg_widgets\display_widget.pyx":50
  * 
  *                 self.frame_time = 0
  *                 Clock.schedule_interval(self.on_timer, timeout=FRAME_DELTA_SECONDS)             # <<<<<<<<<<<<<<
@@ -1082,7 +1082,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":37
+  /* "yapyg_widgets\display_widget.pyx":37
  * 
  * class DisplayWidget(Widget):
  *         def __init__(self,             # <<<<<<<<<<<<<<
@@ -1106,7 +1106,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget___ini
   return __pyx_r;
 }
 
-/* "yapyg_widgets/display_widget.pyx":52
+/* "yapyg_widgets\display_widget.pyx":52
  *                 Clock.schedule_interval(self.on_timer, timeout=FRAME_DELTA_SECONDS)
  * 
  *         def destroy(self):             # <<<<<<<<<<<<<<
@@ -1143,7 +1143,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_2dest
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":56
+  /* "yapyg_widgets\display_widget.pyx":56
  *                 TODO
  *                 """
  *                 Clock.unschedule(self.on_timer)             # <<<<<<<<<<<<<<
@@ -1185,7 +1185,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_2dest
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":57
+  /* "yapyg_widgets\display_widget.pyx":57
  *                 """
  *                 Clock.unschedule(self.on_timer)
  *                 state = self.state             # <<<<<<<<<<<<<<
@@ -1197,7 +1197,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_2dest
   __pyx_v_state = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":58
+  /* "yapyg_widgets\display_widget.pyx":58
  *                 Clock.unschedule(self.on_timer)
  *                 state = self.state
  *                 self.state = None             # <<<<<<<<<<<<<<
@@ -1206,7 +1206,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_2dest
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_state, Py_None) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":59
+  /* "yapyg_widgets\display_widget.pyx":59
  *                 state = self.state
  *                 self.state = None
  *                 yapyg.factory.destroy(state)             # <<<<<<<<<<<<<<
@@ -1248,7 +1248,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_2dest
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":52
+  /* "yapyg_widgets\display_widget.pyx":52
  *                 Clock.schedule_interval(self.on_timer, timeout=FRAME_DELTA_SECONDS)
  * 
  *         def destroy(self):             # <<<<<<<<<<<<<<
@@ -1274,7 +1274,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_2dest
   return __pyx_r;
 }
 
-/* "yapyg_widgets/display_widget.pyx":61
+/* "yapyg_widgets\display_widget.pyx":61
  *                 yapyg.factory.destroy(state)
  * 
  *         def on_timer(self, dt):             # <<<<<<<<<<<<<<
@@ -1365,7 +1365,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_timer", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":67
+  /* "yapyg_widgets\display_widget.pyx":67
  *                 cdef float cur_fps
  *                 cdef float last_frame_delta
  *                 if self.state:             # <<<<<<<<<<<<<<
@@ -1378,7 +1378,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "yapyg_widgets/display_widget.pyx":68
+    /* "yapyg_widgets\display_widget.pyx":68
  *                 cdef float last_frame_delta
  *                 if self.state:
  *                         cur_fps = (float(Clock.get_fps()))             # <<<<<<<<<<<<<<
@@ -1412,7 +1412,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_cur_fps = __pyx_t_5;
 
-    /* "yapyg_widgets/display_widget.pyx":69
+    /* "yapyg_widgets\display_widget.pyx":69
  *                 if self.state:
  *                         cur_fps = (float(Clock.get_fps()))
  *                         if cur_fps > 0:             # <<<<<<<<<<<<<<
@@ -1422,7 +1422,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
     __pyx_t_2 = ((__pyx_v_cur_fps > 0.0) != 0);
     if (__pyx_t_2) {
 
-      /* "yapyg_widgets/display_widget.pyx":70
+      /* "yapyg_widgets\display_widget.pyx":70
  *                         cur_fps = (float(Clock.get_fps()))
  *                         if cur_fps > 0:
  *                                 last_frame_delta = (1000.0 / cur_fps) # milliseconds             # <<<<<<<<<<<<<<
@@ -1441,7 +1441,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       }
       __pyx_v_last_frame_delta = (1000.0 / __pyx_v_cur_fps);
 
-      /* "yapyg_widgets/display_widget.pyx":72
+      /* "yapyg_widgets\display_widget.pyx":72
  *                                 last_frame_delta = (1000.0 / cur_fps) # milliseconds
  * 
  *                                 if last_frame_delta < MAX_FRAME_DELTA_MICROSECONDS:             # <<<<<<<<<<<<<<
@@ -1451,7 +1451,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __pyx_t_2 = ((__pyx_v_last_frame_delta < __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS) != 0);
       if (__pyx_t_2) {
 
-        /* "yapyg_widgets/display_widget.pyx":73
+        /* "yapyg_widgets\display_widget.pyx":73
  * 
  *                                 if last_frame_delta < MAX_FRAME_DELTA_MICROSECONDS:
  *                                         self.frame_time = last_frame_delta             # <<<<<<<<<<<<<<
@@ -1466,7 +1466,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       }
       /*else*/ {
 
-        /* "yapyg_widgets/display_widget.pyx":75
+        /* "yapyg_widgets\display_widget.pyx":75
  *                                         self.frame_time = last_frame_delta
  *                                 else:
  *                                         self.frame_time = MAX_FRAME_DELTA_MICROSECONDS             # <<<<<<<<<<<<<<
@@ -1480,7 +1480,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       }
       __pyx_L5:;
 
-      /* "yapyg_widgets/display_widget.pyx":77
+      /* "yapyg_widgets\display_widget.pyx":77
  *                                         self.frame_time = MAX_FRAME_DELTA_MICROSECONDS
  * 
  *                                 yapyg.timer.run(self.state, self.frame_time)             # <<<<<<<<<<<<<<
@@ -1528,7 +1528,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg_widgets/display_widget.pyx":79
+      /* "yapyg_widgets\display_widget.pyx":79
  *                                 yapyg.timer.run(self.state, self.frame_time)
  *                                 redraw(
  *                                        self.state,             # <<<<<<<<<<<<<<
@@ -1539,7 +1539,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __Pyx_GOTREF(__pyx_t_1);
       if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "yapyg_widgets/display_widget.pyx":80
+      /* "yapyg_widgets\display_widget.pyx":80
  *                                 redraw(
  *                                        self.state,
  *                                        self.frame_time,             # <<<<<<<<<<<<<<
@@ -1551,7 +1551,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "yapyg_widgets/display_widget.pyx":81
+      /* "yapyg_widgets\display_widget.pyx":81
  *                                        self.state,
  *                                        self.frame_time,
  *                                        self.redraw_tiles,             # <<<<<<<<<<<<<<
@@ -1562,7 +1562,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __Pyx_GOTREF(__pyx_t_4);
       if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_4)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "yapyg_widgets/display_widget.pyx":82
+      /* "yapyg_widgets\display_widget.pyx":82
  *                                        self.frame_time,
  *                                        self.redraw_tiles,
  *                                        self.canvas             # <<<<<<<<<<<<<<
@@ -1572,7 +1572,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_canvas); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
 
-      /* "yapyg_widgets/display_widget.pyx":78
+      /* "yapyg_widgets\display_widget.pyx":78
  * 
  *                                 yapyg.timer.run(self.state, self.frame_time)
  *                                 redraw(             # <<<<<<<<<<<<<<
@@ -1590,7 +1590,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
   }
   __pyx_L3:;
 
-  /* "yapyg_widgets/display_widget.pyx":61
+  /* "yapyg_widgets\display_widget.pyx":61
  *                 yapyg.factory.destroy(state)
  * 
  *         def on_timer(self, dt):             # <<<<<<<<<<<<<<
@@ -1616,7 +1616,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
   return __pyx_r;
 }
 
-/* "yapyg_widgets/display_widget.pyx":85
+/* "yapyg_widgets\display_widget.pyx":85
  *                                        )
  * 
  *         def get_frame_time(self):             # <<<<<<<<<<<<<<
@@ -1648,7 +1648,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_6get_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_frame_time", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":89
+  /* "yapyg_widgets\display_widget.pyx":89
  *                 TODO
  *                 """
  *                 return self.frame_time             # <<<<<<<<<<<<<<
@@ -1662,7 +1662,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_6get_
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "yapyg_widgets/display_widget.pyx":85
+  /* "yapyg_widgets\display_widget.pyx":85
  *                                        )
  * 
  *         def get_frame_time(self):             # <<<<<<<<<<<<<<
@@ -1681,7 +1681,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_6get_
   return __pyx_r;
 }
 
-/* "yapyg_widgets/display_widget.pyx":91
+/* "yapyg_widgets\display_widget.pyx":91
  *                 return self.frame_time
  * 
  *         def enable_redraw_tiles(self, value):             # <<<<<<<<<<<<<<
@@ -1764,7 +1764,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("enable_redraw_tiles", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":95
+  /* "yapyg_widgets\display_widget.pyx":95
  *                 TODO
  *                 """
  *                 self.redraw_tiles = value             # <<<<<<<<<<<<<<
@@ -1773,7 +1773,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_redraw_tiles, __pyx_v_value) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":96
+  /* "yapyg_widgets\display_widget.pyx":96
  *                 """
  *                 self.redraw_tiles = value
  *                 if value:             # <<<<<<<<<<<<<<
@@ -1783,7 +1783,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
   __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_1) {
 
-    /* "yapyg_widgets/display_widget.pyx":98
+    /* "yapyg_widgets\display_widget.pyx":98
  *                 if value:
  *                         redraw(
  *                                self.state,             # <<<<<<<<<<<<<<
@@ -1794,7 +1794,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
     __Pyx_GOTREF(__pyx_t_2);
     if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg_widgets/display_widget.pyx":100
+    /* "yapyg_widgets\display_widget.pyx":100
  *                                self.state,
  *                                MAX_FRAME_DELTA_MICROSECONDS,
  *                                self.redraw_tiles,             # <<<<<<<<<<<<<<
@@ -1805,7 +1805,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
     __Pyx_GOTREF(__pyx_t_3);
     if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_3)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg_widgets/display_widget.pyx":101
+    /* "yapyg_widgets\display_widget.pyx":101
  *                                MAX_FRAME_DELTA_MICROSECONDS,
  *                                self.redraw_tiles,
  *                                self.canvas,             # <<<<<<<<<<<<<<
@@ -1815,7 +1815,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
     __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_canvas); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
 
-    /* "yapyg_widgets/display_widget.pyx":97
+    /* "yapyg_widgets\display_widget.pyx":97
  *                 self.redraw_tiles = value
  *                 if value:
  *                         redraw(             # <<<<<<<<<<<<<<
@@ -1830,7 +1830,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
   }
   __pyx_L3:;
 
-  /* "yapyg_widgets/display_widget.pyx":91
+  /* "yapyg_widgets\display_widget.pyx":91
  *                 return self.frame_time
  * 
  *         def enable_redraw_tiles(self, value):             # <<<<<<<<<<<<<<
@@ -1853,7 +1853,7 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
   return __pyx_r;
 }
 
-/* "yapyg_widgets/display_widget.pyx":104
+/* "yapyg_widgets\display_widget.pyx":104
  *                                )
  * 
  * cdef void redraw(list state, float frame_time_delta, list redraw_tiles, canvas):             # <<<<<<<<<<<<<<
@@ -1870,7 +1870,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("redraw", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":108
+  /* "yapyg_widgets\display_widget.pyx":108
  *         TODO
  *         """
  *         yapyg.movers.run(state, frame_time_delta)             # <<<<<<<<<<<<<<
@@ -1879,7 +1879,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
  */
   __pyx_f_5yapyg_6movers_run(__pyx_v_state, __pyx_v_frame_time_delta);
 
-  /* "yapyg_widgets/display_widget.pyx":110
+  /* "yapyg_widgets\display_widget.pyx":110
  *         yapyg.movers.run(state, frame_time_delta)
  * 
  *         if yapyg.view.run(state):             # <<<<<<<<<<<<<<
@@ -1889,7 +1889,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
   __pyx_t_1 = (__pyx_f_5yapyg_4view_run(__pyx_v_state, 0) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg_widgets/display_widget.pyx":111
+    /* "yapyg_widgets\display_widget.pyx":111
  * 
  *         if yapyg.view.run(state):
  *                 redraw_tiles[0] = True             # <<<<<<<<<<<<<<
@@ -1905,7 +1905,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
   }
   __pyx_L3:;
 
-  /* "yapyg_widgets/display_widget.pyx":113
+  /* "yapyg_widgets\display_widget.pyx":113
  *                 redraw_tiles[0] = True
  * 
  *         if redraw_tiles[0]:             # <<<<<<<<<<<<<<
@@ -1922,7 +1922,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_1) {
 
-    /* "yapyg_widgets/display_widget.pyx":114
+    /* "yapyg_widgets\display_widget.pyx":114
  * 
  *         if redraw_tiles[0]:
  *                 yapyg.tiles.draw(state, canvas)             # <<<<<<<<<<<<<<
@@ -1933,7 +1933,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "yapyg_widgets/display_widget.pyx":115
+    /* "yapyg_widgets\display_widget.pyx":115
  *         if redraw_tiles[0]:
  *                 yapyg.tiles.draw(state, canvas)
  *                 redraw_tiles[0] = False             # <<<<<<<<<<<<<<
@@ -1949,14 +1949,14 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
   }
   __pyx_L4:;
 
-  /* "yapyg_widgets/display_widget.pyx":117
+  /* "yapyg_widgets\display_widget.pyx":117
  *                 redraw_tiles[0] = False
  * 
  *         yapyg.sprites.draw(state, canvas, frame_time_delta)             # <<<<<<<<<<<<<<
  */
   __pyx_f_5yapyg_7sprites_draw(__pyx_v_state, __pyx_v_canvas, __pyx_v_frame_time_delta);
 
-  /* "yapyg_widgets/display_widget.pyx":104
+  /* "yapyg_widgets\display_widget.pyx":104
  *                                )
  * 
  * cdef void redraw(list state, float frame_time_delta, list redraw_tiles, canvas):             # <<<<<<<<<<<<<<
@@ -1996,6 +1996,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid, __pyx_k_C_projects_yapyg_trunk_yapyg_wid, sizeof(__pyx_k_C_projects_yapyg_trunk_yapyg_wid), 0, 0, 1, 0},
   {&__pyx_n_s_Clock, __pyx_k_Clock, sizeof(__pyx_k_Clock), 0, 0, 1, 1},
   {&__pyx_n_s_DisplayWidget, __pyx_k_DisplayWidget, sizeof(__pyx_k_DisplayWidget), 0, 0, 1, 1},
   {&__pyx_n_s_DisplayWidget___init, __pyx_k_DisplayWidget___init, sizeof(__pyx_k_DisplayWidget___init), 0, 0, 1, 1},
@@ -2003,7 +2004,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_DisplayWidget_enable_redraw_tile, __pyx_k_DisplayWidget_enable_redraw_tile, sizeof(__pyx_k_DisplayWidget_enable_redraw_tile), 0, 0, 1, 1},
   {&__pyx_n_s_DisplayWidget_get_frame_time, __pyx_k_DisplayWidget_get_frame_time, sizeof(__pyx_k_DisplayWidget_get_frame_time), 0, 0, 1, 1},
   {&__pyx_n_s_DisplayWidget_on_timer, __pyx_k_DisplayWidget_on_timer, sizeof(__pyx_k_DisplayWidget_on_timer), 0, 0, 1, 1},
-  {&__pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr, __pyx_k_Users_raihan_kibria_rk_yapyg_tr, sizeof(__pyx_k_Users_raihan_kibria_rk_yapyg_tr), 0, 0, 1, 0},
   {&__pyx_n_s_Widget, __pyx_k_Widget, sizeof(__pyx_k_Widget), 0, 0, 1, 1},
   {&__pyx_n_s_Window, __pyx_k_Window, sizeof(__pyx_k_Window), 0, 0, 1, 1},
   {&__pyx_n_s_canvas, __pyx_k_canvas, sizeof(__pyx_k_canvas), 0, 0, 1, 1},
@@ -2057,7 +2057,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg_widgets/display_widget.pyx":37
+  /* "yapyg_widgets\display_widget.pyx":37
  * 
  * class DisplayWidget(Widget):
  *         def __init__(self,             # <<<<<<<<<<<<<<
@@ -2067,9 +2067,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_state, __pyx_n_s_kwargs); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr, __pyx_n_s_init, 37, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid, __pyx_n_s_init, 37, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":52
+  /* "yapyg_widgets\display_widget.pyx":52
  *                 Clock.schedule_interval(self.on_timer, timeout=FRAME_DELTA_SECONDS)
  * 
  *         def destroy(self):             # <<<<<<<<<<<<<<
@@ -2079,9 +2079,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_state); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr, __pyx_n_s_destroy, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid, __pyx_n_s_destroy, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":61
+  /* "yapyg_widgets\display_widget.pyx":61
  *                 yapyg.factory.destroy(state)
  * 
  *         def on_timer(self, dt):             # <<<<<<<<<<<<<<
@@ -2091,9 +2091,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__5 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_dt, __pyx_n_s_cur_fps, __pyx_n_s_last_frame_delta); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr, __pyx_n_s_on_timer, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid, __pyx_n_s_on_timer, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":85
+  /* "yapyg_widgets\display_widget.pyx":85
  *                                        )
  * 
  *         def get_frame_time(self):             # <<<<<<<<<<<<<<
@@ -2103,9 +2103,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr, __pyx_n_s_get_frame_time, 85, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid, __pyx_n_s_get_frame_time, 85, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_widgets/display_widget.pyx":91
+  /* "yapyg_widgets\display_widget.pyx":91
  *                 return self.frame_time
  * 
  *         def enable_redraw_tiles(self, value):             # <<<<<<<<<<<<<<
@@ -2115,7 +2115,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_raihan_kibria_rk_yapyg_tr, __pyx_n_s_enable_redraw_tiles, 91, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_projects_yapyg_trunk_yapyg_wid, __pyx_n_s_enable_redraw_tiles, 91, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2255,7 +2255,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   Py_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg_widgets/display_widget.pyx":21
+  /* "yapyg_widgets\display_widget.pyx":21
  * # THE SOFTWARE.
  * 
  * from kivy.clock import Clock             # <<<<<<<<<<<<<<
@@ -2276,7 +2276,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":22
+  /* "yapyg_widgets\display_widget.pyx":22
  * 
  * from kivy.clock import Clock
  * from kivy.uix.widget import Widget             # <<<<<<<<<<<<<<
@@ -2297,7 +2297,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":23
+  /* "yapyg_widgets\display_widget.pyx":23
  * from kivy.clock import Clock
  * from kivy.uix.widget import Widget
  * from kivy.core.window import Window             # <<<<<<<<<<<<<<
@@ -2318,7 +2318,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":30
+  /* "yapyg_widgets\display_widget.pyx":30
  * cimport yapyg.view
  * 
  * import yapyg.factory             # <<<<<<<<<<<<<<
@@ -2330,7 +2330,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":31
+  /* "yapyg_widgets\display_widget.pyx":31
  * 
  * import yapyg.factory
  * import yapyg.timer             # <<<<<<<<<<<<<<
@@ -2342,7 +2342,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":33
+  /* "yapyg_widgets\display_widget.pyx":33
  * import yapyg.timer
  * 
  * cdef float FRAME_DELTA_SECONDS = 1.0 / 30.0             # <<<<<<<<<<<<<<
@@ -2351,7 +2351,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
  */
   __pyx_v_13yapyg_widgets_14display_widget_FRAME_DELTA_SECONDS = (1.0 / 30.0);
 
-  /* "yapyg_widgets/display_widget.pyx":34
+  /* "yapyg_widgets\display_widget.pyx":34
  * 
  * cdef float FRAME_DELTA_SECONDS = 1.0 / 30.0
  * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0             # <<<<<<<<<<<<<<
@@ -2360,7 +2360,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
  */
   __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS = (__pyx_v_13yapyg_widgets_14display_widget_FRAME_DELTA_SECONDS * 1000.0);
 
-  /* "yapyg_widgets/display_widget.pyx":36
+  /* "yapyg_widgets\display_widget.pyx":36
  * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
  * 
  * class DisplayWidget(Widget):             # <<<<<<<<<<<<<<
@@ -2379,7 +2379,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __pyx_t_11 = __Pyx_Py3MetaclassPrepare(__pyx_t_10, __pyx_t_9, __pyx_n_s_DisplayWidget, __pyx_n_s_DisplayWidget, (PyObject *) NULL, __pyx_n_s_yapyg_widgets_display_widget, (PyObject *) NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "yapyg_widgets/display_widget.pyx":37
+  /* "yapyg_widgets\display_widget.pyx":37
  * 
  * class DisplayWidget(Widget):
  *         def __init__(self,             # <<<<<<<<<<<<<<
@@ -2391,7 +2391,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyObject_SetItem(__pyx_t_11, __pyx_n_s_init, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":52
+  /* "yapyg_widgets\display_widget.pyx":52
  *                 Clock.schedule_interval(self.on_timer, timeout=FRAME_DELTA_SECONDS)
  * 
  *         def destroy(self):             # <<<<<<<<<<<<<<
@@ -2403,7 +2403,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyObject_SetItem(__pyx_t_11, __pyx_n_s_destroy, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":61
+  /* "yapyg_widgets\display_widget.pyx":61
  *                 yapyg.factory.destroy(state)
  * 
  *         def on_timer(self, dt):             # <<<<<<<<<<<<<<
@@ -2415,7 +2415,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyObject_SetItem(__pyx_t_11, __pyx_n_s_on_timer, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":85
+  /* "yapyg_widgets\display_widget.pyx":85
  *                                        )
  * 
  *         def get_frame_time(self):             # <<<<<<<<<<<<<<
@@ -2427,7 +2427,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyObject_SetItem(__pyx_t_11, __pyx_n_s_get_frame_time, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":91
+  /* "yapyg_widgets\display_widget.pyx":91
  *                 return self.frame_time
  * 
  *         def enable_redraw_tiles(self, value):             # <<<<<<<<<<<<<<
@@ -2439,7 +2439,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   if (PyObject_SetItem(__pyx_t_11, __pyx_n_s_enable_redraw_tiles, __pyx_t_12) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":36
+  /* "yapyg_widgets\display_widget.pyx":36
  * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
  * 
  * class DisplayWidget(Widget):             # <<<<<<<<<<<<<<
@@ -2454,7 +2454,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "yapyg_widgets/display_widget.pyx":1
+  /* "yapyg_widgets\display_widget.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

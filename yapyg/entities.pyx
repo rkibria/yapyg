@@ -154,6 +154,16 @@ cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
                 if enabled_sprite_name == sprite_name:
                         sprites.set_enable(state, full_sprite_name, True)
 
+cpdef str get_active_sprite_name(list state, str entity_name):
+        """
+        TODO
+        """
+        cdef list entity = get(state, entity_name)
+        if entity:
+                if entity[IDX_ENTITY_ENABLED_SPRITE]:
+                        return get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE])
+        return None
+
 cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):
         """
         TODO

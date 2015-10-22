@@ -32,4 +32,7 @@ cpdef delete(list state, str sprite_name)
 cpdef list get(list state, str sprite_name)
 cpdef tuple get_pos(list state, str sprite_name)
 cpdef set_enable(list state, str sprite_name, int enable)
+cpdef tuple get_textures(list state, str sprite_name)
+cpdef int is_enabled(list state, str sprite_name)
+
 cdef void draw(list state, canvas, float frame_time_delta)

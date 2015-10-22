@@ -234,10 +234,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                              True
                              )
 
-        view.set_viewer(state,
-                        relative_viewer.create(state,
-                                               ENT_MAN,
-                                               [-2.0, -2.25]))
+        view.set_viewer(state, relative_viewer.create(state, ENT_MAN))
 
         start_ghost_movement(state, None)
 

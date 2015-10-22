@@ -135,6 +135,15 @@ cpdef insert(list state,
         if not sprite_name in sprite_draw_order:
                 sprite_draw_order.append(sprite_name)
 
+cpdef tuple get_textures(list state, str sprite_name):
+        """
+        TODO
+        """
+        sprite = get(state, sprite_name)
+        if sprite:
+                return sprite[IDX_SPRITE_TEXTURES]
+        return None
+
 cpdef delete(list state, str sprite_name):
         """
         TODO
@@ -162,6 +171,15 @@ cpdef tuple get_pos(list state, str sprite_name):
         TODO
         """
         return get(state, sprite_name)[IDX_SPRITE_POS]
+
+cpdef int is_enabled(list state, str sprite_name):
+        cdef list sprite_db = state[IDX_STATE_SPRITES]
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
+        cdef list sprite
+        if sprites_dict.has_key(sprite_name):
+                sprite = sprites_dict[sprite_name]
+                return sprite[IDX_SPRITE_ENABLE]
+        return False
 
 cpdef set_enable(list state, str sprite_name, int enable):
         """
