@@ -30,20 +30,21 @@ cimport yapyg.movers
 cimport yapyg.entities
 cimport yapyg.collisions
 
-IDX_MOVERS_PHYSICAL_MASS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
-IDX_MOVERS_PHYSICAL_VX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
-IDX_MOVERS_PHYSICAL_VY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
-IDX_MOVERS_PHYSICAL_AX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
-IDX_MOVERS_PHYSICAL_AY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
-IDX_MOVERS_PHYSICAL_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
-IDX_MOVERS_PHYSICAL_INELASTICITY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
-IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
-IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
-IDX_MOVERS_PHYSICAL_ROT_DECAY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 9
-IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
-IDX_MOVERS_PHYSICAL_NO_ROTATE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 11
+cdef int IDX_MOVERS_PHYSICAL_MASS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
+cdef int IDX_MOVERS_PHYSICAL_VX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
+cdef int IDX_MOVERS_PHYSICAL_VY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
+cdef int IDX_MOVERS_PHYSICAL_AX = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
+cdef int IDX_MOVERS_PHYSICAL_AY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
+cdef int IDX_MOVERS_PHYSICAL_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
+cdef int IDX_MOVERS_PHYSICAL_INELASTICITY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
+cdef int IDX_MOVERS_PHYSICAL_VR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 7
+cdef int IDX_MOVERS_PHYSICAL_ROT_FRICTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 8
+cdef int IDX_MOVERS_PHYSICAL_ROT_DECAY = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 9
+cdef int IDX_MOVERS_PHYSICAL_STICKYNESS = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 10
+cdef int IDX_MOVERS_PHYSICAL_NO_ROTATE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 11
+IDX_MOVERS_PHYSICAL_LAST_PARAMETER = IDX_MOVERS_PHYSICAL_NO_ROTATE
 
-cdef str PHYSICS_MOVER_NAME = "physics"
+cpdef str PHYSICS_MOVER_NAME = "physics"
 
 cdef float CONST_2PI = 2 * yapyg.math_2d.CONST_PI
 cdef float CONST_TORQUE_DAMPENING = 0.5
@@ -51,20 +52,39 @@ cdef float CONST_TORQUE_DAMPENING = 0.5
 # sys.float_info.max leads to overflow, just choose a very high number instead
 cdef float CONST_INF_MASS = 999999999.9
 
+cpdef tuple get_acceleration(list mover):
+        return (mover[IDX_MOVERS_PHYSICAL_AX], mover[IDX_MOVERS_PHYSICAL_AY])
+
+cpdef set_acceleration(list mover, tuple new_acc):
+        mover[IDX_MOVERS_PHYSICAL_AX] = new_acc[0]
+        mover[IDX_MOVERS_PHYSICAL_AY] = new_acc[1]
+
+cpdef tuple get_velocity(list mover):
+        return (mover[IDX_MOVERS_PHYSICAL_VX],
+                mover[IDX_MOVERS_PHYSICAL_VY],
+                mover[IDX_MOVERS_PHYSICAL_VR]
+                )
+
+cpdef set_velocity(list mover, tuple new_vel):
+        mover[IDX_MOVERS_PHYSICAL_VX] = new_vel[0]
+        mover[IDX_MOVERS_PHYSICAL_VY] = new_vel[1]
+        mover[IDX_MOVERS_PHYSICAL_VR] = new_vel[2]
+
 cpdef add(list state,
-                str entity_name,
-                float mass,
-                float vx,
-                float vy,
-                float ax,
-                float ay,
-                float friction,
-                float inelasticity,
-                float vr,
-                float rot_friction,
-                float rot_decay,
-                float stickyness,
-                int do_replace=False):
+          str entity_name,
+          float mass,
+          float vx,
+          float vy,
+          float ax,
+          float ay,
+          float friction,
+          float inelasticity,
+          float vr,
+          float rot_friction,
+          float rot_decay,
+          float stickyness,
+          int do_replace=False
+          ):
         """
         vr > 0: counter-clockwise
         """
@@ -84,7 +104,7 @@ cpdef add(list state,
                         do_replace
                 )
 
-cdef list create(str entity_name,
+cpdef list create(str entity_name,
                 float mass,
                 float vx,
                 float vy,

@@ -22,8 +22,6 @@
 Controls
 """
 
-cdef int IDX_STATE_CONTROLS
-
 cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)
 cpdef add_buttons(list state, tuple button_defs)
@@ -34,5 +32,5 @@ cpdef add_joystick(list state)
 cpdef int need_joystick(list state)
 cpdef int need_buttons(list state)
 cpdef set_joystick(list state, directions)
-cpdef get_joystick(list state)
-cpdef dict get_joystick_properties():
+cpdef list get_joystick(list state)
+cpdef dict get_joystick_properties()

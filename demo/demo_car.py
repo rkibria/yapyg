@@ -18,8 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import math
-
 from yapyg import factory
 from yapyg import tiles
 from yapyg import entities
@@ -37,6 +35,7 @@ from yapyg_movers import linear_mover
 from yapyg_movers import destroy_mover
 from yapyg_movers import wait_mover
 from yapyg_movers import physical_mover
+from yapyg_movers import control_phys_mover
 from yapyg_viewers import relative_viewer
 from yapyg_helpers import tiles_helpers
 
@@ -96,10 +95,9 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                   ['/', '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/' , '/'],
                  ]
                  )
-
-        text.load_font(state, FONT_NAME, "assets/img/fonts/%s.png" % FONT_NAME, 16, 32)
-
         play_area_origin = (2.0, 3.0)
+
+        # text.load_font(state, FONT_NAME, "assets/img/fonts/%s.png" % FONT_NAME, 16, 32)
 
         entities.insert(state,
                         ENT_PLAYER_CAR,
@@ -130,7 +128,7 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 
         view.set_viewer(state, relative_viewer.create(state, ENT_PLAYER_CAR))
 
-        physical_mover.add(state,
+        control_phys_mover.add(state,
                            ENT_PLAYER_CAR,
                            1.0,
                            0,
@@ -143,6 +141,12 @@ def create(screen_width_px, screen_height_px, tile_size_px):
                            YAPYG_STD_ROT_FRICTION,
                            YAPYG_STD_ROT_DECAY,
                            YAPYG_STD_STICKYNESS,
+                           dir_factor=0.005,
+                           pos_accel=12.0,
+                           neg_accel=4.0,
+                           rest_sprite="*",
+                           pos_sprite="+",
+                           neg_sprite="-"
                            )
 
         for i in xrange(7):
@@ -194,39 +198,9 @@ def create(screen_width_px, screen_height_px, tile_size_px):
 def on_timer(state, last_frame_delta):
         phys_mover = movers.get_active(state, ENT_PLAYER_CAR)
         if phys_mover:
-                direction = controls.get_joystick(state)
-                joy_dir = direction[0]
-                joy_accel = direction[1]
-                player_pos = entities.get_pos(state, ENT_PLAYER_CAR)
-                player_speed = (phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_VX], phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_VY])
-                player_rot = player_pos[2]
-                if joy_accel > 0.0:
-                        accel_factor = 11.0
-                else:
-                        accel_factor = 4.0
-                dir_factor = 0.01 * math_2d.length(player_speed)
-                accel_vector = math_2d.vector_mul(math_2d.rotated_point((0, 0), (0.0, 1.0), player_rot), accel_factor * joy_accel)
-                phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_AX] = accel_vector[0]
-                phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_AY] = accel_vector[1]
-                phys_mover[physical_mover.IDX_MOVERS_PHYSICAL_VR] += (-joy_dir) * dir_factor * (-1 if joy_accel < 0 else 1)
-
-                if joy_accel > 0.0:
-                        entities.set_active_sprite(state, ENT_PLAYER_CAR, "+")
-                elif joy_accel == 0.0:
-                        entities.set_active_sprite(state, ENT_PLAYER_CAR, "*")
-                else:
-                        entities.set_active_sprite(state, ENT_PLAYER_CAR, "-")
-
                 exhaust_sprite_name = entities.get_active_sprite_name(state, ENT_PLAYER_CAR_EXHAUST)
-                if joy_accel > 0.0 or not sprites.is_enabled(state, exhaust_sprite_name):
-                        pos = entities.get_pos(state, ENT_PLAYER_CAR)
-                        rot = math.radians(pos[2] + 90.0)
-                        START_OFFSET_FACTOR = -0.25 # - 0.125
-                        start_pos = (pos[0] + (START_OFFSET_FACTOR * math.cos(rot)),
-                                     pos[1] + (START_OFFSET_FACTOR * math.sin(rot)),
-                                     pos[2],
-                                     )
-                        do_exhaust(state, start_pos)
+                if not sprites.is_enabled(state, exhaust_sprite_name):
+                        do_exhaust(state, math_2d.get_radial_offset(entities.get_pos(state, ENT_PLAYER_CAR), -0.25))
 
 def on_fire_button(state, button_pressed):
         pass

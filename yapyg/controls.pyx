@@ -119,7 +119,7 @@ cpdef set_joystick(list state, directions):
                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][0] = (float(directions[0]))
                 state[IDX_STATE_CONTROLS][IDX_CONTROLS_JOYSTICK_DIRECTION][1] = (float(directions[1]))
 
-cpdef get_joystick(list state):
+cpdef list get_joystick(list state):
         """
         TODO
         """

@@ -22,22 +22,27 @@
 Simulate physical movement
 """
 
-cpdef str PHYSICS_MOVER_NAME = "physics"
-
 cpdef add(list state,
-                str entity_name,
-                float mass,
-                float vx,
-                float vy,
-                float ax,
-                float ay,
-                float friction,
-                float inelasticity,
-                float vr,
-                float rot_friction,
-                float rot_decay,
-                float stickyness,
-                int do_replace=*)
+        str entity_name,
+        float mass,
+        float vx,
+        float vy,
+        float ax,
+        float ay,
+        float friction,
+        float inelasticity,
+        float vr,
+        float rot_friction,
+        float rot_decay,
+        float stickyness,
+        float dir_factor,
+        float pos_accel,
+        float neg_accel,
+        str rest_sprite=*,
+        str pos_sprite=*,
+        str neg_sprite=*,
+        int do_replace=*
+        )
 
 cpdef list create(str entity_name,
                 float mass,
@@ -50,21 +55,13 @@ cpdef list create(str entity_name,
                 float vr,
                 float rot_friction,
                 float rot_decay,
-                float stickyness
+                float stickyness,
+                float dir_factor,
+                float pos_accel,
+                float neg_accel,
+                str rest_sprite,
+                str pos_sprite,
+                str neg_sprite,
                 )
 
 cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete)
-
-cpdef collision_handler(list state,
-                str entity_name_1,
-                str entity_name_2,
-                list collision_def_1,
-                list collision_def_2,
-                tuple absolute_shape_1,
-                tuple absolute_shape_2,
-                list contact_points)
-
-cpdef tuple get_acceleration(list mover)
-cpdef set_acceleration(list mover, tuple new_acc)
-cpdef tuple get_velocity(list mover)
-cpdef set_velocity(list mover, tuple new_vel)

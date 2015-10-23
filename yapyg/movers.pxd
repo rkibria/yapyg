@@ -24,10 +24,10 @@ General movements
 
 cdef int IDX_STATE_MOVERS
 
-cpdef int IDX_MOVER_TYPE = 0
-cpdef int IDX_MOVER_RUN_FUNCTION = 1
-cpdef int IDX_MOVER_ENTITY_NAME = 2
-cpdef int IDX_MOVER_COLLISION_HANDLER = 3
+cdef int IDX_MOVER_TYPE = 0
+cdef int IDX_MOVER_RUN_FUNCTION = 1
+cdef int IDX_MOVER_ENTITY_NAME = 2
+cdef int IDX_MOVER_COLLISION_HANDLER = 3
 
 cpdef initialize(int state_idx, list state)
 cpdef destroy(list state)

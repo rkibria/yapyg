@@ -137,3 +137,13 @@ cpdef tuple create_unit_vector(float angle_deg):
         TODO
         """
         return (cos(deg_to_rad(angle_deg)), sin(deg_to_rad(angle_deg)))
+
+cpdef tuple get_radial_offset(tuple pos_triple, float offset_distance):
+        """
+        TODO
+        """
+        cdef float rot = deg_to_rad(pos_triple[2] + 90.0)
+        return (pos_triple[0] + (offset_distance * cos(rot)),
+                pos_triple[1] + (offset_distance * sin(rot)),
+                pos_triple[2],
+                )

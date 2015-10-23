@@ -607,6 +607,7 @@ static PyObject *__pyx_f_5yapyg_7math_2d_get_direction_unit_vector(PyObject *, P
 static PyObject *__pyx_f_5yapyg_7math_2d_get_unit_vector(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static float __pyx_f_5yapyg_7math_2d_get_angle(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_7math_2d_create_unit_vector(float, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5yapyg_7math_2d_get_radial_offset(PyObject *, float, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg.math_2d"
 int __pyx_module_is_main_yapyg__math_2d = 0;
 
@@ -627,6 +628,7 @@ static PyObject *__pyx_pf_5yapyg_7math_2d_24get_direction_unit_vector(CYTHON_UNU
 static PyObject *__pyx_pf_5yapyg_7math_2d_26get_unit_vector(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_vector); /* proto */
 static PyObject *__pyx_pf_5yapyg_7math_2d_28get_angle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pos1, PyObject *__pyx_v_pos2); /* proto */
 static PyObject *__pyx_pf_5yapyg_7math_2d_30create_unit_vector(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_angle_deg); /* proto */
+static PyObject *__pyx_pf_5yapyg_7math_2d_32get_radial_offset(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pos_triple, float __pyx_v_offset_distance); /* proto */
 static char __pyx_k_rot[] = "rot";
 static char __pyx_k_v_1[] = "v_1";
 static char __pyx_k_v_2[] = "v_2";
@@ -644,7 +646,9 @@ static char __pyx_k_pyx_capi[] = "__pyx_capi__";
 static char __pyx_k_complex_1[] = "complex_1";
 static char __pyx_k_complex_2[] = "complex_2";
 static char __pyx_k_2D_vectors[] = "\n2D vectors\n";
+static char __pyx_k_pos_triple[] = "pos_triple";
 static char __pyx_k_origin_point[] = "origin_point";
+static char __pyx_k_offset_distance[] = "offset_distance";
 static char __pyx_k_projected_vector[] = "projected_vector";
 static char __pyx_k_unit_axis_vector[] = "unit_axis_vector";
 static PyObject *__pyx_n_s_CONST_PI;
@@ -652,12 +656,14 @@ static PyObject *__pyx_n_s_complex_1;
 static PyObject *__pyx_n_s_complex_2;
 static PyObject *__pyx_n_s_factor;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_offset_distance;
 static PyObject *__pyx_n_s_origin_point;
 static PyObject *__pyx_n_s_point;
 static PyObject *__pyx_n_s_pos1;
 static PyObject *__pyx_n_s_pos2;
 static PyObject *__pyx_n_s_pos_1;
 static PyObject *__pyx_n_s_pos_2;
+static PyObject *__pyx_n_s_pos_triple;
 static PyObject *__pyx_n_s_projected_vector;
 static PyObject *__pyx_n_s_pyx_capi;
 static PyObject *__pyx_n_s_rot;
@@ -666,6 +672,7 @@ static PyObject *__pyx_n_s_unit_axis_vector;
 static PyObject *__pyx_n_s_v_1;
 static PyObject *__pyx_n_s_v_2;
 static PyObject *__pyx_n_s_vec;
+static PyObject *__pyx_float_90_0;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_tuple_;
 
@@ -3476,6 +3483,8 @@ static PyObject *__pyx_f_5yapyg_7math_2d_create_unit_vector(float __pyx_v_angle_
  *         TODO
  *         """
  *         return (cos(deg_to_rad(angle_deg)), sin(deg_to_rad(angle_deg)))             # <<<<<<<<<<<<<<
+ * 
+ * cpdef tuple get_radial_offset(tuple pos_triple, float offset_distance):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = PyFloat_FromDouble(cos(__pyx_f_5yapyg_7math_2d_deg_to_rad(__pyx_v_angle_deg, 0))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3568,6 +3577,240 @@ static PyObject *__pyx_pf_5yapyg_7math_2d_30create_unit_vector(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
+/* "yapyg\math_2d.pyx":141
+ *         return (cos(deg_to_rad(angle_deg)), sin(deg_to_rad(angle_deg)))
+ * 
+ * cpdef tuple get_radial_offset(tuple pos_triple, float offset_distance):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+static PyObject *__pyx_pw_5yapyg_7math_2d_33get_radial_offset(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5yapyg_7math_2d_get_radial_offset(PyObject *__pyx_v_pos_triple, float __pyx_v_offset_distance, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  float __pyx_v_rot;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  float __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_radial_offset", 0);
+
+  /* "yapyg\math_2d.pyx":145
+ *         TODO
+ *         """
+ *         cdef float rot = deg_to_rad(pos_triple[2] + 90.0)             # <<<<<<<<<<<<<<
+ *         return (pos_triple[0] + (offset_distance * cos(rot)),
+ *                 pos_triple[1] + (offset_distance * sin(rot)),
+ */
+  if (unlikely(__pyx_v_pos_triple == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_triple, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_float_90_0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_3 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_rot = __pyx_f_5yapyg_7math_2d_deg_to_rad(__pyx_t_3, 0);
+
+  /* "yapyg\math_2d.pyx":146
+ *         """
+ *         cdef float rot = deg_to_rad(pos_triple[2] + 90.0)
+ *         return (pos_triple[0] + (offset_distance * cos(rot)),             # <<<<<<<<<<<<<<
+ *                 pos_triple[1] + (offset_distance * sin(rot)),
+ *                 pos_triple[2],
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(__pyx_v_pos_triple == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_triple, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_offset_distance * cos(__pyx_v_rot))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "yapyg\math_2d.pyx":147
+ *         cdef float rot = deg_to_rad(pos_triple[2] + 90.0)
+ *         return (pos_triple[0] + (offset_distance * cos(rot)),
+ *                 pos_triple[1] + (offset_distance * sin(rot)),             # <<<<<<<<<<<<<<
+ *                 pos_triple[2],
+ *                 )
+ */
+  if (unlikely(__pyx_v_pos_triple == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_triple, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_offset_distance * sin(__pyx_v_rot))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_5 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "yapyg\math_2d.pyx":148
+ *         return (pos_triple[0] + (offset_distance * cos(rot)),
+ *                 pos_triple[1] + (offset_distance * sin(rot)),
+ *                 pos_triple[2],             # <<<<<<<<<<<<<<
+ *                 )
+ */
+  if (unlikely(__pyx_v_pos_triple == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_triple, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 148; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
+
+  /* "yapyg\math_2d.pyx":146
+ *         """
+ *         cdef float rot = deg_to_rad(pos_triple[2] + 90.0)
+ *         return (pos_triple[0] + (offset_distance * cos(rot)),             # <<<<<<<<<<<<<<
+ *                 pos_triple[1] + (offset_distance * sin(rot)),
+ *                 pos_triple[2],
+ */
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_5);
+  PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_4 = 0;
+  __pyx_t_5 = 0;
+  __pyx_t_2 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "yapyg\math_2d.pyx":141
+ *         return (cos(deg_to_rad(angle_deg)), sin(deg_to_rad(angle_deg)))
+ * 
+ * cpdef tuple get_radial_offset(tuple pos_triple, float offset_distance):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("yapyg.math_2d.get_radial_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5yapyg_7math_2d_33get_radial_offset(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_7math_2d_32get_radial_offset[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_7math_2d_33get_radial_offset(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_pos_triple = 0;
+  float __pyx_v_offset_distance;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_radial_offset (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_pos_triple,&__pyx_n_s_offset_distance,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_pos_triple)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_offset_distance)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_radial_offset", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_radial_offset") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_pos_triple = ((PyObject*)values[0]);
+    __pyx_v_offset_distance = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_offset_distance == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("get_radial_offset", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("yapyg.math_2d.get_radial_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos_triple), (&PyTuple_Type), 1, "pos_triple", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_7math_2d_32get_radial_offset(__pyx_self, __pyx_v_pos_triple, __pyx_v_offset_distance);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5yapyg_7math_2d_32get_radial_offset(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_pos_triple, float __pyx_v_offset_distance) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_radial_offset", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5yapyg_7math_2d_get_radial_offset(__pyx_v_pos_triple, __pyx_v_offset_distance, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("yapyg.math_2d.get_radial_offset", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {"rad_to_deg", (PyCFunction)__pyx_pw_5yapyg_7math_2d_1rad_to_deg, METH_O, 0},
   {"deg_to_rad", (PyCFunction)__pyx_pw_5yapyg_7math_2d_3deg_to_rad, METH_O, 0},
@@ -3585,6 +3828,7 @@ static PyMethodDef __pyx_methods[] = {
   {"get_unit_vector", (PyCFunction)__pyx_pw_5yapyg_7math_2d_27get_unit_vector, METH_O, __pyx_doc_5yapyg_7math_2d_26get_unit_vector},
   {"get_angle", (PyCFunction)__pyx_pw_5yapyg_7math_2d_29get_angle, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_7math_2d_28get_angle},
   {"create_unit_vector", (PyCFunction)__pyx_pw_5yapyg_7math_2d_31create_unit_vector, METH_O, __pyx_doc_5yapyg_7math_2d_30create_unit_vector},
+  {"get_radial_offset", (PyCFunction)__pyx_pw_5yapyg_7math_2d_33get_radial_offset, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_7math_2d_32get_radial_offset},
   {0, 0, 0, 0}
 };
 
@@ -3612,12 +3856,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_complex_2, __pyx_k_complex_2, sizeof(__pyx_k_complex_2), 0, 0, 1, 1},
   {&__pyx_n_s_factor, __pyx_k_factor, sizeof(__pyx_k_factor), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_offset_distance, __pyx_k_offset_distance, sizeof(__pyx_k_offset_distance), 0, 0, 1, 1},
   {&__pyx_n_s_origin_point, __pyx_k_origin_point, sizeof(__pyx_k_origin_point), 0, 0, 1, 1},
   {&__pyx_n_s_point, __pyx_k_point, sizeof(__pyx_k_point), 0, 0, 1, 1},
   {&__pyx_n_s_pos1, __pyx_k_pos1, sizeof(__pyx_k_pos1), 0, 0, 1, 1},
   {&__pyx_n_s_pos2, __pyx_k_pos2, sizeof(__pyx_k_pos2), 0, 0, 1, 1},
   {&__pyx_n_s_pos_1, __pyx_k_pos_1, sizeof(__pyx_k_pos_1), 0, 0, 1, 1},
   {&__pyx_n_s_pos_2, __pyx_k_pos_2, sizeof(__pyx_k_pos_2), 0, 0, 1, 1},
+  {&__pyx_n_s_pos_triple, __pyx_k_pos_triple, sizeof(__pyx_k_pos_triple), 0, 0, 1, 1},
   {&__pyx_n_s_projected_vector, __pyx_k_projected_vector, sizeof(__pyx_k_projected_vector), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_capi, __pyx_k_pyx_capi, sizeof(__pyx_k_pyx_capi), 0, 0, 1, 1},
   {&__pyx_n_s_rot, __pyx_k_rot, sizeof(__pyx_k_rot), 0, 0, 1, 1},
@@ -3655,6 +3901,7 @@ static int __Pyx_InitCachedConstants(void) {
 
 static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_float_90_0 = PyFloat_FromDouble(90.0); if (unlikely(!__pyx_float_90_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
@@ -3757,6 +4004,7 @@ PyMODINIT_FUNC PyInit_math_2d(void)
   if (__Pyx_ExportFunction("get_unit_vector", (void (*)(void))__pyx_f_5yapyg_7math_2d_get_unit_vector, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("get_angle", (void (*)(void))__pyx_f_5yapyg_7math_2d_get_angle, "float (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("create_unit_vector", (void (*)(void))__pyx_f_5yapyg_7math_2d_create_unit_vector, "PyObject *(float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("get_radial_offset", (void (*)(void))__pyx_f_5yapyg_7math_2d_get_radial_offset, "PyObject *(PyObject *, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
