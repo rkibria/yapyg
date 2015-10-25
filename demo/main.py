@@ -40,6 +40,8 @@ from kivy.uix.image import Image
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.boxlayout import BoxLayout
 
+from kivy import platform
+
 from yapyg_widgets.screen_widget import ScreenWidget
 
 DEFAULT_START_CHOICE = "demo_car"
