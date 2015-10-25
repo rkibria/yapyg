@@ -150,6 +150,7 @@ cpdef run(list state, str entity_name, list mover, float frame_time_delta, list 
         cdef tuple delta_dist_vector
         cdef tuple delta_velocity_vector
         cdef float delta_rot
+        cdef tuple collision_result
         if not (accel_vector == (0.0, 0.0) and velocity_vector == (0.0, 0.0) and v_r == 0.0):
                 delta_time = frame_time_delta / 1000.0
 
@@ -187,9 +188,9 @@ cpdef run(list state, str entity_name, list mover, float frame_time_delta, list 
 
                 yapyg.entities.add_pos(state, entity_name, delta_dist_vector[0], delta_dist_vector[1], delta_rot)
 
-        cdef tuple collision_result = yapyg.collisions.run(state, entity_name)
-        if collision_result:
-                collision_handler(*collision_result)
+                collision_result = yapyg.collisions.run(state, entity_name)
+                if collision_result:
+                        collision_handler(*collision_result)
 
 cdef tuple compute_circle_torque(float v_r, float v_x, float rot_friction, float circle_r, int clockw_right):
         """
