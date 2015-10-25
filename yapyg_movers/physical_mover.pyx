@@ -145,37 +145,47 @@ cpdef run(list state, str entity_name, list mover, float frame_time_delta, list 
         cdef tuple accel_vector = (mover[IDX_MOVERS_PHYSICAL_AX], mover[IDX_MOVERS_PHYSICAL_AY])
         cdef tuple velocity_vector = (mover[IDX_MOVERS_PHYSICAL_VX], mover[IDX_MOVERS_PHYSICAL_VY])
         cdef float v_r = mover[IDX_MOVERS_PHYSICAL_VR]
-        cdef float delta_time = frame_time_delta / 1000.0
 
-        # s = 0.5 a t^2
-        cdef tuple delta_dist_vector = yapyg.math_2d.vector_mul(accel_vector, 0.5 * delta_time * delta_time / 1000.0)
+        cdef float delta_time
+        cdef tuple delta_dist_vector
+        cdef tuple delta_velocity_vector
+        cdef float delta_rot
+        if not (accel_vector == (0.0, 0.0) and velocity_vector == (0.0, 0.0) and v_r == 0.0):
+                delta_time = frame_time_delta / 1000.0
 
-        # s = v t
-        delta_dist_vector = yapyg.math_2d.vector_add(delta_dist_vector, yapyg.math_2d.vector_mul(velocity_vector, delta_time))
+                # s = 0.5 a t^2
+                delta_dist_vector = yapyg.math_2d.vector_mul(accel_vector, 0.5 * delta_time * delta_time / 1000.0)
 
-        # v = a t
-        cdef tuple delta_velocity_vector = yapyg.math_2d.vector_mul(accel_vector, delta_time)
+                # s = v t
+                delta_dist_vector = yapyg.math_2d.vector_add(delta_dist_vector, yapyg.math_2d.vector_mul(velocity_vector, delta_time))
 
-        # translation friction
-        velocity_vector = yapyg.math_2d.vector_add(velocity_vector, delta_velocity_vector)
-        velocity_vector = yapyg.math_2d.vector_mul(velocity_vector, mover[IDX_MOVERS_PHYSICAL_FRICTION])
+                # v = a t
+                delta_velocity_vector = yapyg.math_2d.vector_mul(accel_vector, delta_time)
 
-        # rotation amount and velocity decay
-        cdef float delta_rot = 0.0
-        if not mover[IDX_MOVERS_PHYSICAL_NO_ROTATE]:
-                delta_rot = v_r * frame_time_delta
-                mover[IDX_MOVERS_PHYSICAL_VR] = v_r * mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
-        else:
-                mover[IDX_MOVERS_PHYSICAL_NO_ROTATE] = False
+                # translation friction
+                velocity_vector = yapyg.math_2d.vector_add(velocity_vector, delta_velocity_vector)
+                velocity_vector = yapyg.math_2d.vector_mul(velocity_vector, mover[IDX_MOVERS_PHYSICAL_FRICTION])
 
-        if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
-                delta_dist_vector = (0, 0)
-                delta_rot = 0
+                # rotation amount and velocity decay
+                delta_rot = 0.0
+                if not mover[IDX_MOVERS_PHYSICAL_NO_ROTATE]:
+                        delta_rot = v_r * frame_time_delta
+                        mover[IDX_MOVERS_PHYSICAL_VR] = v_r * mover[IDX_MOVERS_PHYSICAL_ROT_DECAY]
+                else:
+                        mover[IDX_MOVERS_PHYSICAL_NO_ROTATE] = False
 
-        mover[IDX_MOVERS_PHYSICAL_VX] = velocity_vector[0]
-        mover[IDX_MOVERS_PHYSICAL_VY] = velocity_vector[1]
+                if abs(mover[IDX_MOVERS_PHYSICAL_VR]) < 0.001:
+                        mover[IDX_MOVERS_PHYSICAL_VR] = 0.0
 
-        yapyg.entities.add_pos(state, entity_name, delta_dist_vector[0], delta_dist_vector[1], delta_rot)
+                if yapyg.math_2d.length(velocity_vector) < mover[IDX_MOVERS_PHYSICAL_STICKYNESS]:
+                        delta_dist_vector = (0, 0)
+                        delta_rot = 0
+                        velocity_vector = (0.0, 0.0)
+
+                mover[IDX_MOVERS_PHYSICAL_VX] = velocity_vector[0]
+                mover[IDX_MOVERS_PHYSICAL_VY] = velocity_vector[1]
+
+                yapyg.entities.add_pos(state, entity_name, delta_dist_vector[0], delta_dist_vector[1], delta_rot)
 
         cdef tuple collision_result = yapyg.collisions.run(state, entity_name)
         if collision_result:
