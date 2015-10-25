@@ -90,7 +90,8 @@ class MenuWidget(FloatLayout):
 
                 self.add_widget(layout)
 
-                Window.bind(on_key_up=self._on_keyboard_up)
+                if platform == 'win' or platform == 'linux' or platform == 'macosx':
+                        Window.bind(on_key_up=self._on_keyboard_up)
 
         def _on_keyboard_up(self, window, keycode, scancode):
                 self.on_run(None, None)
