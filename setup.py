@@ -23,8 +23,11 @@ else:
                 Extension('yapyg/texture_db', ['yapyg/texture_db.c']),
                 Extension('yapyg/tiles', ['yapyg/tiles.c']),
                 Extension('yapyg/view', ['yapyg/view.c']),
-                Extension('yapyg_movers/physical_mover', ['yapyg_movers/physical_mover.c']),
+
+                Extension('yapyg_movers/control_phys_mover', ['yapyg_movers/control_phys_mover.c']),
                 Extension('yapyg_movers/linear_mover', ['yapyg_movers/linear_mover.c']),
+                Extension('yapyg_movers/physical_mover', ['yapyg_movers/physical_mover.c']),
+
                 Extension('yapyg_widgets/display_widget', ['yapyg_widgets/display_widget.c']),
                 ]
 
