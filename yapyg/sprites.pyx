@@ -190,6 +190,9 @@ cpdef set_enable(list state, str sprite_name, int enable):
         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
         cdef tuple screen_scale = screen.get_screen_scale(state)
+        cdef int tile_size = tiles.get_tile_size(state)
+        cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])
+        cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])
 
         cdef list sprite
         cdef tuple offset_pos
@@ -226,7 +229,8 @@ cpdef set_enable(list state, str sprite_name, int enable):
                                                                     ]
                                                 offset_pos = _get_screen_coords(state,
                                                                                 view_pos,
-                                                                                screen_scale,
+                                                                                scaled_tile_size_x,
+                                                                                scaled_tile_size_y,
                                                                                 sprite_total_pos,
                                                                                 origin_xy,
                                                                                 sprite[IDX_SPRITE_SCREEN_RELATIVE]
@@ -252,6 +256,9 @@ cdef void draw(list state,
         """
         cdef tuple origin_xy = screen.get_origin(state)
         cdef tuple screen_scale = screen.get_screen_scale(state)
+        cdef int tile_size = tiles.get_tile_size(state)
+        cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])
+        cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])
 
         cdef tuple view_pos = view.get_view_pos(state)
         cdef list sprite_db = state[IDX_STATE_SPRITES]
@@ -273,6 +280,7 @@ cdef void draw(list state,
         cdef list sprite_pos
         cdef list sprite_pos_offset
         cdef int play_once
+        cdef tuple screen_xy_pos
 
         for sprite_name in sprite_draw_order:
                 sprite = sprites_dict[sprite_name]
@@ -296,6 +304,8 @@ cdef void draw(list state,
                 screen_relative = sprite[IDX_SPRITE_SCREEN_RELATIVE]
                 play_once = sprite[IDX_SPRITE_PLAYONCE]
 
+                screen_xy_pos = _get_screen_coords(state, view_pos, scaled_tile_size_x, scaled_tile_size_y, pos, origin_xy, screen_relative)
+
                 if speed > 0:
                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
                         time_sum += frame_time_delta
@@ -316,49 +326,50 @@ cdef void draw(list state,
                 texture_name = textures[phase]
                 draw_sprite(state,
                             canvas,
-                            view_pos,
                             screen_scale,
                             sprite_name,
                             texture_db.get(state, texture_name),
                             pos,
                             scale,
-                            origin_xy,
-                            screen_relative
+                            screen_xy_pos
                             )
 
 cdef tuple _get_screen_coords(list state,
                               tuple view_pos,
-                              tuple screen_scale,
+                              int scaled_tile_size_x,
+                              int scaled_tile_size_y,
                               list pos,
                               tuple origin_xy,
                               int screen_relative
                               ):
         """
-        TODO
+        Return: (int x, int y)
         """
-        cdef float col = floor(pos[0])
-        cdef float row = floor(pos[1])
-        cdef int tile_size = tiles.get_tile_size(state)
-        cdef float scaled_tile_size_x = tile_size * screen_scale[0]
-        cdef float scaled_tile_size_y = tile_size * screen_scale[1]
+        cdef int col = int(floor(pos[0]))
+        cdef int row = int(floor(pos[1]))
 
-        cdef float tile_x = col * scaled_tile_size_x
-        cdef float tile_y = row * scaled_tile_size_y
+        cdef int tile_x = col * scaled_tile_size_x
+        cdef int tile_y = row * scaled_tile_size_y
 
-        cdef float draw_x
-        cdef float draw_y
+        cdef int draw_x
+        cdef int draw_y
+        cdef float view_pos_x = view_pos[0]
+        cdef float view_pos_y = view_pos[1]
         if not screen_relative:
-                draw_x = tile_x - (view_pos[0] * scaled_tile_size_x)
-                draw_y = tile_y - (view_pos[1] * scaled_tile_size_y)
+                draw_x = tile_x - int(view_pos_x * scaled_tile_size_x)
+                draw_y = tile_y - int(view_pos_y * scaled_tile_size_y)
         else:
                 draw_x = tile_x
                 draw_y = tile_y
 
-        cdef tuple draw_pos = (draw_x, draw_y)
-        cdef tuple offset = (pos[0] - col, pos[1] - row,)
-        cdef tuple offset_pos = (draw_pos[0] + (scaled_tile_size_x * offset[0]) + origin_xy[0],
-                                 draw_pos[1] + (scaled_tile_size_y * offset[1]) + origin_xy[1])
-        return offset_pos
+        cdef float offset_x = pos[0] - col
+        cdef float offset_y = pos[1] - row
+        cdef int origin_x = int(origin_xy[0])
+        cdef int origin_y = int(origin_xy[1])
+        return (
+                draw_x + int(scaled_tile_size_x * offset_x) + origin_x,
+                draw_y + int(scaled_tile_size_y * offset_y) + origin_y
+                )
 
 cdef tuple _get_rect_rot_attributes(int texture_w,
                                     int texture_h,
@@ -368,7 +379,7 @@ cdef tuple _get_rect_rot_attributes(int texture_w,
                                     float rotate
                                     ):
         """
-        TODO
+        Return: (tuple int screen_xy, tuple int texture center, float rotation degrees, tuple int width/height)
         """
         cdef int w = int(texture_w * screen_scale[0] * scale[0])
         cdef int h = int(texture_h * screen_scale[1] * scale[1])
@@ -384,14 +395,12 @@ cdef tuple _get_rect_rot_attributes(int texture_w,
 
 cdef void draw_sprite(list state,
                       canvas,
-                      tuple view_pos,
                       tuple screen_scale,
                       str sprite_name,
                       texture,
                       list pos,
                       list scale,
-                      tuple origin_xy,
-                      int screen_relative
+                      tuple offset_pos,
                       ):
         """
         TODO
@@ -400,7 +409,6 @@ cdef void draw_sprite(list state,
         cdef dict rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]
 
         cdef float rotate = pos[2]
-        cdef tuple offset_pos = _get_screen_coords(state, view_pos, screen_scale, pos, origin_xy, screen_relative)
         cdef tuple rect_rot_attributes
 
         if rectangles_rotates_dict.has_key(sprite_name):
