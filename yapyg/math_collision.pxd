@@ -30,3 +30,7 @@ cpdef int is_point_in_rect(tuple point, tuple rectangle)
 cpdef tuple get_rect_points(tuple rect)
 cpdef int value_in_range(float value, float min_limit, float max_limit)
 cpdef tuple get_contact_sum_vector(list contact_points, tuple origin_point)
+
+cpdef int is_rectangle_visible(int win_w, int win_h, int x1, int y1, int w, int h)
+cpdef int intervals_overlap(int a1, int a2, int b1, int b2)
+cpdef tuple get_clipping_rectangle(int x1, int y1, int w, int h)

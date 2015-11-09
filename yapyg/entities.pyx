@@ -171,7 +171,8 @@ cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable
         cdef list entity = get(state, entity_name)
         if entity:
                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
-                        sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
+                        if entity[IDX_ENTITY_ENABLED_SPRITE] != sprite_name:
+                                sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)
                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
 

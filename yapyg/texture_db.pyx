@@ -44,19 +44,27 @@ cpdef destroy(list state):
         """
         state[IDX_STATE_TEXTURE_DB] = None
 
-cpdef insert(list state, str texture_name, texture):
+cpdef tuple insert(list state, str texture_name, texture):
         """
-        TODO
+        Return tuple (int w, int h in pixels)
         """
         cdef dict texturedb = state[IDX_STATE_TEXTURE_DB]
-        texturedb[texture_name] = texture
+        cdef tuple texture_size = (texture.width, texture.height)
+        if not texturedb.has_key(texture_name):
+                texturedb[texture_name] = texture
+                print "texture", texture_name, texture_size
+        return texture_size
 
-cpdef load(list state, str texture_name, str texture_filename):
+cpdef tuple load(list state, str texture_name, str texture_filename):
         """
-        TODO
+        Return tuple (int w, int h in pixels)
         """
         cdef dict texturedb = state[IDX_STATE_TEXTURE_DB]
-        texturedb[texture_name] = Image(source=texture_filename).texture
+        if not texturedb.has_key(texture_name):
+                return insert(state, texture_name, Image(source=texture_filename).texture)
+        else:
+                texture = texturedb[texture_name]
+                return (texture.width, texture.height)
 
 cpdef get(list state, str texture_name):
         """
@@ -68,9 +76,9 @@ cpdef get(list state, str texture_name):
         else:
                 return None
 
-cpdef insert_combined(list state, float texture_size, str texture_name, tuple texture_list):
+cpdef tuple insert_combined(list state, float texture_size, str texture_name, tuple texture_list):
         """
-        TODO
+        Return tuple (int w, int h in pixels)
         """
         cdef float tile_size = screen.get_tile_size(state)
         texture_size *= tile_size
@@ -93,11 +101,11 @@ cpdef insert_combined(list state, float texture_size, str texture_name, tuple te
                                 Color(1, 1, 1)
                                 Rectangle(pos=(0, 0), size=other_texture.size, texture=other_texture)
                         fbo.draw()
-                insert(state, texture_name, texture)
+                return insert(state, texture_name, texture)
 
-cpdef insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
+cpdef tuple insert_color_rect(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
-        TODO
+        Return tuple (int w, int h in pixels)
         """
         cdef float tile_size = screen.get_tile_size(state)
         texture_w *= tile_size
@@ -112,11 +120,11 @@ cpdef insert_color_rect(list state, float texture_w, float texture_h, str textur
                 Color(c_r, c_g, c_b)
                 Rectangle(pos=(0, 0), size=(int_texture_w, int_texture_h))
         fbo.draw()
-        insert(state, texture_name, texture)
+        return insert(state, texture_name, texture)
 
-cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
+cpdef tuple insert_color_ellipse(list state, float texture_w, float texture_h, str texture_name, float c_r, float c_g, float c_b):
         """
-        TODO
+        Return tuple (int w, int h in pixels)
         """
         cdef float tile_size = screen.get_tile_size(state)
         texture_w *= tile_size
@@ -131,4 +139,4 @@ cpdef insert_color_ellipse(list state, float texture_w, float texture_h, str tex
                 Color(c_r, c_g, c_b)
                 Ellipse(pos=(0, 0), size=(int_texture_w, int_texture_h))
         fbo.draw()
-        insert(state, texture_name, texture)
+        return insert(state, texture_name, texture)

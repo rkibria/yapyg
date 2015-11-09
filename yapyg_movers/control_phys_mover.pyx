@@ -128,7 +128,7 @@ cpdef list create(str entity_name,
         phys_mover_list.append(neg_sprite)
         return phys_mover_list
 
-cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):
+cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
         cdef list direction = yapyg.controls.get_joystick(state)
         cdef float joy_dir = direction[0]
         cdef float joy_accel = direction[1]

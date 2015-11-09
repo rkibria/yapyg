@@ -579,27 +579,19 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
-static double __Pyx__PyObject_AsDouble(PyObject* obj);
-#if CYTHON_COMPILING_IN_PYPY
-#define __Pyx_PyObject_AsDouble(obj) \
-(likely(PyFloat_CheckExact(obj)) ? PyFloat_AS_DOUBLE(obj) : \
- likely(PyInt_CheckExact(obj)) ? \
- PyFloat_AsDouble(obj) : __Pyx__PyObject_AsDouble(obj))
-#else
-#define __Pyx_PyObject_AsDouble(obj) \
-((likely(PyFloat_CheckExact(obj))) ? \
- PyFloat_AS_DOUBLE(obj) : __Pyx__PyObject_AsDouble(obj))
-#endif
-
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 #else
 #define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
 
+static CYTHON_INLINE long __Pyx_div_long(long, long); /* proto */
+
 #ifndef __PYX_FORCE_INIT_THREADS
   #define __PYX_FORCE_INIT_THREADS 0
 #endif
+
+#define UNARY_NEG_WOULD_OVERFLOW(x)            (((x) < 0) & ((unsigned long)(x) == 0-(unsigned long)(x)))
 
 #define __Pyx_SetItemInt(o, i, v, type, is_signed, to_py_func, is_list, wraparound, boundscheck) \
     (__Pyx_fits_Py_ssize_t(i, type, is_signed) ? \
@@ -721,11 +713,13 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
+
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
-
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
@@ -757,12 +751,12 @@ static int *__pyx_vp_5yapyg_6movers_IDX_MOVER_ENTITY_NAME = 0;
 #define __pyx_v_5yapyg_6movers_IDX_MOVER_ENTITY_NAME (*__pyx_vp_5yapyg_6movers_IDX_MOVER_ENTITY_NAME)
 static int *__pyx_vp_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER = 0;
 #define __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER (*__pyx_vp_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER)
-static void (*__pyx_f_5yapyg_6movers_run)(PyObject *, float); /*proto*/
+static void (*__pyx_f_5yapyg_6movers_run)(PyObject *, int); /*proto*/
 
 /* Module declarations from 'yapyg.sprites' */
 static int *__pyx_vp_5yapyg_7sprites_IDX_STATE_SPRITES = 0;
 #define __pyx_v_5yapyg_7sprites_IDX_STATE_SPRITES (*__pyx_vp_5yapyg_7sprites_IDX_STATE_SPRITES)
-static void (*__pyx_f_5yapyg_7sprites_draw)(PyObject *, PyObject *, float); /*proto*/
+static void (*__pyx_f_5yapyg_7sprites_draw)(PyObject *, PyObject *, int); /*proto*/
 
 /* Module declarations from 'yapyg.tiles' */
 static int *__pyx_vp_5yapyg_5tiles_IDX_STATE_TILES = 0;
@@ -778,8 +772,8 @@ static int (*__pyx_f_5yapyg_4view_run)(PyObject *, int __pyx_skip_dispatch); /*p
 
 /* Module declarations from 'yapyg_widgets.display_widget' */
 static float __pyx_v_13yapyg_widgets_14display_widget_FRAME_DELTA_SECONDS;
-static float __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS;
-static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *, float, PyObject *, PyObject *); /*proto*/
+static int __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS;
+static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *, int, PyObject *, PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg_widgets.display_widget"
 int __pyx_module_is_main_yapyg_widgets__display_widget = 0;
 
@@ -1346,30 +1340,29 @@ static PyObject *__pyx_pw_13yapyg_widgets_14display_widget_13DisplayWidget_5on_t
 }
 
 static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_timer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_dt) {
-  float __pyx_v_cur_fps;
-  float __pyx_v_last_frame_delta;
+  int __pyx_v_cur_fps;
+  int __pyx_v_last_frame_delta;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  double __pyx_t_5;
+  int __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   Py_ssize_t __pyx_t_8;
   PyObject *__pyx_t_9 = NULL;
-  float __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("on_timer", 0);
 
   /* "yapyg_widgets\display_widget.pyx":67
- *                 cdef float cur_fps
- *                 cdef float last_frame_delta
+ *                 cdef int cur_fps
+ *                 cdef int last_frame_delta
  *                 if self.state:             # <<<<<<<<<<<<<<
- *                         cur_fps = (float(Clock.get_fps()))
+ *                         cur_fps = int(Clock.get_fps())
  *                         if cur_fps > 0:
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_state); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1379,11 +1372,11 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
   if (__pyx_t_2) {
 
     /* "yapyg_widgets\display_widget.pyx":68
- *                 cdef float last_frame_delta
+ *                 cdef int last_frame_delta
  *                 if self.state:
- *                         cur_fps = (float(Clock.get_fps()))             # <<<<<<<<<<<<<<
+ *                         cur_fps = int(Clock.get_fps())             # <<<<<<<<<<<<<<
  *                         if cur_fps > 0:
- *                                 last_frame_delta = (1000.0 / cur_fps) # milliseconds
+ *                                 last_frame_delta = 1000 / cur_fps # milliseconds
  */
     __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Clock); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -1408,24 +1401,27 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
     }
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_5 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_5 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_4); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_cur_fps = __pyx_t_5;
 
     /* "yapyg_widgets\display_widget.pyx":69
  *                 if self.state:
- *                         cur_fps = (float(Clock.get_fps()))
+ *                         cur_fps = int(Clock.get_fps())
  *                         if cur_fps > 0:             # <<<<<<<<<<<<<<
- *                                 last_frame_delta = (1000.0 / cur_fps) # milliseconds
+ *                                 last_frame_delta = 1000 / cur_fps # milliseconds
  * 
  */
-    __pyx_t_2 = ((__pyx_v_cur_fps > 0.0) != 0);
+    __pyx_t_2 = ((__pyx_v_cur_fps > 0) != 0);
     if (__pyx_t_2) {
 
       /* "yapyg_widgets\display_widget.pyx":70
- *                         cur_fps = (float(Clock.get_fps()))
+ *                         cur_fps = int(Clock.get_fps())
  *                         if cur_fps > 0:
- *                                 last_frame_delta = (1000.0 / cur_fps) # milliseconds             # <<<<<<<<<<<<<<
+ *                                 last_frame_delta = 1000 / cur_fps # milliseconds             # <<<<<<<<<<<<<<
  * 
  *                                 if last_frame_delta < MAX_FRAME_DELTA_MICROSECONDS:
  */
@@ -1433,16 +1429,26 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
         #ifdef WITH_THREAD
         PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
         #endif
-        PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+        PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
         #ifdef WITH_THREAD
         PyGILState_Release(__pyx_gilstate_save);
         #endif
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_v_last_frame_delta = (1000.0 / __pyx_v_cur_fps);
+      else if (sizeof(long) == sizeof(long) && (!(((int)-1) > 0)) && unlikely(__pyx_v_cur_fps == (int)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(1000))) {
+        #ifdef WITH_THREAD
+        PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
+        #endif
+        PyErr_SetString(PyExc_OverflowError, "value too large to perform division");
+        #ifdef WITH_THREAD
+        PyGILState_Release(__pyx_gilstate_save);
+        #endif
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+      __pyx_v_last_frame_delta = __Pyx_div_long(1000, __pyx_v_cur_fps);
 
       /* "yapyg_widgets\display_widget.pyx":72
- *                                 last_frame_delta = (1000.0 / cur_fps) # milliseconds
+ *                                 last_frame_delta = 1000 / cur_fps # milliseconds
  * 
  *                                 if last_frame_delta < MAX_FRAME_DELTA_MICROSECONDS:             # <<<<<<<<<<<<<<
  *                                         self.frame_time = last_frame_delta
@@ -1458,10 +1464,10 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  *                                 else:
  *                                         self.frame_time = MAX_FRAME_DELTA_MICROSECONDS
  */
-        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_last_frame_delta); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame_time, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_last_frame_delta); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame_time, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         goto __pyx_L5;
       }
       /*else*/ {
@@ -1473,10 +1479,10 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  * 
  *                                 yapyg.timer.run(self.state, self.frame_time)
  */
-        __pyx_t_1 = PyFloat_FromDouble(__pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_1);
-        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame_time, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_frame_time, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
       __pyx_L5:;
 
@@ -1487,13 +1493,13 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  *                                 redraw(
  *                                        self.state,
  */
-      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_timer); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_yapyg); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_timer); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_run); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_run); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_state); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
@@ -1501,13 +1507,13 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_7 = NULL;
       __pyx_t_8 = 0;
-      if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
-        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
+      if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_1))) {
+        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_1);
         if (likely(__pyx_t_7)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
           __Pyx_INCREF(__pyx_t_7);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_4, function);
+          __Pyx_DECREF_SET(__pyx_t_1, function);
           __pyx_t_8 = 1;
         }
       }
@@ -1522,11 +1528,11 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
       __Pyx_GIVEREF(__pyx_t_6);
       __pyx_t_3 = 0;
       __pyx_t_6 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
       /* "yapyg_widgets\display_widget.pyx":79
  *                                 yapyg.timer.run(self.state, self.frame_time)
@@ -1535,9 +1541,9 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  *                                        self.frame_time,
  *                                        self.redraw_tiles,
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_state); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_1);
-      if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_state); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_4)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
       /* "yapyg_widgets\display_widget.pyx":80
  *                                 redraw(
@@ -1546,10 +1552,10 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  *                                        self.redraw_tiles,
  *                                        self.canvas
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_frame_time); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_10 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_10 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_frame_time); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
       /* "yapyg_widgets\display_widget.pyx":81
  *                                        self.state,
@@ -1558,9 +1564,9 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  *                                        self.canvas
  *                                        )
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_redraw_tiles); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_4);
-      if (!(likely(PyList_CheckExact(__pyx_t_4))||((__pyx_t_4) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_4)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_redraw_tiles); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
       /* "yapyg_widgets\display_widget.pyx":82
  *                                        self.frame_time,
@@ -1579,9 +1585,9 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_4on_t
  *                                        self.state,
  *                                        self.frame_time,
  */
-      __pyx_f_13yapyg_widgets_14display_widget_redraw(((PyObject*)__pyx_t_1), __pyx_t_10, ((PyObject*)__pyx_t_4), __pyx_t_9);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_f_13yapyg_widgets_14display_widget_redraw(((PyObject*)__pyx_t_4), __pyx_t_5, ((PyObject*)__pyx_t_1), __pyx_t_9);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       goto __pyx_L4;
     }
@@ -1856,12 +1862,12 @@ static PyObject *__pyx_pf_13yapyg_widgets_14display_widget_13DisplayWidget_8enab
 /* "yapyg_widgets\display_widget.pyx":104
  *                                )
  * 
- * cdef void redraw(list state, float frame_time_delta, list redraw_tiles, canvas):             # <<<<<<<<<<<<<<
+ * cdef void redraw(list state, int frame_time_delta, list redraw_tiles, canvas):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_state, float __pyx_v_frame_time_delta, PyObject *__pyx_v_redraw_tiles, PyObject *__pyx_v_canvas) {
+static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_state, int __pyx_v_frame_time_delta, PyObject *__pyx_v_redraw_tiles, PyObject *__pyx_v_canvas) {
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
@@ -1959,7 +1965,7 @@ static void __pyx_f_13yapyg_widgets_14display_widget_redraw(PyObject *__pyx_v_st
   /* "yapyg_widgets\display_widget.pyx":104
  *                                )
  * 
- * cdef void redraw(list state, float frame_time_delta, list redraw_tiles, canvas):             # <<<<<<<<<<<<<<
+ * cdef void redraw(list state, int frame_time_delta, list redraw_tiles, canvas):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -2242,10 +2248,10 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   Py_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   /*--- Function import code ---*/
   __pyx_t_5 = __Pyx_ImportModule("yapyg.movers"); if (!__pyx_t_5) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "run", (void (**)(void))&__pyx_f_5yapyg_6movers_run, "void (PyObject *, float)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_5, "run", (void (**)(void))&__pyx_f_5yapyg_6movers_run, "void (PyObject *, int)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_6 = __Pyx_ImportModule("yapyg.sprites"); if (!__pyx_t_6) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_6, "draw", (void (**)(void))&__pyx_f_5yapyg_7sprites_draw, "void (PyObject *, PyObject *, float)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_6, "draw", (void (**)(void))&__pyx_f_5yapyg_7sprites_draw, "void (PyObject *, PyObject *, int)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_7 = __Pyx_ImportModule("yapyg.tiles"); if (!__pyx_t_7) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_7, "draw", (void (**)(void))&__pyx_f_5yapyg_5tiles_draw, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2346,7 +2352,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
  * import yapyg.timer
  * 
  * cdef float FRAME_DELTA_SECONDS = 1.0 / 30.0             # <<<<<<<<<<<<<<
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
+ * cdef int MAX_FRAME_DELTA_MICROSECONDS = int(FRAME_DELTA_SECONDS * 1000.0)
  * 
  */
   __pyx_v_13yapyg_widgets_14display_widget_FRAME_DELTA_SECONDS = (1.0 / 30.0);
@@ -2354,14 +2360,14 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   /* "yapyg_widgets\display_widget.pyx":34
  * 
  * cdef float FRAME_DELTA_SECONDS = 1.0 / 30.0
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0             # <<<<<<<<<<<<<<
+ * cdef int MAX_FRAME_DELTA_MICROSECONDS = int(FRAME_DELTA_SECONDS * 1000.0)             # <<<<<<<<<<<<<<
  * 
  * class DisplayWidget(Widget):
  */
-  __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS = (__pyx_v_13yapyg_widgets_14display_widget_FRAME_DELTA_SECONDS * 1000.0);
+  __pyx_v_13yapyg_widgets_14display_widget_MAX_FRAME_DELTA_MICROSECONDS = ((int)(__pyx_v_13yapyg_widgets_14display_widget_FRAME_DELTA_SECONDS * 1000.0));
 
   /* "yapyg_widgets\display_widget.pyx":36
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
+ * cdef int MAX_FRAME_DELTA_MICROSECONDS = int(FRAME_DELTA_SECONDS * 1000.0)
  * 
  * class DisplayWidget(Widget):             # <<<<<<<<<<<<<<
  *         def __init__(self,
@@ -2440,7 +2446,7 @@ PyMODINIT_FUNC PyInit_display_widget(void)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
   /* "yapyg_widgets\display_widget.pyx":36
- * cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
+ * cdef int MAX_FRAME_DELTA_MICROSECONDS = int(FRAME_DELTA_SECONDS * 1000.0)
  * 
  * class DisplayWidget(Widget):             # <<<<<<<<<<<<<<
  *         def __init__(self,
@@ -2751,45 +2757,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 }
 #endif
 
-static double __Pyx__PyObject_AsDouble(PyObject* obj) {
-    PyObject* float_value;
-#if CYTHON_COMPILING_IN_PYPY
-    float_value = PyNumber_Float(obj);
-#else
-    PyNumberMethods *nb = Py_TYPE(obj)->tp_as_number;
-    if (likely(nb) && likely(nb->nb_float)) {
-        float_value = nb->nb_float(obj);
-        if (likely(float_value) && unlikely(!PyFloat_Check(float_value))) {
-            PyErr_Format(PyExc_TypeError,
-                "__float__ returned non-float (type %.200s)",
-                Py_TYPE(float_value)->tp_name);
-            Py_DECREF(float_value);
-            goto bad;
-        }
-    } else if (PyUnicode_CheckExact(obj) || PyBytes_CheckExact(obj)) {
-#if PY_MAJOR_VERSION >= 3
-        float_value = PyFloat_FromString(obj);
-#else
-        float_value = PyFloat_FromString(obj, 0);
-#endif
-    } else {
-        PyObject* args = PyTuple_New(1);
-        if (unlikely(!args)) goto bad;
-        PyTuple_SET_ITEM(args, 0, obj);
-        float_value = PyObject_Call((PyObject*)&PyFloat_Type, args, 0);
-        PyTuple_SET_ITEM(args, 0, 0);
-        Py_DECREF(args);
-    }
-#endif
-    if (likely(float_value)) {
-        double value = PyFloat_AS_DOUBLE(float_value);
-        Py_DECREF(float_value);
-        return value;
-    }
-bad:
-    return (double)-1;
-}
-
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 #ifdef __Pyx_CyFunction_USED
@@ -2804,6 +2771,13 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
     return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
 }
 #endif
+
+static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
+    long q = a / b;
+    long r = a - q*b;
+    q -= ((r != 0) & ((r ^ b) < 0));
+    return q;
+}
 
 static CYTHON_INLINE int __Pyx_SetItemInt_Generic(PyObject *o, PyObject *j, PyObject *v) {
     int r;
@@ -3930,32 +3904,6 @@ bad:
     return module;
 }
 
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
-    const long neg_one = (long) -1, const_zero = 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long long)) {
-            return PyLong_FromUnsignedLongLong((unsigned long long) value);
-        }
-    } else {
-        if (sizeof(long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(long long)) {
-            return PyLong_FromLongLong((long long) value);
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(long),
-                                     little, !is_unsigned);
-    }
-}
-
 #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)       \
     {                                                                     \
         func_type value = func_value;                                     \
@@ -3976,101 +3924,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
   #include "longintrepr.h"
  #endif
 #endif
-
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
-    const long neg_one = (long) -1, const_zero = 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(long) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (long) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
- #if CYTHON_USE_PYLONG_INTERNALS
-            switch (Py_SIZE(x)) {
-                case  0: return 0;
-                case  1: __PYX_VERIFY_RETURN_INT(long, digit, ((PyLongObject*)x)->ob_digit[0]);
-            }
- #endif
-#endif
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-            if (sizeof(long) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT(long, unsigned long, PyLong_AsUnsignedLong(x))
-            } else if (sizeof(long) <= sizeof(unsigned long long)) {
-                __PYX_VERIFY_RETURN_INT(long, unsigned long long, PyLong_AsUnsignedLongLong(x))
-            }
-        } else {
-#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
- #if CYTHON_USE_PYLONG_INTERNALS
-            switch (Py_SIZE(x)) {
-                case  0: return 0;
-                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +(((PyLongObject*)x)->ob_digit[0]));
-                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, -(sdigit) ((PyLongObject*)x)->ob_digit[0]);
-            }
- #endif
-#endif
-            if (sizeof(long) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT(long, long, PyLong_AsLong(x))
-            } else if (sizeof(long) <= sizeof(long long)) {
-                __PYX_VERIFY_RETURN_INT(long, long long, PyLong_AsLongLong(x))
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            long val;
-            PyObject *v = __Pyx_PyNumber_Int(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (long) -1;
-        }
-    } else {
-        long val;
-        PyObject *tmp = __Pyx_PyNumber_Int(x);
-        if (!tmp) return (long) -1;
-        val = __Pyx_PyInt_As_long(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to long");
-    return (long) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to long");
-    return (long) -1;
-}
 
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = 0;
@@ -4165,6 +4018,153 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to int");
     return (int) -1;
+}
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long long)) {
+            return PyLong_FromUnsignedLongLong((unsigned long long) value);
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(long long)) {
+            return PyLong_FromLongLong((long long) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
+}
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    const long neg_one = (long) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(long) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long long)) {
+            return PyLong_FromUnsignedLongLong((unsigned long long) value);
+        }
+    } else {
+        if (sizeof(long) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(long long)) {
+            return PyLong_FromLongLong((long long) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(long),
+                                     little, !is_unsigned);
+    }
+}
+
+static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    const long neg_one = (long) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(long) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (long) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
+ #if CYTHON_USE_PYLONG_INTERNALS
+            switch (Py_SIZE(x)) {
+                case  0: return 0;
+                case  1: __PYX_VERIFY_RETURN_INT(long, digit, ((PyLongObject*)x)->ob_digit[0]);
+            }
+ #endif
+#endif
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+            if (sizeof(long) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT(long, unsigned long, PyLong_AsUnsignedLong(x))
+            } else if (sizeof(long) <= sizeof(unsigned long long)) {
+                __PYX_VERIFY_RETURN_INT(long, unsigned long long, PyLong_AsUnsignedLongLong(x))
+            }
+        } else {
+#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
+ #if CYTHON_USE_PYLONG_INTERNALS
+            switch (Py_SIZE(x)) {
+                case  0: return 0;
+                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +(((PyLongObject*)x)->ob_digit[0]));
+                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, -(sdigit) ((PyLongObject*)x)->ob_digit[0]);
+            }
+ #endif
+#endif
+            if (sizeof(long) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT(long, long, PyLong_AsLong(x))
+            } else if (sizeof(long) <= sizeof(long long)) {
+                __PYX_VERIFY_RETURN_INT(long, long long, PyLong_AsLongLong(x))
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            long val;
+            PyObject *v = __Pyx_PyNumber_Int(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (long) -1;
+        }
+    } else {
+        long val;
+        PyObject *tmp = __Pyx_PyNumber_Int(x);
+        if (!tmp) return (long) -1;
+        val = __Pyx_PyInt_As_long(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to long");
+    return (long) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to long");
+    return (long) -1;
 }
 
 static int __Pyx_check_binary_version(void) {

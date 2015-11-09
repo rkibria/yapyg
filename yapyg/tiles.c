@@ -415,7 +415,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg\\tiles.pyx",
+  "yapyg/tiles.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -434,7 +434,7 @@ struct __pyx_opt_args_5yapyg_6screen_initialize {
 };
 struct __pyx_opt_args_5yapyg_5tiles_add_tile_def;
 
-/* "yapyg\tiles.pxd":32
+/* "yapyg/tiles.pxd":32
  * cpdef set_area(list state, list area)
  * cpdef list get_area(list state)
  * cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=?)             # <<<<<<<<<<<<<<
@@ -892,7 +892,7 @@ static PyObject *__pyx_n_s_width;
 static PyObject *__pyx_n_s_xrange;
 static PyObject *__pyx_tuple_;
 
-/* "yapyg\tiles.pyx":46
+/* "yapyg/tiles.pyx":46
  * cdef int IDX_TILEDEF_COLLISION = 1
  * 
  * cpdef initialize(int state_idx, list state, int tile_size):             # <<<<<<<<<<<<<<
@@ -914,7 +914,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg\tiles.pyx":51
+  /* "yapyg/tiles.pyx":51
  *         """
  *         global IDX_STATE_TILES
  *         IDX_STATE_TILES = state_idx             # <<<<<<<<<<<<<<
@@ -923,7 +923,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
  */
   __pyx_v_5yapyg_5tiles_IDX_STATE_TILES = __pyx_v_state_idx;
 
-  /* "yapyg\tiles.pyx":53
+  /* "yapyg/tiles.pyx":53
  *         IDX_STATE_TILES = state_idx
  *         state[IDX_STATE_TILES] = [
  *                 tile_size,             # <<<<<<<<<<<<<<
@@ -933,7 +933,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_tile_size); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg\tiles.pyx":54
+  /* "yapyg/tiles.pyx":54
  *         state[IDX_STATE_TILES] = [
  *                 tile_size,
  *                 {},             # <<<<<<<<<<<<<<
@@ -943,7 +943,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
   __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg\tiles.pyx":55
+  /* "yapyg/tiles.pyx":55
  *                 tile_size,
  *                 {},
  *                 [],             # <<<<<<<<<<<<<<
@@ -953,7 +953,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
   __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg\tiles.pyx":56
+  /* "yapyg/tiles.pyx":56
  *                 {},
  *                 [],
  *                 [],             # <<<<<<<<<<<<<<
@@ -963,7 +963,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
   __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "yapyg\tiles.pyx":52
+  /* "yapyg/tiles.pyx":52
  *         global IDX_STATE_TILES
  *         IDX_STATE_TILES = state_idx
  *         state[IDX_STATE_TILES] = [             # <<<<<<<<<<<<<<
@@ -994,7 +994,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_initialize(int __pyx_v_state_idx, PyObjec
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_5tiles_IDX_STATE_TILES, __pyx_t_5, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg\tiles.pyx":46
+  /* "yapyg/tiles.pyx":46
  * cdef int IDX_TILEDEF_COLLISION = 1
  * 
  * cpdef initialize(int state_idx, list state, int tile_size):             # <<<<<<<<<<<<<<
@@ -1121,7 +1121,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_initialize(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":60
+/* "yapyg/tiles.pyx":60
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1138,7 +1138,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_destroy(PyObject *__pyx_v_state, CYTHON_U
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg\tiles.pyx":64
+  /* "yapyg/tiles.pyx":64
  *         TODO
  *         """
  *         state[IDX_STATE_TILES] = None             # <<<<<<<<<<<<<<
@@ -1151,7 +1151,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_destroy(PyObject *__pyx_v_state, CYTHON_U
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_5tiles_IDX_STATE_TILES, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\tiles.pyx":60
+  /* "yapyg/tiles.pyx":60
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1219,7 +1219,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_2destroy(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":66
+/* "yapyg/tiles.pyx":66
  *         state[IDX_STATE_TILES] = None
  * 
  * cpdef int get_tile_size(state):             # <<<<<<<<<<<<<<
@@ -1239,7 +1239,7 @@ static int __pyx_f_5yapyg_5tiles_get_tile_size(PyObject *__pyx_v_state, CYTHON_U
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_tile_size", 0);
 
-  /* "yapyg\tiles.pyx":70
+  /* "yapyg/tiles.pyx":70
  *         TODO
  *         """
  *         return state[IDX_STATE_TILES][IDX_TILES_SIZE]             # <<<<<<<<<<<<<<
@@ -1256,7 +1256,7 @@ static int __pyx_f_5yapyg_5tiles_get_tile_size(PyObject *__pyx_v_state, CYTHON_U
   __pyx_r = __pyx_t_3;
   goto __pyx_L0;
 
-  /* "yapyg\tiles.pyx":66
+  /* "yapyg/tiles.pyx":66
  *         state[IDX_STATE_TILES] = None
  * 
  * cpdef int get_tile_size(state):             # <<<<<<<<<<<<<<
@@ -1315,7 +1315,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_4get_tile_size(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":72
+/* "yapyg/tiles.pyx":72
  *         return state[IDX_STATE_TILES][IDX_TILES_SIZE]
  * 
  * cpdef _set_area_size(list state):             # <<<<<<<<<<<<<<
@@ -1342,7 +1342,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_set_area_size", 0);
 
-  /* "yapyg\tiles.pyx":76
+  /* "yapyg/tiles.pyx":76
  *         TODO
  *         """
  *         cdef list area = get_area(state)             # <<<<<<<<<<<<<<
@@ -1354,7 +1354,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
   __pyx_v_area = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":77
+  /* "yapyg/tiles.pyx":77
  *         """
  *         cdef list area = get_area(state)
  *         cdef int max_rows = len(area)             # <<<<<<<<<<<<<<
@@ -1368,7 +1368,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
   __pyx_t_2 = PyList_GET_SIZE(__pyx_v_area); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_max_rows = __pyx_t_2;
 
-  /* "yapyg\tiles.pyx":78
+  /* "yapyg/tiles.pyx":78
  *         cdef list area = get_area(state)
  *         cdef int max_rows = len(area)
  *         cdef int max_columns = 0             # <<<<<<<<<<<<<<
@@ -1377,7 +1377,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
  */
   __pyx_v_max_columns = 0;
 
-  /* "yapyg\tiles.pyx":79
+  /* "yapyg/tiles.pyx":79
  *         cdef int max_rows = len(area)
  *         cdef int max_columns = 0
  *         for row_data in area:             # <<<<<<<<<<<<<<
@@ -1399,7 +1399,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
     __Pyx_XDECREF_SET(__pyx_v_row_data, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "yapyg\tiles.pyx":80
+    /* "yapyg/tiles.pyx":80
  *         cdef int max_columns = 0
  *         for row_data in area:
  *                 if len(row_data) > max_columns:             # <<<<<<<<<<<<<<
@@ -1410,7 +1410,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
     __pyx_t_5 = ((__pyx_t_4 > __pyx_v_max_columns) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\tiles.pyx":81
+      /* "yapyg/tiles.pyx":81
  *         for row_data in area:
  *                 if len(row_data) > max_columns:
  *                         max_columns = len(row_data)             # <<<<<<<<<<<<<<
@@ -1423,7 +1423,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
     }
     __pyx_L5:;
 
-    /* "yapyg\tiles.pyx":79
+    /* "yapyg/tiles.pyx":79
  *         cdef int max_rows = len(area)
  *         cdef int max_columns = 0
  *         for row_data in area:             # <<<<<<<<<<<<<<
@@ -1433,7 +1433,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":82
+  /* "yapyg/tiles.pyx":82
  *                 if len(row_data) > max_columns:
  *                         max_columns = len(row_data)
  *         state[IDX_STATE_TILES][IDX_TILES_AREASIZE] = (max_columns, max_rows,)             # <<<<<<<<<<<<<<
@@ -1462,7 +1462,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__set_area_size(PyObject *__pyx_v_state, C
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg\tiles.pyx":72
+  /* "yapyg/tiles.pyx":72
  *         return state[IDX_STATE_TILES][IDX_TILES_SIZE]
  * 
  * cpdef _set_area_size(list state):             # <<<<<<<<<<<<<<
@@ -1535,7 +1535,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_6_set_area_size(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":84
+/* "yapyg/tiles.pyx":84
  *         state[IDX_STATE_TILES][IDX_TILES_AREASIZE] = (max_columns, max_rows,)
  * 
  * cpdef _add_tile_collisions(state):             # <<<<<<<<<<<<<<
@@ -1569,7 +1569,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_add_tile_collisions", 0);
 
-  /* "yapyg\tiles.pyx":88
+  /* "yapyg/tiles.pyx":88
  *         TODO
  *         """
  *         cdef list area = get_area(state)             # <<<<<<<<<<<<<<
@@ -1582,7 +1582,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
   __pyx_v_area = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":91
+  /* "yapyg/tiles.pyx":91
  *         cdef int max_columns
  *         cdef int max_rows
  *         max_columns, max_rows = get_area_size(state)             # <<<<<<<<<<<<<<
@@ -1626,7 +1626,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
   __pyx_v_max_columns = __pyx_t_4;
   __pyx_v_max_rows = __pyx_t_5;
 
-  /* "yapyg\tiles.pyx":93
+  /* "yapyg/tiles.pyx":93
  *         max_columns, max_rows = get_area_size(state)
  *         cdef str tile_name
  *         cdef dict tile_defs = state[IDX_STATE_TILES][IDX_TILES_DEFS]             # <<<<<<<<<<<<<<
@@ -1642,7 +1642,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
   __pyx_v_tile_defs = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "yapyg\tiles.pyx":98
+  /* "yapyg/tiles.pyx":98
  *         cdef int col
  *         cdef int row
  *         for row in xrange(max_rows):             # <<<<<<<<<<<<<<
@@ -1653,7 +1653,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_5; __pyx_t_4+=1) {
     __pyx_v_row = __pyx_t_4;
 
-    /* "yapyg\tiles.pyx":99
+    /* "yapyg/tiles.pyx":99
  *         cdef int row
  *         for row in xrange(max_rows):
  *                 for col in xrange(max_columns):             # <<<<<<<<<<<<<<
@@ -1664,7 +1664,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
     for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_col = __pyx_t_7;
 
-      /* "yapyg\tiles.pyx":100
+      /* "yapyg/tiles.pyx":100
  *         for row in xrange(max_rows):
  *                 for col in xrange(max_columns):
  *                         tile_name = get_tile(state, col, row)             # <<<<<<<<<<<<<<
@@ -1677,7 +1677,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
       __Pyx_XDECREF_SET(__pyx_v_tile_name, ((PyObject*)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "yapyg\tiles.pyx":101
+      /* "yapyg/tiles.pyx":101
  *                 for col in xrange(max_columns):
  *                         tile_name = get_tile(state, col, row)
  *                         if tile_name:             # <<<<<<<<<<<<<<
@@ -1687,7 +1687,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
       __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_tile_name); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_8) {
 
-        /* "yapyg\tiles.pyx":102
+        /* "yapyg/tiles.pyx":102
  *                         tile_name = get_tile(state, col, row)
  *                         if tile_name:
  *                                 tile_def = tile_defs[tile_name]             # <<<<<<<<<<<<<<
@@ -1704,7 +1704,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
         __Pyx_XDECREF_SET(__pyx_v_tile_def, ((PyObject*)__pyx_t_3));
         __pyx_t_3 = 0;
 
-        /* "yapyg\tiles.pyx":103
+        /* "yapyg/tiles.pyx":103
  *                         if tile_name:
  *                                 tile_def = tile_defs[tile_name]
  *                                 collision = tile_def[IDX_TILEDEF_COLLISION]             # <<<<<<<<<<<<<<
@@ -1721,7 +1721,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
         __Pyx_XDECREF_SET(__pyx_v_collision, ((PyObject*)__pyx_t_3));
         __pyx_t_3 = 0;
 
-        /* "yapyg\tiles.pyx":104
+        /* "yapyg/tiles.pyx":104
  *                                 tile_def = tile_defs[tile_name]
  *                                 collision = tile_def[IDX_TILEDEF_COLLISION]
  *                                 if collision:             # <<<<<<<<<<<<<<
@@ -1731,7 +1731,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
         __pyx_t_8 = (__pyx_v_collision != Py_None) && (PyTuple_GET_SIZE(__pyx_v_collision) != 0);
         if (__pyx_t_8) {
 
-          /* "yapyg\tiles.pyx":105
+          /* "yapyg/tiles.pyx":105
  *                                 collision = tile_def[IDX_TILEDEF_COLLISION]
  *                                 if collision:
  *                                         collisions.add_tile(state, tile_name,             # <<<<<<<<<<<<<<
@@ -1740,7 +1740,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
  */
           if (!(likely(PyList_CheckExact(__pyx_v_state))||((__pyx_v_state) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_state)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-          /* "yapyg\tiles.pyx":107
+          /* "yapyg/tiles.pyx":107
  *                                         collisions.add_tile(state, tile_name,
  *                                                             col, row,
  *                                                             collision)             # <<<<<<<<<<<<<<
@@ -1759,7 +1759,7 @@ static PyObject *__pyx_f_5yapyg_5tiles__add_tile_collisions(PyObject *__pyx_v_st
     }
   }
 
-  /* "yapyg\tiles.pyx":84
+  /* "yapyg/tiles.pyx":84
  *         state[IDX_STATE_TILES][IDX_TILES_AREASIZE] = (max_columns, max_rows,)
  * 
  * cpdef _add_tile_collisions(state):             # <<<<<<<<<<<<<<
@@ -1827,7 +1827,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_8_add_tile_collisions(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":109
+/* "yapyg/tiles.pyx":109
  *                                                             collision)
  * 
  * cpdef set_area(list state, list area):             # <<<<<<<<<<<<<<
@@ -1845,7 +1845,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_set_area(PyObject *__pyx_v_state, PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_area", 0);
 
-  /* "yapyg\tiles.pyx":113
+  /* "yapyg/tiles.pyx":113
  *         TODO
  *         """
  *         state[IDX_STATE_TILES][IDX_TILES_AREA] = area             # <<<<<<<<<<<<<<
@@ -1861,7 +1861,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_set_area(PyObject *__pyx_v_state, PyObjec
   if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_5tiles_IDX_TILES_AREA, __pyx_v_area, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":114
+  /* "yapyg/tiles.pyx":114
  *         """
  *         state[IDX_STATE_TILES][IDX_TILES_AREA] = area
  *         _set_area_size(state)             # <<<<<<<<<<<<<<
@@ -1872,7 +1872,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_set_area(PyObject *__pyx_v_state, PyObjec
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":115
+  /* "yapyg/tiles.pyx":115
  *         state[IDX_STATE_TILES][IDX_TILES_AREA] = area
  *         _set_area_size(state)
  *         _add_tile_collisions(state)             # <<<<<<<<<<<<<<
@@ -1883,7 +1883,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_set_area(PyObject *__pyx_v_state, PyObjec
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":109
+  /* "yapyg/tiles.pyx":109
  *                                                             collision)
  * 
  * cpdef set_area(list state, list area):             # <<<<<<<<<<<<<<
@@ -1998,7 +1998,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_10set_area(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":117
+/* "yapyg/tiles.pyx":117
  *         _add_tile_collisions(state)
  * 
  * cpdef list get_area(list state):             # <<<<<<<<<<<<<<
@@ -2017,7 +2017,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_area(PyObject *__pyx_v_state, CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_area", 0);
 
-  /* "yapyg\tiles.pyx":121
+  /* "yapyg/tiles.pyx":121
  *         TODO
  *         """
  *         return state[IDX_STATE_TILES][IDX_TILES_AREA]             # <<<<<<<<<<<<<<
@@ -2039,7 +2039,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_area(PyObject *__pyx_v_state, CYTHON_
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\tiles.pyx":117
+  /* "yapyg/tiles.pyx":117
  *         _add_tile_collisions(state)
  * 
  * cpdef list get_area(list state):             # <<<<<<<<<<<<<<
@@ -2107,7 +2107,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_12get_area(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":123
+/* "yapyg/tiles.pyx":123
  *         return state[IDX_STATE_TILES][IDX_TILES_AREA]
  * 
  * cpdef tuple get_area_size(list state):             # <<<<<<<<<<<<<<
@@ -2126,7 +2126,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_area_size(PyObject *__pyx_v_state, CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_area_size", 0);
 
-  /* "yapyg\tiles.pyx":127
+  /* "yapyg/tiles.pyx":127
  *         TODO
  *         """
  *         return state[IDX_STATE_TILES][IDX_TILES_AREASIZE]             # <<<<<<<<<<<<<<
@@ -2148,7 +2148,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_area_size(PyObject *__pyx_v_state, CY
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\tiles.pyx":123
+  /* "yapyg/tiles.pyx":123
  *         return state[IDX_STATE_TILES][IDX_TILES_AREA]
  * 
  * cpdef tuple get_area_size(list state):             # <<<<<<<<<<<<<<
@@ -2216,7 +2216,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_14get_area_size(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":129
+/* "yapyg/tiles.pyx":129
  *         return state[IDX_STATE_TILES][IDX_TILES_AREASIZE]
  * 
  * cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=None):             # <<<<<<<<<<<<<<
@@ -2244,7 +2244,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_add_tile_def(PyObject *__pyx_v_state, PyO
     }
   }
 
-  /* "yapyg\tiles.pyx":133
+  /* "yapyg/tiles.pyx":133
  *         texture_list: tuple of strings or a Texture object
  *         """
  *         cdef dict tile_defs = state[IDX_STATE_TILES][IDX_TILES_DEFS]             # <<<<<<<<<<<<<<
@@ -2264,7 +2264,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_add_tile_def(PyObject *__pyx_v_state, PyO
   __pyx_v_tile_defs = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\tiles.pyx":134
+  /* "yapyg/tiles.pyx":134
  *         """
  *         cdef dict tile_defs = state[IDX_STATE_TILES][IDX_TILES_DEFS]
  *         tile_defs[tile_name] = [texture_list,             # <<<<<<<<<<<<<<
@@ -2286,7 +2286,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_add_tile_def(PyObject *__pyx_v_state, PyO
   if (unlikely(PyDict_SetItem(__pyx_v_tile_defs, __pyx_v_tile_name, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\tiles.pyx":137
+  /* "yapyg/tiles.pyx":137
  *                                 collision,
  *                                 ]
  *         if isinstance(texture_list, tuple):             # <<<<<<<<<<<<<<
@@ -2297,7 +2297,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_add_tile_def(PyObject *__pyx_v_state, PyO
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg\tiles.pyx":138
+    /* "yapyg/tiles.pyx":138
  *                                 ]
  *         if isinstance(texture_list, tuple):
  *                 texture_db.insert_combined(state, 1.0, tile_name, texture_list)             # <<<<<<<<<<<<<<
@@ -2312,7 +2312,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_add_tile_def(PyObject *__pyx_v_state, PyO
   }
   /*else*/ {
 
-    /* "yapyg\tiles.pyx":140
+    /* "yapyg/tiles.pyx":140
  *                 texture_db.insert_combined(state, 1.0, tile_name, texture_list)
  *         else:
  *                 texture_db.insert(state, tile_name, texture_list)             # <<<<<<<<<<<<<<
@@ -2325,7 +2325,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_add_tile_def(PyObject *__pyx_v_state, PyO
   }
   __pyx_L3:;
 
-  /* "yapyg\tiles.pyx":129
+  /* "yapyg/tiles.pyx":129
  *         return state[IDX_STATE_TILES][IDX_TILES_AREASIZE]
  * 
  * cpdef add_tile_def(list state, str tile_name, texture_list, tuple collision=None):             # <<<<<<<<<<<<<<
@@ -2467,7 +2467,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_16add_tile_def(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":142
+/* "yapyg/tiles.pyx":142
  *                 texture_db.insert(state, tile_name, texture_list)
  * 
  * cpdef str get_tile(list state, int col, int row):             # <<<<<<<<<<<<<<
@@ -2492,7 +2492,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_tile", 0);
 
-  /* "yapyg\tiles.pyx":148
+  /* "yapyg/tiles.pyx":148
  *         -> 0/0 is the lower left corner
  *         """
  *         cdef list area = get_area(state)             # <<<<<<<<<<<<<<
@@ -2504,7 +2504,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   __pyx_v_area = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":149
+  /* "yapyg/tiles.pyx":149
  *         """
  *         cdef list area = get_area(state)
  *         cdef int maxrows = len(area)             # <<<<<<<<<<<<<<
@@ -2518,7 +2518,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   __pyx_t_2 = PyList_GET_SIZE(__pyx_v_area); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_maxrows = __pyx_t_2;
 
-  /* "yapyg\tiles.pyx":150
+  /* "yapyg/tiles.pyx":150
  *         cdef list area = get_area(state)
  *         cdef int maxrows = len(area)
  *         if row < 0 or row >= maxrows:             # <<<<<<<<<<<<<<
@@ -2536,7 +2536,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "yapyg\tiles.pyx":151
+    /* "yapyg/tiles.pyx":151
  *         cdef int maxrows = len(area)
  *         if row < 0 or row >= maxrows:
  *                 return None             # <<<<<<<<<<<<<<
@@ -2549,7 +2549,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
     goto __pyx_L0;
   }
 
-  /* "yapyg\tiles.pyx":152
+  /* "yapyg/tiles.pyx":152
  *         if row < 0 or row >= maxrows:
  *                 return None
  *         cdef list rowdata = area[maxrows - row - 1]             # <<<<<<<<<<<<<<
@@ -2567,7 +2567,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   __pyx_v_rowdata = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":153
+  /* "yapyg/tiles.pyx":153
  *                 return None
  *         cdef list rowdata = area[maxrows - row - 1]
  *         if col < 0 or col >= len(rowdata):             # <<<<<<<<<<<<<<
@@ -2590,7 +2590,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "yapyg\tiles.pyx":154
+    /* "yapyg/tiles.pyx":154
  *         cdef list rowdata = area[maxrows - row - 1]
  *         if col < 0 or col >= len(rowdata):
  *                 return None             # <<<<<<<<<<<<<<
@@ -2603,7 +2603,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
     goto __pyx_L0;
   }
 
-  /* "yapyg\tiles.pyx":155
+  /* "yapyg/tiles.pyx":155
  *         if col < 0 or col >= len(rowdata):
  *                 return None
  *         return rowdata[col]             # <<<<<<<<<<<<<<
@@ -2622,7 +2622,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_get_tile(PyObject *__pyx_v_state, int __p
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\tiles.pyx":142
+  /* "yapyg/tiles.pyx":142
  *                 texture_db.insert(state, tile_name, texture_list)
  * 
  * cpdef str get_tile(list state, int col, int row):             # <<<<<<<<<<<<<<
@@ -2745,7 +2745,7 @@ static PyObject *__pyx_pf_5yapyg_5tiles_18get_tile(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\tiles.pyx":157
+/* "yapyg/tiles.pyx":157
  *         return rowdata[col]
  * 
  * cpdef draw(list state, canvas):             # <<<<<<<<<<<<<<
@@ -2805,7 +2805,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("draw", 0);
 
-  /* "yapyg\tiles.pyx":161
+  /* "yapyg/tiles.pyx":161
  *         TODO
  *         """
  *         cdef tuple origin_xy = screen.get_origin(state)             # <<<<<<<<<<<<<<
@@ -2817,7 +2817,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __pyx_v_origin_xy = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":162
+  /* "yapyg/tiles.pyx":162
  *         """
  *         cdef tuple origin_xy = screen.get_origin(state)
  *         cdef float target_w = screen.get_width(state)             # <<<<<<<<<<<<<<
@@ -2826,7 +2826,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
  */
   __pyx_v_target_w = __pyx_f_5yapyg_6screen_get_width(__pyx_v_state, 0);
 
-  /* "yapyg\tiles.pyx":163
+  /* "yapyg/tiles.pyx":163
  *         cdef tuple origin_xy = screen.get_origin(state)
  *         cdef float target_w = screen.get_width(state)
  *         cdef float target_h = screen.get_height(state)             # <<<<<<<<<<<<<<
@@ -2835,7 +2835,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
  */
   __pyx_v_target_h = __pyx_f_5yapyg_6screen_get_height(__pyx_v_state, 0);
 
-  /* "yapyg\tiles.pyx":164
+  /* "yapyg/tiles.pyx":164
  *         cdef float target_w = screen.get_width(state)
  *         cdef float target_h = screen.get_height(state)
  *         cdef int tile_size = get_tile_size(state)             # <<<<<<<<<<<<<<
@@ -2844,7 +2844,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
  */
   __pyx_v_tile_size = __pyx_f_5yapyg_5tiles_get_tile_size(__pyx_v_state, 0);
 
-  /* "yapyg\tiles.pyx":165
+  /* "yapyg/tiles.pyx":165
  *         cdef float target_h = screen.get_height(state)
  *         cdef int tile_size = get_tile_size(state)
  *         cdef tuple screen_scale = screen.get_screen_scale(state)             # <<<<<<<<<<<<<<
@@ -2856,7 +2856,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __pyx_v_screen_scale = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":167
+  /* "yapyg/tiles.pyx":167
  *         cdef tuple screen_scale = screen.get_screen_scale(state)
  * 
  *         cdef float scaled_tile_size_x = float(tile_size) * screen_scale[0]             # <<<<<<<<<<<<<<
@@ -2879,7 +2879,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_scaled_tile_size_x = __pyx_t_4;
 
-  /* "yapyg\tiles.pyx":168
+  /* "yapyg/tiles.pyx":168
  * 
  *         cdef float scaled_tile_size_x = float(tile_size) * screen_scale[0]
  *         cdef float scaled_tile_size_y = float(tile_size) * screen_scale[1]             # <<<<<<<<<<<<<<
@@ -2902,7 +2902,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_scaled_tile_size_y = __pyx_t_4;
 
-  /* "yapyg\tiles.pyx":170
+  /* "yapyg/tiles.pyx":170
  *         cdef float scaled_tile_size_y = float(tile_size) * screen_scale[1]
  * 
  *         cdef tuple view_pos = view.get_view_pos(state)             # <<<<<<<<<<<<<<
@@ -2914,7 +2914,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __pyx_v_view_pos = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\tiles.pyx":171
+  /* "yapyg/tiles.pyx":171
  * 
  *         cdef tuple view_pos = view.get_view_pos(state)
  *         cdef float map_x = view_pos[0] * scaled_tile_size_x             # <<<<<<<<<<<<<<
@@ -2937,7 +2937,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_map_x = __pyx_t_4;
 
-  /* "yapyg\tiles.pyx":172
+  /* "yapyg/tiles.pyx":172
  *         cdef tuple view_pos = view.get_view_pos(state)
  *         cdef float map_x = view_pos[0] * scaled_tile_size_x
  *         cdef float map_y = view_pos[1] * scaled_tile_size_y             # <<<<<<<<<<<<<<
@@ -2960,7 +2960,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_map_y = __pyx_t_4;
 
-  /* "yapyg\tiles.pyx":174
+  /* "yapyg/tiles.pyx":174
  *         cdef float map_y = view_pos[1] * scaled_tile_size_y
  * 
  *         cdef int first_row = int(map_y / scaled_tile_size_y)             # <<<<<<<<<<<<<<
@@ -2979,7 +2979,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   }
   __pyx_v_first_row = ((int)(__pyx_v_map_y / __pyx_v_scaled_tile_size_y));
 
-  /* "yapyg\tiles.pyx":175
+  /* "yapyg/tiles.pyx":175
  * 
  *         cdef int first_row = int(map_y / scaled_tile_size_y)
  *         cdef int total_rows = int(target_h * screen_scale[0] / scaled_tile_size_y)             # <<<<<<<<<<<<<<
@@ -3011,7 +3011,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_total_rows = __pyx_t_5;
 
-  /* "yapyg\tiles.pyx":177
+  /* "yapyg/tiles.pyx":177
  *         cdef int total_rows = int(target_h * screen_scale[0] / scaled_tile_size_y)
  * 
  *         cdef int first_col = int(map_x / scaled_tile_size_x)             # <<<<<<<<<<<<<<
@@ -3030,7 +3030,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   }
   __pyx_v_first_col = ((int)(__pyx_v_map_x / __pyx_v_scaled_tile_size_x));
 
-  /* "yapyg\tiles.pyx":178
+  /* "yapyg/tiles.pyx":178
  * 
  *         cdef int first_col = int(map_x / scaled_tile_size_x)
  *         cdef int total_cols = int(target_w * screen_scale[1] / scaled_tile_size_x)             # <<<<<<<<<<<<<<
@@ -3062,7 +3062,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_total_cols = __pyx_t_5;
 
-  /* "yapyg\tiles.pyx":180
+  /* "yapyg/tiles.pyx":180
  *         cdef int total_cols = int(target_w * screen_scale[1] / scaled_tile_size_x)
  * 
  *         cdef list tile_rects = state[IDX_STATE_TILES][IDX_TILES_RECTS]             # <<<<<<<<<<<<<<
@@ -3082,7 +3082,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
   __pyx_v_tile_rects = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\tiles.pyx":182
+  /* "yapyg/tiles.pyx":182
  *         cdef list tile_rects = state[IDX_STATE_TILES][IDX_TILES_RECTS]
  * 
  *         cdef int tile_index = 0             # <<<<<<<<<<<<<<
@@ -3091,7 +3091,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
  */
   __pyx_v_tile_index = 0;
 
-  /* "yapyg\tiles.pyx":189
+  /* "yapyg/tiles.pyx":189
  *         cdef str tile
  * 
  *         with canvas:             # <<<<<<<<<<<<<<
@@ -3130,7 +3130,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
         __Pyx_XGOTREF(__pyx_t_9);
         /*try:*/ {
 
-          /* "yapyg\tiles.pyx":190
+          /* "yapyg/tiles.pyx":190
  * 
  *         with canvas:
  *                 for row in xrange(first_row, first_row + total_rows + 2):             # <<<<<<<<<<<<<<
@@ -3141,7 +3141,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
           for (__pyx_t_5 = __pyx_v_first_row; __pyx_t_5 < __pyx_t_10; __pyx_t_5+=1) {
             __pyx_v_row = __pyx_t_5;
 
-            /* "yapyg\tiles.pyx":191
+            /* "yapyg/tiles.pyx":191
  *         with canvas:
  *                 for row in xrange(first_row, first_row + total_rows + 2):
  *                         for col in xrange(first_col, first_col + total_cols + 2):             # <<<<<<<<<<<<<<
@@ -3152,7 +3152,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
             for (__pyx_t_12 = __pyx_v_first_col; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
               __pyx_v_col = __pyx_t_12;
 
-              /* "yapyg\tiles.pyx":193
+              /* "yapyg/tiles.pyx":193
  *                         for col in xrange(first_col, first_col + total_cols + 2):
  * 
  *                                 tile_x = (col * scaled_tile_size_x)             # <<<<<<<<<<<<<<
@@ -3164,7 +3164,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_XDECREF_SET(__pyx_v_tile_x, __pyx_t_2);
               __pyx_t_2 = 0;
 
-              /* "yapyg\tiles.pyx":194
+              /* "yapyg/tiles.pyx":194
  * 
  *                                 tile_x = (col * scaled_tile_size_x)
  *                                 tile_y = (row * scaled_tile_size_y)             # <<<<<<<<<<<<<<
@@ -3176,7 +3176,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_XDECREF_SET(__pyx_v_tile_y, __pyx_t_2);
               __pyx_t_2 = 0;
 
-              /* "yapyg\tiles.pyx":197
+              /* "yapyg/tiles.pyx":197
  * 
  *                                 draw_pos = (
  *                                             int((tile_x - map_x) + origin_xy[0]),             # <<<<<<<<<<<<<<
@@ -3202,7 +3202,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-              /* "yapyg\tiles.pyx":198
+              /* "yapyg/tiles.pyx":198
  *                                 draw_pos = (
  *                                             int((tile_x - map_x) + origin_xy[0]),
  *                                             int((tile_y - map_y) + origin_xy[1])             # <<<<<<<<<<<<<<
@@ -3228,7 +3228,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_GOTREF(__pyx_t_3);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-              /* "yapyg\tiles.pyx":197
+              /* "yapyg/tiles.pyx":197
  * 
  *                                 draw_pos = (
  *                                             int((tile_x - map_x) + origin_xy[0]),             # <<<<<<<<<<<<<<
@@ -3246,7 +3246,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_XDECREF_SET(__pyx_v_draw_pos, ((PyObject*)__pyx_t_13));
               __pyx_t_13 = 0;
 
-              /* "yapyg\tiles.pyx":201
+              /* "yapyg/tiles.pyx":201
  *                                             )
  * 
  *                                 texture = texture_db.get(state, "tl_null")             # <<<<<<<<<<<<<<
@@ -3258,7 +3258,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_XDECREF_SET(__pyx_v_texture, __pyx_t_13);
               __pyx_t_13 = 0;
 
-              /* "yapyg\tiles.pyx":202
+              /* "yapyg/tiles.pyx":202
  * 
  *                                 texture = texture_db.get(state, "tl_null")
  *                                 tile = get_tile(state, col, row)             # <<<<<<<<<<<<<<
@@ -3270,7 +3270,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_XDECREF_SET(__pyx_v_tile, ((PyObject*)__pyx_t_13));
               __pyx_t_13 = 0;
 
-              /* "yapyg\tiles.pyx":203
+              /* "yapyg/tiles.pyx":203
  *                                 texture = texture_db.get(state, "tl_null")
  *                                 tile = get_tile(state, col, row)
  *                                 if tile:             # <<<<<<<<<<<<<<
@@ -3280,7 +3280,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_tile); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               if (__pyx_t_14) {
 
-                /* "yapyg\tiles.pyx":204
+                /* "yapyg/tiles.pyx":204
  *                                 tile = get_tile(state, col, row)
  *                                 if tile:
  *                                         texture = texture_db.get(state, tile)             # <<<<<<<<<<<<<<
@@ -3295,7 +3295,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               }
               __pyx_L19:;
 
-              /* "yapyg\tiles.pyx":207
+              /* "yapyg/tiles.pyx":207
  * 
  *                                 draw_size = (
  *                                              int(texture.width * screen_scale[0]),             # <<<<<<<<<<<<<<
@@ -3318,7 +3318,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_GOTREF(__pyx_t_3);
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-              /* "yapyg\tiles.pyx":208
+              /* "yapyg/tiles.pyx":208
  *                                 draw_size = (
  *                                              int(texture.width * screen_scale[0]),
  *                                              int(texture.height * screen_scale[1]),             # <<<<<<<<<<<<<<
@@ -3341,7 +3341,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_GOTREF(__pyx_t_13);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-              /* "yapyg\tiles.pyx":207
+              /* "yapyg/tiles.pyx":207
  * 
  *                                 draw_size = (
  *                                              int(texture.width * screen_scale[0]),             # <<<<<<<<<<<<<<
@@ -3359,7 +3359,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __Pyx_XDECREF_SET(__pyx_v_draw_size, ((PyObject*)__pyx_t_1));
               __pyx_t_1 = 0;
 
-              /* "yapyg\tiles.pyx":211
+              /* "yapyg/tiles.pyx":211
  *                                              )
  * 
  *                                 if tile_index >= len(tile_rects):             # <<<<<<<<<<<<<<
@@ -3374,7 +3374,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               __pyx_t_14 = ((__pyx_v_tile_index >= __pyx_t_15) != 0);
               if (__pyx_t_14) {
 
-                /* "yapyg\tiles.pyx":212
+                /* "yapyg/tiles.pyx":212
  * 
  *                                 if tile_index >= len(tile_rects):
  *                                         PushMatrix()             # <<<<<<<<<<<<<<
@@ -3403,7 +3403,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-                /* "yapyg\tiles.pyx":213
+                /* "yapyg/tiles.pyx":213
  *                                 if tile_index >= len(tile_rects):
  *                                         PushMatrix()
  *                                         tile_rect = Rectangle(texture=texture,             # <<<<<<<<<<<<<<
@@ -3416,7 +3416,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __Pyx_GOTREF(__pyx_t_13);
                 if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_texture, __pyx_v_texture) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
-                /* "yapyg\tiles.pyx":214
+                /* "yapyg/tiles.pyx":214
  *                                         PushMatrix()
  *                                         tile_rect = Rectangle(texture=texture,
  *                                                               pos=draw_pos,             # <<<<<<<<<<<<<<
@@ -3425,7 +3425,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
  */
                 if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_pos, __pyx_v_draw_pos) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
-                /* "yapyg\tiles.pyx":215
+                /* "yapyg/tiles.pyx":215
  *                                         tile_rect = Rectangle(texture=texture,
  *                                                               pos=draw_pos,
  *                                                               size=draw_size)             # <<<<<<<<<<<<<<
@@ -3434,7 +3434,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
  */
                 if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_size, __pyx_v_draw_size) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
-                /* "yapyg\tiles.pyx":213
+                /* "yapyg/tiles.pyx":213
  *                                 if tile_index >= len(tile_rects):
  *                                         PushMatrix()
  *                                         tile_rect = Rectangle(texture=texture,             # <<<<<<<<<<<<<<
@@ -3448,7 +3448,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __Pyx_XDECREF_SET(__pyx_v_tile_rect, __pyx_t_3);
                 __pyx_t_3 = 0;
 
-                /* "yapyg\tiles.pyx":216
+                /* "yapyg/tiles.pyx":216
  *                                                               pos=draw_pos,
  *                                                               size=draw_size)
  *                                         tile_rects.append(tile_rect)             # <<<<<<<<<<<<<<
@@ -3461,7 +3461,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 }
                 __pyx_t_16 = __Pyx_PyList_Append(__pyx_v_tile_rects, __pyx_v_tile_rect); if (unlikely(__pyx_t_16 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
-                /* "yapyg\tiles.pyx":217
+                /* "yapyg/tiles.pyx":217
  *                                                               size=draw_size)
  *                                         tile_rects.append(tile_rect)
  *                                         PopMatrix()             # <<<<<<<<<<<<<<
@@ -3493,7 +3493,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               }
               /*else*/ {
 
-                /* "yapyg\tiles.pyx":219
+                /* "yapyg/tiles.pyx":219
  *                                         PopMatrix()
  *                                 else:
  *                                         tile_rect = tile_rects[tile_index]             # <<<<<<<<<<<<<<
@@ -3509,7 +3509,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __Pyx_XDECREF_SET(__pyx_v_tile_rect, __pyx_t_3);
                 __pyx_t_3 = 0;
 
-                /* "yapyg\tiles.pyx":220
+                /* "yapyg/tiles.pyx":220
  *                                 else:
  *                                         tile_rect = tile_rects[tile_index]
  *                                         if tile_rect.pos != draw_pos:             # <<<<<<<<<<<<<<
@@ -3524,7 +3524,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
                 if (__pyx_t_14) {
 
-                  /* "yapyg\tiles.pyx":221
+                  /* "yapyg/tiles.pyx":221
  *                                         tile_rect = tile_rects[tile_index]
  *                                         if tile_rect.pos != draw_pos:
  *                                                 tile_rect.pos = draw_pos             # <<<<<<<<<<<<<<
@@ -3536,7 +3536,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 }
                 __pyx_L21:;
 
-                /* "yapyg\tiles.pyx":222
+                /* "yapyg/tiles.pyx":222
  *                                         if tile_rect.pos != draw_pos:
  *                                                 tile_rect.pos = draw_pos
  *                                         if tile_rect.size != draw_size:             # <<<<<<<<<<<<<<
@@ -3551,7 +3551,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
                 if (__pyx_t_14) {
 
-                  /* "yapyg\tiles.pyx":223
+                  /* "yapyg/tiles.pyx":223
  *                                                 tile_rect.pos = draw_pos
  *                                         if tile_rect.size != draw_size:
  *                                                 tile_rect.size = draw_size             # <<<<<<<<<<<<<<
@@ -3563,7 +3563,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 }
                 __pyx_L22:;
 
-                /* "yapyg\tiles.pyx":224
+                /* "yapyg/tiles.pyx":224
  *                                         if tile_rect.size != draw_size:
  *                                                 tile_rect.size = draw_size
  *                                         if not tile_rect.texture is texture:             # <<<<<<<<<<<<<<
@@ -3577,7 +3577,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
                 __pyx_t_17 = (__pyx_t_14 != 0);
                 if (__pyx_t_17) {
 
-                  /* "yapyg\tiles.pyx":225
+                  /* "yapyg/tiles.pyx":225
  *                                                 tile_rect.size = draw_size
  *                                         if not tile_rect.texture is texture:
  *                                                 tile_rect.texture = texture             # <<<<<<<<<<<<<<
@@ -3590,7 +3590,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
               }
               __pyx_L20:;
 
-              /* "yapyg\tiles.pyx":226
+              /* "yapyg/tiles.pyx":226
  *                                         if not tile_rect.texture is texture:
  *                                                 tile_rect.texture = texture
  *                                 tile_index += 1             # <<<<<<<<<<<<<<
@@ -3609,7 +3609,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
         __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "yapyg\tiles.pyx":189
+        /* "yapyg/tiles.pyx":189
  *         cdef str tile
  * 
  *         with canvas:             # <<<<<<<<<<<<<<
@@ -3680,7 +3680,7 @@ static PyObject *__pyx_f_5yapyg_5tiles_draw(PyObject *__pyx_v_state, PyObject *_
     __pyx_L27:;
   }
 
-  /* "yapyg\tiles.pyx":157
+  /* "yapyg/tiles.pyx":157
  *         return rowdata[col]
  * 
  * cpdef draw(list state, canvas):             # <<<<<<<<<<<<<<
@@ -3894,7 +3894,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg\tiles.pyx":189
+  /* "yapyg/tiles.pyx":189
  *         cdef str tile
  * 
  *         with canvas:             # <<<<<<<<<<<<<<
@@ -4061,7 +4061,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
   Py_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg\tiles.pyx":25
+  /* "yapyg/tiles.pyx":25
  * """
  * 
  * from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix             # <<<<<<<<<<<<<<
@@ -4110,7 +4110,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg\tiles.pyx":26
+  /* "yapyg/tiles.pyx":26
  * 
  * from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
  * from kivy.uix.image import Image             # <<<<<<<<<<<<<<
@@ -4131,7 +4131,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "yapyg\tiles.pyx":27
+  /* "yapyg/tiles.pyx":27
  * from kivy.graphics import PushMatrix, Rectangle, Fbo, Color, PopMatrix
  * from kivy.uix.image import Image
  * from kivy.graphics.texture import Texture             # <<<<<<<<<<<<<<
@@ -4152,7 +4152,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg\tiles.pyx":36
+  /* "yapyg/tiles.pyx":36
  * cdef int IDX_STATE_TILES
  * 
  * cdef int IDX_TILES_SIZE = 0             # <<<<<<<<<<<<<<
@@ -4161,7 +4161,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILES_SIZE = 0;
 
-  /* "yapyg\tiles.pyx":37
+  /* "yapyg/tiles.pyx":37
  * 
  * cdef int IDX_TILES_SIZE = 0
  * cdef int IDX_TILES_DEFS = 1             # <<<<<<<<<<<<<<
@@ -4170,7 +4170,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILES_DEFS = 1;
 
-  /* "yapyg\tiles.pyx":38
+  /* "yapyg/tiles.pyx":38
  * cdef int IDX_TILES_SIZE = 0
  * cdef int IDX_TILES_DEFS = 1
  * cdef int IDX_TILES_AREA = 2             # <<<<<<<<<<<<<<
@@ -4179,7 +4179,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILES_AREA = 2;
 
-  /* "yapyg\tiles.pyx":39
+  /* "yapyg/tiles.pyx":39
  * cdef int IDX_TILES_DEFS = 1
  * cdef int IDX_TILES_AREA = 2
  * cdef int IDX_TILES_RECTS = 3             # <<<<<<<<<<<<<<
@@ -4188,7 +4188,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILES_RECTS = 3;
 
-  /* "yapyg\tiles.pyx":40
+  /* "yapyg/tiles.pyx":40
  * cdef int IDX_TILES_AREA = 2
  * cdef int IDX_TILES_RECTS = 3
  * cdef int IDX_TILES_AREASIZE = 4             # <<<<<<<<<<<<<<
@@ -4197,7 +4197,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILES_AREASIZE = 4;
 
-  /* "yapyg\tiles.pyx":43
+  /* "yapyg/tiles.pyx":43
  * 
  * # Values of list IDX_TILES_DEFS
  * cdef int IDX_TILEDEF_TEXTURES = 0             # <<<<<<<<<<<<<<
@@ -4206,7 +4206,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILEDEF_TEXTURES = 0;
 
-  /* "yapyg\tiles.pyx":44
+  /* "yapyg/tiles.pyx":44
  * # Values of list IDX_TILES_DEFS
  * cdef int IDX_TILEDEF_TEXTURES = 0
  * cdef int IDX_TILEDEF_COLLISION = 1             # <<<<<<<<<<<<<<
@@ -4215,7 +4215,7 @@ PyMODINIT_FUNC PyInit_tiles(void)
  */
   __pyx_v_5yapyg_5tiles_IDX_TILEDEF_COLLISION = 1;
 
-  /* "yapyg\tiles.pyx":1
+  /* "yapyg/tiles.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

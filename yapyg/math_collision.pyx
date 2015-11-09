@@ -222,3 +222,42 @@ cpdef tuple get_contact_sum_vector(list contact_points, tuple origin_point):
         for contact_point_vector in contact_points:
                 contact_sum_vector = math_2d.vector_add(contact_sum_vector, math_2d.vector_sub(contact_point_vector, origin_point))
         return math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points))
+
+cpdef tuple get_clipping_rectangle(int x1, int y1, int w, int h):
+        """
+        clipping rectangle visible => real rectangle *may* be visible = draw it
+        clipping rectangle not visible => real rectangle not visible
+        Return (ints x, y, w, h) for worst case size for h/w extent and rotation
+        """
+        cdef int clip_size = 3 * max(w, h)
+        return (x1 + (w - clip_size) / 2,
+                y1 + (h - clip_size) / 2,
+                clip_size,
+                clip_size)
+
+cpdef int intervals_overlap(int a1, int a2, int b1, int b2):
+        """
+                  a1-------a2
+            b1-------b2
+            b1-------------------b2
+                       b1-------b2
+                    b1--b2
+        """
+        cdef int temp
+        if a1 > a2:
+                temp = a1
+                a1 = a2
+                a2 = temp
+        if b1 > b2:
+                temp = b1
+                b1 = b2
+                b2 = temp
+        return (a1 >= b1 and a1 <= b2) or (a2 >= b1 and a2 <= b2) or (b1 >= a1 and b1 <= a2) or (b2 >= a1 and b2 <= a2)
+
+cpdef int is_rectangle_visible(int win_w, int win_h, int x1, int y1, int w, int h):
+        """
+        TODO
+        """
+        cdef int x2 = x1 + w
+        cdef int y2 = y1 + h
+        return intervals_overlap(x1, x2, 0, win_w) and intervals_overlap(y1, y2, 0, win_h)

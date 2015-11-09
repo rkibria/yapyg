@@ -415,7 +415,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg_movers\\linear_mover.pyx",
+  "yapyg_movers/linear_mover.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -423,7 +423,7 @@ struct __pyx_opt_args_5yapyg_8entities_insert;
 struct __pyx_opt_args_5yapyg_8entities_set_sprite;
 struct __pyx_opt_args_5yapyg_8entities_set_active_sprite;
 
-/* "yapyg\entities.pxd":38
+/* "yapyg/entities.pxd":38
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos,             # <<<<<<<<<<<<<<
@@ -438,7 +438,7 @@ struct __pyx_opt_args_5yapyg_8entities_insert {
   int play_once;
 };
 
-/* "yapyg\entities.pxd":40
+/* "yapyg/entities.pxd":40
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos,
  *              tuple pos_offset=*, tuple collision=*, int screen_relative=*, int play_once=*)
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -452,7 +452,7 @@ struct __pyx_opt_args_5yapyg_8entities_set_sprite {
   int play_once;
 };
 
-/* "yapyg\entities.pxd":42
+/* "yapyg/entities.pxd":42
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=*, int screen_relative=*, int play_once=*)
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=?)             # <<<<<<<<<<<<<<
@@ -465,7 +465,7 @@ struct __pyx_opt_args_5yapyg_8entities_set_active_sprite {
 };
 struct __pyx_opt_args_12yapyg_movers_12linear_mover_add;
 
-/* "yapyg_movers\linear_mover.pyx":48
+/* "yapyg_movers/linear_mover.pyx":48
  * }
  * 
  * cpdef add(list state, str entity_name, tuple rel_vector, float speed, tuple rotate_mode=("none", 0), on_end_function=None, int do_replace=False):             # <<<<<<<<<<<<<<
@@ -768,14 +768,14 @@ static int __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_CONST;
 static PyObject *__pyx_v_12yapyg_movers_12linear_mover_rotate_mode_trans = 0;
 static PyObject *__pyx_f_12yapyg_movers_12linear_mover_add(PyObject *, PyObject *, PyObject *, float, int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_12linear_mover_add *__pyx_optional_args); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *, PyObject *, float, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg_movers.linear_mover"
 int __pyx_module_is_main_yapyg_movers__linear_mover = 0;
 
 /* Implementation of 'yapyg_movers.linear_mover' */
 static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_rel_vector, float __pyx_v_speed, PyObject *__pyx_v_rotate_mode, PyObject *__pyx_v_on_end_function, int __pyx_v_do_replace); /* proto */
 static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_2create(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_rel_vector, float __pyx_v_speed, PyObject *__pyx_v_rotate_mode, PyObject *__pyx_v_on_end_function); /* proto */
-static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete); /* proto */
+static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, int __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete); /* proto */
 static char __pyx_k_add[] = "add";
 static char __pyx_k_end[] = "end";
 static char __pyx_k_run[] = "run";
@@ -844,7 +844,7 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 
-/* "yapyg_movers\linear_mover.pyx":48
+/* "yapyg_movers/linear_mover.pyx":48
  * }
  * 
  * cpdef add(list state, str entity_name, tuple rel_vector, float speed, tuple rotate_mode=("none", 0), on_end_function=None, int do_replace=False):             # <<<<<<<<<<<<<<
@@ -882,7 +882,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_add(PyObject *__pyx_v_sta
     }
   }
 
-  /* "yapyg_movers\linear_mover.pyx":52
+  /* "yapyg_movers/linear_mover.pyx":52
  *         TODO
  *         """
  *         yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, rotate_mode, on_end_function), do_replace)             # <<<<<<<<<<<<<<
@@ -936,7 +936,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_add(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":48
+  /* "yapyg_movers/linear_mover.pyx":48
  * }
  * 
  * cpdef add(list state, str entity_name, tuple rel_vector, float speed, tuple rotate_mode=("none", 0), on_end_function=None, int do_replace=False):             # <<<<<<<<<<<<<<
@@ -1116,7 +1116,7 @@ static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_add(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg_movers\linear_mover.pyx":54
+/* "yapyg_movers/linear_mover.pyx":54
  *         yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, rotate_mode, on_end_function), do_replace)
  * 
  * cpdef list create(str entity_name, tuple rel_vector, float speed, tuple rotate_mode, on_end_function):             # <<<<<<<<<<<<<<
@@ -1143,7 +1143,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create", 0);
 
-  /* "yapyg_movers\linear_mover.pyx":58
+  /* "yapyg_movers/linear_mover.pyx":58
  *         TODO
  *         """
  *         cdef float distance = yapyg.math_2d.length(rel_vector)             # <<<<<<<<<<<<<<
@@ -1152,7 +1152,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
  */
   __pyx_v_distance = __pyx_f_5yapyg_7math_2d_length(__pyx_v_rel_vector, 0);
 
-  /* "yapyg_movers\linear_mover.pyx":59
+  /* "yapyg_movers/linear_mover.pyx":59
  *         """
  *         cdef float distance = yapyg.math_2d.length(rel_vector)
  *         if distance == 0 or speed == 0:             # <<<<<<<<<<<<<<
@@ -1170,7 +1170,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "yapyg_movers\linear_mover.pyx":60
+    /* "yapyg_movers/linear_mover.pyx":60
  *         cdef float distance = yapyg.math_2d.length(rel_vector)
  *         if distance == 0 or speed == 0:
  *                 print "Distance and speed must be >0"             # <<<<<<<<<<<<<<
@@ -1179,7 +1179,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
  */
     if (__Pyx_PrintOne(0, __pyx_kp_s_Distance_and_speed_must_be_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg_movers\linear_mover.pyx":61
+    /* "yapyg_movers/linear_mover.pyx":61
  *         if distance == 0 or speed == 0:
  *                 print "Distance and speed must be >0"
  *                 return None             # <<<<<<<<<<<<<<
@@ -1192,7 +1192,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
     goto __pyx_L0;
   }
 
-  /* "yapyg_movers\linear_mover.pyx":63
+  /* "yapyg_movers/linear_mover.pyx":63
  *                 return None
  * 
  *         cdef float travel_time = (distance / speed)             # <<<<<<<<<<<<<<
@@ -1211,7 +1211,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   }
   __pyx_v_travel_time = (__pyx_v_distance / __pyx_v_speed);
 
-  /* "yapyg_movers\linear_mover.pyx":65
+  /* "yapyg_movers/linear_mover.pyx":65
  *         cdef float travel_time = (distance / speed)
  *         cdef tuple travel_vector = (
  *                 ((rel_vector[0]) / travel_time),             # <<<<<<<<<<<<<<
@@ -1231,7 +1231,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":66
+  /* "yapyg_movers/linear_mover.pyx":66
  *         cdef tuple travel_vector = (
  *                 ((rel_vector[0]) / travel_time),
  *                 ((rel_vector[1]) / travel_time))             # <<<<<<<<<<<<<<
@@ -1251,7 +1251,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":65
+  /* "yapyg_movers/linear_mover.pyx":65
  *         cdef float travel_time = (distance / speed)
  *         cdef tuple travel_vector = (
  *                 ((rel_vector[0]) / travel_time),             # <<<<<<<<<<<<<<
@@ -1269,7 +1269,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_v_travel_vector = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":68
+  /* "yapyg_movers/linear_mover.pyx":68
  *                 ((rel_vector[1]) / travel_time))
  * 
  *         return ["linear",             # <<<<<<<<<<<<<<
@@ -1278,7 +1278,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "yapyg_movers\linear_mover.pyx":69
+  /* "yapyg_movers/linear_mover.pyx":69
  * 
  *         return ["linear",
  *                 run,             # <<<<<<<<<<<<<<
@@ -1288,7 +1288,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_run); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg_movers\linear_mover.pyx":73
+  /* "yapyg_movers/linear_mover.pyx":73
  *                 None,
  *                 rel_vector, # IDX_LINEAR_MOVER_REL_VECTOR
  *                 speed, # IDX_LINEAR_MOVER_SPEED             # <<<<<<<<<<<<<<
@@ -1298,7 +1298,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_t_6 = PyFloat_FromDouble(__pyx_v_speed); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "yapyg_movers\linear_mover.pyx":74
+  /* "yapyg_movers/linear_mover.pyx":74
  *                 rel_vector, # IDX_LINEAR_MOVER_REL_VECTOR
  *                 speed, # IDX_LINEAR_MOVER_SPEED
  *                 (rotate_mode_trans[rotate_mode[0]], rotate_mode[1]),             # <<<<<<<<<<<<<<
@@ -1333,7 +1333,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_t_4 = 0;
   __pyx_t_5 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":76
+  /* "yapyg_movers/linear_mover.pyx":76
  *                 (rotate_mode_trans[rotate_mode[0]], rotate_mode[1]),
  *                 travel_vector,
  *                 travel_time,             # <<<<<<<<<<<<<<
@@ -1343,7 +1343,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_t_5 = PyFloat_FromDouble(__pyx_v_travel_time); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "yapyg_movers\linear_mover.pyx":68
+  /* "yapyg_movers/linear_mover.pyx":68
  *                 ((rel_vector[1]) / travel_time))
  * 
  *         return ["linear",             # <<<<<<<<<<<<<<
@@ -1389,7 +1389,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_create(PyObject *__pyx_v_
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "yapyg_movers\linear_mover.pyx":54
+  /* "yapyg_movers/linear_mover.pyx":54
  *         yapyg.movers.add(state, entity_name, create(entity_name, rel_vector, speed, rotate_mode, on_end_function), do_replace)
  * 
  * cpdef list create(str entity_name, tuple rel_vector, float speed, tuple rotate_mode, on_end_function):             # <<<<<<<<<<<<<<
@@ -1535,16 +1535,16 @@ static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_2create(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "yapyg_movers\linear_mover.pyx":80
+/* "yapyg_movers/linear_mover.pyx":80
  *                 on_end_function,]
  * 
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
 static PyObject *__pyx_pw_12yapyg_movers_12linear_mover_5run(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, int __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete, CYTHON_UNUSED int __pyx_skip_dispatch) {
   float __pyx_v_travel_time;
   PyObject *__pyx_v_travel_vector = 0;
   float __pyx_v_passed_time;
@@ -1572,7 +1572,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
 
-  /* "yapyg_movers\linear_mover.pyx":84
+  /* "yapyg_movers/linear_mover.pyx":84
  *         TODO
  *         """
  *         cdef float travel_time = mover[IDX_LINEAR_MOVER_TRAVEL_TIME]             # <<<<<<<<<<<<<<
@@ -1589,7 +1589,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_travel_time = __pyx_t_2;
 
-  /* "yapyg_movers\linear_mover.pyx":85
+  /* "yapyg_movers/linear_mover.pyx":85
  *         """
  *         cdef float travel_time = mover[IDX_LINEAR_MOVER_TRAVEL_TIME]
  *         cdef tuple travel_vector = mover[IDX_LINEAR_MOVER_TRAVEL_VECTOR]             # <<<<<<<<<<<<<<
@@ -1606,7 +1606,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_v_travel_vector = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":86
+  /* "yapyg_movers/linear_mover.pyx":86
  *         cdef float travel_time = mover[IDX_LINEAR_MOVER_TRAVEL_TIME]
  *         cdef tuple travel_vector = mover[IDX_LINEAR_MOVER_TRAVEL_VECTOR]
  *         cdef float passed_time = mover[IDX_LINEAR_MOVER_PASSED_TIME]             # <<<<<<<<<<<<<<
@@ -1623,7 +1623,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_passed_time = __pyx_t_2;
 
-  /* "yapyg_movers\linear_mover.pyx":87
+  /* "yapyg_movers/linear_mover.pyx":87
  *         cdef tuple travel_vector = mover[IDX_LINEAR_MOVER_TRAVEL_VECTOR]
  *         cdef float passed_time = mover[IDX_LINEAR_MOVER_PASSED_TIME]
  *         cdef tuple rotate_mode = mover[IDX_LINEAR_MOVER_ROTATE_MODE]             # <<<<<<<<<<<<<<
@@ -1640,7 +1640,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_v_rotate_mode = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":88
+  /* "yapyg_movers/linear_mover.pyx":88
  *         cdef float passed_time = mover[IDX_LINEAR_MOVER_PASSED_TIME]
  *         cdef tuple rotate_mode = mover[IDX_LINEAR_MOVER_ROTATE_MODE]
  *         cdef int rot_type = rotate_mode[0]             # <<<<<<<<<<<<<<
@@ -1657,7 +1657,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rot_type = __pyx_t_3;
 
-  /* "yapyg_movers\linear_mover.pyx":89
+  /* "yapyg_movers/linear_mover.pyx":89
  *         cdef tuple rotate_mode = mover[IDX_LINEAR_MOVER_ROTATE_MODE]
  *         cdef int rot_type = rotate_mode[0]
  *         cdef float rot_speed = rotate_mode[1]             # <<<<<<<<<<<<<<
@@ -1674,7 +1674,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rot_speed = __pyx_t_2;
 
-  /* "yapyg_movers\linear_mover.pyx":90
+  /* "yapyg_movers/linear_mover.pyx":90
  *         cdef int rot_type = rotate_mode[0]
  *         cdef float rot_speed = rotate_mode[1]
  *         cdef tuple old_pos = yapyg.entities.get_pos(state, entity_name)             # <<<<<<<<<<<<<<
@@ -1686,7 +1686,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_v_old_pos = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":91
+  /* "yapyg_movers/linear_mover.pyx":91
  *         cdef float rot_speed = rotate_mode[1]
  *         cdef tuple old_pos = yapyg.entities.get_pos(state, entity_name)
  *         cdef float old_rot = old_pos[2]             # <<<<<<<<<<<<<<
@@ -1703,7 +1703,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_old_rot = __pyx_t_2;
 
-  /* "yapyg_movers\linear_mover.pyx":95
+  /* "yapyg_movers/linear_mover.pyx":95
  *         cdef float heading
  *         cdef int heading_int
  *         cdef float delta_rot = 0             # <<<<<<<<<<<<<<
@@ -1712,7 +1712,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  */
   __pyx_v_delta_rot = 0.0;
 
-  /* "yapyg_movers\linear_mover.pyx":97
+  /* "yapyg_movers/linear_mover.pyx":97
  *         cdef float delta_rot = 0
  * 
  *         if rot_type == N_ROTATE_MODE_AUTO:             # <<<<<<<<<<<<<<
@@ -1722,7 +1722,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_t_4 = ((__pyx_v_rot_type == __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_AUTO) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg_movers\linear_mover.pyx":98
+    /* "yapyg_movers/linear_mover.pyx":98
  * 
  *         if rot_type == N_ROTATE_MODE_AUTO:
  *                 if passed_time == 0:             # <<<<<<<<<<<<<<
@@ -1732,7 +1732,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
     __pyx_t_4 = ((__pyx_v_passed_time == 0.0) != 0);
     if (__pyx_t_4) {
 
-      /* "yapyg_movers\linear_mover.pyx":99
+      /* "yapyg_movers/linear_mover.pyx":99
  *         if rot_type == N_ROTATE_MODE_AUTO:
  *                 if passed_time == 0:
  *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)             # <<<<<<<<<<<<<<
@@ -1741,7 +1741,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  */
       __pyx_v_heading = __pyx_f_5yapyg_7math_2d_get_angle(__pyx_tuple__3, __pyx_v_travel_vector, 0);
 
-      /* "yapyg_movers\linear_mover.pyx":100
+      /* "yapyg_movers/linear_mover.pyx":100
  *                 if passed_time == 0:
  *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
  *                         heading_int = (int(heading) - 90) % 360             # <<<<<<<<<<<<<<
@@ -1768,7 +1768,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_v_heading_int = __pyx_t_3;
 
-      /* "yapyg_movers\linear_mover.pyx":101
+      /* "yapyg_movers/linear_mover.pyx":101
  *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)
  *                         heading_int = (int(heading) - 90) % 360
  *                         heading = float(heading_int)             # <<<<<<<<<<<<<<
@@ -1777,7 +1777,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  */
       __pyx_v_heading = ((double)__pyx_v_heading_int);
 
-      /* "yapyg_movers\linear_mover.pyx":102
+      /* "yapyg_movers/linear_mover.pyx":102
  *                         heading_int = (int(heading) - 90) % 360
  *                         heading = float(heading_int)
  *                         delta_rot = -old_rot + heading             # <<<<<<<<<<<<<<
@@ -1791,7 +1791,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
     goto __pyx_L3;
   }
 
-  /* "yapyg_movers\linear_mover.pyx":103
+  /* "yapyg_movers/linear_mover.pyx":103
  *                         heading = float(heading_int)
  *                         delta_rot = -old_rot + heading
  *         elif rot_type == N_ROTATE_MODE_CONST:             # <<<<<<<<<<<<<<
@@ -1801,7 +1801,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_t_4 = ((__pyx_v_rot_type == __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_CONST) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg_movers\linear_mover.pyx":104
+    /* "yapyg_movers/linear_mover.pyx":104
  *                         delta_rot = -old_rot + heading
  *         elif rot_type == N_ROTATE_MODE_CONST:
  *                 delta_rot = (rot_speed * frame_time_delta)             # <<<<<<<<<<<<<<
@@ -1813,7 +1813,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   }
   __pyx_L3:;
 
-  /* "yapyg_movers\linear_mover.pyx":106
+  /* "yapyg_movers/linear_mover.pyx":106
  *                 delta_rot = (rot_speed * frame_time_delta)
  * 
  *         passed_time += frame_time_delta / 1000.0             # <<<<<<<<<<<<<<
@@ -1822,7 +1822,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  */
   __pyx_v_passed_time = (__pyx_v_passed_time + (__pyx_v_frame_time_delta / 1000.0));
 
-  /* "yapyg_movers\linear_mover.pyx":107
+  /* "yapyg_movers/linear_mover.pyx":107
  * 
  *         passed_time += frame_time_delta / 1000.0
  *         if passed_time > travel_time:             # <<<<<<<<<<<<<<
@@ -1832,7 +1832,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_t_4 = ((__pyx_v_passed_time > __pyx_v_travel_time) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg_movers\linear_mover.pyx":108
+    /* "yapyg_movers/linear_mover.pyx":108
  *         passed_time += frame_time_delta / 1000.0
  *         if passed_time > travel_time:
  *                 passed_time = travel_time             # <<<<<<<<<<<<<<
@@ -1844,7 +1844,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   }
   __pyx_L5:;
 
-  /* "yapyg_movers\linear_mover.pyx":109
+  /* "yapyg_movers/linear_mover.pyx":109
  *         if passed_time > travel_time:
  *                 passed_time = travel_time
  *         mover[IDX_LINEAR_MOVER_PASSED_TIME] = passed_time             # <<<<<<<<<<<<<<
@@ -1860,14 +1860,14 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   if (unlikely(__Pyx_SetItemInt(__pyx_v_mover, __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_PASSED_TIME, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":111
+  /* "yapyg_movers/linear_mover.pyx":111
  *         mover[IDX_LINEAR_MOVER_PASSED_TIME] = passed_time
  * 
  *         cdef float d_x = frame_time_delta * travel_vector[0]             # <<<<<<<<<<<<<<
  *         cdef float d_y = frame_time_delta * travel_vector[1]
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_frame_time_delta); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_frame_time_delta); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_travel_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1883,14 +1883,14 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_d_x = __pyx_t_2;
 
-  /* "yapyg_movers\linear_mover.pyx":112
+  /* "yapyg_movers/linear_mover.pyx":112
  * 
  *         cdef float d_x = frame_time_delta * travel_vector[0]
  *         cdef float d_y = frame_time_delta * travel_vector[1]             # <<<<<<<<<<<<<<
  * 
  *         d_x /= 1000.0
  */
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_frame_time_delta); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_frame_time_delta); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   if (unlikely(__pyx_v_travel_vector == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1906,7 +1906,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_d_y = __pyx_t_2;
 
-  /* "yapyg_movers\linear_mover.pyx":114
+  /* "yapyg_movers/linear_mover.pyx":114
  *         cdef float d_y = frame_time_delta * travel_vector[1]
  * 
  *         d_x /= 1000.0             # <<<<<<<<<<<<<<
@@ -1915,7 +1915,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  */
   __pyx_v_d_x = (__pyx_v_d_x / 1000.0);
 
-  /* "yapyg_movers\linear_mover.pyx":115
+  /* "yapyg_movers/linear_mover.pyx":115
  * 
  *         d_x /= 1000.0
  *         d_y /= 1000.0             # <<<<<<<<<<<<<<
@@ -1924,7 +1924,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
  */
   __pyx_v_d_y = (__pyx_v_d_y / 1000.0);
 
-  /* "yapyg_movers\linear_mover.pyx":117
+  /* "yapyg_movers/linear_mover.pyx":117
  *         d_y /= 1000.0
  * 
  *         yapyg.entities.add_pos(state, entity_name, d_x, d_y, delta_rot)             # <<<<<<<<<<<<<<
@@ -1935,7 +1935,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":119
+  /* "yapyg_movers/linear_mover.pyx":119
  *         yapyg.entities.add_pos(state, entity_name, d_x, d_y, delta_rot)
  * 
  *         if passed_time == travel_time:             # <<<<<<<<<<<<<<
@@ -1945,7 +1945,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __pyx_t_4 = ((__pyx_v_passed_time == __pyx_v_travel_time) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg_movers\linear_mover.pyx":120
+    /* "yapyg_movers/linear_mover.pyx":120
  * 
  *         if passed_time == travel_time:
  *                 movers_to_delete.append((entity_name, mover[IDX_LINEAR_MOVER_ON_END_FUNCTION]))             # <<<<<<<<<<<<<<
@@ -1976,7 +1976,7 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   }
   __pyx_L6:;
 
-  /* "yapyg_movers\linear_mover.pyx":122
+  /* "yapyg_movers/linear_mover.pyx":122
  *                 movers_to_delete.append((entity_name, mover[IDX_LINEAR_MOVER_ON_END_FUNCTION]))
  * 
  *         yapyg.collisions.run(state, entity_name)             # <<<<<<<<<<<<<<
@@ -1985,10 +1985,10 @@ static PyObject *__pyx_f_12yapyg_movers_12linear_mover_run(PyObject *__pyx_v_sta
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":80
+  /* "yapyg_movers/linear_mover.pyx":80
  *                 on_end_function,]
  * 
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -2018,7 +2018,7 @@ static PyObject *__pyx_pw_12yapyg_movers_12linear_mover_5run(PyObject *__pyx_sel
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   PyObject *__pyx_v_mover = 0;
-  float __pyx_v_frame_time_delta;
+  int __pyx_v_frame_time_delta;
   PyObject *__pyx_v_movers_to_delete = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2082,7 +2082,7 @@ static PyObject *__pyx_pw_12yapyg_movers_12linear_mover_5run(PyObject *__pyx_sel
     __pyx_v_state = ((PyObject*)values[0]);
     __pyx_v_entity_name = ((PyObject*)values[1]);
     __pyx_v_mover = ((PyObject*)values[2]);
-    __pyx_v_frame_time_delta = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_frame_time_delta == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_frame_time_delta = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_frame_time_delta == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     __pyx_v_movers_to_delete = ((PyObject*)values[4]);
   }
   goto __pyx_L4_argument_unpacking_done;
@@ -2108,7 +2108,7 @@ static PyObject *__pyx_pw_12yapyg_movers_12linear_mover_5run(PyObject *__pyx_sel
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete) {
+static PyObject *__pyx_pf_12yapyg_movers_12linear_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, int __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2197,7 +2197,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg_movers\linear_mover.pyx":48
+  /* "yapyg_movers/linear_mover.pyx":48
  * }
  * 
  * cpdef add(list state, str entity_name, tuple rel_vector, float speed, tuple rotate_mode=("none", 0), on_end_function=None, int do_replace=False):             # <<<<<<<<<<<<<<
@@ -2211,7 +2211,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "yapyg_movers\linear_mover.pyx":99
+  /* "yapyg_movers/linear_mover.pyx":99
  *         if rot_type == N_ROTATE_MODE_AUTO:
  *                 if passed_time == 0:
  *                         heading = yapyg.math_2d.get_angle((0, 0), travel_vector)             # <<<<<<<<<<<<<<
@@ -2375,7 +2375,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   Py_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg_movers\linear_mover.pyx":26
+  /* "yapyg_movers/linear_mover.pyx":26
  * 
  * cimport yapyg.math_2d
  * import yapyg.movers             # <<<<<<<<<<<<<<
@@ -2387,7 +2387,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":30
+  /* "yapyg_movers/linear_mover.pyx":30
  * cimport yapyg.collisions
  * 
  * cdef int IDX_LINEAR_MOVER_REL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER             # <<<<<<<<<<<<<<
@@ -2406,7 +2406,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_REL_VECTOR = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":31
+  /* "yapyg_movers/linear_mover.pyx":31
  * 
  * cdef int IDX_LINEAR_MOVER_REL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
  * cdef int IDX_LINEAR_MOVER_SPEED = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1             # <<<<<<<<<<<<<<
@@ -2428,7 +2428,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_SPEED = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":32
+  /* "yapyg_movers/linear_mover.pyx":32
  * cdef int IDX_LINEAR_MOVER_REL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER
  * cdef int IDX_LINEAR_MOVER_SPEED = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
  * cdef int IDX_LINEAR_MOVER_ROTATE_MODE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2             # <<<<<<<<<<<<<<
@@ -2450,7 +2450,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_ROTATE_MODE = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":33
+  /* "yapyg_movers/linear_mover.pyx":33
  * cdef int IDX_LINEAR_MOVER_SPEED = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 1
  * cdef int IDX_LINEAR_MOVER_ROTATE_MODE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
  * cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3             # <<<<<<<<<<<<<<
@@ -2472,7 +2472,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_TRAVEL_VECTOR = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":34
+  /* "yapyg_movers/linear_mover.pyx":34
  * cdef int IDX_LINEAR_MOVER_ROTATE_MODE = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 2
  * cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
  * cdef int IDX_LINEAR_MOVER_TRAVEL_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4             # <<<<<<<<<<<<<<
@@ -2494,7 +2494,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_TRAVEL_TIME = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":35
+  /* "yapyg_movers/linear_mover.pyx":35
  * cdef int IDX_LINEAR_MOVER_TRAVEL_VECTOR = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 3
  * cdef int IDX_LINEAR_MOVER_TRAVEL_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
  * cdef int IDX_LINEAR_MOVER_PASSED_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5             # <<<<<<<<<<<<<<
@@ -2516,7 +2516,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_PASSED_TIME = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":36
+  /* "yapyg_movers/linear_mover.pyx":36
  * cdef int IDX_LINEAR_MOVER_TRAVEL_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 4
  * cdef int IDX_LINEAR_MOVER_PASSED_TIME = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 5
  * cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6             # <<<<<<<<<<<<<<
@@ -2538,7 +2538,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_12yapyg_movers_12linear_mover_IDX_LINEAR_MOVER_ON_END_FUNCTION = __pyx_t_9;
 
-  /* "yapyg_movers\linear_mover.pyx":38
+  /* "yapyg_movers/linear_mover.pyx":38
  * cdef int IDX_LINEAR_MOVER_ON_END_FUNCTION = yapyg.movers.IDX_MOVER_FIRST_PARAMETER + 6
  * 
  * cdef int N_ROTATE_MODE_NONE = 0             # <<<<<<<<<<<<<<
@@ -2547,7 +2547,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
  */
   __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_NONE = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":39
+  /* "yapyg_movers/linear_mover.pyx":39
  * 
  * cdef int N_ROTATE_MODE_NONE = 0
  * cdef int N_ROTATE_MODE_AUTO = 1             # <<<<<<<<<<<<<<
@@ -2556,7 +2556,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
  */
   __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_AUTO = 1;
 
-  /* "yapyg_movers\linear_mover.pyx":40
+  /* "yapyg_movers/linear_mover.pyx":40
  * cdef int N_ROTATE_MODE_NONE = 0
  * cdef int N_ROTATE_MODE_AUTO = 1
  * cdef int N_ROTATE_MODE_CONST = 2             # <<<<<<<<<<<<<<
@@ -2565,7 +2565,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
  */
   __pyx_v_12yapyg_movers_12linear_mover_N_ROTATE_MODE_CONST = 2;
 
-  /* "yapyg_movers\linear_mover.pyx":42
+  /* "yapyg_movers/linear_mover.pyx":42
  * cdef int N_ROTATE_MODE_CONST = 2
  * 
  * cpdef dict rotate_mode_trans = {             # <<<<<<<<<<<<<<
@@ -2575,7 +2575,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __pyx_t_7 = PyDict_New(); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "yapyg_movers\linear_mover.pyx":43
+  /* "yapyg_movers/linear_mover.pyx":43
  * 
  * cpdef dict rotate_mode_trans = {
  *         "none": N_ROTATE_MODE_NONE,             # <<<<<<<<<<<<<<
@@ -2587,7 +2587,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_none, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":44
+  /* "yapyg_movers/linear_mover.pyx":44
  * cpdef dict rotate_mode_trans = {
  *         "none": N_ROTATE_MODE_NONE,
  *         "auto": N_ROTATE_MODE_AUTO,             # <<<<<<<<<<<<<<
@@ -2599,7 +2599,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_auto, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 42; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":45
+  /* "yapyg_movers/linear_mover.pyx":45
  *         "none": N_ROTATE_MODE_NONE,
  *         "auto": N_ROTATE_MODE_AUTO,
  *         "const": N_ROTATE_MODE_CONST,             # <<<<<<<<<<<<<<
@@ -2615,7 +2615,7 @@ PyMODINIT_FUNC PyInit_linear_mover(void)
   __Pyx_GIVEREF(__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "yapyg_movers\linear_mover.pyx":1
+  /* "yapyg_movers/linear_mover.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

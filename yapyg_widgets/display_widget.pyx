@@ -31,7 +31,7 @@ import yapyg.factory
 import yapyg.timer
 
 cdef float FRAME_DELTA_SECONDS = 1.0 / 30.0
-cdef float MAX_FRAME_DELTA_MICROSECONDS = FRAME_DELTA_SECONDS * 1000.0
+cdef int MAX_FRAME_DELTA_MICROSECONDS = int(FRAME_DELTA_SECONDS * 1000.0)
 
 class DisplayWidget(Widget):
         def __init__(self,
@@ -62,12 +62,12 @@ class DisplayWidget(Widget):
                 """
                 TODO
                 """
-                cdef float cur_fps
-                cdef float last_frame_delta
+                cdef int cur_fps
+                cdef int last_frame_delta
                 if self.state:
-                        cur_fps = (float(Clock.get_fps()))
+                        cur_fps = int(Clock.get_fps())
                         if cur_fps > 0:
-                                last_frame_delta = (1000.0 / cur_fps) # milliseconds
+                                last_frame_delta = 1000 / cur_fps # milliseconds
 
                                 if last_frame_delta < MAX_FRAME_DELTA_MICROSECONDS:
                                         self.frame_time = last_frame_delta
@@ -101,7 +101,7 @@ class DisplayWidget(Widget):
                                self.canvas,
                                )
 
-cdef void redraw(list state, float frame_time_delta, list redraw_tiles, canvas):
+cdef void redraw(list state, int frame_time_delta, list redraw_tiles, canvas):
         """
         TODO
         """

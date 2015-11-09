@@ -60,6 +60,7 @@ class MenuWidget(FloatLayout):
                         "demo_pinball": "Simple pinball demo",
                         "demo_squares": "Random set of falling physical objects",
                         "demo_car": "Top down car driving game",
+                        "demo_sprites": "Draw a large amount of sprites",
                         }
 
                 layout = StackLayout(orientation="tb-lr", padding=[10, 20, 10, 20])

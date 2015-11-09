@@ -85,6 +85,13 @@ cpdef float get_tile_size(list state):
         """
         return state[IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
 
+cpdef tuple get_width_height_tilesize(list state):
+        """
+        Returns (float w, float h, float ts)
+        """
+        cdef list screen_state = state[IDX_STATE_SCREEN]
+        return (screen_state[IDX_SCREEN_WIDTH], screen_state[IDX_SCREEN_HEIGHT], screen_state[IDX_SCREEN_TILE_SIZE])
+
 cpdef set_origin(list state, tuple origin_xy):
         """
         TODO

@@ -109,7 +109,7 @@ cpdef delete(list state, str mover_name):
         if movers_dict.has_key(mover_name):
                 del movers_dict[mover_name]
 
-cdef void run(list state, float frame_time_delta):
+cdef void run(list state, int frame_time_delta):
         """
         TODO
         """

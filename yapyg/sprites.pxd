@@ -35,4 +35,4 @@ cpdef set_enable(list state, str sprite_name, int enable)
 cpdef tuple get_textures(list state, str sprite_name)
 cpdef int is_enabled(list state, str sprite_name)
 
-cdef void draw(list state, canvas, float frame_time_delta)
+cdef void draw(list state, canvas, int frame_time_delta)

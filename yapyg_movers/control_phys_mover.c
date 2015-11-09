@@ -733,7 +733,7 @@ static PyObject *(*__pyx_f_5yapyg_8controls_get_joystick)(PyObject *, int __pyx_
 static PyObject **__pyx_vp_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME = 0;
 #define __pyx_v_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME (*__pyx_vp_12yapyg_movers_14physical_mover_PHYSICS_MOVER_NAME)
 static PyObject *(*__pyx_f_12yapyg_movers_14physical_mover_create)(PyObject *, float, float, float, float, float, float, float, float, float, float, float, int __pyx_skip_dispatch); /*proto*/
-static PyObject *(*__pyx_f_12yapyg_movers_14physical_mover_run)(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *(*__pyx_f_12yapyg_movers_14physical_mover_run)(PyObject *, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *(*__pyx_f_12yapyg_movers_14physical_mover_set_acceleration)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *(*__pyx_f_12yapyg_movers_14physical_mover_get_velocity)(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *(*__pyx_f_12yapyg_movers_14physical_mover_set_velocity)(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
@@ -749,14 +749,14 @@ static int __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_M
 static int __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE;
 static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *, PyObject *, float, float, float, float, float, float, float, float, float, float, float, float, float, float, int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_18control_phys_mover_add *__pyx_optional_args); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *, float, float, float, float, float, float, float, float, float, float, float, float, float, float, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg_movers.control_phys_mover"
 int __pyx_module_is_main_yapyg_movers__control_phys_mover = 0;
 
 /* Implementation of 'yapyg_movers.control_phys_mover' */
 static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_mass, float __pyx_v_vx, float __pyx_v_vy, float __pyx_v_ax, float __pyx_v_ay, float __pyx_v_friction, float __pyx_v_inelasticity, float __pyx_v_vr, float __pyx_v_rot_friction, float __pyx_v_rot_decay, float __pyx_v_stickyness, float __pyx_v_dir_factor, float __pyx_v_pos_accel, float __pyx_v_neg_accel, PyObject *__pyx_v_rest_sprite, PyObject *__pyx_v_pos_sprite, PyObject *__pyx_v_neg_sprite, int __pyx_v_do_replace); /* proto */
 static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_2create(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_entity_name, float __pyx_v_mass, float __pyx_v_vx, float __pyx_v_vy, float __pyx_v_ax, float __pyx_v_ay, float __pyx_v_friction, float __pyx_v_inelasticity, float __pyx_v_vr, float __pyx_v_rot_friction, float __pyx_v_rot_decay, float __pyx_v_stickyness, float __pyx_v_dir_factor, float __pyx_v_pos_accel, float __pyx_v_neg_accel, PyObject *__pyx_v_rest_sprite, PyObject *__pyx_v_pos_sprite, PyObject *__pyx_v_neg_sprite); /* proto */
-static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete); /* proto */
+static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, int __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete); /* proto */
 static char __pyx_k_ax[] = "ax";
 static char __pyx_k_ay[] = "ay";
 static char __pyx_k_vr[] = "vr";
@@ -1417,7 +1417,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
  *         phys_mover_list.append(neg_sprite)
  *         return phys_mover_list             # <<<<<<<<<<<<<<
  * 
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_phys_mover_list);
@@ -1689,13 +1689,13 @@ static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_2create(CYTHON_UNU
 /* "yapyg_movers\control_phys_mover.pyx":131
  *         return phys_mover_list
  * 
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
  *         cdef list direction = yapyg.controls.get_joystick(state)
  *         cdef float joy_dir = direction[0]
  */
 
 static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_5run(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, int __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_direction = 0;
   float __pyx_v_joy_dir;
   float __pyx_v_joy_accel;
@@ -1725,7 +1725,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
 
   /* "yapyg_movers\control_phys_mover.pyx":132
  * 
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
  *         cdef list direction = yapyg.controls.get_joystick(state)             # <<<<<<<<<<<<<<
  *         cdef float joy_dir = direction[0]
  *         cdef float joy_accel = direction[1]
@@ -1736,7 +1736,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_1 = 0;
 
   /* "yapyg_movers\control_phys_mover.pyx":133
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
  *         cdef list direction = yapyg.controls.get_joystick(state)
  *         cdef float joy_dir = direction[0]             # <<<<<<<<<<<<<<
  *         cdef float joy_accel = direction[1]
@@ -2144,7 +2144,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   /* "yapyg_movers\control_phys_mover.pyx":131
  *         return phys_mover_list
  * 
- * cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
+ * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
  *         cdef list direction = yapyg.controls.get_joystick(state)
  *         cdef float joy_dir = direction[0]
  */
@@ -2177,7 +2177,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_5run(PyObject *__p
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_entity_name = 0;
   PyObject *__pyx_v_mover = 0;
-  float __pyx_v_frame_time_delta;
+  int __pyx_v_frame_time_delta;
   PyObject *__pyx_v_movers_to_delete = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2241,7 +2241,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_5run(PyObject *__p
     __pyx_v_state = ((PyObject*)values[0]);
     __pyx_v_entity_name = ((PyObject*)values[1]);
     __pyx_v_mover = ((PyObject*)values[2]);
-    __pyx_v_frame_time_delta = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_frame_time_delta == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_frame_time_delta = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_frame_time_delta == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     __pyx_v_movers_to_delete = ((PyObject*)values[4]);
   }
   goto __pyx_L4_argument_unpacking_done;
@@ -2267,7 +2267,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_5run(PyObject *__p
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, float __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete) {
+static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_4run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_mover, int __pyx_v_frame_time_delta, PyObject *__pyx_v_movers_to_delete) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2490,7 +2490,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   /*--- Function export code ---*/
   if (__Pyx_ExportFunction("add", (void (*)(void))__pyx_f_12yapyg_movers_18control_phys_mover_add, "PyObject *(PyObject *, PyObject *, float, float, float, float, float, float, float, float, float, float, float, float, float, float, int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_18control_phys_mover_add *__pyx_optional_args)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("create", (void (*)(void))__pyx_f_12yapyg_movers_18control_phys_mover_create, "PyObject *(PyObject *, float, float, float, float, float, float, float, float, float, float, float, float, float, float, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("run", (void (*)(void))__pyx_f_12yapyg_movers_18control_phys_mover_run, "PyObject *(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("run", (void (*)(void))__pyx_f_12yapyg_movers_18control_phys_mover_run, "PyObject *(PyObject *, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -2535,7 +2535,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   Py_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_t_9 = __Pyx_ImportModule("yapyg_movers.physical_mover"); if (!__pyx_t_9) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_9, "create", (void (**)(void))&__pyx_f_12yapyg_movers_14physical_mover_create, "PyObject *(PyObject *, float, float, float, float, float, float, float, float, float, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_9, "run", (void (**)(void))&__pyx_f_12yapyg_movers_14physical_mover_run, "PyObject *(PyObject *, PyObject *, PyObject *, float, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_9, "run", (void (**)(void))&__pyx_f_12yapyg_movers_14physical_mover_run, "PyObject *(PyObject *, PyObject *, PyObject *, int, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_9, "set_acceleration", (void (**)(void))&__pyx_f_12yapyg_movers_14physical_mover_set_acceleration, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_9, "get_velocity", (void (**)(void))&__pyx_f_12yapyg_movers_14physical_mover_get_velocity, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_9, "set_velocity", (void (**)(void))&__pyx_f_12yapyg_movers_14physical_mover_set_velocity, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

@@ -57,7 +57,7 @@ def run(state, mover_name, mover, frame_time_delta, movers_to_delete):
         passed_time = mover[IDX_DESTROY_MOVER_PASSED_TIME]
         wait_time = mover[IDX_DESTROY_MOVER_WAIT_TIME]
 
-        passed_time += (frame_time_delta / 1000.0)
+        passed_time += frame_time_delta / 1000
         if passed_time > wait_time:
                 passed_time = wait_time
         mover[IDX_DESTROY_MOVER_PASSED_TIME] = passed_time

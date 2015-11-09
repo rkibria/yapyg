@@ -77,7 +77,7 @@ cpdef list create(str entity_name, tuple rel_vector, float speed, tuple rotate_m
                 0,
                 on_end_function,]
 
-cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete):
+cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
         """
         TODO
         """

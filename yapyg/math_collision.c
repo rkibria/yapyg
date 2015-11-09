@@ -415,7 +415,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg\\math_collision.pyx",
+  "yapyg/math_collision.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -547,6 +547,8 @@ static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
   #define __PYX_FORCE_INIT_THREADS 0
 #endif
 
+static CYTHON_INLINE long __Pyx_div_long(long, long); /* proto */
+
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -564,13 +566,13 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
+
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
-
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
@@ -610,6 +612,9 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *, PyObject
 static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static int __pyx_f_5yapyg_14math_collision_value_in_range(float, float, float, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static int __pyx_f_5yapyg_14math_collision_is_rectangle_visible(int, int, int, int, int, int, int __pyx_skip_dispatch); /*proto*/
+static int __pyx_f_5yapyg_14math_collision_intervals_overlap(int, int, int, int, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5yapyg_14math_collision_get_clipping_rectangle(int, int, int, int, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg.math_collision"
 int __pyx_module_is_main_yapyg__math_collision = 0;
 
@@ -622,6 +627,17 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_8is_circle_circle_collision(CY
 static PyObject *__pyx_pf_5yapyg_14math_collision_10is_rect_circle_collision(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_circ, PyObject *__pyx_v_rect, PyObject *__pyx_v_contact_points); /* proto */
 static PyObject *__pyx_pf_5yapyg_14math_collision_12is_point_in_circle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_point, PyObject *__pyx_v_circ); /* proto */
 static PyObject *__pyx_pf_5yapyg_14math_collision_14get_contact_sum_vector(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_contact_points, PyObject *__pyx_v_origin_point); /* proto */
+static PyObject *__pyx_pf_5yapyg_14math_collision_16get_clipping_rectangle(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_x1, int __pyx_v_y1, int __pyx_v_w, int __pyx_v_h); /* proto */
+static PyObject *__pyx_pf_5yapyg_14math_collision_18intervals_overlap(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_a1, int __pyx_v_a2, int __pyx_v_b1, int __pyx_v_b2); /* proto */
+static PyObject *__pyx_pf_5yapyg_14math_collision_20is_rectangle_visible(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_win_w, int __pyx_v_win_h, int __pyx_v_x1, int __pyx_v_y1, int __pyx_v_w, int __pyx_v_h); /* proto */
+static char __pyx_k_h[] = "h";
+static char __pyx_k_w[] = "w";
+static char __pyx_k_a1[] = "a1";
+static char __pyx_k_a2[] = "a2";
+static char __pyx_k_b1[] = "b1";
+static char __pyx_k_b2[] = "b2";
+static char __pyx_k_x1[] = "x1";
+static char __pyx_k_y1[] = "y1";
 static char __pyx_k_c_1[] = "c_1";
 static char __pyx_k_c_2[] = "c_2";
 static char __pyx_k_circ[] = "circ";
@@ -630,6 +646,8 @@ static char __pyx_k_rect[] = "rect";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_point[] = "point";
 static char __pyx_k_value[] = "value";
+static char __pyx_k_win_h[] = "win_h";
+static char __pyx_k_win_w[] = "win_w";
 static char __pyx_k_rect_1[] = "rect_1";
 static char __pyx_k_rect_2[] = "rect_2";
 static char __pyx_k_max_limit[] = "max_limit";
@@ -637,10 +655,15 @@ static char __pyx_k_min_limit[] = "min_limit";
 static char __pyx_k_origin_point[] = "origin_point";
 static char __pyx_k_contact_points[] = "contact_points";
 static char __pyx_k_Collision_algorithms[] = "\nCollision algorithms\n";
+static PyObject *__pyx_n_s_a1;
+static PyObject *__pyx_n_s_a2;
+static PyObject *__pyx_n_s_b1;
+static PyObject *__pyx_n_s_b2;
 static PyObject *__pyx_n_s_c_1;
 static PyObject *__pyx_n_s_c_2;
 static PyObject *__pyx_n_s_circ;
 static PyObject *__pyx_n_s_contact_points;
+static PyObject *__pyx_n_s_h;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_max_limit;
 static PyObject *__pyx_n_s_min_limit;
@@ -651,10 +674,15 @@ static PyObject *__pyx_n_s_rect_1;
 static PyObject *__pyx_n_s_rect_2;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_value;
+static PyObject *__pyx_n_s_w;
+static PyObject *__pyx_n_s_win_h;
+static PyObject *__pyx_n_s_win_w;
+static PyObject *__pyx_n_s_x1;
+static PyObject *__pyx_n_s_y1;
 static PyObject *__pyx_float_0_0;
 static PyObject *__pyx_tuple_;
 
-/* "yapyg\math_collision.pyx":27
+/* "yapyg/math_collision.pyx":27
  * cimport math_2d
  * 
  * cpdef int value_in_range(float value, float min_limit, float max_limit):             # <<<<<<<<<<<<<<
@@ -670,7 +698,7 @@ static int __pyx_f_5yapyg_14math_collision_value_in_range(float __pyx_v_value, f
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("value_in_range", 0);
 
-  /* "yapyg\math_collision.pyx":31
+  /* "yapyg/math_collision.pyx":31
  *         TODO
  *         """
  *         return (value >= min_limit) and (value <= max_limit)             # <<<<<<<<<<<<<<
@@ -689,7 +717,7 @@ static int __pyx_f_5yapyg_14math_collision_value_in_range(float __pyx_v_value, f
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":27
+  /* "yapyg/math_collision.pyx":27
  * cimport math_2d
  * 
  * cpdef int value_in_range(float value, float min_limit, float max_limit):             # <<<<<<<<<<<<<<
@@ -800,7 +828,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_value_in_range(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":33
+/* "yapyg/math_collision.pyx":33
  *         return (value >= min_limit) and (value <= max_limit)
  * 
  * cpdef int is_point_in_rect(tuple point, tuple rect):             # <<<<<<<<<<<<<<
@@ -833,7 +861,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_point_in_rect", 0);
 
-  /* "yapyg\math_collision.pyx":37
+  /* "yapyg/math_collision.pyx":37
  *         rectangle = ("rectangle", x, y, w, h, rot)
  *         """
  *         cdef float r_x = rect[1]             # <<<<<<<<<<<<<<
@@ -850,7 +878,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":38
+  /* "yapyg/math_collision.pyx":38
  *         """
  *         cdef float r_x = rect[1]
  *         cdef float r_y = rect[2]             # <<<<<<<<<<<<<<
@@ -867,7 +895,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":39
+  /* "yapyg/math_collision.pyx":39
  *         cdef float r_x = rect[1]
  *         cdef float r_y = rect[2]
  *         cdef float r_w = rect[3]             # <<<<<<<<<<<<<<
@@ -884,7 +912,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_w = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":40
+  /* "yapyg/math_collision.pyx":40
  *         cdef float r_y = rect[2]
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]             # <<<<<<<<<<<<<<
@@ -901,7 +929,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_h = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":41
+  /* "yapyg/math_collision.pyx":41
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]
  *         cdef float r_rot = rect[5]             # <<<<<<<<<<<<<<
@@ -918,7 +946,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_rot = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":43
+  /* "yapyg/math_collision.pyx":43
  *         cdef float r_rot = rect[5]
  * 
  *         cdef float p_x = point[0]             # <<<<<<<<<<<<<<
@@ -935,7 +963,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":44
+  /* "yapyg/math_collision.pyx":44
  * 
  *         cdef float p_x = point[0]
  *         cdef float p_y = point[1]             # <<<<<<<<<<<<<<
@@ -952,7 +980,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":47
+  /* "yapyg/math_collision.pyx":47
  * 
  *         cdef tuple rotation_origin
  *         if r_rot != 0:             # <<<<<<<<<<<<<<
@@ -962,7 +990,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __pyx_t_3 = ((__pyx_v_r_rot != 0.0) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\math_collision.pyx":48
+    /* "yapyg/math_collision.pyx":48
  *         cdef tuple rotation_origin
  *         if r_rot != 0:
  *                 rotation_origin = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))             # <<<<<<<<<<<<<<
@@ -984,7 +1012,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
     __pyx_v_rotation_origin = ((PyObject*)__pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "yapyg\math_collision.pyx":49
+    /* "yapyg/math_collision.pyx":49
  *         if r_rot != 0:
  *                 rotation_origin = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
  *                 p_x, p_y = math_2d.rotated_point(rotation_origin, (p_x, p_y), -r_rot)             # <<<<<<<<<<<<<<
@@ -1043,7 +1071,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   }
   __pyx_L3:;
 
-  /* "yapyg\math_collision.pyx":51
+  /* "yapyg/math_collision.pyx":51
  *                 p_x, p_y = math_2d.rotated_point(rotation_origin, (p_x, p_y), -r_rot)
  * 
  *         return value_in_range(p_x, r_x, r_x + r_w) and value_in_range(p_y, r_y, r_y + r_h)             # <<<<<<<<<<<<<<
@@ -1062,7 +1090,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_rect(PyObject *__pyx_v_po
   __pyx_r = __pyx_t_7;
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":33
+  /* "yapyg/math_collision.pyx":33
  *         return (value >= min_limit) and (value <= max_limit)
  * 
  * cpdef int is_point_in_rect(tuple point, tuple rect):             # <<<<<<<<<<<<<<
@@ -1177,7 +1205,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_2is_point_in_rect(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":53
+/* "yapyg/math_collision.pyx":53
  *         return value_in_range(p_x, r_x, r_x + r_w) and value_in_range(p_y, r_y, r_y + r_h)
  * 
  * cpdef tuple get_rect_points(tuple rect):             # <<<<<<<<<<<<<<
@@ -1209,7 +1237,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_rect_points", 0);
 
-  /* "yapyg\math_collision.pyx":57
+  /* "yapyg/math_collision.pyx":57
  *         rect = ("rectangle", x, y, w, h, rot)
  *         """
  *         cdef float r_x = rect[1]             # <<<<<<<<<<<<<<
@@ -1226,7 +1254,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":58
+  /* "yapyg/math_collision.pyx":58
  *         """
  *         cdef float r_x = rect[1]
  *         cdef float r_y = rect[2]             # <<<<<<<<<<<<<<
@@ -1243,7 +1271,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":59
+  /* "yapyg/math_collision.pyx":59
  *         cdef float r_x = rect[1]
  *         cdef float r_y = rect[2]
  *         cdef float r_w = rect[3]             # <<<<<<<<<<<<<<
@@ -1260,7 +1288,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_w = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":60
+  /* "yapyg/math_collision.pyx":60
  *         cdef float r_y = rect[2]
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]             # <<<<<<<<<<<<<<
@@ -1277,7 +1305,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_h = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":61
+  /* "yapyg/math_collision.pyx":61
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]
  *         cdef float r_rot = rect[5]             # <<<<<<<<<<<<<<
@@ -1294,7 +1322,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_rot = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":64
+  /* "yapyg/math_collision.pyx":64
  * 
  *         cdef tuple rect_rotated_points = (
  *                 (r_x, r_y),             # <<<<<<<<<<<<<<
@@ -1314,7 +1342,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_t_1 = 0;
   __pyx_t_3 = 0;
 
-  /* "yapyg\math_collision.pyx":65
+  /* "yapyg/math_collision.pyx":65
  *         cdef tuple rect_rotated_points = (
  *                 (r_x, r_y),
  *                 (r_x + r_w, r_y),             # <<<<<<<<<<<<<<
@@ -1334,7 +1362,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":66
+  /* "yapyg/math_collision.pyx":66
  *                 (r_x, r_y),
  *                 (r_x + r_w, r_y),
  *                 (r_x, r_y + r_h),             # <<<<<<<<<<<<<<
@@ -1354,7 +1382,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_t_1 = 0;
   __pyx_t_3 = 0;
 
-  /* "yapyg\math_collision.pyx":67
+  /* "yapyg/math_collision.pyx":67
  *                 (r_x + r_w, r_y),
  *                 (r_x, r_y + r_h),
  *                 (r_x + r_w, r_y + r_h),             # <<<<<<<<<<<<<<
@@ -1374,7 +1402,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":64
+  /* "yapyg/math_collision.pyx":64
  * 
  *         cdef tuple rect_rotated_points = (
  *                 (r_x, r_y),             # <<<<<<<<<<<<<<
@@ -1398,7 +1426,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_v_rect_rotated_points = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":71
+  /* "yapyg/math_collision.pyx":71
  * 
  *         cdef tuple rect_rotation_origin
  *         if r_rot != 0:             # <<<<<<<<<<<<<<
@@ -1408,7 +1436,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_t_8 = ((__pyx_v_r_rot != 0.0) != 0);
   if (__pyx_t_8) {
 
-    /* "yapyg\math_collision.pyx":72
+    /* "yapyg/math_collision.pyx":72
  *         cdef tuple rect_rotation_origin
  *         if r_rot != 0:
  *                 rect_rotation_origin = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))             # <<<<<<<<<<<<<<
@@ -1430,7 +1458,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
     __pyx_v_rect_rotation_origin = ((PyObject*)__pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "yapyg\math_collision.pyx":74
+    /* "yapyg/math_collision.pyx":74
  *                 rect_rotation_origin = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
  *                 rect_rotated_points = (
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[0], r_rot),             # <<<<<<<<<<<<<<
@@ -1443,7 +1471,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "yapyg\math_collision.pyx":75
+    /* "yapyg/math_collision.pyx":75
  *                 rect_rotated_points = (
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[0], r_rot),
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[1], r_rot),             # <<<<<<<<<<<<<<
@@ -1456,7 +1484,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "yapyg\math_collision.pyx":76
+    /* "yapyg/math_collision.pyx":76
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[0], r_rot),
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[1], r_rot),
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[2], r_rot),             # <<<<<<<<<<<<<<
@@ -1469,7 +1497,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "yapyg\math_collision.pyx":77
+    /* "yapyg/math_collision.pyx":77
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[1], r_rot),
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[2], r_rot),
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[3], r_rot),             # <<<<<<<<<<<<<<
@@ -1482,7 +1510,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "yapyg\math_collision.pyx":74
+    /* "yapyg/math_collision.pyx":74
  *                 rect_rotation_origin = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
  *                 rect_rotated_points = (
  *                                 math_2d.rotated_point(rect_rotation_origin, rect_rotated_points[0], r_rot),             # <<<<<<<<<<<<<<
@@ -1509,7 +1537,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg\math_collision.pyx":80
+  /* "yapyg/math_collision.pyx":80
  *                         )
  * 
  *         return rect_rotated_points             # <<<<<<<<<<<<<<
@@ -1521,7 +1549,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_rect_points(PyObject *__pyx
   __pyx_r = __pyx_v_rect_rotated_points;
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":53
+  /* "yapyg/math_collision.pyx":53
  *         return value_in_range(p_x, r_x, r_x + r_w) and value_in_range(p_y, r_y, r_y + r_h)
  * 
  * cpdef tuple get_rect_points(tuple rect):             # <<<<<<<<<<<<<<
@@ -1595,7 +1623,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_4get_rect_points(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":82
+/* "yapyg/math_collision.pyx":82
  *         return rect_rotated_points
  * 
  * cpdef int is_rect_rect_collision(tuple rect_1, tuple rect_2, list contact_points):             # <<<<<<<<<<<<<<
@@ -1632,7 +1660,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_rect_rect_collision", 0);
 
-  /* "yapyg\math_collision.pyx":86
+  /* "yapyg/math_collision.pyx":86
  *         rect = ("rectangle", x, y, w, h, rot)
  *         """
  *         cdef float r_x_1 = rect_1[1]             # <<<<<<<<<<<<<<
@@ -1649,7 +1677,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_x_1 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":87
+  /* "yapyg/math_collision.pyx":87
  *         """
  *         cdef float r_x_1 = rect_1[1]
  *         cdef float r_y_1 = rect_1[2]             # <<<<<<<<<<<<<<
@@ -1666,7 +1694,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_y_1 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":88
+  /* "yapyg/math_collision.pyx":88
  *         cdef float r_x_1 = rect_1[1]
  *         cdef float r_y_1 = rect_1[2]
  *         cdef float r_w_1 = rect_1[3]             # <<<<<<<<<<<<<<
@@ -1683,7 +1711,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_w_1 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":89
+  /* "yapyg/math_collision.pyx":89
  *         cdef float r_y_1 = rect_1[2]
  *         cdef float r_w_1 = rect_1[3]
  *         cdef float r_h_1 = rect_1[4]             # <<<<<<<<<<<<<<
@@ -1700,7 +1728,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_h_1 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":90
+  /* "yapyg/math_collision.pyx":90
  *         cdef float r_w_1 = rect_1[3]
  *         cdef float r_h_1 = rect_1[4]
  *         cdef float r_rot_1 = rect_1[5]             # <<<<<<<<<<<<<<
@@ -1717,7 +1745,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_rot_1 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":92
+  /* "yapyg/math_collision.pyx":92
  *         cdef float r_rot_1 = rect_1[5]
  * 
  *         cdef float r_x_2 = rect_2[1]             # <<<<<<<<<<<<<<
@@ -1734,7 +1762,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_x_2 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":93
+  /* "yapyg/math_collision.pyx":93
  * 
  *         cdef float r_x_2 = rect_2[1]
  *         cdef float r_y_2 = rect_2[2]             # <<<<<<<<<<<<<<
@@ -1751,7 +1779,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_y_2 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":94
+  /* "yapyg/math_collision.pyx":94
  *         cdef float r_x_2 = rect_2[1]
  *         cdef float r_y_2 = rect_2[2]
  *         cdef float r_w_2 = rect_2[3]             # <<<<<<<<<<<<<<
@@ -1768,7 +1796,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_w_2 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":95
+  /* "yapyg/math_collision.pyx":95
  *         cdef float r_y_2 = rect_2[2]
  *         cdef float r_w_2 = rect_2[3]
  *         cdef float r_h_2 = rect_2[4]             # <<<<<<<<<<<<<<
@@ -1785,7 +1813,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_h_2 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":96
+  /* "yapyg/math_collision.pyx":96
  *         cdef float r_w_2 = rect_2[3]
  *         cdef float r_h_2 = rect_2[4]
  *         cdef float r_rot_2 = rect_2[5]             # <<<<<<<<<<<<<<
@@ -1802,7 +1830,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_rot_2 = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":98
+  /* "yapyg/math_collision.pyx":98
  *         cdef float r_rot_2 = rect_2[5]
  * 
  *         cdef tuple rect_2_rotated_points = get_rect_points(rect_2)             # <<<<<<<<<<<<<<
@@ -1814,7 +1842,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __pyx_v_rect_2_rotated_points = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":99
+  /* "yapyg/math_collision.pyx":99
  * 
  *         cdef tuple rect_2_rotated_points = get_rect_points(rect_2)
  *         for point in rect_2_rotated_points:             # <<<<<<<<<<<<<<
@@ -1836,7 +1864,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_point, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "yapyg\math_collision.pyx":100
+    /* "yapyg/math_collision.pyx":100
  *         cdef tuple rect_2_rotated_points = get_rect_points(rect_2)
  *         for point in rect_2_rotated_points:
  *                 if (is_point_in_rect(point, rect_1)):             # <<<<<<<<<<<<<<
@@ -1847,7 +1875,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
     __pyx_t_5 = (__pyx_f_5yapyg_14math_collision_is_point_in_rect(((PyObject*)__pyx_v_point), __pyx_v_rect_1, 0) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":101
+      /* "yapyg/math_collision.pyx":101
  *         for point in rect_2_rotated_points:
  *                 if (is_point_in_rect(point, rect_1)):
  *                         contact_points.append(point)             # <<<<<<<<<<<<<<
@@ -1863,7 +1891,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
     }
     __pyx_L5:;
 
-    /* "yapyg\math_collision.pyx":99
+    /* "yapyg/math_collision.pyx":99
  * 
  *         cdef tuple rect_2_rotated_points = get_rect_points(rect_2)
  *         for point in rect_2_rotated_points:             # <<<<<<<<<<<<<<
@@ -1873,7 +1901,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":104
+  /* "yapyg/math_collision.pyx":104
  * 
  *         cdef tuple rect_1_rotated_points
  *         if not contact_points:             # <<<<<<<<<<<<<<
@@ -1884,7 +1912,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __pyx_t_7 = ((!__pyx_t_5) != 0);
   if (__pyx_t_7) {
 
-    /* "yapyg\math_collision.pyx":105
+    /* "yapyg/math_collision.pyx":105
  *         cdef tuple rect_1_rotated_points
  *         if not contact_points:
  *                 rect_1_rotated_points = get_rect_points(rect_1)             # <<<<<<<<<<<<<<
@@ -1896,7 +1924,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
     __pyx_v_rect_1_rotated_points = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\math_collision.pyx":106
+    /* "yapyg/math_collision.pyx":106
  *         if not contact_points:
  *                 rect_1_rotated_points = get_rect_points(rect_1)
  *                 for point in rect_1_rotated_points:             # <<<<<<<<<<<<<<
@@ -1918,7 +1946,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
       __Pyx_XDECREF_SET(__pyx_v_point, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "yapyg\math_collision.pyx":107
+      /* "yapyg/math_collision.pyx":107
  *                 rect_1_rotated_points = get_rect_points(rect_1)
  *                 for point in rect_1_rotated_points:
  *                         if (is_point_in_rect(point, rect_2)):             # <<<<<<<<<<<<<<
@@ -1929,7 +1957,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
       __pyx_t_7 = (__pyx_f_5yapyg_14math_collision_is_point_in_rect(((PyObject*)__pyx_v_point), __pyx_v_rect_2, 0) != 0);
       if (__pyx_t_7) {
 
-        /* "yapyg\math_collision.pyx":108
+        /* "yapyg/math_collision.pyx":108
  *                 for point in rect_1_rotated_points:
  *                         if (is_point_in_rect(point, rect_2)):
  *                                 contact_points.append(point)             # <<<<<<<<<<<<<<
@@ -1945,7 +1973,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
       }
       __pyx_L9:;
 
-      /* "yapyg\math_collision.pyx":106
+      /* "yapyg/math_collision.pyx":106
  *         if not contact_points:
  *                 rect_1_rotated_points = get_rect_points(rect_1)
  *                 for point in rect_1_rotated_points:             # <<<<<<<<<<<<<<
@@ -1958,7 +1986,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   }
   __pyx_L6:;
 
-  /* "yapyg\math_collision.pyx":110
+  /* "yapyg/math_collision.pyx":110
  *                                 contact_points.append(point)
  * 
  *         return len(contact_points) > 0             # <<<<<<<<<<<<<<
@@ -1973,7 +2001,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_rect_collision(PyObject *__py
   __pyx_r = (__pyx_t_3 > 0);
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":82
+  /* "yapyg/math_collision.pyx":82
  *         return rect_rotated_points
  * 
  * cpdef int is_rect_rect_collision(tuple rect_1, tuple rect_2, list contact_points):             # <<<<<<<<<<<<<<
@@ -2099,7 +2127,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_6is_rect_rect_collision(CYTHON
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":112
+/* "yapyg/math_collision.pyx":112
  *         return len(contact_points) > 0
  * 
  * cpdef int is_circle_circle_collision(tuple c_1, tuple c_2, list contact_points):             # <<<<<<<<<<<<<<
@@ -2127,7 +2155,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_circle_circle_collision", 0);
 
-  /* "yapyg\math_collision.pyx":116
+  /* "yapyg/math_collision.pyx":116
  *         TODO
  *         """
  *         cdef float c1_x = c_1[1]             # <<<<<<<<<<<<<<
@@ -2144,7 +2172,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c1_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":117
+  /* "yapyg/math_collision.pyx":117
  *         """
  *         cdef float c1_x = c_1[1]
  *         cdef float c1_y = c_1[2]             # <<<<<<<<<<<<<<
@@ -2161,7 +2189,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c1_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":118
+  /* "yapyg/math_collision.pyx":118
  *         cdef float c1_x = c_1[1]
  *         cdef float c1_y = c_1[2]
  *         cdef float c1_r = c_1[3]             # <<<<<<<<<<<<<<
@@ -2178,7 +2206,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c1_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":120
+  /* "yapyg/math_collision.pyx":120
  *         cdef float c1_r = c_1[3]
  * 
  *         cdef float c2_x = c_2[1]             # <<<<<<<<<<<<<<
@@ -2195,7 +2223,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c2_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":121
+  /* "yapyg/math_collision.pyx":121
  * 
  *         cdef float c2_x = c_2[1]
  *         cdef float c2_y = c_2[2]             # <<<<<<<<<<<<<<
@@ -2212,7 +2240,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c2_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":122
+  /* "yapyg/math_collision.pyx":122
  *         cdef float c2_x = c_2[1]
  *         cdef float c2_y = c_2[2]
  *         cdef float c2_r = c_2[3]             # <<<<<<<<<<<<<<
@@ -2229,7 +2257,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c2_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":124
+  /* "yapyg/math_collision.pyx":124
  *         cdef float c2_r = c_2[3]
  * 
  *         cdef float sq_1 = c2_x - c1_x             # <<<<<<<<<<<<<<
@@ -2238,7 +2266,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   __pyx_v_sq_1 = (__pyx_v_c2_x - __pyx_v_c1_x);
 
-  /* "yapyg\math_collision.pyx":125
+  /* "yapyg/math_collision.pyx":125
  * 
  *         cdef float sq_1 = c2_x - c1_x
  *         sq_1 *= sq_1             # <<<<<<<<<<<<<<
@@ -2247,7 +2275,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   __pyx_v_sq_1 = (__pyx_v_sq_1 * __pyx_v_sq_1);
 
-  /* "yapyg\math_collision.pyx":127
+  /* "yapyg/math_collision.pyx":127
  *         sq_1 *= sq_1
  * 
  *         cdef float sq_2 = c2_y - c1_y             # <<<<<<<<<<<<<<
@@ -2256,7 +2284,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   __pyx_v_sq_2 = (__pyx_v_c2_y - __pyx_v_c1_y);
 
-  /* "yapyg\math_collision.pyx":128
+  /* "yapyg/math_collision.pyx":128
  * 
  *         cdef float sq_2 = c2_y - c1_y
  *         sq_2 *= sq_2             # <<<<<<<<<<<<<<
@@ -2265,7 +2293,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   __pyx_v_sq_2 = (__pyx_v_sq_2 * __pyx_v_sq_2);
 
-  /* "yapyg\math_collision.pyx":130
+  /* "yapyg/math_collision.pyx":130
  *         sq_2 *= sq_2
  * 
  *         cdef float sq_3 = c1_r + c2_r             # <<<<<<<<<<<<<<
@@ -2274,7 +2302,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   __pyx_v_sq_3 = (__pyx_v_c1_r + __pyx_v_c2_r);
 
-  /* "yapyg\math_collision.pyx":131
+  /* "yapyg/math_collision.pyx":131
  * 
  *         cdef float sq_3 = c1_r + c2_r
  *         sq_3 *= sq_3             # <<<<<<<<<<<<<<
@@ -2283,7 +2311,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
  */
   __pyx_v_sq_3 = (__pyx_v_sq_3 * __pyx_v_sq_3);
 
-  /* "yapyg\math_collision.pyx":133
+  /* "yapyg/math_collision.pyx":133
  *         sq_3 *= sq_3
  * 
  *         return sq_3 >= (sq_1 + sq_2)             # <<<<<<<<<<<<<<
@@ -2293,7 +2321,7 @@ static int __pyx_f_5yapyg_14math_collision_is_circle_circle_collision(PyObject *
   __pyx_r = (__pyx_v_sq_3 >= (__pyx_v_sq_1 + __pyx_v_sq_2));
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":112
+  /* "yapyg/math_collision.pyx":112
  *         return len(contact_points) > 0
  * 
  * cpdef int is_circle_circle_collision(tuple c_1, tuple c_2, list contact_points):             # <<<<<<<<<<<<<<
@@ -2415,7 +2443,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_8is_circle_circle_collision(CY
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":135
+/* "yapyg/math_collision.pyx":135
  *         return sq_3 >= (sq_1 + sq_2)
  * 
  * cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points):             # <<<<<<<<<<<<<<
@@ -2454,7 +2482,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_rect_circle_collision", 0);
 
-  /* "yapyg\math_collision.pyx":140
+  /* "yapyg/math_collision.pyx":140
  *         rect = ("rectangle", x, y, w, h, rot)
  *         """
  *         cdef float c_x = circ[1]             # <<<<<<<<<<<<<<
@@ -2471,7 +2499,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":141
+  /* "yapyg/math_collision.pyx":141
  *         """
  *         cdef float c_x = circ[1]
  *         cdef float c_y = circ[2]             # <<<<<<<<<<<<<<
@@ -2488,7 +2516,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":142
+  /* "yapyg/math_collision.pyx":142
  *         cdef float c_x = circ[1]
  *         cdef float c_y = circ[2]
  *         cdef float c_r = circ[3]             # <<<<<<<<<<<<<<
@@ -2505,7 +2533,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":144
+  /* "yapyg/math_collision.pyx":144
  *         cdef float c_r = circ[3]
  * 
  *         cdef float r_x_left = rect[1]             # <<<<<<<<<<<<<<
@@ -2522,7 +2550,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_x_left = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":145
+  /* "yapyg/math_collision.pyx":145
  * 
  *         cdef float r_x_left = rect[1]
  *         cdef float r_y_bottom = rect[2]             # <<<<<<<<<<<<<<
@@ -2539,7 +2567,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_y_bottom = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":146
+  /* "yapyg/math_collision.pyx":146
  *         cdef float r_x_left = rect[1]
  *         cdef float r_y_bottom = rect[2]
  *         cdef float r_w = rect[3]             # <<<<<<<<<<<<<<
@@ -2556,7 +2584,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_w = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":147
+  /* "yapyg/math_collision.pyx":147
  *         cdef float r_y_bottom = rect[2]
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]             # <<<<<<<<<<<<<<
@@ -2573,7 +2601,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_h = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":148
+  /* "yapyg/math_collision.pyx":148
  *         cdef float r_w = rect[3]
  *         cdef float r_h = rect[4]
  *         cdef float r_rot = rect[5]             # <<<<<<<<<<<<<<
@@ -2590,7 +2618,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r_rot = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":150
+  /* "yapyg/math_collision.pyx":150
  *         cdef float r_rot = rect[5]
  * 
  *         cdef float r_x_right = r_x_left + r_w             # <<<<<<<<<<<<<<
@@ -2599,7 +2627,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
  */
   __pyx_v_r_x_right = (__pyx_v_r_x_left + __pyx_v_r_w);
 
-  /* "yapyg\math_collision.pyx":151
+  /* "yapyg/math_collision.pyx":151
  * 
  *         cdef float r_x_right = r_x_left + r_w
  *         cdef float r_y_top = r_y_bottom + r_h             # <<<<<<<<<<<<<<
@@ -2608,7 +2636,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
  */
   __pyx_v_r_y_top = (__pyx_v_r_y_bottom + __pyx_v_r_h);
 
-  /* "yapyg\math_collision.pyx":153
+  /* "yapyg/math_collision.pyx":153
  *         cdef float r_y_top = r_y_bottom + r_h
  * 
  *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))             # <<<<<<<<<<<<<<
@@ -2630,7 +2658,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_v_r_centre = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg\math_collision.pyx":154
+  /* "yapyg/math_collision.pyx":154
  * 
  *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))
  *         if r_rot != 0:             # <<<<<<<<<<<<<<
@@ -2640,7 +2668,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_t_5 = ((__pyx_v_r_rot != 0.0) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\math_collision.pyx":155
+    /* "yapyg/math_collision.pyx":155
  *         cdef tuple r_centre = (r_x_left + (r_w / 2.0), r_y_bottom + (r_h / 2.0))
  *         if r_rot != 0:
  *                 c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)             # <<<<<<<<<<<<<<
@@ -2699,7 +2727,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   }
   __pyx_L3:;
 
-  /* "yapyg\math_collision.pyx":157
+  /* "yapyg/math_collision.pyx":157
  *                 c_x, c_y = math_2d.rotated_point(r_centre, (c_x, c_y), -r_rot)
  * 
  *         cdef tuple found_contact_point = None             # <<<<<<<<<<<<<<
@@ -2709,7 +2737,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_INCREF(Py_None);
   __pyx_v_found_contact_point = ((PyObject*)Py_None);
 
-  /* "yapyg\math_collision.pyx":158
+  /* "yapyg/math_collision.pyx":158
  * 
  *         cdef tuple found_contact_point = None
  *         cdef tuple corner_circle = None             # <<<<<<<<<<<<<<
@@ -2719,7 +2747,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __Pyx_INCREF(Py_None);
   __pyx_v_corner_circle = ((PyObject*)Py_None);
 
-  /* "yapyg\math_collision.pyx":160
+  /* "yapyg/math_collision.pyx":160
  *         cdef tuple corner_circle = None
  * 
  *         if c_x <= r_x_left:             # <<<<<<<<<<<<<<
@@ -2729,7 +2757,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_t_5 = ((__pyx_v_c_x <= __pyx_v_r_x_left) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\math_collision.pyx":161
+    /* "yapyg/math_collision.pyx":161
  * 
  *         if c_x <= r_x_left:
  *                 if c_y < r_y_bottom:             # <<<<<<<<<<<<<<
@@ -2739,7 +2767,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __pyx_t_5 = ((__pyx_v_c_y < __pyx_v_r_y_bottom) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":162
+      /* "yapyg/math_collision.pyx":162
  *         if c_x <= r_x_left:
  *                 if c_y < r_y_bottom:
  *                         corner_circle = (r_x_left, r_y_bottom, c_r)             # <<<<<<<<<<<<<<
@@ -2768,7 +2796,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       goto __pyx_L5;
     }
 
-    /* "yapyg\math_collision.pyx":163
+    /* "yapyg/math_collision.pyx":163
  *                 if c_y < r_y_bottom:
  *                         corner_circle = (r_x_left, r_y_bottom, c_r)
  *                 elif c_y > r_y_top:             # <<<<<<<<<<<<<<
@@ -2778,7 +2806,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __pyx_t_5 = ((__pyx_v_c_y > __pyx_v_r_y_top) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":164
+      /* "yapyg/math_collision.pyx":164
  *                         corner_circle = (r_x_left, r_y_bottom, c_r)
  *                 elif c_y > r_y_top:
  *                         corner_circle = (r_x_left, r_y_top, c_r)             # <<<<<<<<<<<<<<
@@ -2808,7 +2836,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     }
     /*else*/ {
 
-      /* "yapyg\math_collision.pyx":166
+      /* "yapyg/math_collision.pyx":166
  *                         corner_circle = (r_x_left, r_y_top, c_r)
  *                 else:
  *                         if c_x + c_r >= r_x_left:             # <<<<<<<<<<<<<<
@@ -2818,7 +2846,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       __pyx_t_5 = (((__pyx_v_c_x + __pyx_v_c_r) >= __pyx_v_r_x_left) != 0);
       if (__pyx_t_5) {
 
-        /* "yapyg\math_collision.pyx":167
+        /* "yapyg/math_collision.pyx":167
  *                 else:
  *                         if c_x + c_r >= r_x_left:
  *                                 found_contact_point = (r_x_left, c_y)             # <<<<<<<<<<<<<<
@@ -2847,7 +2875,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     goto __pyx_L4;
   }
 
-  /* "yapyg\math_collision.pyx":168
+  /* "yapyg/math_collision.pyx":168
  *                         if c_x + c_r >= r_x_left:
  *                                 found_contact_point = (r_x_left, c_y)
  *         elif c_x >= r_x_right:             # <<<<<<<<<<<<<<
@@ -2857,7 +2885,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_t_5 = ((__pyx_v_c_x >= __pyx_v_r_x_right) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\math_collision.pyx":169
+    /* "yapyg/math_collision.pyx":169
  *                                 found_contact_point = (r_x_left, c_y)
  *         elif c_x >= r_x_right:
  *                 if c_y < r_y_bottom:             # <<<<<<<<<<<<<<
@@ -2867,7 +2895,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __pyx_t_5 = ((__pyx_v_c_y < __pyx_v_r_y_bottom) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":170
+      /* "yapyg/math_collision.pyx":170
  *         elif c_x >= r_x_right:
  *                 if c_y < r_y_bottom:
  *                         corner_circle = (r_x_right, r_y_bottom, c_r)             # <<<<<<<<<<<<<<
@@ -2896,7 +2924,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       goto __pyx_L7;
     }
 
-    /* "yapyg\math_collision.pyx":171
+    /* "yapyg/math_collision.pyx":171
  *                 if c_y < r_y_bottom:
  *                         corner_circle = (r_x_right, r_y_bottom, c_r)
  *                 elif c_y > r_y_top:             # <<<<<<<<<<<<<<
@@ -2906,7 +2934,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __pyx_t_5 = ((__pyx_v_c_y > __pyx_v_r_y_top) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":172
+      /* "yapyg/math_collision.pyx":172
  *                         corner_circle = (r_x_right, r_y_bottom, c_r)
  *                 elif c_y > r_y_top:
  *                         corner_circle = (r_x_right, r_y_top, c_r)             # <<<<<<<<<<<<<<
@@ -2936,7 +2964,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     }
     /*else*/ {
 
-      /* "yapyg\math_collision.pyx":174
+      /* "yapyg/math_collision.pyx":174
  *                         corner_circle = (r_x_right, r_y_top, c_r)
  *                 else:
  *                         if c_x - c_r <= r_x_right:             # <<<<<<<<<<<<<<
@@ -2946,7 +2974,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       __pyx_t_5 = (((__pyx_v_c_x - __pyx_v_c_r) <= __pyx_v_r_x_right) != 0);
       if (__pyx_t_5) {
 
-        /* "yapyg\math_collision.pyx":175
+        /* "yapyg/math_collision.pyx":175
  *                 else:
  *                         if c_x - c_r <= r_x_right:
  *                                 found_contact_point = (r_x_right, c_y)             # <<<<<<<<<<<<<<
@@ -2976,7 +3004,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   }
   /*else*/ {
 
-    /* "yapyg\math_collision.pyx":177
+    /* "yapyg/math_collision.pyx":177
  *                                 found_contact_point = (r_x_right, c_y)
  *         else:
  *                 if c_y < r_y_bottom:             # <<<<<<<<<<<<<<
@@ -2986,7 +3014,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __pyx_t_5 = ((__pyx_v_c_y < __pyx_v_r_y_bottom) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":178
+      /* "yapyg/math_collision.pyx":178
  *         else:
  *                 if c_y < r_y_bottom:
  *                         if c_y + c_r >= r_y_bottom:             # <<<<<<<<<<<<<<
@@ -2996,7 +3024,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       __pyx_t_5 = (((__pyx_v_c_y + __pyx_v_c_r) >= __pyx_v_r_y_bottom) != 0);
       if (__pyx_t_5) {
 
-        /* "yapyg\math_collision.pyx":179
+        /* "yapyg/math_collision.pyx":179
  *                 if c_y < r_y_bottom:
  *                         if c_y + c_r >= r_y_bottom:
  *                                 found_contact_point = (c_x, r_y_bottom)             # <<<<<<<<<<<<<<
@@ -3023,7 +3051,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       goto __pyx_L9;
     }
 
-    /* "yapyg\math_collision.pyx":180
+    /* "yapyg/math_collision.pyx":180
  *                         if c_y + c_r >= r_y_bottom:
  *                                 found_contact_point = (c_x, r_y_bottom)
  *                 elif c_y > r_y_top:             # <<<<<<<<<<<<<<
@@ -3033,7 +3061,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __pyx_t_5 = ((__pyx_v_c_y > __pyx_v_r_y_top) != 0);
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":181
+      /* "yapyg/math_collision.pyx":181
  *                                 found_contact_point = (c_x, r_y_bottom)
  *                 elif c_y > r_y_top:
  *                         if c_y - c_r <= r_y_top:             # <<<<<<<<<<<<<<
@@ -3043,7 +3071,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
       __pyx_t_5 = (((__pyx_v_c_y - __pyx_v_c_r) <= __pyx_v_r_y_top) != 0);
       if (__pyx_t_5) {
 
-        /* "yapyg\math_collision.pyx":182
+        /* "yapyg/math_collision.pyx":182
  *                 elif c_y > r_y_top:
  *                         if c_y - c_r <= r_y_top:
  *                                 found_contact_point = (c_x, r_y_top)             # <<<<<<<<<<<<<<
@@ -3071,7 +3099,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     }
     /*else*/ {
 
-      /* "yapyg\math_collision.pyx":184
+      /* "yapyg/math_collision.pyx":184
  *                                 found_contact_point = (c_x, r_y_top)
  *                 else:
  *                         found_contact_point = (c_x, c_y)             # <<<<<<<<<<<<<<
@@ -3097,7 +3125,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   }
   __pyx_L4:;
 
-  /* "yapyg\math_collision.pyx":186
+  /* "yapyg/math_collision.pyx":186
  *                         found_contact_point = (c_x, c_y)
  * 
  *         if corner_circle:             # <<<<<<<<<<<<<<
@@ -3107,7 +3135,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_t_5 = (__pyx_v_corner_circle != Py_None) && (PyTuple_GET_SIZE(__pyx_v_corner_circle) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\math_collision.pyx":187
+    /* "yapyg/math_collision.pyx":187
  * 
  *         if corner_circle:
  *                 if is_point_in_circle((c_x, c_y), corner_circle):             # <<<<<<<<<<<<<<
@@ -3130,7 +3158,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "yapyg\math_collision.pyx":188
+      /* "yapyg/math_collision.pyx":188
  *         if corner_circle:
  *                 if is_point_in_circle((c_x, c_y), corner_circle):
  *                         found_contact_point = corner_circle             # <<<<<<<<<<<<<<
@@ -3146,7 +3174,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   }
   __pyx_L12:;
 
-  /* "yapyg\math_collision.pyx":190
+  /* "yapyg/math_collision.pyx":190
  *                         found_contact_point = corner_circle
  * 
  *         if found_contact_point:             # <<<<<<<<<<<<<<
@@ -3156,7 +3184,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_t_5 = (__pyx_v_found_contact_point != Py_None) && (PyTuple_GET_SIZE(__pyx_v_found_contact_point) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\math_collision.pyx":191
+    /* "yapyg/math_collision.pyx":191
  * 
  *         if found_contact_point:
  *                 contact_points.append(math_2d.rotated_point(r_centre, found_contact_point, r_rot))             # <<<<<<<<<<<<<<
@@ -3175,7 +3203,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   }
   __pyx_L14:;
 
-  /* "yapyg\math_collision.pyx":193
+  /* "yapyg/math_collision.pyx":193
  *                 contact_points.append(math_2d.rotated_point(r_centre, found_contact_point, r_rot))
  * 
  *         return len(contact_points) > 0             # <<<<<<<<<<<<<<
@@ -3190,7 +3218,7 @@ static int __pyx_f_5yapyg_14math_collision_is_rect_circle_collision(PyObject *__
   __pyx_r = (__pyx_t_9 > 0);
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":135
+  /* "yapyg/math_collision.pyx":135
  *         return sq_3 >= (sq_1 + sq_2)
  * 
  * cpdef int is_rect_circle_collision(tuple circ, tuple rect, list contact_points):             # <<<<<<<<<<<<<<
@@ -3318,7 +3346,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_10is_rect_circle_collision(CYT
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":195
+/* "yapyg/math_collision.pyx":195
  *         return len(contact_points) > 0
  * 
  * cpdef int is_point_in_circle(tuple point, tuple circ):             # <<<<<<<<<<<<<<
@@ -3345,7 +3373,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_point_in_circle", 0);
 
-  /* "yapyg\math_collision.pyx":199
+  /* "yapyg/math_collision.pyx":199
  *         TODO
  *         """
  *         cdef float c_x = circ[0]             # <<<<<<<<<<<<<<
@@ -3362,7 +3390,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":200
+  /* "yapyg/math_collision.pyx":200
  *         """
  *         cdef float c_x = circ[0]
  *         cdef float c_y = circ[1]             # <<<<<<<<<<<<<<
@@ -3379,7 +3407,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":201
+  /* "yapyg/math_collision.pyx":201
  *         cdef float c_x = circ[0]
  *         cdef float c_y = circ[1]
  *         cdef float c_r = circ[2]             # <<<<<<<<<<<<<<
@@ -3396,7 +3424,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_r = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":203
+  /* "yapyg/math_collision.pyx":203
  *         cdef float c_r = circ[2]
  * 
  *         cdef float p_x = point[0]             # <<<<<<<<<<<<<<
@@ -3413,7 +3441,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_x = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":204
+  /* "yapyg/math_collision.pyx":204
  * 
  *         cdef float p_x = point[0]
  *         cdef float p_y = point[1]             # <<<<<<<<<<<<<<
@@ -3430,7 +3458,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_y = __pyx_t_2;
 
-  /* "yapyg\math_collision.pyx":206
+  /* "yapyg/math_collision.pyx":206
  *         cdef float p_y = point[1]
  * 
  *         cdef float x_d = p_x - c_x             # <<<<<<<<<<<<<<
@@ -3439,7 +3467,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   __pyx_v_x_d = (__pyx_v_p_x - __pyx_v_c_x);
 
-  /* "yapyg\math_collision.pyx":207
+  /* "yapyg/math_collision.pyx":207
  * 
  *         cdef float x_d = p_x - c_x
  *         x_d *= x_d             # <<<<<<<<<<<<<<
@@ -3448,7 +3476,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   __pyx_v_x_d = (__pyx_v_x_d * __pyx_v_x_d);
 
-  /* "yapyg\math_collision.pyx":209
+  /* "yapyg/math_collision.pyx":209
  *         x_d *= x_d
  * 
  *         cdef float y_d = p_y - c_y             # <<<<<<<<<<<<<<
@@ -3457,7 +3485,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   __pyx_v_y_d = (__pyx_v_p_y - __pyx_v_c_y);
 
-  /* "yapyg\math_collision.pyx":210
+  /* "yapyg/math_collision.pyx":210
  * 
  *         cdef float y_d = p_y - c_y
  *         y_d *= y_d             # <<<<<<<<<<<<<<
@@ -3466,7 +3494,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   __pyx_v_y_d = (__pyx_v_y_d * __pyx_v_y_d);
 
-  /* "yapyg\math_collision.pyx":212
+  /* "yapyg/math_collision.pyx":212
  *         y_d *= y_d
  * 
  *         cdef float dist = y_d + x_d             # <<<<<<<<<<<<<<
@@ -3475,7 +3503,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
  */
   __pyx_v_dist = (__pyx_v_y_d + __pyx_v_x_d);
 
-  /* "yapyg\math_collision.pyx":214
+  /* "yapyg/math_collision.pyx":214
  *         cdef float dist = y_d + x_d
  * 
  *         return dist <= (c_r * c_r)             # <<<<<<<<<<<<<<
@@ -3485,7 +3513,7 @@ static int __pyx_f_5yapyg_14math_collision_is_point_in_circle(PyObject *__pyx_v_
   __pyx_r = (__pyx_v_dist <= (__pyx_v_c_r * __pyx_v_c_r));
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":195
+  /* "yapyg/math_collision.pyx":195
  *         return len(contact_points) > 0
  * 
  * cpdef int is_point_in_circle(tuple point, tuple circ):             # <<<<<<<<<<<<<<
@@ -3597,7 +3625,7 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_12is_point_in_circle(CYTHON_UN
   return __pyx_r;
 }
 
-/* "yapyg\math_collision.pyx":216
+/* "yapyg/math_collision.pyx":216
  *         return dist <= (c_r * c_r)
  * 
  * cpdef tuple get_contact_sum_vector(list contact_points, tuple origin_point):             # <<<<<<<<<<<<<<
@@ -3620,7 +3648,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_contact_sum_vector", 0);
 
-  /* "yapyg\math_collision.pyx":220
+  /* "yapyg/math_collision.pyx":220
  *         TODO
  *         """
  *         cdef tuple contact_sum_vector = (0.0, 0.0)             # <<<<<<<<<<<<<<
@@ -3630,7 +3658,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject
   __Pyx_INCREF(__pyx_tuple_);
   __pyx_v_contact_sum_vector = __pyx_tuple_;
 
-  /* "yapyg\math_collision.pyx":222
+  /* "yapyg/math_collision.pyx":222
  *         cdef tuple contact_sum_vector = (0.0, 0.0)
  *         cdef tuple contact_point_vector
  *         for contact_point_vector in contact_points:             # <<<<<<<<<<<<<<
@@ -3653,11 +3681,12 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject
     __Pyx_XDECREF_SET(__pyx_v_contact_point_vector, ((PyObject*)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "yapyg\math_collision.pyx":223
+    /* "yapyg/math_collision.pyx":223
  *         cdef tuple contact_point_vector
  *         for contact_point_vector in contact_points:
  *                 contact_sum_vector = math_2d.vector_add(contact_sum_vector, math_2d.vector_sub(contact_point_vector, origin_point))             # <<<<<<<<<<<<<<
  *         return math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points))
+ * 
  */
     __pyx_t_3 = __pyx_f_5yapyg_7math_2d_vector_sub(__pyx_v_contact_point_vector, __pyx_v_origin_point, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -3667,7 +3696,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject
     __Pyx_DECREF_SET(__pyx_v_contact_sum_vector, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "yapyg\math_collision.pyx":222
+    /* "yapyg/math_collision.pyx":222
  *         cdef tuple contact_sum_vector = (0.0, 0.0)
  *         cdef tuple contact_point_vector
  *         for contact_point_vector in contact_points:             # <<<<<<<<<<<<<<
@@ -3677,10 +3706,12 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\math_collision.pyx":224
+  /* "yapyg/math_collision.pyx":224
  *         for contact_point_vector in contact_points:
  *                 contact_sum_vector = math_2d.vector_add(contact_sum_vector, math_2d.vector_sub(contact_point_vector, origin_point))
  *         return math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points))             # <<<<<<<<<<<<<<
+ * 
+ * cpdef tuple get_clipping_rectangle(int x1, int y1, int w, int h):
  */
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_contact_points == Py_None)) {
@@ -3704,7 +3735,7 @@ static PyObject *__pyx_f_5yapyg_14math_collision_get_contact_sum_vector(PyObject
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\math_collision.pyx":216
+  /* "yapyg/math_collision.pyx":216
  *         return dist <= (c_r * c_r)
  * 
  * cpdef tuple get_contact_sum_vector(list contact_points, tuple origin_point):             # <<<<<<<<<<<<<<
@@ -3821,6 +3852,705 @@ static PyObject *__pyx_pf_5yapyg_14math_collision_14get_contact_sum_vector(CYTHO
   return __pyx_r;
 }
 
+/* "yapyg/math_collision.pyx":226
+ *         return math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points))
+ * 
+ * cpdef tuple get_clipping_rectangle(int x1, int y1, int w, int h):             # <<<<<<<<<<<<<<
+ *         """
+ *         clipping rectangle visible => real rectangle *may* be visible = draw it
+ */
+
+static PyObject *__pyx_pw_5yapyg_14math_collision_17get_clipping_rectangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_5yapyg_14math_collision_get_clipping_rectangle(int __pyx_v_x1, int __pyx_v_y1, int __pyx_v_w, int __pyx_v_h, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_v_clip_size;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_clipping_rectangle", 0);
+
+  /* "yapyg/math_collision.pyx":232
+ *         Return (ints x, y, w, h) for worst case size for h/w extent and rotation
+ *         """
+ *         cdef int clip_size = 3 * max(w, h)             # <<<<<<<<<<<<<<
+ *         return (x1 + (w - clip_size) / 2,
+ *                 y1 + (h - clip_size) / 2,
+ */
+  __pyx_t_1 = __pyx_v_h;
+  __pyx_t_2 = __pyx_v_w;
+  if (((__pyx_t_1 > __pyx_t_2) != 0)) {
+    __pyx_t_3 = __pyx_t_1;
+  } else {
+    __pyx_t_3 = __pyx_t_2;
+  }
+  __pyx_v_clip_size = (3 * __pyx_t_3);
+
+  /* "yapyg/math_collision.pyx":233
+ *         """
+ *         cdef int clip_size = 3 * max(w, h)
+ *         return (x1 + (w - clip_size) / 2,             # <<<<<<<<<<<<<<
+ *                 y1 + (h - clip_size) / 2,
+ *                 clip_size,
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_x1 + __Pyx_div_long((__pyx_v_w - __pyx_v_clip_size), 2))); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+
+  /* "yapyg/math_collision.pyx":234
+ *         cdef int clip_size = 3 * max(w, h)
+ *         return (x1 + (w - clip_size) / 2,
+ *                 y1 + (h - clip_size) / 2,             # <<<<<<<<<<<<<<
+ *                 clip_size,
+ *                 clip_size)
+ */
+  __pyx_t_5 = __Pyx_PyInt_From_long((__pyx_v_y1 + __Pyx_div_long((__pyx_v_h - __pyx_v_clip_size), 2))); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+
+  /* "yapyg/math_collision.pyx":235
+ *         return (x1 + (w - clip_size) / 2,
+ *                 y1 + (h - clip_size) / 2,
+ *                 clip_size,             # <<<<<<<<<<<<<<
+ *                 clip_size)
+ * 
+ */
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_clip_size); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+
+  /* "yapyg/math_collision.pyx":236
+ *                 y1 + (h - clip_size) / 2,
+ *                 clip_size,
+ *                 clip_size)             # <<<<<<<<<<<<<<
+ * 
+ * cpdef int intervals_overlap(int a1, int a2, int b1, int b2):
+ */
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_clip_size); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_7);
+
+  /* "yapyg/math_collision.pyx":233
+ *         """
+ *         cdef int clip_size = 3 * max(w, h)
+ *         return (x1 + (w - clip_size) / 2,             # <<<<<<<<<<<<<<
+ *                 y1 + (h - clip_size) / 2,
+ *                 clip_size,
+ */
+  __pyx_t_8 = PyTuple_New(4); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_5);
+  PyTuple_SET_ITEM(__pyx_t_8, 2, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_8, 3, __pyx_t_7);
+  __Pyx_GIVEREF(__pyx_t_7);
+  __pyx_t_4 = 0;
+  __pyx_t_5 = 0;
+  __pyx_t_6 = 0;
+  __pyx_t_7 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_8);
+  __pyx_t_8 = 0;
+  goto __pyx_L0;
+
+  /* "yapyg/math_collision.pyx":226
+ *         return math_2d.vector_mul(contact_sum_vector, 1.0 / len(contact_points))
+ * 
+ * cpdef tuple get_clipping_rectangle(int x1, int y1, int w, int h):             # <<<<<<<<<<<<<<
+ *         """
+ *         clipping rectangle visible => real rectangle *may* be visible = draw it
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("yapyg.math_collision.get_clipping_rectangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5yapyg_14math_collision_17get_clipping_rectangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_14math_collision_16get_clipping_rectangle[] = "\n        clipping rectangle visible => real rectangle *may* be visible = draw it\n        clipping rectangle not visible => real rectangle not visible\n        Return (ints x, y, w, h) for worst case size for h/w extent and rotation\n        ";
+static PyObject *__pyx_pw_5yapyg_14math_collision_17get_clipping_rectangle(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_x1;
+  int __pyx_v_y1;
+  int __pyx_v_w;
+  int __pyx_v_h;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_clipping_rectangle (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x1,&__pyx_n_s_y1,&__pyx_n_s_w,&__pyx_n_s_h,0};
+    PyObject* values[4] = {0,0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_x1)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y1)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_clipping_rectangle", 1, 4, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  2:
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_w)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_clipping_rectangle", 1, 4, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  3:
+        if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_h)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_clipping_rectangle", 1, 4, 4, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_clipping_rectangle") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+    }
+    __pyx_v_x1 = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_y1 = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_y1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_w = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_w == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_h = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_h == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("get_clipping_rectangle", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("yapyg.math_collision.get_clipping_rectangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5yapyg_14math_collision_16get_clipping_rectangle(__pyx_self, __pyx_v_x1, __pyx_v_y1, __pyx_v_w, __pyx_v_h);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5yapyg_14math_collision_16get_clipping_rectangle(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_x1, int __pyx_v_y1, int __pyx_v_w, int __pyx_v_h) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_clipping_rectangle", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5yapyg_14math_collision_get_clipping_rectangle(__pyx_v_x1, __pyx_v_y1, __pyx_v_w, __pyx_v_h, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("yapyg.math_collision.get_clipping_rectangle", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg/math_collision.pyx":238
+ *                 clip_size)
+ * 
+ * cpdef int intervals_overlap(int a1, int a2, int b1, int b2):             # <<<<<<<<<<<<<<
+ *         """
+ *                   a1-------a2
+ */
+
+static PyObject *__pyx_pw_5yapyg_14math_collision_19intervals_overlap(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_f_5yapyg_14math_collision_intervals_overlap(int __pyx_v_a1, int __pyx_v_a2, int __pyx_v_b1, int __pyx_v_b2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_v_temp;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  __Pyx_RefNannySetupContext("intervals_overlap", 0);
+
+  /* "yapyg/math_collision.pyx":247
+ *         """
+ *         cdef int temp
+ *         if a1 > a2:             # <<<<<<<<<<<<<<
+ *                 temp = a1
+ *                 a1 = a2
+ */
+  __pyx_t_1 = ((__pyx_v_a1 > __pyx_v_a2) != 0);
+  if (__pyx_t_1) {
+
+    /* "yapyg/math_collision.pyx":248
+ *         cdef int temp
+ *         if a1 > a2:
+ *                 temp = a1             # <<<<<<<<<<<<<<
+ *                 a1 = a2
+ *                 a2 = temp
+ */
+    __pyx_v_temp = __pyx_v_a1;
+
+    /* "yapyg/math_collision.pyx":249
+ *         if a1 > a2:
+ *                 temp = a1
+ *                 a1 = a2             # <<<<<<<<<<<<<<
+ *                 a2 = temp
+ *         if b1 > b2:
+ */
+    __pyx_v_a1 = __pyx_v_a2;
+
+    /* "yapyg/math_collision.pyx":250
+ *                 temp = a1
+ *                 a1 = a2
+ *                 a2 = temp             # <<<<<<<<<<<<<<
+ *         if b1 > b2:
+ *                 temp = b1
+ */
+    __pyx_v_a2 = __pyx_v_temp;
+    goto __pyx_L3;
+  }
+  __pyx_L3:;
+
+  /* "yapyg/math_collision.pyx":251
+ *                 a1 = a2
+ *                 a2 = temp
+ *         if b1 > b2:             # <<<<<<<<<<<<<<
+ *                 temp = b1
+ *                 b1 = b2
+ */
+  __pyx_t_1 = ((__pyx_v_b1 > __pyx_v_b2) != 0);
+  if (__pyx_t_1) {
+
+    /* "yapyg/math_collision.pyx":252
+ *                 a2 = temp
+ *         if b1 > b2:
+ *                 temp = b1             # <<<<<<<<<<<<<<
+ *                 b1 = b2
+ *                 b2 = temp
+ */
+    __pyx_v_temp = __pyx_v_b1;
+
+    /* "yapyg/math_collision.pyx":253
+ *         if b1 > b2:
+ *                 temp = b1
+ *                 b1 = b2             # <<<<<<<<<<<<<<
+ *                 b2 = temp
+ *         return (a1 >= b1 and a1 <= b2) or (a2 >= b1 and a2 <= b2) or (b1 >= a1 and b1 <= a2) or (b2 >= a1 and b2 <= a2)
+ */
+    __pyx_v_b1 = __pyx_v_b2;
+
+    /* "yapyg/math_collision.pyx":254
+ *                 temp = b1
+ *                 b1 = b2
+ *                 b2 = temp             # <<<<<<<<<<<<<<
+ *         return (a1 >= b1 and a1 <= b2) or (a2 >= b1 and a2 <= b2) or (b1 >= a1 and b1 <= a2) or (b2 >= a1 and b2 <= a2)
+ * 
+ */
+    __pyx_v_b2 = __pyx_v_temp;
+    goto __pyx_L4;
+  }
+  __pyx_L4:;
+
+  /* "yapyg/math_collision.pyx":255
+ *                 b1 = b2
+ *                 b2 = temp
+ *         return (a1 >= b1 and a1 <= b2) or (a2 >= b1 and a2 <= b2) or (b1 >= a1 and b1 <= a2) or (b2 >= a1 and b2 <= a2)             # <<<<<<<<<<<<<<
+ * 
+ * cpdef int is_rectangle_visible(int win_w, int win_h, int x1, int y1, int w, int h):
+ */
+  __pyx_t_1 = (__pyx_v_a1 >= __pyx_v_b1);
+  if (!__pyx_t_1) {
+    goto __pyx_L6_next_or;
+  } else {
+  }
+  __pyx_t_1 = (__pyx_v_a1 <= __pyx_v_b2);
+  if (!__pyx_t_1) {
+  } else {
+    __pyx_t_2 = __pyx_t_1;
+    goto __pyx_L5_bool_binop_done;
+  }
+  __pyx_L6_next_or:;
+  __pyx_t_1 = (__pyx_v_a2 >= __pyx_v_b1);
+  if (!__pyx_t_1) {
+    goto __pyx_L8_next_or;
+  } else {
+  }
+  __pyx_t_1 = (__pyx_v_a2 <= __pyx_v_b2);
+  if (!__pyx_t_1) {
+  } else {
+    __pyx_t_2 = __pyx_t_1;
+    goto __pyx_L5_bool_binop_done;
+  }
+  __pyx_L8_next_or:;
+  __pyx_t_1 = (__pyx_v_b1 >= __pyx_v_a1);
+  if (!__pyx_t_1) {
+    goto __pyx_L10_next_or;
+  } else {
+  }
+  __pyx_t_1 = (__pyx_v_b1 <= __pyx_v_a2);
+  if (!__pyx_t_1) {
+  } else {
+    __pyx_t_2 = __pyx_t_1;
+    goto __pyx_L5_bool_binop_done;
+  }
+  __pyx_L10_next_or:;
+  __pyx_t_1 = (__pyx_v_b2 >= __pyx_v_a1);
+  if (__pyx_t_1) {
+  } else {
+    __pyx_t_2 = __pyx_t_1;
+    goto __pyx_L5_bool_binop_done;
+  }
+  __pyx_t_1 = (__pyx_v_b2 <= __pyx_v_a2);
+  __pyx_t_2 = __pyx_t_1;
+  __pyx_L5_bool_binop_done:;
+  __pyx_r = __pyx_t_2;
+  goto __pyx_L0;
+
+  /* "yapyg/math_collision.pyx":238
+ *                 clip_size)
+ * 
+ * cpdef int intervals_overlap(int a1, int a2, int b1, int b2):             # <<<<<<<<<<<<<<
+ *         """
+ *                   a1-------a2
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5yapyg_14math_collision_19intervals_overlap(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_14math_collision_18intervals_overlap[] = "\n                  a1-------a2\n            b1-------b2\n            b1-------------------b2\n                       b1-------b2\n                    b1--b2\n        ";
+static PyObject *__pyx_pw_5yapyg_14math_collision_19intervals_overlap(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_a1;
+  int __pyx_v_a2;
+  int __pyx_v_b1;
+  int __pyx_v_b2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("intervals_overlap (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_a1,&__pyx_n_s_a2,&__pyx_n_s_b1,&__pyx_n_s_b2,0};
+    PyObject* values[4] = {0,0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_a1)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_a2)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("intervals_overlap", 1, 4, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  2:
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_b1)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("intervals_overlap", 1, 4, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  3:
+        if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_b2)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("intervals_overlap", 1, 4, 4, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "intervals_overlap") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+    }
+    __pyx_v_a1 = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_a1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_a2 = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_a2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_b1 = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_b1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_b2 = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_b2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("intervals_overlap", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("yapyg.math_collision.intervals_overlap", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5yapyg_14math_collision_18intervals_overlap(__pyx_self, __pyx_v_a1, __pyx_v_a2, __pyx_v_b1, __pyx_v_b2);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5yapyg_14math_collision_18intervals_overlap(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_a1, int __pyx_v_a2, int __pyx_v_b1, int __pyx_v_b2) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("intervals_overlap", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_intervals_overlap(__pyx_v_a1, __pyx_v_a2, __pyx_v_b1, __pyx_v_b2, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("yapyg.math_collision.intervals_overlap", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg/math_collision.pyx":257
+ *         return (a1 >= b1 and a1 <= b2) or (a2 >= b1 and a2 <= b2) or (b1 >= a1 and b1 <= a2) or (b2 >= a1 and b2 <= a2)
+ * 
+ * cpdef int is_rectangle_visible(int win_w, int win_h, int x1, int y1, int w, int h):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+static PyObject *__pyx_pw_5yapyg_14math_collision_21is_rectangle_visible(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_f_5yapyg_14math_collision_is_rectangle_visible(int __pyx_v_win_w, int __pyx_v_win_h, int __pyx_v_x1, int __pyx_v_y1, int __pyx_v_w, int __pyx_v_h, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_v_x2;
+  int __pyx_v_y2;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  __Pyx_RefNannySetupContext("is_rectangle_visible", 0);
+
+  /* "yapyg/math_collision.pyx":261
+ *         TODO
+ *         """
+ *         cdef int x2 = x1 + w             # <<<<<<<<<<<<<<
+ *         cdef int y2 = y1 + h
+ *         return intervals_overlap(x1, x2, 0, win_w) and intervals_overlap(y1, y2, 0, win_h)
+ */
+  __pyx_v_x2 = (__pyx_v_x1 + __pyx_v_w);
+
+  /* "yapyg/math_collision.pyx":262
+ *         """
+ *         cdef int x2 = x1 + w
+ *         cdef int y2 = y1 + h             # <<<<<<<<<<<<<<
+ *         return intervals_overlap(x1, x2, 0, win_w) and intervals_overlap(y1, y2, 0, win_h)
+ */
+  __pyx_v_y2 = (__pyx_v_y1 + __pyx_v_h);
+
+  /* "yapyg/math_collision.pyx":263
+ *         cdef int x2 = x1 + w
+ *         cdef int y2 = y1 + h
+ *         return intervals_overlap(x1, x2, 0, win_w) and intervals_overlap(y1, y2, 0, win_h)             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_2 = __pyx_f_5yapyg_14math_collision_intervals_overlap(__pyx_v_x1, __pyx_v_x2, 0, __pyx_v_win_w, 0);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L3_bool_binop_done;
+  }
+  __pyx_t_2 = __pyx_f_5yapyg_14math_collision_intervals_overlap(__pyx_v_y1, __pyx_v_y2, 0, __pyx_v_win_h, 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L3_bool_binop_done:;
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "yapyg/math_collision.pyx":257
+ *         return (a1 >= b1 and a1 <= b2) or (a2 >= b1 and a2 <= b2) or (b1 >= a1 and b1 <= a2) or (b2 >= a1 and b2 <= a2)
+ * 
+ * cpdef int is_rectangle_visible(int win_w, int win_h, int x1, int y1, int w, int h):             # <<<<<<<<<<<<<<
+ *         """
+ *         TODO
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5yapyg_14math_collision_21is_rectangle_visible(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_14math_collision_20is_rectangle_visible[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_14math_collision_21is_rectangle_visible(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_win_w;
+  int __pyx_v_win_h;
+  int __pyx_v_x1;
+  int __pyx_v_y1;
+  int __pyx_v_w;
+  int __pyx_v_h;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("is_rectangle_visible (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_win_w,&__pyx_n_s_win_h,&__pyx_n_s_x1,&__pyx_n_s_y1,&__pyx_n_s_w,&__pyx_n_s_h,0};
+    PyObject* values[6] = {0,0,0,0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
+        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_win_w)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_win_h)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("is_rectangle_visible", 1, 6, 6, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  2:
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_x1)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("is_rectangle_visible", 1, 6, 6, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  3:
+        if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y1)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("is_rectangle_visible", 1, 6, 6, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  4:
+        if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_w)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("is_rectangle_visible", 1, 6, 6, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+        case  5:
+        if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_h)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("is_rectangle_visible", 1, 6, 6, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_rectangle_visible") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+      values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+      values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
+    }
+    __pyx_v_win_w = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_win_w == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_win_h = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_win_h == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_x1 = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_x1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_y1 = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_y1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_w = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_w == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_h = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_h == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("is_rectangle_visible", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("yapyg.math_collision.is_rectangle_visible", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_5yapyg_14math_collision_20is_rectangle_visible(__pyx_self, __pyx_v_win_w, __pyx_v_win_h, __pyx_v_x1, __pyx_v_y1, __pyx_v_w, __pyx_v_h);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5yapyg_14math_collision_20is_rectangle_visible(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_win_w, int __pyx_v_win_h, int __pyx_v_x1, int __pyx_v_y1, int __pyx_v_w, int __pyx_v_h) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("is_rectangle_visible", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_5yapyg_14math_collision_is_rectangle_visible(__pyx_v_win_w, __pyx_v_win_h, __pyx_v_x1, __pyx_v_y1, __pyx_v_w, __pyx_v_h, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("yapyg.math_collision.is_rectangle_visible", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {"value_in_range", (PyCFunction)__pyx_pw_5yapyg_14math_collision_1value_in_range, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_value_in_range},
   {"is_point_in_rect", (PyCFunction)__pyx_pw_5yapyg_14math_collision_3is_point_in_rect, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_2is_point_in_rect},
@@ -3830,6 +4560,9 @@ static PyMethodDef __pyx_methods[] = {
   {"is_rect_circle_collision", (PyCFunction)__pyx_pw_5yapyg_14math_collision_11is_rect_circle_collision, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_10is_rect_circle_collision},
   {"is_point_in_circle", (PyCFunction)__pyx_pw_5yapyg_14math_collision_13is_point_in_circle, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_12is_point_in_circle},
   {"get_contact_sum_vector", (PyCFunction)__pyx_pw_5yapyg_14math_collision_15get_contact_sum_vector, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_14get_contact_sum_vector},
+  {"get_clipping_rectangle", (PyCFunction)__pyx_pw_5yapyg_14math_collision_17get_clipping_rectangle, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_16get_clipping_rectangle},
+  {"intervals_overlap", (PyCFunction)__pyx_pw_5yapyg_14math_collision_19intervals_overlap, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_18intervals_overlap},
+  {"is_rectangle_visible", (PyCFunction)__pyx_pw_5yapyg_14math_collision_21is_rectangle_visible, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_14math_collision_20is_rectangle_visible},
   {0, 0, 0, 0}
 };
 
@@ -3852,10 +4585,15 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_a1, __pyx_k_a1, sizeof(__pyx_k_a1), 0, 0, 1, 1},
+  {&__pyx_n_s_a2, __pyx_k_a2, sizeof(__pyx_k_a2), 0, 0, 1, 1},
+  {&__pyx_n_s_b1, __pyx_k_b1, sizeof(__pyx_k_b1), 0, 0, 1, 1},
+  {&__pyx_n_s_b2, __pyx_k_b2, sizeof(__pyx_k_b2), 0, 0, 1, 1},
   {&__pyx_n_s_c_1, __pyx_k_c_1, sizeof(__pyx_k_c_1), 0, 0, 1, 1},
   {&__pyx_n_s_c_2, __pyx_k_c_2, sizeof(__pyx_k_c_2), 0, 0, 1, 1},
   {&__pyx_n_s_circ, __pyx_k_circ, sizeof(__pyx_k_circ), 0, 0, 1, 1},
   {&__pyx_n_s_contact_points, __pyx_k_contact_points, sizeof(__pyx_k_contact_points), 0, 0, 1, 1},
+  {&__pyx_n_s_h, __pyx_k_h, sizeof(__pyx_k_h), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_max_limit, __pyx_k_max_limit, sizeof(__pyx_k_max_limit), 0, 0, 1, 1},
   {&__pyx_n_s_min_limit, __pyx_k_min_limit, sizeof(__pyx_k_min_limit), 0, 0, 1, 1},
@@ -3866,6 +4604,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_rect_2, __pyx_k_rect_2, sizeof(__pyx_k_rect_2), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
+  {&__pyx_n_s_w, __pyx_k_w, sizeof(__pyx_k_w), 0, 0, 1, 1},
+  {&__pyx_n_s_win_h, __pyx_k_win_h, sizeof(__pyx_k_win_h), 0, 0, 1, 1},
+  {&__pyx_n_s_win_w, __pyx_k_win_w, sizeof(__pyx_k_win_w), 0, 0, 1, 1},
+  {&__pyx_n_s_x1, __pyx_k_x1, sizeof(__pyx_k_x1), 0, 0, 1, 1},
+  {&__pyx_n_s_y1, __pyx_k_y1, sizeof(__pyx_k_y1), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
@@ -3876,7 +4619,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg\math_collision.pyx":220
+  /* "yapyg/math_collision.pyx":220
  *         TODO
  *         """
  *         cdef tuple contact_sum_vector = (0.0, 0.0)             # <<<<<<<<<<<<<<
@@ -3990,6 +4733,9 @@ PyMODINIT_FUNC PyInit_math_collision(void)
   if (__Pyx_ExportFunction("get_rect_points", (void (*)(void))__pyx_f_5yapyg_14math_collision_get_rect_points, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("value_in_range", (void (*)(void))__pyx_f_5yapyg_14math_collision_value_in_range, "int (float, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("get_contact_sum_vector", (void (*)(void))__pyx_f_5yapyg_14math_collision_get_contact_sum_vector, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("is_rectangle_visible", (void (*)(void))__pyx_f_5yapyg_14math_collision_is_rectangle_visible, "int (int, int, int, int, int, int, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("intervals_overlap", (void (*)(void))__pyx_f_5yapyg_14math_collision_intervals_overlap, "int (int, int, int, int, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("get_clipping_rectangle", (void (*)(void))__pyx_f_5yapyg_14math_collision_get_clipping_rectangle, "PyObject *(int, int, int, int, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -4005,7 +4751,7 @@ PyMODINIT_FUNC PyInit_math_collision(void)
   Py_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg\math_collision.pyx":1
+  /* "yapyg/math_collision.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -4372,6 +5118,13 @@ static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, in
     return 0;
 }
 
+static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
+    long q = a / b;
+    long r = a - q*b;
+    q -= ((r != 0) & ((r ^ b) < 0));
+    return q;
+}
+
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;
     if (end >= 0 && code_line > entries[end].code_line) {
@@ -4531,58 +5284,6 @@ bad:
     Py_XDECREF(py_frame);
 }
 
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
-    const int neg_one = (int) -1, const_zero = 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(int) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long long)) {
-            return PyLong_FromUnsignedLongLong((unsigned long long) value);
-        }
-    } else {
-        if (sizeof(int) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(long long)) {
-            return PyLong_FromLongLong((long long) value);
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-    }
-}
-
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
-    const long neg_one = (long) -1, const_zero = 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long long)) {
-            return PyLong_FromUnsignedLongLong((unsigned long long) value);
-        }
-    } else {
-        if (sizeof(long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(long long)) {
-            return PyLong_FromLongLong((long long) value);
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(long),
-                                     little, !is_unsigned);
-    }
-}
-
 #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)       \
     {                                                                     \
         func_type value = func_value;                                     \
@@ -4603,101 +5304,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
   #include "longintrepr.h"
  #endif
 #endif
-
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
-    const long neg_one = (long) -1, const_zero = 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(long) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (long) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
- #if CYTHON_USE_PYLONG_INTERNALS
-            switch (Py_SIZE(x)) {
-                case  0: return 0;
-                case  1: __PYX_VERIFY_RETURN_INT(long, digit, ((PyLongObject*)x)->ob_digit[0]);
-            }
- #endif
-#endif
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-            if (sizeof(long) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT(long, unsigned long, PyLong_AsUnsignedLong(x))
-            } else if (sizeof(long) <= sizeof(unsigned long long)) {
-                __PYX_VERIFY_RETURN_INT(long, unsigned long long, PyLong_AsUnsignedLongLong(x))
-            }
-        } else {
-#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
- #if CYTHON_USE_PYLONG_INTERNALS
-            switch (Py_SIZE(x)) {
-                case  0: return 0;
-                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +(((PyLongObject*)x)->ob_digit[0]));
-                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, -(sdigit) ((PyLongObject*)x)->ob_digit[0]);
-            }
- #endif
-#endif
-            if (sizeof(long) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT(long, long, PyLong_AsLong(x))
-            } else if (sizeof(long) <= sizeof(long long)) {
-                __PYX_VERIFY_RETURN_INT(long, long long, PyLong_AsLongLong(x))
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            long val;
-            PyObject *v = __Pyx_PyNumber_Int(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (long) -1;
-        }
-    } else {
-        long val;
-        PyObject *tmp = __Pyx_PyNumber_Int(x);
-        if (!tmp) return (long) -1;
-        val = __Pyx_PyInt_As_long(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to long");
-    return (long) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to long");
-    return (long) -1;
-}
 
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = 0;
@@ -4792,6 +5398,153 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to int");
     return (int) -1;
+}
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long long)) {
+            return PyLong_FromUnsignedLongLong((unsigned long long) value);
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(long long)) {
+            return PyLong_FromLongLong((long long) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
+}
+
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    const long neg_one = (long) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(long) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long long)) {
+            return PyLong_FromUnsignedLongLong((unsigned long long) value);
+        }
+    } else {
+        if (sizeof(long) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(long long)) {
+            return PyLong_FromLongLong((long long) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(long),
+                                     little, !is_unsigned);
+    }
+}
+
+static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    const long neg_one = (long) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(long) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (long) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
+ #if CYTHON_USE_PYLONG_INTERNALS
+            switch (Py_SIZE(x)) {
+                case  0: return 0;
+                case  1: __PYX_VERIFY_RETURN_INT(long, digit, ((PyLongObject*)x)->ob_digit[0]);
+            }
+ #endif
+#endif
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+            if (sizeof(long) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT(long, unsigned long, PyLong_AsUnsignedLong(x))
+            } else if (sizeof(long) <= sizeof(unsigned long long)) {
+                __PYX_VERIFY_RETURN_INT(long, unsigned long long, PyLong_AsUnsignedLongLong(x))
+            }
+        } else {
+#if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
+ #if CYTHON_USE_PYLONG_INTERNALS
+            switch (Py_SIZE(x)) {
+                case  0: return 0;
+                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +(((PyLongObject*)x)->ob_digit[0]));
+                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, -(sdigit) ((PyLongObject*)x)->ob_digit[0]);
+            }
+ #endif
+#endif
+            if (sizeof(long) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT(long, long, PyLong_AsLong(x))
+            } else if (sizeof(long) <= sizeof(long long)) {
+                __PYX_VERIFY_RETURN_INT(long, long long, PyLong_AsLongLong(x))
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            long val;
+            PyObject *v = __Pyx_PyNumber_Int(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (long) -1;
+        }
+    } else {
+        long val;
+        PyObject *tmp = __Pyx_PyNumber_Int(x);
+        if (!tmp) return (long) -1;
+        val = __Pyx_PyInt_As_long(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to long");
+    return (long) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to long");
+    return (long) -1;
 }
 
 static int __Pyx_check_binary_version(void) {

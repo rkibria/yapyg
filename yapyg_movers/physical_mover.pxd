@@ -53,7 +53,7 @@ cpdef list create(str entity_name,
                 float stickyness
                 )
 
-cpdef run(list state, str entity_name, list mover, float frame_time_delta, list movers_to_delete)
+cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete)
 
 cpdef collision_handler(list state,
                 str entity_name_1,

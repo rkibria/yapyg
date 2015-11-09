@@ -2172,7 +2172,7 @@ static PyObject *__pyx_f_5yapyg_6movers_delete(PyObject *__pyx_v_state, PyObject
  *         if movers_dict.has_key(mover_name):
  *                 del movers_dict[mover_name]             # <<<<<<<<<<<<<<
  * 
- * cdef void run(list state, float frame_time_delta):
+ * cdef void run(list state, int frame_time_delta):
  */
     if (unlikely(__pyx_v_movers_dict == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -2302,12 +2302,12 @@ static PyObject *__pyx_pf_5yapyg_6movers_12delete(CYTHON_UNUSED PyObject *__pyx_
 /* "yapyg\movers.pyx":112
  *                 del movers_dict[mover_name]
  * 
- * cdef void run(list state, float frame_time_delta):             # <<<<<<<<<<<<<<
+ * cdef void run(list state, int frame_time_delta):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, float __pyx_v_frame_time_delta) {
+static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_frame_time_delta) {
   PyObject *__pyx_v_movers_dict = 0;
   PyObject *__pyx_v_movers_to_delete = 0;
   CYTHON_UNUSED PyObject *__pyx_v_entities_to_delete = 0;
@@ -2452,7 +2452,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, float __pyx_v_fr
       }
       __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_mover, __pyx_v_5yapyg_6movers_IDX_MOVER_RUN_FUNCTION, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = PyFloat_FromDouble(__pyx_v_frame_time_delta); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_frame_time_delta); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
       __pyx_t_10 = NULL;
       __pyx_t_11 = 0;
@@ -2781,7 +2781,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, float __pyx_v_fr
   /* "yapyg\movers.pyx":112
  *                 del movers_dict[mover_name]
  * 
- * cdef void run(list state, float frame_time_delta):             # <<<<<<<<<<<<<<
+ * cdef void run(list state, int frame_time_delta):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
@@ -2978,7 +2978,7 @@ PyMODINIT_FUNC PyInit_movers(void)
   if (__Pyx_ExportFunction("get_type", (void (*)(void))__pyx_f_5yapyg_6movers_get_type, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("remove", (void (*)(void))__pyx_f_5yapyg_6movers_remove, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("delete", (void (*)(void))__pyx_f_5yapyg_6movers_delete, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ExportFunction("run", (void (*)(void))__pyx_f_5yapyg_6movers_run, "void (PyObject *, float)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("run", (void (*)(void))__pyx_f_5yapyg_6movers_run, "void (PyObject *, int)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/

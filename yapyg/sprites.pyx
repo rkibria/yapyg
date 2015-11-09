@@ -22,14 +22,16 @@
 2D Sprites
 """
 
-from libc.math cimport fmod, floor
+from libc.math cimport floor
 
 from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
+from kivy.core.window import Window
 
 cimport tiles
 cimport texture_db
 cimport view
 cimport screen
+cimport math_collision
 
 import text
 
@@ -50,6 +52,8 @@ cdef int IDX_SPRITE_TIME_SUM = 6
 cdef int IDX_SPRITE_PHASE = 7
 cdef int IDX_SPRITE_SCREEN_RELATIVE = 8
 cdef int IDX_SPRITE_PLAYONCE = 9
+cdef int IDX_SPRITE_TXSIZE = 10
+cdef int IDX_SPRITE_VISIBLE = 11
 
 cpdef initialize(int state_idx, list state):
         """
@@ -95,28 +99,29 @@ cpdef insert(list state,
 
         cdef list text_textures = []
         cdef str texture_name
+        cdef tuple texture_size = None
         for texture_part in textures:
                 texture_name = str(texture_part)
                 text_textures.append(texture_name)
 
                 if type(texture_part) == tuple:
                         if texture_part[0] == "rectangle":
-                                texture_db.insert_color_rect(state, texture_part[1], texture_part[2],
+                                texture_size = texture_db.insert_color_rect(state, texture_part[1], texture_part[2],
                                                              texture_name, texture_part[3], texture_part[4],
                                                              texture_part[5])
                         elif texture_part[0] == "ellipse":
-                                texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],
+                                texture_size = texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],
                                                                 texture_name, texture_part[3], texture_part[4],
                                                                 texture_part[5])
                         elif texture_part[0] == "text":
                                 new_texture = text.create_texture(state, texture_part[1], texture_part[2])
-                                texture_db.insert(state, texture_name, new_texture)
+                                texture_size = texture_db.insert(state, texture_name, new_texture)
                                 if sprites_rects_rots.has_key(sprite_name):
                                         del sprites_rects_rots[sprite_name]
                         else:
                                 print "unknown texture type", texture_part[0]
                 elif type(texture_part) == str:
-                        texture_db.load(state, texture_part, texture_part)
+                        texture_size = texture_db.load(state, texture_part, texture_part)
 
         cdef list sprite = [
                 enable,
@@ -129,6 +134,8 @@ cpdef insert(list state,
                 0,
                 screen_relative,
                 play_once,
+                texture_size,
+                None,
                 ]
 
         sprites_dict[sprite_name] = sprite
@@ -170,7 +177,10 @@ cpdef tuple get_pos(list state, str sprite_name):
         """
         TODO
         """
-        return get(state, sprite_name)[IDX_SPRITE_POS]
+        sprite = get(state, sprite_name)
+        if sprite:
+                return sprite[IDX_SPRITE_POS]
+        return None
 
 cpdef int is_enabled(list state, str sprite_name):
         cdef list sprite_db = state[IDX_STATE_SPRITES]
@@ -181,10 +191,7 @@ cpdef int is_enabled(list state, str sprite_name):
                 return sprite[IDX_SPRITE_ENABLE]
         return False
 
-cpdef set_enable(list state, str sprite_name, int enable):
-        """
-        TODO
-        """
+cdef set_visibility(list state, str sprite_name, int enable):
         cdef list sprite_db = state[IDX_STATE_SPRITES]
         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
@@ -194,7 +201,6 @@ cpdef set_enable(list state, str sprite_name, int enable):
         cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])
         cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])
 
-        cdef list sprite
         cdef tuple offset_pos
         cdef tuple origin_xy
         cdef tuple view_pos
@@ -203,60 +209,92 @@ cpdef set_enable(list state, str sprite_name, int enable):
         cdef list sprite_total_pos
         cdef list sprite_offset
 
+        if not sprites_dict.has_key(sprite_name):
+                return
+
+        if not sprites_rects_rots.has_key(sprite_name):
+                return
+
+        cdef list sprite = sprites_dict[sprite_name]
+
+        if sprite[IDX_SPRITE_VISIBLE] != None and ((sprite[IDX_SPRITE_VISIBLE] and enable) or (not sprite[IDX_SPRITE_VISIBLE] and not enable)):
+                return
+
+        if enable == False:
+                rect, rot = sprites_rects_rots[sprite_name]
+                sprite_sizes[sprite_name] = rect.size
+                rect.size = (0, 0)
+                sprite[IDX_SPRITE_VISIBLE] = False
+        else:
+                rect, rot = sprites_rects_rots[sprite_name]
+                if sprite_sizes.has_key(sprite_name):
+                        origin_xy = screen.get_origin(state)
+                        view_pos = view.get_view_pos(state)
+                        sprite_pos = sprite[IDX_SPRITE_POS]
+                        sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]
+                        sprite_total_pos = [sprite_pos[0] + sprite_offset[0],
+                                            sprite_pos[1] + sprite_offset[1],
+                                            sprite_pos[2]
+                                            ]
+                        offset_pos = _get_screen_coords(state,
+                                                        view_pos,
+                                                        scaled_tile_size_x,
+                                                        scaled_tile_size_y,
+                                                        sprite_total_pos,
+                                                        origin_xy,
+                                                        sprite[IDX_SPRITE_SCREEN_RELATIVE]
+                                                        )
+                        sprite_size = sprite_sizes[sprite_name]
+                        rect_rot_attributes = _get_rect_rot_attributes(int(sprite_size[0]),
+                                                                       int(sprite_size[1]),
+                                                                       screen_scale,
+                                                                       sprite[IDX_SPRITE_SCALE],
+                                                                       offset_pos,
+                                                                       sprite_pos[2])
+                        rot.origin = rect_rot_attributes[1]
+                        rot.angle = rect_rot_attributes[2]
+                        rect.pos = rect_rot_attributes[0]
+                        rect.size = sprite_size
+                        sprite[IDX_SPRITE_VISIBLE] = True
+
+cpdef set_enable(list state, str sprite_name, int enable):
+        """
+        TODO
+        """
+        cdef list sprite_db = state[IDX_STATE_SPRITES]
+        cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
+        cdef list sprite
+
         if sprites_dict.has_key(sprite_name):
                 sprite = sprites_dict[sprite_name]
 
                 if enable == False:
                         if sprite[IDX_SPRITE_ENABLE] == True:
                                 sprite[IDX_SPRITE_ENABLE] = False
-                                if sprites_rects_rots.has_key(sprite_name):
-                                        rect, rot = sprites_rects_rots[sprite_name]
-                                        sprite_sizes[sprite_name] = rect.size
-                                        rect.size = (0, 0)
+                                set_visibility(state, sprite_name, False)
                 else:
                         if sprite[IDX_SPRITE_ENABLE] == False:
                                 sprite[IDX_SPRITE_ENABLE] = True
-                                if sprites_rects_rots.has_key(sprite_name):
-                                        rect, rot = sprites_rects_rots[sprite_name]
-                                        if sprite_sizes.has_key(sprite_name):
-                                                origin_xy = screen.get_origin(state)
-                                                view_pos = view.get_view_pos(state)
-                                                sprite_pos = sprite[IDX_SPRITE_POS]
-                                                sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]
-                                                sprite_total_pos = [sprite_pos[0] + sprite_offset[0],
-                                                                    sprite_pos[1] + sprite_offset[1],
-                                                                    sprite_pos[2]
-                                                                    ]
-                                                offset_pos = _get_screen_coords(state,
-                                                                                view_pos,
-                                                                                scaled_tile_size_x,
-                                                                                scaled_tile_size_y,
-                                                                                sprite_total_pos,
-                                                                                origin_xy,
-                                                                                sprite[IDX_SPRITE_SCREEN_RELATIVE]
-                                                                                )
-                                                sprite_size = sprite_sizes[sprite_name]
-                                                rect_rot_attributes = _get_rect_rot_attributes(int(sprite_size[0]),
-                                                                                               int(sprite_size[1]),
-                                                                                               screen_scale,
-                                                                                               sprite[IDX_SPRITE_SCALE],
-                                                                                               offset_pos,
-                                                                                               sprite_pos[2])
-                                                rot.origin = rect_rot_attributes[1]
-                                                rot.angle = rect_rot_attributes[2]
-                                                rect.pos = rect_rot_attributes[0]
-                                                rect.size = sprite_size
+                                set_visibility(state, sprite_name, True)
 
 cdef void draw(list state,
                canvas,
-               float frame_time_delta
+               int frame_time_delta
                ):
         """
         TODO
         """
+        cdef int win_w = Window.width
+        cdef int win_h = Window.height
+
         cdef tuple origin_xy = screen.get_origin(state)
         cdef tuple screen_scale = screen.get_screen_scale(state)
+
+        cdef int screen_width = int(screen.get_width(state))
+        cdef int screen_height = int(screen.get_height(state))
+
         cdef int tile_size = tiles.get_tile_size(state)
+
         cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])
         cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])
 
@@ -272,7 +310,7 @@ cdef void draw(list state,
         cdef float rotate
         cdef int phase
         cdef int speed
-        cdef float time_sum
+        cdef int time_sum
         cdef int phase_increment
         cdef str texture_name
         cdef tuple textures
@@ -281,6 +319,8 @@ cdef void draw(list state,
         cdef list sprite_pos_offset
         cdef int play_once
         cdef tuple screen_xy_pos
+        cdef tuple texture_size
+        cdef tuple sprite_rect
 
         for sprite_name in sprite_draw_order:
                 sprite = sprites_dict[sprite_name]
@@ -303,13 +343,19 @@ cdef void draw(list state,
                 speed = sprite[IDX_SPRITE_SPEED]
                 screen_relative = sprite[IDX_SPRITE_SCREEN_RELATIVE]
                 play_once = sprite[IDX_SPRITE_PLAYONCE]
+                texture_size = sprite[IDX_SPRITE_TXSIZE]
 
                 screen_xy_pos = _get_screen_coords(state, view_pos, scaled_tile_size_x, scaled_tile_size_y, pos, origin_xy, screen_relative)
+                sprite_rect = math_collision.get_clipping_rectangle(screen_xy_pos[0], screen_xy_pos[1], texture_size[0], texture_size[1])
+                if not math_collision.is_rectangle_visible(win_w, win_h, sprite_rect[0], sprite_rect[1], sprite_rect[2], sprite_rect[3]):
+                        set_visibility(state, sprite_name, False)
+                        continue
+                set_visibility(state, sprite_name, True)
 
                 if speed > 0:
                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
                         time_sum += frame_time_delta
-                        phase_increment = int(time_sum / speed) # int
+                        phase_increment = time_sum / speed
                         if phase_increment < 1:
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 phase = sprite[IDX_SPRITE_PHASE]
@@ -319,7 +365,7 @@ cdef void draw(list state,
                                         set_enable(state, sprite_name, False)
                                         continue
                                 phase = phase % len(textures)
-                                time_sum = fmod(time_sum, speed)
+                                time_sum = time_sum % speed
                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
                                 sprite[IDX_SPRITE_PHASE] = phase
 

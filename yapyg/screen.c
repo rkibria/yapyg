@@ -660,6 +660,7 @@ static float __pyx_f_5yapyg_6screen_get_tile_size(PyObject *, int __pyx_skip_dis
 static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_f_5yapyg_6screen_get_screen_scale(PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_5yapyg_6screen_get_width_height_tilesize(PyObject *, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "yapyg.screen"
 int __pyx_module_is_main_yapyg__screen = 0;
 
@@ -669,9 +670,10 @@ static PyObject *__pyx_pf_5yapyg_6screen_2destroy(CYTHON_UNUSED PyObject *__pyx_
 static PyObject *__pyx_pf_5yapyg_6screen_4get_width(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
 static PyObject *__pyx_pf_5yapyg_6screen_6get_height(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
 static PyObject *__pyx_pf_5yapyg_6screen_8get_tile_size(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
-static PyObject *__pyx_pf_5yapyg_6screen_10set_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_origin_xy); /* proto */
-static PyObject *__pyx_pf_5yapyg_6screen_12get_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
-static PyObject *__pyx_pf_5yapyg_6screen_14get_screen_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
+static PyObject *__pyx_pf_5yapyg_6screen_10get_width_height_tilesize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
+static PyObject *__pyx_pf_5yapyg_6screen_12set_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_origin_xy); /* proto */
+static PyObject *__pyx_pf_5yapyg_6screen_14get_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
+static PyObject *__pyx_pf_5yapyg_6screen_16get_screen_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
 static char __pyx_k_info[] = "info";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
@@ -1629,7 +1631,7 @@ static float __pyx_f_5yapyg_6screen_get_tile_size(PyObject *__pyx_v_state, CYTHO
  *         """
  *         return state[IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]             # <<<<<<<<<<<<<<
  * 
- * cpdef set_origin(list state, tuple origin_xy):
+ * cpdef tuple get_width_height_tilesize(list state):
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -1715,12 +1717,163 @@ static PyObject *__pyx_pf_5yapyg_6screen_8get_tile_size(CYTHON_UNUSED PyObject *
 /* "yapyg\screen.pyx":88
  *         return state[IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
  * 
+ * cpdef tuple get_width_height_tilesize(list state):             # <<<<<<<<<<<<<<
+ *         """
+ *         Returns (float w, float h, float ts)
+ */
+
+static PyObject *__pyx_pw_5yapyg_6screen_11get_width_height_tilesize(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
+static PyObject *__pyx_f_5yapyg_6screen_get_width_height_tilesize(PyObject *__pyx_v_state, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_v_screen_state = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_width_height_tilesize", 0);
+
+  /* "yapyg\screen.pyx":92
+ *         Returns (float w, float h, float ts)
+ *         """
+ *         cdef list screen_state = state[IDX_STATE_SCREEN]             # <<<<<<<<<<<<<<
+ *         return (screen_state[IDX_SCREEN_WIDTH], screen_state[IDX_SCREEN_HEIGHT], screen_state[IDX_SCREEN_TILE_SIZE])
+ * 
+ */
+  if (unlikely(__pyx_v_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_screen_state = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "yapyg\screen.pyx":93
+ *         """
+ *         cdef list screen_state = state[IDX_STATE_SCREEN]
+ *         return (screen_state[IDX_SCREEN_WIDTH], screen_state[IDX_SCREEN_HEIGHT], screen_state[IDX_SCREEN_TILE_SIZE])             # <<<<<<<<<<<<<<
+ * 
+ * cpdef set_origin(list state, tuple origin_xy):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(__pyx_v_screen_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_screen_state, __pyx_v_5yapyg_6screen_IDX_SCREEN_WIDTH, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_1);
+  if (unlikely(__pyx_v_screen_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_screen_state, __pyx_v_5yapyg_6screen_IDX_SCREEN_HEIGHT, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__pyx_v_screen_state == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_screen_state, __pyx_v_5yapyg_6screen_IDX_SCREEN_TILE_SIZE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_4);
+  __pyx_t_4 = 0;
+  goto __pyx_L0;
+
+  /* "yapyg\screen.pyx":88
+ *         return state[IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
+ * 
+ * cpdef tuple get_width_height_tilesize(list state):             # <<<<<<<<<<<<<<
+ *         """
+ *         Returns (float w, float h, float ts)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("yapyg.screen.get_width_height_tilesize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_screen_state);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5yapyg_6screen_11get_width_height_tilesize(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
+static char __pyx_doc_5yapyg_6screen_10get_width_height_tilesize[] = "\n        Returns (float w, float h, float ts)\n        ";
+static PyObject *__pyx_pw_5yapyg_6screen_11get_width_height_tilesize(PyObject *__pyx_self, PyObject *__pyx_v_state) {
+  CYTHON_UNUSED int __pyx_lineno = 0;
+  CYTHON_UNUSED const char *__pyx_filename = NULL;
+  CYTHON_UNUSED int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_width_height_tilesize (wrapper)", 0);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_6screen_10get_width_height_tilesize(__pyx_self, ((PyObject*)__pyx_v_state));
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5yapyg_6screen_10get_width_height_tilesize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_width_height_tilesize", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_5yapyg_6screen_get_width_height_tilesize(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("yapyg.screen.get_width_height_tilesize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "yapyg\screen.pyx":95
+ *         return (screen_state[IDX_SCREEN_WIDTH], screen_state[IDX_SCREEN_HEIGHT], screen_state[IDX_SCREEN_TILE_SIZE])
+ * 
  * cpdef set_origin(list state, tuple origin_xy):             # <<<<<<<<<<<<<<
  *         """
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_6screen_11set_origin(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_5yapyg_6screen_13set_origin(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *__pyx_v_state, PyObject *__pyx_v_origin_xy, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_screen_origin = 0;
   PyObject *__pyx_r = NULL;
@@ -1733,7 +1886,7 @@ static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *__pyx_v_state, PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_origin", 0);
 
-  /* "yapyg\screen.pyx":92
+  /* "yapyg\screen.pyx":99
  *         TODO
  *         """
  *         cdef list screen_origin = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]             # <<<<<<<<<<<<<<
@@ -1742,18 +1895,18 @@ static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *__pyx_v_state, PyOb
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_6screen_IDX_SCREEN_ORIGIN_XY, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_6screen_IDX_SCREEN_ORIGIN_XY, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_screen_origin = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\screen.pyx":93
+  /* "yapyg\screen.pyx":100
  *         """
  *         cdef list screen_origin = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
  *         screen_origin[0] = float(origin_xy[0])             # <<<<<<<<<<<<<<
@@ -1762,22 +1915,22 @@ static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *__pyx_v_state, PyOb
  */
   if (unlikely(__pyx_v_origin_xy == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_origin_xy, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_origin_xy, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_screen_origin == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(__Pyx_SetItemInt(__pyx_v_screen_origin, 0, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_v_screen_origin, 0, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\screen.pyx":94
+  /* "yapyg\screen.pyx":101
  *         cdef list screen_origin = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
  *         screen_origin[0] = float(origin_xy[0])
  *         screen_origin[1] = float(origin_xy[1])             # <<<<<<<<<<<<<<
@@ -1786,23 +1939,23 @@ static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *__pyx_v_state, PyOb
  */
   if (unlikely(__pyx_v_origin_xy == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_origin_xy, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_origin_xy, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__pyx_t_3 == ((double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_screen_origin == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(__Pyx_SetItemInt(__pyx_v_screen_origin, 1, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_v_screen_origin, 1, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\screen.pyx":88
- *         return state[IDX_STATE_SCREEN][IDX_SCREEN_TILE_SIZE]
+  /* "yapyg\screen.pyx":95
+ *         return (screen_state[IDX_SCREEN_WIDTH], screen_state[IDX_SCREEN_HEIGHT], screen_state[IDX_SCREEN_TILE_SIZE])
  * 
  * cpdef set_origin(list state, tuple origin_xy):             # <<<<<<<<<<<<<<
  *         """
@@ -1825,9 +1978,9 @@ static PyObject *__pyx_f_5yapyg_6screen_set_origin(PyObject *__pyx_v_state, PyOb
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_6screen_11set_origin(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_5yapyg_6screen_10set_origin[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_6screen_11set_origin(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_5yapyg_6screen_13set_origin(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_5yapyg_6screen_12set_origin[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_6screen_13set_origin(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v_origin_xy = 0;
   int __pyx_lineno = 0;
@@ -1856,11 +2009,11 @@ static PyObject *__pyx_pw_5yapyg_6screen_11set_origin(PyObject *__pyx_self, PyOb
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_origin_xy)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_origin", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("set_origin", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_origin") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_origin") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1873,15 +2026,15 @@ static PyObject *__pyx_pw_5yapyg_6screen_11set_origin(PyObject *__pyx_self, PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_origin", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("set_origin", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.screen.set_origin", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_origin_xy), (&PyTuple_Type), 1, "origin_xy", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_6screen_10set_origin(__pyx_self, __pyx_v_state, __pyx_v_origin_xy);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_origin_xy), (&PyTuple_Type), 1, "origin_xy", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_6screen_12set_origin(__pyx_self, __pyx_v_state, __pyx_v_origin_xy);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1892,7 +2045,7 @@ static PyObject *__pyx_pw_5yapyg_6screen_11set_origin(PyObject *__pyx_self, PyOb
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_6screen_10set_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_origin_xy) {
+static PyObject *__pyx_pf_5yapyg_6screen_12set_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_origin_xy) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1901,7 +2054,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_10set_origin(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_origin", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_6screen_set_origin(__pyx_v_state, __pyx_v_origin_xy, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_6screen_set_origin(__pyx_v_state, __pyx_v_origin_xy, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1918,7 +2071,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_10set_origin(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "yapyg\screen.pyx":96
+/* "yapyg\screen.pyx":103
  *         screen_origin[1] = float(origin_xy[1])
  * 
  * cpdef tuple get_origin(list state):             # <<<<<<<<<<<<<<
@@ -1926,7 +2079,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_10set_origin(CYTHON_UNUSED PyObject *__
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_6screen_13get_origin(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
+static PyObject *__pyx_pw_5yapyg_6screen_15get_origin(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
 static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *__pyx_v_state, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_origin_xy = 0;
   PyObject *__pyx_r = NULL;
@@ -1939,7 +2092,7 @@ static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *__pyx_v_state, CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_origin", 0);
 
-  /* "yapyg\screen.pyx":100
+  /* "yapyg\screen.pyx":107
  *         TODO
  *         """
  *         cdef list origin_xy = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]             # <<<<<<<<<<<<<<
@@ -1948,18 +2101,18 @@ static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *__pyx_v_state, CYTH
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_6screen_IDX_SCREEN_ORIGIN_XY, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_6screen_IDX_SCREEN_ORIGIN_XY, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_origin_xy = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\screen.pyx":101
+  /* "yapyg\screen.pyx":108
  *         """
  *         cdef list origin_xy = state[IDX_STATE_SCREEN][IDX_SCREEN_ORIGIN_XY]
  *         return (origin_xy[0], origin_xy[1])             # <<<<<<<<<<<<<<
@@ -1969,17 +2122,17 @@ static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *__pyx_v_state, CYTH
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_origin_xy == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_origin_xy, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_origin_xy, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   if (unlikely(__pyx_v_origin_xy == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_origin_xy, 1, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_origin_xy, 1, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
@@ -1991,7 +2144,7 @@ static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *__pyx_v_state, CYTH
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\screen.pyx":96
+  /* "yapyg\screen.pyx":103
  *         screen_origin[1] = float(origin_xy[1])
  * 
  * cpdef tuple get_origin(list state):             # <<<<<<<<<<<<<<
@@ -2014,17 +2167,17 @@ static PyObject *__pyx_f_5yapyg_6screen_get_origin(PyObject *__pyx_v_state, CYTH
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_6screen_13get_origin(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
-static char __pyx_doc_5yapyg_6screen_12get_origin[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_6screen_13get_origin(PyObject *__pyx_self, PyObject *__pyx_v_state) {
+static PyObject *__pyx_pw_5yapyg_6screen_15get_origin(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
+static char __pyx_doc_5yapyg_6screen_14get_origin[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_6screen_15get_origin(PyObject *__pyx_self, PyObject *__pyx_v_state) {
   CYTHON_UNUSED int __pyx_lineno = 0;
   CYTHON_UNUSED const char *__pyx_filename = NULL;
   CYTHON_UNUSED int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_origin (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_6screen_12get_origin(__pyx_self, ((PyObject*)__pyx_v_state));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_6screen_14get_origin(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2035,7 +2188,7 @@ static PyObject *__pyx_pw_5yapyg_6screen_13get_origin(PyObject *__pyx_self, PyOb
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_6screen_12get_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state) {
+static PyObject *__pyx_pf_5yapyg_6screen_14get_origin(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2044,7 +2197,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_12get_origin(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_origin", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_6screen_get_origin(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_6screen_get_origin(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2061,7 +2214,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_12get_origin(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "yapyg\screen.pyx":103
+/* "yapyg\screen.pyx":110
  *         return (origin_xy[0], origin_xy[1])
  * 
  * cpdef tuple get_screen_scale(list state):             # <<<<<<<<<<<<<<
@@ -2069,7 +2222,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_12get_origin(CYTHON_UNUSED PyObject *__
  *         TODO
  */
 
-static PyObject *__pyx_pw_5yapyg_6screen_15get_screen_scale(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
+static PyObject *__pyx_pw_5yapyg_6screen_17get_screen_scale(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
 static PyObject *__pyx_f_5yapyg_6screen_get_screen_scale(PyObject *__pyx_v_state, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2080,7 +2233,7 @@ static PyObject *__pyx_f_5yapyg_6screen_get_screen_scale(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_screen_scale", 0);
 
-  /* "yapyg\screen.pyx":107
+  /* "yapyg\screen.pyx":114
  *         TODO
  *         """
  *         return state[IDX_STATE_SCREEN][IDX_SCREEN_SCREEN_SCALE]             # <<<<<<<<<<<<<<
@@ -2088,19 +2241,19 @@ static PyObject *__pyx_f_5yapyg_6screen_get_screen_scale(PyObject *__pyx_v_state
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_6screen_IDX_STATE_SCREEN, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_6screen_IDX_SCREEN_SCREEN_SCALE, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_6screen_IDX_SCREEN_SCREEN_SCALE, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\screen.pyx":103
+  /* "yapyg\screen.pyx":110
  *         return (origin_xy[0], origin_xy[1])
  * 
  * cpdef tuple get_screen_scale(list state):             # <<<<<<<<<<<<<<
@@ -2121,17 +2274,17 @@ static PyObject *__pyx_f_5yapyg_6screen_get_screen_scale(PyObject *__pyx_v_state
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5yapyg_6screen_15get_screen_scale(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
-static char __pyx_doc_5yapyg_6screen_14get_screen_scale[] = "\n        TODO\n        ";
-static PyObject *__pyx_pw_5yapyg_6screen_15get_screen_scale(PyObject *__pyx_self, PyObject *__pyx_v_state) {
+static PyObject *__pyx_pw_5yapyg_6screen_17get_screen_scale(PyObject *__pyx_self, PyObject *__pyx_v_state); /*proto*/
+static char __pyx_doc_5yapyg_6screen_16get_screen_scale[] = "\n        TODO\n        ";
+static PyObject *__pyx_pw_5yapyg_6screen_17get_screen_scale(PyObject *__pyx_self, PyObject *__pyx_v_state) {
   CYTHON_UNUSED int __pyx_lineno = 0;
   CYTHON_UNUSED const char *__pyx_filename = NULL;
   CYTHON_UNUSED int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_screen_scale (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_r = __pyx_pf_5yapyg_6screen_14get_screen_scale(__pyx_self, ((PyObject*)__pyx_v_state));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_5yapyg_6screen_16get_screen_scale(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2142,7 +2295,7 @@ static PyObject *__pyx_pw_5yapyg_6screen_15get_screen_scale(PyObject *__pyx_self
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5yapyg_6screen_14get_screen_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state) {
+static PyObject *__pyx_pf_5yapyg_6screen_16get_screen_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2151,7 +2304,7 @@ static PyObject *__pyx_pf_5yapyg_6screen_14get_screen_scale(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_screen_scale", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_6screen_get_screen_scale(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_6screen_get_screen_scale(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2174,9 +2327,10 @@ static PyMethodDef __pyx_methods[] = {
   {"get_width", (PyCFunction)__pyx_pw_5yapyg_6screen_5get_width, METH_O, __pyx_doc_5yapyg_6screen_4get_width},
   {"get_height", (PyCFunction)__pyx_pw_5yapyg_6screen_7get_height, METH_O, __pyx_doc_5yapyg_6screen_6get_height},
   {"get_tile_size", (PyCFunction)__pyx_pw_5yapyg_6screen_9get_tile_size, METH_O, __pyx_doc_5yapyg_6screen_8get_tile_size},
-  {"set_origin", (PyCFunction)__pyx_pw_5yapyg_6screen_11set_origin, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_6screen_10set_origin},
-  {"get_origin", (PyCFunction)__pyx_pw_5yapyg_6screen_13get_origin, METH_O, __pyx_doc_5yapyg_6screen_12get_origin},
-  {"get_screen_scale", (PyCFunction)__pyx_pw_5yapyg_6screen_15get_screen_scale, METH_O, __pyx_doc_5yapyg_6screen_14get_screen_scale},
+  {"get_width_height_tilesize", (PyCFunction)__pyx_pw_5yapyg_6screen_11get_width_height_tilesize, METH_O, __pyx_doc_5yapyg_6screen_10get_width_height_tilesize},
+  {"set_origin", (PyCFunction)__pyx_pw_5yapyg_6screen_13set_origin, METH_VARARGS|METH_KEYWORDS, __pyx_doc_5yapyg_6screen_12set_origin},
+  {"get_origin", (PyCFunction)__pyx_pw_5yapyg_6screen_15get_origin, METH_O, __pyx_doc_5yapyg_6screen_14get_origin},
+  {"get_screen_scale", (PyCFunction)__pyx_pw_5yapyg_6screen_17get_screen_scale, METH_O, __pyx_doc_5yapyg_6screen_16get_screen_scale},
   {0, 0, 0, 0}
 };
 
@@ -2346,6 +2500,7 @@ PyMODINIT_FUNC PyInit_screen(void)
   if (__Pyx_ExportFunction("set_origin", (void (*)(void))__pyx_f_5yapyg_6screen_set_origin, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("get_origin", (void (*)(void))__pyx_f_5yapyg_6screen_get_origin, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ExportFunction("get_screen_scale", (void (*)(void))__pyx_f_5yapyg_6screen_get_screen_scale, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ExportFunction("get_width_height_tilesize", (void (*)(void))__pyx_f_5yapyg_6screen_get_width_height_tilesize, "PyObject *(PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
