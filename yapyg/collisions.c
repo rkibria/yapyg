@@ -416,7 +416,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg\\collisions.pyx",
+  "yapyg/collisions.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -904,7 +904,7 @@ static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_tuple__4;
 
-/* "yapyg\collisions.pyx":53
+/* "yapyg/collisions.pyx":53
  * cdef int IDX_COLLISION_CACHE_HASH_EXTENT = 2
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -925,7 +925,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg\collisions.pyx":58
+  /* "yapyg/collisions.pyx":58
  *         """
  *         global IDX_STATE_COLLISIONS
  *         IDX_STATE_COLLISIONS = state_idx             # <<<<<<<<<<<<<<
@@ -934,7 +934,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
  */
   __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS = __pyx_v_state_idx;
 
-  /* "yapyg\collisions.pyx":60
+  /* "yapyg/collisions.pyx":60
  *         IDX_STATE_COLLISIONS = state_idx
  *         state[IDX_STATE_COLLISIONS] = [
  *                 {},             # <<<<<<<<<<<<<<
@@ -944,7 +944,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg\collisions.pyx":61
+  /* "yapyg/collisions.pyx":61
  *         state[IDX_STATE_COLLISIONS] = [
  *                 {},
  *                 {},             # <<<<<<<<<<<<<<
@@ -954,7 +954,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg\collisions.pyx":63
+  /* "yapyg/collisions.pyx":63
  *                 {},
  *                 None,
  *                 []             # <<<<<<<<<<<<<<
@@ -964,7 +964,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg\collisions.pyx":59
+  /* "yapyg/collisions.pyx":59
  *         global IDX_STATE_COLLISIONS
  *         IDX_STATE_COLLISIONS = state_idx
  *         state[IDX_STATE_COLLISIONS] = [             # <<<<<<<<<<<<<<
@@ -992,7 +992,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, __pyx_t_4, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg\collisions.pyx":53
+  /* "yapyg/collisions.pyx":53
  * cdef int IDX_COLLISION_CACHE_HASH_EXTENT = 2
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -1109,7 +1109,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_initialize(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":66
+/* "yapyg/collisions.pyx":66
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1126,7 +1126,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_destroy(PyObject *__pyx_v_state, CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg\collisions.pyx":70
+  /* "yapyg/collisions.pyx":70
  *         TODO
  *         """
  *         state[IDX_STATE_COLLISIONS] = None             # <<<<<<<<<<<<<<
@@ -1139,7 +1139,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_destroy(PyObject *__pyx_v_state, CY
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\collisions.pyx":66
+  /* "yapyg/collisions.pyx":66
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1207,7 +1207,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_2destroy(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":72
+/* "yapyg/collisions.pyx":72
  *         state[IDX_STATE_COLLISIONS] = None
  * 
  * cpdef entity_pos_listener(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
@@ -1232,7 +1232,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("entity_pos_listener", 0);
 
-  /* "yapyg\collisions.pyx":76
+  /* "yapyg/collisions.pyx":76
  *         TODO
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1252,7 +1252,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":81
+  /* "yapyg/collisions.pyx":81
  *         cdef tuple cached_hash_extents
  * 
  *         if collision_db.has_key(entity_name):             # <<<<<<<<<<<<<<
@@ -1267,7 +1267,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg\collisions.pyx":82
+    /* "yapyg/collisions.pyx":82
  * 
  *         if collision_db.has_key(entity_name):
  *                 collision_db[entity_name][IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_ABS_SHAPE] = None             # <<<<<<<<<<<<<<
@@ -1286,7 +1286,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_ABS_SHAPE, Py_None, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":84
+    /* "yapyg/collisions.pyx":84
  *                 collision_db[entity_name][IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_ABS_SHAPE] = None
  * 
  *                 entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -1303,7 +1303,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":85
+    /* "yapyg/collisions.pyx":85
  * 
  *                 entity_collision_data = collision_db[entity_name]
  *                 entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -1320,7 +1320,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     __pyx_v_entity_collision_cache = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":86
+    /* "yapyg/collisions.pyx":86
  *                 entity_collision_data = collision_db[entity_name]
  *                 entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *                 cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]             # <<<<<<<<<<<<<<
@@ -1337,7 +1337,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     __pyx_v_cached_hash_extents = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":87
+    /* "yapyg/collisions.pyx":87
  *                 entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *                 cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = None             # <<<<<<<<<<<<<<
@@ -1350,7 +1350,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     }
     if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg\collisions.pyx":89
+    /* "yapyg/collisions.pyx":89
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = None
  * 
  *                 update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)             # <<<<<<<<<<<<<<
@@ -1367,7 +1367,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg\collisions.pyx":72
+  /* "yapyg/collisions.pyx":72
  *         state[IDX_STATE_COLLISIONS] = None
  * 
  * cpdef entity_pos_listener(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
@@ -1497,7 +1497,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_4entity_pos_listener(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":91
+/* "yapyg/collisions.pyx":91
  *                 update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef set_handler(list state, handler_function):             # <<<<<<<<<<<<<<
@@ -1515,7 +1515,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_set_handler(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_handler", 0);
 
-  /* "yapyg\collisions.pyx":95
+  /* "yapyg/collisions.pyx":95
  *         TODO
  *         """
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function             # <<<<<<<<<<<<<<
@@ -1531,7 +1531,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_set_handler(PyObject *__pyx_v_state
   if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HANDLER_FUNCTION, __pyx_v_handler_function, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":91
+  /* "yapyg/collisions.pyx":91
  *                 update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef set_handler(list state, handler_function):             # <<<<<<<<<<<<<<
@@ -1645,7 +1645,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_6set_handler(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":97
+/* "yapyg/collisions.pyx":97
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
  * 
  * cpdef add_entity(list state, str entity_name, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -1665,7 +1665,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_entity", 0);
 
-  /* "yapyg\collisions.pyx":102
+  /* "yapyg/collisions.pyx":102
  *         """
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1685,7 +1685,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":106
+  /* "yapyg/collisions.pyx":106
  *                 shapes_list,
  *                 None,
  *                 [None, None, None],             # <<<<<<<<<<<<<<
@@ -1704,7 +1704,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   PyList_SET_ITEM(__pyx_t_2, 2, Py_None);
   __Pyx_GIVEREF(Py_None);
 
-  /* "yapyg\collisions.pyx":103
+  /* "yapyg/collisions.pyx":103
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         collision_db[entity_name] = [             # <<<<<<<<<<<<<<
@@ -1732,7 +1732,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   if (unlikely(PyDict_SetItem(__pyx_v_collision_db, __pyx_v_entity_name, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":109
+  /* "yapyg/collisions.pyx":109
  *                 False,
  *                 ]
  *         update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)             # <<<<<<<<<<<<<<
@@ -1746,7 +1746,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":97
+  /* "yapyg/collisions.pyx":97
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
  * 
  * cpdef add_entity(list state, str entity_name, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -1873,7 +1873,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_8add_entity(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":111
+/* "yapyg/collisions.pyx":111
  *         update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef add_tile(list state, str tile_name, int x, int y, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -1895,7 +1895,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_tile", 0);
 
-  /* "yapyg\collisions.pyx":116
+  /* "yapyg/collisions.pyx":116
  *         """
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1915,7 +1915,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":117
+  /* "yapyg/collisions.pyx":117
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef str full_tile_name = "TILE_%s_%d_%d" % (tile_name, x, y)             # <<<<<<<<<<<<<<
@@ -1944,7 +1944,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   __pyx_v_full_tile_name = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":121
+  /* "yapyg/collisions.pyx":121
  *                 shapes_list,
  *                 None,
  *                 [None, None, None],             # <<<<<<<<<<<<<<
@@ -1963,7 +1963,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   PyList_SET_ITEM(__pyx_t_1, 2, Py_None);
   __Pyx_GIVEREF(Py_None);
 
-  /* "yapyg\collisions.pyx":118
+  /* "yapyg/collisions.pyx":118
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef str full_tile_name = "TILE_%s_%d_%d" % (tile_name, x, y)
  *         collision_db[full_tile_name] = [             # <<<<<<<<<<<<<<
@@ -1991,7 +1991,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   if (unlikely(PyDict_SetItem(__pyx_v_collision_db, __pyx_v_full_tile_name, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg\collisions.pyx":124
+  /* "yapyg/collisions.pyx":124
  *                 True,
  *                 ]
  *         update_hash(state, full_tile_name, (x, y, 0), True)             # <<<<<<<<<<<<<<
@@ -2018,7 +2018,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":111
+  /* "yapyg/collisions.pyx":111
  *         update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef add_tile(list state, str tile_name, int x, int y, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -2165,7 +2165,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_10add_tile(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":126
+/* "yapyg/collisions.pyx":126
  *         update_hash(state, full_tile_name, (x, y, 0), True)
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2185,7 +2185,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
 
-  /* "yapyg\collisions.pyx":130
+  /* "yapyg/collisions.pyx":130
  *         TODO
  *         """
  *         remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))             # <<<<<<<<<<<<<<
@@ -2199,7 +2199,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":131
+  /* "yapyg/collisions.pyx":131
  *         """
  *         remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2219,7 +2219,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   __pyx_v_collision_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":132
+  /* "yapyg/collisions.pyx":132
  *         remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         del collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -2232,7 +2232,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   }
   if (PyDict_DelItem(__pyx_v_collision_db, __pyx_v_entity_name) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\collisions.pyx":126
+  /* "yapyg/collisions.pyx":126
  *         update_hash(state, full_tile_name, (x, y, 0), True)
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2349,7 +2349,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_12delete(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":134
+/* "yapyg/collisions.pyx":134
  *         del collision_db[entity_name]
  * 
  * cpdef update_hash(list state, str entity_name, tuple new_pos, int is_tile):             # <<<<<<<<<<<<<<
@@ -2387,7 +2387,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update_hash", 0);
 
-  /* "yapyg\collisions.pyx":138
+  /* "yapyg/collisions.pyx":138
  *         TODO
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2407,7 +2407,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":139
+  /* "yapyg/collisions.pyx":139
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -2424,7 +2424,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":141
+  /* "yapyg/collisions.pyx":141
  *         cdef list entity_collision_data = collision_db[entity_name]
  * 
  *         cdef tuple last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]             # <<<<<<<<<<<<<<
@@ -2441,7 +2441,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_last_pos = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":142
+  /* "yapyg/collisions.pyx":142
  * 
  *         cdef tuple last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]
  *         if last_pos:             # <<<<<<<<<<<<<<
@@ -2451,7 +2451,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_t_3 = (__pyx_v_last_pos != Py_None) && (PyTuple_GET_SIZE(__pyx_v_last_pos) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\collisions.pyx":143
+    /* "yapyg/collisions.pyx":143
  *         cdef tuple last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]
  *         if last_pos:
  *                 remove_hash_entries(state, entity_name, last_pos)             # <<<<<<<<<<<<<<
@@ -2465,7 +2465,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   }
   __pyx_L3:;
 
-  /* "yapyg\collisions.pyx":145
+  /* "yapyg/collisions.pyx":145
  *                 remove_hash_entries(state, entity_name, last_pos)
  * 
  *         entity_collision_data[IDX_COLLISION_LAST_POS] = new_pos             # <<<<<<<<<<<<<<
@@ -2478,7 +2478,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_data, __pyx_v_5yapyg_10collisions_IDX_COLLISION_LAST_POS, __pyx_v_new_pos, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\collisions.pyx":149
+  /* "yapyg/collisions.pyx":149
  *         cdef tuple entity_lower_left
  *         cdef tuple entity_upper_right
  *         entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, new_pos, is_tile)             # <<<<<<<<<<<<<<
@@ -2521,7 +2521,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_entity_upper_right = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg\collisions.pyx":151
+  /* "yapyg/collisions.pyx":151
  *         entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, new_pos, is_tile)
  * 
  *         entity_collision_data[IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_LAST_HASH_POS] = (entity_lower_left, entity_upper_right)             # <<<<<<<<<<<<<<
@@ -2546,7 +2546,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":153
+  /* "yapyg/collisions.pyx":153
  *         entity_collision_data[IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_LAST_HASH_POS] = (entity_lower_left, entity_upper_right)
  * 
  *         cdef dict hash_map = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]             # <<<<<<<<<<<<<<
@@ -2566,7 +2566,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_hash_map = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg\collisions.pyx":158
+  /* "yapyg/collisions.pyx":158
  *         cdef int y
  *         cdef tuple hash
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):             # <<<<<<<<<<<<<<
@@ -2595,7 +2595,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   for (__pyx_t_7 = __pyx_t_6; __pyx_t_7 < __pyx_t_5; __pyx_t_7+=1) {
     __pyx_v_x = __pyx_t_7;
 
-    /* "yapyg\collisions.pyx":159
+    /* "yapyg/collisions.pyx":159
  *         cdef tuple hash
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):             # <<<<<<<<<<<<<<
@@ -2624,7 +2624,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
     for (__pyx_t_10 = __pyx_t_9; __pyx_t_10 < __pyx_t_8; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "yapyg\collisions.pyx":160
+      /* "yapyg/collisions.pyx":160
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash = (x, y)             # <<<<<<<<<<<<<<
@@ -2646,7 +2646,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
       __Pyx_XDECREF_SET(__pyx_v_hash, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "yapyg\collisions.pyx":161
+      /* "yapyg/collisions.pyx":161
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):             # <<<<<<<<<<<<<<
@@ -2661,7 +2661,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
       __pyx_t_11 = ((!(__pyx_t_3 != 0)) != 0);
       if (__pyx_t_11) {
 
-        /* "yapyg\collisions.pyx":162
+        /* "yapyg/collisions.pyx":162
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):
  *                                 hash_map[hash] = set()             # <<<<<<<<<<<<<<
@@ -2680,7 +2680,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
       }
       __pyx_L8:;
 
-      /* "yapyg\collisions.pyx":163
+      /* "yapyg/collisions.pyx":163
  *                         if not hash_map.has_key(hash):
  *                                 hash_map[hash] = set()
  *                         hash_map[hash].add(entity_name)             # <<<<<<<<<<<<<<
@@ -2725,7 +2725,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
     }
   }
 
-  /* "yapyg\collisions.pyx":134
+  /* "yapyg/collisions.pyx":134
  *         del collision_db[entity_name]
  * 
  * cpdef update_hash(list state, str entity_name, tuple new_pos, int is_tile):             # <<<<<<<<<<<<<<
@@ -2869,7 +2869,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_14update_hash(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":165
+/* "yapyg/collisions.pyx":165
  *                         hash_map[hash].add(entity_name)
  * 
  * cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, int is_tile):             # <<<<<<<<<<<<<<
@@ -2936,7 +2936,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_RefNannySetupContext("get_hash_area", 0);
   __Pyx_INCREF(__pyx_v_entity_lower_left);
 
-  /* "yapyg\collisions.pyx":171
+  /* "yapyg/collisions.pyx":171
  *                 ["circle", x, y, radius]
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2956,7 +2956,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":172
+  /* "yapyg/collisions.pyx":172
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -2973,7 +2973,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":173
+  /* "yapyg/collisions.pyx":173
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -2990,7 +2990,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_entity_collision_cache = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":174
+  /* "yapyg/collisions.pyx":174
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple entity_shapes = entity_collision_data[IDX_COLLISION_SHAPES]             # <<<<<<<<<<<<<<
@@ -3007,7 +3007,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_entity_shapes = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":175
+  /* "yapyg/collisions.pyx":175
  *         cdef list entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple entity_shapes = entity_collision_data[IDX_COLLISION_SHAPES]
  *         cdef tuple cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]             # <<<<<<<<<<<<<<
@@ -3024,7 +3024,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_cached_hash_extents = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":181
+  /* "yapyg/collisions.pyx":181
  *         cdef float tile_ur_x
  *         cdef float tile_ur_y
  *         if is_tile:             # <<<<<<<<<<<<<<
@@ -3034,7 +3034,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_t_3 = (__pyx_v_is_tile != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\collisions.pyx":183
+    /* "yapyg/collisions.pyx":183
  *         if is_tile:
  *                 # Simplified: always check full tile area
  *                 tile_ll_x = ((entity_lower_left[0]) * HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -3057,7 +3057,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_tile_ll_x = __pyx_t_5;
 
-    /* "yapyg\collisions.pyx":184
+    /* "yapyg/collisions.pyx":184
  *                 # Simplified: always check full tile area
  *                 tile_ll_x = ((entity_lower_left[0]) * HASH_SCALE_FACTOR)
  *                 tile_ll_y = ((entity_lower_left[1]) * HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -3080,7 +3080,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_tile_ll_y = __pyx_t_5;
 
-    /* "yapyg\collisions.pyx":185
+    /* "yapyg/collisions.pyx":185
  *                 tile_ll_x = ((entity_lower_left[0]) * HASH_SCALE_FACTOR)
  *                 tile_ll_y = ((entity_lower_left[1]) * HASH_SCALE_FACTOR)
  *                 tile_ur_x = tile_ll_x + HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3089,7 +3089,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
     __pyx_v_tile_ur_x = (__pyx_v_tile_ll_x + __pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR);
 
-    /* "yapyg\collisions.pyx":186
+    /* "yapyg/collisions.pyx":186
  *                 tile_ll_y = ((entity_lower_left[1]) * HASH_SCALE_FACTOR)
  *                 tile_ur_x = tile_ll_x + HASH_SCALE_FACTOR
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3098,7 +3098,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
     __pyx_v_tile_ur_y = (__pyx_v_tile_ll_y + __pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR);
 
-    /* "yapyg\collisions.pyx":187
+    /* "yapyg/collisions.pyx":187
  *                 tile_ur_x = tile_ll_x + HASH_SCALE_FACTOR
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -3130,7 +3130,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT, __pyx_t_4, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg\collisions.pyx":188
+    /* "yapyg/collisions.pyx":188
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)
  *                 return ((int(tile_ll_x), int(tile_ll_y),),             # <<<<<<<<<<<<<<
@@ -3167,7 +3167,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __pyx_t_4 = 0;
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":189
+    /* "yapyg/collisions.pyx":189
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)
  *                 return ((int(tile_ll_x), int(tile_ll_y),),
  *                         (int(tile_ur_x), int(tile_ur_y),)             # <<<<<<<<<<<<<<
@@ -3203,7 +3203,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __pyx_t_1 = 0;
     __pyx_t_4 = 0;
 
-    /* "yapyg\collisions.pyx":188
+    /* "yapyg/collisions.pyx":188
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)
  *                 return ((int(tile_ll_x), int(tile_ll_y),),             # <<<<<<<<<<<<<<
@@ -3223,7 +3223,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     goto __pyx_L0;
   }
 
-  /* "yapyg\collisions.pyx":192
+  /* "yapyg/collisions.pyx":192
  *                         )
  * 
  *         cdef float lower_left_x_offset = 0             # <<<<<<<<<<<<<<
@@ -3232,7 +3232,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_lower_left_x_offset = 0.0;
 
-  /* "yapyg\collisions.pyx":193
+  /* "yapyg/collisions.pyx":193
  * 
  *         cdef float lower_left_x_offset = 0
  *         cdef float lower_left_y_offset = 0             # <<<<<<<<<<<<<<
@@ -3241,7 +3241,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_lower_left_y_offset = 0.0;
 
-  /* "yapyg\collisions.pyx":194
+  /* "yapyg/collisions.pyx":194
  *         cdef float lower_left_x_offset = 0
  *         cdef float lower_left_y_offset = 0
  *         cdef float upper_right_x_offset = 0             # <<<<<<<<<<<<<<
@@ -3250,7 +3250,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_upper_right_x_offset = 0.0;
 
-  /* "yapyg\collisions.pyx":195
+  /* "yapyg/collisions.pyx":195
  *         cdef float lower_left_y_offset = 0
  *         cdef float upper_right_x_offset = 0
  *         cdef float upper_right_y_offset = 0             # <<<<<<<<<<<<<<
@@ -3259,7 +3259,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_upper_right_y_offset = 0.0;
 
-  /* "yapyg\collisions.pyx":217
+  /* "yapyg/collisions.pyx":217
  *         cdef float rotated_y
  * 
  *         if cached_hash_extents:             # <<<<<<<<<<<<<<
@@ -3269,7 +3269,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_t_3 = (__pyx_v_cached_hash_extents != Py_None) && (PyTuple_GET_SIZE(__pyx_v_cached_hash_extents) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\collisions.pyx":218
+    /* "yapyg/collisions.pyx":218
  * 
  *         if cached_hash_extents:
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents             # <<<<<<<<<<<<<<
@@ -3327,7 +3327,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   }
   /*else*/ {
 
-    /* "yapyg\collisions.pyx":220
+    /* "yapyg/collisions.pyx":220
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
  *         else:
  *                 for collision_shape in entity_shapes:             # <<<<<<<<<<<<<<
@@ -3350,7 +3350,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
       __Pyx_XDECREF_SET(__pyx_v_collision_shape, ((PyObject*)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "yapyg\collisions.pyx":221
+      /* "yapyg/collisions.pyx":221
  *         else:
  *                 for collision_shape in entity_shapes:
  *                         if collision_shape[0] == "circle":             # <<<<<<<<<<<<<<
@@ -3367,7 +3367,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg\collisions.pyx":222
+        /* "yapyg/collisions.pyx":222
  *                 for collision_shape in entity_shapes:
  *                         if collision_shape[0] == "circle":
  *                                 c_x = collision_shape[1] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3390,7 +3390,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_c_x = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":223
+        /* "yapyg/collisions.pyx":223
  *                         if collision_shape[0] == "circle":
  *                                 c_x = collision_shape[1] * HASH_SCALE_FACTOR
  *                                 c_y = collision_shape[2] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3413,7 +3413,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_v_c_y = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":224
+        /* "yapyg/collisions.pyx":224
  *                                 c_x = collision_shape[1] * HASH_SCALE_FACTOR
  *                                 c_y = collision_shape[2] * HASH_SCALE_FACTOR
  *                                 c_r = collision_shape[3] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3436,7 +3436,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_c_r = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":226
+        /* "yapyg/collisions.pyx":226
  *                                 c_r = collision_shape[3] * HASH_SCALE_FACTOR
  * 
  *                                 c_ll_x = c_x - c_r             # <<<<<<<<<<<<<<
@@ -3445,7 +3445,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ll_x = (__pyx_v_c_x - __pyx_v_c_r);
 
-        /* "yapyg\collisions.pyx":227
+        /* "yapyg/collisions.pyx":227
  * 
  *                                 c_ll_x = c_x - c_r
  *                                 c_ll_y = c_y - c_r             # <<<<<<<<<<<<<<
@@ -3454,7 +3454,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ll_y = (__pyx_v_c_y - __pyx_v_c_r);
 
-        /* "yapyg\collisions.pyx":228
+        /* "yapyg/collisions.pyx":228
  *                                 c_ll_x = c_x - c_r
  *                                 c_ll_y = c_y - c_r
  *                                 c_ur_x = c_x + c_r             # <<<<<<<<<<<<<<
@@ -3463,7 +3463,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ur_x = (__pyx_v_c_x + __pyx_v_c_r);
 
-        /* "yapyg\collisions.pyx":229
+        /* "yapyg/collisions.pyx":229
  *                                 c_ll_y = c_y - c_r
  *                                 c_ur_x = c_x + c_r
  *                                 c_ur_y = c_y + c_r             # <<<<<<<<<<<<<<
@@ -3472,7 +3472,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ur_y = (__pyx_v_c_y + __pyx_v_c_r);
 
-        /* "yapyg\collisions.pyx":231
+        /* "yapyg/collisions.pyx":231
  *                                 c_ur_y = c_y + c_r
  * 
  *                                 if c_ll_x < lower_left_x_offset:             # <<<<<<<<<<<<<<
@@ -3482,7 +3482,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ll_x < __pyx_v_lower_left_x_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg\collisions.pyx":232
+          /* "yapyg/collisions.pyx":232
  * 
  *                                 if c_ll_x < lower_left_x_offset:
  *                                         lower_left_x_offset = c_ll_x             # <<<<<<<<<<<<<<
@@ -3494,7 +3494,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         }
         __pyx_L8:;
 
-        /* "yapyg\collisions.pyx":234
+        /* "yapyg/collisions.pyx":234
  *                                         lower_left_x_offset = c_ll_x
  * 
  *                                 if c_ll_y < lower_left_y_offset:             # <<<<<<<<<<<<<<
@@ -3504,7 +3504,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ll_y < __pyx_v_lower_left_y_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg\collisions.pyx":235
+          /* "yapyg/collisions.pyx":235
  * 
  *                                 if c_ll_y < lower_left_y_offset:
  *                                         lower_left_y_offset = c_ll_y             # <<<<<<<<<<<<<<
@@ -3516,7 +3516,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         }
         __pyx_L9:;
 
-        /* "yapyg\collisions.pyx":237
+        /* "yapyg/collisions.pyx":237
  *                                         lower_left_y_offset = c_ll_y
  * 
  *                                 if c_ur_x > upper_right_x_offset:             # <<<<<<<<<<<<<<
@@ -3526,7 +3526,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ur_x > __pyx_v_upper_right_x_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg\collisions.pyx":238
+          /* "yapyg/collisions.pyx":238
  * 
  *                                 if c_ur_x > upper_right_x_offset:
  *                                         upper_right_x_offset = c_ur_x             # <<<<<<<<<<<<<<
@@ -3538,7 +3538,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         }
         __pyx_L10:;
 
-        /* "yapyg\collisions.pyx":240
+        /* "yapyg/collisions.pyx":240
  *                                         upper_right_x_offset = c_ur_x
  * 
  *                                 if c_ur_y > upper_right_y_offset:             # <<<<<<<<<<<<<<
@@ -3548,7 +3548,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ur_y > __pyx_v_upper_right_y_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg\collisions.pyx":241
+          /* "yapyg/collisions.pyx":241
  * 
  *                                 if c_ur_y > upper_right_y_offset:
  *                                         upper_right_y_offset = c_ur_y             # <<<<<<<<<<<<<<
@@ -3562,7 +3562,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         goto __pyx_L7;
       }
 
-      /* "yapyg\collisions.pyx":243
+      /* "yapyg/collisions.pyx":243
  *                                         upper_right_y_offset = c_ur_y
  * 
  *                         elif collision_shape[0] == "rectangle":             # <<<<<<<<<<<<<<
@@ -3579,7 +3579,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg\collisions.pyx":244
+        /* "yapyg/collisions.pyx":244
  * 
  *                         elif collision_shape[0] == "rectangle":
  *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3602,7 +3602,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_v_r_x = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":245
+        /* "yapyg/collisions.pyx":245
  *                         elif collision_shape[0] == "rectangle":
  *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR
  *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3625,7 +3625,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_r_y = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":246
+        /* "yapyg/collisions.pyx":246
  *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR
  *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR
  *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3648,7 +3648,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_v_r_w = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":247
+        /* "yapyg/collisions.pyx":247
  *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR
  *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR
  *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3671,7 +3671,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_r_h = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":248
+        /* "yapyg/collisions.pyx":248
  *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR
  *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR
  *                                 pos = entities.get_pos(state, entity_name)             # <<<<<<<<<<<<<<
@@ -3683,7 +3683,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_XDECREF_SET(__pyx_v_pos, ((PyObject*)__pyx_t_4));
         __pyx_t_4 = 0;
 
-        /* "yapyg\collisions.pyx":249
+        /* "yapyg/collisions.pyx":249
  *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR
  *                                 pos = entities.get_pos(state, entity_name)
  *                                 rot = pos[2]             # <<<<<<<<<<<<<<
@@ -3700,7 +3700,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_rot = __pyx_t_9;
 
-        /* "yapyg\collisions.pyx":251
+        /* "yapyg/collisions.pyx":251
  *                                 rot = pos[2]
  * 
  *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))             # <<<<<<<<<<<<<<
@@ -3722,7 +3722,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_XDECREF_SET(__pyx_v_rect_center, ((PyObject*)__pyx_t_2));
         __pyx_t_2 = 0;
 
-        /* "yapyg\collisions.pyx":252
+        /* "yapyg/collisions.pyx":252
  * 
  *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
  *                                 rect_corners = ((r_x, r_y),             # <<<<<<<<<<<<<<
@@ -3742,7 +3742,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_2 = 0;
         __pyx_t_6 = 0;
 
-        /* "yapyg\collisions.pyx":253
+        /* "yapyg/collisions.pyx":253
  *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
  *                                 rect_corners = ((r_x, r_y),
  *                                                 (r_x + r_w, r_y),             # <<<<<<<<<<<<<<
@@ -3762,7 +3762,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_6 = 0;
         __pyx_t_2 = 0;
 
-        /* "yapyg\collisions.pyx":254
+        /* "yapyg/collisions.pyx":254
  *                                 rect_corners = ((r_x, r_y),
  *                                                 (r_x + r_w, r_y),
  *                                                 (r_x, r_y + r_h),             # <<<<<<<<<<<<<<
@@ -3782,7 +3782,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_2 = 0;
         __pyx_t_6 = 0;
 
-        /* "yapyg\collisions.pyx":255
+        /* "yapyg/collisions.pyx":255
  *                                                 (r_x + r_w, r_y),
  *                                                 (r_x, r_y + r_h),
  *                                                 (r_x + r_w, r_y + r_h),             # <<<<<<<<<<<<<<
@@ -3802,7 +3802,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_6 = 0;
         __pyx_t_2 = 0;
 
-        /* "yapyg\collisions.pyx":252
+        /* "yapyg/collisions.pyx":252
  * 
  *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
  *                                 rect_corners = ((r_x, r_y),             # <<<<<<<<<<<<<<
@@ -3826,7 +3826,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __Pyx_XDECREF_SET(__pyx_v_rect_corners, ((PyObject*)__pyx_t_2));
         __pyx_t_2 = 0;
 
-        /* "yapyg\collisions.pyx":257
+        /* "yapyg/collisions.pyx":257
  *                                                 (r_x + r_w, r_y + r_h),
  *                                                 )
  *                                 for rect_corner in rect_corners:             # <<<<<<<<<<<<<<
@@ -3844,7 +3844,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           __Pyx_XDECREF_SET(__pyx_v_rect_corner, ((PyObject*)__pyx_t_13));
           __pyx_t_13 = 0;
 
-          /* "yapyg\collisions.pyx":258
+          /* "yapyg/collisions.pyx":258
  *                                                 )
  *                                 for rect_corner in rect_corners:
  *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)             # <<<<<<<<<<<<<<
@@ -3887,7 +3887,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           __pyx_v_rotated_x = __pyx_t_9;
           __pyx_v_rotated_y = __pyx_t_8;
 
-          /* "yapyg\collisions.pyx":259
+          /* "yapyg/collisions.pyx":259
  *                                 for rect_corner in rect_corners:
  *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
  *                                         if rotated_x < lower_left_x_offset:             # <<<<<<<<<<<<<<
@@ -3897,7 +3897,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           __pyx_t_3 = ((__pyx_v_rotated_x < __pyx_v_lower_left_x_offset) != 0);
           if (__pyx_t_3) {
 
-            /* "yapyg\collisions.pyx":260
+            /* "yapyg/collisions.pyx":260
  *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
  *                                         if rotated_x < lower_left_x_offset:
  *                                                 lower_left_x_offset = rotated_x             # <<<<<<<<<<<<<<
@@ -3909,7 +3909,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           }
           __pyx_L14:;
 
-          /* "yapyg\collisions.pyx":262
+          /* "yapyg/collisions.pyx":262
  *                                                 lower_left_x_offset = rotated_x
  * 
  *                                         if rotated_y < lower_left_y_offset:             # <<<<<<<<<<<<<<
@@ -3919,7 +3919,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           __pyx_t_3 = ((__pyx_v_rotated_y < __pyx_v_lower_left_y_offset) != 0);
           if (__pyx_t_3) {
 
-            /* "yapyg\collisions.pyx":263
+            /* "yapyg/collisions.pyx":263
  * 
  *                                         if rotated_y < lower_left_y_offset:
  *                                                 lower_left_y_offset = rotated_y             # <<<<<<<<<<<<<<
@@ -3931,7 +3931,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           }
           __pyx_L15:;
 
-          /* "yapyg\collisions.pyx":265
+          /* "yapyg/collisions.pyx":265
  *                                                 lower_left_y_offset = rotated_y
  * 
  *                                         if rotated_x > upper_right_x_offset:             # <<<<<<<<<<<<<<
@@ -3941,7 +3941,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           __pyx_t_3 = ((__pyx_v_rotated_x > __pyx_v_upper_right_x_offset) != 0);
           if (__pyx_t_3) {
 
-            /* "yapyg\collisions.pyx":266
+            /* "yapyg/collisions.pyx":266
  * 
  *                                         if rotated_x > upper_right_x_offset:
  *                                                 upper_right_x_offset = rotated_x             # <<<<<<<<<<<<<<
@@ -3953,7 +3953,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           }
           __pyx_L16:;
 
-          /* "yapyg\collisions.pyx":268
+          /* "yapyg/collisions.pyx":268
  *                                                 upper_right_x_offset = rotated_x
  * 
  *                                         if rotated_y > upper_right_y_offset:             # <<<<<<<<<<<<<<
@@ -3963,7 +3963,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           __pyx_t_3 = ((__pyx_v_rotated_y > __pyx_v_upper_right_y_offset) != 0);
           if (__pyx_t_3) {
 
-            /* "yapyg\collisions.pyx":269
+            /* "yapyg/collisions.pyx":269
  * 
  *                                         if rotated_y > upper_right_y_offset:
  *                                                 upper_right_y_offset = rotated_y             # <<<<<<<<<<<<<<
@@ -3975,7 +3975,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
           }
           __pyx_L17:;
 
-          /* "yapyg\collisions.pyx":257
+          /* "yapyg/collisions.pyx":257
  *                                                 (r_x + r_w, r_y + r_h),
  *                                                 )
  *                                 for rect_corner in rect_corners:             # <<<<<<<<<<<<<<
@@ -3988,7 +3988,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
       }
       __pyx_L7:;
 
-      /* "yapyg\collisions.pyx":220
+      /* "yapyg/collisions.pyx":220
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
  *         else:
  *                 for collision_shape in entity_shapes:             # <<<<<<<<<<<<<<
@@ -3998,7 +3998,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":270
+    /* "yapyg/collisions.pyx":270
  *                                         if rotated_y > upper_right_y_offset:
  *                                                 upper_right_y_offset = rotated_y
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,             # <<<<<<<<<<<<<<
@@ -4010,7 +4010,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __pyx_t_2 = PyFloat_FromDouble(__pyx_v_lower_left_y_offset); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "yapyg\collisions.pyx":271
+    /* "yapyg/collisions.pyx":271
  *                                                 upper_right_y_offset = rotated_y
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
  *                                                                            upper_right_x_offset, upper_right_y_offset)             # <<<<<<<<<<<<<<
@@ -4022,7 +4022,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __pyx_t_11 = PyFloat_FromDouble(__pyx_v_upper_right_y_offset); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
 
-    /* "yapyg\collisions.pyx":270
+    /* "yapyg/collisions.pyx":270
  *                                         if rotated_y > upper_right_y_offset:
  *                                                 upper_right_y_offset = rotated_y
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,             # <<<<<<<<<<<<<<
@@ -4052,7 +4052,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   }
   __pyx_L4:;
 
-  /* "yapyg\collisions.pyx":273
+  /* "yapyg/collisions.pyx":273
  *                                                                            upper_right_x_offset, upper_right_y_offset)
  * 
  *         entity_lower_left = (entity_lower_left[0] * HASH_SCALE_FACTOR, entity_lower_left[1] * HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -4094,7 +4094,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF_SET(__pyx_v_entity_lower_left, ((PyObject*)__pyx_t_12));
   __pyx_t_12 = 0;
 
-  /* "yapyg\collisions.pyx":276
+  /* "yapyg/collisions.pyx":276
  * 
  *         cdef tuple area_lower_left
  *         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,             # <<<<<<<<<<<<<<
@@ -4110,7 +4110,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":277
+  /* "yapyg/collisions.pyx":277
  *         cdef tuple area_lower_left
  *         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,
  *                            entity_lower_left[1] + lower_left_y_offset)             # <<<<<<<<<<<<<<
@@ -4126,7 +4126,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg\collisions.pyx":276
+  /* "yapyg/collisions.pyx":276
  * 
  *         cdef tuple area_lower_left
  *         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,             # <<<<<<<<<<<<<<
@@ -4144,7 +4144,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_area_lower_left = ((PyObject*)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "yapyg\collisions.pyx":280
+  /* "yapyg/collisions.pyx":280
  * 
  *         cdef tuple area_upper_right
  *         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,             # <<<<<<<<<<<<<<
@@ -4160,7 +4160,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "yapyg\collisions.pyx":281
+  /* "yapyg/collisions.pyx":281
  *         cdef tuple area_upper_right
  *         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,
  *                             entity_lower_left[1] + upper_right_y_offset)             # <<<<<<<<<<<<<<
@@ -4176,7 +4176,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg\collisions.pyx":280
+  /* "yapyg/collisions.pyx":280
  * 
  *         cdef tuple area_upper_right
  *         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,             # <<<<<<<<<<<<<<
@@ -4194,7 +4194,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_area_upper_right = ((PyObject*)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "yapyg\collisions.pyx":283
+  /* "yapyg/collisions.pyx":283
  *                             entity_lower_left[1] + upper_right_y_offset)
  * 
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))             # <<<<<<<<<<<<<<
@@ -4240,7 +4240,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF_SET(__pyx_v_area_lower_left, ((PyObject*)__pyx_t_13));
   __pyx_t_13 = 0;
 
-  /* "yapyg\collisions.pyx":284
+  /* "yapyg/collisions.pyx":284
  * 
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))
  *         area_upper_right = (int(floor(area_upper_right[0])), int(floor(area_upper_right[1])))             # <<<<<<<<<<<<<<
@@ -4286,7 +4286,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_DECREF_SET(__pyx_v_area_upper_right, ((PyObject*)__pyx_t_12));
   __pyx_t_12 = 0;
 
-  /* "yapyg\collisions.pyx":285
+  /* "yapyg/collisions.pyx":285
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))
  *         area_upper_right = (int(floor(area_upper_right[0])), int(floor(area_upper_right[1])))
  *         return (area_lower_left, area_upper_right)             # <<<<<<<<<<<<<<
@@ -4306,7 +4306,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_t_12 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\collisions.pyx":165
+  /* "yapyg/collisions.pyx":165
  *                         hash_map[hash].add(entity_name)
  * 
  * cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, int is_tile):             # <<<<<<<<<<<<<<
@@ -4457,7 +4457,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_16get_hash_area(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":287
+/* "yapyg/collisions.pyx":287
  *         return (area_lower_left, area_upper_right)
  * 
  * cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):             # <<<<<<<<<<<<<<
@@ -4495,7 +4495,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __Pyx_RefNannySetupContext("remove_hash_entries", 0);
   __Pyx_INCREF(__pyx_v_entity_lower_left);
 
-  /* "yapyg\collisions.pyx":291
+  /* "yapyg/collisions.pyx":291
  *         TODO
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -4515,7 +4515,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":292
+  /* "yapyg/collisions.pyx":292
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -4532,7 +4532,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":293
+  /* "yapyg/collisions.pyx":293
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list collision_cache = entity_collision_data[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -4549,7 +4549,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_v_collision_cache = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":294
+  /* "yapyg/collisions.pyx":294
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple last_added_range = collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS]             # <<<<<<<<<<<<<<
@@ -4566,7 +4566,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_v_last_added_range = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":295
+  /* "yapyg/collisions.pyx":295
  *         cdef list collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple last_added_range = collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS]
  *         cdef int is_tile = entity_collision_data[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -4583,7 +4583,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_is_tile = __pyx_t_3;
 
-  /* "yapyg\collisions.pyx":298
+  /* "yapyg/collisions.pyx":298
  * 
  *         cdef tuple entity_upper_right
  *         if last_added_range:             # <<<<<<<<<<<<<<
@@ -4593,7 +4593,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_t_4 = (__pyx_v_last_added_range != Py_None) && (PyTuple_GET_SIZE(__pyx_v_last_added_range) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg\collisions.pyx":299
+    /* "yapyg/collisions.pyx":299
  *         cdef tuple entity_upper_right
  *         if last_added_range:
  *                 entity_lower_left, entity_upper_right = last_added_range             # <<<<<<<<<<<<<<
@@ -4636,7 +4636,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   }
   /*else*/ {
 
-    /* "yapyg\collisions.pyx":301
+    /* "yapyg/collisions.pyx":301
  *                 entity_lower_left, entity_upper_right = last_added_range
  *         else:
  *                 entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, entity_lower_left, is_tile)             # <<<<<<<<<<<<<<
@@ -4681,7 +4681,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg\collisions.pyx":303
+  /* "yapyg/collisions.pyx":303
  *                 entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, entity_lower_left, is_tile)
  * 
  *         cdef dict hash_map = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]             # <<<<<<<<<<<<<<
@@ -4701,7 +4701,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_v_hash_map = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "yapyg\collisions.pyx":306
+  /* "yapyg/collisions.pyx":306
  *         cdef int x
  *         cdef int y
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):             # <<<<<<<<<<<<<<
@@ -4730,7 +4730,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   for (__pyx_t_3 = __pyx_t_7; __pyx_t_3 < __pyx_t_6; __pyx_t_3+=1) {
     __pyx_v_x = __pyx_t_3;
 
-    /* "yapyg\collisions.pyx":307
+    /* "yapyg/collisions.pyx":307
  *         cdef int y
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):             # <<<<<<<<<<<<<<
@@ -4759,7 +4759,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
     for (__pyx_t_10 = __pyx_t_9; __pyx_t_10 < __pyx_t_8; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "yapyg\collisions.pyx":308
+      /* "yapyg/collisions.pyx":308
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash_map[(x, y)].remove(entity_name)             # <<<<<<<<<<<<<<
@@ -4817,7 +4817,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
     }
   }
 
-  /* "yapyg\collisions.pyx":309
+  /* "yapyg/collisions.pyx":309
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash_map[(x, y)].remove(entity_name)
  *         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None             # <<<<<<<<<<<<<<
@@ -4830,7 +4830,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\collisions.pyx":287
+  /* "yapyg/collisions.pyx":287
  *         return (area_lower_left, area_upper_right)
  * 
  * cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):             # <<<<<<<<<<<<<<
@@ -4965,7 +4965,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_18remove_hash_entries(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":311
+/* "yapyg/collisions.pyx":311
  *         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None
  * 
  * cdef str absolute_shape_to_str(tuple absolute_shape):             # <<<<<<<<<<<<<<
@@ -4984,7 +4984,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("absolute_shape_to_str", 0);
 
-  /* "yapyg\collisions.pyx":312
+  /* "yapyg/collisions.pyx":312
  * 
  * cdef str absolute_shape_to_str(tuple absolute_shape):
  *         cdef str output = ""             # <<<<<<<<<<<<<<
@@ -4994,7 +4994,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   __Pyx_INCREF(__pyx_kp_s_);
   __pyx_v_output = __pyx_kp_s_;
 
-  /* "yapyg\collisions.pyx":313
+  /* "yapyg/collisions.pyx":313
  * cdef str absolute_shape_to_str(tuple absolute_shape):
  *         cdef str output = ""
  *         output += "(" + absolute_shape[0]             # <<<<<<<<<<<<<<
@@ -5017,7 +5017,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   __Pyx_DECREF_SET(__pyx_v_output, ((PyObject*)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":314
+  /* "yapyg/collisions.pyx":314
  *         cdef str output = ""
  *         output += "(" + absolute_shape[0]
  *         output += str(absolute_shape[1:]) + ") "             # <<<<<<<<<<<<<<
@@ -5048,7 +5048,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   __Pyx_DECREF_SET(__pyx_v_output, ((PyObject*)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":315
+  /* "yapyg/collisions.pyx":315
  *         output += "(" + absolute_shape[0]
  *         output += str(absolute_shape[1:]) + ") "
  *         return output             # <<<<<<<<<<<<<<
@@ -5060,7 +5060,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   __pyx_r = __pyx_v_output;
   goto __pyx_L0;
 
-  /* "yapyg\collisions.pyx":311
+  /* "yapyg/collisions.pyx":311
  *         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None
  * 
  * cdef str absolute_shape_to_str(tuple absolute_shape):             # <<<<<<<<<<<<<<
@@ -5081,7 +5081,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":317
+/* "yapyg/collisions.pyx":317
  *         return output
  * 
  * cpdef list get_collision_shapes(list state, str entity_name, list collision_def):             # <<<<<<<<<<<<<<
@@ -5126,7 +5126,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_collision_shapes", 0);
 
-  /* "yapyg\collisions.pyx":328
+  /* "yapyg/collisions.pyx":328
  *                 rectangle: ("rectangle", x, y, w, h, rotation)
  *         """
  *         cdef list entity_collision_cache = collision_def[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -5143,7 +5143,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_v_entity_collision_cache = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":330
+  /* "yapyg/collisions.pyx":330
  *         cdef list entity_collision_cache = collision_def[IDX_COLLISION_CACHE]
  * 
  *         cdef list cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]             # <<<<<<<<<<<<<<
@@ -5160,7 +5160,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_v_cached_absolute_shapes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":331
+  /* "yapyg/collisions.pyx":331
  * 
  *         cdef list cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]
  *         if cached_absolute_shapes:             # <<<<<<<<<<<<<<
@@ -5170,7 +5170,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_t_2 = (__pyx_v_cached_absolute_shapes != Py_None) && (PyList_GET_SIZE(__pyx_v_cached_absolute_shapes) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\collisions.pyx":332
+    /* "yapyg/collisions.pyx":332
  *         cdef list cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]
  *         if cached_absolute_shapes:
  *                 return cached_absolute_shapes             # <<<<<<<<<<<<<<
@@ -5183,7 +5183,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     goto __pyx_L0;
   }
 
-  /* "yapyg\collisions.pyx":336
+  /* "yapyg/collisions.pyx":336
  *         cdef tuple pos
  *         cdef tuple pos_offset
  *         cdef int is_tile = collision_def[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -5200,7 +5200,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_is_tile = __pyx_t_3;
 
-  /* "yapyg\collisions.pyx":337
+  /* "yapyg/collisions.pyx":337
  *         cdef tuple pos_offset
  *         cdef int is_tile = collision_def[IDX_COLLISION_IS_TILE]
  *         if is_tile:             # <<<<<<<<<<<<<<
@@ -5210,7 +5210,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_t_2 = (__pyx_v_is_tile != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\collisions.pyx":338
+    /* "yapyg/collisions.pyx":338
  *         cdef int is_tile = collision_def[IDX_COLLISION_IS_TILE]
  *         if is_tile:
  *                 pos = collision_def[IDX_COLLISION_LAST_POS]             # <<<<<<<<<<<<<<
@@ -5227,7 +5227,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     __pyx_v_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":339
+    /* "yapyg/collisions.pyx":339
  *         if is_tile:
  *                 pos = collision_def[IDX_COLLISION_LAST_POS]
  *                 pos_offset = (0, 0)             # <<<<<<<<<<<<<<
@@ -5240,7 +5240,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   }
   /*else*/ {
 
-    /* "yapyg\collisions.pyx":341
+    /* "yapyg/collisions.pyx":341
  *                 pos_offset = (0, 0)
  *         else:
  *                 pos = entities.get_pos(state, entity_name)             # <<<<<<<<<<<<<<
@@ -5252,7 +5252,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     __pyx_v_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":342
+    /* "yapyg/collisions.pyx":342
  *         else:
  *                 pos = entities.get_pos(state, entity_name)
  *                 pos_offset = entities.get_pos_offset(state, entity_name)             # <<<<<<<<<<<<<<
@@ -5266,7 +5266,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   }
   __pyx_L4:;
 
-  /* "yapyg\collisions.pyx":345
+  /* "yapyg/collisions.pyx":345
  * 
  *         cdef float rot
  *         rot = pos[2]             # <<<<<<<<<<<<<<
@@ -5283,7 +5283,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rot = __pyx_t_4;
 
-  /* "yapyg\collisions.pyx":346
+  /* "yapyg/collisions.pyx":346
  *         cdef float rot
  *         rot = pos[2]
  *         cdef list absolute_shapes = []             # <<<<<<<<<<<<<<
@@ -5295,7 +5295,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_v_absolute_shapes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":356
+  /* "yapyg/collisions.pyx":356
  *         cdef float r_w
  *         cdef float r_h
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:             # <<<<<<<<<<<<<<
@@ -5350,7 +5350,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_collision_shape, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "yapyg\collisions.pyx":357
+    /* "yapyg/collisions.pyx":357
  *         cdef float r_h
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:
  *                 if collision_shape[0] == "circle":             # <<<<<<<<<<<<<<
@@ -5367,7 +5367,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg\collisions.pyx":358
+      /* "yapyg/collisions.pyx":358
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:
  *                 if collision_shape[0] == "circle":
  *                         c_x = collision_shape[1]             # <<<<<<<<<<<<<<
@@ -5384,7 +5384,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_v_c_x = __pyx_t_4;
 
-      /* "yapyg\collisions.pyx":359
+      /* "yapyg/collisions.pyx":359
  *                 if collision_shape[0] == "circle":
  *                         c_x = collision_shape[1]
  *                         c_y = collision_shape[2]             # <<<<<<<<<<<<<<
@@ -5401,7 +5401,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_v_c_y = __pyx_t_4;
 
-      /* "yapyg\collisions.pyx":360
+      /* "yapyg/collisions.pyx":360
  *                         c_x = collision_shape[1]
  *                         c_y = collision_shape[2]
  *                         c_r = collision_shape[3]             # <<<<<<<<<<<<<<
@@ -5417,7 +5417,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_XDECREF_SET(__pyx_v_c_r, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg\collisions.pyx":361
+      /* "yapyg/collisions.pyx":361
  *                         c_y = collision_shape[2]
  *                         c_r = collision_shape[3]
  *                         absolute_shapes.append(("circle", pos[0] + pos_offset[0] + c_x, pos[1] + pos_offset[1] + c_y, c_r))             # <<<<<<<<<<<<<<
@@ -5487,7 +5487,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       goto __pyx_L7;
     }
 
-    /* "yapyg\collisions.pyx":362
+    /* "yapyg/collisions.pyx":362
  *                         c_r = collision_shape[3]
  *                         absolute_shapes.append(("circle", pos[0] + pos_offset[0] + c_x, pos[1] + pos_offset[1] + c_y, c_r))
  *                 elif collision_shape[0] == "rectangle":             # <<<<<<<<<<<<<<
@@ -5504,7 +5504,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg\collisions.pyx":363
+      /* "yapyg/collisions.pyx":363
  *                         absolute_shapes.append(("circle", pos[0] + pos_offset[0] + c_x, pos[1] + pos_offset[1] + c_y, c_r))
  *                 elif collision_shape[0] == "rectangle":
  *                         r_x = collision_shape[1]             # <<<<<<<<<<<<<<
@@ -5521,7 +5521,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_x = __pyx_t_4;
 
-      /* "yapyg\collisions.pyx":364
+      /* "yapyg/collisions.pyx":364
  *                 elif collision_shape[0] == "rectangle":
  *                         r_x = collision_shape[1]
  *                         r_y = collision_shape[2]             # <<<<<<<<<<<<<<
@@ -5538,7 +5538,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_y = __pyx_t_4;
 
-      /* "yapyg\collisions.pyx":365
+      /* "yapyg/collisions.pyx":365
  *                         r_x = collision_shape[1]
  *                         r_y = collision_shape[2]
  *                         r_w = collision_shape[3]             # <<<<<<<<<<<<<<
@@ -5555,7 +5555,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_w = __pyx_t_4;
 
-      /* "yapyg\collisions.pyx":366
+      /* "yapyg/collisions.pyx":366
  *                         r_y = collision_shape[2]
  *                         r_w = collision_shape[3]
  *                         r_h = collision_shape[4]             # <<<<<<<<<<<<<<
@@ -5572,7 +5572,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_h = __pyx_t_4;
 
-      /* "yapyg\collisions.pyx":367
+      /* "yapyg/collisions.pyx":367
  *                         r_w = collision_shape[3]
  *                         r_h = collision_shape[4]
  *                         absolute_shapes.append(("rectangle", pos[0] + pos_offset[0] + r_x, pos[1] + pos_offset[1] + r_y, r_w, r_h, rot))             # <<<<<<<<<<<<<<
@@ -5655,7 +5655,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     }
     __pyx_L7:;
 
-    /* "yapyg\collisions.pyx":356
+    /* "yapyg/collisions.pyx":356
  *         cdef float r_w
  *         cdef float r_h
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:             # <<<<<<<<<<<<<<
@@ -5665,7 +5665,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg\collisions.pyx":369
+  /* "yapyg/collisions.pyx":369
  *                         absolute_shapes.append(("rectangle", pos[0] + pos_offset[0] + r_x, pos[1] + pos_offset[1] + r_y, r_w, r_h, rot))
  * 
  *         entity_collision_cache[0] = absolute_shapes             # <<<<<<<<<<<<<<
@@ -5678,7 +5678,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, 0, __pyx_v_absolute_shapes, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\collisions.pyx":371
+  /* "yapyg/collisions.pyx":371
  *         entity_collision_cache[0] = absolute_shapes
  * 
  *         return absolute_shapes             # <<<<<<<<<<<<<<
@@ -5690,7 +5690,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_r = __pyx_v_absolute_shapes;
   goto __pyx_L0;
 
-  /* "yapyg\collisions.pyx":317
+  /* "yapyg/collisions.pyx":317
  *         return output
  * 
  * cpdef list get_collision_shapes(list state, str entity_name, list collision_def):             # <<<<<<<<<<<<<<
@@ -5826,7 +5826,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_20get_collision_shapes(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":373
+/* "yapyg/collisions.pyx":373
  *         return absolute_shapes
  * 
  * cpdef tuple run(list state, str entity_name_1):             # <<<<<<<<<<<<<<
@@ -5886,7 +5886,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
 
-  /* "yapyg\collisions.pyx":377
+  /* "yapyg/collisions.pyx":377
  *         TODO
  *         """
  *         if not entities.is_enabled(state, entity_name_1):             # <<<<<<<<<<<<<<
@@ -5896,7 +5896,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_t_1 = ((!(__pyx_f_5yapyg_8entities_is_enabled(__pyx_v_state, __pyx_v_entity_name_1, 0) != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg\collisions.pyx":378
+    /* "yapyg/collisions.pyx":378
  *         """
  *         if not entities.is_enabled(state, entity_name_1):
  *                 return             # <<<<<<<<<<<<<<
@@ -5908,7 +5908,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     goto __pyx_L0;
   }
 
-  /* "yapyg\collisions.pyx":380
+  /* "yapyg/collisions.pyx":380
  *                 return
  * 
  *         cdef list state_collisions = state[IDX_STATE_COLLISIONS]             # <<<<<<<<<<<<<<
@@ -5925,7 +5925,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_state_collisions = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":382
+  /* "yapyg/collisions.pyx":382
  *         cdef list state_collisions = state[IDX_STATE_COLLISIONS]
  * 
  *         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -5942,7 +5942,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_state_collisions_entities = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":383
+  /* "yapyg/collisions.pyx":383
  * 
  *         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
  *         if not state_collisions_entities.has_key(entity_name_1):             # <<<<<<<<<<<<<<
@@ -5957,7 +5957,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_t_3 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\collisions.pyx":384
+    /* "yapyg/collisions.pyx":384
  *         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
  *         if not state_collisions_entities.has_key(entity_name_1):
  *                 return             # <<<<<<<<<<<<<<
@@ -5969,7 +5969,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     goto __pyx_L0;
   }
 
-  /* "yapyg\collisions.pyx":386
+  /* "yapyg/collisions.pyx":386
  *                 return
  * 
  *         cdef dict hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]             # <<<<<<<<<<<<<<
@@ -5986,7 +5986,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_hash_map = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":388
+  /* "yapyg/collisions.pyx":388
  *         cdef dict hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]
  * 
  *         cdef list collision_def_1 = state_collisions_entities[entity_name_1]             # <<<<<<<<<<<<<<
@@ -6003,7 +6003,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_collision_def_1 = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":389
+  /* "yapyg/collisions.pyx":389
  * 
  *         cdef list collision_def_1 = state_collisions_entities[entity_name_1]
  *         cdef list absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)             # <<<<<<<<<<<<<<
@@ -6015,7 +6015,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_absolute_shapes_1 = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":390
+  /* "yapyg/collisions.pyx":390
  *         cdef list collision_def_1 = state_collisions_entities[entity_name_1]
  *         cdef list absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)
  *         cdef int is_tile_1 = collision_def_1[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -6032,7 +6032,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_is_tile_1 = __pyx_t_4;
 
-  /* "yapyg\collisions.pyx":395
+  /* "yapyg/collisions.pyx":395
  *         cdef tuple entity_1_upper_right
  *         entity_1_lower_left, entity_1_upper_right = get_hash_area(state, entity_name_1,
  *                                                                   entities.get_pos(state, entity_name_1),             # <<<<<<<<<<<<<<
@@ -6042,7 +6042,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_t_2 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg\collisions.pyx":394
+  /* "yapyg/collisions.pyx":394
  *         cdef tuple entity_1_lower_left
  *         cdef tuple entity_1_upper_right
  *         entity_1_lower_left, entity_1_upper_right = get_hash_area(state, entity_name_1,             # <<<<<<<<<<<<<<
@@ -6086,7 +6086,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_entity_1_upper_right = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "yapyg\collisions.pyx":398
+  /* "yapyg/collisions.pyx":398
  *                                                                   is_tile_1)
  * 
  *         cdef set already_checked_set = set()             # <<<<<<<<<<<<<<
@@ -6098,7 +6098,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_already_checked_set = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "yapyg\collisions.pyx":400
+  /* "yapyg/collisions.pyx":400
  *         cdef set already_checked_set = set()
  * 
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]             # <<<<<<<<<<<<<<
@@ -6118,7 +6118,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_collisions_list = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "yapyg\collisions.pyx":408
+  /* "yapyg/collisions.pyx":408
  *         cdef list collision_def_2
  *         cdef list absolute_shapes_2
  *         cdef list contact_points = []             # <<<<<<<<<<<<<<
@@ -6130,7 +6130,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_v_contact_points = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "yapyg\collisions.pyx":417
+  /* "yapyg/collisions.pyx":417
  *         cdef int y
  * 
  *         cdef int lower_x = entity_1_lower_left[0]             # <<<<<<<<<<<<<<
@@ -6147,7 +6147,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_lower_x = __pyx_t_4;
 
-  /* "yapyg\collisions.pyx":418
+  /* "yapyg/collisions.pyx":418
  * 
  *         cdef int lower_x = entity_1_lower_left[0]
  *         cdef int upper_x = entity_1_upper_right[0]             # <<<<<<<<<<<<<<
@@ -6164,7 +6164,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_upper_x = __pyx_t_4;
 
-  /* "yapyg\collisions.pyx":419
+  /* "yapyg/collisions.pyx":419
  *         cdef int lower_x = entity_1_lower_left[0]
  *         cdef int upper_x = entity_1_upper_right[0]
  *         cdef int lower_y = entity_1_lower_left[1]             # <<<<<<<<<<<<<<
@@ -6181,7 +6181,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_lower_y = __pyx_t_4;
 
-  /* "yapyg\collisions.pyx":420
+  /* "yapyg/collisions.pyx":420
  *         cdef int upper_x = entity_1_upper_right[0]
  *         cdef int lower_y = entity_1_lower_left[1]
  *         cdef int upper_y = entity_1_upper_right[1]             # <<<<<<<<<<<<<<
@@ -6198,7 +6198,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_upper_y = __pyx_t_4;
 
-  /* "yapyg\collisions.pyx":422
+  /* "yapyg/collisions.pyx":422
  *         cdef int upper_y = entity_1_upper_right[1]
  * 
  *         for x in xrange(lower_x, upper_x + 1):             # <<<<<<<<<<<<<<
@@ -6209,7 +6209,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   for (__pyx_t_4 = __pyx_v_lower_x; __pyx_t_4 < __pyx_t_7; __pyx_t_4+=1) {
     __pyx_v_x = __pyx_t_4;
 
-    /* "yapyg\collisions.pyx":423
+    /* "yapyg/collisions.pyx":423
  * 
  *         for x in xrange(lower_x, upper_x + 1):
  *                 for y in xrange(lower_y, upper_y + 1):             # <<<<<<<<<<<<<<
@@ -6220,7 +6220,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     for (__pyx_t_9 = __pyx_v_lower_y; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
       __pyx_v_y = __pyx_t_9;
 
-      /* "yapyg\collisions.pyx":424
+      /* "yapyg/collisions.pyx":424
  *         for x in xrange(lower_x, upper_x + 1):
  *                 for y in xrange(lower_y, upper_y + 1):
  *                         hash = (x, y)             # <<<<<<<<<<<<<<
@@ -6242,7 +6242,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
       __Pyx_XDECREF_SET(__pyx_v_hash, ((PyObject*)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "yapyg\collisions.pyx":425
+      /* "yapyg/collisions.pyx":425
  *                 for y in xrange(lower_y, upper_y + 1):
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):             # <<<<<<<<<<<<<<
@@ -6257,7 +6257,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
       __pyx_t_1 = ((!(__pyx_t_3 != 0)) != 0);
       if (__pyx_t_1) {
 
-        /* "yapyg\collisions.pyx":426
+        /* "yapyg/collisions.pyx":426
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):
  *                                 continue             # <<<<<<<<<<<<<<
@@ -6267,7 +6267,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         goto __pyx_L7_continue;
       }
 
-      /* "yapyg\collisions.pyx":428
+      /* "yapyg/collisions.pyx":428
  *                                 continue
  * 
  *                         collision_candidates = hash_map[hash]             # <<<<<<<<<<<<<<
@@ -6284,7 +6284,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
       __Pyx_XDECREF_SET(__pyx_v_collision_candidates, ((PyObject*)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "yapyg\collisions.pyx":430
+      /* "yapyg/collisions.pyx":430
  *                         collision_candidates = hash_map[hash]
  * 
  *                         for entity_name_2 in collision_candidates:             # <<<<<<<<<<<<<<
@@ -6311,7 +6311,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __Pyx_XDECREF_SET(__pyx_v_entity_name_2, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg\collisions.pyx":431
+        /* "yapyg/collisions.pyx":431
  * 
  *                         for entity_name_2 in collision_candidates:
  *                                 if entity_name_1 == entity_name_2:             # <<<<<<<<<<<<<<
@@ -6322,7 +6322,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __pyx_t_3 = (__pyx_t_1 != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg\collisions.pyx":432
+          /* "yapyg/collisions.pyx":432
  *                         for entity_name_2 in collision_candidates:
  *                                 if entity_name_1 == entity_name_2:
  *                                         continue             # <<<<<<<<<<<<<<
@@ -6332,7 +6332,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           goto __pyx_L10_continue;
         }
 
-        /* "yapyg\collisions.pyx":434
+        /* "yapyg/collisions.pyx":434
  *                                         continue
  * 
  *                                 if entity_name_2 in already_checked_set:             # <<<<<<<<<<<<<<
@@ -6343,7 +6343,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __pyx_t_1 = (__pyx_t_3 != 0);
         if (__pyx_t_1) {
 
-          /* "yapyg\collisions.pyx":435
+          /* "yapyg/collisions.pyx":435
  * 
  *                                 if entity_name_2 in already_checked_set:
  *                                         continue             # <<<<<<<<<<<<<<
@@ -6353,7 +6353,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           goto __pyx_L10_continue;
         }
 
-        /* "yapyg\collisions.pyx":437
+        /* "yapyg/collisions.pyx":437
  *                                         continue
  * 
  *                                 already_checked_set.add(entity_name_2)             # <<<<<<<<<<<<<<
@@ -6362,7 +6362,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
         __pyx_t_11 = PySet_Add(__pyx_v_already_checked_set, __pyx_v_entity_name_2); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "yapyg\collisions.pyx":439
+        /* "yapyg/collisions.pyx":439
  *                                 already_checked_set.add(entity_name_2)
  * 
  *                                 collision_def_2 = state_collisions_entities[entity_name_2]             # <<<<<<<<<<<<<<
@@ -6379,7 +6379,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __Pyx_XDECREF_SET(__pyx_v_collision_def_2, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg\collisions.pyx":440
+        /* "yapyg/collisions.pyx":440
  * 
  *                                 collision_def_2 = state_collisions_entities[entity_name_2]
  *                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)             # <<<<<<<<<<<<<<
@@ -6391,7 +6391,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __Pyx_XDECREF_SET(__pyx_v_absolute_shapes_2, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg\collisions.pyx":442
+        /* "yapyg/collisions.pyx":442
  *                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
  * 
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -6408,7 +6408,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_v_is_tile_2 = __pyx_t_12;
 
-        /* "yapyg\collisions.pyx":443
+        /* "yapyg/collisions.pyx":443
  * 
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]
  *                                 if not is_tile_2 and not entities.is_enabled(state, entity_name_2):             # <<<<<<<<<<<<<<
@@ -6426,7 +6426,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __pyx_L15_bool_binop_done:;
         if (__pyx_t_1) {
 
-          /* "yapyg\collisions.pyx":444
+          /* "yapyg/collisions.pyx":444
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]
  *                                 if not is_tile_2 and not entities.is_enabled(state, entity_name_2):
  *                                         continue             # <<<<<<<<<<<<<<
@@ -6436,7 +6436,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           goto __pyx_L10_continue;
         }
 
-        /* "yapyg\collisions.pyx":446
+        /* "yapyg/collisions.pyx":446
  *                                         continue
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:             # <<<<<<<<<<<<<<
@@ -6459,7 +6459,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           __Pyx_XDECREF_SET(__pyx_v_absolute_shape_1, ((PyObject*)__pyx_t_6));
           __pyx_t_6 = 0;
 
-          /* "yapyg\collisions.pyx":447
+          /* "yapyg/collisions.pyx":447
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:
  *                                         for absolute_shape_2 in absolute_shapes_2:             # <<<<<<<<<<<<<<
@@ -6482,7 +6482,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __Pyx_XDECREF_SET(__pyx_v_absolute_shape_2, ((PyObject*)__pyx_t_15));
             __pyx_t_15 = 0;
 
-            /* "yapyg\collisions.pyx":448
+            /* "yapyg/collisions.pyx":448
  *                                 for absolute_shape_1 in absolute_shapes_1:
  *                                         for absolute_shape_2 in absolute_shapes_2:
  *                                                 is_collision = False             # <<<<<<<<<<<<<<
@@ -6491,7 +6491,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
             __pyx_v_is_collision = 0;
 
-            /* "yapyg\collisions.pyx":449
+            /* "yapyg/collisions.pyx":449
  *                                         for absolute_shape_2 in absolute_shapes_2:
  *                                                 is_collision = False
  *                                                 absolute_shape_1_type = absolute_shape_1[0]             # <<<<<<<<<<<<<<
@@ -6508,7 +6508,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __Pyx_XDECREF_SET(__pyx_v_absolute_shape_1_type, ((PyObject*)__pyx_t_15));
             __pyx_t_15 = 0;
 
-            /* "yapyg\collisions.pyx":450
+            /* "yapyg/collisions.pyx":450
  *                                                 is_collision = False
  *                                                 absolute_shape_1_type = absolute_shape_1[0]
  *                                                 absolute_shape_2_type = absolute_shape_2[0]             # <<<<<<<<<<<<<<
@@ -6525,7 +6525,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __Pyx_XDECREF_SET(__pyx_v_absolute_shape_2_type, ((PyObject*)__pyx_t_15));
             __pyx_t_15 = 0;
 
-            /* "yapyg\collisions.pyx":452
+            /* "yapyg/collisions.pyx":452
  *                                                 absolute_shape_2_type = absolute_shape_2[0]
  * 
  *                                                 del contact_points[:]             # <<<<<<<<<<<<<<
@@ -6534,7 +6534,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
             if (__Pyx_PyObject_DelSlice(__pyx_v_contact_points, 0, 0, NULL, NULL, NULL, 0, 0, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-            /* "yapyg\collisions.pyx":453
+            /* "yapyg/collisions.pyx":453
  * 
  *                                                 del contact_points[:]
  *                                                 if absolute_shape_1_type == "circle":             # <<<<<<<<<<<<<<
@@ -6545,7 +6545,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __pyx_t_3 = (__pyx_t_1 != 0);
             if (__pyx_t_3) {
 
-              /* "yapyg\collisions.pyx":454
+              /* "yapyg/collisions.pyx":454
  *                                                 del contact_points[:]
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":             # <<<<<<<<<<<<<<
@@ -6556,7 +6556,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               __pyx_t_1 = (__pyx_t_3 != 0);
               if (__pyx_t_1) {
 
-                /* "yapyg\collisions.pyx":455
+                /* "yapyg/collisions.pyx":455
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
@@ -6567,7 +6567,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 goto __pyx_L22;
               }
 
-              /* "yapyg\collisions.pyx":458
+              /* "yapyg/collisions.pyx":458
  *                                                                 # if is_collision:
  *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":             # <<<<<<<<<<<<<<
@@ -6578,7 +6578,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               __pyx_t_3 = (__pyx_t_1 != 0);
               if (__pyx_t_3) {
 
-                /* "yapyg\collisions.pyx":459
+                /* "yapyg/collisions.pyx":459
  *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
@@ -6592,7 +6592,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               goto __pyx_L21;
             }
 
-            /* "yapyg\collisions.pyx":462
+            /* "yapyg/collisions.pyx":462
  *                                                                 # if is_collision:
  *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  *                                                 elif absolute_shape_1_type == "rectangle":             # <<<<<<<<<<<<<<
@@ -6603,7 +6603,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __pyx_t_1 = (__pyx_t_3 != 0);
             if (__pyx_t_1) {
 
-              /* "yapyg\collisions.pyx":463
+              /* "yapyg/collisions.pyx":463
  *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  *                                                 elif absolute_shape_1_type == "rectangle":
  *                                                         if absolute_shape_2_type == "circle":             # <<<<<<<<<<<<<<
@@ -6614,7 +6614,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               __pyx_t_3 = (__pyx_t_1 != 0);
               if (__pyx_t_3) {
 
-                /* "yapyg\collisions.pyx":464
+                /* "yapyg/collisions.pyx":464
  *                                                 elif absolute_shape_1_type == "rectangle":
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)             # <<<<<<<<<<<<<<
@@ -6625,7 +6625,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 goto __pyx_L23;
               }
 
-              /* "yapyg\collisions.pyx":467
+              /* "yapyg/collisions.pyx":467
  *                                                                 # if is_collision:
  *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":             # <<<<<<<<<<<<<<
@@ -6636,7 +6636,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               __pyx_t_1 = (__pyx_t_3 != 0);
               if (__pyx_t_1) {
 
-                /* "yapyg\collisions.pyx":468
+                /* "yapyg/collisions.pyx":468
  *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":
  *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
@@ -6651,7 +6651,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             }
             __pyx_L21:;
 
-            /* "yapyg\collisions.pyx":472
+            /* "yapyg/collisions.pyx":472
  *                                                                         # debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
  * 
  *                                                 if is_collision:             # <<<<<<<<<<<<<<
@@ -6661,7 +6661,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __pyx_t_1 = (__pyx_v_is_collision != 0);
             if (__pyx_t_1) {
 
-              /* "yapyg\collisions.pyx":475
+              /* "yapyg/collisions.pyx":475
  *                                                         # debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
  *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  *                                                         if entity_name_1 < entity_name_2:             # <<<<<<<<<<<<<<
@@ -6673,7 +6673,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
               if (__pyx_t_1) {
 
-                /* "yapyg\collisions.pyx":476
+                /* "yapyg/collisions.pyx":476
  *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  *                                                         if entity_name_1 < entity_name_2:
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))             # <<<<<<<<<<<<<<
@@ -6698,7 +6698,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               }
               /*else*/ {
 
-                /* "yapyg\collisions.pyx":478
+                /* "yapyg/collisions.pyx":478
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))
  *                                                         else:
  *                                                                 collisions_list.append((entity_name_2, entity_name_1,))             # <<<<<<<<<<<<<<
@@ -6722,7 +6722,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               }
               __pyx_L25:;
 
-              /* "yapyg\collisions.pyx":479
+              /* "yapyg/collisions.pyx":479
  *                                                         else:
  *                                                                 collisions_list.append((entity_name_2, entity_name_1,))
  *                                                         return (state,             # <<<<<<<<<<<<<<
@@ -6731,7 +6731,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
               __Pyx_XDECREF(__pyx_r);
 
-              /* "yapyg\collisions.pyx":484
+              /* "yapyg/collisions.pyx":484
  *                                                                 absolute_shape_1, absolute_shape_2,
  *                                                                 contact_points
  *                                                                 )             # <<<<<<<<<<<<<<
@@ -6772,7 +6772,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               goto __pyx_L0;
             }
 
-            /* "yapyg\collisions.pyx":447
+            /* "yapyg/collisions.pyx":447
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:
  *                                         for absolute_shape_2 in absolute_shapes_2:             # <<<<<<<<<<<<<<
@@ -6782,7 +6782,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "yapyg\collisions.pyx":446
+          /* "yapyg/collisions.pyx":446
  *                                         continue
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:             # <<<<<<<<<<<<<<
@@ -6792,7 +6792,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-        /* "yapyg\collisions.pyx":430
+        /* "yapyg/collisions.pyx":430
  *                         collision_candidates = hash_map[hash]
  * 
  *                         for entity_name_2 in collision_candidates:             # <<<<<<<<<<<<<<
@@ -6806,7 +6806,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     }
   }
 
-  /* "yapyg\collisions.pyx":485
+  /* "yapyg/collisions.pyx":485
  *                                                                 contact_points
  *                                                                 )
  *         return None             # <<<<<<<<<<<<<<
@@ -6818,7 +6818,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_r = ((PyObject*)Py_None);
   goto __pyx_L0;
 
-  /* "yapyg\collisions.pyx":373
+  /* "yapyg/collisions.pyx":373
  *         return absolute_shapes
  * 
  * cpdef tuple run(list state, str entity_name_1):             # <<<<<<<<<<<<<<
@@ -6953,7 +6953,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_22run(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":487
+/* "yapyg/collisions.pyx":487
  *         return None
  * 
  * cpdef clear_collisions_list(list state):             # <<<<<<<<<<<<<<
@@ -6972,7 +6972,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_clear_collisions_list(PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clear_collisions_list", 0);
 
-  /* "yapyg\collisions.pyx":491
+  /* "yapyg/collisions.pyx":491
  *         TODO
  *         """
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []             # <<<<<<<<<<<<<<
@@ -6991,7 +6991,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_clear_collisions_list(PyObject *__p
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":487
+  /* "yapyg/collisions.pyx":487
  *         return None
  * 
  * cpdef clear_collisions_list(list state):             # <<<<<<<<<<<<<<
@@ -7061,7 +7061,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_24clear_collisions_list(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "yapyg\collisions.pyx":493
+/* "yapyg/collisions.pyx":493
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
  * 
  * cpdef notify_collision_handler(list state):             # <<<<<<<<<<<<<<
@@ -7087,7 +7087,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("notify_collision_handler", 0);
 
-  /* "yapyg\collisions.pyx":497
+  /* "yapyg/collisions.pyx":497
  *         TODO
  *         """
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]             # <<<<<<<<<<<<<<
@@ -7107,7 +7107,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   __pyx_v_collisions_list = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg\collisions.pyx":499
+  /* "yapyg/collisions.pyx":499
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
  * 
  *         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]             # <<<<<<<<<<<<<<
@@ -7126,7 +7126,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   __pyx_v_handler_function = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "yapyg\collisions.pyx":500
+  /* "yapyg/collisions.pyx":500
  * 
  *         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]
  *         if collisions_list and handler_function:             # <<<<<<<<<<<<<<
@@ -7143,7 +7143,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "yapyg\collisions.pyx":501
+    /* "yapyg/collisions.pyx":501
  *         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]
  *         if collisions_list and handler_function:
  *                 (handler_function)(state, collisions_list)             # <<<<<<<<<<<<<<
@@ -7181,7 +7181,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   }
   __pyx_L3:;
 
-  /* "yapyg\collisions.pyx":493
+  /* "yapyg/collisions.pyx":493
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
  * 
  * cpdef notify_collision_handler(list state):             # <<<<<<<<<<<<<<
@@ -7349,7 +7349,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg\collisions.pyx":339
+  /* "yapyg/collisions.pyx":339
  *         if is_tile:
  *                 pos = collision_def[IDX_COLLISION_LAST_POS]
  *                 pos_offset = (0, 0)             # <<<<<<<<<<<<<<
@@ -7517,7 +7517,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
   Py_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg\collisions.pyx":30
+  /* "yapyg/collisions.pyx":30
  * cimport math_2d
  * cimport entities
  * import debug             # <<<<<<<<<<<<<<
@@ -7529,7 +7529,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_debug, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg\collisions.pyx":34
+  /* "yapyg/collisions.pyx":34
  * cdef int IDX_STATE_COLLISIONS
  * 
  * cdef int HASH_SCALE_FACTOR = 2             # <<<<<<<<<<<<<<
@@ -7538,7 +7538,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR = 2;
 
-  /* "yapyg\collisions.pyx":36
+  /* "yapyg/collisions.pyx":36
  * cdef int HASH_SCALE_FACTOR = 2
  * 
  * cdef int IDX_COLLISIONDB_ENTITIES = 0             # <<<<<<<<<<<<<<
@@ -7547,7 +7547,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_ENTITIES = 0;
 
-  /* "yapyg\collisions.pyx":37
+  /* "yapyg/collisions.pyx":37
  * 
  * cdef int IDX_COLLISIONDB_ENTITIES = 0
  * cdef int IDX_COLLISIONDB_HASH_MAP = 1             # <<<<<<<<<<<<<<
@@ -7556,7 +7556,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HASH_MAP = 1;
 
-  /* "yapyg\collisions.pyx":38
+  /* "yapyg/collisions.pyx":38
  * cdef int IDX_COLLISIONDB_ENTITIES = 0
  * cdef int IDX_COLLISIONDB_HASH_MAP = 1
  * cdef int IDX_COLLISIONDB_HANDLER_FUNCTION = 2             # <<<<<<<<<<<<<<
@@ -7565,7 +7565,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HANDLER_FUNCTION = 2;
 
-  /* "yapyg\collisions.pyx":39
+  /* "yapyg/collisions.pyx":39
  * cdef int IDX_COLLISIONDB_HASH_MAP = 1
  * cdef int IDX_COLLISIONDB_HANDLER_FUNCTION = 2
  * cdef int IDX_COLLISIONDB_COLLISIONS_LIST = 3             # <<<<<<<<<<<<<<
@@ -7574,7 +7574,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST = 3;
 
-  /* "yapyg\collisions.pyx":43
+  /* "yapyg/collisions.pyx":43
  * # Values of state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES] are lists with these elements
  * # Key is entity_name
  * cdef int IDX_COLLISION_SHAPES = 0             # <<<<<<<<<<<<<<
@@ -7583,7 +7583,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_SHAPES = 0;
 
-  /* "yapyg\collisions.pyx":44
+  /* "yapyg/collisions.pyx":44
  * # Key is entity_name
  * cdef int IDX_COLLISION_SHAPES = 0
  * cdef int IDX_COLLISION_LAST_POS = 1             # <<<<<<<<<<<<<<
@@ -7592,7 +7592,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_LAST_POS = 1;
 
-  /* "yapyg\collisions.pyx":45
+  /* "yapyg/collisions.pyx":45
  * cdef int IDX_COLLISION_SHAPES = 0
  * cdef int IDX_COLLISION_LAST_POS = 1
  * cdef int IDX_COLLISION_CACHE = 2             # <<<<<<<<<<<<<<
@@ -7601,7 +7601,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE = 2;
 
-  /* "yapyg\collisions.pyx":46
+  /* "yapyg/collisions.pyx":46
  * cdef int IDX_COLLISION_LAST_POS = 1
  * cdef int IDX_COLLISION_CACHE = 2
  * cdef int IDX_COLLISION_IS_TILE = 3             # <<<<<<<<<<<<<<
@@ -7610,7 +7610,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE = 3;
 
-  /* "yapyg\collisions.pyx":49
+  /* "yapyg/collisions.pyx":49
  * 
  * # Values of the IDX_COLLISION_CACHE list
  * cdef int IDX_COLLISION_CACHE_ABS_SHAPE = 0             # <<<<<<<<<<<<<<
@@ -7619,7 +7619,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_ABS_SHAPE = 0;
 
-  /* "yapyg\collisions.pyx":50
+  /* "yapyg/collisions.pyx":50
  * # Values of the IDX_COLLISION_CACHE list
  * cdef int IDX_COLLISION_CACHE_ABS_SHAPE = 0
  * cdef int IDX_COLLISION_CACHE_LAST_HASH_POS = 1             # <<<<<<<<<<<<<<
@@ -7628,7 +7628,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS = 1;
 
-  /* "yapyg\collisions.pyx":51
+  /* "yapyg/collisions.pyx":51
  * cdef int IDX_COLLISION_CACHE_ABS_SHAPE = 0
  * cdef int IDX_COLLISION_CACHE_LAST_HASH_POS = 1
  * cdef int IDX_COLLISION_CACHE_HASH_EXTENT = 2             # <<<<<<<<<<<<<<
@@ -7637,7 +7637,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT = 2;
 
-  /* "yapyg\collisions.pyx":1
+  /* "yapyg/collisions.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

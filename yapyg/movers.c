@@ -415,7 +415,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg\\movers.pyx",
+  "yapyg/movers.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -465,7 +465,7 @@ struct __pyx_opt_args_5yapyg_8entities_set_active_sprite {
 };
 struct __pyx_opt_args_5yapyg_6movers_add;
 
-/* "yapyg\movers.pxd":34
+/* "yapyg/movers.pxd":34
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef add(list state, str mover_name, list mover, int do_replace=*, int prepend=*)             # <<<<<<<<<<<<<<
@@ -873,7 +873,7 @@ static PyObject *__pyx_n_s_state;
 static PyObject *__pyx_n_s_state_idx;
 static PyObject *__pyx_n_s_test;
 
-/* "yapyg\movers.pyx":49
+/* "yapyg/movers.pyx":49
  * G_IDX_MOVER_RUN_FUNCTION = IDX_MOVER_RUN_FUNCTION
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -891,7 +891,7 @@ static PyObject *__pyx_f_5yapyg_6movers_initialize(int __pyx_v_state_idx, PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg\movers.pyx":54
+  /* "yapyg/movers.pyx":54
  *         """
  *         global IDX_STATE_MOVERS
  *         IDX_STATE_MOVERS = state_idx             # <<<<<<<<<<<<<<
@@ -900,7 +900,7 @@ static PyObject *__pyx_f_5yapyg_6movers_initialize(int __pyx_v_state_idx, PyObje
  */
   __pyx_v_5yapyg_6movers_IDX_STATE_MOVERS = __pyx_v_state_idx;
 
-  /* "yapyg\movers.pyx":55
+  /* "yapyg/movers.pyx":55
  *         global IDX_STATE_MOVERS
  *         IDX_STATE_MOVERS = state_idx
  *         state[IDX_STATE_MOVERS] = {}             # <<<<<<<<<<<<<<
@@ -916,7 +916,7 @@ static PyObject *__pyx_f_5yapyg_6movers_initialize(int __pyx_v_state_idx, PyObje
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_6movers_IDX_STATE_MOVERS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":49
+  /* "yapyg/movers.pyx":49
  * G_IDX_MOVER_RUN_FUNCTION = IDX_MOVER_RUN_FUNCTION
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -1030,7 +1030,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_initialize(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":57
+/* "yapyg/movers.pyx":57
  *         state[IDX_STATE_MOVERS] = {}
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1047,7 +1047,7 @@ static PyObject *__pyx_f_5yapyg_6movers_destroy(PyObject *__pyx_v_state, CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg\movers.pyx":61
+  /* "yapyg/movers.pyx":61
  *         TODO
  *         """
  *         state[IDX_STATE_MOVERS] = None             # <<<<<<<<<<<<<<
@@ -1060,7 +1060,7 @@ static PyObject *__pyx_f_5yapyg_6movers_destroy(PyObject *__pyx_v_state, CYTHON_
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_6movers_IDX_STATE_MOVERS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg\movers.pyx":57
+  /* "yapyg/movers.pyx":57
  *         state[IDX_STATE_MOVERS] = {}
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1128,7 +1128,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_2destroy(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":63
+/* "yapyg/movers.pyx":63
  *         state[IDX_STATE_MOVERS] = None
  * 
  * cpdef add(list state, str mover_name, list mover, int do_replace=False, int prepend=False):             # <<<<<<<<<<<<<<
@@ -1163,7 +1163,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
     }
   }
 
-  /* "yapyg\movers.pyx":67
+  /* "yapyg/movers.pyx":67
  *         TODO
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]             # <<<<<<<<<<<<<<
@@ -1180,7 +1180,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
   __pyx_v_movers_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":68
+  /* "yapyg/movers.pyx":68
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         if do_replace:             # <<<<<<<<<<<<<<
@@ -1190,7 +1190,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
   __pyx_t_2 = (__pyx_v_do_replace != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg\movers.pyx":69
+    /* "yapyg/movers.pyx":69
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         if do_replace:
  *                 movers_dict[mover_name] = deque()             # <<<<<<<<<<<<<<
@@ -1224,7 +1224,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
     if (unlikely(PyDict_SetItem(__pyx_v_movers_dict, __pyx_v_mover_name, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg\movers.pyx":70
+    /* "yapyg/movers.pyx":70
  *         if do_replace:
  *                 movers_dict[mover_name] = deque()
  *                 movers_dict[mover_name].append(mover)             # <<<<<<<<<<<<<<
@@ -1243,7 +1243,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
   }
   /*else*/ {
 
-    /* "yapyg\movers.pyx":72
+    /* "yapyg/movers.pyx":72
  *                 movers_dict[mover_name].append(mover)
  *         else:
  *                 if not movers_dict.has_key(mover_name):             # <<<<<<<<<<<<<<
@@ -1258,7 +1258,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
     __pyx_t_6 = ((!(__pyx_t_2 != 0)) != 0);
     if (__pyx_t_6) {
 
-      /* "yapyg\movers.pyx":73
+      /* "yapyg/movers.pyx":73
  *         else:
  *                 if not movers_dict.has_key(mover_name):
  *                         movers_dict[mover_name] = deque()             # <<<<<<<<<<<<<<
@@ -1295,7 +1295,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
     }
     __pyx_L4:;
 
-    /* "yapyg\movers.pyx":74
+    /* "yapyg/movers.pyx":74
  *                 if not movers_dict.has_key(mover_name):
  *                         movers_dict[mover_name] = deque()
  *                 if not prepend:             # <<<<<<<<<<<<<<
@@ -1305,7 +1305,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
     __pyx_t_6 = ((!(__pyx_v_prepend != 0)) != 0);
     if (__pyx_t_6) {
 
-      /* "yapyg\movers.pyx":75
+      /* "yapyg/movers.pyx":75
  *                         movers_dict[mover_name] = deque()
  *                 if not prepend:
  *                         movers_dict[mover_name].append(mover)             # <<<<<<<<<<<<<<
@@ -1324,7 +1324,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
     }
     /*else*/ {
 
-      /* "yapyg\movers.pyx":77
+      /* "yapyg/movers.pyx":77
  *                         movers_dict[mover_name].append(mover)
  *                 else:
  *                         movers_dict[mover_name].appendleft(mover)             # <<<<<<<<<<<<<<
@@ -1371,7 +1371,7 @@ static PyObject *__pyx_f_5yapyg_6movers_add(PyObject *__pyx_v_state, PyObject *_
   }
   __pyx_L3:;
 
-  /* "yapyg\movers.pyx":63
+  /* "yapyg/movers.pyx":63
  *         state[IDX_STATE_MOVERS] = None
  * 
  * cpdef add(list state, str mover_name, list mover, int do_replace=False, int prepend=False):             # <<<<<<<<<<<<<<
@@ -1532,7 +1532,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_4add(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":79
+/* "yapyg/movers.pyx":79
  *                         movers_dict[mover_name].appendleft(mover)
  * 
  * cpdef get_active(list state, str mover_name):             # <<<<<<<<<<<<<<
@@ -1554,7 +1554,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_active(PyObject *__pyx_v_state, PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_active", 0);
 
-  /* "yapyg\movers.pyx":83
+  /* "yapyg/movers.pyx":83
  *         TODO
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]             # <<<<<<<<<<<<<<
@@ -1571,7 +1571,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_active(PyObject *__pyx_v_state, PyOb
   __pyx_v_movers_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":84
+  /* "yapyg/movers.pyx":84
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         if movers_dict.has_key(mover_name):             # <<<<<<<<<<<<<<
@@ -1586,7 +1586,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_active(PyObject *__pyx_v_state, PyOb
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\movers.pyx":85
+    /* "yapyg/movers.pyx":85
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         if movers_dict.has_key(mover_name):
  *                 return movers_dict[mover_name][0]             # <<<<<<<<<<<<<<
@@ -1609,7 +1609,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_active(PyObject *__pyx_v_state, PyOb
   }
   /*else*/ {
 
-    /* "yapyg\movers.pyx":87
+    /* "yapyg/movers.pyx":87
  *                 return movers_dict[mover_name][0]
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -1622,7 +1622,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_active(PyObject *__pyx_v_state, PyOb
     goto __pyx_L0;
   }
 
-  /* "yapyg\movers.pyx":79
+  /* "yapyg/movers.pyx":79
  *                         movers_dict[mover_name].appendleft(mover)
  * 
  * cpdef get_active(list state, str mover_name):             # <<<<<<<<<<<<<<
@@ -1737,7 +1737,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_6get_active(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":89
+/* "yapyg/movers.pyx":89
  *                 return None
  * 
  * cpdef get_type(list state, list mover):             # <<<<<<<<<<<<<<
@@ -1755,7 +1755,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_type(CYTHON_UNUSED PyObject *__pyx_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_type", 0);
 
-  /* "yapyg\movers.pyx":93
+  /* "yapyg/movers.pyx":93
  *         TODO
  *         """
  *         return mover[IDX_MOVER_TYPE]             # <<<<<<<<<<<<<<
@@ -1773,7 +1773,7 @@ static PyObject *__pyx_f_5yapyg_6movers_get_type(CYTHON_UNUSED PyObject *__pyx_v
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "yapyg\movers.pyx":89
+  /* "yapyg/movers.pyx":89
  *                 return None
  * 
  * cpdef get_type(list state, list mover):             # <<<<<<<<<<<<<<
@@ -1886,7 +1886,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_8get_type(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":95
+/* "yapyg/movers.pyx":95
  *         return mover[IDX_MOVER_TYPE]
  * 
  * cpdef remove(list state, str mover_name):             # <<<<<<<<<<<<<<
@@ -1909,7 +1909,7 @@ static PyObject *__pyx_f_5yapyg_6movers_remove(PyObject *__pyx_v_state, PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("remove", 0);
 
-  /* "yapyg\movers.pyx":99
+  /* "yapyg/movers.pyx":99
  *         TODO
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]             # <<<<<<<<<<<<<<
@@ -1926,7 +1926,7 @@ static PyObject *__pyx_f_5yapyg_6movers_remove(PyObject *__pyx_v_state, PyObject
   __pyx_v_movers_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":100
+  /* "yapyg/movers.pyx":100
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         movers_dict[mover_name].popleft()             # <<<<<<<<<<<<<<
@@ -1962,7 +1962,7 @@ static PyObject *__pyx_f_5yapyg_6movers_remove(PyObject *__pyx_v_state, PyObject
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":101
+  /* "yapyg/movers.pyx":101
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         movers_dict[mover_name].popleft()
  *         if len(movers_dict[mover_name]) == 0:             # <<<<<<<<<<<<<<
@@ -1980,7 +1980,7 @@ static PyObject *__pyx_f_5yapyg_6movers_remove(PyObject *__pyx_v_state, PyObject
   __pyx_t_5 = ((__pyx_t_4 == 0) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg\movers.pyx":102
+    /* "yapyg/movers.pyx":102
  *         movers_dict[mover_name].popleft()
  *         if len(movers_dict[mover_name]) == 0:
  *                 del movers_dict[mover_name]             # <<<<<<<<<<<<<<
@@ -1996,7 +1996,7 @@ static PyObject *__pyx_f_5yapyg_6movers_remove(PyObject *__pyx_v_state, PyObject
   }
   __pyx_L3:;
 
-  /* "yapyg\movers.pyx":95
+  /* "yapyg/movers.pyx":95
  *         return mover[IDX_MOVER_TYPE]
  * 
  * cpdef remove(list state, str mover_name):             # <<<<<<<<<<<<<<
@@ -2114,7 +2114,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_10remove(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":104
+/* "yapyg/movers.pyx":104
  *                 del movers_dict[mover_name]
  * 
  * cpdef delete(list state, str mover_name):             # <<<<<<<<<<<<<<
@@ -2135,7 +2135,7 @@ static PyObject *__pyx_f_5yapyg_6movers_delete(PyObject *__pyx_v_state, PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
 
-  /* "yapyg\movers.pyx":108
+  /* "yapyg/movers.pyx":108
  *         TODO
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]             # <<<<<<<<<<<<<<
@@ -2152,7 +2152,7 @@ static PyObject *__pyx_f_5yapyg_6movers_delete(PyObject *__pyx_v_state, PyObject
   __pyx_v_movers_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":109
+  /* "yapyg/movers.pyx":109
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         if movers_dict.has_key(mover_name):             # <<<<<<<<<<<<<<
@@ -2167,7 +2167,7 @@ static PyObject *__pyx_f_5yapyg_6movers_delete(PyObject *__pyx_v_state, PyObject
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg\movers.pyx":110
+    /* "yapyg/movers.pyx":110
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         if movers_dict.has_key(mover_name):
  *                 del movers_dict[mover_name]             # <<<<<<<<<<<<<<
@@ -2183,7 +2183,7 @@ static PyObject *__pyx_f_5yapyg_6movers_delete(PyObject *__pyx_v_state, PyObject
   }
   __pyx_L3:;
 
-  /* "yapyg\movers.pyx":104
+  /* "yapyg/movers.pyx":104
  *                 del movers_dict[mover_name]
  * 
  * cpdef delete(list state, str mover_name):             # <<<<<<<<<<<<<<
@@ -2299,7 +2299,7 @@ static PyObject *__pyx_pf_5yapyg_6movers_12delete(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "yapyg\movers.pyx":112
+/* "yapyg/movers.pyx":112
  *                 del movers_dict[mover_name]
  * 
  * cdef void run(list state, int frame_time_delta):             # <<<<<<<<<<<<<<
@@ -2335,7 +2335,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
 
-  /* "yapyg\movers.pyx":116
+  /* "yapyg/movers.pyx":116
  *         TODO
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]             # <<<<<<<<<<<<<<
@@ -2352,7 +2352,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   __pyx_v_movers_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":117
+  /* "yapyg/movers.pyx":117
  *         """
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         collisions.clear_collisions_list(state)             # <<<<<<<<<<<<<<
@@ -2363,7 +2363,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":118
+  /* "yapyg/movers.pyx":118
  *         cdef dict movers_dict = state[IDX_STATE_MOVERS]
  *         collisions.clear_collisions_list(state)
  *         cdef list movers_to_delete = []             # <<<<<<<<<<<<<<
@@ -2375,7 +2375,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   __pyx_v_movers_to_delete = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":119
+  /* "yapyg/movers.pyx":119
  *         collisions.clear_collisions_list(state)
  *         cdef list movers_to_delete = []
  *         cdef list entities_to_delete = []             # <<<<<<<<<<<<<<
@@ -2387,7 +2387,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   __pyx_v_entities_to_delete = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":122
+  /* "yapyg/movers.pyx":122
  *         cdef str mover_name
  *         cdef list mover
  *         for mover_name, mover_deque in movers_dict.iteritems():             # <<<<<<<<<<<<<<
@@ -2416,7 +2416,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __Pyx_XDECREF_SET(__pyx_v_mover_deque, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "yapyg\movers.pyx":123
+    /* "yapyg/movers.pyx":123
  *         cdef list mover
  *         for mover_name, mover_deque in movers_dict.iteritems():
  *                 if mover_deque:             # <<<<<<<<<<<<<<
@@ -2426,7 +2426,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_mover_deque); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     if (__pyx_t_8) {
 
-      /* "yapyg\movers.pyx":124
+      /* "yapyg/movers.pyx":124
  *         for mover_name, mover_deque in movers_dict.iteritems():
  *                 if mover_deque:
  *                         mover = mover_deque[0]             # <<<<<<<<<<<<<<
@@ -2439,7 +2439,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __Pyx_XDECREF_SET(__pyx_v_mover, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "yapyg\movers.pyx":125
+      /* "yapyg/movers.pyx":125
  *                 if mover_deque:
  *                         mover = mover_deque[0]
  *                         (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)             # <<<<<<<<<<<<<<
@@ -2497,7 +2497,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":127
+  /* "yapyg/movers.pyx":127
  *                         (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
  * 
  *         for mover_to_delete in movers_to_delete:             # <<<<<<<<<<<<<<
@@ -2515,7 +2515,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __Pyx_XDECREF_SET(__pyx_v_mover_to_delete, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "yapyg\movers.pyx":128
+    /* "yapyg/movers.pyx":128
  * 
  *         for mover_to_delete in movers_to_delete:
  *                 if mover_to_delete:             # <<<<<<<<<<<<<<
@@ -2525,7 +2525,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_mover_to_delete); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     if (__pyx_t_8) {
 
-      /* "yapyg\movers.pyx":129
+      /* "yapyg/movers.pyx":129
  *         for mover_to_delete in movers_to_delete:
  *                 if mover_to_delete:
  *                         mover_name = mover_to_delete[0]             # <<<<<<<<<<<<<<
@@ -2538,7 +2538,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __Pyx_XDECREF_SET(__pyx_v_mover_name, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "yapyg\movers.pyx":130
+      /* "yapyg/movers.pyx":130
  *                 if mover_to_delete:
  *                         mover_name = mover_to_delete[0]
  *                         remove(state, mover_name)             # <<<<<<<<<<<<<<
@@ -2552,7 +2552,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     }
     __pyx_L8:;
 
-    /* "yapyg\movers.pyx":127
+    /* "yapyg/movers.pyx":127
  *                         (mover[IDX_MOVER_RUN_FUNCTION])(state, mover_name, mover, frame_time_delta, movers_to_delete)
  * 
  *         for mover_to_delete in movers_to_delete:             # <<<<<<<<<<<<<<
@@ -2562,7 +2562,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":132
+  /* "yapyg/movers.pyx":132
  *                         remove(state, mover_name)
  * 
  *         for mover_to_delete in movers_to_delete:             # <<<<<<<<<<<<<<
@@ -2580,7 +2580,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __Pyx_XDECREF_SET(__pyx_v_mover_to_delete, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "yapyg\movers.pyx":133
+    /* "yapyg/movers.pyx":133
  * 
  *         for mover_to_delete in movers_to_delete:
  *                 if len(mover_to_delete) > 2:             # <<<<<<<<<<<<<<
@@ -2591,7 +2591,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __pyx_t_8 = ((__pyx_t_2 > 2) != 0);
     if (__pyx_t_8) {
 
-      /* "yapyg\movers.pyx":134
+      /* "yapyg/movers.pyx":134
  *         for mover_to_delete in movers_to_delete:
  *                 if len(mover_to_delete) > 2:
  *                         mover_name = mover_to_delete[0]             # <<<<<<<<<<<<<<
@@ -2604,7 +2604,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __Pyx_XDECREF_SET(__pyx_v_mover_name, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "yapyg\movers.pyx":135
+      /* "yapyg/movers.pyx":135
  *                 if len(mover_to_delete) > 2:
  *                         mover_name = mover_to_delete[0]
  *                         delete_entity = mover_to_delete[2]             # <<<<<<<<<<<<<<
@@ -2616,7 +2616,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __Pyx_XDECREF_SET(__pyx_v_delete_entity, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "yapyg\movers.pyx":136
+      /* "yapyg/movers.pyx":136
  *                         mover_name = mover_to_delete[0]
  *                         delete_entity = mover_to_delete[2]
  *                         if delete_entity:             # <<<<<<<<<<<<<<
@@ -2626,7 +2626,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_delete_entity); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_8) {
 
-        /* "yapyg\movers.pyx":137
+        /* "yapyg/movers.pyx":137
  *                         delete_entity = mover_to_delete[2]
  *                         if delete_entity:
  *                                 entities.delete(state, mover_name)             # <<<<<<<<<<<<<<
@@ -2643,7 +2643,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     }
     __pyx_L11:;
 
-    /* "yapyg\movers.pyx":132
+    /* "yapyg/movers.pyx":132
  *                         remove(state, mover_name)
  * 
  *         for mover_to_delete in movers_to_delete:             # <<<<<<<<<<<<<<
@@ -2653,7 +2653,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":139
+  /* "yapyg/movers.pyx":139
  *                                 entities.delete(state, mover_name)
  * 
  *         for mover_to_delete in movers_to_delete:             # <<<<<<<<<<<<<<
@@ -2671,7 +2671,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __Pyx_XDECREF_SET(__pyx_v_mover_to_delete, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "yapyg\movers.pyx":140
+    /* "yapyg/movers.pyx":140
  * 
  *         for mover_to_delete in movers_to_delete:
  *                 if mover_to_delete:             # <<<<<<<<<<<<<<
@@ -2681,7 +2681,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_mover_to_delete); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     if (__pyx_t_8) {
 
-      /* "yapyg\movers.pyx":141
+      /* "yapyg/movers.pyx":141
  *         for mover_to_delete in movers_to_delete:
  *                 if mover_to_delete:
  *                         mover_name = mover_to_delete[0]             # <<<<<<<<<<<<<<
@@ -2694,7 +2694,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __Pyx_XDECREF_SET(__pyx_v_mover_name, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "yapyg\movers.pyx":142
+      /* "yapyg/movers.pyx":142
  *                 if mover_to_delete:
  *                         mover_name = mover_to_delete[0]
  *                         on_end_function = mover_to_delete[1]             # <<<<<<<<<<<<<<
@@ -2706,7 +2706,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __Pyx_XDECREF_SET(__pyx_v_on_end_function, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "yapyg\movers.pyx":143
+      /* "yapyg/movers.pyx":143
  *                         mover_name = mover_to_delete[0]
  *                         on_end_function = mover_to_delete[1]
  *                         if on_end_function:             # <<<<<<<<<<<<<<
@@ -2716,7 +2716,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
       __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_on_end_function); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_8) {
 
-        /* "yapyg\movers.pyx":144
+        /* "yapyg/movers.pyx":144
  *                         on_end_function = mover_to_delete[1]
  *                         if on_end_function:
  *                                 (on_end_function)(state, mover_name)             # <<<<<<<<<<<<<<
@@ -2759,7 +2759,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
     }
     __pyx_L15:;
 
-    /* "yapyg\movers.pyx":139
+    /* "yapyg/movers.pyx":139
  *                                 entities.delete(state, mover_name)
  * 
  *         for mover_to_delete in movers_to_delete:             # <<<<<<<<<<<<<<
@@ -2769,7 +2769,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":146
+  /* "yapyg/movers.pyx":146
  *                                 (on_end_function)(state, mover_name)
  * 
  *         collisions.notify_collision_handler(state)             # <<<<<<<<<<<<<<
@@ -2778,7 +2778,7 @@ static void __pyx_f_5yapyg_6movers_run(PyObject *__pyx_v_state, int __pyx_v_fram
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg\movers.pyx":112
+  /* "yapyg/movers.pyx":112
  *                 del movers_dict[mover_name]
  * 
  * cdef void run(list state, int frame_time_delta):             # <<<<<<<<<<<<<<
@@ -3015,7 +3015,7 @@ PyMODINIT_FUNC PyInit_movers(void)
   Py_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg\movers.pyx":33
+  /* "yapyg/movers.pyx":33
  * """
  * 
  * from collections import deque             # <<<<<<<<<<<<<<
@@ -3036,7 +3036,7 @@ PyMODINIT_FUNC PyInit_movers(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg\movers.pyx":40
+  /* "yapyg/movers.pyx":40
  * cdef int IDX_STATE_MOVERS
  * 
  * cdef int IDX_MOVER_TYPE = 0             # <<<<<<<<<<<<<<
@@ -3045,7 +3045,7 @@ PyMODINIT_FUNC PyInit_movers(void)
  */
   __pyx_v_5yapyg_6movers_IDX_MOVER_TYPE = 0;
 
-  /* "yapyg\movers.pyx":41
+  /* "yapyg/movers.pyx":41
  * 
  * cdef int IDX_MOVER_TYPE = 0
  * cdef int IDX_MOVER_RUN_FUNCTION = 1             # <<<<<<<<<<<<<<
@@ -3054,7 +3054,7 @@ PyMODINIT_FUNC PyInit_movers(void)
  */
   __pyx_v_5yapyg_6movers_IDX_MOVER_RUN_FUNCTION = 1;
 
-  /* "yapyg\movers.pyx":42
+  /* "yapyg/movers.pyx":42
  * cdef int IDX_MOVER_TYPE = 0
  * cdef int IDX_MOVER_RUN_FUNCTION = 1
  * cdef int IDX_MOVER_ENTITY_NAME = 2             # <<<<<<<<<<<<<<
@@ -3063,7 +3063,7 @@ PyMODINIT_FUNC PyInit_movers(void)
  */
   __pyx_v_5yapyg_6movers_IDX_MOVER_ENTITY_NAME = 2;
 
-  /* "yapyg\movers.pyx":43
+  /* "yapyg/movers.pyx":43
  * cdef int IDX_MOVER_RUN_FUNCTION = 1
  * cdef int IDX_MOVER_ENTITY_NAME = 2
  * cdef int IDX_MOVER_COLLISION_HANDLER = 3             # <<<<<<<<<<<<<<
@@ -3072,7 +3072,7 @@ PyMODINIT_FUNC PyInit_movers(void)
  */
   __pyx_v_5yapyg_6movers_IDX_MOVER_COLLISION_HANDLER = 3;
 
-  /* "yapyg\movers.pyx":45
+  /* "yapyg/movers.pyx":45
  * cdef int IDX_MOVER_COLLISION_HANDLER = 3
  * 
  * IDX_MOVER_FIRST_PARAMETER = IDX_MOVER_COLLISION_HANDLER + 1             # <<<<<<<<<<<<<<
@@ -3084,7 +3084,7 @@ PyMODINIT_FUNC PyInit_movers(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_IDX_MOVER_FIRST_PARAMETER, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg\movers.pyx":47
+  /* "yapyg/movers.pyx":47
  * IDX_MOVER_FIRST_PARAMETER = IDX_MOVER_COLLISION_HANDLER + 1
  * 
  * G_IDX_MOVER_RUN_FUNCTION = IDX_MOVER_RUN_FUNCTION             # <<<<<<<<<<<<<<
@@ -3096,7 +3096,7 @@ PyMODINIT_FUNC PyInit_movers(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_G_IDX_MOVER_RUN_FUNCTION, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg\movers.pyx":1
+  /* "yapyg/movers.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

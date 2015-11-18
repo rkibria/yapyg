@@ -415,13 +415,13 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg_movers\\control_phys_mover.pyx",
+  "yapyg_movers/control_phys_mover.pyx",
 };
 
 /*--- Type declarations ---*/
 struct __pyx_opt_args_5yapyg_6movers_add;
 
-/* "yapyg\movers.pxd":34
+/* "yapyg/movers.pxd":34
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef add(list state, str mover_name, list mover, int do_replace=*, int prepend=*)             # <<<<<<<<<<<<<<
@@ -437,7 +437,7 @@ struct __pyx_opt_args_5yapyg_8entities_insert;
 struct __pyx_opt_args_5yapyg_8entities_set_sprite;
 struct __pyx_opt_args_5yapyg_8entities_set_active_sprite;
 
-/* "yapyg\entities.pxd":38
+/* "yapyg/entities.pxd":38
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos,             # <<<<<<<<<<<<<<
@@ -452,7 +452,7 @@ struct __pyx_opt_args_5yapyg_8entities_insert {
   int play_once;
 };
 
-/* "yapyg\entities.pxd":40
+/* "yapyg/entities.pxd":40
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos,
  *              tuple pos_offset=*, tuple collision=*, int screen_relative=*, int play_once=*)
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -466,7 +466,7 @@ struct __pyx_opt_args_5yapyg_8entities_set_sprite {
   int play_once;
 };
 
-/* "yapyg\entities.pxd":42
+/* "yapyg/entities.pxd":42
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=*, int screen_relative=*, int play_once=*)
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=?)             # <<<<<<<<<<<<<<
@@ -479,7 +479,7 @@ struct __pyx_opt_args_5yapyg_8entities_set_active_sprite {
 };
 struct __pyx_opt_args_12yapyg_movers_14physical_mover_add;
 
-/* "yapyg_movers\physical_mover.pxd":27
+/* "yapyg_movers/physical_mover.pxd":27
  * cpdef str PHYSICS_MOVER_NAME = "physics"
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
@@ -492,7 +492,7 @@ struct __pyx_opt_args_12yapyg_movers_14physical_mover_add {
 };
 struct __pyx_opt_args_12yapyg_movers_18control_phys_mover_add;
 
-/* "yapyg_movers\control_phys_mover.pxd":25
+/* "yapyg_movers/control_phys_mover.pxd":25
  * """
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
@@ -836,7 +836,7 @@ static PyObject *__pyx_int_6;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 
-/* "yapyg_movers\control_phys_mover.pyx":41
+/* "yapyg_movers/control_phys_mover.pyx":41
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 6
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
@@ -847,7 +847,7 @@ static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_1add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, float __pyx_v_mass, float __pyx_v_vx, float __pyx_v_vy, float __pyx_v_ax, float __pyx_v_ay, float __pyx_v_friction, float __pyx_v_inelasticity, float __pyx_v_vr, float __pyx_v_rot_friction, float __pyx_v_rot_decay, float __pyx_v_stickyness, float __pyx_v_dir_factor, float __pyx_v_pos_accel, float __pyx_v_neg_accel, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_12yapyg_movers_18control_phys_mover_add *__pyx_optional_args) {
 
-  /* "yapyg_movers\control_phys_mover.pyx":57
+  /* "yapyg_movers/control_phys_mover.pyx":57
  *         float pos_accel,
  *         float neg_accel,
  *         str rest_sprite=None,             # <<<<<<<<<<<<<<
@@ -856,7 +856,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx
  */
   PyObject *__pyx_v_rest_sprite = ((PyObject*)Py_None);
 
-  /* "yapyg_movers\control_phys_mover.pyx":58
+  /* "yapyg_movers/control_phys_mover.pyx":58
  *         float neg_accel,
  *         str rest_sprite=None,
  *         str pos_sprite=None,             # <<<<<<<<<<<<<<
@@ -865,7 +865,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx
  */
   PyObject *__pyx_v_pos_sprite = ((PyObject*)Py_None);
 
-  /* "yapyg_movers\control_phys_mover.pyx":59
+  /* "yapyg_movers/control_phys_mover.pyx":59
  *         str rest_sprite=None,
  *         str pos_sprite=None,
  *         str neg_sprite=None,             # <<<<<<<<<<<<<<
@@ -874,7 +874,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx
  */
   PyObject *__pyx_v_neg_sprite = ((PyObject*)Py_None);
 
-  /* "yapyg_movers\control_phys_mover.pyx":60
+  /* "yapyg_movers/control_phys_mover.pyx":60
  *         str pos_sprite=None,
  *         str neg_sprite=None,
  *         int do_replace=False             # <<<<<<<<<<<<<<
@@ -906,7 +906,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx
     }
   }
 
-  /* "yapyg_movers\control_phys_mover.pyx":67
+  /* "yapyg_movers/control_phys_mover.pyx":67
  *         yapyg.movers.add(state,
  *                          entity_name,
  *                          create(entity_name,             # <<<<<<<<<<<<<<
@@ -916,7 +916,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx
   __pyx_t_1 = __pyx_f_12yapyg_movers_18control_phys_mover_create(__pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness, __pyx_v_dir_factor, __pyx_v_pos_accel, __pyx_v_neg_accel, __pyx_v_rest_sprite, __pyx_v_pos_sprite, __pyx_v_neg_sprite, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg_movers\control_phys_mover.pyx":65
+  /* "yapyg_movers/control_phys_mover.pyx":65
  *         vr > 0: counter-clockwise
  *         """
  *         yapyg.movers.add(state,             # <<<<<<<<<<<<<<
@@ -930,7 +930,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_add(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":41
+  /* "yapyg_movers/control_phys_mover.pyx":41
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 6
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
@@ -986,7 +986,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_1add(PyObject *__p
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_state,&__pyx_n_s_entity_name,&__pyx_n_s_mass,&__pyx_n_s_vx,&__pyx_n_s_vy,&__pyx_n_s_ax,&__pyx_n_s_ay,&__pyx_n_s_friction,&__pyx_n_s_inelasticity,&__pyx_n_s_vr,&__pyx_n_s_rot_friction,&__pyx_n_s_rot_decay,&__pyx_n_s_stickyness,&__pyx_n_s_dir_factor,&__pyx_n_s_pos_accel,&__pyx_n_s_neg_accel,&__pyx_n_s_rest_sprite,&__pyx_n_s_pos_sprite,&__pyx_n_s_neg_sprite,&__pyx_n_s_do_replace,0};
     PyObject* values[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-    /* "yapyg_movers\control_phys_mover.pyx":57
+    /* "yapyg_movers/control_phys_mover.pyx":57
  *         float pos_accel,
  *         float neg_accel,
  *         str rest_sprite=None,             # <<<<<<<<<<<<<<
@@ -995,7 +995,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_1add(PyObject *__p
  */
     values[16] = ((PyObject*)Py_None);
 
-    /* "yapyg_movers\control_phys_mover.pyx":58
+    /* "yapyg_movers/control_phys_mover.pyx":58
  *         float neg_accel,
  *         str rest_sprite=None,
  *         str pos_sprite=None,             # <<<<<<<<<<<<<<
@@ -1004,7 +1004,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_1add(PyObject *__p
  */
     values[17] = ((PyObject*)Py_None);
 
-    /* "yapyg_movers\control_phys_mover.pyx":59
+    /* "yapyg_movers/control_phys_mover.pyx":59
  *         str rest_sprite=None,
  *         str pos_sprite=None,
  *         str neg_sprite=None,             # <<<<<<<<<<<<<<
@@ -1192,7 +1192,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_1add(PyObject *__p
       __pyx_v_do_replace = __Pyx_PyInt_As_int(values[19]); if (unlikely((__pyx_v_do_replace == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
 
-      /* "yapyg_movers\control_phys_mover.pyx":60
+      /* "yapyg_movers/control_phys_mover.pyx":60
  *         str pos_sprite=None,
  *         str neg_sprite=None,
  *         int do_replace=False             # <<<<<<<<<<<<<<
@@ -1217,7 +1217,7 @@ static PyObject *__pyx_pw_12yapyg_movers_18control_phys_mover_1add(PyObject *__p
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_neg_sprite), (&PyString_Type), 1, "neg_sprite", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_12yapyg_movers_18control_phys_mover_add(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_mass, __pyx_v_vx, __pyx_v_vy, __pyx_v_ax, __pyx_v_ay, __pyx_v_friction, __pyx_v_inelasticity, __pyx_v_vr, __pyx_v_rot_friction, __pyx_v_rot_decay, __pyx_v_stickyness, __pyx_v_dir_factor, __pyx_v_pos_accel, __pyx_v_neg_accel, __pyx_v_rest_sprite, __pyx_v_pos_sprite, __pyx_v_neg_sprite, __pyx_v_do_replace);
 
-  /* "yapyg_movers\control_phys_mover.pyx":41
+  /* "yapyg_movers/control_phys_mover.pyx":41
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 6
  * 
  * cpdef add(list state,             # <<<<<<<<<<<<<<
@@ -1266,7 +1266,7 @@ static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_add(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "yapyg_movers\control_phys_mover.pyx":87
+/* "yapyg_movers/control_phys_mover.pyx":87
  *                          )
  * 
  * cpdef list create(str entity_name,             # <<<<<<<<<<<<<<
@@ -1288,7 +1288,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create", 0);
 
-  /* "yapyg_movers\control_phys_mover.pyx":109
+  /* "yapyg_movers/control_phys_mover.pyx":109
  *         TODO
  *         """
  *         cdef list phys_mover_list = yapyg_movers.physical_mover.create(entity_name,             # <<<<<<<<<<<<<<
@@ -1300,7 +1300,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   __pyx_v_phys_mover_list = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":122
+  /* "yapyg_movers/control_phys_mover.pyx":122
  *                                                         stickyness
  *                                                         )
  *         phys_mover_list[yapyg.movers.G_IDX_MOVER_RUN_FUNCTION] = run             # <<<<<<<<<<<<<<
@@ -1325,7 +1325,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":123
+  /* "yapyg_movers/control_phys_mover.pyx":123
  *                                                         )
  *         phys_mover_list[yapyg.movers.G_IDX_MOVER_RUN_FUNCTION] = run
  *         phys_mover_list.append(dir_factor)             # <<<<<<<<<<<<<<
@@ -1341,7 +1341,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_phys_mover_list, __pyx_t_1); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":124
+  /* "yapyg_movers/control_phys_mover.pyx":124
  *         phys_mover_list[yapyg.movers.G_IDX_MOVER_RUN_FUNCTION] = run
  *         phys_mover_list.append(dir_factor)
  *         phys_mover_list.append(pos_accel)             # <<<<<<<<<<<<<<
@@ -1357,7 +1357,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_phys_mover_list, __pyx_t_1); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":125
+  /* "yapyg_movers/control_phys_mover.pyx":125
  *         phys_mover_list.append(dir_factor)
  *         phys_mover_list.append(pos_accel)
  *         phys_mover_list.append(neg_accel)             # <<<<<<<<<<<<<<
@@ -1373,7 +1373,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_phys_mover_list, __pyx_t_1); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":126
+  /* "yapyg_movers/control_phys_mover.pyx":126
  *         phys_mover_list.append(pos_accel)
  *         phys_mover_list.append(neg_accel)
  *         phys_mover_list.append(rest_sprite)             # <<<<<<<<<<<<<<
@@ -1386,7 +1386,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   }
   __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_phys_mover_list, __pyx_v_rest_sprite); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_movers\control_phys_mover.pyx":127
+  /* "yapyg_movers/control_phys_mover.pyx":127
  *         phys_mover_list.append(neg_accel)
  *         phys_mover_list.append(rest_sprite)
  *         phys_mover_list.append(pos_sprite)             # <<<<<<<<<<<<<<
@@ -1399,7 +1399,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   }
   __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_phys_mover_list, __pyx_v_pos_sprite); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_movers\control_phys_mover.pyx":128
+  /* "yapyg_movers/control_phys_mover.pyx":128
  *         phys_mover_list.append(rest_sprite)
  *         phys_mover_list.append(pos_sprite)
  *         phys_mover_list.append(neg_sprite)             # <<<<<<<<<<<<<<
@@ -1412,7 +1412,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   }
   __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_phys_mover_list, __pyx_v_neg_sprite); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg_movers\control_phys_mover.pyx":129
+  /* "yapyg_movers/control_phys_mover.pyx":129
  *         phys_mover_list.append(pos_sprite)
  *         phys_mover_list.append(neg_sprite)
  *         return phys_mover_list             # <<<<<<<<<<<<<<
@@ -1424,7 +1424,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_create(PyObject *__
   __pyx_r = __pyx_v_phys_mover_list;
   goto __pyx_L0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":87
+  /* "yapyg_movers/control_phys_mover.pyx":87
  *                          )
  * 
  * cpdef list create(str entity_name,             # <<<<<<<<<<<<<<
@@ -1686,7 +1686,7 @@ static PyObject *__pyx_pf_12yapyg_movers_18control_phys_mover_2create(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "yapyg_movers\control_phys_mover.pyx":131
+/* "yapyg_movers/control_phys_mover.pyx":131
  *         return phys_mover_list
  * 
  * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
@@ -1723,7 +1723,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
 
-  /* "yapyg_movers\control_phys_mover.pyx":132
+  /* "yapyg_movers/control_phys_mover.pyx":132
  * 
  * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
  *         cdef list direction = yapyg.controls.get_joystick(state)             # <<<<<<<<<<<<<<
@@ -1735,7 +1735,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_direction = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":133
+  /* "yapyg_movers/control_phys_mover.pyx":133
  * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):
  *         cdef list direction = yapyg.controls.get_joystick(state)
  *         cdef float joy_dir = direction[0]             # <<<<<<<<<<<<<<
@@ -1752,7 +1752,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_joy_dir = __pyx_t_2;
 
-  /* "yapyg_movers\control_phys_mover.pyx":134
+  /* "yapyg_movers/control_phys_mover.pyx":134
  *         cdef list direction = yapyg.controls.get_joystick(state)
  *         cdef float joy_dir = direction[0]
  *         cdef float joy_accel = direction[1]             # <<<<<<<<<<<<<<
@@ -1769,7 +1769,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_joy_accel = __pyx_t_2;
 
-  /* "yapyg_movers\control_phys_mover.pyx":136
+  /* "yapyg_movers/control_phys_mover.pyx":136
  *         cdef float joy_accel = direction[1]
  * 
  *         cdef tuple player_pos = yapyg.entities.get_pos(state, entity_name)             # <<<<<<<<<<<<<<
@@ -1781,7 +1781,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_player_pos = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":137
+  /* "yapyg_movers/control_phys_mover.pyx":137
  * 
  *         cdef tuple player_pos = yapyg.entities.get_pos(state, entity_name)
  *         cdef float player_rot = player_pos[2]             # <<<<<<<<<<<<<<
@@ -1798,7 +1798,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_player_rot = __pyx_t_2;
 
-  /* "yapyg_movers\control_phys_mover.pyx":139
+  /* "yapyg_movers/control_phys_mover.pyx":139
  *         cdef float player_rot = player_pos[2]
  * 
  *         cdef tuple player_speed = yapyg_movers.physical_mover.get_velocity(mover)             # <<<<<<<<<<<<<<
@@ -1810,7 +1810,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_player_speed = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":140
+  /* "yapyg_movers/control_phys_mover.pyx":140
  * 
  *         cdef tuple player_speed = yapyg_movers.physical_mover.get_velocity(mover)
  *         cdef float dir_factor = mover[IDX_CONTROLLED_PHYSICAL_MOVER_DIR_FACTOR] * yapyg.math_2d.length(player_speed)             # <<<<<<<<<<<<<<
@@ -1833,7 +1833,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_dir_factor = __pyx_t_2;
 
-  /* "yapyg_movers\control_phys_mover.pyx":143
+  /* "yapyg_movers/control_phys_mover.pyx":143
  * 
  *         cdef float accel_factor
  *         if joy_accel > 0.0:             # <<<<<<<<<<<<<<
@@ -1843,7 +1843,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_5 = ((__pyx_v_joy_accel > 0.0) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg_movers\control_phys_mover.pyx":144
+    /* "yapyg_movers/control_phys_mover.pyx":144
  *         cdef float accel_factor
  *         if joy_accel > 0.0:
  *                 accel_factor = mover[IDX_CONTROLLED_PHYSICAL_MOVER_POS_ACCEL]             # <<<<<<<<<<<<<<
@@ -1863,7 +1863,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   }
   /*else*/ {
 
-    /* "yapyg_movers\control_phys_mover.pyx":146
+    /* "yapyg_movers/control_phys_mover.pyx":146
  *                 accel_factor = mover[IDX_CONTROLLED_PHYSICAL_MOVER_POS_ACCEL]
  *         else:
  *                 accel_factor = mover[IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL]             # <<<<<<<<<<<<<<
@@ -1882,7 +1882,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg_movers\control_phys_mover.pyx":148
+  /* "yapyg_movers/control_phys_mover.pyx":148
  *                 accel_factor = mover[IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL]
  * 
  *         cdef tuple accel_vector = yapyg.math_2d.vector_mul(yapyg.math_2d.rotated_point((0, 0), (0.0, 1.0), player_rot), accel_factor * joy_accel)             # <<<<<<<<<<<<<<
@@ -1897,7 +1897,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_accel_vector = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":149
+  /* "yapyg_movers/control_phys_mover.pyx":149
  * 
  *         cdef tuple accel_vector = yapyg.math_2d.vector_mul(yapyg.math_2d.rotated_point((0, 0), (0.0, 1.0), player_rot), accel_factor * joy_accel)
  *         yapyg_movers.physical_mover.set_acceleration(mover, accel_vector)             # <<<<<<<<<<<<<<
@@ -1908,7 +1908,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":151
+  /* "yapyg_movers/control_phys_mover.pyx":151
  *         yapyg_movers.physical_mover.set_acceleration(mover, accel_vector)
  *         yapyg_movers.physical_mover.set_velocity(mover,
  *                                     (player_speed[0],             # <<<<<<<<<<<<<<
@@ -1922,7 +1922,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_3 = __Pyx_GetItemInt_Tuple(__pyx_v_player_speed, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg_movers\control_phys_mover.pyx":152
+  /* "yapyg_movers/control_phys_mover.pyx":152
  *         yapyg_movers.physical_mover.set_velocity(mover,
  *                                     (player_speed[0],
  *                                      player_speed[1],             # <<<<<<<<<<<<<<
@@ -1936,7 +1936,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_player_speed, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "yapyg_movers\control_phys_mover.pyx":153
+  /* "yapyg_movers/control_phys_mover.pyx":153
  *                                     (player_speed[0],
  *                                      player_speed[1],
  *                                      player_speed[2] + (-joy_dir) * dir_factor * (-1 if joy_accel < 0 else 1)             # <<<<<<<<<<<<<<
@@ -1961,7 +1961,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":151
+  /* "yapyg_movers/control_phys_mover.pyx":151
  *         yapyg_movers.physical_mover.set_acceleration(mover, accel_vector)
  *         yapyg_movers.physical_mover.set_velocity(mover,
  *                                     (player_speed[0],             # <<<<<<<<<<<<<<
@@ -1980,7 +1980,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_4 = 0;
   __pyx_t_7 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":150
+  /* "yapyg_movers/control_phys_mover.pyx":150
  *         cdef tuple accel_vector = yapyg.math_2d.vector_mul(yapyg.math_2d.rotated_point((0, 0), (0.0, 1.0), player_rot), accel_factor * joy_accel)
  *         yapyg_movers.physical_mover.set_acceleration(mover, accel_vector)
  *         yapyg_movers.physical_mover.set_velocity(mover,             # <<<<<<<<<<<<<<
@@ -1992,7 +1992,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":157
+  /* "yapyg_movers/control_phys_mover.pyx":157
  *                                     )
  * 
  *         cdef str pos_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_POS_SPRITE]             # <<<<<<<<<<<<<<
@@ -2009,7 +2009,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_pos_sprite = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":158
+  /* "yapyg_movers/control_phys_mover.pyx":158
  * 
  *         cdef str pos_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_POS_SPRITE]
  *         cdef str neg_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE]             # <<<<<<<<<<<<<<
@@ -2026,7 +2026,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_neg_sprite = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":159
+  /* "yapyg_movers/control_phys_mover.pyx":159
  *         cdef str pos_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_POS_SPRITE]
  *         cdef str neg_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE]
  *         cdef str rest_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE]             # <<<<<<<<<<<<<<
@@ -2043,7 +2043,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_v_rest_sprite = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":160
+  /* "yapyg_movers/control_phys_mover.pyx":160
  *         cdef str neg_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE]
  *         cdef str rest_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE]
  *         if pos_sprite and joy_accel > 0.0:             # <<<<<<<<<<<<<<
@@ -2061,7 +2061,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "yapyg_movers\control_phys_mover.pyx":161
+    /* "yapyg_movers/control_phys_mover.pyx":161
  *         cdef str rest_sprite = mover[IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE]
  *         if pos_sprite and joy_accel > 0.0:
  *                 yapyg.entities.set_active_sprite(state, entity_name, pos_sprite)             # <<<<<<<<<<<<<<
@@ -2074,7 +2074,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
     goto __pyx_L4;
   }
 
-  /* "yapyg_movers\control_phys_mover.pyx":162
+  /* "yapyg_movers/control_phys_mover.pyx":162
  *         if pos_sprite and joy_accel > 0.0:
  *                 yapyg.entities.set_active_sprite(state, entity_name, pos_sprite)
  *         elif rest_sprite and joy_accel == 0.0:             # <<<<<<<<<<<<<<
@@ -2092,7 +2092,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "yapyg_movers\control_phys_mover.pyx":163
+    /* "yapyg_movers/control_phys_mover.pyx":163
  *                 yapyg.entities.set_active_sprite(state, entity_name, pos_sprite)
  *         elif rest_sprite and joy_accel == 0.0:
  *                 yapyg.entities.set_active_sprite(state, entity_name, rest_sprite)             # <<<<<<<<<<<<<<
@@ -2105,7 +2105,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
     goto __pyx_L4;
   }
 
-  /* "yapyg_movers\control_phys_mover.pyx":164
+  /* "yapyg_movers/control_phys_mover.pyx":164
  *         elif rest_sprite and joy_accel == 0.0:
  *                 yapyg.entities.set_active_sprite(state, entity_name, rest_sprite)
  *         elif neg_sprite:             # <<<<<<<<<<<<<<
@@ -2115,7 +2115,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_neg_sprite); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_5) {
 
-    /* "yapyg_movers\control_phys_mover.pyx":165
+    /* "yapyg_movers/control_phys_mover.pyx":165
  *                 yapyg.entities.set_active_sprite(state, entity_name, rest_sprite)
  *         elif neg_sprite:
  *                 yapyg.entities.set_active_sprite(state, entity_name, neg_sprite)             # <<<<<<<<<<<<<<
@@ -2129,7 +2129,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   }
   __pyx_L4:;
 
-  /* "yapyg_movers\control_phys_mover.pyx":167
+  /* "yapyg_movers/control_phys_mover.pyx":167
  *                 yapyg.entities.set_active_sprite(state, entity_name, neg_sprite)
  * 
  *         return yapyg_movers.physical_mover.run(state, entity_name, mover, frame_time_delta, movers_to_delete)             # <<<<<<<<<<<<<<
@@ -2141,7 +2141,7 @@ static PyObject *__pyx_f_12yapyg_movers_18control_phys_mover_run(PyObject *__pyx
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":131
+  /* "yapyg_movers/control_phys_mover.pyx":131
  *         return phys_mover_list
  * 
  * cpdef run(list state, str entity_name, list mover, int frame_time_delta, list movers_to_delete):             # <<<<<<<<<<<<<<
@@ -2362,7 +2362,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg_movers\control_phys_mover.pyx":148
+  /* "yapyg_movers/control_phys_mover.pyx":148
  *                 accel_factor = mover[IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL]
  * 
  *         cdef tuple accel_vector = yapyg.math_2d.vector_mul(yapyg.math_2d.rotated_point((0, 0), (0.0, 1.0), player_rot), accel_factor * joy_accel)             # <<<<<<<<<<<<<<
@@ -2542,7 +2542,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   Py_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg_movers\control_phys_mover.pyx":25
+  /* "yapyg_movers/control_phys_mover.pyx":25
  * """
  * 
  * import yapyg             # <<<<<<<<<<<<<<
@@ -2554,7 +2554,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":31
+  /* "yapyg_movers/control_phys_mover.pyx":31
  * cimport yapyg.controls
  * 
  * import yapyg_movers             # <<<<<<<<<<<<<<
@@ -2566,7 +2566,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_yapyg_movers, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg_movers\control_phys_mover.pyx":34
+  /* "yapyg_movers/control_phys_mover.pyx":34
  * cimport yapyg_movers.physical_mover
  * 
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_DIR_FACTOR = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 1             # <<<<<<<<<<<<<<
@@ -2588,7 +2588,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_DIR_FACTOR = __pyx_t_12;
 
-  /* "yapyg_movers\control_phys_mover.pyx":35
+  /* "yapyg_movers/control_phys_mover.pyx":35
  * 
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_DIR_FACTOR = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 1
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_POS_ACCEL = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 2             # <<<<<<<<<<<<<<
@@ -2610,7 +2610,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_POS_ACCEL = __pyx_t_12;
 
-  /* "yapyg_movers\control_phys_mover.pyx":36
+  /* "yapyg_movers/control_phys_mover.pyx":36
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_DIR_FACTOR = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 1
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_POS_ACCEL = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 2
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 3             # <<<<<<<<<<<<<<
@@ -2632,7 +2632,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL = __pyx_t_12;
 
-  /* "yapyg_movers\control_phys_mover.pyx":37
+  /* "yapyg_movers/control_phys_mover.pyx":37
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_POS_ACCEL = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 2
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 3
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 4             # <<<<<<<<<<<<<<
@@ -2654,7 +2654,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE = __pyx_t_12;
 
-  /* "yapyg_movers\control_phys_mover.pyx":38
+  /* "yapyg_movers/control_phys_mover.pyx":38
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_ACCEL = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 3
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 4
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_POS_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 5             # <<<<<<<<<<<<<<
@@ -2676,7 +2676,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_POS_SPRITE = __pyx_t_12;
 
-  /* "yapyg_movers\control_phys_mover.pyx":39
+  /* "yapyg_movers/control_phys_mover.pyx":39
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_REST_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 4
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_POS_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 5
  * cdef int IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE = yapyg_movers.physical_mover.IDX_MOVERS_PHYSICAL_LAST_PARAMETER + 6             # <<<<<<<<<<<<<<
@@ -2698,7 +2698,7 @@ PyMODINIT_FUNC PyInit_control_phys_mover(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __pyx_v_12yapyg_movers_18control_phys_mover_IDX_CONTROLLED_PHYSICAL_MOVER_NEG_SPRITE = __pyx_t_12;
 
-  /* "yapyg_movers\control_phys_mover.pyx":1
+  /* "yapyg_movers/control_phys_mover.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

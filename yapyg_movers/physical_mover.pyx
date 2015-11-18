@@ -245,10 +245,8 @@ cdef rectangle_circle_collision(list state,
 
         cdef float inelasticity
         cdef tuple rotated_circle
-        cdef float v_total
         cdef float corner_x
         cdef float corner_y
-        cdef float angle
         cdef float angle_dx
         cdef float angle_dy
         cdef float new_vx
@@ -314,7 +312,6 @@ cdef rectangle_circle_collision(list state,
                                         circle_velocity_vector = (circle_velocity_vector[0], abs(circle_velocity_vector[1]) * inelasticity)
                         else:
                                 # lower/upper left/right quadrant
-                                v_total = yapyg.math_2d.length(circle_velocity_vector)
                                 corner_y = 0
                                 corner_x = 0
                                 if circle_y <= rect_y:
@@ -327,11 +324,10 @@ cdef rectangle_circle_collision(list state,
                                         corner_x = rect_x + rect_w
                                 angle_dx = circle_x - corner_x
                                 angle_dy = circle_y - corner_y
-                                angle = atan2(angle_dy, angle_dx)
-
-                                new_vy = sin(angle) * v_total
-                                new_vx = cos(angle) * v_total
-                                circle_velocity_vector = (new_vx * inelasticity, new_vy * inelasticity)
+                                if abs(angle_dx) >= abs(angle_dy):
+                                        circle_velocity_vector = (circle_velocity_vector[0] * inelasticity, -circle_velocity_vector[1] * inelasticity)
+                                else:
+                                        circle_velocity_vector = (-circle_velocity_vector[0] * inelasticity, circle_velocity_vector[1] * inelasticity)
                 else:
                         # circle same height as rectangle
                         if circle_x < rect_x:
