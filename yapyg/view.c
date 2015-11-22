@@ -1702,7 +1702,7 @@ PyMODINIT_FUNC PyInit_view(void)
   __pyx_v_5yapyg_4view_IDX_VIEW_SETTER = 1;
 
   /* "yapyg\view.pyx":1
- * # Copyright C 2015 Raihan Kibria             # <<<<<<<<<<<<<<
+ * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */

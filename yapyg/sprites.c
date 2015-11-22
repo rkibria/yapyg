@@ -416,7 +416,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg/sprites.pyx",
+  "yapyg\\sprites.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -448,7 +448,7 @@ struct __pyx_opt_args_5yapyg_6screen_initialize {
 };
 struct __pyx_opt_args_5yapyg_7sprites_insert;
 
-/* "yapyg/sprites.pxd":29
+/* "yapyg\sprites.pxd":29
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef insert(list state, str sprite_name, tuple textures, float speed, list pos_offset,             # <<<<<<<<<<<<<<
@@ -955,7 +955,7 @@ static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 
-/* "yapyg/sprites.pyx":58
+/* "yapyg\sprites.pyx":58
  * cdef int IDX_SPRITE_VISIBLE = 11
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -977,7 +977,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg/sprites.pyx":63
+  /* "yapyg\sprites.pyx":63
  *         """
  *         global IDX_STATE_SPRITES
  *         IDX_STATE_SPRITES = state_idx             # <<<<<<<<<<<<<<
@@ -986,7 +986,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
  */
   __pyx_v_5yapyg_7sprites_IDX_STATE_SPRITES = __pyx_v_state_idx;
 
-  /* "yapyg/sprites.pyx":65
+  /* "yapyg\sprites.pyx":65
  *         IDX_STATE_SPRITES = state_idx
  *         state[IDX_STATE_SPRITES] = [
  *                 {},             # <<<<<<<<<<<<<<
@@ -996,7 +996,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg/sprites.pyx":66
+  /* "yapyg\sprites.pyx":66
  *         state[IDX_STATE_SPRITES] = [
  *                 {},
  *                 {},             # <<<<<<<<<<<<<<
@@ -1006,7 +1006,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
   __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg/sprites.pyx":67
+  /* "yapyg\sprites.pyx":67
  *                 {},
  *                 {},
  *                 {},             # <<<<<<<<<<<<<<
@@ -1016,7 +1016,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
   __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg/sprites.pyx":68
+  /* "yapyg\sprites.pyx":68
  *                 {},
  *                 {},
  *                 []             # <<<<<<<<<<<<<<
@@ -1026,7 +1026,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
   __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "yapyg/sprites.pyx":64
+  /* "yapyg\sprites.pyx":64
  *         global IDX_STATE_SPRITES
  *         IDX_STATE_SPRITES = state_idx
  *         state[IDX_STATE_SPRITES] = [             # <<<<<<<<<<<<<<
@@ -1054,7 +1054,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_initialize(int __pyx_v_state_idx, PyObj
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_7sprites_IDX_STATE_SPRITES, __pyx_t_5, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg/sprites.pyx":58
+  /* "yapyg\sprites.pyx":58
  * cdef int IDX_SPRITE_VISIBLE = 11
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -1172,7 +1172,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_initialize(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":71
+/* "yapyg\sprites.pyx":71
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1189,7 +1189,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_destroy(PyObject *__pyx_v_state, CYTHON
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg/sprites.pyx":75
+  /* "yapyg\sprites.pyx":75
  *         TODO
  *         """
  *         state[IDX_STATE_SPRITES] = None             # <<<<<<<<<<<<<<
@@ -1202,7 +1202,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_destroy(PyObject *__pyx_v_state, CYTHON
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_7sprites_IDX_STATE_SPRITES, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/sprites.pyx":71
+  /* "yapyg\sprites.pyx":71
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1270,7 +1270,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_2destroy(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":77
+/* "yapyg\sprites.pyx":77
  *         state[IDX_STATE_SPRITES] = None
  * 
  * cpdef insert(list state,             # <<<<<<<<<<<<<<
@@ -1281,7 +1281,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_2destroy(CYTHON_UNUSED PyObject *__pyx
 static PyObject *__pyx_pw_5yapyg_7sprites_5insert(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObject *__pyx_v_sprite_name, PyObject *__pyx_v_textures, float __pyx_v_speed, PyObject *__pyx_v_pos_offset, PyObject *__pyx_v_scale, int __pyx_v_enable, PyObject *__pyx_v_pos, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_7sprites_insert *__pyx_optional_args) {
 
-  /* "yapyg/sprites.pyx":85
+  /* "yapyg\sprites.pyx":85
  *              int enable,
  *              list pos,
  *              int screen_relative=False,             # <<<<<<<<<<<<<<
@@ -1290,7 +1290,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
  */
   int __pyx_v_screen_relative = ((int)0);
 
-  /* "yapyg/sprites.pyx":86
+  /* "yapyg\sprites.pyx":86
  *              list pos,
  *              int screen_relative=False,
  *              int play_once=False             # <<<<<<<<<<<<<<
@@ -1343,7 +1343,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   }
   __Pyx_INCREF(__pyx_v_scale);
 
-  /* "yapyg/sprites.pyx":91
+  /* "yapyg\sprites.pyx":91
  *         TODO
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -1360,7 +1360,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":92
+  /* "yapyg\sprites.pyx":92
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -1377,7 +1377,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":93
+  /* "yapyg\sprites.pyx":93
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]             # <<<<<<<<<<<<<<
@@ -1394,7 +1394,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprites_rects_rots = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":94
+  /* "yapyg\sprites.pyx":94
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
  *         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]             # <<<<<<<<<<<<<<
@@ -1411,7 +1411,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite_sizes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":95
+  /* "yapyg\sprites.pyx":95
  *         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
  *         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
  *         cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]             # <<<<<<<<<<<<<<
@@ -1428,7 +1428,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite_draw_order = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":97
+  /* "yapyg\sprites.pyx":97
  *         cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
  * 
  *         if not scale:             # <<<<<<<<<<<<<<
@@ -1439,7 +1439,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/sprites.pyx":98
+    /* "yapyg\sprites.pyx":98
  * 
  *         if not scale:
  *                 scale = (1, 1)             # <<<<<<<<<<<<<<
@@ -1452,7 +1452,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   }
   __pyx_L3:;
 
-  /* "yapyg/sprites.pyx":100
+  /* "yapyg\sprites.pyx":100
  *                 scale = (1, 1)
  * 
  *         cdef list text_textures = []             # <<<<<<<<<<<<<<
@@ -1464,7 +1464,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_text_textures = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":102
+  /* "yapyg\sprites.pyx":102
  *         cdef list text_textures = []
  *         cdef str texture_name
  *         cdef tuple texture_size = None             # <<<<<<<<<<<<<<
@@ -1474,7 +1474,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __Pyx_INCREF(Py_None);
   __pyx_v_texture_size = ((PyObject*)Py_None);
 
-  /* "yapyg/sprites.pyx":103
+  /* "yapyg\sprites.pyx":103
  *         cdef str texture_name
  *         cdef tuple texture_size = None
  *         for texture_part in textures:             # <<<<<<<<<<<<<<
@@ -1496,7 +1496,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
     __Pyx_XDECREF_SET(__pyx_v_texture_part, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "yapyg/sprites.pyx":104
+    /* "yapyg\sprites.pyx":104
  *         cdef tuple texture_size = None
  *         for texture_part in textures:
  *                 texture_name = str(texture_part)             # <<<<<<<<<<<<<<
@@ -1515,7 +1515,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
     __Pyx_XDECREF_SET(__pyx_v_texture_name, ((PyObject*)__pyx_t_6));
     __pyx_t_6 = 0;
 
-    /* "yapyg/sprites.pyx":105
+    /* "yapyg\sprites.pyx":105
  *         for texture_part in textures:
  *                 texture_name = str(texture_part)
  *                 text_textures.append(texture_name)             # <<<<<<<<<<<<<<
@@ -1524,7 +1524,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
  */
     __pyx_t_7 = __Pyx_PyList_Append(__pyx_v_text_textures, __pyx_v_texture_name); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg/sprites.pyx":107
+    /* "yapyg\sprites.pyx":107
  *                 text_textures.append(texture_name)
  * 
  *                 if type(texture_part) == tuple:             # <<<<<<<<<<<<<<
@@ -1536,7 +1536,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (__pyx_t_3) {
 
-      /* "yapyg/sprites.pyx":108
+      /* "yapyg\sprites.pyx":108
  * 
  *                 if type(texture_part) == tuple:
  *                         if texture_part[0] == "rectangle":             # <<<<<<<<<<<<<<
@@ -1549,7 +1549,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/sprites.pyx":109
+        /* "yapyg\sprites.pyx":109
  *                 if type(texture_part) == tuple:
  *                         if texture_part[0] == "rectangle":
  *                                 texture_size = texture_db.insert_color_rect(state, texture_part[1], texture_part[2],             # <<<<<<<<<<<<<<
@@ -1565,7 +1565,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":110
+        /* "yapyg\sprites.pyx":110
  *                         if texture_part[0] == "rectangle":
  *                                 texture_size = texture_db.insert_color_rect(state, texture_part[1], texture_part[2],
  *                                                              texture_name, texture_part[3], texture_part[4],             # <<<<<<<<<<<<<<
@@ -1581,7 +1581,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_11 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_11 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":111
+        /* "yapyg\sprites.pyx":111
  *                                 texture_size = texture_db.insert_color_rect(state, texture_part[1], texture_part[2],
  *                                                              texture_name, texture_part[3], texture_part[4],
  *                                                              texture_part[5])             # <<<<<<<<<<<<<<
@@ -1593,7 +1593,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":109
+        /* "yapyg\sprites.pyx":109
  *                 if type(texture_part) == tuple:
  *                         if texture_part[0] == "rectangle":
  *                                 texture_size = texture_db.insert_color_rect(state, texture_part[1], texture_part[2],             # <<<<<<<<<<<<<<
@@ -1607,7 +1607,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         goto __pyx_L7;
       }
 
-      /* "yapyg/sprites.pyx":112
+      /* "yapyg\sprites.pyx":112
  *                                                              texture_name, texture_part[3], texture_part[4],
  *                                                              texture_part[5])
  *                         elif texture_part[0] == "ellipse":             # <<<<<<<<<<<<<<
@@ -1620,7 +1620,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/sprites.pyx":113
+        /* "yapyg\sprites.pyx":113
  *                                                              texture_part[5])
  *                         elif texture_part[0] == "ellipse":
  *                                 texture_size = texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],             # <<<<<<<<<<<<<<
@@ -1636,7 +1636,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_11 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_11 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":114
+        /* "yapyg\sprites.pyx":114
  *                         elif texture_part[0] == "ellipse":
  *                                 texture_size = texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],
  *                                                                 texture_name, texture_part[3], texture_part[4],             # <<<<<<<<<<<<<<
@@ -1652,7 +1652,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":115
+        /* "yapyg\sprites.pyx":115
  *                                 texture_size = texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],
  *                                                                 texture_name, texture_part[3], texture_part[4],
  *                                                                 texture_part[5])             # <<<<<<<<<<<<<<
@@ -1664,7 +1664,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":113
+        /* "yapyg\sprites.pyx":113
  *                                                              texture_part[5])
  *                         elif texture_part[0] == "ellipse":
  *                                 texture_size = texture_db.insert_color_ellipse(state, texture_part[1], texture_part[2],             # <<<<<<<<<<<<<<
@@ -1678,7 +1678,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         goto __pyx_L7;
       }
 
-      /* "yapyg/sprites.pyx":116
+      /* "yapyg\sprites.pyx":116
  *                                                                 texture_name, texture_part[3], texture_part[4],
  *                                                                 texture_part[5])
  *                         elif texture_part[0] == "text":             # <<<<<<<<<<<<<<
@@ -1691,7 +1691,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/sprites.pyx":117
+        /* "yapyg\sprites.pyx":117
  *                                                                 texture_part[5])
  *                         elif texture_part[0] == "text":
  *                                 new_texture = text.create_texture(state, texture_part[1], texture_part[2])             # <<<<<<<<<<<<<<
@@ -1740,7 +1740,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __Pyx_XDECREF_SET(__pyx_v_new_texture, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":118
+        /* "yapyg\sprites.pyx":118
  *                         elif texture_part[0] == "text":
  *                                 new_texture = text.create_texture(state, texture_part[1], texture_part[2])
  *                                 texture_size = texture_db.insert(state, texture_name, new_texture)             # <<<<<<<<<<<<<<
@@ -1752,7 +1752,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __Pyx_DECREF_SET(__pyx_v_texture_size, ((PyObject*)__pyx_t_6));
         __pyx_t_6 = 0;
 
-        /* "yapyg/sprites.pyx":119
+        /* "yapyg\sprites.pyx":119
  *                                 new_texture = text.create_texture(state, texture_part[1], texture_part[2])
  *                                 texture_size = texture_db.insert(state, texture_name, new_texture)
  *                                 if sprites_rects_rots.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -1767,7 +1767,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
         __pyx_t_2 = (__pyx_t_3 != 0);
         if (__pyx_t_2) {
 
-          /* "yapyg/sprites.pyx":120
+          /* "yapyg\sprites.pyx":120
  *                                 texture_size = texture_db.insert(state, texture_name, new_texture)
  *                                 if sprites_rects_rots.has_key(sprite_name):
  *                                         del sprites_rects_rots[sprite_name]             # <<<<<<<<<<<<<<
@@ -1786,7 +1786,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
       }
       /*else*/ {
 
-        /* "yapyg/sprites.pyx":122
+        /* "yapyg\sprites.pyx":122
  *                                         del sprites_rects_rots[sprite_name]
  *                         else:
  *                                 print "unknown texture type", texture_part[0]             # <<<<<<<<<<<<<<
@@ -1810,7 +1810,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
       goto __pyx_L6;
     }
 
-    /* "yapyg/sprites.pyx":123
+    /* "yapyg\sprites.pyx":123
  *                         else:
  *                                 print "unknown texture type", texture_part[0]
  *                 elif type(texture_part) == str:             # <<<<<<<<<<<<<<
@@ -1822,7 +1822,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/sprites.pyx":124
+      /* "yapyg\sprites.pyx":124
  *                                 print "unknown texture type", texture_part[0]
  *                 elif type(texture_part) == str:
  *                         texture_size = texture_db.load(state, texture_part, texture_part)             # <<<<<<<<<<<<<<
@@ -1839,7 +1839,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
     }
     __pyx_L6:;
 
-    /* "yapyg/sprites.pyx":103
+    /* "yapyg\sprites.pyx":103
  *         cdef str texture_name
  *         cdef tuple texture_size = None
  *         for texture_part in textures:             # <<<<<<<<<<<<<<
@@ -1849,7 +1849,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":127
+  /* "yapyg\sprites.pyx":127
  * 
  *         cdef list sprite = [
  *                 enable,             # <<<<<<<<<<<<<<
@@ -1859,7 +1859,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_enable); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg/sprites.pyx":129
+  /* "yapyg\sprites.pyx":129
  *                 enable,
  *                 pos,
  *                 tuple(text_textures),             # <<<<<<<<<<<<<<
@@ -1869,7 +1869,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_13 = PyList_AsTuple(__pyx_v_text_textures); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "yapyg/sprites.pyx":130
+  /* "yapyg\sprites.pyx":130
  *                 pos,
  *                 tuple(text_textures),
  *                 speed,             # <<<<<<<<<<<<<<
@@ -1879,7 +1879,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_6 = PyFloat_FromDouble(__pyx_v_speed); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "yapyg/sprites.pyx":131
+  /* "yapyg\sprites.pyx":131
  *                 tuple(text_textures),
  *                 speed,
  *                 [scale[0], scale[1]],             # <<<<<<<<<<<<<<
@@ -1907,7 +1907,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_17 = 0;
   __pyx_t_14 = 0;
 
-  /* "yapyg/sprites.pyx":132
+  /* "yapyg\sprites.pyx":132
  *                 speed,
  *                 [scale[0], scale[1]],
  *                 [pos_offset[0], pos_offset[1]],             # <<<<<<<<<<<<<<
@@ -1935,7 +1935,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_14 = 0;
   __pyx_t_17 = 0;
 
-  /* "yapyg/sprites.pyx":135
+  /* "yapyg\sprites.pyx":135
  *                 0,
  *                 0,
  *                 screen_relative,             # <<<<<<<<<<<<<<
@@ -1945,7 +1945,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_17 = __Pyx_PyInt_From_int(__pyx_v_screen_relative); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_17);
 
-  /* "yapyg/sprites.pyx":136
+  /* "yapyg\sprites.pyx":136
  *                 0,
  *                 screen_relative,
  *                 play_once,             # <<<<<<<<<<<<<<
@@ -1955,7 +1955,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_14 = __Pyx_PyInt_From_int(__pyx_v_play_once); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_14);
 
-  /* "yapyg/sprites.pyx":126
+  /* "yapyg\sprites.pyx":126
  *                         texture_size = texture_db.load(state, texture_part, texture_part)
  * 
  *         cdef list sprite = [             # <<<<<<<<<<<<<<
@@ -2003,7 +2003,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite = ((PyObject*)__pyx_t_18);
   __pyx_t_18 = 0;
 
-  /* "yapyg/sprites.pyx":141
+  /* "yapyg\sprites.pyx":141
  *                 ]
  * 
  *         sprites_dict[sprite_name] = sprite             # <<<<<<<<<<<<<<
@@ -2016,7 +2016,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   }
   if (unlikely(PyDict_SetItem(__pyx_v_sprites_dict, __pyx_v_sprite_name, __pyx_v_sprite) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/sprites.pyx":142
+  /* "yapyg\sprites.pyx":142
  * 
  *         sprites_dict[sprite_name] = sprite
  *         if not sprite_name in sprite_draw_order:             # <<<<<<<<<<<<<<
@@ -2027,7 +2027,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/sprites.pyx":143
+    /* "yapyg\sprites.pyx":143
  *         sprites_dict[sprite_name] = sprite
  *         if not sprite_name in sprite_draw_order:
  *                 sprite_draw_order.append(sprite_name)             # <<<<<<<<<<<<<<
@@ -2043,7 +2043,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_insert(PyObject *__pyx_v_state, PyObjec
   }
   __pyx_L9:;
 
-  /* "yapyg/sprites.pyx":77
+  /* "yapyg\sprites.pyx":77
  *         state[IDX_STATE_SPRITES] = None
  * 
  * cpdef insert(list state,             # <<<<<<<<<<<<<<
@@ -2205,7 +2205,7 @@ static PyObject *__pyx_pw_5yapyg_7sprites_5insert(PyObject *__pyx_self, PyObject
       __pyx_v_screen_relative = __Pyx_PyInt_As_int(values[8]); if (unlikely((__pyx_v_screen_relative == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
 
-      /* "yapyg/sprites.pyx":85
+      /* "yapyg\sprites.pyx":85
  *              int enable,
  *              list pos,
  *              int screen_relative=False,             # <<<<<<<<<<<<<<
@@ -2218,7 +2218,7 @@ static PyObject *__pyx_pw_5yapyg_7sprites_5insert(PyObject *__pyx_self, PyObject
       __pyx_v_play_once = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_play_once == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
 
-      /* "yapyg/sprites.pyx":86
+      /* "yapyg\sprites.pyx":86
  *              list pos,
  *              int screen_relative=False,
  *              int play_once=False             # <<<<<<<<<<<<<<
@@ -2244,7 +2244,7 @@ static PyObject *__pyx_pw_5yapyg_7sprites_5insert(PyObject *__pyx_self, PyObject
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_pos), (&PyList_Type), 1, "pos", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_7sprites_4insert(__pyx_self, __pyx_v_state, __pyx_v_sprite_name, __pyx_v_textures, __pyx_v_speed, __pyx_v_pos_offset, __pyx_v_scale, __pyx_v_enable, __pyx_v_pos, __pyx_v_screen_relative, __pyx_v_play_once);
 
-  /* "yapyg/sprites.pyx":77
+  /* "yapyg\sprites.pyx":77
  *         state[IDX_STATE_SPRITES] = None
  * 
  * cpdef insert(list state,             # <<<<<<<<<<<<<<
@@ -2291,7 +2291,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_4insert(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":145
+/* "yapyg\sprites.pyx":145
  *                 sprite_draw_order.append(sprite_name)
  * 
  * cpdef tuple get_textures(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2311,7 +2311,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_textures(PyObject *__pyx_v_state, P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_textures", 0);
 
-  /* "yapyg/sprites.pyx":149
+  /* "yapyg\sprites.pyx":149
  *         TODO
  *         """
  *         sprite = get(state, sprite_name)             # <<<<<<<<<<<<<<
@@ -2323,7 +2323,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_textures(PyObject *__pyx_v_state, P
   __pyx_v_sprite = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":150
+  /* "yapyg\sprites.pyx":150
  *         """
  *         sprite = get(state, sprite_name)
  *         if sprite:             # <<<<<<<<<<<<<<
@@ -2333,7 +2333,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_textures(PyObject *__pyx_v_state, P
   __pyx_t_2 = (__pyx_v_sprite != Py_None) && (PyList_GET_SIZE(__pyx_v_sprite) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/sprites.pyx":151
+    /* "yapyg\sprites.pyx":151
  *         sprite = get(state, sprite_name)
  *         if sprite:
  *                 return sprite[IDX_SPRITE_TEXTURES]             # <<<<<<<<<<<<<<
@@ -2353,7 +2353,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_textures(PyObject *__pyx_v_state, P
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":152
+  /* "yapyg\sprites.pyx":152
  *         if sprite:
  *                 return sprite[IDX_SPRITE_TEXTURES]
  *         return None             # <<<<<<<<<<<<<<
@@ -2365,7 +2365,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_textures(PyObject *__pyx_v_state, P
   __pyx_r = ((PyObject*)Py_None);
   goto __pyx_L0;
 
-  /* "yapyg/sprites.pyx":145
+  /* "yapyg\sprites.pyx":145
  *                 sprite_draw_order.append(sprite_name)
  * 
  * cpdef tuple get_textures(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2479,7 +2479,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_6get_textures(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":154
+/* "yapyg\sprites.pyx":154
  *         return None
  * 
  * cpdef delete(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2505,7 +2505,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
 
-  /* "yapyg/sprites.pyx":158
+  /* "yapyg\sprites.pyx":158
  *         TODO
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -2522,7 +2522,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":159
+  /* "yapyg\sprites.pyx":159
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -2539,7 +2539,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":160
+  /* "yapyg\sprites.pyx":160
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]             # <<<<<<<<<<<<<<
@@ -2556,7 +2556,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite_draw_order = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":161
+  /* "yapyg\sprites.pyx":161
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
  *         if sprites_dict.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -2571,7 +2571,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/sprites.pyx":162
+    /* "yapyg\sprites.pyx":162
  *         cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]
  *         if sprites_dict.has_key(sprite_name):
  *                 del sprites_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -2584,7 +2584,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
     }
     if (PyDict_DelItem(__pyx_v_sprites_dict, __pyx_v_sprite_name) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg/sprites.pyx":163
+    /* "yapyg\sprites.pyx":163
  *         if sprites_dict.has_key(sprite_name):
  *                 del sprites_dict[sprite_name]
  *                 sprite_draw_order.remove(sprite_name)             # <<<<<<<<<<<<<<
@@ -2623,7 +2623,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_delete(PyObject *__pyx_v_state, PyObjec
   }
   __pyx_L3:;
 
-  /* "yapyg/sprites.pyx":154
+  /* "yapyg\sprites.pyx":154
  *         return None
  * 
  * cpdef delete(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2744,7 +2744,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_8delete(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":165
+/* "yapyg\sprites.pyx":165
  *                 sprite_draw_order.remove(sprite_name)
  * 
  * cpdef list get(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2766,7 +2766,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get(PyObject *__pyx_v_state, PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "yapyg/sprites.pyx":169
+  /* "yapyg\sprites.pyx":169
  *         TODO
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -2783,7 +2783,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get(PyObject *__pyx_v_state, PyObject *
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":170
+  /* "yapyg\sprites.pyx":170
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -2800,7 +2800,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get(PyObject *__pyx_v_state, PyObject *
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":171
+  /* "yapyg\sprites.pyx":171
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         if sprites_dict.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -2815,7 +2815,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get(PyObject *__pyx_v_state, PyObject *
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/sprites.pyx":172
+    /* "yapyg\sprites.pyx":172
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         if sprites_dict.has_key(sprite_name):
  *                 return sprites_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -2836,7 +2836,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get(PyObject *__pyx_v_state, PyObject *
   }
   /*else*/ {
 
-    /* "yapyg/sprites.pyx":174
+    /* "yapyg\sprites.pyx":174
  *                 return sprites_dict[sprite_name]
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -2849,7 +2849,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get(PyObject *__pyx_v_state, PyObject *
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":165
+  /* "yapyg\sprites.pyx":165
  *                 sprite_draw_order.remove(sprite_name)
  * 
  * cpdef list get(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2964,7 +2964,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_10get(CYTHON_UNUSED PyObject *__pyx_se
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":176
+/* "yapyg\sprites.pyx":176
  *                 return None
  * 
  * cpdef tuple get_pos(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -2984,7 +2984,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_pos(PyObject *__pyx_v_state, PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos", 0);
 
-  /* "yapyg/sprites.pyx":180
+  /* "yapyg\sprites.pyx":180
  *         TODO
  *         """
  *         sprite = get(state, sprite_name)             # <<<<<<<<<<<<<<
@@ -2996,7 +2996,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_pos(PyObject *__pyx_v_state, PyObje
   __pyx_v_sprite = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":181
+  /* "yapyg\sprites.pyx":181
  *         """
  *         sprite = get(state, sprite_name)
  *         if sprite:             # <<<<<<<<<<<<<<
@@ -3006,7 +3006,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_pos(PyObject *__pyx_v_state, PyObje
   __pyx_t_2 = (__pyx_v_sprite != Py_None) && (PyList_GET_SIZE(__pyx_v_sprite) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/sprites.pyx":182
+    /* "yapyg\sprites.pyx":182
  *         sprite = get(state, sprite_name)
  *         if sprite:
  *                 return sprite[IDX_SPRITE_POS]             # <<<<<<<<<<<<<<
@@ -3026,7 +3026,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_pos(PyObject *__pyx_v_state, PyObje
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":183
+  /* "yapyg\sprites.pyx":183
  *         if sprite:
  *                 return sprite[IDX_SPRITE_POS]
  *         return None             # <<<<<<<<<<<<<<
@@ -3038,7 +3038,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_get_pos(PyObject *__pyx_v_state, PyObje
   __pyx_r = ((PyObject*)Py_None);
   goto __pyx_L0;
 
-  /* "yapyg/sprites.pyx":176
+  /* "yapyg\sprites.pyx":176
  *                 return None
  * 
  * cpdef tuple get_pos(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -3152,7 +3152,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_12get_pos(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":185
+/* "yapyg\sprites.pyx":185
  *         return None
  * 
  * cpdef int is_enabled(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -3176,7 +3176,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_enabled", 0);
 
-  /* "yapyg/sprites.pyx":186
+  /* "yapyg\sprites.pyx":186
  * 
  * cpdef int is_enabled(list state, str sprite_name):
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -3193,7 +3193,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":187
+  /* "yapyg\sprites.pyx":187
  * cpdef int is_enabled(list state, str sprite_name):
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -3210,7 +3210,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":189
+  /* "yapyg\sprites.pyx":189
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef list sprite
  *         if sprites_dict.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -3225,7 +3225,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/sprites.pyx":190
+    /* "yapyg\sprites.pyx":190
  *         cdef list sprite
  *         if sprites_dict.has_key(sprite_name):
  *                 sprite = sprites_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -3242,7 +3242,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
     __pyx_v_sprite = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":191
+    /* "yapyg\sprites.pyx":191
  *         if sprites_dict.has_key(sprite_name):
  *                 sprite = sprites_dict[sprite_name]
  *                 return sprite[IDX_SPRITE_ENABLE]             # <<<<<<<<<<<<<<
@@ -3261,7 +3261,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":192
+  /* "yapyg\sprites.pyx":192
  *                 sprite = sprites_dict[sprite_name]
  *                 return sprite[IDX_SPRITE_ENABLE]
  *         return False             # <<<<<<<<<<<<<<
@@ -3271,7 +3271,7 @@ static int __pyx_f_5yapyg_7sprites_is_enabled(PyObject *__pyx_v_state, PyObject 
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "yapyg/sprites.pyx":185
+  /* "yapyg\sprites.pyx":185
  *         return None
  * 
  * cpdef int is_enabled(list state, str sprite_name):             # <<<<<<<<<<<<<<
@@ -3385,7 +3385,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_14is_enabled(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":194
+/* "yapyg\sprites.pyx":194
  *         return False
  * 
  * cdef set_visibility(list state, str sprite_name, int enable):             # <<<<<<<<<<<<<<
@@ -3431,7 +3431,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_visibility", 0);
 
-  /* "yapyg/sprites.pyx":195
+  /* "yapyg\sprites.pyx":195
  * 
  * cdef set_visibility(list state, str sprite_name, int enable):
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -3448,7 +3448,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":196
+  /* "yapyg\sprites.pyx":196
  * cdef set_visibility(list state, str sprite_name, int enable):
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -3465,7 +3465,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":197
+  /* "yapyg\sprites.pyx":197
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]             # <<<<<<<<<<<<<<
@@ -3482,7 +3482,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_v_sprites_rects_rots = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":198
+  /* "yapyg\sprites.pyx":198
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
  *         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]             # <<<<<<<<<<<<<<
@@ -3499,7 +3499,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_v_sprite_sizes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":199
+  /* "yapyg\sprites.pyx":199
  *         cdef dict sprites_rects_rots = sprite_db[IDX_SPRITES_RECTS_ROTS]
  *         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
  *         cdef tuple screen_scale = screen.get_screen_scale(state)             # <<<<<<<<<<<<<<
@@ -3511,7 +3511,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_v_screen_scale = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":200
+  /* "yapyg\sprites.pyx":200
  *         cdef dict sprite_sizes = sprite_db[IDX_SPRITES_SIZES]
  *         cdef tuple screen_scale = screen.get_screen_scale(state)
  *         cdef int tile_size = tiles.get_tile_size(state)             # <<<<<<<<<<<<<<
@@ -3520,7 +3520,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
  */
   __pyx_v_tile_size = __pyx_f_5yapyg_5tiles_get_tile_size(__pyx_v_state, 0);
 
-  /* "yapyg/sprites.pyx":201
+  /* "yapyg\sprites.pyx":201
  *         cdef tuple screen_scale = screen.get_screen_scale(state)
  *         cdef int tile_size = tiles.get_tile_size(state)
  *         cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])             # <<<<<<<<<<<<<<
@@ -3546,7 +3546,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_scaled_tile_size_x = __pyx_t_4;
 
-  /* "yapyg/sprites.pyx":202
+  /* "yapyg\sprites.pyx":202
  *         cdef int tile_size = tiles.get_tile_size(state)
  *         cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])
  *         cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])             # <<<<<<<<<<<<<<
@@ -3572,7 +3572,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_scaled_tile_size_y = __pyx_t_4;
 
-  /* "yapyg/sprites.pyx":212
+  /* "yapyg\sprites.pyx":212
  *         cdef list sprite_offset
  * 
  *         if not sprites_dict.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -3587,7 +3587,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_t_6 = ((!(__pyx_t_5 != 0)) != 0);
   if (__pyx_t_6) {
 
-    /* "yapyg/sprites.pyx":213
+    /* "yapyg\sprites.pyx":213
  * 
  *         if not sprites_dict.has_key(sprite_name):
  *                 return             # <<<<<<<<<<<<<<
@@ -3599,7 +3599,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":215
+  /* "yapyg\sprites.pyx":215
  *                 return
  * 
  *         if not sprites_rects_rots.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -3614,7 +3614,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_t_5 = ((!(__pyx_t_6 != 0)) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg/sprites.pyx":216
+    /* "yapyg\sprites.pyx":216
  * 
  *         if not sprites_rects_rots.has_key(sprite_name):
  *                 return             # <<<<<<<<<<<<<<
@@ -3626,7 +3626,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":218
+  /* "yapyg\sprites.pyx":218
  *                 return
  * 
  *         cdef list sprite = sprites_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -3643,7 +3643,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_v_sprite = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "yapyg/sprites.pyx":220
+  /* "yapyg\sprites.pyx":220
  *         cdef list sprite = sprites_dict[sprite_name]
  * 
  *         if sprite[IDX_SPRITE_VISIBLE] != None and ((sprite[IDX_SPRITE_VISIBLE] and enable) or (not sprite[IDX_SPRITE_VISIBLE] and not enable)):             # <<<<<<<<<<<<<<
@@ -3703,7 +3703,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_L6_bool_binop_done:;
   if (__pyx_t_5) {
 
-    /* "yapyg/sprites.pyx":221
+    /* "yapyg\sprites.pyx":221
  * 
  *         if sprite[IDX_SPRITE_VISIBLE] != None and ((sprite[IDX_SPRITE_VISIBLE] and enable) or (not sprite[IDX_SPRITE_VISIBLE] and not enable)):
  *                 return             # <<<<<<<<<<<<<<
@@ -3715,7 +3715,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     goto __pyx_L0;
   }
 
-  /* "yapyg/sprites.pyx":223
+  /* "yapyg\sprites.pyx":223
  *                 return
  * 
  *         if enable == False:             # <<<<<<<<<<<<<<
@@ -3725,7 +3725,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   __pyx_t_5 = ((__pyx_v_enable == 0) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg/sprites.pyx":224
+    /* "yapyg\sprites.pyx":224
  * 
  *         if enable == False:
  *                 rect, rot = sprites_rects_rots[sprite_name]             # <<<<<<<<<<<<<<
@@ -3793,7 +3793,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     __pyx_v_rot = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "yapyg/sprites.pyx":225
+    /* "yapyg\sprites.pyx":225
  *         if enable == False:
  *                 rect, rot = sprites_rects_rots[sprite_name]
  *                 sprite_sizes[sprite_name] = rect.size             # <<<<<<<<<<<<<<
@@ -3809,7 +3809,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     if (unlikely(PyDict_SetItem(__pyx_v_sprite_sizes, __pyx_v_sprite_name, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":226
+    /* "yapyg\sprites.pyx":226
  *                 rect, rot = sprites_rects_rots[sprite_name]
  *                 sprite_sizes[sprite_name] = rect.size
  *                 rect.size = (0, 0)             # <<<<<<<<<<<<<<
@@ -3818,7 +3818,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
  */
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_rect, __pyx_n_s_size, __pyx_tuple__2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg/sprites.pyx":227
+    /* "yapyg\sprites.pyx":227
  *                 sprite_sizes[sprite_name] = rect.size
  *                 rect.size = (0, 0)
  *                 sprite[IDX_SPRITE_VISIBLE] = False             # <<<<<<<<<<<<<<
@@ -3834,7 +3834,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   }
   /*else*/ {
 
-    /* "yapyg/sprites.pyx":229
+    /* "yapyg\sprites.pyx":229
  *                 sprite[IDX_SPRITE_VISIBLE] = False
  *         else:
  *                 rect, rot = sprites_rects_rots[sprite_name]             # <<<<<<<<<<<<<<
@@ -3902,7 +3902,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     __pyx_v_rot = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "yapyg/sprites.pyx":230
+    /* "yapyg\sprites.pyx":230
  *         else:
  *                 rect, rot = sprites_rects_rots[sprite_name]
  *                 if sprite_sizes.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -3917,7 +3917,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
     __pyx_t_7 = (__pyx_t_5 != 0);
     if (__pyx_t_7) {
 
-      /* "yapyg/sprites.pyx":231
+      /* "yapyg\sprites.pyx":231
  *                 rect, rot = sprites_rects_rots[sprite_name]
  *                 if sprite_sizes.has_key(sprite_name):
  *                         origin_xy = screen.get_origin(state)             # <<<<<<<<<<<<<<
@@ -3929,7 +3929,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_origin_xy = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":232
+      /* "yapyg\sprites.pyx":232
  *                 if sprite_sizes.has_key(sprite_name):
  *                         origin_xy = screen.get_origin(state)
  *                         view_pos = view.get_view_pos(state)             # <<<<<<<<<<<<<<
@@ -3941,7 +3941,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_view_pos = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":233
+      /* "yapyg\sprites.pyx":233
  *                         origin_xy = screen.get_origin(state)
  *                         view_pos = view.get_view_pos(state)
  *                         sprite_pos = sprite[IDX_SPRITE_POS]             # <<<<<<<<<<<<<<
@@ -3958,7 +3958,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_sprite_pos = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":234
+      /* "yapyg\sprites.pyx":234
  *                         view_pos = view.get_view_pos(state)
  *                         sprite_pos = sprite[IDX_SPRITE_POS]
  *                         sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]             # <<<<<<<<<<<<<<
@@ -3975,7 +3975,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_sprite_offset = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":235
+      /* "yapyg\sprites.pyx":235
  *                         sprite_pos = sprite[IDX_SPRITE_POS]
  *                         sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]
  *                         sprite_total_pos = [sprite_pos[0] + sprite_offset[0],             # <<<<<<<<<<<<<<
@@ -3999,7 +3999,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "yapyg/sprites.pyx":236
+      /* "yapyg\sprites.pyx":236
  *                         sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]
  *                         sprite_total_pos = [sprite_pos[0] + sprite_offset[0],
  *                                             sprite_pos[1] + sprite_offset[1],             # <<<<<<<<<<<<<<
@@ -4023,7 +4023,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":237
+      /* "yapyg\sprites.pyx":237
  *                         sprite_total_pos = [sprite_pos[0] + sprite_offset[0],
  *                                             sprite_pos[1] + sprite_offset[1],
  *                                             sprite_pos[2]             # <<<<<<<<<<<<<<
@@ -4037,7 +4037,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_sprite_pos, 2, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
 
-      /* "yapyg/sprites.pyx":235
+      /* "yapyg\sprites.pyx":235
  *                         sprite_pos = sprite[IDX_SPRITE_POS]
  *                         sprite_offset = sprite[IDX_SPRITE_POS_OFFSET]
  *                         sprite_total_pos = [sprite_pos[0] + sprite_offset[0],             # <<<<<<<<<<<<<<
@@ -4058,7 +4058,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_sprite_total_pos = ((PyObject*)__pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "yapyg/sprites.pyx":245
+      /* "yapyg\sprites.pyx":245
  *                                                         sprite_total_pos,
  *                                                         origin_xy,
  *                                                         sprite[IDX_SPRITE_SCREEN_RELATIVE]             # <<<<<<<<<<<<<<
@@ -4074,7 +4074,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "yapyg/sprites.pyx":239
+      /* "yapyg\sprites.pyx":239
  *                                             sprite_pos[2]
  *                                             ]
  *                         offset_pos = _get_screen_coords(state,             # <<<<<<<<<<<<<<
@@ -4086,7 +4086,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_offset_pos = ((PyObject*)__pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "yapyg/sprites.pyx":247
+      /* "yapyg\sprites.pyx":247
  *                                                         sprite[IDX_SPRITE_SCREEN_RELATIVE]
  *                                                         )
  *                         sprite_size = sprite_sizes[sprite_name]             # <<<<<<<<<<<<<<
@@ -4103,7 +4103,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_sprite_size = ((PyObject*)__pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "yapyg/sprites.pyx":248
+      /* "yapyg\sprites.pyx":248
  *                                                         )
  *                         sprite_size = sprite_sizes[sprite_name]
  *                         rect_rot_attributes = _get_rect_rot_attributes(int(sprite_size[0]),             # <<<<<<<<<<<<<<
@@ -4122,7 +4122,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":249
+      /* "yapyg\sprites.pyx":249
  *                         sprite_size = sprite_sizes[sprite_name]
  *                         rect_rot_attributes = _get_rect_rot_attributes(int(sprite_size[0]),
  *                                                                        int(sprite_size[1]),             # <<<<<<<<<<<<<<
@@ -4141,7 +4141,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "yapyg/sprites.pyx":251
+      /* "yapyg\sprites.pyx":251
  *                                                                        int(sprite_size[1]),
  *                                                                        screen_scale,
  *                                                                        sprite[IDX_SPRITE_SCALE],             # <<<<<<<<<<<<<<
@@ -4156,7 +4156,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __Pyx_GOTREF(__pyx_t_3);
       if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_3)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "yapyg/sprites.pyx":253
+      /* "yapyg\sprites.pyx":253
  *                                                                        sprite[IDX_SPRITE_SCALE],
  *                                                                        offset_pos,
  *                                                                        sprite_pos[2])             # <<<<<<<<<<<<<<
@@ -4172,7 +4172,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_t_11 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_11 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":248
+      /* "yapyg\sprites.pyx":248
  *                                                         )
  *                         sprite_size = sprite_sizes[sprite_name]
  *                         rect_rot_attributes = _get_rect_rot_attributes(int(sprite_size[0]),             # <<<<<<<<<<<<<<
@@ -4185,7 +4185,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       __pyx_v_rect_rot_attributes = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":254
+      /* "yapyg\sprites.pyx":254
  *                                                                        offset_pos,
  *                                                                        sprite_pos[2])
  *                         rot.origin = rect_rot_attributes[1]             # <<<<<<<<<<<<<<
@@ -4201,7 +4201,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_rot, __pyx_n_s_origin, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":255
+      /* "yapyg\sprites.pyx":255
  *                                                                        sprite_pos[2])
  *                         rot.origin = rect_rot_attributes[1]
  *                         rot.angle = rect_rot_attributes[2]             # <<<<<<<<<<<<<<
@@ -4217,7 +4217,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_rot, __pyx_n_s_angle, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":256
+      /* "yapyg\sprites.pyx":256
  *                         rot.origin = rect_rot_attributes[1]
  *                         rot.angle = rect_rot_attributes[2]
  *                         rect.pos = rect_rot_attributes[0]             # <<<<<<<<<<<<<<
@@ -4233,7 +4233,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_rect, __pyx_n_s_pos, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/sprites.pyx":257
+      /* "yapyg\sprites.pyx":257
  *                         rot.angle = rect_rot_attributes[2]
  *                         rect.pos = rect_rot_attributes[0]
  *                         rect.size = sprite_size             # <<<<<<<<<<<<<<
@@ -4242,7 +4242,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
  */
       if (__Pyx_PyObject_SetAttrStr(__pyx_v_rect, __pyx_n_s_size, __pyx_v_sprite_size) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "yapyg/sprites.pyx":258
+      /* "yapyg\sprites.pyx":258
  *                         rect.pos = rect_rot_attributes[0]
  *                         rect.size = sprite_size
  *                         sprite[IDX_SPRITE_VISIBLE] = True             # <<<<<<<<<<<<<<
@@ -4260,7 +4260,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   }
   __pyx_L11:;
 
-  /* "yapyg/sprites.pyx":194
+  /* "yapyg\sprites.pyx":194
  *         return False
  * 
  * cdef set_visibility(list state, str sprite_name, int enable):             # <<<<<<<<<<<<<<
@@ -4300,7 +4300,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_visibility(PyObject *__pyx_v_state,
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":260
+/* "yapyg\sprites.pyx":260
  *                         sprite[IDX_SPRITE_VISIBLE] = True
  * 
  * cpdef set_enable(list state, str sprite_name, int enable):             # <<<<<<<<<<<<<<
@@ -4324,7 +4324,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_enable", 0);
 
-  /* "yapyg/sprites.pyx":264
+  /* "yapyg\sprites.pyx":264
  *         TODO
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -4341,7 +4341,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":265
+  /* "yapyg\sprites.pyx":265
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -4358,7 +4358,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":268
+  /* "yapyg\sprites.pyx":268
  *         cdef list sprite
  * 
  *         if sprites_dict.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -4373,7 +4373,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/sprites.pyx":269
+    /* "yapyg\sprites.pyx":269
  * 
  *         if sprites_dict.has_key(sprite_name):
  *                 sprite = sprites_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -4390,7 +4390,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
     __pyx_v_sprite = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":271
+    /* "yapyg\sprites.pyx":271
  *                 sprite = sprites_dict[sprite_name]
  * 
  *                 if enable == False:             # <<<<<<<<<<<<<<
@@ -4400,7 +4400,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
     __pyx_t_3 = ((__pyx_v_enable == 0) != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg/sprites.pyx":272
+      /* "yapyg\sprites.pyx":272
  * 
  *                 if enable == False:
  *                         if sprite[IDX_SPRITE_ENABLE] == True:             # <<<<<<<<<<<<<<
@@ -4419,7 +4419,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/sprites.pyx":273
+        /* "yapyg\sprites.pyx":273
  *                 if enable == False:
  *                         if sprite[IDX_SPRITE_ENABLE] == True:
  *                                 sprite[IDX_SPRITE_ENABLE] = False             # <<<<<<<<<<<<<<
@@ -4432,7 +4432,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
         }
         if (unlikely(__Pyx_SetItemInt(__pyx_v_sprite, __pyx_v_5yapyg_7sprites_IDX_SPRITE_ENABLE, Py_False, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "yapyg/sprites.pyx":274
+        /* "yapyg\sprites.pyx":274
  *                         if sprite[IDX_SPRITE_ENABLE] == True:
  *                                 sprite[IDX_SPRITE_ENABLE] = False
  *                                 set_visibility(state, sprite_name, False)             # <<<<<<<<<<<<<<
@@ -4449,7 +4449,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
     }
     /*else*/ {
 
-      /* "yapyg/sprites.pyx":276
+      /* "yapyg\sprites.pyx":276
  *                                 set_visibility(state, sprite_name, False)
  *                 else:
  *                         if sprite[IDX_SPRITE_ENABLE] == False:             # <<<<<<<<<<<<<<
@@ -4468,7 +4468,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/sprites.pyx":277
+        /* "yapyg\sprites.pyx":277
  *                 else:
  *                         if sprite[IDX_SPRITE_ENABLE] == False:
  *                                 sprite[IDX_SPRITE_ENABLE] = True             # <<<<<<<<<<<<<<
@@ -4481,7 +4481,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
         }
         if (unlikely(__Pyx_SetItemInt(__pyx_v_sprite, __pyx_v_5yapyg_7sprites_IDX_SPRITE_ENABLE, Py_True, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "yapyg/sprites.pyx":278
+        /* "yapyg\sprites.pyx":278
  *                         if sprite[IDX_SPRITE_ENABLE] == False:
  *                                 sprite[IDX_SPRITE_ENABLE] = True
  *                                 set_visibility(state, sprite_name, True)             # <<<<<<<<<<<<<<
@@ -4500,7 +4500,7 @@ static PyObject *__pyx_f_5yapyg_7sprites_set_enable(PyObject *__pyx_v_state, PyO
   }
   __pyx_L3:;
 
-  /* "yapyg/sprites.pyx":260
+  /* "yapyg\sprites.pyx":260
  *                         sprite[IDX_SPRITE_VISIBLE] = True
  * 
  * cpdef set_enable(list state, str sprite_name, int enable):             # <<<<<<<<<<<<<<
@@ -4628,7 +4628,7 @@ static PyObject *__pyx_pf_5yapyg_7sprites_16set_enable(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":280
+/* "yapyg\sprites.pyx":280
  *                                 set_visibility(state, sprite_name, True)
  * 
  * cdef void draw(list state,             # <<<<<<<<<<<<<<
@@ -4686,7 +4686,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("draw", 0);
 
-  /* "yapyg/sprites.pyx":287
+  /* "yapyg\sprites.pyx":287
  *         TODO
  *         """
  *         cdef int win_w = Window.width             # <<<<<<<<<<<<<<
@@ -4702,7 +4702,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_win_w = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":288
+  /* "yapyg\sprites.pyx":288
  *         """
  *         cdef int win_w = Window.width
  *         cdef int win_h = Window.height             # <<<<<<<<<<<<<<
@@ -4718,7 +4718,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_win_h = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":290
+  /* "yapyg\sprites.pyx":290
  *         cdef int win_h = Window.height
  * 
  *         cdef tuple origin_xy = screen.get_origin(state)             # <<<<<<<<<<<<<<
@@ -4730,7 +4730,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __pyx_v_origin_xy = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":291
+  /* "yapyg\sprites.pyx":291
  * 
  *         cdef tuple origin_xy = screen.get_origin(state)
  *         cdef tuple screen_scale = screen.get_screen_scale(state)             # <<<<<<<<<<<<<<
@@ -4742,7 +4742,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __pyx_v_screen_scale = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":293
+  /* "yapyg\sprites.pyx":293
  *         cdef tuple screen_scale = screen.get_screen_scale(state)
  * 
  *         cdef int screen_width = int(screen.get_width(state))             # <<<<<<<<<<<<<<
@@ -4751,7 +4751,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
  */
   __pyx_v_screen_width = ((int)__pyx_f_5yapyg_6screen_get_width(__pyx_v_state, 0));
 
-  /* "yapyg/sprites.pyx":294
+  /* "yapyg\sprites.pyx":294
  * 
  *         cdef int screen_width = int(screen.get_width(state))
  *         cdef int screen_height = int(screen.get_height(state))             # <<<<<<<<<<<<<<
@@ -4760,7 +4760,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
  */
   __pyx_v_screen_height = ((int)__pyx_f_5yapyg_6screen_get_height(__pyx_v_state, 0));
 
-  /* "yapyg/sprites.pyx":296
+  /* "yapyg\sprites.pyx":296
  *         cdef int screen_height = int(screen.get_height(state))
  * 
  *         cdef int tile_size = tiles.get_tile_size(state)             # <<<<<<<<<<<<<<
@@ -4769,7 +4769,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
  */
   __pyx_v_tile_size = __pyx_f_5yapyg_5tiles_get_tile_size(__pyx_v_state, 0);
 
-  /* "yapyg/sprites.pyx":298
+  /* "yapyg\sprites.pyx":298
  *         cdef int tile_size = tiles.get_tile_size(state)
  * 
  *         cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])             # <<<<<<<<<<<<<<
@@ -4795,7 +4795,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_scaled_tile_size_x = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":299
+  /* "yapyg\sprites.pyx":299
  * 
  *         cdef int scaled_tile_size_x = int(tile_size * screen_scale[0])
  *         cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])             # <<<<<<<<<<<<<<
@@ -4821,7 +4821,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_scaled_tile_size_y = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":301
+  /* "yapyg\sprites.pyx":301
  *         cdef int scaled_tile_size_y = int(tile_size * screen_scale[1])
  * 
  *         cdef tuple view_pos = view.get_view_pos(state)             # <<<<<<<<<<<<<<
@@ -4833,7 +4833,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __pyx_v_view_pos = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg/sprites.pyx":302
+  /* "yapyg\sprites.pyx":302
  * 
  *         cdef tuple view_pos = view.get_view_pos(state)
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -4850,7 +4850,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg/sprites.pyx":303
+  /* "yapyg\sprites.pyx":303
  *         cdef tuple view_pos = view.get_view_pos(state)
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]             # <<<<<<<<<<<<<<
@@ -4867,7 +4867,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __pyx_v_sprites_dict = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg/sprites.pyx":304
+  /* "yapyg\sprites.pyx":304
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict sprites_dict = sprite_db[IDX_SPRITES_DICT]
  *         cdef list sprite_draw_order = sprite_db[IDX_SPRITES_DRAW_ORDER]             # <<<<<<<<<<<<<<
@@ -4884,7 +4884,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __pyx_v_sprite_draw_order = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg/sprites.pyx":325
+  /* "yapyg\sprites.pyx":325
  *         cdef tuple sprite_rect
  * 
  *         for sprite_name in sprite_draw_order:             # <<<<<<<<<<<<<<
@@ -4907,7 +4907,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_sprite_name, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":326
+    /* "yapyg\sprites.pyx":326
  * 
  *         for sprite_name in sprite_draw_order:
  *                 sprite = sprites_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -4924,7 +4924,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_sprite, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":328
+    /* "yapyg\sprites.pyx":328
  *                 sprite = sprites_dict[sprite_name]
  * 
  *                 if not sprite[IDX_SPRITE_ENABLE]:             # <<<<<<<<<<<<<<
@@ -4942,7 +4942,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __pyx_t_7 = ((!__pyx_t_6) != 0);
     if (__pyx_t_7) {
 
-      /* "yapyg/sprites.pyx":329
+      /* "yapyg\sprites.pyx":329
  * 
  *                 if not sprite[IDX_SPRITE_ENABLE]:
  *                         continue             # <<<<<<<<<<<<<<
@@ -4952,7 +4952,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       goto __pyx_L3_continue;
     }
 
-    /* "yapyg/sprites.pyx":331
+    /* "yapyg\sprites.pyx":331
  *                         continue
  * 
  *                 sprite_pos = sprite[IDX_SPRITE_POS]             # <<<<<<<<<<<<<<
@@ -4969,7 +4969,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_sprite_pos, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":333
+    /* "yapyg\sprites.pyx":333
  *                 sprite_pos = sprite[IDX_SPRITE_POS]
  * 
  *                 textures = sprite[IDX_SPRITE_TEXTURES]             # <<<<<<<<<<<<<<
@@ -4986,7 +4986,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_textures, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":334
+    /* "yapyg\sprites.pyx":334
  * 
  *                 textures = sprite[IDX_SPRITE_TEXTURES]
  *                 pos = [sprite_pos[0], sprite_pos[1], sprite_pos[2]]             # <<<<<<<<<<<<<<
@@ -5025,7 +5025,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_pos, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":335
+    /* "yapyg\sprites.pyx":335
  *                 textures = sprite[IDX_SPRITE_TEXTURES]
  *                 pos = [sprite_pos[0], sprite_pos[1], sprite_pos[2]]
  *                 scale = sprite[IDX_SPRITE_SCALE]             # <<<<<<<<<<<<<<
@@ -5042,7 +5042,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_scale, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":336
+    /* "yapyg\sprites.pyx":336
  *                 pos = [sprite_pos[0], sprite_pos[1], sprite_pos[2]]
  *                 scale = sprite[IDX_SPRITE_SCALE]
  *                 phase = 0             # <<<<<<<<<<<<<<
@@ -5051,7 +5051,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
  */
     __pyx_v_phase = 0;
 
-    /* "yapyg/sprites.pyx":338
+    /* "yapyg\sprites.pyx":338
  *                 phase = 0
  * 
  *                 sprite_pos_offset = sprite[IDX_SPRITE_POS_OFFSET]             # <<<<<<<<<<<<<<
@@ -5068,7 +5068,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_sprite_pos_offset, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":339
+    /* "yapyg\sprites.pyx":339
  * 
  *                 sprite_pos_offset = sprite[IDX_SPRITE_POS_OFFSET]
  *                 pos[0] += sprite_pos_offset[0]             # <<<<<<<<<<<<<<
@@ -5091,7 +5091,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     if (unlikely(__Pyx_SetItemInt(__pyx_v_pos, __pyx_t_10, __pyx_t_2, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "yapyg/sprites.pyx":340
+    /* "yapyg\sprites.pyx":340
  *                 sprite_pos_offset = sprite[IDX_SPRITE_POS_OFFSET]
  *                 pos[0] += sprite_pos_offset[0]
  *                 pos[1] += sprite_pos_offset[1]             # <<<<<<<<<<<<<<
@@ -5114,7 +5114,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     if (unlikely(__Pyx_SetItemInt(__pyx_v_pos, __pyx_t_10, __pyx_t_9, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":342
+    /* "yapyg\sprites.pyx":342
  *                 pos[1] += sprite_pos_offset[1]
  * 
  *                 phase = sprite[IDX_SPRITE_PHASE]             # <<<<<<<<<<<<<<
@@ -5131,7 +5131,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_v_phase = __pyx_t_3;
 
-    /* "yapyg/sprites.pyx":343
+    /* "yapyg\sprites.pyx":343
  * 
  *                 phase = sprite[IDX_SPRITE_PHASE]
  *                 speed = sprite[IDX_SPRITE_SPEED]             # <<<<<<<<<<<<<<
@@ -5148,7 +5148,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_v_speed = __pyx_t_3;
 
-    /* "yapyg/sprites.pyx":344
+    /* "yapyg\sprites.pyx":344
  *                 phase = sprite[IDX_SPRITE_PHASE]
  *                 speed = sprite[IDX_SPRITE_SPEED]
  *                 screen_relative = sprite[IDX_SPRITE_SCREEN_RELATIVE]             # <<<<<<<<<<<<<<
@@ -5165,7 +5165,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_v_screen_relative = __pyx_t_3;
 
-    /* "yapyg/sprites.pyx":345
+    /* "yapyg\sprites.pyx":345
  *                 speed = sprite[IDX_SPRITE_SPEED]
  *                 screen_relative = sprite[IDX_SPRITE_SCREEN_RELATIVE]
  *                 play_once = sprite[IDX_SPRITE_PLAYONCE]             # <<<<<<<<<<<<<<
@@ -5182,7 +5182,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_v_play_once = __pyx_t_3;
 
-    /* "yapyg/sprites.pyx":346
+    /* "yapyg\sprites.pyx":346
  *                 screen_relative = sprite[IDX_SPRITE_SCREEN_RELATIVE]
  *                 play_once = sprite[IDX_SPRITE_PLAYONCE]
  *                 texture_size = sprite[IDX_SPRITE_TXSIZE]             # <<<<<<<<<<<<<<
@@ -5199,7 +5199,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_texture_size, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":348
+    /* "yapyg\sprites.pyx":348
  *                 texture_size = sprite[IDX_SPRITE_TXSIZE]
  * 
  *                 screen_xy_pos = _get_screen_coords(state, view_pos, scaled_tile_size_x, scaled_tile_size_y, pos, origin_xy, screen_relative)             # <<<<<<<<<<<<<<
@@ -5211,7 +5211,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_screen_xy_pos, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":349
+    /* "yapyg\sprites.pyx":349
  * 
  *                 screen_xy_pos = _get_screen_coords(state, view_pos, scaled_tile_size_x, scaled_tile_size_y, pos, origin_xy, screen_relative)
  *                 sprite_rect = math_collision.get_clipping_rectangle(screen_xy_pos[0], screen_xy_pos[1], texture_size[0], texture_size[1])             # <<<<<<<<<<<<<<
@@ -5255,7 +5255,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_sprite_rect, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":350
+    /* "yapyg\sprites.pyx":350
  *                 screen_xy_pos = _get_screen_coords(state, view_pos, scaled_tile_size_x, scaled_tile_size_y, pos, origin_xy, screen_relative)
  *                 sprite_rect = math_collision.get_clipping_rectangle(screen_xy_pos[0], screen_xy_pos[1], texture_size[0], texture_size[1])
  *                 if not math_collision.is_rectangle_visible(win_w, win_h, sprite_rect[0], sprite_rect[1], sprite_rect[2], sprite_rect[3]):             # <<<<<<<<<<<<<<
@@ -5297,7 +5297,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __pyx_t_7 = ((!(__pyx_f_5yapyg_14math_collision_is_rectangle_visible(__pyx_v_win_w, __pyx_v_win_h, __pyx_t_13, __pyx_t_12, __pyx_t_11, __pyx_t_3, 0) != 0)) != 0);
     if (__pyx_t_7) {
 
-      /* "yapyg/sprites.pyx":351
+      /* "yapyg\sprites.pyx":351
  *                 sprite_rect = math_collision.get_clipping_rectangle(screen_xy_pos[0], screen_xy_pos[1], texture_size[0], texture_size[1])
  *                 if not math_collision.is_rectangle_visible(win_w, win_h, sprite_rect[0], sprite_rect[1], sprite_rect[2], sprite_rect[3]):
  *                         set_visibility(state, sprite_name, False)             # <<<<<<<<<<<<<<
@@ -5308,7 +5308,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "yapyg/sprites.pyx":352
+      /* "yapyg\sprites.pyx":352
  *                 if not math_collision.is_rectangle_visible(win_w, win_h, sprite_rect[0], sprite_rect[1], sprite_rect[2], sprite_rect[3]):
  *                         set_visibility(state, sprite_name, False)
  *                         continue             # <<<<<<<<<<<<<<
@@ -5318,7 +5318,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       goto __pyx_L3_continue;
     }
 
-    /* "yapyg/sprites.pyx":353
+    /* "yapyg\sprites.pyx":353
  *                         set_visibility(state, sprite_name, False)
  *                         continue
  *                 set_visibility(state, sprite_name, True)             # <<<<<<<<<<<<<<
@@ -5329,7 +5329,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":355
+    /* "yapyg\sprites.pyx":355
  *                 set_visibility(state, sprite_name, True)
  * 
  *                 if speed > 0:             # <<<<<<<<<<<<<<
@@ -5339,7 +5339,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __pyx_t_7 = ((__pyx_v_speed > 0) != 0);
     if (__pyx_t_7) {
 
-      /* "yapyg/sprites.pyx":356
+      /* "yapyg\sprites.pyx":356
  * 
  *                 if speed > 0:
  *                         time_sum = sprite[IDX_SPRITE_TIME_SUM]             # <<<<<<<<<<<<<<
@@ -5356,7 +5356,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_time_sum = __pyx_t_3;
 
-      /* "yapyg/sprites.pyx":357
+      /* "yapyg\sprites.pyx":357
  *                 if speed > 0:
  *                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
  *                         time_sum += frame_time_delta             # <<<<<<<<<<<<<<
@@ -5365,7 +5365,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
  */
       __pyx_v_time_sum = (__pyx_v_time_sum + __pyx_v_frame_time_delta);
 
-      /* "yapyg/sprites.pyx":358
+      /* "yapyg\sprites.pyx":358
  *                         time_sum = sprite[IDX_SPRITE_TIME_SUM]
  *                         time_sum += frame_time_delta
  *                         phase_increment = time_sum / speed             # <<<<<<<<<<<<<<
@@ -5394,7 +5394,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       }
       __pyx_v_phase_increment = __Pyx_div_int(__pyx_v_time_sum, __pyx_v_speed);
 
-      /* "yapyg/sprites.pyx":359
+      /* "yapyg\sprites.pyx":359
  *                         time_sum += frame_time_delta
  *                         phase_increment = time_sum / speed
  *                         if phase_increment < 1:             # <<<<<<<<<<<<<<
@@ -5404,7 +5404,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       __pyx_t_7 = ((__pyx_v_phase_increment < 1) != 0);
       if (__pyx_t_7) {
 
-        /* "yapyg/sprites.pyx":360
+        /* "yapyg\sprites.pyx":360
  *                         phase_increment = time_sum / speed
  *                         if phase_increment < 1:
  *                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum             # <<<<<<<<<<<<<<
@@ -5420,7 +5420,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
         if (unlikely(__Pyx_SetItemInt(__pyx_v_sprite, __pyx_v_5yapyg_7sprites_IDX_SPRITE_TIME_SUM, __pyx_t_9, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "yapyg/sprites.pyx":361
+        /* "yapyg\sprites.pyx":361
  *                         if phase_increment < 1:
  *                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
  *                                 phase = sprite[IDX_SPRITE_PHASE]             # <<<<<<<<<<<<<<
@@ -5440,7 +5440,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
       }
       /*else*/ {
 
-        /* "yapyg/sprites.pyx":363
+        /* "yapyg\sprites.pyx":363
  *                                 phase = sprite[IDX_SPRITE_PHASE]
  *                         else:
  *                                 phase = (phase + phase_increment)             # <<<<<<<<<<<<<<
@@ -5449,7 +5449,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
  */
         __pyx_v_phase = (__pyx_v_phase + __pyx_v_phase_increment);
 
-        /* "yapyg/sprites.pyx":364
+        /* "yapyg\sprites.pyx":364
  *                         else:
  *                                 phase = (phase + phase_increment)
  *                                 if phase >= len(textures) and play_once:             # <<<<<<<<<<<<<<
@@ -5472,7 +5472,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
         __pyx_L10_bool_binop_done:;
         if (__pyx_t_7) {
 
-          /* "yapyg/sprites.pyx":365
+          /* "yapyg\sprites.pyx":365
  *                                 phase = (phase + phase_increment)
  *                                 if phase >= len(textures) and play_once:
  *                                         set_enable(state, sprite_name, False)             # <<<<<<<<<<<<<<
@@ -5483,7 +5483,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "yapyg/sprites.pyx":366
+          /* "yapyg\sprites.pyx":366
  *                                 if phase >= len(textures) and play_once:
  *                                         set_enable(state, sprite_name, False)
  *                                         continue             # <<<<<<<<<<<<<<
@@ -5493,7 +5493,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
           goto __pyx_L3_continue;
         }
 
-        /* "yapyg/sprites.pyx":367
+        /* "yapyg\sprites.pyx":367
  *                                         set_enable(state, sprite_name, False)
  *                                         continue
  *                                 phase = phase % len(textures)             # <<<<<<<<<<<<<<
@@ -5517,7 +5517,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
         }
         __pyx_v_phase = __Pyx_mod_Py_ssize_t(__pyx_v_phase, __pyx_t_10);
 
-        /* "yapyg/sprites.pyx":368
+        /* "yapyg\sprites.pyx":368
  *                                         continue
  *                                 phase = phase % len(textures)
  *                                 time_sum = time_sum % speed             # <<<<<<<<<<<<<<
@@ -5536,7 +5536,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
         }
         __pyx_v_time_sum = __Pyx_mod_int(__pyx_v_time_sum, __pyx_v_speed);
 
-        /* "yapyg/sprites.pyx":369
+        /* "yapyg\sprites.pyx":369
  *                                 phase = phase % len(textures)
  *                                 time_sum = time_sum % speed
  *                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum             # <<<<<<<<<<<<<<
@@ -5552,7 +5552,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
         if (unlikely(__Pyx_SetItemInt(__pyx_v_sprite, __pyx_v_5yapyg_7sprites_IDX_SPRITE_TIME_SUM, __pyx_t_9, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "yapyg/sprites.pyx":370
+        /* "yapyg\sprites.pyx":370
  *                                 time_sum = time_sum % speed
  *                                 sprite[IDX_SPRITE_TIME_SUM] = time_sum
  *                                 sprite[IDX_SPRITE_PHASE] = phase             # <<<<<<<<<<<<<<
@@ -5573,7 +5573,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     }
     __pyx_L7:;
 
-    /* "yapyg/sprites.pyx":372
+    /* "yapyg\sprites.pyx":372
  *                                 sprite[IDX_SPRITE_PHASE] = phase
  * 
  *                 texture_name = textures[phase]             # <<<<<<<<<<<<<<
@@ -5590,7 +5590,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __Pyx_XDECREF_SET(__pyx_v_texture_name, ((PyObject*)__pyx_t_9));
     __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":377
+    /* "yapyg\sprites.pyx":377
  *                             screen_scale,
  *                             sprite_name,
  *                             texture_db.get(state, texture_name),             # <<<<<<<<<<<<<<
@@ -5600,7 +5600,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __pyx_t_9 = __pyx_f_5yapyg_10texture_db_get(__pyx_v_state, __pyx_v_texture_name, 0); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
 
-    /* "yapyg/sprites.pyx":373
+    /* "yapyg\sprites.pyx":373
  * 
  *                 texture_name = textures[phase]
  *                 draw_sprite(state,             # <<<<<<<<<<<<<<
@@ -5610,7 +5610,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
     __pyx_f_5yapyg_7sprites_draw_sprite(__pyx_v_state, __pyx_v_canvas, __pyx_v_screen_scale, __pyx_v_sprite_name, __pyx_t_9, __pyx_v_pos, __pyx_v_scale, __pyx_v_screen_xy_pos);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "yapyg/sprites.pyx":325
+    /* "yapyg\sprites.pyx":325
  *         cdef tuple sprite_rect
  * 
  *         for sprite_name in sprite_draw_order:             # <<<<<<<<<<<<<<
@@ -5621,7 +5621,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg/sprites.pyx":280
+  /* "yapyg\sprites.pyx":280
  *                                 set_visibility(state, sprite_name, True)
  * 
  * cdef void draw(list state,             # <<<<<<<<<<<<<<
@@ -5659,7 +5659,7 @@ static void __pyx_f_5yapyg_7sprites_draw(PyObject *__pyx_v_state, PyObject *__py
   __Pyx_RefNannyFinishContext();
 }
 
-/* "yapyg/sprites.pyx":383
+/* "yapyg\sprites.pyx":383
  *                             )
  * 
  * cdef tuple _get_screen_coords(list state,             # <<<<<<<<<<<<<<
@@ -5695,7 +5695,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_screen_coords", 0);
 
-  /* "yapyg/sprites.pyx":394
+  /* "yapyg\sprites.pyx":394
  *         Return: (int x, int y)
  *         """
  *         cdef int col = int(floor(pos[0]))             # <<<<<<<<<<<<<<
@@ -5712,7 +5712,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_col = ((int)floor(__pyx_t_2));
 
-  /* "yapyg/sprites.pyx":395
+  /* "yapyg\sprites.pyx":395
  *         """
  *         cdef int col = int(floor(pos[0]))
  *         cdef int row = int(floor(pos[1]))             # <<<<<<<<<<<<<<
@@ -5729,7 +5729,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_row = ((int)floor(__pyx_t_2));
 
-  /* "yapyg/sprites.pyx":397
+  /* "yapyg\sprites.pyx":397
  *         cdef int row = int(floor(pos[1]))
  * 
  *         cdef int tile_x = col * scaled_tile_size_x             # <<<<<<<<<<<<<<
@@ -5738,7 +5738,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
  */
   __pyx_v_tile_x = (__pyx_v_col * __pyx_v_scaled_tile_size_x);
 
-  /* "yapyg/sprites.pyx":398
+  /* "yapyg\sprites.pyx":398
  * 
  *         cdef int tile_x = col * scaled_tile_size_x
  *         cdef int tile_y = row * scaled_tile_size_y             # <<<<<<<<<<<<<<
@@ -5747,7 +5747,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
  */
   __pyx_v_tile_y = (__pyx_v_row * __pyx_v_scaled_tile_size_y);
 
-  /* "yapyg/sprites.pyx":402
+  /* "yapyg\sprites.pyx":402
  *         cdef int draw_x
  *         cdef int draw_y
  *         cdef float view_pos_x = view_pos[0]             # <<<<<<<<<<<<<<
@@ -5764,7 +5764,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_view_pos_x = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":403
+  /* "yapyg\sprites.pyx":403
  *         cdef int draw_y
  *         cdef float view_pos_x = view_pos[0]
  *         cdef float view_pos_y = view_pos[1]             # <<<<<<<<<<<<<<
@@ -5781,7 +5781,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_view_pos_y = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":404
+  /* "yapyg\sprites.pyx":404
  *         cdef float view_pos_x = view_pos[0]
  *         cdef float view_pos_y = view_pos[1]
  *         if not screen_relative:             # <<<<<<<<<<<<<<
@@ -5791,7 +5791,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __pyx_t_4 = ((!(__pyx_v_screen_relative != 0)) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg/sprites.pyx":405
+    /* "yapyg\sprites.pyx":405
  *         cdef float view_pos_y = view_pos[1]
  *         if not screen_relative:
  *                 draw_x = tile_x - int(view_pos_x * scaled_tile_size_x)             # <<<<<<<<<<<<<<
@@ -5818,7 +5818,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_draw_x = __pyx_t_7;
 
-    /* "yapyg/sprites.pyx":406
+    /* "yapyg\sprites.pyx":406
  *         if not screen_relative:
  *                 draw_x = tile_x - int(view_pos_x * scaled_tile_size_x)
  *                 draw_y = tile_y - int(view_pos_y * scaled_tile_size_y)             # <<<<<<<<<<<<<<
@@ -5848,7 +5848,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   }
   /*else*/ {
 
-    /* "yapyg/sprites.pyx":408
+    /* "yapyg\sprites.pyx":408
  *                 draw_y = tile_y - int(view_pos_y * scaled_tile_size_y)
  *         else:
  *                 draw_x = tile_x             # <<<<<<<<<<<<<<
@@ -5857,7 +5857,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
  */
     __pyx_v_draw_x = __pyx_v_tile_x;
 
-    /* "yapyg/sprites.pyx":409
+    /* "yapyg\sprites.pyx":409
  *         else:
  *                 draw_x = tile_x
  *                 draw_y = tile_y             # <<<<<<<<<<<<<<
@@ -5868,7 +5868,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   }
   __pyx_L3:;
 
-  /* "yapyg/sprites.pyx":411
+  /* "yapyg\sprites.pyx":411
  *                 draw_y = tile_y
  * 
  *         cdef float offset_x = pos[0] - col             # <<<<<<<<<<<<<<
@@ -5891,7 +5891,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_offset_x = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":412
+  /* "yapyg\sprites.pyx":412
  * 
  *         cdef float offset_x = pos[0] - col
  *         cdef float offset_y = pos[1] - row             # <<<<<<<<<<<<<<
@@ -5914,7 +5914,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_offset_y = __pyx_t_3;
 
-  /* "yapyg/sprites.pyx":413
+  /* "yapyg\sprites.pyx":413
  *         cdef float offset_x = pos[0] - col
  *         cdef float offset_y = pos[1] - row
  *         cdef int origin_x = int(origin_xy[0])             # <<<<<<<<<<<<<<
@@ -5934,7 +5934,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_origin_x = __pyx_t_7;
 
-  /* "yapyg/sprites.pyx":414
+  /* "yapyg\sprites.pyx":414
  *         cdef float offset_y = pos[1] - row
  *         cdef int origin_x = int(origin_xy[0])
  *         cdef int origin_y = int(origin_xy[1])             # <<<<<<<<<<<<<<
@@ -5954,7 +5954,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_origin_y = __pyx_t_7;
 
-  /* "yapyg/sprites.pyx":415
+  /* "yapyg\sprites.pyx":415
  *         cdef int origin_x = int(origin_xy[0])
  *         cdef int origin_y = int(origin_xy[1])
  *         return (             # <<<<<<<<<<<<<<
@@ -5963,7 +5963,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "yapyg/sprites.pyx":416
+  /* "yapyg\sprites.pyx":416
  *         cdef int origin_y = int(origin_xy[1])
  *         return (
  *                 draw_x + int(scaled_tile_size_x * offset_x) + origin_x,             # <<<<<<<<<<<<<<
@@ -5993,7 +5993,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg/sprites.pyx":417
+  /* "yapyg\sprites.pyx":417
  *         return (
  *                 draw_x + int(scaled_tile_size_x * offset_x) + origin_x,
  *                 draw_y + int(scaled_tile_size_y * offset_y) + origin_y             # <<<<<<<<<<<<<<
@@ -6017,7 +6017,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg/sprites.pyx":418
+  /* "yapyg\sprites.pyx":418
  *                 draw_x + int(scaled_tile_size_x * offset_x) + origin_x,
  *                 draw_y + int(scaled_tile_size_y * offset_y) + origin_y
  *                 )             # <<<<<<<<<<<<<<
@@ -6027,7 +6027,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_origin_y); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "yapyg/sprites.pyx":417
+  /* "yapyg\sprites.pyx":417
  *         return (
  *                 draw_x + int(scaled_tile_size_x * offset_x) + origin_x,
  *                 draw_y + int(scaled_tile_size_y * offset_y) + origin_y             # <<<<<<<<<<<<<<
@@ -6039,7 +6039,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg/sprites.pyx":416
+  /* "yapyg\sprites.pyx":416
  *         cdef int origin_y = int(origin_xy[1])
  *         return (
  *                 draw_x + int(scaled_tile_size_x * offset_x) + origin_x,             # <<<<<<<<<<<<<<
@@ -6058,7 +6058,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "yapyg/sprites.pyx":383
+  /* "yapyg\sprites.pyx":383
  *                             )
  * 
  * cdef tuple _get_screen_coords(list state,             # <<<<<<<<<<<<<<
@@ -6080,7 +6080,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_screen_coords(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":420
+/* "yapyg\sprites.pyx":420
  *                 )
  * 
  * cdef tuple _get_rect_rot_attributes(int texture_w,             # <<<<<<<<<<<<<<
@@ -6107,7 +6107,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_get_rect_rot_attributes", 0);
 
-  /* "yapyg/sprites.pyx":430
+  /* "yapyg\sprites.pyx":430
  *         Return: (tuple int screen_xy, tuple int texture center, float rotation degrees, tuple int width/height)
  *         """
  *         cdef int w = int(texture_w * screen_scale[0] * scale[0])             # <<<<<<<<<<<<<<
@@ -6143,7 +6143,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_w = __pyx_t_4;
 
-  /* "yapyg/sprites.pyx":431
+  /* "yapyg\sprites.pyx":431
  *         """
  *         cdef int w = int(texture_w * screen_scale[0] * scale[0])
  *         cdef int h = int(texture_h * screen_scale[1] * scale[1])             # <<<<<<<<<<<<<<
@@ -6179,7 +6179,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_h = __pyx_t_4;
 
-  /* "yapyg/sprites.pyx":433
+  /* "yapyg\sprites.pyx":433
  *         cdef int h = int(texture_h * screen_scale[1] * scale[1])
  * 
  *         cdef int x = int(offset_pos[0])             # <<<<<<<<<<<<<<
@@ -6199,7 +6199,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_x = __pyx_t_4;
 
-  /* "yapyg/sprites.pyx":434
+  /* "yapyg\sprites.pyx":434
  * 
  *         cdef int x = int(offset_pos[0])
  *         cdef int y = int(offset_pos[1])             # <<<<<<<<<<<<<<
@@ -6219,7 +6219,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_y = __pyx_t_4;
 
-  /* "yapyg/sprites.pyx":436
+  /* "yapyg\sprites.pyx":436
  *         cdef int y = int(offset_pos[1])
  * 
  *         return ((x, y),             # <<<<<<<<<<<<<<
@@ -6240,7 +6240,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
 
-  /* "yapyg/sprites.pyx":437
+  /* "yapyg\sprites.pyx":437
  * 
  *         return ((x, y),
  *                 (x + w / 2, y + h / 2),             # <<<<<<<<<<<<<<
@@ -6260,7 +6260,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __pyx_t_2 = 0;
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":438
+  /* "yapyg\sprites.pyx":438
  *         return ((x, y),
  *                 (x + w / 2, y + h / 2),
  *                 rotate,             # <<<<<<<<<<<<<<
@@ -6270,7 +6270,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __pyx_t_1 = PyFloat_FromDouble(__pyx_v_rotate); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 438; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg/sprites.pyx":439
+  /* "yapyg\sprites.pyx":439
  *                 (x + w / 2, y + h / 2),
  *                 rotate,
  *                 (w, h),             # <<<<<<<<<<<<<<
@@ -6290,7 +6290,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __pyx_t_2 = 0;
   __pyx_t_6 = 0;
 
-  /* "yapyg/sprites.pyx":436
+  /* "yapyg\sprites.pyx":436
  *         cdef int y = int(offset_pos[1])
  * 
  *         return ((x, y),             # <<<<<<<<<<<<<<
@@ -6315,7 +6315,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "yapyg/sprites.pyx":420
+  /* "yapyg\sprites.pyx":420
  *                 )
  * 
  * cdef tuple _get_rect_rot_attributes(int texture_w,             # <<<<<<<<<<<<<<
@@ -6339,7 +6339,7 @@ static PyObject *__pyx_f_5yapyg_7sprites__get_rect_rot_attributes(int __pyx_v_te
   return __pyx_r;
 }
 
-/* "yapyg/sprites.pyx":442
+/* "yapyg\sprites.pyx":442
  *                 )
  * 
  * cdef void draw_sprite(list state,             # <<<<<<<<<<<<<<
@@ -6375,7 +6375,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("draw_sprite", 0);
 
-  /* "yapyg/sprites.pyx":454
+  /* "yapyg\sprites.pyx":454
  *         TODO
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]             # <<<<<<<<<<<<<<
@@ -6392,7 +6392,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   __pyx_v_sprite_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":455
+  /* "yapyg\sprites.pyx":455
  *         """
  *         cdef list sprite_db = state[IDX_STATE_SPRITES]
  *         cdef dict rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]             # <<<<<<<<<<<<<<
@@ -6409,7 +6409,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   __pyx_v_rectangles_rotates_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/sprites.pyx":457
+  /* "yapyg\sprites.pyx":457
  *         cdef dict rectangles_rotates_dict = sprite_db[IDX_SPRITES_RECTS_ROTS]
  * 
  *         cdef float rotate = pos[2]             # <<<<<<<<<<<<<<
@@ -6426,7 +6426,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rotate = __pyx_t_2;
 
-  /* "yapyg/sprites.pyx":460
+  /* "yapyg\sprites.pyx":460
  *         cdef tuple rect_rot_attributes
  * 
  *         if rectangles_rotates_dict.has_key(sprite_name):             # <<<<<<<<<<<<<<
@@ -6441,7 +6441,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg/sprites.pyx":461
+    /* "yapyg\sprites.pyx":461
  * 
  *         if rectangles_rotates_dict.has_key(sprite_name):
  *                 rect, rot = rectangles_rotates_dict[sprite_name]             # <<<<<<<<<<<<<<
@@ -6509,7 +6509,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     __pyx_v_rot = __pyx_t_6;
     __pyx_t_6 = 0;
 
-    /* "yapyg/sprites.pyx":462
+    /* "yapyg\sprites.pyx":462
  *         if rectangles_rotates_dict.has_key(sprite_name):
  *                 rect, rot = rectangles_rotates_dict[sprite_name]
  *                 if not rect.texture is texture:             # <<<<<<<<<<<<<<
@@ -6523,7 +6523,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     __pyx_t_3 = (__pyx_t_4 != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg/sprites.pyx":463
+      /* "yapyg\sprites.pyx":463
  *                 rect, rot = rectangles_rotates_dict[sprite_name]
  *                 if not rect.texture is texture:
  *                         rect.texture = texture             # <<<<<<<<<<<<<<
@@ -6535,7 +6535,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     }
     __pyx_L6:;
 
-    /* "yapyg/sprites.pyx":464
+    /* "yapyg\sprites.pyx":464
  *                 if not rect.texture is texture:
  *                         rect.texture = texture
  *                 rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]),             # <<<<<<<<<<<<<<
@@ -6553,7 +6553,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":465
+    /* "yapyg\sprites.pyx":465
  *                         rect.texture = texture
  *                 rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]),
  *                                                                int(texture.size[1]),             # <<<<<<<<<<<<<<
@@ -6571,7 +6571,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":464
+    /* "yapyg\sprites.pyx":464
  *                 if not rect.texture is texture:
  *                         rect.texture = texture
  *                 rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]),             # <<<<<<<<<<<<<<
@@ -6583,7 +6583,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     __pyx_v_rect_rot_attributes = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":471
+    /* "yapyg\sprites.pyx":471
  *                                                                rotate
  *                                                                )
  *                 rect.pos = rect_rot_attributes[0]             # <<<<<<<<<<<<<<
@@ -6599,7 +6599,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_rect, __pyx_n_s_pos, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":472
+    /* "yapyg\sprites.pyx":472
  *                                                                )
  *                 rect.pos = rect_rot_attributes[0]
  *                 rot.origin = rect_rot_attributes[1]             # <<<<<<<<<<<<<<
@@ -6615,7 +6615,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_rot, __pyx_n_s_origin, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 472; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/sprites.pyx":473
+    /* "yapyg\sprites.pyx":473
  *                 rect.pos = rect_rot_attributes[0]
  *                 rot.origin = rect_rot_attributes[1]
  *                 rot.angle = rect_rot_attributes[2]             # <<<<<<<<<<<<<<
@@ -6634,7 +6634,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   }
   /*else*/ {
 
-    /* "yapyg/sprites.pyx":475
+    /* "yapyg\sprites.pyx":475
  *                 rot.angle = rect_rot_attributes[2]
  *         else:
  *                 with canvas:             # <<<<<<<<<<<<<<
@@ -6673,7 +6673,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
           __Pyx_XGOTREF(__pyx_t_14);
           /*try:*/ {
 
-            /* "yapyg/sprites.pyx":476
+            /* "yapyg\sprites.pyx":476
  *         else:
  *                 with canvas:
  *                         rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]),             # <<<<<<<<<<<<<<
@@ -6691,7 +6691,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":477
+            /* "yapyg\sprites.pyx":477
  *                 with canvas:
  *                         rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]),
  *                                                                        int(texture.size[1]),             # <<<<<<<<<<<<<<
@@ -6709,7 +6709,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 477; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":476
+            /* "yapyg\sprites.pyx":476
  *         else:
  *                 with canvas:
  *                         rect_rot_attributes = _get_rect_rot_attributes(int(texture.size[0]),             # <<<<<<<<<<<<<<
@@ -6721,7 +6721,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __pyx_v_rect_rot_attributes = ((PyObject*)__pyx_t_1);
             __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":484
+            /* "yapyg\sprites.pyx":484
  *                                                                        )
  * 
  *                         PushMatrix()             # <<<<<<<<<<<<<<
@@ -6750,7 +6750,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":485
+            /* "yapyg\sprites.pyx":485
  * 
  *                         PushMatrix()
  *                         rot = Rotate(angle=rect_rot_attributes[2],             # <<<<<<<<<<<<<<
@@ -6770,7 +6770,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_angle, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "yapyg/sprites.pyx":486
+            /* "yapyg\sprites.pyx":486
  *                         PushMatrix()
  *                         rot = Rotate(angle=rect_rot_attributes[2],
  *                                      origin=rect_rot_attributes[1],             # <<<<<<<<<<<<<<
@@ -6786,7 +6786,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_origin, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "yapyg/sprites.pyx":487
+            /* "yapyg\sprites.pyx":487
  *                         rot = Rotate(angle=rect_rot_attributes[2],
  *                                      origin=rect_rot_attributes[1],
  *                                      axis=(0, 0, 1),             # <<<<<<<<<<<<<<
@@ -6795,7 +6795,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
  */
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_axis, __pyx_tuple__3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 485; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
 
-            /* "yapyg/sprites.pyx":485
+            /* "yapyg\sprites.pyx":485
  * 
  *                         PushMatrix()
  *                         rot = Rotate(angle=rect_rot_attributes[2],             # <<<<<<<<<<<<<<
@@ -6809,7 +6809,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __pyx_v_rot = __pyx_t_5;
             __pyx_t_5 = 0;
 
-            /* "yapyg/sprites.pyx":489
+            /* "yapyg\sprites.pyx":489
  *                                      axis=(0, 0, 1),
  *                                      )
  *                         rect = Rectangle(             # <<<<<<<<<<<<<<
@@ -6821,7 +6821,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_GOTREF(__pyx_t_6);
 
-            /* "yapyg/sprites.pyx":490
+            /* "yapyg\sprites.pyx":490
  *                                      )
  *                         rect = Rectangle(
  *                                 texture=texture,             # <<<<<<<<<<<<<<
@@ -6830,7 +6830,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
  */
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_texture, __pyx_v_texture) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
 
-            /* "yapyg/sprites.pyx":491
+            /* "yapyg\sprites.pyx":491
  *                         rect = Rectangle(
  *                                 texture=texture,
  *                                 pos=rect_rot_attributes[0],             # <<<<<<<<<<<<<<
@@ -6846,7 +6846,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_pos, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":492
+            /* "yapyg\sprites.pyx":492
  *                                 texture=texture,
  *                                 pos=rect_rot_attributes[0],
  *                                 size=rect_rot_attributes[3],             # <<<<<<<<<<<<<<
@@ -6862,7 +6862,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_size, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 489; __pyx_clineno = __LINE__; goto __pyx_L11_error;}
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":489
+            /* "yapyg\sprites.pyx":489
  *                                      axis=(0, 0, 1),
  *                                      )
  *                         rect = Rectangle(             # <<<<<<<<<<<<<<
@@ -6876,7 +6876,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __pyx_v_rect = __pyx_t_1;
             __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":494
+            /* "yapyg\sprites.pyx":494
  *                                 size=rect_rot_attributes[3],
  *                                 )
  *                         PopMatrix()             # <<<<<<<<<<<<<<
@@ -6905,7 +6905,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "yapyg/sprites.pyx":496
+            /* "yapyg\sprites.pyx":496
  *                         PopMatrix()
  * 
  *                         rectangles_rotates_dict[sprite_name] = (rect, rot,)             # <<<<<<<<<<<<<<
@@ -6935,7 +6935,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "yapyg/sprites.pyx":475
+          /* "yapyg\sprites.pyx":475
  *                 rot.angle = rect_rot_attributes[2]
  *         else:
  *                 with canvas:             # <<<<<<<<<<<<<<
@@ -7008,7 +7008,7 @@ static void __pyx_f_5yapyg_7sprites_draw_sprite(PyObject *__pyx_v_state, PyObjec
   }
   __pyx_L3:;
 
-  /* "yapyg/sprites.pyx":442
+  /* "yapyg\sprites.pyx":442
  *                 )
  * 
  * cdef void draw_sprite(list state,             # <<<<<<<<<<<<<<
@@ -7116,7 +7116,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg/sprites.pyx":98
+  /* "yapyg\sprites.pyx":98
  * 
  *         if not scale:
  *                 scale = (1, 1)             # <<<<<<<<<<<<<<
@@ -7127,7 +7127,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "yapyg/sprites.pyx":226
+  /* "yapyg\sprites.pyx":226
  *                 rect, rot = sprites_rects_rots[sprite_name]
  *                 sprite_sizes[sprite_name] = rect.size
  *                 rect.size = (0, 0)             # <<<<<<<<<<<<<<
@@ -7138,7 +7138,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "yapyg/sprites.pyx":487
+  /* "yapyg\sprites.pyx":487
  *                         rot = Rotate(angle=rect_rot_attributes[2],
  *                                      origin=rect_rot_attributes[1],
  *                                      axis=(0, 0, 1),             # <<<<<<<<<<<<<<
@@ -7149,7 +7149,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "yapyg/sprites.pyx":475
+  /* "yapyg\sprites.pyx":475
  *                 rot.angle = rect_rot_attributes[2]
  *         else:
  *                 with canvas:             # <<<<<<<<<<<<<<
@@ -7316,7 +7316,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
   Py_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg/sprites.pyx":27
+  /* "yapyg\sprites.pyx":27
  * from libc.math cimport floor
  * 
  * from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix             # <<<<<<<<<<<<<<
@@ -7358,7 +7358,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "yapyg/sprites.pyx":28
+  /* "yapyg\sprites.pyx":28
  * 
  * from kivy.graphics import PushMatrix, Rectangle, Rotate, PopMatrix
  * from kivy.core.window import Window             # <<<<<<<<<<<<<<
@@ -7379,7 +7379,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg/sprites.pyx":36
+  /* "yapyg\sprites.pyx":36
  * cimport math_collision
  * 
  * import text             # <<<<<<<<<<<<<<
@@ -7391,7 +7391,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_text, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "yapyg/sprites.pyx":40
+  /* "yapyg\sprites.pyx":40
  * cdef int IDX_STATE_SPRITES
  * 
  * cdef int IDX_SPRITES_DICT = 0             # <<<<<<<<<<<<<<
@@ -7400,7 +7400,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITES_DICT = 0;
 
-  /* "yapyg/sprites.pyx":41
+  /* "yapyg\sprites.pyx":41
  * 
  * cdef int IDX_SPRITES_DICT = 0
  * cdef int IDX_SPRITES_RECTS_ROTS = 1             # <<<<<<<<<<<<<<
@@ -7409,7 +7409,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITES_RECTS_ROTS = 1;
 
-  /* "yapyg/sprites.pyx":42
+  /* "yapyg\sprites.pyx":42
  * cdef int IDX_SPRITES_DICT = 0
  * cdef int IDX_SPRITES_RECTS_ROTS = 1
  * cdef int IDX_SPRITES_SIZES = 2             # <<<<<<<<<<<<<<
@@ -7418,7 +7418,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITES_SIZES = 2;
 
-  /* "yapyg/sprites.pyx":43
+  /* "yapyg\sprites.pyx":43
  * cdef int IDX_SPRITES_RECTS_ROTS = 1
  * cdef int IDX_SPRITES_SIZES = 2
  * cdef int IDX_SPRITES_DRAW_ORDER = 3             # <<<<<<<<<<<<<<
@@ -7427,7 +7427,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITES_DRAW_ORDER = 3;
 
-  /* "yapyg/sprites.pyx":45
+  /* "yapyg\sprites.pyx":45
  * cdef int IDX_SPRITES_DRAW_ORDER = 3
  * 
  * cdef int IDX_SPRITE_ENABLE = 0             # <<<<<<<<<<<<<<
@@ -7436,7 +7436,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_ENABLE = 0;
 
-  /* "yapyg/sprites.pyx":46
+  /* "yapyg\sprites.pyx":46
  * 
  * cdef int IDX_SPRITE_ENABLE = 0
  * cdef int IDX_SPRITE_POS = 1             # <<<<<<<<<<<<<<
@@ -7445,7 +7445,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_POS = 1;
 
-  /* "yapyg/sprites.pyx":47
+  /* "yapyg\sprites.pyx":47
  * cdef int IDX_SPRITE_ENABLE = 0
  * cdef int IDX_SPRITE_POS = 1
  * cdef int IDX_SPRITE_TEXTURES = 2             # <<<<<<<<<<<<<<
@@ -7454,7 +7454,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_TEXTURES = 2;
 
-  /* "yapyg/sprites.pyx":48
+  /* "yapyg\sprites.pyx":48
  * cdef int IDX_SPRITE_POS = 1
  * cdef int IDX_SPRITE_TEXTURES = 2
  * cdef int IDX_SPRITE_SPEED = 3             # <<<<<<<<<<<<<<
@@ -7463,7 +7463,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_SPEED = 3;
 
-  /* "yapyg/sprites.pyx":49
+  /* "yapyg\sprites.pyx":49
  * cdef int IDX_SPRITE_TEXTURES = 2
  * cdef int IDX_SPRITE_SPEED = 3
  * cdef int IDX_SPRITE_SCALE = 4             # <<<<<<<<<<<<<<
@@ -7472,7 +7472,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_SCALE = 4;
 
-  /* "yapyg/sprites.pyx":50
+  /* "yapyg\sprites.pyx":50
  * cdef int IDX_SPRITE_SPEED = 3
  * cdef int IDX_SPRITE_SCALE = 4
  * cdef int IDX_SPRITE_POS_OFFSET = 5             # <<<<<<<<<<<<<<
@@ -7481,7 +7481,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_POS_OFFSET = 5;
 
-  /* "yapyg/sprites.pyx":51
+  /* "yapyg\sprites.pyx":51
  * cdef int IDX_SPRITE_SCALE = 4
  * cdef int IDX_SPRITE_POS_OFFSET = 5
  * cdef int IDX_SPRITE_TIME_SUM = 6             # <<<<<<<<<<<<<<
@@ -7490,7 +7490,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_TIME_SUM = 6;
 
-  /* "yapyg/sprites.pyx":52
+  /* "yapyg\sprites.pyx":52
  * cdef int IDX_SPRITE_POS_OFFSET = 5
  * cdef int IDX_SPRITE_TIME_SUM = 6
  * cdef int IDX_SPRITE_PHASE = 7             # <<<<<<<<<<<<<<
@@ -7499,7 +7499,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_PHASE = 7;
 
-  /* "yapyg/sprites.pyx":53
+  /* "yapyg\sprites.pyx":53
  * cdef int IDX_SPRITE_TIME_SUM = 6
  * cdef int IDX_SPRITE_PHASE = 7
  * cdef int IDX_SPRITE_SCREEN_RELATIVE = 8             # <<<<<<<<<<<<<<
@@ -7508,7 +7508,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_SCREEN_RELATIVE = 8;
 
-  /* "yapyg/sprites.pyx":54
+  /* "yapyg\sprites.pyx":54
  * cdef int IDX_SPRITE_PHASE = 7
  * cdef int IDX_SPRITE_SCREEN_RELATIVE = 8
  * cdef int IDX_SPRITE_PLAYONCE = 9             # <<<<<<<<<<<<<<
@@ -7517,7 +7517,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_PLAYONCE = 9;
 
-  /* "yapyg/sprites.pyx":55
+  /* "yapyg\sprites.pyx":55
  * cdef int IDX_SPRITE_SCREEN_RELATIVE = 8
  * cdef int IDX_SPRITE_PLAYONCE = 9
  * cdef int IDX_SPRITE_TXSIZE = 10             # <<<<<<<<<<<<<<
@@ -7526,7 +7526,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_TXSIZE = 10;
 
-  /* "yapyg/sprites.pyx":56
+  /* "yapyg\sprites.pyx":56
  * cdef int IDX_SPRITE_PLAYONCE = 9
  * cdef int IDX_SPRITE_TXSIZE = 10
  * cdef int IDX_SPRITE_VISIBLE = 11             # <<<<<<<<<<<<<<
@@ -7535,7 +7535,7 @@ PyMODINIT_FUNC PyInit_sprites(void)
  */
   __pyx_v_5yapyg_7sprites_IDX_SPRITE_VISIBLE = 11;
 
-  /* "yapyg/sprites.pyx":1
+  /* "yapyg\sprites.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

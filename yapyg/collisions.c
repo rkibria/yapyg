@@ -416,7 +416,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg/collisions.pyx",
+  "yapyg\\collisions.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -635,6 +635,11 @@ static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int 
 #define __Pyx_PyString_Equals __Pyx_PyBytes_Equals
 #endif
 
+static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb);
+
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyList_GetSlice(PyObject* src, Py_ssize_t start, Py_ssize_t stop);
 static CYTHON_INLINE PyObject* __Pyx_PyTuple_GetSlice(PyObject* src, Py_ssize_t start, Py_ssize_t stop);
@@ -744,11 +749,11 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 static int (*__pyx_f_5yapyg_14math_collision_is_rect_rect_collision)(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static int (*__pyx_f_5yapyg_14math_collision_is_circle_circle_collision)(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static int (*__pyx_f_5yapyg_14math_collision_is_rect_circle_collision)(PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *(*__pyx_f_5yapyg_14math_collision_f_get_clipping_rectangle)(float, float, float, float, int __pyx_skip_dispatch); /*proto*/
 
 /* Module declarations from 'yapyg.math_2d' */
 static float *__pyx_vp_5yapyg_7math_2d_CONST_PI = 0;
 #define __pyx_v_5yapyg_7math_2d_CONST_PI (*__pyx_vp_5yapyg_7math_2d_CONST_PI)
-static PyObject *(*__pyx_f_5yapyg_7math_2d_rotated_point)(PyObject *, PyObject *, float, int __pyx_skip_dispatch); /*proto*/
 
 /* Module declarations from 'yapyg.entities' */
 static int *__pyx_vp_5yapyg_8entities_IDX_STATE_ENTITIES = 0;
@@ -805,6 +810,7 @@ int __pyx_module_is_main_yapyg__collisions = 0;
 
 /* Implementation of 'yapyg.collisions' */
 static PyObject *__pyx_builtin_xrange;
+static PyObject *__pyx_builtin_RuntimeError;
 static PyObject *__pyx_pf_5yapyg_10collisions_initialize(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_state_idx, PyObject *__pyx_v_state); /* proto */
 static PyObject *__pyx_pf_5yapyg_10collisions_2destroy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state); /* proto */
 static PyObject *__pyx_pf_5yapyg_10collisions_4entity_pos_listener(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_pos); /* proto */
@@ -844,9 +850,11 @@ static char __pyx_k_tile_name[] = "tile_name";
 static char __pyx_k_Collisions[] = "\nCollisions\n";
 static char __pyx_k_entity_name[] = "entity_name";
 static char __pyx_k_shapes_list[] = "shapes_list";
+static char __pyx_k_RuntimeError[] = "RuntimeError";
 static char __pyx_k_TILE__s__d__d[] = "TILE_%s_%d_%d";
 static char __pyx_k_collision_def[] = "collision_def";
 static char __pyx_k_entity_name_1[] = "entity_name_1";
+static char __pyx_k_Unknown_shape_s[] = "Unknown shape %s";
 static char __pyx_k_handler_function[] = "handler_function";
 static char __pyx_k_entity_lower_left[] = "entity_lower_left";
 static char __pyx_k_IDX_COLLISION_CACHE[] = "IDX_COLLISION_CACHE";
@@ -872,7 +880,9 @@ static PyObject *__pyx_n_s_IDX_COLLISION_CACHE_LAST_HASH_PO;
 static PyObject *__pyx_n_s_IDX_COLLISION_LAST_POS;
 static PyObject *__pyx_n_s_IDX_COLLISION_SHAPES;
 static PyObject *__pyx_n_s_IDX_STATE_COLLISIONS;
+static PyObject *__pyx_n_s_RuntimeError;
 static PyObject *__pyx_kp_s_TILE__s__d__d;
+static PyObject *__pyx_kp_s_Unknown_shape_s;
 static PyObject *__pyx_kp_s__2;
 static PyObject *__pyx_kp_s__3;
 static PyObject *__pyx_n_s_add;
@@ -904,7 +914,7 @@ static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_tuple__4;
 
-/* "yapyg/collisions.pyx":53
+/* "yapyg\collisions.pyx":53
  * cdef int IDX_COLLISION_CACHE_HASH_EXTENT = 2
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -925,7 +935,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg/collisions.pyx":58
+  /* "yapyg\collisions.pyx":58
  *         """
  *         global IDX_STATE_COLLISIONS
  *         IDX_STATE_COLLISIONS = state_idx             # <<<<<<<<<<<<<<
@@ -934,7 +944,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
  */
   __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS = __pyx_v_state_idx;
 
-  /* "yapyg/collisions.pyx":60
+  /* "yapyg\collisions.pyx":60
  *         IDX_STATE_COLLISIONS = state_idx
  *         state[IDX_STATE_COLLISIONS] = [
  *                 {},             # <<<<<<<<<<<<<<
@@ -944,7 +954,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg/collisions.pyx":61
+  /* "yapyg\collisions.pyx":61
  *         state[IDX_STATE_COLLISIONS] = [
  *                 {},
  *                 {},             # <<<<<<<<<<<<<<
@@ -954,7 +964,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg/collisions.pyx":63
+  /* "yapyg\collisions.pyx":63
  *                 {},
  *                 None,
  *                 []             # <<<<<<<<<<<<<<
@@ -964,7 +974,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "yapyg/collisions.pyx":59
+  /* "yapyg\collisions.pyx":59
  *         global IDX_STATE_COLLISIONS
  *         IDX_STATE_COLLISIONS = state_idx
  *         state[IDX_STATE_COLLISIONS] = [             # <<<<<<<<<<<<<<
@@ -992,7 +1002,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_initialize(int __pyx_v_state_idx, P
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, __pyx_t_4, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "yapyg/collisions.pyx":53
+  /* "yapyg\collisions.pyx":53
  * cdef int IDX_COLLISION_CACHE_HASH_EXTENT = 2
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -1109,7 +1119,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_initialize(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":66
+/* "yapyg\collisions.pyx":66
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1126,7 +1136,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_destroy(PyObject *__pyx_v_state, CY
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg/collisions.pyx":70
+  /* "yapyg\collisions.pyx":70
  *         TODO
  *         """
  *         state[IDX_STATE_COLLISIONS] = None             # <<<<<<<<<<<<<<
@@ -1139,7 +1149,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_destroy(PyObject *__pyx_v_state, CY
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/collisions.pyx":66
+  /* "yapyg\collisions.pyx":66
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1207,7 +1217,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_2destroy(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":72
+/* "yapyg\collisions.pyx":72
  *         state[IDX_STATE_COLLISIONS] = None
  * 
  * cpdef entity_pos_listener(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
@@ -1232,7 +1242,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("entity_pos_listener", 0);
 
-  /* "yapyg/collisions.pyx":76
+  /* "yapyg\collisions.pyx":76
  *         TODO
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1252,7 +1262,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":81
+  /* "yapyg\collisions.pyx":81
  *         cdef tuple cached_hash_extents
  * 
  *         if collision_db.has_key(entity_name):             # <<<<<<<<<<<<<<
@@ -1267,7 +1277,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg/collisions.pyx":82
+    /* "yapyg\collisions.pyx":82
  * 
  *         if collision_db.has_key(entity_name):
  *                 collision_db[entity_name][IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_ABS_SHAPE] = None             # <<<<<<<<<<<<<<
@@ -1286,7 +1296,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_ABS_SHAPE, Py_None, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 82; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":84
+    /* "yapyg\collisions.pyx":84
  *                 collision_db[entity_name][IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_ABS_SHAPE] = None
  * 
  *                 entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -1303,7 +1313,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":85
+    /* "yapyg\collisions.pyx":85
  * 
  *                 entity_collision_data = collision_db[entity_name]
  *                 entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -1320,7 +1330,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     __pyx_v_entity_collision_cache = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":86
+    /* "yapyg\collisions.pyx":86
  *                 entity_collision_data = collision_db[entity_name]
  *                 entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *                 cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]             # <<<<<<<<<<<<<<
@@ -1337,7 +1347,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     __pyx_v_cached_hash_extents = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":87
+    /* "yapyg\collisions.pyx":87
  *                 entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *                 cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = None             # <<<<<<<<<<<<<<
@@ -1350,7 +1360,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
     }
     if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-    /* "yapyg/collisions.pyx":89
+    /* "yapyg\collisions.pyx":89
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = None
  * 
  *                 update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)             # <<<<<<<<<<<<<<
@@ -1367,7 +1377,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_entity_pos_listener(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg/collisions.pyx":72
+  /* "yapyg\collisions.pyx":72
  *         state[IDX_STATE_COLLISIONS] = None
  * 
  * cpdef entity_pos_listener(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
@@ -1497,7 +1507,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_4entity_pos_listener(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":91
+/* "yapyg\collisions.pyx":91
  *                 update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef set_handler(list state, handler_function):             # <<<<<<<<<<<<<<
@@ -1515,7 +1525,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_set_handler(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_handler", 0);
 
-  /* "yapyg/collisions.pyx":95
+  /* "yapyg\collisions.pyx":95
  *         TODO
  *         """
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function             # <<<<<<<<<<<<<<
@@ -1531,7 +1541,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_set_handler(PyObject *__pyx_v_state
   if (unlikely(__Pyx_SetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HANDLER_FUNCTION, __pyx_v_handler_function, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":91
+  /* "yapyg\collisions.pyx":91
  *                 update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef set_handler(list state, handler_function):             # <<<<<<<<<<<<<<
@@ -1645,7 +1655,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_6set_handler(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":97
+/* "yapyg\collisions.pyx":97
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
  * 
  * cpdef add_entity(list state, str entity_name, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -1665,7 +1675,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_entity", 0);
 
-  /* "yapyg/collisions.pyx":102
+  /* "yapyg\collisions.pyx":102
  *         """
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1685,7 +1695,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":106
+  /* "yapyg\collisions.pyx":106
  *                 shapes_list,
  *                 None,
  *                 [None, None, None],             # <<<<<<<<<<<<<<
@@ -1704,7 +1714,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   PyList_SET_ITEM(__pyx_t_2, 2, Py_None);
   __Pyx_GIVEREF(Py_None);
 
-  /* "yapyg/collisions.pyx":103
+  /* "yapyg\collisions.pyx":103
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         collision_db[entity_name] = [             # <<<<<<<<<<<<<<
@@ -1732,7 +1742,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   if (unlikely(PyDict_SetItem(__pyx_v_collision_db, __pyx_v_entity_name, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":109
+  /* "yapyg\collisions.pyx":109
  *                 False,
  *                 ]
  *         update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)             # <<<<<<<<<<<<<<
@@ -1746,7 +1756,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_entity(PyObject *__pyx_v_state,
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":97
+  /* "yapyg\collisions.pyx":97
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION] = handler_function
  * 
  * cpdef add_entity(list state, str entity_name, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -1873,7 +1883,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_8add_entity(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":111
+/* "yapyg\collisions.pyx":111
  *         update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef add_tile(list state, str tile_name, int x, int y, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -1895,7 +1905,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_tile", 0);
 
-  /* "yapyg/collisions.pyx":116
+  /* "yapyg\collisions.pyx":116
  *         """
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1915,7 +1925,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":117
+  /* "yapyg\collisions.pyx":117
  *         cdef dict collision_db
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef str full_tile_name = "TILE_%s_%d_%d" % (tile_name, x, y)             # <<<<<<<<<<<<<<
@@ -1944,7 +1954,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   __pyx_v_full_tile_name = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":121
+  /* "yapyg\collisions.pyx":121
  *                 shapes_list,
  *                 None,
  *                 [None, None, None],             # <<<<<<<<<<<<<<
@@ -1963,7 +1973,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   PyList_SET_ITEM(__pyx_t_1, 2, Py_None);
   __Pyx_GIVEREF(Py_None);
 
-  /* "yapyg/collisions.pyx":118
+  /* "yapyg\collisions.pyx":118
  *         collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef str full_tile_name = "TILE_%s_%d_%d" % (tile_name, x, y)
  *         collision_db[full_tile_name] = [             # <<<<<<<<<<<<<<
@@ -1991,7 +2001,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   if (unlikely(PyDict_SetItem(__pyx_v_collision_db, __pyx_v_full_tile_name, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "yapyg/collisions.pyx":124
+  /* "yapyg\collisions.pyx":124
  *                 True,
  *                 ]
  *         update_hash(state, full_tile_name, (x, y, 0), True)             # <<<<<<<<<<<<<<
@@ -2018,7 +2028,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_add_tile(PyObject *__pyx_v_state, P
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":111
+  /* "yapyg\collisions.pyx":111
  *         update_hash(state, entity_name, entities.get_pos_with_offset(state, entity_name), False)
  * 
  * cpdef add_tile(list state, str tile_name, int x, int y, tuple shapes_list):             # <<<<<<<<<<<<<<
@@ -2165,7 +2175,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_10add_tile(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":126
+/* "yapyg\collisions.pyx":126
  *         update_hash(state, full_tile_name, (x, y, 0), True)
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2185,7 +2195,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
 
-  /* "yapyg/collisions.pyx":130
+  /* "yapyg\collisions.pyx":130
  *         TODO
  *         """
  *         remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))             # <<<<<<<<<<<<<<
@@ -2199,7 +2209,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":131
+  /* "yapyg\collisions.pyx":131
  *         """
  *         remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2219,7 +2229,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   __pyx_v_collision_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":132
+  /* "yapyg\collisions.pyx":132
  *         remove_hash_entries(state, entity_name, entities.get_pos(state, entity_name))
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         del collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -2232,7 +2242,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_delete(PyObject *__pyx_v_state, PyO
   }
   if (PyDict_DelItem(__pyx_v_collision_db, __pyx_v_entity_name) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/collisions.pyx":126
+  /* "yapyg\collisions.pyx":126
  *         update_hash(state, full_tile_name, (x, y, 0), True)
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2349,7 +2359,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_12delete(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":134
+/* "yapyg\collisions.pyx":134
  *         del collision_db[entity_name]
  * 
  * cpdef update_hash(list state, str entity_name, tuple new_pos, int is_tile):             # <<<<<<<<<<<<<<
@@ -2387,7 +2397,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update_hash", 0);
 
-  /* "yapyg/collisions.pyx":138
+  /* "yapyg\collisions.pyx":138
  *         TODO
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2407,7 +2417,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":139
+  /* "yapyg\collisions.pyx":139
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -2424,7 +2434,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":141
+  /* "yapyg\collisions.pyx":141
  *         cdef list entity_collision_data = collision_db[entity_name]
  * 
  *         cdef tuple last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]             # <<<<<<<<<<<<<<
@@ -2441,7 +2451,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_last_pos = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":142
+  /* "yapyg\collisions.pyx":142
  * 
  *         cdef tuple last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]
  *         if last_pos:             # <<<<<<<<<<<<<<
@@ -2451,7 +2461,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_t_3 = (__pyx_v_last_pos != Py_None) && (PyTuple_GET_SIZE(__pyx_v_last_pos) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/collisions.pyx":143
+    /* "yapyg\collisions.pyx":143
  *         cdef tuple last_pos = entity_collision_data[IDX_COLLISION_LAST_POS]
  *         if last_pos:
  *                 remove_hash_entries(state, entity_name, last_pos)             # <<<<<<<<<<<<<<
@@ -2465,7 +2475,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   }
   __pyx_L3:;
 
-  /* "yapyg/collisions.pyx":145
+  /* "yapyg\collisions.pyx":145
  *                 remove_hash_entries(state, entity_name, last_pos)
  * 
  *         entity_collision_data[IDX_COLLISION_LAST_POS] = new_pos             # <<<<<<<<<<<<<<
@@ -2478,7 +2488,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_data, __pyx_v_5yapyg_10collisions_IDX_COLLISION_LAST_POS, __pyx_v_new_pos, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/collisions.pyx":149
+  /* "yapyg\collisions.pyx":149
  *         cdef tuple entity_lower_left
  *         cdef tuple entity_upper_right
  *         entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, new_pos, is_tile)             # <<<<<<<<<<<<<<
@@ -2521,7 +2531,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_entity_upper_right = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg/collisions.pyx":151
+  /* "yapyg\collisions.pyx":151
  *         entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, new_pos, is_tile)
  * 
  *         entity_collision_data[IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_LAST_HASH_POS] = (entity_lower_left, entity_upper_right)             # <<<<<<<<<<<<<<
@@ -2546,7 +2556,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":153
+  /* "yapyg\collisions.pyx":153
  *         entity_collision_data[IDX_COLLISION_CACHE][IDX_COLLISION_CACHE_LAST_HASH_POS] = (entity_lower_left, entity_upper_right)
  * 
  *         cdef dict hash_map = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]             # <<<<<<<<<<<<<<
@@ -2566,7 +2576,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   __pyx_v_hash_map = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "yapyg/collisions.pyx":158
+  /* "yapyg\collisions.pyx":158
  *         cdef int y
  *         cdef tuple hash
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):             # <<<<<<<<<<<<<<
@@ -2595,7 +2605,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
   for (__pyx_t_7 = __pyx_t_6; __pyx_t_7 < __pyx_t_5; __pyx_t_7+=1) {
     __pyx_v_x = __pyx_t_7;
 
-    /* "yapyg/collisions.pyx":159
+    /* "yapyg\collisions.pyx":159
  *         cdef tuple hash
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):             # <<<<<<<<<<<<<<
@@ -2624,7 +2634,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
     for (__pyx_t_10 = __pyx_t_9; __pyx_t_10 < __pyx_t_8; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "yapyg/collisions.pyx":160
+      /* "yapyg\collisions.pyx":160
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash = (x, y)             # <<<<<<<<<<<<<<
@@ -2646,7 +2656,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
       __Pyx_XDECREF_SET(__pyx_v_hash, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "yapyg/collisions.pyx":161
+      /* "yapyg\collisions.pyx":161
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):             # <<<<<<<<<<<<<<
@@ -2661,7 +2671,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
       __pyx_t_11 = ((!(__pyx_t_3 != 0)) != 0);
       if (__pyx_t_11) {
 
-        /* "yapyg/collisions.pyx":162
+        /* "yapyg\collisions.pyx":162
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):
  *                                 hash_map[hash] = set()             # <<<<<<<<<<<<<<
@@ -2680,7 +2690,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
       }
       __pyx_L8:;
 
-      /* "yapyg/collisions.pyx":163
+      /* "yapyg\collisions.pyx":163
  *                         if not hash_map.has_key(hash):
  *                                 hash_map[hash] = set()
  *                         hash_map[hash].add(entity_name)             # <<<<<<<<<<<<<<
@@ -2725,7 +2735,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_update_hash(PyObject *__pyx_v_state
     }
   }
 
-  /* "yapyg/collisions.pyx":134
+  /* "yapyg\collisions.pyx":134
  *         del collision_db[entity_name]
  * 
  * cpdef update_hash(list state, str entity_name, tuple new_pos, int is_tile):             # <<<<<<<<<<<<<<
@@ -2869,7 +2879,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_14update_hash(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":165
+/* "yapyg\collisions.pyx":165
  *                         hash_map[hash].add(entity_name)
  * 
  * cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, int is_tile):             # <<<<<<<<<<<<<<
@@ -2900,17 +2910,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   float __pyx_v_c_ll_y;
   float __pyx_v_c_ur_x;
   float __pyx_v_c_ur_y;
-  float __pyx_v_r_x;
-  float __pyx_v_r_y;
-  float __pyx_v_r_w;
-  float __pyx_v_r_h;
-  PyObject *__pyx_v_pos = 0;
-  float __pyx_v_rot;
-  PyObject *__pyx_v_rect_center = 0;
-  PyObject *__pyx_v_rect_corners = 0;
-  float __pyx_v_rotated_x;
-  float __pyx_v_rotated_y;
-  PyObject *__pyx_v_rect_corner = NULL;
+  PyObject *__pyx_v_clip_rect = 0;
   PyObject *__pyx_v_area_lower_left = 0;
   PyObject *__pyx_v_area_upper_right = 0;
   PyObject *__pyx_r = NULL;
@@ -2926,17 +2926,14 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   float __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   PyObject *__pyx_t_11 = NULL;
-  PyObject *__pyx_t_12 = NULL;
-  PyObject *__pyx_t_13 = NULL;
-  Py_ssize_t __pyx_t_14;
-  double __pyx_t_15;
+  double __pyx_t_12;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_hash_area", 0);
   __Pyx_INCREF(__pyx_v_entity_lower_left);
 
-  /* "yapyg/collisions.pyx":171
+  /* "yapyg\collisions.pyx":171
  *                 ["circle", x, y, radius]
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2956,7 +2953,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":172
+  /* "yapyg\collisions.pyx":172
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -2973,7 +2970,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":173
+  /* "yapyg\collisions.pyx":173
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -2990,7 +2987,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_entity_collision_cache = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":174
+  /* "yapyg\collisions.pyx":174
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple entity_shapes = entity_collision_data[IDX_COLLISION_SHAPES]             # <<<<<<<<<<<<<<
@@ -3007,7 +3004,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_entity_shapes = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":175
+  /* "yapyg\collisions.pyx":175
  *         cdef list entity_collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple entity_shapes = entity_collision_data[IDX_COLLISION_SHAPES]
  *         cdef tuple cached_hash_extents = entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT]             # <<<<<<<<<<<<<<
@@ -3024,7 +3021,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_v_cached_hash_extents = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":181
+  /* "yapyg\collisions.pyx":181
  *         cdef float tile_ur_x
  *         cdef float tile_ur_y
  *         if is_tile:             # <<<<<<<<<<<<<<
@@ -3034,7 +3031,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_t_3 = (__pyx_v_is_tile != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/collisions.pyx":183
+    /* "yapyg\collisions.pyx":183
  *         if is_tile:
  *                 # Simplified: always check full tile area
  *                 tile_ll_x = ((entity_lower_left[0]) * HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -3057,7 +3054,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_tile_ll_x = __pyx_t_5;
 
-    /* "yapyg/collisions.pyx":184
+    /* "yapyg\collisions.pyx":184
  *                 # Simplified: always check full tile area
  *                 tile_ll_x = ((entity_lower_left[0]) * HASH_SCALE_FACTOR)
  *                 tile_ll_y = ((entity_lower_left[1]) * HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -3080,7 +3077,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_tile_ll_y = __pyx_t_5;
 
-    /* "yapyg/collisions.pyx":185
+    /* "yapyg\collisions.pyx":185
  *                 tile_ll_x = ((entity_lower_left[0]) * HASH_SCALE_FACTOR)
  *                 tile_ll_y = ((entity_lower_left[1]) * HASH_SCALE_FACTOR)
  *                 tile_ur_x = tile_ll_x + HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3089,7 +3086,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
     __pyx_v_tile_ur_x = (__pyx_v_tile_ll_x + __pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR);
 
-    /* "yapyg/collisions.pyx":186
+    /* "yapyg\collisions.pyx":186
  *                 tile_ll_y = ((entity_lower_left[1]) * HASH_SCALE_FACTOR)
  *                 tile_ur_x = tile_ll_x + HASH_SCALE_FACTOR
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3098,7 +3095,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
     __pyx_v_tile_ur_y = (__pyx_v_tile_ll_y + __pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR);
 
-    /* "yapyg/collisions.pyx":187
+    /* "yapyg\collisions.pyx":187
  *                 tile_ur_x = tile_ll_x + HASH_SCALE_FACTOR
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -3130,7 +3127,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT, __pyx_t_4, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/collisions.pyx":188
+    /* "yapyg\collisions.pyx":188
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)
  *                 return ((int(tile_ll_x), int(tile_ll_y),),             # <<<<<<<<<<<<<<
@@ -3167,7 +3164,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __pyx_t_4 = 0;
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":189
+    /* "yapyg\collisions.pyx":189
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)
  *                 return ((int(tile_ll_x), int(tile_ll_y),),
  *                         (int(tile_ur_x), int(tile_ur_y),)             # <<<<<<<<<<<<<<
@@ -3203,7 +3200,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     __pyx_t_1 = 0;
     __pyx_t_4 = 0;
 
-    /* "yapyg/collisions.pyx":188
+    /* "yapyg\collisions.pyx":188
  *                 tile_ur_y = tile_ll_y + HASH_SCALE_FACTOR
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (0, 0, HASH_SCALE_FACTOR, HASH_SCALE_FACTOR)
  *                 return ((int(tile_ll_x), int(tile_ll_y),),             # <<<<<<<<<<<<<<
@@ -3223,7 +3220,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     goto __pyx_L0;
   }
 
-  /* "yapyg/collisions.pyx":192
+  /* "yapyg\collisions.pyx":192
  *                         )
  * 
  *         cdef float lower_left_x_offset = 0             # <<<<<<<<<<<<<<
@@ -3232,7 +3229,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_lower_left_x_offset = 0.0;
 
-  /* "yapyg/collisions.pyx":193
+  /* "yapyg\collisions.pyx":193
  * 
  *         cdef float lower_left_x_offset = 0
  *         cdef float lower_left_y_offset = 0             # <<<<<<<<<<<<<<
@@ -3241,7 +3238,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_lower_left_y_offset = 0.0;
 
-  /* "yapyg/collisions.pyx":194
+  /* "yapyg\collisions.pyx":194
  *         cdef float lower_left_x_offset = 0
  *         cdef float lower_left_y_offset = 0
  *         cdef float upper_right_x_offset = 0             # <<<<<<<<<<<<<<
@@ -3250,7 +3247,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_upper_right_x_offset = 0.0;
 
-  /* "yapyg/collisions.pyx":195
+  /* "yapyg\collisions.pyx":195
  *         cdef float lower_left_y_offset = 0
  *         cdef float upper_right_x_offset = 0
  *         cdef float upper_right_y_offset = 0             # <<<<<<<<<<<<<<
@@ -3259,8 +3256,8 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   __pyx_v_upper_right_y_offset = 0.0;
 
-  /* "yapyg/collisions.pyx":217
- *         cdef float rotated_y
+  /* "yapyg\collisions.pyx":207
+ *         cdef tuple clip_rect
  * 
  *         if cached_hash_extents:             # <<<<<<<<<<<<<<
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
@@ -3269,7 +3266,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __pyx_t_3 = (__pyx_v_cached_hash_extents != Py_None) && (PyTuple_GET_SIZE(__pyx_v_cached_hash_extents) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/collisions.pyx":218
+    /* "yapyg\collisions.pyx":208
  * 
  *         if cached_hash_extents:
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents             # <<<<<<<<<<<<<<
@@ -3286,7 +3283,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
       if (unlikely(size != 4)) {
         if (size > 4) __Pyx_RaiseTooManyValuesError(4);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       __pyx_t_4 = PyTuple_GET_ITEM(sequence, 0); 
@@ -3302,22 +3299,22 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         Py_ssize_t i;
         PyObject** temps[4] = {&__pyx_t_4,&__pyx_t_6,&__pyx_t_2,&__pyx_t_1};
         for (i=0; i < 4; i++) {
-          PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(item);
           *(temps[i]) = item;
         }
       }
       #endif
     } else {
-      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_t_6); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_lower_left_x_offset = __pyx_t_5;
     __pyx_v_lower_left_y_offset = __pyx_t_7;
@@ -3327,7 +3324,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   }
   /*else*/ {
 
-    /* "yapyg/collisions.pyx":220
+    /* "yapyg\collisions.pyx":210
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
  *         else:
  *                 for collision_shape in entity_shapes:             # <<<<<<<<<<<<<<
@@ -3336,21 +3333,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
     if (unlikely(__pyx_v_entity_shapes == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __pyx_t_1 = __pyx_v_entity_shapes; __Pyx_INCREF(__pyx_t_1); __pyx_t_10 = 0;
     for (;;) {
       if (__pyx_t_10 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
       #if CYTHON_COMPILING_IN_CPYTHON
-      __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_2); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_2); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       #else
-      __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       #endif
-      if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_XDECREF_SET(__pyx_v_collision_shape, ((PyObject*)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "yapyg/collisions.pyx":221
+      /* "yapyg\collisions.pyx":211
  *         else:
  *                 for collision_shape in entity_shapes:
  *                         if collision_shape[0] == "circle":             # <<<<<<<<<<<<<<
@@ -3359,15 +3356,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_2, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_2, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/collisions.pyx":222
+        /* "yapyg\collisions.pyx":212
  *                 for collision_shape in entity_shapes:
  *                         if collision_shape[0] == "circle":
  *                                 c_x = collision_shape[1] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3376,21 +3373,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         if (unlikely(__pyx_v_collision_shape == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_c_x = __pyx_t_9;
 
-        /* "yapyg/collisions.pyx":223
+        /* "yapyg\collisions.pyx":213
  *                         if collision_shape[0] == "circle":
  *                                 c_x = collision_shape[1] * HASH_SCALE_FACTOR
  *                                 c_y = collision_shape[2] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3399,21 +3396,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         if (unlikely(__pyx_v_collision_shape == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 223; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_v_c_y = __pyx_t_9;
 
-        /* "yapyg/collisions.pyx":224
+        /* "yapyg\collisions.pyx":214
  *                                 c_x = collision_shape[1] * HASH_SCALE_FACTOR
  *                                 c_y = collision_shape[2] * HASH_SCALE_FACTOR
  *                                 c_r = collision_shape[3] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
@@ -3422,21 +3419,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         if (unlikely(__pyx_v_collision_shape == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_v_c_r = __pyx_t_9;
 
-        /* "yapyg/collisions.pyx":226
+        /* "yapyg\collisions.pyx":216
  *                                 c_r = collision_shape[3] * HASH_SCALE_FACTOR
  * 
  *                                 c_ll_x = c_x - c_r             # <<<<<<<<<<<<<<
@@ -3445,7 +3442,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ll_x = (__pyx_v_c_x - __pyx_v_c_r);
 
-        /* "yapyg/collisions.pyx":227
+        /* "yapyg\collisions.pyx":217
  * 
  *                                 c_ll_x = c_x - c_r
  *                                 c_ll_y = c_y - c_r             # <<<<<<<<<<<<<<
@@ -3454,7 +3451,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ll_y = (__pyx_v_c_y - __pyx_v_c_r);
 
-        /* "yapyg/collisions.pyx":228
+        /* "yapyg\collisions.pyx":218
  *                                 c_ll_x = c_x - c_r
  *                                 c_ll_y = c_y - c_r
  *                                 c_ur_x = c_x + c_r             # <<<<<<<<<<<<<<
@@ -3463,7 +3460,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ur_x = (__pyx_v_c_x + __pyx_v_c_r);
 
-        /* "yapyg/collisions.pyx":229
+        /* "yapyg\collisions.pyx":219
  *                                 c_ll_y = c_y - c_r
  *                                 c_ur_x = c_x + c_r
  *                                 c_ur_y = c_y + c_r             # <<<<<<<<<<<<<<
@@ -3472,7 +3469,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
         __pyx_v_c_ur_y = (__pyx_v_c_y + __pyx_v_c_r);
 
-        /* "yapyg/collisions.pyx":231
+        /* "yapyg\collisions.pyx":221
  *                                 c_ur_y = c_y + c_r
  * 
  *                                 if c_ll_x < lower_left_x_offset:             # <<<<<<<<<<<<<<
@@ -3482,7 +3479,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ll_x < __pyx_v_lower_left_x_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg/collisions.pyx":232
+          /* "yapyg\collisions.pyx":222
  * 
  *                                 if c_ll_x < lower_left_x_offset:
  *                                         lower_left_x_offset = c_ll_x             # <<<<<<<<<<<<<<
@@ -3494,7 +3491,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         }
         __pyx_L8:;
 
-        /* "yapyg/collisions.pyx":234
+        /* "yapyg\collisions.pyx":224
  *                                         lower_left_x_offset = c_ll_x
  * 
  *                                 if c_ll_y < lower_left_y_offset:             # <<<<<<<<<<<<<<
@@ -3504,7 +3501,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ll_y < __pyx_v_lower_left_y_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg/collisions.pyx":235
+          /* "yapyg\collisions.pyx":225
  * 
  *                                 if c_ll_y < lower_left_y_offset:
  *                                         lower_left_y_offset = c_ll_y             # <<<<<<<<<<<<<<
@@ -3516,7 +3513,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         }
         __pyx_L9:;
 
-        /* "yapyg/collisions.pyx":237
+        /* "yapyg\collisions.pyx":227
  *                                         lower_left_y_offset = c_ll_y
  * 
  *                                 if c_ur_x > upper_right_x_offset:             # <<<<<<<<<<<<<<
@@ -3526,7 +3523,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ur_x > __pyx_v_upper_right_x_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg/collisions.pyx":238
+          /* "yapyg\collisions.pyx":228
  * 
  *                                 if c_ur_x > upper_right_x_offset:
  *                                         upper_right_x_offset = c_ur_x             # <<<<<<<<<<<<<<
@@ -3538,7 +3535,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         }
         __pyx_L10:;
 
-        /* "yapyg/collisions.pyx":240
+        /* "yapyg\collisions.pyx":230
  *                                         upper_right_x_offset = c_ur_x
  * 
  *                                 if c_ur_y > upper_right_y_offset:             # <<<<<<<<<<<<<<
@@ -3548,7 +3545,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         __pyx_t_3 = ((__pyx_v_c_ur_y > __pyx_v_upper_right_y_offset) != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg/collisions.pyx":241
+          /* "yapyg\collisions.pyx":231
  * 
  *                                 if c_ur_y > upper_right_y_offset:
  *                                         upper_right_y_offset = c_ur_y             # <<<<<<<<<<<<<<
@@ -3562,433 +3559,253 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
         goto __pyx_L7;
       }
 
-      /* "yapyg/collisions.pyx":243
+      /* "yapyg\collisions.pyx":233
  *                                         upper_right_y_offset = c_ur_y
  * 
  *                         elif collision_shape[0] == "rectangle":             # <<<<<<<<<<<<<<
- *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR
- *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR
+ *                                 clip_rect = math_collision.f_get_clipping_rectangle(
+ *                                         collision_shape[1] * HASH_SCALE_FACTOR,
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_4, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_t_4, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/collisions.pyx":244
- * 
+        /* "yapyg\collisions.pyx":235
  *                         elif collision_shape[0] == "rectangle":
- *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
- *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR
- *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR
+ *                                 clip_rect = math_collision.f_get_clipping_rectangle(
+ *                                         collision_shape[1] * HASH_SCALE_FACTOR,             # <<<<<<<<<<<<<<
+ *                                         collision_shape[2] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[3] * HASH_SCALE_FACTOR,
  */
         if (unlikely(__pyx_v_collision_shape == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_v_r_x = __pyx_t_9;
 
-        /* "yapyg/collisions.pyx":245
+        /* "yapyg\collisions.pyx":236
+ *                                 clip_rect = math_collision.f_get_clipping_rectangle(
+ *                                         collision_shape[1] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[2] * HASH_SCALE_FACTOR,             # <<<<<<<<<<<<<<
+ *                                         collision_shape[3] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[4] * HASH_SCALE_FACTOR,
+ */
+        if (unlikely(__pyx_v_collision_shape == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_2);
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+        /* "yapyg\collisions.pyx":237
+ *                                         collision_shape[1] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[2] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[3] * HASH_SCALE_FACTOR,             # <<<<<<<<<<<<<<
+ *                                         collision_shape[4] * HASH_SCALE_FACTOR,
+ *                                         )
+ */
+        if (unlikely(__pyx_v_collision_shape == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+        /* "yapyg\collisions.pyx":238
+ *                                         collision_shape[2] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[3] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[4] * HASH_SCALE_FACTOR,             # <<<<<<<<<<<<<<
+ *                                         )
+ *                                 lower_left_x_offset = clip_rect[0]
+ */
+        if (unlikely(__pyx_v_collision_shape == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_2);
+        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+        /* "yapyg\collisions.pyx":234
+ * 
  *                         elif collision_shape[0] == "rectangle":
- *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR
- *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
- *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR
- *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR
+ *                                 clip_rect = math_collision.f_get_clipping_rectangle(             # <<<<<<<<<<<<<<
+ *                                         collision_shape[1] * HASH_SCALE_FACTOR,
+ *                                         collision_shape[2] * HASH_SCALE_FACTOR,
+ */
+        __pyx_t_4 = __pyx_f_5yapyg_14math_collision_f_get_clipping_rectangle(__pyx_t_9, __pyx_t_8, __pyx_t_7, __pyx_t_5, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_XDECREF_SET(__pyx_v_clip_rect, ((PyObject*)__pyx_t_4));
+        __pyx_t_4 = 0;
+
+        /* "yapyg\collisions.pyx":240
+ *                                         collision_shape[4] * HASH_SCALE_FACTOR,
+ *                                         )
+ *                                 lower_left_x_offset = clip_rect[0]             # <<<<<<<<<<<<<<
+ *                                 lower_left_y_offset = clip_rect[1]
+ *                                 upper_right_x_offset = clip_rect[0] + clip_rect[2]
+ */
+        if (unlikely(__pyx_v_clip_rect == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_clip_rect, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_v_lower_left_x_offset = __pyx_t_5;
+
+        /* "yapyg\collisions.pyx":241
+ *                                         )
+ *                                 lower_left_x_offset = clip_rect[0]
+ *                                 lower_left_y_offset = clip_rect[1]             # <<<<<<<<<<<<<<
+ *                                 upper_right_x_offset = clip_rect[0] + clip_rect[2]
+ *                                 upper_right_y_offset = clip_rect[1] + clip_rect[3]
+ */
+        if (unlikely(__pyx_v_clip_rect == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_clip_rect, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_v_lower_left_y_offset = __pyx_t_5;
+
+        /* "yapyg\collisions.pyx":242
+ *                                 lower_left_x_offset = clip_rect[0]
+ *                                 lower_left_y_offset = clip_rect[1]
+ *                                 upper_right_x_offset = clip_rect[0] + clip_rect[2]             # <<<<<<<<<<<<<<
+ *                                 upper_right_y_offset = clip_rect[1] + clip_rect[3]
+ *                         else:
+ */
+        if (unlikely(__pyx_v_clip_rect == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_clip_rect, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_4);
+        if (unlikely(__pyx_v_clip_rect == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_clip_rect, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_v_upper_right_x_offset = __pyx_t_5;
+
+        /* "yapyg\collisions.pyx":243
+ *                                 lower_left_y_offset = clip_rect[1]
+ *                                 upper_right_x_offset = clip_rect[0] + clip_rect[2]
+ *                                 upper_right_y_offset = clip_rect[1] + clip_rect[3]             # <<<<<<<<<<<<<<
+ *                         else:
+ *                                 raise RuntimeError("Unknown shape %s" % str(collision_shape[0]))
+ */
+        if (unlikely(__pyx_v_clip_rect == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_clip_rect, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_2);
+        if (unlikely(__pyx_v_clip_rect == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        }
+        __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_clip_rect, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_v_upper_right_y_offset = __pyx_t_5;
+        goto __pyx_L7;
+      }
+      /*else*/ {
+
+        /* "yapyg\collisions.pyx":245
+ *                                 upper_right_y_offset = clip_rect[1] + clip_rect[3]
+ *                         else:
+ *                                 raise RuntimeError("Unknown shape %s" % str(collision_shape[0]))             # <<<<<<<<<<<<<<
+ * 
+ *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
  */
         if (unlikely(__pyx_v_collision_shape == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
           {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_v_r_y = __pyx_t_9;
-
-        /* "yapyg/collisions.pyx":246
- *                                 r_x = collision_shape[1] * HASH_SCALE_FACTOR
- *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR
- *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
- *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR
- *                                 pos = entities.get_pos(state, entity_name)
- */
-        if (unlikely(__pyx_v_collision_shape == Py_None)) {
-          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_v_r_w = __pyx_t_9;
-
-        /* "yapyg/collisions.pyx":247
- *                                 r_y = collision_shape[2] * HASH_SCALE_FACTOR
- *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR
- *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR             # <<<<<<<<<<<<<<
- *                                 pos = entities.get_pos(state, entity_name)
- *                                 rot = pos[2]
- */
-        if (unlikely(__pyx_v_collision_shape == Py_None)) {
-          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        }
-        __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_v_r_h = __pyx_t_9;
-
-        /* "yapyg/collisions.pyx":248
- *                                 r_w = collision_shape[3] * HASH_SCALE_FACTOR
- *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR
- *                                 pos = entities.get_pos(state, entity_name)             # <<<<<<<<<<<<<<
- *                                 rot = pos[2]
- * 
- */
-        __pyx_t_4 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_XDECREF_SET(__pyx_v_pos, ((PyObject*)__pyx_t_4));
-        __pyx_t_4 = 0;
-
-        /* "yapyg/collisions.pyx":249
- *                                 r_h = collision_shape[4] * HASH_SCALE_FACTOR
- *                                 pos = entities.get_pos(state, entity_name)
- *                                 rot = pos[2]             # <<<<<<<<<<<<<<
- * 
- *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
- */
-        if (unlikely(__pyx_v_pos == Py_None)) {
-          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        }
-        __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_v_rot = __pyx_t_9;
-
-        /* "yapyg/collisions.pyx":251
- *                                 rot = pos[2]
- * 
- *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))             # <<<<<<<<<<<<<<
- *                                 rect_corners = ((r_x, r_y),
- *                                                 (r_x + r_w, r_y),
- */
-        __pyx_t_4 = PyFloat_FromDouble((__pyx_v_r_x + (__pyx_v_r_w / 2.0))); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = PyFloat_FromDouble((__pyx_v_r_y + (__pyx_v_r_h / 2.0))); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_4);
-        PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_6);
-        __Pyx_GIVEREF(__pyx_t_6);
         __pyx_t_4 = 0;
-        __pyx_t_6 = 0;
-        __Pyx_XDECREF_SET(__pyx_v_rect_center, ((PyObject*)__pyx_t_2));
-        __pyx_t_2 = 0;
-
-        /* "yapyg/collisions.pyx":252
- * 
- *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
- *                                 rect_corners = ((r_x, r_y),             # <<<<<<<<<<<<<<
- *                                                 (r_x + r_w, r_y),
- *                                                 (r_x, r_y + r_h),
- */
-        __pyx_t_2 = PyFloat_FromDouble(__pyx_v_r_x); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_r_y); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
-        __Pyx_GIVEREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_6);
-        __Pyx_GIVEREF(__pyx_t_6);
-        __pyx_t_2 = 0;
-        __pyx_t_6 = 0;
-
-        /* "yapyg/collisions.pyx":253
- *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
- *                                 rect_corners = ((r_x, r_y),
- *                                                 (r_x + r_w, r_y),             # <<<<<<<<<<<<<<
- *                                                 (r_x, r_y + r_h),
- *                                                 (r_x + r_w, r_y + r_h),
- */
-        __pyx_t_6 = PyFloat_FromDouble((__pyx_v_r_x + __pyx_v_r_w)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_Unknown_shape_s, __pyx_t_4); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = PyFloat_FromDouble(__pyx_v_r_y); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_11);
-        PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_6);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_6);
-        PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_2);
-        __Pyx_GIVEREF(__pyx_t_2);
         __pyx_t_6 = 0;
-        __pyx_t_2 = 0;
-
-        /* "yapyg/collisions.pyx":254
- *                                 rect_corners = ((r_x, r_y),
- *                                                 (r_x + r_w, r_y),
- *                                                 (r_x, r_y + r_h),             # <<<<<<<<<<<<<<
- *                                                 (r_x + r_w, r_y + r_h),
- *                                                 )
- */
-        __pyx_t_2 = PyFloat_FromDouble(__pyx_v_r_x); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_6 = PyFloat_FromDouble((__pyx_v_r_y + __pyx_v_r_h)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_12);
-        PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_2);
-        __Pyx_GIVEREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_6);
-        __Pyx_GIVEREF(__pyx_t_6);
-        __pyx_t_2 = 0;
-        __pyx_t_6 = 0;
-
-        /* "yapyg/collisions.pyx":255
- *                                                 (r_x + r_w, r_y),
- *                                                 (r_x, r_y + r_h),
- *                                                 (r_x + r_w, r_y + r_h),             # <<<<<<<<<<<<<<
- *                                                 )
- *                                 for rect_corner in rect_corners:
- */
-        __pyx_t_6 = PyFloat_FromDouble((__pyx_v_r_x + __pyx_v_r_w)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = PyFloat_FromDouble((__pyx_v_r_y + __pyx_v_r_h)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_13);
-        PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_6);
-        __Pyx_GIVEREF(__pyx_t_6);
-        PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_2);
-        __Pyx_GIVEREF(__pyx_t_2);
-        __pyx_t_6 = 0;
-        __pyx_t_2 = 0;
-
-        /* "yapyg/collisions.pyx":252
- * 
- *                                 rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
- *                                 rect_corners = ((r_x, r_y),             # <<<<<<<<<<<<<<
- *                                                 (r_x + r_w, r_y),
- *                                                 (r_x, r_y + r_h),
- */
-        __pyx_t_2 = PyTuple_New(4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
-        __Pyx_GIVEREF(__pyx_t_4);
-        PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_11);
-        __Pyx_GIVEREF(__pyx_t_11);
-        PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_12);
-        __Pyx_GIVEREF(__pyx_t_12);
-        PyTuple_SET_ITEM(__pyx_t_2, 3, __pyx_t_13);
-        __Pyx_GIVEREF(__pyx_t_13);
-        __pyx_t_4 = 0;
-        __pyx_t_11 = 0;
-        __pyx_t_12 = 0;
-        __pyx_t_13 = 0;
-        __Pyx_XDECREF_SET(__pyx_v_rect_corners, ((PyObject*)__pyx_t_2));
-        __pyx_t_2 = 0;
-
-        /* "yapyg/collisions.pyx":257
- *                                                 (r_x + r_w, r_y + r_h),
- *                                                 )
- *                                 for rect_corner in rect_corners:             # <<<<<<<<<<<<<<
- *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
- *                                         if rotated_x < lower_left_x_offset:
- */
-        __pyx_t_2 = __pyx_v_rect_corners; __Pyx_INCREF(__pyx_t_2); __pyx_t_14 = 0;
-        for (;;) {
-          if (__pyx_t_14 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
-          #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_13 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_14); __Pyx_INCREF(__pyx_t_13); __pyx_t_14++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          #else
-          __pyx_t_13 = PySequence_ITEM(__pyx_t_2, __pyx_t_14); __pyx_t_14++; if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          #endif
-          __Pyx_XDECREF_SET(__pyx_v_rect_corner, ((PyObject*)__pyx_t_13));
-          __pyx_t_13 = 0;
-
-          /* "yapyg/collisions.pyx":258
- *                                                 )
- *                                 for rect_corner in rect_corners:
- *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)             # <<<<<<<<<<<<<<
- *                                         if rotated_x < lower_left_x_offset:
- *                                                 lower_left_x_offset = rotated_x
- */
-          __pyx_t_13 = __pyx_f_5yapyg_7math_2d_rotated_point(__pyx_v_rect_center, __pyx_v_rect_corner, __pyx_v_rot, 0); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_13);
-          if (likely(__pyx_t_13 != Py_None)) {
-            PyObject* sequence = __pyx_t_13;
-            #if CYTHON_COMPILING_IN_CPYTHON
-            Py_ssize_t size = Py_SIZE(sequence);
-            #else
-            Py_ssize_t size = PySequence_Size(sequence);
-            #endif
-            if (unlikely(size != 2)) {
-              if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-              else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            }
-            #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_12 = PyTuple_GET_ITEM(sequence, 0); 
-            __pyx_t_11 = PyTuple_GET_ITEM(sequence, 1); 
-            __Pyx_INCREF(__pyx_t_12);
-            __Pyx_INCREF(__pyx_t_11);
-            #else
-            __pyx_t_12 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_12);
-            __pyx_t_11 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_11);
-            #endif
-            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          } else {
-            __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          }
-          __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_t_12); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-          __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_t_11); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_v_rotated_x = __pyx_t_9;
-          __pyx_v_rotated_y = __pyx_t_8;
-
-          /* "yapyg/collisions.pyx":259
- *                                 for rect_corner in rect_corners:
- *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
- *                                         if rotated_x < lower_left_x_offset:             # <<<<<<<<<<<<<<
- *                                                 lower_left_x_offset = rotated_x
- * 
- */
-          __pyx_t_3 = ((__pyx_v_rotated_x < __pyx_v_lower_left_x_offset) != 0);
-          if (__pyx_t_3) {
-
-            /* "yapyg/collisions.pyx":260
- *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
- *                                         if rotated_x < lower_left_x_offset:
- *                                                 lower_left_x_offset = rotated_x             # <<<<<<<<<<<<<<
- * 
- *                                         if rotated_y < lower_left_y_offset:
- */
-            __pyx_v_lower_left_x_offset = __pyx_v_rotated_x;
-            goto __pyx_L14;
-          }
-          __pyx_L14:;
-
-          /* "yapyg/collisions.pyx":262
- *                                                 lower_left_x_offset = rotated_x
- * 
- *                                         if rotated_y < lower_left_y_offset:             # <<<<<<<<<<<<<<
- *                                                 lower_left_y_offset = rotated_y
- * 
- */
-          __pyx_t_3 = ((__pyx_v_rotated_y < __pyx_v_lower_left_y_offset) != 0);
-          if (__pyx_t_3) {
-
-            /* "yapyg/collisions.pyx":263
- * 
- *                                         if rotated_y < lower_left_y_offset:
- *                                                 lower_left_y_offset = rotated_y             # <<<<<<<<<<<<<<
- * 
- *                                         if rotated_x > upper_right_x_offset:
- */
-            __pyx_v_lower_left_y_offset = __pyx_v_rotated_y;
-            goto __pyx_L15;
-          }
-          __pyx_L15:;
-
-          /* "yapyg/collisions.pyx":265
- *                                                 lower_left_y_offset = rotated_y
- * 
- *                                         if rotated_x > upper_right_x_offset:             # <<<<<<<<<<<<<<
- *                                                 upper_right_x_offset = rotated_x
- * 
- */
-          __pyx_t_3 = ((__pyx_v_rotated_x > __pyx_v_upper_right_x_offset) != 0);
-          if (__pyx_t_3) {
-
-            /* "yapyg/collisions.pyx":266
- * 
- *                                         if rotated_x > upper_right_x_offset:
- *                                                 upper_right_x_offset = rotated_x             # <<<<<<<<<<<<<<
- * 
- *                                         if rotated_y > upper_right_y_offset:
- */
-            __pyx_v_upper_right_x_offset = __pyx_v_rotated_x;
-            goto __pyx_L16;
-          }
-          __pyx_L16:;
-
-          /* "yapyg/collisions.pyx":268
- *                                                 upper_right_x_offset = rotated_x
- * 
- *                                         if rotated_y > upper_right_y_offset:             # <<<<<<<<<<<<<<
- *                                                 upper_right_y_offset = rotated_y
- *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
- */
-          __pyx_t_3 = ((__pyx_v_rotated_y > __pyx_v_upper_right_y_offset) != 0);
-          if (__pyx_t_3) {
-
-            /* "yapyg/collisions.pyx":269
- * 
- *                                         if rotated_y > upper_right_y_offset:
- *                                                 upper_right_y_offset = rotated_y             # <<<<<<<<<<<<<<
- *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
- *                                                                            upper_right_x_offset, upper_right_y_offset)
- */
-            __pyx_v_upper_right_y_offset = __pyx_v_rotated_y;
-            goto __pyx_L17;
-          }
-          __pyx_L17:;
-
-          /* "yapyg/collisions.pyx":257
- *                                                 (r_x + r_w, r_y + r_h),
- *                                                 )
- *                                 for rect_corner in rect_corners:             # <<<<<<<<<<<<<<
- *                                         rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
- *                                         if rotated_x < lower_left_x_offset:
- */
-        }
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        goto __pyx_L7;
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_Raise(__pyx_t_6, 0, 0, 0);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       __pyx_L7:;
 
-      /* "yapyg/collisions.pyx":220
+      /* "yapyg\collisions.pyx":210
  *                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
  *         else:
  *                 for collision_shape in entity_shapes:             # <<<<<<<<<<<<<<
@@ -3998,61 +3815,61 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":270
- *                                         if rotated_y > upper_right_y_offset:
- *                                                 upper_right_y_offset = rotated_y
+    /* "yapyg\collisions.pyx":247
+ *                                 raise RuntimeError("Unknown shape %s" % str(collision_shape[0]))
+ * 
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,             # <<<<<<<<<<<<<<
  *                                                                            upper_right_x_offset, upper_right_y_offset)
  * 
  */
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_lower_left_x_offset); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_lower_left_x_offset); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_lower_left_y_offset); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_v_lower_left_y_offset); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_6);
 
-    /* "yapyg/collisions.pyx":271
- *                                                 upper_right_y_offset = rotated_y
+    /* "yapyg\collisions.pyx":248
+ * 
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
  *                                                                            upper_right_x_offset, upper_right_y_offset)             # <<<<<<<<<<<<<<
  * 
  *         entity_lower_left = (entity_lower_left[0] * HASH_SCALE_FACTOR, entity_lower_left[1] * HASH_SCALE_FACTOR)
  */
-    __pyx_t_13 = PyFloat_FromDouble(__pyx_v_upper_right_x_offset); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_11 = PyFloat_FromDouble(__pyx_v_upper_right_y_offset); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_11);
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_upper_right_x_offset); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_upper_right_y_offset); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
 
-    /* "yapyg/collisions.pyx":270
- *                                         if rotated_y > upper_right_y_offset:
- *                                                 upper_right_y_offset = rotated_y
+    /* "yapyg\collisions.pyx":247
+ *                                 raise RuntimeError("Unknown shape %s" % str(collision_shape[0]))
+ * 
  *                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,             # <<<<<<<<<<<<<<
  *                                                                            upper_right_x_offset, upper_right_y_offset)
  * 
  */
-    __pyx_t_12 = PyTuple_New(4); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_12);
-    PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_1);
+    __pyx_t_11 = PyTuple_New(4); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_11);
+    PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
-    PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_2);
+    PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_11, 3, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
-    PyTuple_SET_ITEM(__pyx_t_12, 2, __pyx_t_13);
-    __Pyx_GIVEREF(__pyx_t_13);
-    PyTuple_SET_ITEM(__pyx_t_12, 3, __pyx_t_11);
-    __Pyx_GIVEREF(__pyx_t_11);
     __pyx_t_1 = 0;
+    __pyx_t_6 = 0;
+    __pyx_t_4 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_13 = 0;
-    __pyx_t_11 = 0;
     if (unlikely(__pyx_v_entity_collision_cache == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT, __pyx_t_12, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT, __pyx_t_11, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
   __pyx_L4:;
 
-  /* "yapyg/collisions.pyx":273
+  /* "yapyg\collisions.pyx":250
  *                                                                            upper_right_x_offset, upper_right_y_offset)
  * 
  *         entity_lower_left = (entity_lower_left[0] * HASH_SCALE_FACTOR, entity_lower_left[1] * HASH_SCALE_FACTOR)             # <<<<<<<<<<<<<<
@@ -4061,232 +3878,232 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  */
   if (unlikely(__pyx_v_entity_lower_left == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_12 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_12 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_11 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_13 = PyNumber_Multiply(__pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_11, __pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (unlikely(__pyx_v_entity_lower_left == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_11 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_6 = PyNumber_Multiply(__pyx_t_2, __pyx_t_11); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
-  __Pyx_GIVEREF(__pyx_t_13);
-  PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_13 = 0;
-  __pyx_t_2 = 0;
-  __Pyx_DECREF_SET(__pyx_v_entity_lower_left, ((PyObject*)__pyx_t_12));
-  __pyx_t_12 = 0;
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_4 = 0;
+  __pyx_t_6 = 0;
+  __Pyx_DECREF_SET(__pyx_v_entity_lower_left, ((PyObject*)__pyx_t_11));
+  __pyx_t_11 = 0;
 
-  /* "yapyg/collisions.pyx":276
+  /* "yapyg\collisions.pyx":253
  * 
  *         cdef tuple area_lower_left
  *         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,             # <<<<<<<<<<<<<<
  *                            entity_lower_left[1] + lower_left_y_offset)
  * 
  */
-  __pyx_t_12 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_12 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_lower_left_x_offset); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_t_2); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_11 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_lower_left_x_offset); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_4 = PyNumber_Add(__pyx_t_11, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "yapyg/collisions.pyx":277
+  /* "yapyg\collisions.pyx":254
  *         cdef tuple area_lower_left
  *         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,
  *                            entity_lower_left[1] + lower_left_y_offset)             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple area_upper_right
  */
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_lower_left_y_offset); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_11 = PyNumber_Add(__pyx_t_2, __pyx_t_12); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_lower_left_y_offset); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_11);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  __pyx_t_2 = PyNumber_Add(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "yapyg/collisions.pyx":276
+  /* "yapyg\collisions.pyx":253
  * 
  *         cdef tuple area_lower_left
  *         area_lower_left = (entity_lower_left[0] + lower_left_x_offset,             # <<<<<<<<<<<<<<
  *                            entity_lower_left[1] + lower_left_y_offset)
  * 
  */
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
-  __Pyx_GIVEREF(__pyx_t_13);
-  PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_11);
-  __Pyx_GIVEREF(__pyx_t_11);
-  __pyx_t_13 = 0;
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_4 = 0;
+  __pyx_t_2 = 0;
+  __pyx_v_area_lower_left = ((PyObject*)__pyx_t_11);
   __pyx_t_11 = 0;
-  __pyx_v_area_lower_left = ((PyObject*)__pyx_t_12);
-  __pyx_t_12 = 0;
 
-  /* "yapyg/collisions.pyx":280
+  /* "yapyg\collisions.pyx":257
  * 
  *         cdef tuple area_upper_right
  *         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,             # <<<<<<<<<<<<<<
  *                             entity_lower_left[1] + upper_right_y_offset)
  * 
  */
-  __pyx_t_12 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_12 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_upper_right_x_offset); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_11 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_upper_right_x_offset); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyNumber_Add(__pyx_t_11, __pyx_t_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":281
+  /* "yapyg\collisions.pyx":258
  *         cdef tuple area_upper_right
  *         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,
  *                             entity_lower_left[1] + upper_right_y_offset)             # <<<<<<<<<<<<<<
  * 
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))
  */
-  __pyx_t_11 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_upper_right_y_offset); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_11, __pyx_t_12); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_upper_right_y_offset); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_6 = PyNumber_Add(__pyx_t_2, __pyx_t_11); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "yapyg/collisions.pyx":280
+  /* "yapyg\collisions.pyx":257
  * 
  *         cdef tuple area_upper_right
  *         area_upper_right = (entity_lower_left[0] + upper_right_x_offset,             # <<<<<<<<<<<<<<
  *                             entity_lower_left[1] + upper_right_y_offset)
  * 
  */
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
-  __Pyx_GIVEREF(__pyx_t_13);
-  PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_13 = 0;
-  __pyx_t_2 = 0;
-  __pyx_v_area_upper_right = ((PyObject*)__pyx_t_12);
-  __pyx_t_12 = 0;
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 257; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_4 = 0;
+  __pyx_t_6 = 0;
+  __pyx_v_area_upper_right = ((PyObject*)__pyx_t_11);
+  __pyx_t_11 = 0;
 
-  /* "yapyg/collisions.pyx":283
+  /* "yapyg\collisions.pyx":260
  *                             entity_lower_left[1] + upper_right_y_offset)
  * 
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))             # <<<<<<<<<<<<<<
  *         area_upper_right = (int(floor(area_upper_right[0])), int(floor(area_upper_right[1])))
  *         return (area_lower_left, area_upper_right)
  */
-  __pyx_t_12 = __Pyx_GetItemInt_Tuple(__pyx_v_area_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_12 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_15 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_15 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyFloat_FromDouble(floor(__pyx_t_15)); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_12);
-  __Pyx_GIVEREF(__pyx_t_12);
-  __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_area_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_15 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(floor(__pyx_t_15)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_13 = PyTuple_New(1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_13, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_12);
-  __Pyx_GIVEREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_12 = 0;
-  __pyx_t_2 = 0;
-  __Pyx_DECREF_SET(__pyx_v_area_lower_left, ((PyObject*)__pyx_t_13));
-  __pyx_t_13 = 0;
+  __pyx_t_11 = __Pyx_GetItemInt_Tuple(__pyx_v_area_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __pyx_t_11 = PyFloat_FromDouble(floor(__pyx_t_12)); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_11);
+  __Pyx_GIVEREF(__pyx_t_11);
+  __pyx_t_11 = 0;
+  __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_6, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_area_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = PyFloat_FromDouble(floor(__pyx_t_12)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_4, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 260; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_11);
+  __Pyx_GIVEREF(__pyx_t_11);
+  PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_11 = 0;
+  __pyx_t_6 = 0;
+  __Pyx_DECREF_SET(__pyx_v_area_lower_left, ((PyObject*)__pyx_t_4));
+  __pyx_t_4 = 0;
 
-  /* "yapyg/collisions.pyx":284
+  /* "yapyg\collisions.pyx":261
  * 
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))
  *         area_upper_right = (int(floor(area_upper_right[0])), int(floor(area_upper_right[1])))             # <<<<<<<<<<<<<<
  *         return (area_lower_left, area_upper_right)
  * 
  */
-  __pyx_t_13 = __Pyx_GetItemInt_Tuple(__pyx_v_area_upper_right, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_13 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_15 = __pyx_PyFloat_AsDouble(__pyx_t_13); if (unlikely((__pyx_t_15 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = PyFloat_FromDouble(floor(__pyx_t_15)); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_13);
-  __Pyx_GIVEREF(__pyx_t_13);
-  __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt_Tuple(__pyx_v_area_upper_right, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_15 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_15 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(floor(__pyx_t_15)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
-  __Pyx_GIVEREF(__pyx_t_13);
-  PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_13 = 0;
-  __pyx_t_2 = 0;
-  __Pyx_DECREF_SET(__pyx_v_area_upper_right, ((PyObject*)__pyx_t_12));
-  __pyx_t_12 = 0;
+  __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_area_upper_right, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = PyFloat_FromDouble(floor(__pyx_t_12)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_area_upper_right, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = PyFloat_FromDouble(floor(__pyx_t_12)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyInt_Type))), __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_6);
+  __pyx_t_4 = 0;
+  __pyx_t_6 = 0;
+  __Pyx_DECREF_SET(__pyx_v_area_upper_right, ((PyObject*)__pyx_t_11));
+  __pyx_t_11 = 0;
 
-  /* "yapyg/collisions.pyx":285
+  /* "yapyg\collisions.pyx":262
  *         area_lower_left = (int(floor(area_lower_left[0])), int(floor(area_lower_left[1])))
  *         area_upper_right = (int(floor(area_upper_right[0])), int(floor(area_upper_right[1])))
  *         return (area_lower_left, area_upper_right)             # <<<<<<<<<<<<<<
@@ -4294,19 +4111,19 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
  * cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_v_area_lower_left);
-  PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_v_area_lower_left);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_area_lower_left);
   __Pyx_GIVEREF(__pyx_v_area_lower_left);
   __Pyx_INCREF(__pyx_v_area_upper_right);
-  PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_v_area_upper_right);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_v_area_upper_right);
   __Pyx_GIVEREF(__pyx_v_area_upper_right);
-  __pyx_r = ((PyObject*)__pyx_t_12);
-  __pyx_t_12 = 0;
+  __pyx_r = ((PyObject*)__pyx_t_11);
+  __pyx_t_11 = 0;
   goto __pyx_L0;
 
-  /* "yapyg/collisions.pyx":165
+  /* "yapyg\collisions.pyx":165
  *                         hash_map[hash].add(entity_name)
  * 
  * cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, int is_tile):             # <<<<<<<<<<<<<<
@@ -4321,8 +4138,6 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_XDECREF(__pyx_t_13);
   __Pyx_AddTraceback("yapyg.collisions.get_hash_area", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -4332,10 +4147,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_hash_area(PyObject *__pyx_v_sta
   __Pyx_XDECREF(__pyx_v_entity_shapes);
   __Pyx_XDECREF(__pyx_v_cached_hash_extents);
   __Pyx_XDECREF(__pyx_v_collision_shape);
-  __Pyx_XDECREF(__pyx_v_pos);
-  __Pyx_XDECREF(__pyx_v_rect_center);
-  __Pyx_XDECREF(__pyx_v_rect_corners);
-  __Pyx_XDECREF(__pyx_v_rect_corner);
+  __Pyx_XDECREF(__pyx_v_clip_rect);
   __Pyx_XDECREF(__pyx_v_area_lower_left);
   __Pyx_XDECREF(__pyx_v_area_upper_right);
   __Pyx_XDECREF(__pyx_v_entity_lower_left);
@@ -4457,7 +4269,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_16get_hash_area(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":287
+/* "yapyg\collisions.pyx":264
  *         return (area_lower_left, area_upper_right)
  * 
  * cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):             # <<<<<<<<<<<<<<
@@ -4495,7 +4307,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __Pyx_RefNannySetupContext("remove_hash_entries", 0);
   __Pyx_INCREF(__pyx_v_entity_lower_left);
 
-  /* "yapyg/collisions.pyx":291
+  /* "yapyg\collisions.pyx":268
  *         TODO
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -4504,18 +4316,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_ENTITIES, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_ENTITIES, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_collision_db = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":292
+  /* "yapyg\collisions.pyx":269
  *         """
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]             # <<<<<<<<<<<<<<
@@ -4524,15 +4336,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_collision_db == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_collision_db, __pyx_v_entity_name); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_collision_db, __pyx_v_entity_name); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 292; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entity_collision_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":293
+  /* "yapyg\collisions.pyx":270
  *         cdef dict collision_db = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES]
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list collision_cache = entity_collision_data[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -4541,15 +4353,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_entity_collision_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_entity_collision_data, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_entity_collision_data, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_collision_cache = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":294
+  /* "yapyg\collisions.pyx":271
  *         cdef list entity_collision_data = collision_db[entity_name]
  *         cdef list collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple last_added_range = collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS]             # <<<<<<<<<<<<<<
@@ -4558,15 +4370,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_collision_cache == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_last_added_range = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":295
+  /* "yapyg\collisions.pyx":272
  *         cdef list collision_cache = entity_collision_data[IDX_COLLISION_CACHE]
  *         cdef tuple last_added_range = collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS]
  *         cdef int is_tile = entity_collision_data[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -4575,15 +4387,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_entity_collision_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_entity_collision_data, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_entity_collision_data, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 272; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_is_tile = __pyx_t_3;
 
-  /* "yapyg/collisions.pyx":298
+  /* "yapyg\collisions.pyx":275
  * 
  *         cdef tuple entity_upper_right
  *         if last_added_range:             # <<<<<<<<<<<<<<
@@ -4593,7 +4405,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   __pyx_t_4 = (__pyx_v_last_added_range != Py_None) && (PyTuple_GET_SIZE(__pyx_v_last_added_range) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg/collisions.pyx":299
+    /* "yapyg\collisions.pyx":276
  *         cdef tuple entity_upper_right
  *         if last_added_range:
  *                 entity_lower_left, entity_upper_right = last_added_range             # <<<<<<<<<<<<<<
@@ -4610,7 +4422,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0); 
@@ -4618,16 +4430,16 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_1);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       #endif
     } else {
-      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF_SET(__pyx_v_entity_lower_left, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
     __pyx_v_entity_upper_right = ((PyObject*)__pyx_t_1);
@@ -4636,14 +4448,14 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   }
   /*else*/ {
 
-    /* "yapyg/collisions.pyx":301
+    /* "yapyg\collisions.pyx":278
  *                 entity_lower_left, entity_upper_right = last_added_range
  *         else:
  *                 entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, entity_lower_left, is_tile)             # <<<<<<<<<<<<<<
  * 
  *         cdef dict hash_map = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]
  */
-    __pyx_t_1 = __pyx_f_5yapyg_10collisions_get_hash_area(__pyx_v_state, __pyx_v_entity_name, __pyx_v_entity_lower_left, __pyx_v_is_tile, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_10collisions_get_hash_area(__pyx_v_state, __pyx_v_entity_name, __pyx_v_entity_lower_left, __pyx_v_is_tile, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(__pyx_t_1 != Py_None)) {
       PyObject* sequence = __pyx_t_1;
@@ -4655,7 +4467,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0); 
@@ -4663,17 +4475,17 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_5);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       #endif
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
-      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!(likely(PyTuple_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF_SET(__pyx_v_entity_lower_left, ((PyObject*)__pyx_t_2));
     __pyx_t_2 = 0;
     __pyx_v_entity_upper_right = ((PyObject*)__pyx_t_5);
@@ -4681,7 +4493,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg/collisions.pyx":303
+  /* "yapyg\collisions.pyx":280
  *                 entity_lower_left, entity_upper_right = get_hash_area(state, entity_name, entity_lower_left, is_tile)
  * 
  *         cdef dict hash_map = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HASH_MAP]             # <<<<<<<<<<<<<<
@@ -4690,18 +4502,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HASH_MAP, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HASH_MAP, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyDict_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_hash_map = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "yapyg/collisions.pyx":306
+  /* "yapyg\collisions.pyx":283
  *         cdef int x
  *         cdef int y
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):             # <<<<<<<<<<<<<<
@@ -4710,27 +4522,27 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_entity_upper_right == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_upper_right, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_upper_right, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_int_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_int_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_6 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_6 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (unlikely(__pyx_v_entity_lower_left == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_7 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_7 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (__pyx_t_3 = __pyx_t_7; __pyx_t_3 < __pyx_t_6; __pyx_t_3+=1) {
     __pyx_v_x = __pyx_t_3;
 
-    /* "yapyg/collisions.pyx":307
+    /* "yapyg\collisions.pyx":284
  *         cdef int y
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):             # <<<<<<<<<<<<<<
@@ -4739,27 +4551,27 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
     if (unlikely(__pyx_v_entity_upper_right == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_upper_right, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_upper_right, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (unlikely(__pyx_v_entity_lower_left == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     for (__pyx_t_10 = __pyx_t_9; __pyx_t_10 < __pyx_t_8; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "yapyg/collisions.pyx":308
+      /* "yapyg\collisions.pyx":285
  *         for x in xrange(entity_lower_left[0], entity_upper_right[0] + 1):
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash_map[(x, y)].remove(entity_name)             # <<<<<<<<<<<<<<
@@ -4768,13 +4580,13 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
       if (unlikely(__pyx_v_hash_map == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_11);
       PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_1);
@@ -4782,10 +4594,10 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
       __Pyx_GIVEREF(__pyx_t_2);
       __pyx_t_1 = 0;
       __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_hash_map, __pyx_t_11); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_hash_map, __pyx_t_11); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_remove); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_remove); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -4799,16 +4611,16 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
         }
       }
       if (!__pyx_t_2) {
-        __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_v_entity_name); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_v_entity_name); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
       } else {
-        __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
         __Pyx_INCREF(__pyx_v_entity_name);
         PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_v_entity_name);
         __Pyx_GIVEREF(__pyx_v_entity_name);
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
@@ -4817,7 +4629,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
     }
   }
 
-  /* "yapyg/collisions.pyx":309
+  /* "yapyg\collisions.pyx":286
  *                 for y in xrange(entity_lower_left[1], entity_upper_right[1] + 1):
  *                         hash_map[(x, y)].remove(entity_name)
  *         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None             # <<<<<<<<<<<<<<
@@ -4826,11 +4638,11 @@ static PyObject *__pyx_f_5yapyg_10collisions_remove_hash_entries(PyObject *__pyx
  */
   if (unlikely(__pyx_v_collision_cache == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(__Pyx_SetItemInt(__pyx_v_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_v_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 286; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/collisions.pyx":287
+  /* "yapyg\collisions.pyx":264
  *         return (area_lower_left, area_upper_right)
  * 
  * cpdef remove_hash_entries(list state, str entity_name, tuple entity_lower_left):             # <<<<<<<<<<<<<<
@@ -4895,16 +4707,16 @@ static PyObject *__pyx_pw_5yapyg_10collisions_19remove_hash_entries(PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("remove_hash_entries", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("remove_hash_entries", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_lower_left)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("remove_hash_entries", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("remove_hash_entries", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "remove_hash_entries") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "remove_hash_entries") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -4919,15 +4731,15 @@ static PyObject *__pyx_pw_5yapyg_10collisions_19remove_hash_entries(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("remove_hash_entries", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("remove_hash_entries", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.collisions.remove_hash_entries", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_lower_left), (&PyTuple_Type), 1, "entity_lower_left", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_lower_left), (&PyTuple_Type), 1, "entity_lower_left", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_10collisions_18remove_hash_entries(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_entity_lower_left);
 
   /* function exit code */
@@ -4948,7 +4760,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_18remove_hash_entries(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("remove_hash_entries", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_10collisions_remove_hash_entries(__pyx_v_state, __pyx_v_entity_name, __pyx_v_entity_lower_left, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 287; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_10collisions_remove_hash_entries(__pyx_v_state, __pyx_v_entity_name, __pyx_v_entity_lower_left, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 264; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4965,7 +4777,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_18remove_hash_entries(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":311
+/* "yapyg\collisions.pyx":288
  *         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None
  * 
  * cdef str absolute_shape_to_str(tuple absolute_shape):             # <<<<<<<<<<<<<<
@@ -4984,7 +4796,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("absolute_shape_to_str", 0);
 
-  /* "yapyg/collisions.pyx":312
+  /* "yapyg\collisions.pyx":289
  * 
  * cdef str absolute_shape_to_str(tuple absolute_shape):
  *         cdef str output = ""             # <<<<<<<<<<<<<<
@@ -4994,7 +4806,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   __Pyx_INCREF(__pyx_kp_s_);
   __pyx_v_output = __pyx_kp_s_;
 
-  /* "yapyg/collisions.pyx":313
+  /* "yapyg\collisions.pyx":290
  * cdef str absolute_shape_to_str(tuple absolute_shape):
  *         cdef str output = ""
  *         output += "(" + absolute_shape[0]             # <<<<<<<<<<<<<<
@@ -5003,21 +4815,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
  */
   if (unlikely(__pyx_v_absolute_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_kp_s__2, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_kp_s__2, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_output, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_output, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF_SET(__pyx_v_output, ((PyObject*)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":314
+  /* "yapyg\collisions.pyx":291
  *         cdef str output = ""
  *         output += "(" + absolute_shape[0]
  *         output += str(absolute_shape[1:]) + ") "             # <<<<<<<<<<<<<<
@@ -5026,29 +4838,29 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
  */
   if (unlikely(__pyx_v_absolute_shape == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_PyTuple_GetSlice(__pyx_v_absolute_shape, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyTuple_GetSlice(__pyx_v_absolute_shape, 1, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_output, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_output, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF_SET(__pyx_v_output, ((PyObject*)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":315
+  /* "yapyg\collisions.pyx":292
  *         output += "(" + absolute_shape[0]
  *         output += str(absolute_shape[1:]) + ") "
  *         return output             # <<<<<<<<<<<<<<
@@ -5060,7 +4872,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   __pyx_r = __pyx_v_output;
   goto __pyx_L0;
 
-  /* "yapyg/collisions.pyx":311
+  /* "yapyg\collisions.pyx":288
  *         collision_cache[IDX_COLLISION_CACHE_LAST_HASH_POS] = None
  * 
  * cdef str absolute_shape_to_str(tuple absolute_shape):             # <<<<<<<<<<<<<<
@@ -5081,7 +4893,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_absolute_shape_to_str(PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":317
+/* "yapyg\collisions.pyx":294
  *         return output
  * 
  * cpdef list get_collision_shapes(list state, str entity_name, list collision_def):             # <<<<<<<<<<<<<<
@@ -5126,7 +4938,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_collision_shapes", 0);
 
-  /* "yapyg/collisions.pyx":328
+  /* "yapyg\collisions.pyx":305
  *                 rectangle: ("rectangle", x, y, w, h, rotation)
  *         """
  *         cdef list entity_collision_cache = collision_def[IDX_COLLISION_CACHE]             # <<<<<<<<<<<<<<
@@ -5135,15 +4947,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
   if (unlikely(__pyx_v_collision_def == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 305; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entity_collision_cache = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":330
+  /* "yapyg\collisions.pyx":307
  *         cdef list entity_collision_cache = collision_def[IDX_COLLISION_CACHE]
  * 
  *         cdef list cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]             # <<<<<<<<<<<<<<
@@ -5152,15 +4964,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
   if (unlikely(__pyx_v_entity_collision_cache == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_ABS_SHAPE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_entity_collision_cache, __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_ABS_SHAPE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_cached_absolute_shapes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":331
+  /* "yapyg\collisions.pyx":308
  * 
  *         cdef list cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]
  *         if cached_absolute_shapes:             # <<<<<<<<<<<<<<
@@ -5170,7 +4982,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_t_2 = (__pyx_v_cached_absolute_shapes != Py_None) && (PyList_GET_SIZE(__pyx_v_cached_absolute_shapes) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/collisions.pyx":332
+    /* "yapyg\collisions.pyx":309
  *         cdef list cached_absolute_shapes = entity_collision_cache[IDX_COLLISION_CACHE_ABS_SHAPE]
  *         if cached_absolute_shapes:
  *                 return cached_absolute_shapes             # <<<<<<<<<<<<<<
@@ -5183,7 +4995,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
     goto __pyx_L0;
   }
 
-  /* "yapyg/collisions.pyx":336
+  /* "yapyg\collisions.pyx":313
  *         cdef tuple pos
  *         cdef tuple pos_offset
  *         cdef int is_tile = collision_def[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -5192,15 +5004,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
   if (unlikely(__pyx_v_collision_def == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_is_tile = __pyx_t_3;
 
-  /* "yapyg/collisions.pyx":337
+  /* "yapyg\collisions.pyx":314
  *         cdef tuple pos_offset
  *         cdef int is_tile = collision_def[IDX_COLLISION_IS_TILE]
  *         if is_tile:             # <<<<<<<<<<<<<<
@@ -5210,7 +5022,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_t_2 = (__pyx_v_is_tile != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/collisions.pyx":338
+    /* "yapyg\collisions.pyx":315
  *         cdef int is_tile = collision_def[IDX_COLLISION_IS_TILE]
  *         if is_tile:
  *                 pos = collision_def[IDX_COLLISION_LAST_POS]             # <<<<<<<<<<<<<<
@@ -5219,15 +5031,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
     if (unlikely(__pyx_v_collision_def == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_LAST_POS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":339
+    /* "yapyg\collisions.pyx":316
  *         if is_tile:
  *                 pos = collision_def[IDX_COLLISION_LAST_POS]
  *                 pos_offset = (0, 0)             # <<<<<<<<<<<<<<
@@ -5240,33 +5052,33 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   }
   /*else*/ {
 
-    /* "yapyg/collisions.pyx":341
+    /* "yapyg\collisions.pyx":318
  *                 pos_offset = (0, 0)
  *         else:
  *                 pos = entities.get_pos(state, entity_name)             # <<<<<<<<<<<<<<
  *                 pos_offset = entities.get_pos_offset(state, entity_name)
  * 
  */
-    __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":342
+    /* "yapyg\collisions.pyx":319
  *         else:
  *                 pos = entities.get_pos(state, entity_name)
  *                 pos_offset = entities.get_pos_offset(state, entity_name)             # <<<<<<<<<<<<<<
  * 
  *         cdef float rot
  */
-    __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos_offset(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_f_5yapyg_8entities_get_pos_offset(__pyx_v_state, __pyx_v_entity_name, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_pos_offset = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
   }
   __pyx_L4:;
 
-  /* "yapyg/collisions.pyx":345
+  /* "yapyg\collisions.pyx":322
  * 
  *         cdef float rot
  *         rot = pos[2]             # <<<<<<<<<<<<<<
@@ -5275,27 +5087,27 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
   if (unlikely(__pyx_v_pos == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_rot = __pyx_t_4;
 
-  /* "yapyg/collisions.pyx":346
+  /* "yapyg\collisions.pyx":323
  *         cdef float rot
  *         rot = pos[2]
  *         cdef list absolute_shapes = []             # <<<<<<<<<<<<<<
  * 
  *         cdef tuple collision_shape
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_absolute_shapes = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":356
+  /* "yapyg\collisions.pyx":333
  *         cdef float r_w
  *         cdef float r_h
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:             # <<<<<<<<<<<<<<
@@ -5304,17 +5116,17 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
   if (unlikely(__pyx_v_collision_def == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_SHAPES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_collision_def, __pyx_v_5yapyg_10collisions_IDX_COLLISION_SHAPES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_5 = __pyx_t_1; __Pyx_INCREF(__pyx_t_5); __pyx_t_6 = 0;
     __pyx_t_7 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = Py_TYPE(__pyx_t_5)->tp_iternext; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -5322,16 +5134,16 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       if (likely(PyList_CheckExact(__pyx_t_5))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_5)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_5)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_5, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #endif
       }
     } else {
@@ -5340,17 +5152,17 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_1);
     }
-    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyTuple_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_1)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_XDECREF_SET(__pyx_v_collision_shape, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "yapyg/collisions.pyx":357
+    /* "yapyg\collisions.pyx":334
  *         cdef float r_h
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:
  *                 if collision_shape[0] == "circle":             # <<<<<<<<<<<<<<
@@ -5359,15 +5171,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
     if (unlikely(__pyx_v_collision_shape == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/collisions.pyx":358
+      /* "yapyg\collisions.pyx":335
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:
  *                 if collision_shape[0] == "circle":
  *                         c_x = collision_shape[1]             # <<<<<<<<<<<<<<
@@ -5376,15 +5188,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_v_c_x = __pyx_t_4;
 
-      /* "yapyg/collisions.pyx":359
+      /* "yapyg\collisions.pyx":336
  *                 if collision_shape[0] == "circle":
  *                         c_x = collision_shape[1]
  *                         c_y = collision_shape[2]             # <<<<<<<<<<<<<<
@@ -5393,15 +5205,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_v_c_y = __pyx_t_4;
 
-      /* "yapyg/collisions.pyx":360
+      /* "yapyg\collisions.pyx":337
  *                         c_x = collision_shape[1]
  *                         c_y = collision_shape[2]
  *                         c_r = collision_shape[3]             # <<<<<<<<<<<<<<
@@ -5410,14 +5222,14 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_XDECREF_SET(__pyx_v_c_r, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/collisions.pyx":361
+      /* "yapyg\collisions.pyx":338
  *                         c_y = collision_shape[2]
  *                         c_r = collision_shape[3]
  *                         absolute_shapes.append(("circle", pos[0] + pos_offset[0] + c_x, pos[1] + pos_offset[1] + c_y, c_r))             # <<<<<<<<<<<<<<
@@ -5426,49 +5238,49 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
       if (unlikely(__pyx_v_pos_offset == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = PyNumber_Add(__pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyNumber_Add(__pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = PyFloat_FromDouble(__pyx_v_c_x); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_1 = PyNumber_Add(__pyx_t_9, __pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyNumber_Add(__pyx_t_9, __pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       if (unlikely(__pyx_v_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_8);
       if (unlikely(__pyx_v_pos_offset == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_10 = PyNumber_Add(__pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = PyNumber_Add(__pyx_t_8, __pyx_t_9); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyFloat_FromDouble(__pyx_v_c_y); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_8 = PyNumber_Add(__pyx_t_10, __pyx_t_9); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = PyNumber_Add(__pyx_t_10, __pyx_t_9); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = PyTuple_New(4); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyTuple_New(4); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_INCREF(__pyx_n_s_circle);
       PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_n_s_circle);
@@ -5482,12 +5294,12 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __Pyx_GIVEREF(__pyx_v_c_r);
       __pyx_t_1 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_absolute_shapes, __pyx_t_9); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_absolute_shapes, __pyx_t_9); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 338; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       goto __pyx_L7;
     }
 
-    /* "yapyg/collisions.pyx":362
+    /* "yapyg\collisions.pyx":339
  *                         c_r = collision_shape[3]
  *                         absolute_shapes.append(("circle", pos[0] + pos_offset[0] + c_x, pos[1] + pos_offset[1] + c_y, c_r))
  *                 elif collision_shape[0] == "rectangle":             # <<<<<<<<<<<<<<
@@ -5496,15 +5308,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
     if (unlikely(__pyx_v_collision_shape == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_9, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = (__Pyx_PyString_Equals(__pyx_t_9, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/collisions.pyx":363
+      /* "yapyg\collisions.pyx":340
  *                         absolute_shapes.append(("circle", pos[0] + pos_offset[0] + c_x, pos[1] + pos_offset[1] + c_y, c_r))
  *                 elif collision_shape[0] == "rectangle":
  *                         r_x = collision_shape[1]             # <<<<<<<<<<<<<<
@@ -5513,15 +5325,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_x = __pyx_t_4;
 
-      /* "yapyg/collisions.pyx":364
+      /* "yapyg\collisions.pyx":341
  *                 elif collision_shape[0] == "rectangle":
  *                         r_x = collision_shape[1]
  *                         r_y = collision_shape[2]             # <<<<<<<<<<<<<<
@@ -5530,15 +5342,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 364; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_y = __pyx_t_4;
 
-      /* "yapyg/collisions.pyx":365
+      /* "yapyg\collisions.pyx":342
  *                         r_x = collision_shape[1]
  *                         r_y = collision_shape[2]
  *                         r_w = collision_shape[3]             # <<<<<<<<<<<<<<
@@ -5547,15 +5359,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_w = __pyx_t_4;
 
-      /* "yapyg/collisions.pyx":366
+      /* "yapyg\collisions.pyx":343
  *                         r_y = collision_shape[2]
  *                         r_w = collision_shape[3]
  *                         r_h = collision_shape[4]             # <<<<<<<<<<<<<<
@@ -5564,15 +5376,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_collision_shape == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_collision_shape, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_9); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_r_h = __pyx_t_4;
 
-      /* "yapyg/collisions.pyx":367
+      /* "yapyg\collisions.pyx":344
  *                         r_w = collision_shape[3]
  *                         r_h = collision_shape[4]
  *                         absolute_shapes.append(("rectangle", pos[0] + pos_offset[0] + r_x, pos[1] + pos_offset[1] + r_y, r_w, r_h, rot))             # <<<<<<<<<<<<<<
@@ -5581,55 +5393,55 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
       if (unlikely(__pyx_v_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_9 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_9);
       if (unlikely(__pyx_v_pos_offset == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_1 = PyNumber_Add(__pyx_t_9, __pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyNumber_Add(__pyx_t_9, __pyx_t_8); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = PyFloat_FromDouble(__pyx_v_r_x); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = PyFloat_FromDouble(__pyx_v_r_x); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = PyNumber_Add(__pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyNumber_Add(__pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       if (unlikely(__pyx_v_pos == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_8 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_8);
       if (unlikely(__pyx_v_pos_offset == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_pos_offset, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_10 = PyNumber_Add(__pyx_t_8, __pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = PyNumber_Add(__pyx_t_8, __pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_y); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_y); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = PyNumber_Add(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = PyNumber_Add(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_w); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_r_w); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_10 = PyFloat_FromDouble(__pyx_v_r_h); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = PyFloat_FromDouble(__pyx_v_r_h); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_rot); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = PyTuple_New(6); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = PyTuple_New(6); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_INCREF(__pyx_n_s_rectangle);
       PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_n_s_rectangle);
@@ -5649,13 +5461,13 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
       __pyx_t_1 = 0;
       __pyx_t_10 = 0;
       __pyx_t_12 = 0;
-      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_absolute_shapes, __pyx_t_13); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_absolute_shapes, __pyx_t_13); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       goto __pyx_L7;
     }
     __pyx_L7:;
 
-    /* "yapyg/collisions.pyx":356
+    /* "yapyg\collisions.pyx":333
  *         cdef float r_w
  *         cdef float r_h
  *         for collision_shape in collision_def[IDX_COLLISION_SHAPES]:             # <<<<<<<<<<<<<<
@@ -5665,7 +5477,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg/collisions.pyx":369
+  /* "yapyg\collisions.pyx":346
  *                         absolute_shapes.append(("rectangle", pos[0] + pos_offset[0] + r_x, pos[1] + pos_offset[1] + r_y, r_w, r_h, rot))
  * 
  *         entity_collision_cache[0] = absolute_shapes             # <<<<<<<<<<<<<<
@@ -5674,11 +5486,11 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
  */
   if (unlikely(__pyx_v_entity_collision_cache == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, 0, __pyx_v_absolute_shapes, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 369; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_v_entity_collision_cache, 0, __pyx_v_absolute_shapes, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/collisions.pyx":371
+  /* "yapyg\collisions.pyx":348
  *         entity_collision_cache[0] = absolute_shapes
  * 
  *         return absolute_shapes             # <<<<<<<<<<<<<<
@@ -5690,7 +5502,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_get_collision_shapes(PyObject *__py
   __pyx_r = __pyx_v_absolute_shapes;
   goto __pyx_L0;
 
-  /* "yapyg/collisions.pyx":317
+  /* "yapyg\collisions.pyx":294
  *         return output
  * 
  * cpdef list get_collision_shapes(list state, str entity_name, list collision_def):             # <<<<<<<<<<<<<<
@@ -5756,16 +5568,16 @@ static PyObject *__pyx_pw_5yapyg_10collisions_21get_collision_shapes(PyObject *_
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_collision_shapes", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_collision_shapes", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_collision_def)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_collision_shapes", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_collision_shapes", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_collision_shapes") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_collision_shapes") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -5780,15 +5592,15 @@ static PyObject *__pyx_pw_5yapyg_10collisions_21get_collision_shapes(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_collision_shapes", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_collision_shapes", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.collisions.get_collision_shapes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision_def), (&PyList_Type), 1, "collision_def", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name), (&PyString_Type), 1, "entity_name", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision_def), (&PyList_Type), 1, "collision_def", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_10collisions_20get_collision_shapes(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_collision_def);
 
   /* function exit code */
@@ -5809,7 +5621,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_20get_collision_shapes(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_collision_shapes", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_10collisions_get_collision_shapes(__pyx_v_state, __pyx_v_entity_name, __pyx_v_collision_def, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_10collisions_get_collision_shapes(__pyx_v_state, __pyx_v_entity_name, __pyx_v_collision_def, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5826,7 +5638,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_20get_collision_shapes(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":373
+/* "yapyg\collisions.pyx":350
  *         return absolute_shapes
  * 
  * cpdef tuple run(list state, str entity_name_1):             # <<<<<<<<<<<<<<
@@ -5886,7 +5698,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
 
-  /* "yapyg/collisions.pyx":377
+  /* "yapyg\collisions.pyx":354
  *         TODO
  *         """
  *         if not entities.is_enabled(state, entity_name_1):             # <<<<<<<<<<<<<<
@@ -5896,7 +5708,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_t_1 = ((!(__pyx_f_5yapyg_8entities_is_enabled(__pyx_v_state, __pyx_v_entity_name_1, 0) != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "yapyg/collisions.pyx":378
+    /* "yapyg\collisions.pyx":355
  *         """
  *         if not entities.is_enabled(state, entity_name_1):
  *                 return             # <<<<<<<<<<<<<<
@@ -5908,7 +5720,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     goto __pyx_L0;
   }
 
-  /* "yapyg/collisions.pyx":380
+  /* "yapyg\collisions.pyx":357
  *                 return
  * 
  *         cdef list state_collisions = state[IDX_STATE_COLLISIONS]             # <<<<<<<<<<<<<<
@@ -5917,15 +5729,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_state_collisions = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":382
+  /* "yapyg\collisions.pyx":359
  *         cdef list state_collisions = state[IDX_STATE_COLLISIONS]
  * 
  *         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]             # <<<<<<<<<<<<<<
@@ -5934,15 +5746,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state_collisions == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state_collisions, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state_collisions, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_ENTITIES, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_state_collisions_entities = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":383
+  /* "yapyg\collisions.pyx":360
  * 
  *         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
  *         if not state_collisions_entities.has_key(entity_name_1):             # <<<<<<<<<<<<<<
@@ -5951,13 +5763,13 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state_collisions_entities == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "has_key");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = PyDict_Contains(__pyx_v_state_collisions_entities, __pyx_v_entity_name_1); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyDict_Contains(__pyx_v_state_collisions_entities, __pyx_v_entity_name_1); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/collisions.pyx":384
+    /* "yapyg\collisions.pyx":361
  *         cdef dict state_collisions_entities = state_collisions[IDX_COLLISIONDB_ENTITIES]
  *         if not state_collisions_entities.has_key(entity_name_1):
  *                 return             # <<<<<<<<<<<<<<
@@ -5969,7 +5781,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     goto __pyx_L0;
   }
 
-  /* "yapyg/collisions.pyx":386
+  /* "yapyg\collisions.pyx":363
  *                 return
  * 
  *         cdef dict hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]             # <<<<<<<<<<<<<<
@@ -5978,15 +5790,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state_collisions == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state_collisions, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HASH_MAP, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state_collisions, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HASH_MAP, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_hash_map = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":388
+  /* "yapyg\collisions.pyx":365
  *         cdef dict hash_map = state_collisions[IDX_COLLISIONDB_HASH_MAP]
  * 
  *         cdef list collision_def_1 = state_collisions_entities[entity_name_1]             # <<<<<<<<<<<<<<
@@ -5995,27 +5807,27 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state_collisions_entities == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 388; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_state_collisions_entities, __pyx_v_entity_name_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 388; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_state_collisions_entities, __pyx_v_entity_name_1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 388; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_collision_def_1 = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":389
+  /* "yapyg\collisions.pyx":366
  * 
  *         cdef list collision_def_1 = state_collisions_entities[entity_name_1]
  *         cdef list absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)             # <<<<<<<<<<<<<<
  *         cdef int is_tile_1 = collision_def_1[IDX_COLLISION_IS_TILE]
  * 
  */
-  __pyx_t_2 = __pyx_f_5yapyg_10collisions_get_collision_shapes(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_collision_def_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_5yapyg_10collisions_get_collision_shapes(__pyx_v_state, __pyx_v_entity_name_1, __pyx_v_collision_def_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_absolute_shapes_1 = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":390
+  /* "yapyg\collisions.pyx":367
  *         cdef list collision_def_1 = state_collisions_entities[entity_name_1]
  *         cdef list absolute_shapes_1 = get_collision_shapes(state, entity_name_1, collision_def_1)
  *         cdef int is_tile_1 = collision_def_1[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -6024,32 +5836,32 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_collision_def_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_collision_def_1, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_collision_def_1, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_is_tile_1 = __pyx_t_4;
 
-  /* "yapyg/collisions.pyx":395
+  /* "yapyg\collisions.pyx":372
  *         cdef tuple entity_1_upper_right
  *         entity_1_lower_left, entity_1_upper_right = get_hash_area(state, entity_name_1,
  *                                                                   entities.get_pos(state, entity_name_1),             # <<<<<<<<<<<<<<
  *                                                                   is_tile_1)
  * 
  */
-  __pyx_t_2 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_f_5yapyg_8entities_get_pos(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg/collisions.pyx":394
+  /* "yapyg\collisions.pyx":371
  *         cdef tuple entity_1_lower_left
  *         cdef tuple entity_1_upper_right
  *         entity_1_lower_left, entity_1_upper_right = get_hash_area(state, entity_name_1,             # <<<<<<<<<<<<<<
  *                                                                   entities.get_pos(state, entity_name_1),
  *                                                                   is_tile_1)
  */
-  __pyx_t_5 = __pyx_f_5yapyg_10collisions_get_hash_area(__pyx_v_state, __pyx_v_entity_name_1, ((PyObject*)__pyx_t_2), __pyx_v_is_tile_1, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __pyx_f_5yapyg_10collisions_get_hash_area(__pyx_v_state, __pyx_v_entity_name_1, ((PyObject*)__pyx_t_2), __pyx_v_is_tile_1, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(__pyx_t_5 != Py_None)) {
@@ -6062,7 +5874,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0); 
@@ -6070,35 +5882,35 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_6);
     #else
-    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     #endif
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_RaiseNoneNotIterableError(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (!(likely(PyTuple_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyTuple_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_entity_1_lower_left = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
   __pyx_v_entity_1_upper_right = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "yapyg/collisions.pyx":398
+  /* "yapyg\collisions.pyx":375
  *                                                                   is_tile_1)
  * 
  *         cdef set already_checked_set = set()             # <<<<<<<<<<<<<<
  * 
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
  */
-  __pyx_t_5 = PySet_New(0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PySet_New(0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_v_already_checked_set = ((PyObject*)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "yapyg/collisions.pyx":400
+  /* "yapyg\collisions.pyx":377
  *         cdef set already_checked_set = set()
  * 
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]             # <<<<<<<<<<<<<<
@@ -6107,30 +5919,30 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_collisions_list = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "yapyg/collisions.pyx":408
+  /* "yapyg\collisions.pyx":385
  *         cdef list collision_def_2
  *         cdef list absolute_shapes_2
  *         cdef list contact_points = []             # <<<<<<<<<<<<<<
  *         cdef int is_tile_2
  *         cdef tuple absolute_shape_1
  */
-  __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_v_contact_points = ((PyObject*)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "yapyg/collisions.pyx":417
+  /* "yapyg\collisions.pyx":394
  *         cdef int y
  * 
  *         cdef int lower_x = entity_1_lower_left[0]             # <<<<<<<<<<<<<<
@@ -6139,15 +5951,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entity_1_lower_left == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_lower_left, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_lower_x = __pyx_t_4;
 
-  /* "yapyg/collisions.pyx":418
+  /* "yapyg\collisions.pyx":395
  * 
  *         cdef int lower_x = entity_1_lower_left[0]
  *         cdef int upper_x = entity_1_upper_right[0]             # <<<<<<<<<<<<<<
@@ -6156,15 +5968,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entity_1_upper_right == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_upper_right, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_upper_right, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_upper_x = __pyx_t_4;
 
-  /* "yapyg/collisions.pyx":419
+  /* "yapyg\collisions.pyx":396
  *         cdef int lower_x = entity_1_lower_left[0]
  *         cdef int upper_x = entity_1_upper_right[0]
  *         cdef int lower_y = entity_1_lower_left[1]             # <<<<<<<<<<<<<<
@@ -6173,15 +5985,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entity_1_lower_left == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_lower_left, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_lower_y = __pyx_t_4;
 
-  /* "yapyg/collisions.pyx":420
+  /* "yapyg\collisions.pyx":397
  *         cdef int upper_x = entity_1_upper_right[0]
  *         cdef int lower_y = entity_1_lower_left[1]
  *         cdef int upper_y = entity_1_upper_right[1]             # <<<<<<<<<<<<<<
@@ -6190,15 +6002,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
   if (unlikely(__pyx_v_entity_1_upper_right == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_upper_right, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_entity_1_upper_right, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_upper_y = __pyx_t_4;
 
-  /* "yapyg/collisions.pyx":422
+  /* "yapyg\collisions.pyx":399
  *         cdef int upper_y = entity_1_upper_right[1]
  * 
  *         for x in xrange(lower_x, upper_x + 1):             # <<<<<<<<<<<<<<
@@ -6209,7 +6021,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   for (__pyx_t_4 = __pyx_v_lower_x; __pyx_t_4 < __pyx_t_7; __pyx_t_4+=1) {
     __pyx_v_x = __pyx_t_4;
 
-    /* "yapyg/collisions.pyx":423
+    /* "yapyg\collisions.pyx":400
  * 
  *         for x in xrange(lower_x, upper_x + 1):
  *                 for y in xrange(lower_y, upper_y + 1):             # <<<<<<<<<<<<<<
@@ -6220,18 +6032,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     for (__pyx_t_9 = __pyx_v_lower_y; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
       __pyx_v_y = __pyx_t_9;
 
-      /* "yapyg/collisions.pyx":424
+      /* "yapyg\collisions.pyx":401
  *         for x in xrange(lower_x, upper_x + 1):
  *                 for y in xrange(lower_y, upper_y + 1):
  *                         hash = (x, y)             # <<<<<<<<<<<<<<
  *                         if not hash_map.has_key(hash):
  *                                 continue
  */
-      __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_6);
@@ -6242,7 +6054,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
       __Pyx_XDECREF_SET(__pyx_v_hash, ((PyObject*)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "yapyg/collisions.pyx":425
+      /* "yapyg\collisions.pyx":402
  *                 for y in xrange(lower_y, upper_y + 1):
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):             # <<<<<<<<<<<<<<
@@ -6251,13 +6063,13 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
       if (unlikely(__pyx_v_hash_map == Py_None)) {
         PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "has_key");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_3 = PyDict_Contains(__pyx_v_hash_map, __pyx_v_hash); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = PyDict_Contains(__pyx_v_hash_map, __pyx_v_hash); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_1 = ((!(__pyx_t_3 != 0)) != 0);
       if (__pyx_t_1) {
 
-        /* "yapyg/collisions.pyx":426
+        /* "yapyg\collisions.pyx":403
  *                         hash = (x, y)
  *                         if not hash_map.has_key(hash):
  *                                 continue             # <<<<<<<<<<<<<<
@@ -6267,7 +6079,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         goto __pyx_L7_continue;
       }
 
-      /* "yapyg/collisions.pyx":428
+      /* "yapyg\collisions.pyx":405
  *                                 continue
  * 
  *                         collision_candidates = hash_map[hash]             # <<<<<<<<<<<<<<
@@ -6276,24 +6088,24 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
       if (unlikely(__pyx_v_hash_map == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_hash_map, __pyx_v_hash); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_hash_map, __pyx_v_hash); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_2);
-      if (!(likely(PySet_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "set", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!(likely(PySet_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "set", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_XDECREF_SET(__pyx_v_collision_candidates, ((PyObject*)__pyx_t_2));
       __pyx_t_2 = 0;
 
-      /* "yapyg/collisions.pyx":430
+      /* "yapyg\collisions.pyx":407
  *                         collision_candidates = hash_map[hash]
  * 
  *                         for entity_name_2 in collision_candidates:             # <<<<<<<<<<<<<<
  *                                 if entity_name_1 == entity_name_2:
  *                                         continue
  */
-      __pyx_t_2 = PyObject_GetIter(__pyx_v_collision_candidates); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyObject_GetIter(__pyx_v_collision_candidates); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_10 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       for (;;) {
         {
           __pyx_t_5 = __pyx_t_10(__pyx_t_2);
@@ -6301,28 +6113,28 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
             break;
           }
           __Pyx_GOTREF(__pyx_t_5);
         }
-        if (!(likely(PyString_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (!(likely(PyString_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_XDECREF_SET(__pyx_v_entity_name_2, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg/collisions.pyx":431
+        /* "yapyg\collisions.pyx":408
  * 
  *                         for entity_name_2 in collision_candidates:
  *                                 if entity_name_1 == entity_name_2:             # <<<<<<<<<<<<<<
  *                                         continue
  * 
  */
-        __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_entity_name_1, __pyx_v_entity_name_2, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_entity_name_1, __pyx_v_entity_name_2, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __pyx_t_3 = (__pyx_t_1 != 0);
         if (__pyx_t_3) {
 
-          /* "yapyg/collisions.pyx":432
+          /* "yapyg\collisions.pyx":409
  *                         for entity_name_2 in collision_candidates:
  *                                 if entity_name_1 == entity_name_2:
  *                                         continue             # <<<<<<<<<<<<<<
@@ -6332,18 +6144,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           goto __pyx_L10_continue;
         }
 
-        /* "yapyg/collisions.pyx":434
+        /* "yapyg\collisions.pyx":411
  *                                         continue
  * 
  *                                 if entity_name_2 in already_checked_set:             # <<<<<<<<<<<<<<
  *                                         continue
  * 
  */
-        __pyx_t_3 = (__Pyx_PySequence_Contains(__pyx_v_entity_name_2, __pyx_v_already_checked_set, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 434; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = (__Pyx_PySequence_Contains(__pyx_v_entity_name_2, __pyx_v_already_checked_set, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __pyx_t_1 = (__pyx_t_3 != 0);
         if (__pyx_t_1) {
 
-          /* "yapyg/collisions.pyx":435
+          /* "yapyg\collisions.pyx":412
  * 
  *                                 if entity_name_2 in already_checked_set:
  *                                         continue             # <<<<<<<<<<<<<<
@@ -6353,16 +6165,16 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           goto __pyx_L10_continue;
         }
 
-        /* "yapyg/collisions.pyx":437
+        /* "yapyg\collisions.pyx":414
  *                                         continue
  * 
  *                                 already_checked_set.add(entity_name_2)             # <<<<<<<<<<<<<<
  * 
  *                                 collision_def_2 = state_collisions_entities[entity_name_2]
  */
-        __pyx_t_11 = PySet_Add(__pyx_v_already_checked_set, __pyx_v_entity_name_2); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = PySet_Add(__pyx_v_already_checked_set, __pyx_v_entity_name_2); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 414; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-        /* "yapyg/collisions.pyx":439
+        /* "yapyg\collisions.pyx":416
  *                                 already_checked_set.add(entity_name_2)
  * 
  *                                 collision_def_2 = state_collisions_entities[entity_name_2]             # <<<<<<<<<<<<<<
@@ -6371,27 +6183,27 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
         if (unlikely(__pyx_v_state_collisions_entities == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_state_collisions_entities, __pyx_v_entity_name_2); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_state_collisions_entities, __pyx_v_entity_name_2); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_5);
-        if (!(likely(PyList_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (!(likely(PyList_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_5)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_XDECREF_SET(__pyx_v_collision_def_2, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg/collisions.pyx":440
+        /* "yapyg\collisions.pyx":417
  * 
  *                                 collision_def_2 = state_collisions_entities[entity_name_2]
  *                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)             # <<<<<<<<<<<<<<
  * 
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]
  */
-        __pyx_t_5 = __pyx_f_5yapyg_10collisions_get_collision_shapes(__pyx_v_state, __pyx_v_entity_name_2, __pyx_v_collision_def_2, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __pyx_f_5yapyg_10collisions_get_collision_shapes(__pyx_v_state, __pyx_v_entity_name_2, __pyx_v_collision_def_2, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_XDECREF_SET(__pyx_v_absolute_shapes_2, ((PyObject*)__pyx_t_5));
         __pyx_t_5 = 0;
 
-        /* "yapyg/collisions.pyx":442
+        /* "yapyg\collisions.pyx":419
  *                                 absolute_shapes_2 = get_collision_shapes(state, entity_name_2, collision_def_2)
  * 
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]             # <<<<<<<<<<<<<<
@@ -6400,15 +6212,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
         if (unlikely(__pyx_v_collision_def_2 == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_collision_def_2, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_5 = __Pyx_GetItemInt_List(__pyx_v_collision_def_2, __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_v_is_tile_2 = __pyx_t_12;
 
-        /* "yapyg/collisions.pyx":443
+        /* "yapyg\collisions.pyx":420
  * 
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]
  *                                 if not is_tile_2 and not entities.is_enabled(state, entity_name_2):             # <<<<<<<<<<<<<<
@@ -6426,7 +6238,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         __pyx_L15_bool_binop_done:;
         if (__pyx_t_1) {
 
-          /* "yapyg/collisions.pyx":444
+          /* "yapyg\collisions.pyx":421
  *                                 is_tile_2 = collision_def_2[IDX_COLLISION_IS_TILE]
  *                                 if not is_tile_2 and not entities.is_enabled(state, entity_name_2):
  *                                         continue             # <<<<<<<<<<<<<<
@@ -6436,7 +6248,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           goto __pyx_L10_continue;
         }
 
-        /* "yapyg/collisions.pyx":446
+        /* "yapyg\collisions.pyx":423
  *                                         continue
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:             # <<<<<<<<<<<<<<
@@ -6445,21 +6257,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
         if (unlikely(__pyx_v_absolute_shapes_1 == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         __pyx_t_5 = __pyx_v_absolute_shapes_1; __Pyx_INCREF(__pyx_t_5); __pyx_t_13 = 0;
         for (;;) {
           if (__pyx_t_13 >= PyList_GET_SIZE(__pyx_t_5)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_6 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_13); __Pyx_INCREF(__pyx_t_6); __pyx_t_13++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_13); __Pyx_INCREF(__pyx_t_6); __pyx_t_13++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_6 = PySequence_ITEM(__pyx_t_5, __pyx_t_13); __pyx_t_13++; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = PySequence_ITEM(__pyx_t_5, __pyx_t_13); __pyx_t_13++; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #endif
-          if (!(likely(PyTuple_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          if (!(likely(PyTuple_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_6)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_XDECREF_SET(__pyx_v_absolute_shape_1, ((PyObject*)__pyx_t_6));
           __pyx_t_6 = 0;
 
-          /* "yapyg/collisions.pyx":447
+          /* "yapyg\collisions.pyx":424
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:
  *                                         for absolute_shape_2 in absolute_shapes_2:             # <<<<<<<<<<<<<<
@@ -6468,21 +6280,21 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
           if (unlikely(__pyx_v_absolute_shapes_2 == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           __pyx_t_6 = __pyx_v_absolute_shapes_2; __Pyx_INCREF(__pyx_t_6); __pyx_t_14 = 0;
           for (;;) {
             if (__pyx_t_14 >= PyList_GET_SIZE(__pyx_t_6)) break;
             #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_15 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_14); __Pyx_INCREF(__pyx_t_15); __pyx_t_14++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_15 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_14); __Pyx_INCREF(__pyx_t_15); __pyx_t_14++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #else
-            __pyx_t_15 = PySequence_ITEM(__pyx_t_6, __pyx_t_14); __pyx_t_14++; if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_15 = PySequence_ITEM(__pyx_t_6, __pyx_t_14); __pyx_t_14++; if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #endif
-            if (!(likely(PyTuple_CheckExact(__pyx_t_15))||((__pyx_t_15) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_15)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 447; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            if (!(likely(PyTuple_CheckExact(__pyx_t_15))||((__pyx_t_15) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_15)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_XDECREF_SET(__pyx_v_absolute_shape_2, ((PyObject*)__pyx_t_15));
             __pyx_t_15 = 0;
 
-            /* "yapyg/collisions.pyx":448
+            /* "yapyg\collisions.pyx":425
  *                                 for absolute_shape_1 in absolute_shapes_1:
  *                                         for absolute_shape_2 in absolute_shapes_2:
  *                                                 is_collision = False             # <<<<<<<<<<<<<<
@@ -6491,7 +6303,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
             __pyx_v_is_collision = 0;
 
-            /* "yapyg/collisions.pyx":449
+            /* "yapyg\collisions.pyx":426
  *                                         for absolute_shape_2 in absolute_shapes_2:
  *                                                 is_collision = False
  *                                                 absolute_shape_1_type = absolute_shape_1[0]             # <<<<<<<<<<<<<<
@@ -6500,15 +6312,15 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
             if (unlikely(__pyx_v_absolute_shape_1 == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
-            __pyx_t_15 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_15 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+            __pyx_t_15 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_15 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
             __Pyx_GOTREF(__pyx_t_15);
-            if (!(likely(PyString_CheckExact(__pyx_t_15))||((__pyx_t_15) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_15)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            if (!(likely(PyString_CheckExact(__pyx_t_15))||((__pyx_t_15) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_15)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 426; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_XDECREF_SET(__pyx_v_absolute_shape_1_type, ((PyObject*)__pyx_t_15));
             __pyx_t_15 = 0;
 
-            /* "yapyg/collisions.pyx":450
+            /* "yapyg\collisions.pyx":427
  *                                                 is_collision = False
  *                                                 absolute_shape_1_type = absolute_shape_1[0]
  *                                                 absolute_shape_2_type = absolute_shape_2[0]             # <<<<<<<<<<<<<<
@@ -6517,46 +6329,46 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
             if (unlikely(__pyx_v_absolute_shape_2 == Py_None)) {
               PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 450; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
-            __pyx_t_15 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_15 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 450; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+            __pyx_t_15 = __Pyx_GetItemInt_Tuple(__pyx_v_absolute_shape_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_15 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
             __Pyx_GOTREF(__pyx_t_15);
-            if (!(likely(PyString_CheckExact(__pyx_t_15))||((__pyx_t_15) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_15)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 450; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            if (!(likely(PyString_CheckExact(__pyx_t_15))||((__pyx_t_15) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_15)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_XDECREF_SET(__pyx_v_absolute_shape_2_type, ((PyObject*)__pyx_t_15));
             __pyx_t_15 = 0;
 
-            /* "yapyg/collisions.pyx":452
+            /* "yapyg\collisions.pyx":429
  *                                                 absolute_shape_2_type = absolute_shape_2[0]
  * 
  *                                                 del contact_points[:]             # <<<<<<<<<<<<<<
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":
  */
-            if (__Pyx_PyObject_DelSlice(__pyx_v_contact_points, 0, 0, NULL, NULL, NULL, 0, 0, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            if (__Pyx_PyObject_DelSlice(__pyx_v_contact_points, 0, 0, NULL, NULL, NULL, 0, 0, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-            /* "yapyg/collisions.pyx":453
+            /* "yapyg\collisions.pyx":430
  * 
  *                                                 del contact_points[:]
  *                                                 if absolute_shape_1_type == "circle":             # <<<<<<<<<<<<<<
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
  */
-            __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_1_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_1_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __pyx_t_3 = (__pyx_t_1 != 0);
             if (__pyx_t_3) {
 
-              /* "yapyg/collisions.pyx":454
+              /* "yapyg\collisions.pyx":431
  *                                                 del contact_points[:]
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
  *                                                                 # if is_collision:
  */
-              __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_1 = (__pyx_t_3 != 0);
               if (__pyx_t_1) {
 
-                /* "yapyg/collisions.pyx":455
+                /* "yapyg\collisions.pyx":432
  *                                                 if absolute_shape_1_type == "circle":
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_circle_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
@@ -6567,18 +6379,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 goto __pyx_L22;
               }
 
-              /* "yapyg/collisions.pyx":458
+              /* "yapyg\collisions.pyx":435
  *                                                                 # if is_collision:
  *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)
  *                                                                 # if is_collision:
  */
-              __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 435; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_3 = (__pyx_t_1 != 0);
               if (__pyx_t_3) {
 
-                /* "yapyg/collisions.pyx":459
+                /* "yapyg\collisions.pyx":436
  *                                                                         # debug.print_line(state, "cc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
@@ -6592,29 +6404,29 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               goto __pyx_L21;
             }
 
-            /* "yapyg/collisions.pyx":462
+            /* "yapyg\collisions.pyx":439
  *                                                                 # if is_collision:
  *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  *                                                 elif absolute_shape_1_type == "rectangle":             # <<<<<<<<<<<<<<
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
  */
-            __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_1_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 462; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_1_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __pyx_t_1 = (__pyx_t_3 != 0);
             if (__pyx_t_1) {
 
-              /* "yapyg/collisions.pyx":463
+              /* "yapyg\collisions.pyx":440
  *                                                                         # debug.print_line(state, "cr collision %s %s" % (entity_name_1, entity_name_2))
  *                                                 elif absolute_shape_1_type == "rectangle":
  *                                                         if absolute_shape_2_type == "circle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)
  *                                                                 # if is_collision:
  */
-              __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_1 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_circle, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_3 = (__pyx_t_1 != 0);
               if (__pyx_t_3) {
 
-                /* "yapyg/collisions.pyx":464
+                /* "yapyg\collisions.pyx":441
  *                                                 elif absolute_shape_1_type == "rectangle":
  *                                                         if absolute_shape_2_type == "circle":
  *                                                                 is_collision = math_collision.is_rect_circle_collision(absolute_shape_2, absolute_shape_1, contact_points)             # <<<<<<<<<<<<<<
@@ -6625,18 +6437,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 goto __pyx_L23;
               }
 
-              /* "yapyg/collisions.pyx":467
+              /* "yapyg\collisions.pyx":444
  *                                                                 # if is_collision:
  *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":             # <<<<<<<<<<<<<<
  *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)
  *                                                                 # if is_collision:
  */
-              __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_absolute_shape_2_type, __pyx_n_s_rectangle, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __pyx_t_1 = (__pyx_t_3 != 0);
               if (__pyx_t_1) {
 
-                /* "yapyg/collisions.pyx":468
+                /* "yapyg\collisions.pyx":445
  *                                                                         # debug.print_line(state, "rc collision %s %s" % (entity_name_1, entity_name_2))
  *                                                         elif absolute_shape_2_type == "rectangle":
  *                                                                 is_collision = math_collision.is_rect_rect_collision(absolute_shape_1, absolute_shape_2, contact_points)             # <<<<<<<<<<<<<<
@@ -6651,7 +6463,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             }
             __pyx_L21:;
 
-            /* "yapyg/collisions.pyx":472
+            /* "yapyg\collisions.pyx":449
  *                                                                         # debug.print_line(state, "rr collision %s %s" % (entity_name_1, entity_name_2))
  * 
  *                                                 if is_collision:             # <<<<<<<<<<<<<<
@@ -6661,19 +6473,19 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
             __pyx_t_1 = (__pyx_v_is_collision != 0);
             if (__pyx_t_1) {
 
-              /* "yapyg/collisions.pyx":475
+              /* "yapyg\collisions.pyx":452
  *                                                         # debug.print_line(state, "%s %s" % (entity_name_1, absolute_shape_to_str(absolute_shape_1)))
  *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  *                                                         if entity_name_1 < entity_name_2:             # <<<<<<<<<<<<<<
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))
  *                                                         else:
  */
-              __pyx_t_15 = PyObject_RichCompare(__pyx_v_entity_name_1, __pyx_v_entity_name_2, Py_LT); __Pyx_XGOTREF(__pyx_t_15); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_15 = PyObject_RichCompare(__pyx_v_entity_name_1, __pyx_v_entity_name_2, Py_LT); __Pyx_XGOTREF(__pyx_t_15); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
               if (__pyx_t_1) {
 
-                /* "yapyg/collisions.pyx":476
+                /* "yapyg\collisions.pyx":453
  *                                                         # debug.print_line(state, "%s %s" % (entity_name_2, absolute_shape_to_str(absolute_shape_2)))
  *                                                         if entity_name_1 < entity_name_2:
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))             # <<<<<<<<<<<<<<
@@ -6682,9 +6494,9 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
                 if (unlikely(__pyx_v_collisions_list == Py_None)) {
                   PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
-                  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 }
-                __pyx_t_15 = PyTuple_New(2); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                __pyx_t_15 = PyTuple_New(2); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_GOTREF(__pyx_t_15);
                 __Pyx_INCREF(__pyx_v_entity_name_1);
                 PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_v_entity_name_1);
@@ -6692,13 +6504,13 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 __Pyx_INCREF(__pyx_v_entity_name_2);
                 PyTuple_SET_ITEM(__pyx_t_15, 1, __pyx_v_entity_name_2);
                 __Pyx_GIVEREF(__pyx_v_entity_name_2);
-                __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_collisions_list, __pyx_t_15); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_collisions_list, __pyx_t_15); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
                 goto __pyx_L25;
               }
               /*else*/ {
 
-                /* "yapyg/collisions.pyx":478
+                /* "yapyg\collisions.pyx":455
  *                                                                 collisions_list.append((entity_name_1, entity_name_2,))
  *                                                         else:
  *                                                                 collisions_list.append((entity_name_2, entity_name_1,))             # <<<<<<<<<<<<<<
@@ -6707,9 +6519,9 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
                 if (unlikely(__pyx_v_collisions_list == Py_None)) {
                   PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "append");
-                  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                  {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 }
-                __pyx_t_15 = PyTuple_New(2); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                __pyx_t_15 = PyTuple_New(2); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_GOTREF(__pyx_t_15);
                 __Pyx_INCREF(__pyx_v_entity_name_2);
                 PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_v_entity_name_2);
@@ -6717,12 +6529,12 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
                 __Pyx_INCREF(__pyx_v_entity_name_1);
                 PyTuple_SET_ITEM(__pyx_t_15, 1, __pyx_v_entity_name_1);
                 __Pyx_GIVEREF(__pyx_v_entity_name_1);
-                __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_collisions_list, __pyx_t_15); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_collisions_list, __pyx_t_15); if (unlikely(__pyx_t_11 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
               }
               __pyx_L25:;
 
-              /* "yapyg/collisions.pyx":479
+              /* "yapyg\collisions.pyx":456
  *                                                         else:
  *                                                                 collisions_list.append((entity_name_2, entity_name_1,))
  *                                                         return (state,             # <<<<<<<<<<<<<<
@@ -6731,14 +6543,14 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
  */
               __Pyx_XDECREF(__pyx_r);
 
-              /* "yapyg/collisions.pyx":484
+              /* "yapyg\collisions.pyx":461
  *                                                                 absolute_shape_1, absolute_shape_2,
  *                                                                 contact_points
  *                                                                 )             # <<<<<<<<<<<<<<
  *         return None
  * 
  */
-              __pyx_t_15 = PyTuple_New(8); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 479; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_15 = PyTuple_New(8); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __Pyx_GOTREF(__pyx_t_15);
               __Pyx_INCREF(__pyx_v_state);
               PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_v_state);
@@ -6772,7 +6584,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
               goto __pyx_L0;
             }
 
-            /* "yapyg/collisions.pyx":447
+            /* "yapyg\collisions.pyx":424
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:
  *                                         for absolute_shape_2 in absolute_shapes_2:             # <<<<<<<<<<<<<<
@@ -6782,7 +6594,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "yapyg/collisions.pyx":446
+          /* "yapyg\collisions.pyx":423
  *                                         continue
  * 
  *                                 for absolute_shape_1 in absolute_shapes_1:             # <<<<<<<<<<<<<<
@@ -6792,7 +6604,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-        /* "yapyg/collisions.pyx":430
+        /* "yapyg\collisions.pyx":407
  *                         collision_candidates = hash_map[hash]
  * 
  *                         for entity_name_2 in collision_candidates:             # <<<<<<<<<<<<<<
@@ -6806,7 +6618,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
     }
   }
 
-  /* "yapyg/collisions.pyx":485
+  /* "yapyg\collisions.pyx":462
  *                                                                 contact_points
  *                                                                 )
  *         return None             # <<<<<<<<<<<<<<
@@ -6818,7 +6630,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_run(PyObject *__pyx_v_state, PyObje
   __pyx_r = ((PyObject*)Py_None);
   goto __pyx_L0;
 
-  /* "yapyg/collisions.pyx":373
+  /* "yapyg\collisions.pyx":350
  *         return absolute_shapes
  * 
  * cpdef tuple run(list state, str entity_name_1):             # <<<<<<<<<<<<<<
@@ -6891,11 +6703,11 @@ static PyObject *__pyx_pw_5yapyg_10collisions_23run(PyObject *__pyx_self, PyObje
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_entity_name_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("run", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("run", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "run") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "run") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6908,14 +6720,14 @@ static PyObject *__pyx_pw_5yapyg_10collisions_23run(PyObject *__pyx_self, PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("run", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("run", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("yapyg.collisions.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name_1), (&PyString_Type), 1, "entity_name_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_entity_name_1), (&PyString_Type), 1, "entity_name_1", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_10collisions_22run(__pyx_self, __pyx_v_state, __pyx_v_entity_name_1);
 
   /* function exit code */
@@ -6936,7 +6748,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_22run(CYTHON_UNUSED PyObject *__py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("run", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_10collisions_run(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_10collisions_run(__pyx_v_state, __pyx_v_entity_name_1, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6953,7 +6765,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_22run(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":487
+/* "yapyg\collisions.pyx":464
  *         return None
  * 
  * cpdef clear_collisions_list(list state):             # <<<<<<<<<<<<<<
@@ -6972,26 +6784,26 @@ static PyObject *__pyx_f_5yapyg_10collisions_clear_collisions_list(PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clear_collisions_list", 0);
 
-  /* "yapyg/collisions.pyx":491
+  /* "yapyg\collisions.pyx":468
  *         TODO
  *         """
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []             # <<<<<<<<<<<<<<
  * 
  * cpdef notify_collision_handler(list state):
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 468; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 468; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 468; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 491; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 468; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":487
+  /* "yapyg\collisions.pyx":464
  *         return None
  * 
  * cpdef clear_collisions_list(list state):             # <<<<<<<<<<<<<<
@@ -7023,7 +6835,7 @@ static PyObject *__pyx_pw_5yapyg_10collisions_25clear_collisions_list(PyObject *
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clear_collisions_list (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_10collisions_24clear_collisions_list(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -7044,7 +6856,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_24clear_collisions_list(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clear_collisions_list", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_10collisions_clear_collisions_list(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 487; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_10collisions_clear_collisions_list(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7061,7 +6873,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_24clear_collisions_list(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "yapyg/collisions.pyx":493
+/* "yapyg\collisions.pyx":470
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
  * 
  * cpdef notify_collision_handler(list state):             # <<<<<<<<<<<<<<
@@ -7087,7 +6899,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("notify_collision_handler", 0);
 
-  /* "yapyg/collisions.pyx":497
+  /* "yapyg\collisions.pyx":474
  *         TODO
  *         """
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]             # <<<<<<<<<<<<<<
@@ -7096,18 +6908,18 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 497; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_collisions_list = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "yapyg/collisions.pyx":499
+  /* "yapyg\collisions.pyx":476
  *         cdef list collisions_list = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST]
  * 
  *         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]             # <<<<<<<<<<<<<<
@@ -7116,17 +6928,17 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
  */
   if (unlikely(__pyx_v_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_state, __pyx_v_5yapyg_10collisions_IDX_STATE_COLLISIONS, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HANDLER_FUNCTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 499; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HANDLER_FUNCTION, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_1 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_handler_function = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "yapyg/collisions.pyx":500
+  /* "yapyg\collisions.pyx":477
  * 
  *         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]
  *         if collisions_list and handler_function:             # <<<<<<<<<<<<<<
@@ -7138,12 +6950,12 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
     __pyx_t_3 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_handler_function); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 500; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_v_handler_function); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 477; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_3 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "yapyg/collisions.pyx":501
+    /* "yapyg\collisions.pyx":478
  *         handler_function = state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_HANDLER_FUNCTION]
  *         if collisions_list and handler_function:
  *                 (handler_function)(state, collisions_list)             # <<<<<<<<<<<<<<
@@ -7161,7 +6973,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
         __pyx_t_6 = 1;
       }
     }
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -7172,7 +6984,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
     __Pyx_INCREF(__pyx_v_collisions_list);
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_v_collisions_list);
     __Pyx_GIVEREF(__pyx_v_collisions_list);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 501; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -7181,7 +6993,7 @@ static PyObject *__pyx_f_5yapyg_10collisions_notify_collision_handler(PyObject *
   }
   __pyx_L3:;
 
-  /* "yapyg/collisions.pyx":493
+  /* "yapyg\collisions.pyx":470
  *         state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_COLLISIONS_LIST] = []
  * 
  * cpdef notify_collision_handler(list state):             # <<<<<<<<<<<<<<
@@ -7217,7 +7029,7 @@ static PyObject *__pyx_pw_5yapyg_10collisions_27notify_collision_handler(PyObjec
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("notify_collision_handler (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_state), (&PyList_Type), 1, "state", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_10collisions_26notify_collision_handler(__pyx_self, ((PyObject*)__pyx_v_state));
 
   /* function exit code */
@@ -7238,7 +7050,7 @@ static PyObject *__pyx_pf_5yapyg_10collisions_26notify_collision_handler(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("notify_collision_handler", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5yapyg_10collisions_notify_collision_handler(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_5yapyg_10collisions_notify_collision_handler(__pyx_v_state, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7304,7 +7116,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_IDX_COLLISION_LAST_POS, __pyx_k_IDX_COLLISION_LAST_POS, sizeof(__pyx_k_IDX_COLLISION_LAST_POS), 0, 0, 1, 1},
   {&__pyx_n_s_IDX_COLLISION_SHAPES, __pyx_k_IDX_COLLISION_SHAPES, sizeof(__pyx_k_IDX_COLLISION_SHAPES), 0, 0, 1, 1},
   {&__pyx_n_s_IDX_STATE_COLLISIONS, __pyx_k_IDX_STATE_COLLISIONS, sizeof(__pyx_k_IDX_STATE_COLLISIONS), 0, 0, 1, 1},
+  {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
   {&__pyx_kp_s_TILE__s__d__d, __pyx_k_TILE__s__d__d, sizeof(__pyx_k_TILE__s__d__d), 0, 0, 1, 0},
+  {&__pyx_kp_s_Unknown_shape_s, __pyx_k_Unknown_shape_s, sizeof(__pyx_k_Unknown_shape_s), 0, 0, 1, 0},
   {&__pyx_kp_s__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 1, 0},
   {&__pyx_kp_s__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 0, 1, 0},
   {&__pyx_n_s_add, __pyx_k_add, sizeof(__pyx_k_add), 0, 0, 1, 1},
@@ -7340,6 +7154,7 @@ static int __Pyx_InitCachedBuiltins(void) {
   #else
   __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
+  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -7349,14 +7164,14 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg/collisions.pyx":339
+  /* "yapyg\collisions.pyx":316
  *         if is_tile:
  *                 pos = collision_def[IDX_COLLISION_LAST_POS]
  *                 pos_offset = (0, 0)             # <<<<<<<<<<<<<<
  *         else:
  *                 pos = entities.get_pos(state, entity_name)
  */
-  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
   __Pyx_RefNannyFinishContext();
@@ -7388,7 +7203,6 @@ PyMODINIT_FUNC PyInit_collisions(void)
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -7505,31 +7319,29 @@ PyMODINIT_FUNC PyInit_collisions(void)
   if (__Pyx_ImportFunction(__pyx_t_3, "is_rect_rect_collision", (void (**)(void))&__pyx_f_5yapyg_14math_collision_is_rect_rect_collision, "int (PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_3, "is_circle_circle_collision", (void (**)(void))&__pyx_f_5yapyg_14math_collision_is_circle_circle_collision, "int (PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_ImportFunction(__pyx_t_3, "is_rect_circle_collision", (void (**)(void))&__pyx_f_5yapyg_14math_collision_is_rect_circle_collision, "int (PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_3, "f_get_clipping_rectangle", (void (**)(void))&__pyx_f_5yapyg_14math_collision_f_get_clipping_rectangle, "PyObject *(float, float, float, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_ImportModule("yapyg.math_2d"); if (!__pyx_t_4) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_4, "rotated_point", (void (**)(void))&__pyx_f_5yapyg_7math_2d_rotated_point, "PyObject *(PyObject *, PyObject *, float, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_ImportModule("yapyg.entities"); if (!__pyx_t_4) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_4, "get_pos", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_4, "get_pos_offset", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos_offset, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_4, "get_pos_with_offset", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos_with_offset, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_ImportFunction(__pyx_t_4, "is_enabled", (void (**)(void))&__pyx_f_5yapyg_8entities_is_enabled, "int (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   Py_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __Pyx_ImportModule("yapyg.entities"); if (!__pyx_t_5) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "get_pos", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "get_pos_offset", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos_offset, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "get_pos_with_offset", (void (**)(void))&__pyx_f_5yapyg_8entities_get_pos_with_offset, "PyObject *(PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__Pyx_ImportFunction(__pyx_t_5, "is_enabled", (void (**)(void))&__pyx_f_5yapyg_8entities_is_enabled, "int (PyObject *, PyObject *, int __pyx_skip_dispatch)") < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  Py_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg/collisions.pyx":30
+  /* "yapyg\collisions.pyx":30
  * cimport math_2d
  * cimport entities
  * import debug             # <<<<<<<<<<<<<<
  * 
  * cdef int IDX_STATE_COLLISIONS
  */
-  __pyx_t_6 = __Pyx_Import(__pyx_n_s_debug, 0, -1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_debug, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_5 = __Pyx_Import(__pyx_n_s_debug, 0, -1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_debug, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "yapyg/collisions.pyx":34
+  /* "yapyg\collisions.pyx":34
  * cdef int IDX_STATE_COLLISIONS
  * 
  * cdef int HASH_SCALE_FACTOR = 2             # <<<<<<<<<<<<<<
@@ -7538,7 +7350,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_HASH_SCALE_FACTOR = 2;
 
-  /* "yapyg/collisions.pyx":36
+  /* "yapyg\collisions.pyx":36
  * cdef int HASH_SCALE_FACTOR = 2
  * 
  * cdef int IDX_COLLISIONDB_ENTITIES = 0             # <<<<<<<<<<<<<<
@@ -7547,7 +7359,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_ENTITIES = 0;
 
-  /* "yapyg/collisions.pyx":37
+  /* "yapyg\collisions.pyx":37
  * 
  * cdef int IDX_COLLISIONDB_ENTITIES = 0
  * cdef int IDX_COLLISIONDB_HASH_MAP = 1             # <<<<<<<<<<<<<<
@@ -7556,7 +7368,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HASH_MAP = 1;
 
-  /* "yapyg/collisions.pyx":38
+  /* "yapyg\collisions.pyx":38
  * cdef int IDX_COLLISIONDB_ENTITIES = 0
  * cdef int IDX_COLLISIONDB_HASH_MAP = 1
  * cdef int IDX_COLLISIONDB_HANDLER_FUNCTION = 2             # <<<<<<<<<<<<<<
@@ -7565,7 +7377,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_HANDLER_FUNCTION = 2;
 
-  /* "yapyg/collisions.pyx":39
+  /* "yapyg\collisions.pyx":39
  * cdef int IDX_COLLISIONDB_HASH_MAP = 1
  * cdef int IDX_COLLISIONDB_HANDLER_FUNCTION = 2
  * cdef int IDX_COLLISIONDB_COLLISIONS_LIST = 3             # <<<<<<<<<<<<<<
@@ -7574,7 +7386,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISIONDB_COLLISIONS_LIST = 3;
 
-  /* "yapyg/collisions.pyx":43
+  /* "yapyg\collisions.pyx":43
  * # Values of state[IDX_STATE_COLLISIONS][IDX_COLLISIONDB_ENTITIES] are lists with these elements
  * # Key is entity_name
  * cdef int IDX_COLLISION_SHAPES = 0             # <<<<<<<<<<<<<<
@@ -7583,7 +7395,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_SHAPES = 0;
 
-  /* "yapyg/collisions.pyx":44
+  /* "yapyg\collisions.pyx":44
  * # Key is entity_name
  * cdef int IDX_COLLISION_SHAPES = 0
  * cdef int IDX_COLLISION_LAST_POS = 1             # <<<<<<<<<<<<<<
@@ -7592,7 +7404,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_LAST_POS = 1;
 
-  /* "yapyg/collisions.pyx":45
+  /* "yapyg\collisions.pyx":45
  * cdef int IDX_COLLISION_SHAPES = 0
  * cdef int IDX_COLLISION_LAST_POS = 1
  * cdef int IDX_COLLISION_CACHE = 2             # <<<<<<<<<<<<<<
@@ -7601,7 +7413,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE = 2;
 
-  /* "yapyg/collisions.pyx":46
+  /* "yapyg\collisions.pyx":46
  * cdef int IDX_COLLISION_LAST_POS = 1
  * cdef int IDX_COLLISION_CACHE = 2
  * cdef int IDX_COLLISION_IS_TILE = 3             # <<<<<<<<<<<<<<
@@ -7610,7 +7422,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_IS_TILE = 3;
 
-  /* "yapyg/collisions.pyx":49
+  /* "yapyg\collisions.pyx":49
  * 
  * # Values of the IDX_COLLISION_CACHE list
  * cdef int IDX_COLLISION_CACHE_ABS_SHAPE = 0             # <<<<<<<<<<<<<<
@@ -7619,7 +7431,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_ABS_SHAPE = 0;
 
-  /* "yapyg/collisions.pyx":50
+  /* "yapyg\collisions.pyx":50
  * # Values of the IDX_COLLISION_CACHE list
  * cdef int IDX_COLLISION_CACHE_ABS_SHAPE = 0
  * cdef int IDX_COLLISION_CACHE_LAST_HASH_POS = 1             # <<<<<<<<<<<<<<
@@ -7628,7 +7440,7 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_LAST_HASH_POS = 1;
 
-  /* "yapyg/collisions.pyx":51
+  /* "yapyg\collisions.pyx":51
  * cdef int IDX_COLLISION_CACHE_ABS_SHAPE = 0
  * cdef int IDX_COLLISION_CACHE_LAST_HASH_POS = 1
  * cdef int IDX_COLLISION_CACHE_HASH_EXTENT = 2             # <<<<<<<<<<<<<<
@@ -7637,15 +7449,15 @@ PyMODINIT_FUNC PyInit_collisions(void)
  */
   __pyx_v_5yapyg_10collisions_IDX_COLLISION_CACHE_HASH_EXTENT = 2;
 
-  /* "yapyg/collisions.pyx":1
+  /* "yapyg\collisions.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy
  */
-  __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -7656,7 +7468,6 @@ PyMODINIT_FUNC PyInit_collisions(void)
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init yapyg.collisions", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -8197,6 +8008,194 @@ return_ne:
     return (equals == Py_NE);
 #endif
 }
+
+static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    PyThreadState *tstate = PyThreadState_GET();
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+#else
+    PyErr_Restore(type, value, tb);
+#endif
+}
+static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    PyThreadState *tstate = PyThreadState_GET();
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+#else
+    PyErr_Fetch(type, value, tb);
+#endif
+}
+
+#if PY_MAJOR_VERSION < 3
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb,
+                        CYTHON_UNUSED PyObject *cause) {
+    Py_XINCREF(type);
+    if (!value || value == Py_None)
+        value = NULL;
+    else
+        Py_INCREF(value);
+    if (!tb || tb == Py_None)
+        tb = NULL;
+    else {
+        Py_INCREF(tb);
+        if (!PyTraceBack_Check(tb)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: arg 3 must be a traceback or None");
+            goto raise_error;
+        }
+    }
+    if (PyType_Check(type)) {
+#if CYTHON_COMPILING_IN_PYPY
+        if (!value) {
+            Py_INCREF(Py_None);
+            value = Py_None;
+        }
+#endif
+        PyErr_NormalizeException(&type, &value, &tb);
+    } else {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto raise_error;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(type);
+        Py_INCREF(type);
+        if (!PyType_IsSubtype((PyTypeObject *)type, (PyTypeObject *)PyExc_BaseException)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: exception class must be a subclass of BaseException");
+            goto raise_error;
+        }
+    }
+    __Pyx_ErrRestore(type, value, tb);
+    return;
+raise_error:
+    Py_XDECREF(value);
+    Py_XDECREF(type);
+    Py_XDECREF(tb);
+    return;
+}
+#else
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause) {
+    PyObject* owned_instance = NULL;
+    if (tb == Py_None) {
+        tb = 0;
+    } else if (tb && !PyTraceBack_Check(tb)) {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: arg 3 must be a traceback or None");
+        goto bad;
+    }
+    if (value == Py_None)
+        value = 0;
+    if (PyExceptionInstance_Check(type)) {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto bad;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(value);
+    } else if (PyExceptionClass_Check(type)) {
+        PyObject *instance_class = NULL;
+        if (value && PyExceptionInstance_Check(value)) {
+            instance_class = (PyObject*) Py_TYPE(value);
+            if (instance_class != type) {
+                if (PyObject_IsSubclass(instance_class, type)) {
+                    type = instance_class;
+                } else {
+                    instance_class = NULL;
+                }
+            }
+        }
+        if (!instance_class) {
+            PyObject *args;
+            if (!value)
+                args = PyTuple_New(0);
+            else if (PyTuple_Check(value)) {
+                Py_INCREF(value);
+                args = value;
+            } else
+                args = PyTuple_Pack(1, value);
+            if (!args)
+                goto bad;
+            owned_instance = PyObject_Call(type, args, NULL);
+            Py_DECREF(args);
+            if (!owned_instance)
+                goto bad;
+            value = owned_instance;
+            if (!PyExceptionInstance_Check(value)) {
+                PyErr_Format(PyExc_TypeError,
+                             "calling %R should have returned an instance of "
+                             "BaseException, not %R",
+                             type, Py_TYPE(value));
+                goto bad;
+            }
+        }
+    } else {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: exception class must be a subclass of BaseException");
+        goto bad;
+    }
+#if PY_VERSION_HEX >= 0x03030000
+    if (cause) {
+#else
+    if (cause && cause != Py_None) {
+#endif
+        PyObject *fixed_cause;
+        if (cause == Py_None) {
+            fixed_cause = NULL;
+        } else if (PyExceptionClass_Check(cause)) {
+            fixed_cause = PyObject_CallObject(cause, NULL);
+            if (fixed_cause == NULL)
+                goto bad;
+        } else if (PyExceptionInstance_Check(cause)) {
+            fixed_cause = cause;
+            Py_INCREF(fixed_cause);
+        } else {
+            PyErr_SetString(PyExc_TypeError,
+                            "exception causes must derive from "
+                            "BaseException");
+            goto bad;
+        }
+        PyException_SetCause(value, fixed_cause);
+    }
+    PyErr_SetObject(type, value);
+    if (tb) {
+#if CYTHON_COMPILING_IN_PYPY
+        PyObject *tmp_type, *tmp_value, *tmp_tb;
+        PyErr_Fetch(tmp_type, tmp_value, tmp_tb);
+        Py_INCREF(tb);
+        PyErr_Restore(tmp_type, tmp_value, tb);
+        Py_XDECREF(tmp_tb);
+#else
+        PyThreadState *tstate = PyThreadState_GET();
+        PyObject* tmp_tb = tstate->curexc_traceback;
+        if (tb != tmp_tb) {
+            Py_INCREF(tb);
+            tstate->curexc_traceback = tb;
+            Py_XDECREF(tmp_tb);
+        }
+#endif
+    }
+bad:
+    Py_XDECREF(owned_instance);
+    return;
+}
+#endif
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE void __Pyx_crop_slice(Py_ssize_t* _start, Py_ssize_t* _stop, Py_ssize_t* _length) {

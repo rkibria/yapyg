@@ -32,7 +32,7 @@ else:
                 ]
 
 setup(  name='yapyg',
-        version='0.5.0',
+        version='0.5.2',
         description='Yet Another Python Game Engine',
         author='Raihan Kibria',
         author_email='raihan@kibria.de',

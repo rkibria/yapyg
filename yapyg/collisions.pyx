@@ -202,17 +202,7 @@ cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, 
         cdef float c_ll_y
         cdef float c_ur_x
         cdef float c_ur_y
-        cdef float r_x
-        cdef float r_y
-        cdef float r_w
-        cdef float r_h
-        cdef tuple pos
-        cdef float rot
-        cdef float max_extent
-        cdef tuple rect_center
-        cdef tuple rect_corners
-        cdef float rotated_x
-        cdef float rotated_y
+        cdef tuple clip_rect
 
         if cached_hash_extents:
                 lower_left_x_offset, lower_left_y_offset, upper_right_x_offset, upper_right_y_offset = cached_hash_extents
@@ -241,32 +231,19 @@ cpdef tuple get_hash_area(list state, str entity_name, tuple entity_lower_left, 
                                         upper_right_y_offset = c_ur_y
 
                         elif collision_shape[0] == "rectangle":
-                                r_x = collision_shape[1] * HASH_SCALE_FACTOR
-                                r_y = collision_shape[2] * HASH_SCALE_FACTOR
-                                r_w = collision_shape[3] * HASH_SCALE_FACTOR
-                                r_h = collision_shape[4] * HASH_SCALE_FACTOR
-                                pos = entities.get_pos(state, entity_name)
-                                rot = pos[2]
+                                clip_rect = math_collision.f_get_clipping_rectangle(
+                                        collision_shape[1] * HASH_SCALE_FACTOR,
+                                        collision_shape[2] * HASH_SCALE_FACTOR,
+                                        collision_shape[3] * HASH_SCALE_FACTOR,
+                                        collision_shape[4] * HASH_SCALE_FACTOR,
+                                        )
+                                lower_left_x_offset = clip_rect[0]
+                                lower_left_y_offset = clip_rect[1]
+                                upper_right_x_offset = clip_rect[0] + clip_rect[2]
+                                upper_right_y_offset = clip_rect[1] + clip_rect[3]
+                        else:
+                                raise RuntimeError("Unknown shape %s" % str(collision_shape[0]))
 
-                                rect_center = (r_x + (r_w / 2.0), r_y + (r_h / 2.0))
-                                rect_corners = ((r_x, r_y),
-                                                (r_x + r_w, r_y),
-                                                (r_x, r_y + r_h),
-                                                (r_x + r_w, r_y + r_h),
-                                                )
-                                for rect_corner in rect_corners:
-                                        rotated_x,rotated_y = math_2d.rotated_point(rect_center, rect_corner, rot)
-                                        if rotated_x < lower_left_x_offset:
-                                                lower_left_x_offset = rotated_x
-
-                                        if rotated_y < lower_left_y_offset:
-                                                lower_left_y_offset = rotated_y
-
-                                        if rotated_x > upper_right_x_offset:
-                                                upper_right_x_offset = rotated_x
-
-                                        if rotated_y > upper_right_y_offset:
-                                                upper_right_y_offset = rotated_y
                 entity_collision_cache[IDX_COLLISION_CACHE_HASH_EXTENT] = (lower_left_x_offset, lower_left_y_offset,
                                                                            upper_right_x_offset, upper_right_y_offset)
 

@@ -416,7 +416,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "yapyg/entities.pyx",
+  "yapyg\\entities.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -452,7 +452,7 @@ struct __pyx_opt_args_5yapyg_8entities_insert;
 struct __pyx_opt_args_5yapyg_8entities_set_sprite;
 struct __pyx_opt_args_5yapyg_8entities_set_active_sprite;
 
-/* "yapyg/entities.pxd":38
+/* "yapyg\entities.pxd":38
  * cpdef initialize(int state_idx, list state)
  * cpdef destroy(list state)
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos,             # <<<<<<<<<<<<<<
@@ -467,7 +467,7 @@ struct __pyx_opt_args_5yapyg_8entities_insert {
   int play_once;
 };
 
-/* "yapyg/entities.pxd":40
+/* "yapyg\entities.pxd":40
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos,
  *              tuple pos_offset=*, tuple collision=*, int screen_relative=*, int play_once=*)
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -481,7 +481,7 @@ struct __pyx_opt_args_5yapyg_8entities_set_sprite {
   int play_once;
 };
 
-/* "yapyg/entities.pxd":42
+/* "yapyg\entities.pxd":42
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=*, int screen_relative=*, int play_once=*)
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=?)             # <<<<<<<<<<<<<<
@@ -962,7 +962,7 @@ static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__6;
 
-/* "yapyg/entities.pyx":47
+/* "yapyg\entities.pyx":47
  * cdef int IDX_ENTITY_ENABLE = 7
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -981,7 +981,7 @@ static PyObject *__pyx_f_5yapyg_8entities_initialize(int __pyx_v_state_idx, PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("initialize", 0);
 
-  /* "yapyg/entities.pyx":52
+  /* "yapyg\entities.pyx":52
  *         """
  *         global IDX_STATE_ENTITIES
  *         IDX_STATE_ENTITIES = state_idx             # <<<<<<<<<<<<<<
@@ -990,7 +990,7 @@ static PyObject *__pyx_f_5yapyg_8entities_initialize(int __pyx_v_state_idx, PyOb
  */
   __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES = __pyx_v_state_idx;
 
-  /* "yapyg/entities.pyx":54
+  /* "yapyg\entities.pyx":54
  *         IDX_STATE_ENTITIES = state_idx
  *         state[IDX_STATE_ENTITIES] = [
  *                 {},             # <<<<<<<<<<<<<<
@@ -1000,7 +1000,7 @@ static PyObject *__pyx_f_5yapyg_8entities_initialize(int __pyx_v_state_idx, PyOb
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "yapyg/entities.pyx":53
+  /* "yapyg\entities.pyx":53
  *         global IDX_STATE_ENTITIES
  *         IDX_STATE_ENTITIES = state_idx
  *         state[IDX_STATE_ENTITIES] = [             # <<<<<<<<<<<<<<
@@ -1019,7 +1019,7 @@ static PyObject *__pyx_f_5yapyg_8entities_initialize(int __pyx_v_state_idx, PyOb
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, __pyx_t_2, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "yapyg/entities.pyx":47
+  /* "yapyg\entities.pyx":47
  * cdef int IDX_ENTITY_ENABLE = 7
  * 
  * cpdef initialize(int state_idx, list state):             # <<<<<<<<<<<<<<
@@ -1134,7 +1134,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_initialize(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":57
+/* "yapyg\entities.pyx":57
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1151,7 +1151,7 @@ static PyObject *__pyx_f_5yapyg_8entities_destroy(PyObject *__pyx_v_state, CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("destroy", 0);
 
-  /* "yapyg/entities.pyx":61
+  /* "yapyg\entities.pyx":61
  *         TODO
  *         """
  *         state[IDX_STATE_ENTITIES] = None             # <<<<<<<<<<<<<<
@@ -1164,7 +1164,7 @@ static PyObject *__pyx_f_5yapyg_8entities_destroy(PyObject *__pyx_v_state, CYTHO
   }
   if (unlikely(__Pyx_SetItemInt(__pyx_v_state, __pyx_v_5yapyg_8entities_IDX_STATE_ENTITIES, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/entities.pyx":57
+  /* "yapyg\entities.pyx":57
  *                 ]
  * 
  * cpdef destroy(list state):             # <<<<<<<<<<<<<<
@@ -1232,7 +1232,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_2destroy(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":63
+/* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -1244,7 +1244,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
 static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_sprite_defs, PyObject *__pyx_v_pos, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_8entities_insert *__pyx_optional_args) {
   PyObject *__pyx_v_pos_offset = ((PyObject*)__pyx_tuple_);
 
-  /* "yapyg/entities.pyx":64
+  /* "yapyg\entities.pyx":64
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),
  *              tuple collision=None, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -1294,7 +1294,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     }
   }
 
-  /* "yapyg/entities.pyx":68
+  /* "yapyg\entities.pyx":68
  *         TODO
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]             # <<<<<<<<<<<<<<
@@ -1311,7 +1311,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_v_entities_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":69
+  /* "yapyg\entities.pyx":69
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]             # <<<<<<<<<<<<<<
@@ -1328,7 +1328,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_v_entities_table = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":71
+  /* "yapyg\entities.pyx":71
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity = [
  *                 [pos[0], pos[1], pos[2]],             # <<<<<<<<<<<<<<
@@ -1365,7 +1365,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
 
-  /* "yapyg/entities.pyx":72
+  /* "yapyg\entities.pyx":72
  *         cdef list entity = [
  *                 [pos[0], pos[1], pos[2]],
  *                 [pos_offset[0], pos_offset[1]],             # <<<<<<<<<<<<<<
@@ -1393,7 +1393,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_3 = 0;
   __pyx_t_2 = 0;
 
-  /* "yapyg/entities.pyx":75
+  /* "yapyg\entities.pyx":75
  *                 None,
  *                 None,
  *                 [],             # <<<<<<<<<<<<<<
@@ -1403,7 +1403,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "yapyg/entities.pyx":76
+  /* "yapyg\entities.pyx":76
  *                 None,
  *                 [],
  *                 True if collision else None,             # <<<<<<<<<<<<<<
@@ -1419,7 +1419,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __pyx_t_3 = Py_None;
   }
 
-  /* "yapyg/entities.pyx":77
+  /* "yapyg\entities.pyx":77
  *                 [],
  *                 True if collision else None,
  *                 True if play_once else False,             # <<<<<<<<<<<<<<
@@ -1434,7 +1434,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __pyx_t_6 = Py_False;
   }
 
-  /* "yapyg/entities.pyx":70
+  /* "yapyg\entities.pyx":70
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity = [             # <<<<<<<<<<<<<<
@@ -1470,7 +1470,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_v_entity = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "yapyg/entities.pyx":80
+  /* "yapyg\entities.pyx":80
  *                 True,
  *                 ]
  *         entities_table[entity_name] = entity             # <<<<<<<<<<<<<<
@@ -1483,7 +1483,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   }
   if (unlikely(PyDict_SetItem(__pyx_v_entities_table, __pyx_v_entity_name, __pyx_v_entity) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "yapyg/entities.pyx":82
+  /* "yapyg\entities.pyx":82
  *         entities_table[entity_name] = entity
  * 
  *         if collision:             # <<<<<<<<<<<<<<
@@ -1493,7 +1493,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_5 = (__pyx_v_collision != Py_None) && (PyTuple_GET_SIZE(__pyx_v_collision) != 0);
   if (__pyx_t_5) {
 
-    /* "yapyg/entities.pyx":83
+    /* "yapyg\entities.pyx":83
  * 
  *         if collision:
  *                 collisions.add_entity(state, entity_name, collision)             # <<<<<<<<<<<<<<
@@ -1507,7 +1507,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":85
+  /* "yapyg\entities.pyx":85
  *                 collisions.add_entity(state, entity_name, collision)
  * 
  *         cdef str default_sprite = None             # <<<<<<<<<<<<<<
@@ -1517,7 +1517,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __Pyx_INCREF(Py_None);
   __pyx_v_default_sprite = ((PyObject*)Py_None);
 
-  /* "yapyg/entities.pyx":89
+  /* "yapyg\entities.pyx":89
  *         cdef str sprite_name
  *         cdef dict sprite_def
  *         for sprite_name, sprite_def in sprite_defs.iteritems():             # <<<<<<<<<<<<<<
@@ -1547,7 +1547,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __Pyx_XDECREF_SET(__pyx_v_sprite_def, ((PyObject*)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "yapyg/entities.pyx":91
+    /* "yapyg\entities.pyx":91
  *         for sprite_name, sprite_def in sprite_defs.iteritems():
  * 
  *                 entity[IDX_ENTITY_SPRITES].append(sprite_name)             # <<<<<<<<<<<<<<
@@ -1559,7 +1559,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __pyx_t_12 = __Pyx_PyObject_Append(__pyx_t_3, __pyx_v_sprite_name); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "yapyg/entities.pyx":93
+    /* "yapyg\entities.pyx":93
  *                 entity[IDX_ENTITY_SPRITES].append(sprite_name)
  * 
  *                 if sprite_name[0] == "*":             # <<<<<<<<<<<<<<
@@ -1572,7 +1572,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_5) {
 
-      /* "yapyg/entities.pyx":94
+      /* "yapyg\entities.pyx":94
  * 
  *                 if sprite_name[0] == "*":
  *                         default_sprite = sprite_name             # <<<<<<<<<<<<<<
@@ -1585,7 +1585,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
     }
     __pyx_L6:;
 
-    /* "yapyg/entities.pyx":96
+    /* "yapyg\entities.pyx":96
  *                         default_sprite = sprite_name
  * 
  *                 set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative, play_once)             # <<<<<<<<<<<<<<
@@ -1602,7 +1602,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "yapyg/entities.pyx":98
+  /* "yapyg\entities.pyx":98
  *                 set_sprite(state, entity_name, sprite_name, sprite_def, False, screen_relative, play_once)
  * 
  *         if default_sprite:             # <<<<<<<<<<<<<<
@@ -1612,7 +1612,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_v_default_sprite); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_5) {
 
-    /* "yapyg/entities.pyx":99
+    /* "yapyg\entities.pyx":99
  * 
  *         if default_sprite:
  *                 set_active_sprite(state, entity_name, default_sprite)             # <<<<<<<<<<<<<<
@@ -1626,7 +1626,7 @@ static PyObject *__pyx_f_5yapyg_8entities_insert(PyObject *__pyx_v_state, PyObje
   }
   __pyx_L7:;
 
-  /* "yapyg/entities.pyx":63
+  /* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -1681,7 +1681,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
     PyObject* values[8] = {0,0,0,0,0,0,0,0};
     values[4] = ((PyObject*)__pyx_tuple__3);
 
-    /* "yapyg/entities.pyx":64
+    /* "yapyg\entities.pyx":64
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),
  *              tuple collision=None, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -1795,7 +1795,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_5insert(PyObject *__pyx_self, PyObjec
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_collision), (&PyTuple_Type), 1, "collision", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_4insert(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_defs, __pyx_v_pos, __pyx_v_pos_offset, __pyx_v_collision, __pyx_v_screen_relative, __pyx_v_play_once);
 
-  /* "yapyg/entities.pyx":63
+  /* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -1844,7 +1844,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_4insert(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":101
+/* "yapyg\entities.pyx":101
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -1855,7 +1855,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_4insert(CYTHON_UNUSED PyObject *__pyx
 static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, PyObject *__pyx_v_entity_name, PyObject *__pyx_v_sprite_name, PyObject *__pyx_v_sprite_def, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_5yapyg_8entities_set_sprite *__pyx_optional_args) {
 
-  /* "yapyg/entities.pyx":102
+  /* "yapyg\entities.pyx":102
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=False, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -1897,7 +1897,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     }
   }
 
-  /* "yapyg/entities.pyx":106
+  /* "yapyg\entities.pyx":106
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -1909,7 +1909,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":119
+  /* "yapyg\entities.pyx":119
  *         cdef str enabled_sprite_name
  * 
  *         if entity:             # <<<<<<<<<<<<<<
@@ -1919,7 +1919,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":120
+    /* "yapyg\entities.pyx":120
  * 
  *         if entity:
  *                 full_sprite_name = get_full_sprite_name(entity_name, sprite_name)             # <<<<<<<<<<<<<<
@@ -1931,7 +1931,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_v_full_sprite_name = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":122
+    /* "yapyg\entities.pyx":122
  *                 full_sprite_name = get_full_sprite_name(entity_name, sprite_name)
  * 
  *                 sprite_textures = sprite_def["textures"]             # <<<<<<<<<<<<<<
@@ -1948,7 +1948,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_v_sprite_textures = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":124
+    /* "yapyg\entities.pyx":124
  *                 sprite_textures = sprite_def["textures"]
  * 
  *                 sprite_speed = 0             # <<<<<<<<<<<<<<
@@ -1957,7 +1957,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     __pyx_v_sprite_speed = 0;
 
-    /* "yapyg/entities.pyx":125
+    /* "yapyg\entities.pyx":125
  * 
  *                 sprite_speed = 0
  *                 if sprite_def.has_key("speed"):             # <<<<<<<<<<<<<<
@@ -1972,7 +1972,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg/entities.pyx":126
+      /* "yapyg\entities.pyx":126
  *                 sprite_speed = 0
  *                 if sprite_def.has_key("speed"):
  *                         sprite_speed = sprite_def["speed"]             # <<<<<<<<<<<<<<
@@ -1992,7 +1992,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     }
     __pyx_L4:;
 
-    /* "yapyg/entities.pyx":128
+    /* "yapyg\entities.pyx":128
  *                         sprite_speed = sprite_def["speed"]
  * 
  *                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]             # <<<<<<<<<<<<<<
@@ -2009,7 +2009,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_v_sprite_pos_offset = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":130
+    /* "yapyg\entities.pyx":130
  *                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
  * 
  *                 sprite_scale = (1.0, 1.0)             # <<<<<<<<<<<<<<
@@ -2019,7 +2019,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __Pyx_INCREF(__pyx_tuple__4);
     __pyx_v_sprite_scale = __pyx_tuple__4;
 
-    /* "yapyg/entities.pyx":132
+    /* "yapyg\entities.pyx":132
  *                 sprite_scale = (1.0, 1.0)
  * 
  *                 sprite_enable = enable             # <<<<<<<<<<<<<<
@@ -2028,7 +2028,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
  */
     __pyx_v_sprite_enable = __pyx_v_enable;
 
-    /* "yapyg/entities.pyx":134
+    /* "yapyg\entities.pyx":134
  *                 sprite_enable = enable
  * 
  *                 sprite_pos = entity[IDX_ENTITY_POS]             # <<<<<<<<<<<<<<
@@ -2045,7 +2045,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_v_sprite_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":136
+    /* "yapyg\entities.pyx":136
  *                 sprite_pos = entity[IDX_ENTITY_POS]
  * 
  *                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]             # <<<<<<<<<<<<<<
@@ -2062,7 +2062,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_v_enabled_sprite_name = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":137
+    /* "yapyg\entities.pyx":137
  * 
  *                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]
  *                 if enabled_sprite_name == sprite_name:             # <<<<<<<<<<<<<<
@@ -2073,7 +2073,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_t_2 = (__pyx_t_3 != 0);
     if (__pyx_t_2) {
 
-      /* "yapyg/entities.pyx":138
+      /* "yapyg\entities.pyx":138
  *                 enabled_sprite_name = entity[IDX_ENTITY_ENABLED_SPRITE]
  *                 if enabled_sprite_name == sprite_name:
  *                         sprites.set_enable(state, full_sprite_name, False)             # <<<<<<<<<<<<<<
@@ -2087,7 +2087,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     }
     __pyx_L5:;
 
-    /* "yapyg/entities.pyx":140
+    /* "yapyg\entities.pyx":140
  *                         sprites.set_enable(state, full_sprite_name, False)
  * 
  *                 sprites.delete(state, full_sprite_name)             # <<<<<<<<<<<<<<
@@ -2098,7 +2098,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":142
+    /* "yapyg\entities.pyx":142
  *                 sprites.delete(state, full_sprite_name)
  * 
  *                 sprites.insert(state,             # <<<<<<<<<<<<<<
@@ -2112,7 +2112,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":154
+    /* "yapyg\entities.pyx":154
  *                         )
  * 
  *                 if enabled_sprite_name == sprite_name:             # <<<<<<<<<<<<<<
@@ -2123,7 +2123,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg/entities.pyx":155
+      /* "yapyg\entities.pyx":155
  * 
  *                 if enabled_sprite_name == sprite_name:
  *                         sprites.set_enable(state, full_sprite_name, True)             # <<<<<<<<<<<<<<
@@ -2140,7 +2140,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_sprite(PyObject *__pyx_v_state, Py
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":101
+  /* "yapyg\entities.pyx":101
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -2262,7 +2262,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyO
       __pyx_v_enable = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_enable == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
     } else {
 
-      /* "yapyg/entities.pyx":102
+      /* "yapyg\entities.pyx":102
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,
  *                  int enable=False, int screen_relative=False, int play_once=False):             # <<<<<<<<<<<<<<
@@ -2296,7 +2296,7 @@ static PyObject *__pyx_pw_5yapyg_8entities_7set_sprite(PyObject *__pyx_self, PyO
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_sprite_def), (&PyDict_Type), 1, "sprite_def", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_5yapyg_8entities_6set_sprite(__pyx_self, __pyx_v_state, __pyx_v_entity_name, __pyx_v_sprite_name, __pyx_v_sprite_def, __pyx_v_enable, __pyx_v_screen_relative, __pyx_v_play_once);
 
-  /* "yapyg/entities.pyx":101
+  /* "yapyg\entities.pyx":101
  *                 set_active_sprite(state, entity_name, default_sprite)
  * 
  * cpdef set_sprite(list state, str entity_name, str sprite_name, dict sprite_def,             # <<<<<<<<<<<<<<
@@ -2344,7 +2344,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_6set_sprite(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":157
+/* "yapyg\entities.pyx":157
  *                         sprites.set_enable(state, full_sprite_name, True)
  * 
  * cpdef str get_active_sprite_name(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2365,7 +2365,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_active_sprite_name(PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_active_sprite_name", 0);
 
-  /* "yapyg/entities.pyx":161
+  /* "yapyg\entities.pyx":161
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -2377,7 +2377,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_active_sprite_name(PyObject *__pyx
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":162
+  /* "yapyg\entities.pyx":162
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -2387,7 +2387,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_active_sprite_name(PyObject *__pyx
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":163
+    /* "yapyg\entities.pyx":163
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:             # <<<<<<<<<<<<<<
@@ -2404,7 +2404,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_active_sprite_name(PyObject *__pyx
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/entities.pyx":164
+      /* "yapyg\entities.pyx":164
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
  *                         return get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE])             # <<<<<<<<<<<<<<
@@ -2430,7 +2430,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_active_sprite_name(PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":165
+  /* "yapyg\entities.pyx":165
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
  *                         return get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE])
  *         return None             # <<<<<<<<<<<<<<
@@ -2442,7 +2442,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_active_sprite_name(PyObject *__pyx
   __pyx_r = ((PyObject*)Py_None);
   goto __pyx_L0;
 
-  /* "yapyg/entities.pyx":157
+  /* "yapyg\entities.pyx":157
  *                         sprites.set_enable(state, full_sprite_name, True)
  * 
  * cpdef str get_active_sprite_name(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2557,7 +2557,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_8get_active_sprite_name(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":167
+/* "yapyg\entities.pyx":167
  *         return None
  * 
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):             # <<<<<<<<<<<<<<
@@ -2584,7 +2584,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
     }
   }
 
-  /* "yapyg/entities.pyx":171
+  /* "yapyg\entities.pyx":171
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -2596,7 +2596,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":172
+  /* "yapyg\entities.pyx":172
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -2606,7 +2606,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":173
+    /* "yapyg\entities.pyx":173
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:             # <<<<<<<<<<<<<<
@@ -2623,7 +2623,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/entities.pyx":174
+      /* "yapyg\entities.pyx":174
  *         if entity:
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
  *                         if entity[IDX_ENTITY_ENABLED_SPRITE] != sprite_name:             # <<<<<<<<<<<<<<
@@ -2640,7 +2640,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_2) {
 
-        /* "yapyg/entities.pyx":175
+        /* "yapyg\entities.pyx":175
  *                 if entity[IDX_ENTITY_ENABLED_SPRITE]:
  *                         if entity[IDX_ENTITY_ENABLED_SPRITE] != sprite_name:
  *                                 sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)             # <<<<<<<<<<<<<<
@@ -2668,7 +2668,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
     }
     __pyx_L4:;
 
-    /* "yapyg/entities.pyx":176
+    /* "yapyg\entities.pyx":176
  *                         if entity[IDX_ENTITY_ENABLED_SPRITE] != sprite_name:
  *                                 sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)             # <<<<<<<<<<<<<<
@@ -2682,7 +2682,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "yapyg/entities.pyx":177
+    /* "yapyg\entities.pyx":177
  *                                 sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                 sprites.set_enable(state, get_full_sprite_name(entity_name, sprite_name), enable)
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name             # <<<<<<<<<<<<<<
@@ -2698,7 +2698,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_active_sprite(PyObject *__pyx_v_st
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":167
+  /* "yapyg\entities.pyx":167
  *         return None
  * 
  * cpdef set_active_sprite(list state, str entity_name, str sprite_name, int enable=True):             # <<<<<<<<<<<<<<
@@ -2843,7 +2843,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_10set_active_sprite(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":179
+/* "yapyg\entities.pyx":179
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -2871,7 +2871,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("delete", 0);
 
-  /* "yapyg/entities.pyx":183
+  /* "yapyg\entities.pyx":183
  *         TODO
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]             # <<<<<<<<<<<<<<
@@ -2888,7 +2888,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   __pyx_v_entities_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":184
+  /* "yapyg\entities.pyx":184
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]             # <<<<<<<<<<<<<<
@@ -2905,7 +2905,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   __pyx_v_entities_table = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":186
+  /* "yapyg\entities.pyx":186
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity
  *         if entities_table.has_key(entity_name):             # <<<<<<<<<<<<<<
@@ -2920,7 +2920,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/entities.pyx":187
+    /* "yapyg\entities.pyx":187
  *         cdef list entity
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]             # <<<<<<<<<<<<<<
@@ -2937,7 +2937,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
     __pyx_v_entity = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":188
+    /* "yapyg\entities.pyx":188
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]
  *                 if entity:             # <<<<<<<<<<<<<<
@@ -2947,7 +2947,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
     __pyx_t_3 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
     if (__pyx_t_3) {
 
-      /* "yapyg/entities.pyx":189
+      /* "yapyg\entities.pyx":189
  *                 entity = entities_table[entity_name]
  *                 if entity:
  *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)             # <<<<<<<<<<<<<<
@@ -2969,7 +2969,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/entities.pyx":190
+      /* "yapyg\entities.pyx":190
  *                 if entity:
  *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:             # <<<<<<<<<<<<<<
@@ -3023,7 +3023,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
         __Pyx_XDECREF_SET(__pyx_v_sprite_name, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "yapyg/entities.pyx":191
+        /* "yapyg\entities.pyx":191
  *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:
  *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))             # <<<<<<<<<<<<<<
@@ -3038,7 +3038,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-        /* "yapyg/entities.pyx":190
+        /* "yapyg\entities.pyx":190
  *                 if entity:
  *                         sprites.set_enable(state, get_full_sprite_name(entity_name, entity[IDX_ENTITY_ENABLED_SPRITE]), False)
  *                         for sprite_name in entity[IDX_ENTITY_SPRITES]:             # <<<<<<<<<<<<<<
@@ -3048,7 +3048,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "yapyg/entities.pyx":193
+      /* "yapyg\entities.pyx":193
  *                                 sprites.delete(state, get_full_sprite_name(entity_name, sprite_name))
  * 
  *                         if entity[IDX_ENTITY_COLLISION]:             # <<<<<<<<<<<<<<
@@ -3065,7 +3065,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (__pyx_t_3) {
 
-        /* "yapyg/entities.pyx":194
+        /* "yapyg\entities.pyx":194
  * 
  *                         if entity[IDX_ENTITY_COLLISION]:
  *                                 collisions.delete(state, entity_name)             # <<<<<<<<<<<<<<
@@ -3079,7 +3079,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
       }
       __pyx_L7:;
 
-      /* "yapyg/entities.pyx":196
+      /* "yapyg\entities.pyx":196
  *                                 collisions.delete(state, entity_name)
  * 
  *                         del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]             # <<<<<<<<<<<<<<
@@ -3098,7 +3098,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
       if (PyObject_DelItem(__pyx_t_7, __pyx_v_entity_name) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "yapyg/entities.pyx":198
+      /* "yapyg\entities.pyx":198
  *                         del state[IDX_STATE_ENTITIES][IDX_ENTITIES_TABLE][entity_name]
  * 
  *                         movers.delete(state, entity_name)             # <<<<<<<<<<<<<<
@@ -3115,7 +3115,7 @@ static PyObject *__pyx_f_5yapyg_8entities_delete(PyObject *__pyx_v_state, PyObje
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":179
+  /* "yapyg\entities.pyx":179
  *                 entity[IDX_ENTITY_ENABLED_SPRITE] = sprite_name
  * 
  * cpdef delete(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3236,7 +3236,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_12delete(CYTHON_UNUSED PyObject *__py
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":200
+/* "yapyg\entities.pyx":200
  *                         movers.delete(state, entity_name)
  * 
  * cdef call_pos_listeners(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
@@ -3253,7 +3253,7 @@ static PyObject *__pyx_f_5yapyg_8entities_call_pos_listeners(PyObject *__pyx_v_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("call_pos_listeners", 0);
 
-  /* "yapyg/entities.pyx":204
+  /* "yapyg\entities.pyx":204
  *         TODO
  *         """
  *         collisions.entity_pos_listener(state, entity_name, pos)             # <<<<<<<<<<<<<<
@@ -3264,7 +3264,7 @@ static PyObject *__pyx_f_5yapyg_8entities_call_pos_listeners(PyObject *__pyx_v_s
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":200
+  /* "yapyg\entities.pyx":200
  *                         movers.delete(state, entity_name)
  * 
  * cdef call_pos_listeners(list state, str entity_name, tuple pos):             # <<<<<<<<<<<<<<
@@ -3285,7 +3285,7 @@ static PyObject *__pyx_f_5yapyg_8entities_call_pos_listeners(PyObject *__pyx_v_s
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":206
+/* "yapyg\entities.pyx":206
  *         collisions.entity_pos_listener(state, entity_name, pos)
  * 
  * cdef str get_full_sprite_name(str entity_name, str sprite_name):             # <<<<<<<<<<<<<<
@@ -3303,7 +3303,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_full_sprite_name(PyObject *__pyx_v
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_full_sprite_name", 0);
 
-  /* "yapyg/entities.pyx":210
+  /* "yapyg\entities.pyx":210
  *         TODO
  *         """
  *         return entity_name + "_" + sprite_name             # <<<<<<<<<<<<<<
@@ -3320,7 +3320,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_full_sprite_name(PyObject *__pyx_v
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "yapyg/entities.pyx":206
+  /* "yapyg\entities.pyx":206
  *         collisions.entity_pos_listener(state, entity_name, pos)
  * 
  * cdef str get_full_sprite_name(str entity_name, str sprite_name):             # <<<<<<<<<<<<<<
@@ -3340,7 +3340,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_full_sprite_name(PyObject *__pyx_v
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":212
+/* "yapyg\entities.pyx":212
  *         return entity_name + "_" + sprite_name
  * 
  * cpdef list get(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3363,7 +3363,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "yapyg/entities.pyx":216
+  /* "yapyg\entities.pyx":216
  *         TODO
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]             # <<<<<<<<<<<<<<
@@ -3380,7 +3380,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   __pyx_v_entities_db = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":217
+  /* "yapyg\entities.pyx":217
  *         """
  *         cdef list entities_db = state[IDX_STATE_ENTITIES]
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]             # <<<<<<<<<<<<<<
@@ -3397,7 +3397,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   __pyx_v_entities_table = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":219
+  /* "yapyg\entities.pyx":219
  *         cdef dict entities_table = entities_db[IDX_ENTITIES_TABLE]
  *         cdef list entity
  *         if entities_table.has_key(entity_name):             # <<<<<<<<<<<<<<
@@ -3412,7 +3412,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "yapyg/entities.pyx":220
+    /* "yapyg\entities.pyx":220
  *         cdef list entity
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]             # <<<<<<<<<<<<<<
@@ -3429,7 +3429,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
     __pyx_v_entity = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":221
+    /* "yapyg\entities.pyx":221
  *         if entities_table.has_key(entity_name):
  *                 entity = entities_table[entity_name]
  *                 if entity[IDX_ENTITY_ENABLE]:             # <<<<<<<<<<<<<<
@@ -3446,7 +3446,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "yapyg/entities.pyx":222
+      /* "yapyg\entities.pyx":222
  *                 entity = entities_table[entity_name]
  *                 if entity[IDX_ENTITY_ENABLE]:
  *                         return entity             # <<<<<<<<<<<<<<
@@ -3460,7 +3460,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
     }
     /*else*/ {
 
-      /* "yapyg/entities.pyx":224
+      /* "yapyg\entities.pyx":224
  *                         return entity
  *                 else:
  *                         return None             # <<<<<<<<<<<<<<
@@ -3475,7 +3475,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
   }
   /*else*/ {
 
-    /* "yapyg/entities.pyx":226
+    /* "yapyg\entities.pyx":226
  *                         return None
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -3488,7 +3488,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get(PyObject *__pyx_v_state, PyObject 
     goto __pyx_L0;
   }
 
-  /* "yapyg/entities.pyx":212
+  /* "yapyg\entities.pyx":212
  *         return entity_name + "_" + sprite_name
  * 
  * cpdef list get(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3604,7 +3604,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_14get(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":228
+/* "yapyg\entities.pyx":228
  *                 return None
  * 
  * cpdef tuple get_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3625,7 +3625,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos", 0);
 
-  /* "yapyg/entities.pyx":232
+  /* "yapyg\entities.pyx":232
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -3637,7 +3637,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":234
+  /* "yapyg\entities.pyx":234
  *         cdef list entity = get(state, entity_name)
  *         cdef list pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -3647,7 +3647,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":235
+    /* "yapyg\entities.pyx":235
  *         cdef list pos
  *         if entity:
  *                 pos = entity[IDX_ENTITY_POS]             # <<<<<<<<<<<<<<
@@ -3664,7 +3664,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
     __pyx_v_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":236
+    /* "yapyg\entities.pyx":236
  *         if entity:
  *                 pos = entity[IDX_ENTITY_POS]
  *                 return tuple(pos)             # <<<<<<<<<<<<<<
@@ -3684,7 +3684,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
   }
   /*else*/ {
 
-    /* "yapyg/entities.pyx":238
+    /* "yapyg\entities.pyx":238
  *                 return tuple(pos)
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -3697,7 +3697,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos(PyObject *__pyx_v_state, PyObj
     goto __pyx_L0;
   }
 
-  /* "yapyg/entities.pyx":228
+  /* "yapyg\entities.pyx":228
  *                 return None
  * 
  * cpdef tuple get_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3812,7 +3812,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_16get_pos(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":240
+/* "yapyg\entities.pyx":240
  *                 return None
  * 
  * cpdef tuple get_last_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -3833,7 +3833,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_last_pos", 0);
 
-  /* "yapyg/entities.pyx":244
+  /* "yapyg\entities.pyx":244
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -3845,7 +3845,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":246
+  /* "yapyg\entities.pyx":246
  *         cdef list entity = get(state, entity_name)
  *         cdef tuple last_pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -3855,7 +3855,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":247
+    /* "yapyg\entities.pyx":247
  *         cdef tuple last_pos
  *         if entity:
  *                 last_pos = entity[IDX_ENTITY_LAST_POS]             # <<<<<<<<<<<<<<
@@ -3872,7 +3872,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
     __pyx_v_last_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":248
+    /* "yapyg\entities.pyx":248
  *         if entity:
  *                 last_pos = entity[IDX_ENTITY_LAST_POS]
  *                 return last_pos             # <<<<<<<<<<<<<<
@@ -3886,7 +3886,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
   }
   /*else*/ {
 
-    /* "yapyg/entities.pyx":250
+    /* "yapyg\entities.pyx":250
  *                 return last_pos
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -3899,7 +3899,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_last_pos(PyObject *__pyx_v_state, 
     goto __pyx_L0;
   }
 
-  /* "yapyg/entities.pyx":240
+  /* "yapyg\entities.pyx":240
  *                 return None
  * 
  * cpdef tuple get_last_pos(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -4014,7 +4014,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_18get_last_pos(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":252
+/* "yapyg\entities.pyx":252
  *                 return None
  * 
  * cpdef tuple get_pos_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -4035,7 +4035,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos_offset", 0);
 
-  /* "yapyg/entities.pyx":256
+  /* "yapyg\entities.pyx":256
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -4047,7 +4047,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":258
+  /* "yapyg\entities.pyx":258
  *         cdef list entity = get(state, entity_name)
  *         cdef list pos_offset
  *         if entity:             # <<<<<<<<<<<<<<
@@ -4057,7 +4057,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":259
+    /* "yapyg\entities.pyx":259
  *         cdef list pos_offset
  *         if entity:
  *                 pos_offset = entity[IDX_ENTITY_POS_OFFSET]             # <<<<<<<<<<<<<<
@@ -4074,7 +4074,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
     __pyx_v_pos_offset = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":260
+    /* "yapyg\entities.pyx":260
  *         if entity:
  *                 pos_offset = entity[IDX_ENTITY_POS_OFFSET]
  *                 return tuple(pos_offset)             # <<<<<<<<<<<<<<
@@ -4094,7 +4094,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
   }
   /*else*/ {
 
-    /* "yapyg/entities.pyx":262
+    /* "yapyg\entities.pyx":262
  *                 return tuple(pos_offset)
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -4107,7 +4107,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_offset(PyObject *__pyx_v_state
     goto __pyx_L0;
   }
 
-  /* "yapyg/entities.pyx":252
+  /* "yapyg\entities.pyx":252
  *                 return None
  * 
  * cpdef tuple get_pos_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -4222,7 +4222,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_20get_pos_offset(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":264
+/* "yapyg\entities.pyx":264
  *                 return None
  * 
  * cpdef tuple get_pos_with_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -4245,7 +4245,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_pos_with_offset", 0);
 
-  /* "yapyg/entities.pyx":265
+  /* "yapyg\entities.pyx":265
  * 
  * cpdef tuple get_pos_with_offset(list state, str entity_name):
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -4257,7 +4257,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":268
+  /* "yapyg\entities.pyx":268
  *         cdef tuple last_pos
  *         cdef tuple pos_offset
  *         if entity:             # <<<<<<<<<<<<<<
@@ -4267,7 +4267,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":269
+    /* "yapyg\entities.pyx":269
  *         cdef tuple pos_offset
  *         if entity:
  *                 last_pos = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -4291,7 +4291,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
     __pyx_v_last_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":270
+    /* "yapyg\entities.pyx":270
  *         if entity:
  *                 last_pos = tuple(entity[IDX_ENTITY_POS])
  *                 pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])             # <<<<<<<<<<<<<<
@@ -4315,7 +4315,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
     __pyx_v_pos_offset = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":271
+    /* "yapyg\entities.pyx":271
  *                 last_pos = tuple(entity[IDX_ENTITY_POS])
  *                 pos_offset = tuple(entity[IDX_ENTITY_POS_OFFSET])
  *                 return math_2d.vector_add(last_pos, pos_offset)             # <<<<<<<<<<<<<<
@@ -4331,7 +4331,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
   }
   /*else*/ {
 
-    /* "yapyg/entities.pyx":273
+    /* "yapyg\entities.pyx":273
  *                 return math_2d.vector_add(last_pos, pos_offset)
  *         else:
  *                 return None             # <<<<<<<<<<<<<<
@@ -4344,7 +4344,7 @@ static PyObject *__pyx_f_5yapyg_8entities_get_pos_with_offset(PyObject *__pyx_v_
     goto __pyx_L0;
   }
 
-  /* "yapyg/entities.pyx":264
+  /* "yapyg\entities.pyx":264
  *                 return None
  * 
  * cpdef tuple get_pos_with_offset(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -4460,7 +4460,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_22get_pos_with_offset(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":275
+/* "yapyg\entities.pyx":275
  *                 return None
  * 
  * cdef void normalize_rotation(list entity):             # <<<<<<<<<<<<<<
@@ -4482,7 +4482,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("normalize_rotation", 0);
 
-  /* "yapyg/entities.pyx":279
+  /* "yapyg\entities.pyx":279
  *         TODO
  *         """
  *         cdef float old_rot = entity[IDX_ENTITY_POS][2]             # <<<<<<<<<<<<<<
@@ -4502,7 +4502,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_old_rot = __pyx_t_3;
 
-  /* "yapyg/entities.pyx":280
+  /* "yapyg\entities.pyx":280
  *         """
  *         cdef float old_rot = entity[IDX_ENTITY_POS][2]
  *         if old_rot < 0.0:             # <<<<<<<<<<<<<<
@@ -4512,7 +4512,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   __pyx_t_4 = ((__pyx_v_old_rot < 0.0) != 0);
   if (__pyx_t_4) {
 
-    /* "yapyg/entities.pyx":281
+    /* "yapyg\entities.pyx":281
  *         cdef float old_rot = entity[IDX_ENTITY_POS][2]
  *         if old_rot < 0.0:
  *                 old_rot += ((int(old_rot) / -360) + 1) * 360.0             # <<<<<<<<<<<<<<
@@ -4551,7 +4551,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":282
+  /* "yapyg\entities.pyx":282
  *         if old_rot < 0.0:
  *                 old_rot += ((int(old_rot) / -360) + 1) * 360.0
  *         cdef float modulo_rot = fmod(old_rot, 360.0)             # <<<<<<<<<<<<<<
@@ -4560,7 +4560,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
  */
   __pyx_v_modulo_rot = fmod(__pyx_v_old_rot, 360.0);
 
-  /* "yapyg/entities.pyx":283
+  /* "yapyg\entities.pyx":283
  *                 old_rot += ((int(old_rot) / -360) + 1) * 360.0
  *         cdef float modulo_rot = fmod(old_rot, 360.0)
  *         entity[IDX_ENTITY_POS][2] = modulo_rot             # <<<<<<<<<<<<<<
@@ -4579,7 +4579,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":275
+  /* "yapyg\entities.pyx":275
  *                 return None
  * 
  * cdef void normalize_rotation(list entity):             # <<<<<<<<<<<<<<
@@ -4598,7 +4598,7 @@ static void __pyx_f_5yapyg_8entities_normalize_rotation(PyObject *__pyx_v_entity
   __Pyx_RefNannyFinishContext();
 }
 
-/* "yapyg/entities.pyx":285
+/* "yapyg\entities.pyx":285
  *         entity[IDX_ENTITY_POS][2] = modulo_rot
  * 
  * cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
@@ -4622,7 +4622,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_pos", 0);
 
-  /* "yapyg/entities.pyx":289
+  /* "yapyg\entities.pyx":289
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -4634,7 +4634,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":291
+  /* "yapyg\entities.pyx":291
  *         cdef list entity = get(state, entity_name)
  *         cdef tuple old_pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -4644,7 +4644,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":292
+    /* "yapyg\entities.pyx":292
  *         cdef tuple old_pos
  *         if entity:
  *                 old_pos = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -4668,7 +4668,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     __pyx_v_old_pos = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":294
+    /* "yapyg\entities.pyx":294
  *                 old_pos = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -4696,7 +4696,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 294; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":296
+    /* "yapyg\entities.pyx":296
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 if (x_pos, y_pos, rot) == old_pos:             # <<<<<<<<<<<<<<
@@ -4726,7 +4726,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/entities.pyx":297
+      /* "yapyg\entities.pyx":297
  * 
  *                 if (x_pos, y_pos, rot) == old_pos:
  *                         return             # <<<<<<<<<<<<<<
@@ -4738,7 +4738,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
       goto __pyx_L0;
     }
 
-    /* "yapyg/entities.pyx":299
+    /* "yapyg\entities.pyx":299
  *                         return
  * 
  *                 entity[IDX_ENTITY_POS][0] = x_pos             # <<<<<<<<<<<<<<
@@ -4757,7 +4757,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/entities.pyx":300
+    /* "yapyg\entities.pyx":300
  * 
  *                 entity[IDX_ENTITY_POS][0] = x_pos
  *                 entity[IDX_ENTITY_POS][1] = y_pos             # <<<<<<<<<<<<<<
@@ -4776,7 +4776,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/entities.pyx":301
+    /* "yapyg\entities.pyx":301
  *                 entity[IDX_ENTITY_POS][0] = x_pos
  *                 entity[IDX_ENTITY_POS][1] = y_pos
  *                 entity[IDX_ENTITY_POS][2] = rot             # <<<<<<<<<<<<<<
@@ -4795,7 +4795,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/entities.pyx":303
+    /* "yapyg\entities.pyx":303
  *                 entity[IDX_ENTITY_POS][2] = rot
  * 
  *                 normalize_rotation(entity)             # <<<<<<<<<<<<<<
@@ -4804,7 +4804,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
  */
     __pyx_f_5yapyg_8entities_normalize_rotation(__pyx_v_entity);
 
-    /* "yapyg/entities.pyx":305
+    /* "yapyg\entities.pyx":305
  *                 normalize_rotation(entity)
  * 
  *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))             # <<<<<<<<<<<<<<
@@ -4833,7 +4833,7 @@ static PyObject *__pyx_f_5yapyg_8entities_set_pos(PyObject *__pyx_v_state, PyObj
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":285
+  /* "yapyg\entities.pyx":285
  *         entity[IDX_ENTITY_POS][2] = modulo_rot
  * 
  * cpdef set_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
@@ -4980,7 +4980,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_24set_pos(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":307
+/* "yapyg\entities.pyx":307
  *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
@@ -5004,7 +5004,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_pos", 0);
 
-  /* "yapyg/entities.pyx":311
+  /* "yapyg\entities.pyx":311
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -5016,7 +5016,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":312
+  /* "yapyg\entities.pyx":312
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -5026,7 +5026,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":313
+    /* "yapyg\entities.pyx":313
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])             # <<<<<<<<<<<<<<
@@ -5054,7 +5054,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
     if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, __pyx_t_1, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "yapyg/entities.pyx":315
+    /* "yapyg\entities.pyx":315
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 if (x_pos, y_pos, rot) == (0, 0, 0):             # <<<<<<<<<<<<<<
@@ -5084,7 +5084,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/entities.pyx":316
+      /* "yapyg\entities.pyx":316
  * 
  *                 if (x_pos, y_pos, rot) == (0, 0, 0):
  *                         return             # <<<<<<<<<<<<<<
@@ -5096,7 +5096,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
       goto __pyx_L0;
     }
 
-    /* "yapyg/entities.pyx":318
+    /* "yapyg\entities.pyx":318
  *                         return
  * 
  *                 entity[IDX_ENTITY_POS][0] += x_pos             # <<<<<<<<<<<<<<
@@ -5122,7 +5122,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/entities.pyx":319
+    /* "yapyg\entities.pyx":319
  * 
  *                 entity[IDX_ENTITY_POS][0] += x_pos
  *                 entity[IDX_ENTITY_POS][1] += y_pos             # <<<<<<<<<<<<<<
@@ -5148,7 +5148,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/entities.pyx":320
+    /* "yapyg\entities.pyx":320
  *                 entity[IDX_ENTITY_POS][0] += x_pos
  *                 entity[IDX_ENTITY_POS][1] += y_pos
  *                 entity[IDX_ENTITY_POS][2] += rot             # <<<<<<<<<<<<<<
@@ -5174,7 +5174,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "yapyg/entities.pyx":322
+    /* "yapyg\entities.pyx":322
  *                 entity[IDX_ENTITY_POS][2] += rot
  * 
  *                 normalize_rotation(entity)             # <<<<<<<<<<<<<<
@@ -5183,7 +5183,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
  */
     __pyx_f_5yapyg_8entities_normalize_rotation(__pyx_v_entity);
 
-    /* "yapyg/entities.pyx":324
+    /* "yapyg\entities.pyx":324
  *                 normalize_rotation(entity)
  * 
  *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))             # <<<<<<<<<<<<<<
@@ -5212,7 +5212,7 @@ static PyObject *__pyx_f_5yapyg_8entities_add_pos(PyObject *__pyx_v_state, PyObj
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":307
+  /* "yapyg\entities.pyx":307
  *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef add_pos(list state, str entity_name, float x_pos, float y_pos, float rot):             # <<<<<<<<<<<<<<
@@ -5358,7 +5358,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_26add_pos(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":326
+/* "yapyg\entities.pyx":326
  *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef undo_last_move(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5380,7 +5380,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("undo_last_move", 0);
 
-  /* "yapyg/entities.pyx":330
+  /* "yapyg\entities.pyx":330
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -5392,7 +5392,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":332
+  /* "yapyg\entities.pyx":332
  *         cdef list entity = get(state, entity_name)
  *         cdef tuple last_pos
  *         if entity:             # <<<<<<<<<<<<<<
@@ -5402,7 +5402,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":333
+    /* "yapyg\entities.pyx":333
  *         cdef tuple last_pos
  *         if entity:
  *                 if entity[IDX_ENTITY_LAST_POS]:             # <<<<<<<<<<<<<<
@@ -5419,7 +5419,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_2) {
 
-      /* "yapyg/entities.pyx":334
+      /* "yapyg\entities.pyx":334
  *         if entity:
  *                 if entity[IDX_ENTITY_LAST_POS]:
  *                         last_pos = entity[IDX_ENTITY_LAST_POS]             # <<<<<<<<<<<<<<
@@ -5436,7 +5436,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
       __pyx_v_last_pos = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "yapyg/entities.pyx":336
+      /* "yapyg\entities.pyx":336
  *                         last_pos = entity[IDX_ENTITY_LAST_POS]
  * 
  *                         entity[IDX_ENTITY_POS][0] = last_pos[0]             # <<<<<<<<<<<<<<
@@ -5459,7 +5459,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/entities.pyx":337
+      /* "yapyg\entities.pyx":337
  * 
  *                         entity[IDX_ENTITY_POS][0] = last_pos[0]
  *                         entity[IDX_ENTITY_POS][1] = last_pos[1]             # <<<<<<<<<<<<<<
@@ -5482,7 +5482,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/entities.pyx":338
+      /* "yapyg\entities.pyx":338
  *                         entity[IDX_ENTITY_POS][0] = last_pos[0]
  *                         entity[IDX_ENTITY_POS][1] = last_pos[1]
  *                         entity[IDX_ENTITY_POS][2] = last_pos[2]             # <<<<<<<<<<<<<<
@@ -5505,7 +5505,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "yapyg/entities.pyx":340
+      /* "yapyg\entities.pyx":340
  *                         entity[IDX_ENTITY_POS][2] = last_pos[2]
  * 
  *                         entity[IDX_ENTITY_LAST_POS] = None             # <<<<<<<<<<<<<<
@@ -5518,7 +5518,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
       }
       if (unlikely(__Pyx_SetItemInt(__pyx_v_entity, __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "yapyg/entities.pyx":342
+      /* "yapyg\entities.pyx":342
  *                         entity[IDX_ENTITY_LAST_POS] = None
  * 
  *                         call_pos_listeners(state, entity_name, last_pos)             # <<<<<<<<<<<<<<
@@ -5535,7 +5535,7 @@ static PyObject *__pyx_f_5yapyg_8entities_undo_last_move(PyObject *__pyx_v_state
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":326
+  /* "yapyg\entities.pyx":326
  *                 call_pos_listeners(state, entity_name, tuple(entity[IDX_ENTITY_POS]))
  * 
  * cpdef undo_last_move(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5653,7 +5653,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_28undo_last_move(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":344
+/* "yapyg\entities.pyx":344
  *                         call_pos_listeners(state, entity_name, last_pos)
  * 
  * cpdef disable(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5673,7 +5673,7 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("disable", 0);
 
-  /* "yapyg/entities.pyx":348
+  /* "yapyg\entities.pyx":348
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -5685,7 +5685,7 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":349
+  /* "yapyg\entities.pyx":349
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -5695,7 +5695,7 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":350
+    /* "yapyg\entities.pyx":350
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 entity[IDX_ENTITY_ENABLE] = False             # <<<<<<<<<<<<<<
@@ -5711,7 +5711,7 @@ static PyObject *__pyx_f_5yapyg_8entities_disable(PyObject *__pyx_v_state, PyObj
   }
   __pyx_L3:;
 
-  /* "yapyg/entities.pyx":344
+  /* "yapyg\entities.pyx":344
  *                         call_pos_listeners(state, entity_name, last_pos)
  * 
  * cpdef disable(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5827,7 +5827,7 @@ static PyObject *__pyx_pf_5yapyg_8entities_30disable(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "yapyg/entities.pyx":352
+/* "yapyg\entities.pyx":352
  *                 entity[IDX_ENTITY_ENABLE] = False
  * 
  * cpdef int is_enabled(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -5848,7 +5848,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_enabled", 0);
 
-  /* "yapyg/entities.pyx":356
+  /* "yapyg\entities.pyx":356
  *         TODO
  *         """
  *         cdef list entity = get(state, entity_name)             # <<<<<<<<<<<<<<
@@ -5860,7 +5860,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
   __pyx_v_entity = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "yapyg/entities.pyx":357
+  /* "yapyg\entities.pyx":357
  *         """
  *         cdef list entity = get(state, entity_name)
  *         if entity:             # <<<<<<<<<<<<<<
@@ -5870,7 +5870,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
   __pyx_t_2 = (__pyx_v_entity != Py_None) && (PyList_GET_SIZE(__pyx_v_entity) != 0);
   if (__pyx_t_2) {
 
-    /* "yapyg/entities.pyx":358
+    /* "yapyg\entities.pyx":358
  *         cdef list entity = get(state, entity_name)
  *         if entity:
  *                 return entity[IDX_ENTITY_ENABLE]             # <<<<<<<<<<<<<<
@@ -5890,7 +5890,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
   }
   /*else*/ {
 
-    /* "yapyg/entities.pyx":360
+    /* "yapyg\entities.pyx":360
  *                 return entity[IDX_ENTITY_ENABLE]
  *         else:
  *                 return False             # <<<<<<<<<<<<<<
@@ -5899,7 +5899,7 @@ static int __pyx_f_5yapyg_8entities_is_enabled(PyObject *__pyx_v_state, PyObject
     goto __pyx_L0;
   }
 
-  /* "yapyg/entities.pyx":352
+  /* "yapyg\entities.pyx":352
  *                 entity[IDX_ENTITY_ENABLE] = False
  * 
  * cpdef int is_enabled(list state, str entity_name):             # <<<<<<<<<<<<<<
@@ -6096,7 +6096,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "yapyg/entities.pyx":63
+  /* "yapyg\entities.pyx":63
  *         state[IDX_STATE_ENTITIES] = None
  * 
  * cpdef insert(list state, str entity_name, dict sprite_defs, tuple pos, tuple pos_offset=(0, 0),             # <<<<<<<<<<<<<<
@@ -6110,7 +6110,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "yapyg/entities.pyx":130
+  /* "yapyg\entities.pyx":130
  *                 sprite_pos_offset = entity[IDX_ENTITY_POS_OFFSET]
  * 
  *                 sprite_scale = (1.0, 1.0)             # <<<<<<<<<<<<<<
@@ -6121,7 +6121,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "yapyg/entities.pyx":315
+  /* "yapyg\entities.pyx":315
  *                 entity[IDX_ENTITY_LAST_POS] = tuple(entity[IDX_ENTITY_POS])
  * 
  *                 if (x_pos, y_pos, rot) == (0, 0, 0):             # <<<<<<<<<<<<<<
@@ -6312,7 +6312,7 @@ PyMODINIT_FUNC PyInit_entities(void)
   Py_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   /*--- Execution code ---*/
 
-  /* "yapyg/entities.pyx":27
+  /* "yapyg\entities.pyx":27
  * from libc.math cimport fmod
  * 
  * import copy             # <<<<<<<<<<<<<<
@@ -6324,7 +6324,7 @@ PyMODINIT_FUNC PyInit_entities(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy, __pyx_t_9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "yapyg/entities.pyx":36
+  /* "yapyg\entities.pyx":36
  * cdef int IDX_STATE_ENTITIES
  * 
  * cdef int IDX_ENTITIES_TABLE = 0             # <<<<<<<<<<<<<<
@@ -6333,7 +6333,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITIES_TABLE = 0;
 
-  /* "yapyg/entities.pyx":38
+  /* "yapyg\entities.pyx":38
  * cdef int IDX_ENTITIES_TABLE = 0
  * 
  * cdef int IDX_ENTITY_POS = 0             # <<<<<<<<<<<<<<
@@ -6342,7 +6342,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_POS = 0;
 
-  /* "yapyg/entities.pyx":39
+  /* "yapyg\entities.pyx":39
  * 
  * cdef int IDX_ENTITY_POS = 0
  * cdef int IDX_ENTITY_POS_OFFSET = 1             # <<<<<<<<<<<<<<
@@ -6351,7 +6351,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_POS_OFFSET = 1;
 
-  /* "yapyg/entities.pyx":40
+  /* "yapyg\entities.pyx":40
  * cdef int IDX_ENTITY_POS = 0
  * cdef int IDX_ENTITY_POS_OFFSET = 1
  * cdef int IDX_ENTITY_ENABLED_SPRITE = 2             # <<<<<<<<<<<<<<
@@ -6360,7 +6360,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLED_SPRITE = 2;
 
-  /* "yapyg/entities.pyx":41
+  /* "yapyg\entities.pyx":41
  * cdef int IDX_ENTITY_POS_OFFSET = 1
  * cdef int IDX_ENTITY_ENABLED_SPRITE = 2
  * cdef int IDX_ENTITY_LAST_POS = 3             # <<<<<<<<<<<<<<
@@ -6369,7 +6369,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_LAST_POS = 3;
 
-  /* "yapyg/entities.pyx":42
+  /* "yapyg\entities.pyx":42
  * cdef int IDX_ENTITY_ENABLED_SPRITE = 2
  * cdef int IDX_ENTITY_LAST_POS = 3
  * cdef int IDX_ENTITY_SPRITES = 4             # <<<<<<<<<<<<<<
@@ -6378,7 +6378,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_SPRITES = 4;
 
-  /* "yapyg/entities.pyx":43
+  /* "yapyg\entities.pyx":43
  * cdef int IDX_ENTITY_LAST_POS = 3
  * cdef int IDX_ENTITY_SPRITES = 4
  * cdef int IDX_ENTITY_COLLISION = 5             # <<<<<<<<<<<<<<
@@ -6387,7 +6387,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_COLLISION = 5;
 
-  /* "yapyg/entities.pyx":44
+  /* "yapyg\entities.pyx":44
  * cdef int IDX_ENTITY_SPRITES = 4
  * cdef int IDX_ENTITY_COLLISION = 5
  * cdef int IDX_ENTITY_PLAYONCE = 6             # <<<<<<<<<<<<<<
@@ -6396,7 +6396,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_PLAYONCE = 6;
 
-  /* "yapyg/entities.pyx":45
+  /* "yapyg\entities.pyx":45
  * cdef int IDX_ENTITY_COLLISION = 5
  * cdef int IDX_ENTITY_PLAYONCE = 6
  * cdef int IDX_ENTITY_ENABLE = 7             # <<<<<<<<<<<<<<
@@ -6405,7 +6405,7 @@ PyMODINIT_FUNC PyInit_entities(void)
  */
   __pyx_v_5yapyg_8entities_IDX_ENTITY_ENABLE = 7;
 
-  /* "yapyg/entities.pyx":1
+  /* "yapyg\entities.pyx":1
  * # Copyright (c) 2015 Raihan Kibria             # <<<<<<<<<<<<<<
  * #
  * # Permission is hereby granted, free of charge, to any person obtaining a copy

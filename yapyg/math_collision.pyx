@@ -235,6 +235,16 @@ cpdef tuple get_clipping_rectangle(int x1, int y1, int w, int h):
                 clip_size,
                 clip_size)
 
+cpdef tuple f_get_clipping_rectangle(float x1, float y1, float w, float h):
+        """
+        See above. Same but with floats.
+        """
+        cdef float clip_size = 3.0 * max(w, h)
+        return (x1 + (w - clip_size) / 2,
+                y1 + (h - clip_size) / 2,
+                clip_size,
+                clip_size)
+
 cpdef int intervals_overlap(int a1, int a2, int b1, int b2):
         """
                   a1-------a2
